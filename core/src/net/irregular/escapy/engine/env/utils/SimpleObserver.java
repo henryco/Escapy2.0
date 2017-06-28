@@ -1,4 +1,4 @@
-package net.irregular.escapy.utils;
+package net.irregular.escapy.engine.env.utils;
 
 /**
  * @author Henry on 27/06/17.

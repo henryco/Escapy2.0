@@ -1,4 +1,4 @@
-package net.irregular.escapy.environment.render;
+package net.irregular.escapy.engine.graphic.render;
 
 import dagger.Module;
 

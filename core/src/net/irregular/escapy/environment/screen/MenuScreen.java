@@ -1,11 +1,13 @@
-package net.irregular.escapy.environment.screen.game;
+package net.irregular.escapy.environment.screen;
 
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Game;
+import net.irregular.escapy.engine.env.EscapyScreen;
 
 /**
  * @author Henry on 28/06/17.
  */
-public class GameScreen implements Screen {
+public class MenuScreen implements EscapyScreen {
+
 	@Override
 	public void show() {
 
@@ -38,6 +40,11 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
+
+	}
+
+	@Override
+	public void setGame(Game game) {
 
 	}
 }

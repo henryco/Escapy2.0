@@ -1,4 +1,4 @@
-package net.irregular.escapy.environment.camera;
+package net.irregular.escapy.engine.graphic.camera;
 
 /**
  * @author Henry on 27/06/17.

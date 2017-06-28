@@ -1,4 +1,4 @@
-package net.irregular.escapy.utils;
+package net.irregular.escapy.engine.env.utils;
 
 import com.badlogic.gdx.math.Vector2;
 

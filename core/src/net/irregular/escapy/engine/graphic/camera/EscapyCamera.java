@@ -1,10 +1,10 @@
-package net.irregular.escapy.environment.camera;
+package net.irregular.escapy.engine.graphic.camera;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Matrix4;
-import net.irregular.escapy.utils.TransVec;
+import net.irregular.escapy.engine.env.utils.TransVec;
 
 import java.util.function.Function;
 
@@ -41,9 +41,10 @@ public class EscapyCamera {
 		camera.update();
 	}
 
-	public void update(Runnable runnable) {
+	public EscapyCamera update(Runnable runnable) {
 		runnable.run();
 		update();
+		return this;
 	}
 
 

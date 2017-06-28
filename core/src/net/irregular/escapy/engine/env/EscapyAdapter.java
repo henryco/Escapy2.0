@@ -1,4 +1,4 @@
-package net.irregular.escapy.dagger;
+package net.irregular.escapy.engine.env;
 
 import com.badlogic.gdx.ApplicationListener;
 import dagger.ObjectGraph;
@@ -6,13 +6,13 @@ import dagger.ObjectGraph;
 /**
  * @author Henry on 27/06/17.
  */
-public class DaggerAdapter implements ApplicationListener {
+public class EscapyAdapter implements ApplicationListener {
 
 	private Class applicationListenerClass;
 	private ApplicationListener delegateApplicationListener;
 	private Object[] daggerModules;
 
-	public DaggerAdapter(Class<? extends ApplicationListener> applicationListener,
+	public EscapyAdapter(Class<? extends ApplicationListener> applicationListener,
 						 Object... daggerModules){
 		this.setApplicationListenerClass(applicationListener);
 		this.setDaggerModules(daggerModules);

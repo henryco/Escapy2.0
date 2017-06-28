@@ -1,33 +1,37 @@
-package net.irregular.escapy.environment.screen.splash;
+package net.irregular.escapy.environment.screen;
 
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import net.irregular.escapy.environment.camera.EscapyCamera;
+import net.irregular.escapy.engine.env.EscapyScreen;
+import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
 
 
 /**
  * @author Henry on 28/06/17.
  */
-public class SplashScreen implements Screen {
+public class SplashScreen implements EscapyScreen {
 
 	private final String logoUrl;
 	private final EscapyCamera camera;
+	private final Batch batch;
 
-	private Batch batch;
+
 	private Sprite sprite;
+	private Game game;
 
-	public SplashScreen(String logoUrl, EscapyCamera camera) {
+
+
+	public SplashScreen(String logoUrl, EscapyCamera camera, Batch batch) {
 		this.logoUrl = logoUrl;
 		this.camera = camera;
+		this.batch = batch;
 	}
 
 	@Override
 	public void show() {
 
-		batch = new SpriteBatch();
 		sprite = new Sprite(new Texture(logoUrl));
 		camera.setCameraPosition(sprite.getWidth() * .5f, sprite.getHeight() * .5f, true);
 	}
@@ -35,8 +39,7 @@ public class SplashScreen implements Screen {
 	@Override
 	public void render(float delta) {
 
-		camera.update(camera::clear);
-		batch.setProjectionMatrix(camera.getProjection());
+		batch.setProjectionMatrix(camera.update(camera::clear).getProjection());
 		batch.begin();
 		sprite.draw(batch);
 		batch.end();
@@ -49,4 +52,9 @@ public class SplashScreen implements Screen {
 	@Override public void resume() {}
 	@Override public void hide() {}
 	@Override public void dispose() {}
+
+	@Override
+	public void setGame(Game game) {
+		this.game = game;
+	}
 }

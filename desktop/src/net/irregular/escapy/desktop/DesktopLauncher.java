@@ -2,9 +2,9 @@ package net.irregular.escapy.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import net.irregular.escapy.EscapyMainEnvironment;
-import net.irregular.escapy.MainEnvironmentModule;
-import net.irregular.escapy.dagger.DaggerAdapter;
+import net.irregular.escapy.environment.MainEnvironment;
+import net.irregular.escapy.environment.MainModule;
+import net.irregular.escapy.engine.env.EscapyAdapter;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -18,8 +18,7 @@ public class DesktopLauncher {
 		config.height = 1080;
 		config.forceExit = true;
 
-		DaggerAdapter daggerAdapter = new DaggerAdapter(EscapyMainEnvironment.class, new MainEnvironmentModule());
-		new LwjglApplication(daggerAdapter, config);
+		new LwjglApplication(new EscapyAdapter(MainEnvironment.class, new MainModule()), config);
 
 	}
 }
