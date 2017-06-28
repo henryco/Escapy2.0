@@ -19,6 +19,7 @@ public class EscapyAdapter implements ApplicationListener {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void create(){
 
 		final ObjectGraph objectGraph = ObjectGraph.create(this.getDaggerModules());

@@ -1,10 +1,10 @@
 package net.irregular.escapy.environment.screen;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import net.irregular.escapy.engine.env.EscapyScreen;
+import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
+import net.irregular.escapy.engine.env.context.screen.EscapyScreenContext;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
 
 import javax.inject.Inject;
@@ -18,11 +18,12 @@ public class SplashScreen implements EscapyScreen {
 	private final String logoUrl;
 	private final EscapyCamera camera;
 	private final Batch batch;
-	private final EscapyScreen nextScreen;
 	private final float showTime;
+	private final String nextScreenName;
+	private final String screenName;
 
+	private EscapyScreenContext screenContext;
 	private Sprite sprite;
-	private Game game;
 	private float time;
 
 
@@ -31,9 +32,11 @@ public class SplashScreen implements EscapyScreen {
 						EscapyCamera camera,
 						Batch batch,
 						float timeSec,
-						EscapyScreen nextScreen) {
+						String screenName,
+						String nextScreenName) {
 
-		this.nextScreen = nextScreen;
+		this.nextScreenName = nextScreenName;
+		this.screenName = screenName;
 		this.showTime = timeSec;
 		this.logoUrl = logoUrl;
 		this.camera = camera;
@@ -51,7 +54,7 @@ public class SplashScreen implements EscapyScreen {
 
 	@Override
 	public void render(float delta) {
-		if ((time -= delta) <= 0) game.setScreen(nextScreen);
+		if ((time -= delta) <= 0) screenContext.setScreen(screenContext.getScreen(MenuScreen.class));
 		else {
 			batch.setProjectionMatrix(camera.update(camera::clear).getProjection());
 			batch.begin();
@@ -61,15 +64,17 @@ public class SplashScreen implements EscapyScreen {
 	}
 
 
+	@Override
+	public void setScreenContext(EscapyScreenContext screenContext) {
+		this.screenContext = screenContext;
+	}
+
+
+
 	@Override public void resize(int width, int height) {}
 	@Override public void pause() {}
 	@Override public void resume() {}
 	@Override public void hide() {}
 	@Override public void dispose() {}
 
-
-	@Override
-	public void setGameContext(Game gameContext) {
-		this.game = gameContext;
-	}
 }

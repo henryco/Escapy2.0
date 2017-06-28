@@ -1,8 +1,8 @@
 package net.irregular.escapy.environment.screen;
 
 
-import com.badlogic.gdx.Game;
-import net.irregular.escapy.engine.env.EscapyScreen;
+import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
+import net.irregular.escapy.engine.env.context.screen.EscapyScreenContext;
 
 /**
  * @author Henry on 28/06/17.
@@ -44,7 +44,8 @@ public class PauseScreen implements EscapyScreen {
 	}
 
 	@Override
-	public void setGameContext(Game gameContext) {
+	public void setScreenContext(EscapyScreenContext screenContext) {
 
 	}
+
 }

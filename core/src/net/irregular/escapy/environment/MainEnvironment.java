@@ -1,28 +1,31 @@
 package net.irregular.escapy.environment;
 
-import com.badlogic.gdx.Game;
-import net.irregular.escapy.engine.env.EscapyScreen;
-
+import com.badlogic.gdx.Screen;
+import net.irregular.escapy.engine.env.context.game.EscapyGameContext;
+import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
 import javax.inject.Inject;
+import java.util.Collection;
 
 /**
  * @author Henry on 28/06/17.
  */
-public class MainEnvironment extends Game {
+public class MainEnvironment extends EscapyGameContext {
 
-	private EscapyScreen screen;
+	private final Screen initialScreen;
 
 	@Inject
-	public MainEnvironment(EscapyScreen screen) {
-		this.screen = screen;
-		screen.setGameContext(this);
-	}
+	protected MainEnvironment(
+			Collection<EscapyScreen> screens,
+			EscapyScreen initialScreen) {
 
+		super(screens);
+		this.initialScreen = initialScreen;
+		initialScreen.setScreenContext(this);
+	}
 
 	@Override
-	public void create() {
-		setScreen(screen);
+	protected Screen getInitialScreen() {
+		return initialScreen;
 	}
-
 
 }
