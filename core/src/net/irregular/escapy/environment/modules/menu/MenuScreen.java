@@ -3,17 +3,20 @@ package net.irregular.escapy.environment.modules.menu;
 import net.irregular.escapy.engine.env.context.annotation.ScreenName;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreenContext;
+import net.irregular.escapy.environment.modules.game.GameScreen;
 
 /**
  * @author Henry on 28/06/17.
  */
-@ScreenName("menu_screen")
+@ScreenName("menu_screen") // TODO: 28/06/17 we will work on menu screen later
 public class MenuScreen implements EscapyScreen {
+
+	private EscapyScreenContext context;
 
 	@Override
 	public void show() {
 
-		System.out.println("MENU LOADED");
+		context.setScreen(GameScreen.class);
 	}
 
 	@Override
@@ -48,6 +51,6 @@ public class MenuScreen implements EscapyScreen {
 
 	@Override
 	public void setScreenContext(EscapyScreenContext screenContext) {
-
+		this.context = screenContext;
 	}
 }

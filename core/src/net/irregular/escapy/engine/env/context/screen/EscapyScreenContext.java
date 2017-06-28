@@ -25,4 +25,8 @@ public interface EscapyScreenContext {
 	 * Set actual screen
 	 */
 	void setScreen(EscapyScreen screen);
+
+	void setScreen(String name);
+
+	void setScreen(Class<? extends EscapyScreen> screenClass);
 }

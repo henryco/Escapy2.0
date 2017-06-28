@@ -1,7 +1,6 @@
 package net.irregular.escapy.engine.env.context.game;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreenContext;
 import net.irregular.escapy.engine.env.context.annotation.meta.AnnotationProcessor;
@@ -66,14 +65,25 @@ public abstract class EscapyGameContext extends Game implements EscapyScreenCont
 	}
 
 	@Override
+	public EscapyScreen getScreen(Class<? extends EscapyScreen> screenClass) {
+		return classEscapyScreenMap.get(screenClass);
+	}
+
+
+	@Override
 	public void setScreen(EscapyScreen screen) {
 		screen.setScreenContext(this);
 		super.setScreen(screen);
 	}
 
 	@Override
-	public EscapyScreen getScreen(Class<? extends EscapyScreen> screenClass) {
-		return classEscapyScreenMap.get(screenClass);
+	public void setScreen(String name) {
+		this.setScreen(this.getScreen(name));
+	}
+
+	@Override
+	public void setScreen(Class<? extends EscapyScreen> screenClass) {
+		this.setScreen(this.getScreen(screenClass));
 	}
 
 }
