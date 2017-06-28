@@ -1,4 +1,4 @@
-package net.irregular.escapy.environment.modules;
+package net.irregular.escapy.environment.modules.splash;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -9,7 +9,7 @@ import dagger.Provides;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
 import net.irregular.escapy.engine.graphic.camera.Resolution;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
-import net.irregular.escapy.environment.screen.SplashScreen;
+import net.irregular.escapy.environment.modules.splash.SplashScreen;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -25,13 +25,10 @@ public class SplashScreenModule {
 			@Named("camera_splash") EscapyCamera camera,
 			@Named("logo_splash") String logo,
 			@Named("batch_splash") Batch batch,
-			@Named("time_splash") float time,
-			@Named("name_splash") String name,
-			@Named("next_screen") String nextScreenName) {
+			@Named("time_splash") float time) {
 
-		return new SplashScreen(logo, camera, batch, time, name, nextScreenName);
+		return new SplashScreen(logo, camera, batch, time);
 	}
-
 
 
 
@@ -49,22 +46,10 @@ public class SplashScreenModule {
 	}
 
 
-
-	@Provides @Named("name_splash")
-	String provideScreenName() {
-		return "splashScreen";
-	}
-
-	@Provides @Named("next_screen")
-	String provideNextScreenName() {
-		return "menuScreen";
-	}
-
 	@Provides @Named("logo_splash")
 	String provideSplashLogoUrl() {
 		return "ESCAPY.png";
 	}
-
 
 
 	@Provides @Singleton @Named("batch_splash")

@@ -1,11 +1,12 @@
-package net.irregular.escapy.environment;
+package net.irregular.escapy.environment.modules;
 
 import dagger.Module;
 import dagger.Provides;
-import net.irregular.escapy.environment.modules.GameScreenModule;
-import net.irregular.escapy.environment.modules.MenuScreenModule;
-import net.irregular.escapy.environment.modules.PauseScreenModule;
-import net.irregular.escapy.environment.modules.SplashScreenModule;
+import net.irregular.escapy.environment.MainEnvironment;
+import net.irregular.escapy.environment.modules.game.GameScreenModule;
+import net.irregular.escapy.environment.modules.menu.MenuScreenModule;
+import net.irregular.escapy.environment.modules.pause.PauseScreenModule;
+import net.irregular.escapy.environment.modules.splash.SplashScreenModule;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
 
 

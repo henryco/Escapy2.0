@@ -1,4 +1,4 @@
-package net.irregular.escapy.environment.screen;
+package net.irregular.escapy.environment.modules.game;
 
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreenContext;

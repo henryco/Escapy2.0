@@ -1,9 +1,8 @@
-package net.irregular.escapy.environment.modules;
+package net.irregular.escapy.environment.modules.game;
 
 import dagger.Module;
 import dagger.Provides;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
-import net.irregular.escapy.environment.screen.GameScreen;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

@@ -1,4 +1,4 @@
-package net.irregular.escapy.environment.screen;
+package net.irregular.escapy.environment.modules.pause;
 
 
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;

@@ -1,9 +1,8 @@
-package net.irregular.escapy.environment.modules;
+package net.irregular.escapy.environment.modules.pause;
 
 import dagger.Module;
 import dagger.Provides;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
-import net.irregular.escapy.environment.screen.PauseScreen;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

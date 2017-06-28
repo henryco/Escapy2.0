@@ -1,4 +1,4 @@
-package net.irregular.escapy.environment.screen;
+package net.irregular.escapy.environment.modules.splash;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreenContext;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
+import net.irregular.escapy.environment.modules.menu.MenuScreen;
 
 import javax.inject.Inject;
 
@@ -19,8 +20,6 @@ public class SplashScreen implements EscapyScreen {
 	private final EscapyCamera camera;
 	private final Batch batch;
 	private final float showTime;
-	private final String nextScreenName;
-	private final String screenName;
 
 	private EscapyScreenContext screenContext;
 	private Sprite sprite;
@@ -31,12 +30,8 @@ public class SplashScreen implements EscapyScreen {
 	public SplashScreen(String logoUrl,
 						EscapyCamera camera,
 						Batch batch,
-						float timeSec,
-						String screenName,
-						String nextScreenName) {
+						float timeSec) {
 
-		this.nextScreenName = nextScreenName;
-		this.screenName = screenName;
 		this.showTime = timeSec;
 		this.logoUrl = logoUrl;
 		this.camera = camera;
