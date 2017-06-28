@@ -15,7 +15,7 @@ public class EscapyMainEnvironment extends Game {
 	private Screen screen;
 
 	@Inject
-	public EscapyMainEnvironment(@Named("screen_menu") Screen screen) {
+	public EscapyMainEnvironment(@Named("screen_start") Screen screen) {
 		this.screen = screen;
 	}
 
