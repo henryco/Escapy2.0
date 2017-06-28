@@ -23,7 +23,7 @@ import java.util.List;
 		SplashScreenModule.class,
 		MenuScreenModule.class,
 		PauseScreenModule.class,
-		GameScreenModule.class,
+		GameScreenModule.class
 })
 public class MainModule {
 

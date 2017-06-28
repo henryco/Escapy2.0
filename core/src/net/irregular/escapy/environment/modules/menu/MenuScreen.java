@@ -7,7 +7,7 @@ import net.irregular.escapy.engine.env.context.screen.EscapyScreenContext;
 /**
  * @author Henry on 28/06/17.
  */
-@ScreenName("menu_test_name")
+@ScreenName("menu_screen")
 public class MenuScreen implements EscapyScreen {
 
 	@Override

@@ -1,12 +1,14 @@
 package net.irregular.escapy.environment.modules.pause;
 
 
+import net.irregular.escapy.engine.env.context.annotation.ScreenName;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreenContext;
 
 /**
  * @author Henry on 28/06/17.
  */
+@ScreenName("pause_screen")
 public class PauseScreen implements EscapyScreen {
 	@Override
 	public void show() {

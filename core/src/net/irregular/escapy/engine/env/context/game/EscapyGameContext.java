@@ -44,7 +44,6 @@ public abstract class EscapyGameContext extends Game implements EscapyScreenCont
 		classEscapyScreenMap = new HashMap<>();
 		AnnotationProcessor processor = contextConfiguration.getAnnotationProcessor();
 		escapyScreens.forEach(escapyScreen -> {
-			escapyScreen.setScreenContext(this);
 			processor.processScreenMap(escapyScreen, screenMap);
 			classEscapyScreenMap.put(escapyScreen.getClass(), escapyScreen);
 		});
@@ -52,13 +51,13 @@ public abstract class EscapyGameContext extends Game implements EscapyScreenCont
 	}
 
 
-	protected abstract Screen getInitialScreen();
+	protected abstract EscapyScreen getInitialScreen();
 
 
 
 	@Override
 	public final void create() {
-		setScreen(getInitialScreen());
+		this.setScreen(getInitialScreen());
 	}
 
 	@Override
@@ -68,6 +67,7 @@ public abstract class EscapyGameContext extends Game implements EscapyScreenCont
 
 	@Override
 	public void setScreen(EscapyScreen screen) {
+		screen.setScreenContext(this);
 		super.setScreen(screen);
 	}
 
