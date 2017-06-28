@@ -44,7 +44,7 @@ public class PauseScreen implements EscapyScreen {
 	}
 
 	@Override
-	public void setGame(Game game) {
+	public void setGameContext(Game gameContext) {
 
 	}
 }

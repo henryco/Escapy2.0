@@ -17,6 +17,7 @@ public class DesktopLauncher {
 		config.width = 1920;
 		config.height = 1080;
 		config.forceExit = true;
+		config.foregroundFPS = 25;
 
 		new LwjglApplication(new EscapyAdapter(MainEnvironment.class, new MainModule()), config);
 

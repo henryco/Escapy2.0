@@ -11,6 +11,7 @@ public class MenuScreen implements EscapyScreen {
 	@Override
 	public void show() {
 
+		System.out.println("MENU LOADED");
 	}
 
 	@Override
@@ -44,7 +45,7 @@ public class MenuScreen implements EscapyScreen {
 	}
 
 	@Override
-	public void setGame(Game game) {
+	public void setGameContext(Game gameContext) {
 
 	}
 }

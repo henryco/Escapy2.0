@@ -17,15 +17,20 @@ import javax.inject.Singleton;
 /**
  * @author Henry on 28/06/17.
  */
-@Module(library = true)
+@Module(library = true, includes = {
+		MenuScreenModule.class
+})
 public class SplashScreenModule {
 
 
 	@Provides @Singleton @Named("screen_splash")
 	public EscapyScreen provideSplashScreen(
 			@Named("camera_splash") EscapyCamera camera,
-			@Named("logo_splash") String logo, Batch batch) {
-		return new SplashScreen(logo, camera, batch);
+			@Named("logo_splash") String logo,
+			@Named("screen_menu") EscapyScreen menuScreen,
+			@Named("batch_splash") Batch batch,
+			@Named("time_splash") float time) {
+		return new SplashScreen(logo, camera, batch, time, menuScreen);
 	}
 
 
@@ -48,9 +53,14 @@ public class SplashScreenModule {
 	}
 
 
-	@Provides @Singleton
+	@Provides @Singleton @Named("batch_splash")
 	Batch provideBatch() {
 		return new SpriteBatch();
+	}
+
+	@Provides @Named("time_splash")
+	float provideSplashTime() {
+		return 3f;
 	}
 
 }

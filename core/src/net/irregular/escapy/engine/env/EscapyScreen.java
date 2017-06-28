@@ -7,5 +7,5 @@ import com.badlogic.gdx.Screen;
  * @author Henry on 28/06/17.
  */
 public interface EscapyScreen extends Screen {
-	void setGame(Game game);
+	void setGameContext(Game gameContext);
 }

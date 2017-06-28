@@ -15,7 +15,7 @@ public class MainEnvironment extends Game {
 	@Inject
 	public MainEnvironment(EscapyScreen screen) {
 		this.screen = screen;
-		screen.setGame(this);
+		screen.setGameContext(this);
 	}
 
 
