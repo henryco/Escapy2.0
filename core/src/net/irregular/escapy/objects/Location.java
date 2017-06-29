@@ -1,5 +1,6 @@
 package net.irregular.escapy.objects;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -38,10 +39,16 @@ public class Location implements Loadable {
 
     public void removeLayer(Layer layer) {
         layers.remove(layer);
+        this.sortLayers();
     }
 
-    public void addNewLayer() {
-        //TODO: implement addition of new layer to list.
+    public void addNewLayer(Layer layer) {
+        layers.add(layer);
+        this.sortLayers();
+    }
+
+    private void sortLayers() {
+        Collections.sort(layers);
     }
 
 }

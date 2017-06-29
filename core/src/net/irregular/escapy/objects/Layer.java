@@ -7,7 +7,7 @@ import java.util.List;
  * net.irregular.escapy.objects
  * At 29.06.17
  */
-public class Layer implements Loadable {
+public class Layer implements Loadable, Comparable<Layer> {
 
     private String name;
 
@@ -65,13 +65,26 @@ public class Layer implements Loadable {
         attachedObjects.add(object);
     }
 
-    public boolean removeAttachedObject() {
-        //TODO: implement remove attached object method according to data struct.
+    public boolean removeAttachedObject(String name) {
+        for (GameObject object :
+                attachedObjects) {
+            if (object.getName().equals(name)) {
+                return attachedObjects.remove(object);
+            }
+        }
         return false;
     }
 
-    public GameObject findGameObject() {
-        //TODO: implement search of game object by certain criteria.
+    public GameObject findGameObject(String name) {
+        for (GameObject object :
+                attachedObjects) {
+            if(object.getName().equals(name)) return object;
+        }
         return null;
+    }
+
+    @Override
+    public int compareTo(Layer o) {
+        return Float.compare(zAxis, o.getzAxis());
     }
 }
