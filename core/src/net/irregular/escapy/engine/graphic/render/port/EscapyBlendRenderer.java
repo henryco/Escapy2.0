@@ -23,8 +23,9 @@ public class EscapyBlendRenderer implements MultiSourceShader {
 	public EscapyBlendRenderer() {
 		shaderProgram = SpriteBatch.createDefaultShader();
 	}
-	public EscapyBlendRenderer(ShaderFile shaderFile) {
+	public EscapyBlendRenderer(ShaderFile shaderFile, String... sourcesNames) {
 		loadProgram(shaderFile);
+		setSourcesNames(sourcesNames);
 	}
 
 
