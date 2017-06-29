@@ -36,15 +36,6 @@ public class EscapyFrameBuffer implements EscapyFBO {
 	}
 
 
-	@EscapyAPI
-	public EscapyFrameBuffer begin(Runnable r) {
-		begin();
-		r.run();
-		end();
-		return this;
-	}
-
-
 	@Override
 	public void begin() {
 		buffer.begin();

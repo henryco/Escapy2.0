@@ -11,6 +11,13 @@ import net.irregular.escapy.engine.graphic.screen.Wipeable;
  */
 public interface EscapyFBO extends GraphicRenderer, Wipeable {
 
+	@EscapyAPI default EscapyFBO begin(Runnable r) {
+		begin();
+		r.run();
+		end();
+		return this;
+	}
+
 	void begin();
 	void end();
 
