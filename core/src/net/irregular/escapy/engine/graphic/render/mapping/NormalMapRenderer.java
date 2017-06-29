@@ -7,5 +7,5 @@ import com.badlogic.gdx.graphics.g2d.Batch;
  */
 public interface NormalMapRenderer {
 
-	void renderNormals(Batch batch);
+	void renderNormalsMap(Batch batch);
 }

@@ -5,16 +5,13 @@ package net.irregular.escapy.engine.graphic.screen;
  */
 public class Resolution {
 
-	public static final int DEFAULT_WIDTH = 1280;
-	public static final int DEFAULT_HEIGHT = 720;
-
 	public final int width, height;
-	public final boolean flip;
+	public final boolean bool;
 
-	public Resolution(int width, int height, boolean flip) {
+	public Resolution(int width, int height, boolean bool) {
 		this.width = width;
 		this.height = height;
-		this.flip = flip;
+		this.bool = bool;
 	}
 
 	public Resolution(int width, int height) {
@@ -26,7 +23,7 @@ public class Resolution {
 		return "Resolution{" +
 				"width=" + width +
 				", height=" + height +
-				", flip=" + flip +
+				", bool=" + bool +
 				'}';
 	}
 }

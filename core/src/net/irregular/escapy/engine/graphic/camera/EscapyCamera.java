@@ -1,18 +1,17 @@
 package net.irregular.escapy.engine.graphic.camera;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Matrix4;
 import net.irregular.escapy.engine.env.utils.TransVec;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
+import net.irregular.escapy.engine.graphic.screen.Wipeable;
 
 import java.util.function.Function;
 
 /**
  * @author Henry on 27/06/17.
  */
-public class EscapyCamera {
+public class EscapyCamera implements Wipeable {
 
 	private OrthographicCamera camera;
 	private Resolution resolution;
@@ -27,7 +26,7 @@ public class EscapyCamera {
 	public void setResolution(Resolution resolution) {
 		this.resolution = resolution;
 		this.camera = new OrthographicCamera();
-		this.camera.setToOrtho(resolution.flip, resolution.width, resolution.height);
+		this.camera.setToOrtho(resolution.bool, resolution.width, resolution.height);
 	}
 
 	public Resolution getResolution() {
@@ -101,8 +100,6 @@ public class EscapyCamera {
 
 
 
-
-
 //	----------------------------- ZOOM --------------------------------
 	public void setZoom(float zoom) {
 		this.camera.zoom = zoom;
@@ -119,24 +116,5 @@ public class EscapyCamera {
 
 
 
-
-
-//	------------------------- GL BUFFER -------------------------------
-	/**
-	 * Clear current GL buffer.
-	 */
-	public void clear() {
-		Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	}
-
-	/**
-	 * Wipe current GL buffer.
-	 */
-	public void wipe() {
-		Gdx.gl.glClearColor(0f, 0f, 0f, 0f);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	}
-//	------------------------- GL BUFFER -------------------------------
 
 }
