@@ -3,6 +3,7 @@ package net.irregular.escapy.engine.graphic.render.port;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import net.irregular.escapy.engine.graphic.render.port.gl20.MultiSourceShader;
@@ -17,11 +18,16 @@ public class EscapyBlendRenderer implements MultiSourceShader {
 	private ShaderProgram shaderProgram;
 	private String[] sourcesNames;
 
-	public EscapyBlendRenderer() {}
+
+
+	public EscapyBlendRenderer() {
+		shaderProgram = SpriteBatch.createDefaultShader();
+	}
 	public EscapyBlendRenderer(ShaderFile shaderFile) {
-		this();
 		loadProgram(shaderFile);
 	}
+
+
 
 	@Override
 	public void setSourcesNames(String... sourcesNames) {
@@ -31,7 +37,9 @@ public class EscapyBlendRenderer implements MultiSourceShader {
 
 	@Override
 	public void loadProgram(ShaderFile shaderFile) {
+		ShaderProgram.pedantic = false;
 		shaderProgram = new ShaderProgram(shaderFile.VERTEX, shaderFile.FRAGMENT);
+		checkStatus(shaderProgram);
 	}
 
 
