@@ -1,11 +1,11 @@
 package net.irregular.escapy.engine.graphic.render.mapping;
 
-import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 
 /**
  * @author Henry on 28/06/17.
  */
 public interface NormalMapRenderer {
 
-	void renderNormals(EscapyCamera camera);
+	void renderNormals(Batch batch);
 }

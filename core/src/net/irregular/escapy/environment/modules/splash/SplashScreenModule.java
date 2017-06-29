@@ -5,11 +5,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dagger.Module;
 import dagger.Provides;
-
-import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
-import net.irregular.escapy.engine.graphic.camera.Resolution;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
-import net.irregular.escapy.environment.modules.splash.SplashScreen;
+import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
+import net.irregular.escapy.engine.graphic.screen.Resolution;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

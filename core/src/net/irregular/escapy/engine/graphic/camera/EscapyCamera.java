@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Matrix4;
 import net.irregular.escapy.engine.env.utils.TransVec;
+import net.irregular.escapy.engine.graphic.screen.Resolution;
 
 import java.util.function.Function;
 
