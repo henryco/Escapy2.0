@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.port.gl20;
+package net.irregular.escapy.engine.graphic.render.port.gl20.shader;
 
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 
@@ -24,4 +24,8 @@ public interface EscapyShader extends EscapyShaderHelper {
 
 	@EscapyAPI void loadProgram(ShaderFile shaderFile);
 
+
+	default String getName() {
+		return this.getClass().getSimpleName()+"[" + hashCode() + "]";
+	}
 }

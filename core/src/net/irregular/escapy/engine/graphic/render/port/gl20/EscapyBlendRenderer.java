@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.port;
+package net.irregular.escapy.engine.graphic.render.port.gl20;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -6,28 +6,30 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import net.irregular.escapy.engine.graphic.render.port.gl20.MultiSourceShader;
+import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
+import net.irregular.escapy.engine.graphic.render.port.gl20.shader.MultiSourceShader;
 
 import java.util.function.Function;
 
 /**
  * @author Henry on 29/06/17.
- */
+ */ @EscapyAPI
 public class EscapyBlendRenderer implements MultiSourceShader {
 
 	private ShaderProgram shaderProgram;
 	private String[] sourcesNames;
 
 
-
-	public EscapyBlendRenderer() {
+	@EscapyAPI public EscapyBlendRenderer() {
 		shaderProgram = SpriteBatch.createDefaultShader();
 	}
-	public EscapyBlendRenderer(ShaderFile shaderFile, String... sourcesNames) {
+	@EscapyAPI public EscapyBlendRenderer(ShaderFile shaderFile) {
 		loadProgram(shaderFile);
+	}
+	@EscapyAPI public EscapyBlendRenderer(ShaderFile shaderFile, String ... sourcesNames) {
+		this(shaderFile);
 		setSourcesNames(sourcesNames);
 	}
-
 
 
 	@Override
@@ -45,18 +47,22 @@ public class EscapyBlendRenderer implements MultiSourceShader {
 
 
 	@Override
-	public void draw(Batch batch, Texture... source) {
+	public void draw(Batch batch, float x, float y, Texture... source) {
 		begin(batch, () -> {
 			bindTextures(batch, source);
-
+			batch.begin();
+			batch.draw(source[0], x, y);
+			batch.end();
 		});
 	}
 
 	@Override
-	public void draw(Batch batch, TextureRegion... source) {
+	public void draw(Batch batch, float x, float y, float width, float height, TextureRegion... source) {
 		begin(batch, () -> {
 			bindTextures(batch, source);
-
+			batch.begin();
+			batch.draw(source[0], x, y, width, height);
+			batch.end();
 		});
 	}
 
@@ -64,7 +70,9 @@ public class EscapyBlendRenderer implements MultiSourceShader {
 	public void draw(Batch batch, Sprite... source) {
 		begin(batch, () -> {
 			bindTextures(batch, source);
-			
+			batch.begin();
+			source[0].draw(batch);
+			batch.end();
 		});
 	}
 
