@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.program.shader;
+package net.irregular.escapy.engine.graphic.render.program.gl20.shader.core.uniform;
 
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import net.irregular.escapy.engine.env.context.annotation.Dante;
@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 /**
  * @author Henry on 29/06/17.
  */ @EscapyAPI @Dante
-public final class Uniforms <T> {
+public final class Uniforms<T> {
 
 	private Consumer<ShaderProgram> loader;
 	private EscapyArray<T> uni;
@@ -33,7 +33,8 @@ public final class Uniforms <T> {
 	 * @param uniformType Type of uniform value to be set in java environment (can be array).
 	 */ @EscapyAPI @Dante
 	public Uniforms(Class<T> uniformType) {
-		this.uni = new EscapyArray<T>(uniformType){};
+
+	 	this.uni = new EscapyArray<T>(uniformType){};
 		this.str = new EscapyArray<String>(String.class){};
 		this.uniforms = uni.container;
 		this.names = str.container;
@@ -70,7 +71,8 @@ public final class Uniforms <T> {
 		}
 	}
 
-	@EscapyAPI public Uniforms addUniform(String name, T val) {
+	@EscapyAPI
+	public Uniforms addUniform(String name, T val) {
 		uni.add(val);
 		str.add(name);
 		uniforms = uni.container;
