@@ -1,21 +1,24 @@
 package net.irregular.escapy.engine.env.utils.arrContainer;
 
+import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
+
 /**
  * @author Henry on 19/10/16.
- */
+ */ @EscapyAPI
 public class EscapyNamedArray <T> extends EscapyArray <T> {
 
 
 	private String[] names;
 	private String[] namesCopy;
 
+	@EscapyAPI
 	public EscapyNamedArray(Class<T> obClass) {
 		super(obClass);
 		this.names = new String[0];
 	}
 
 	@Override
-	public EscapyArray addSource(T ob) {
+	public EscapyArray add(T ob) {
 		return this.addSource(ob, Integer.toString(ob.hashCode()));
 	}
 
@@ -23,14 +26,16 @@ public class EscapyNamedArray <T> extends EscapyArray <T> {
 
 		this.names = addObjToArray(String.class, names, name);
 		copyNames();
-		return super.addSource(ob);
+		return super.add(ob);
 	}
 
+	@EscapyAPI
 	public T get(String name) {
 		for (int i = 0; i < names.length; i++) if (names[i].equalsIgnoreCase(name)) return container[i];
 		return null;
 	}
 
+	@EscapyAPI
 	public String[] getNames() {
 		return namesCopy;
 	}

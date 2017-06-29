@@ -1,11 +1,12 @@
-package net.irregular.escapy.engine.graphic.render.port.gl20.shader;
+package net.irregular.escapy.engine.graphic.render.port.gl20.shader.core;
 
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
+import net.irregular.escapy.engine.graphic.render.port.gl20.shader.uniform.UniformsProvider;
 
 /**
  * @author Henry on 29/06/17.
  */ @EscapyAPI
-public interface EscapyShader extends EscapyShaderHelper {
+public interface EscapyShader extends EscapyShaderHelper, UniformsProvider {
 
 	final class ShaderFile {
 		public final String VERTEX, FRAGMENT;

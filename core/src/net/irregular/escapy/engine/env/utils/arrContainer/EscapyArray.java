@@ -19,7 +19,7 @@ public abstract class EscapyArray<T> {
 		this.container = instanceArray(obClass, 0);
 	}
 
-	public EscapyArray addSource(T ob) {
+	public EscapyArray add(T ob) {
 		container = addObjToArray(obClass, container, ob);
 		return this;
 	}

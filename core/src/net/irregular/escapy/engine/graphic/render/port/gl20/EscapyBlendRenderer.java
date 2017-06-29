@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
-import net.irregular.escapy.engine.graphic.render.port.gl20.shader.MultiSourceShader;
+import net.irregular.escapy.engine.graphic.render.port.gl20.shader.core.MultiSourceShader;
 
 import java.util.function.Function;
 
@@ -77,9 +77,6 @@ public class EscapyBlendRenderer implements MultiSourceShader {
 	}
 
 
-
-
-
 	private void bindTextures(Batch batch, Texture... source) {
 		bindTextures(batch, t -> ((Texture) t), (Object) source);
 	}
@@ -97,7 +94,7 @@ public class EscapyBlendRenderer implements MultiSourceShader {
 		for (int i = sourcesNames.length - 1; i >= 0; i--)
 			shaderProgram.setUniformi(sourcesNames[i], i);
 
-		// TODO: 29/06/17 uniform loadings
+		provideUniforms(null, shaderProgram);
 		
 		shaderProgram.end();
 	}

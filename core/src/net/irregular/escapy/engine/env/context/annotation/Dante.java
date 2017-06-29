@@ -8,11 +8,11 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.*;
 
 /**
- * This annotation is just a marker and will be discarded by compiler.
+ * Lasciate ogni speranza, voi ch’entrate
  * @author Henry on 29/06/17.
  */
 @Documented
 @Retention(RetentionPolicy.SOURCE)
 @Target({METHOD, TYPE, FIELD, CONSTRUCTOR})
-public @interface EscapyAPI {
+public @interface Dante {
 }
