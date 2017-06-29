@@ -17,14 +17,26 @@ public class EscapyFrameBuffer implements EscapyFBO {
 	private final Sprite bufferSprite;
 	private final TextureRegion bufferRegion;
 
+	/**
+	 * This class encapsulate default FBO logic provided by GDX.FrameBuffer
+	 * @author Henry on 29/06/17.
+	 */
 	public EscapyFrameBuffer(final FrameBuffer buffer) {
 		this.buffer = buffer;
 		this.bufferRegion = new TextureRegion(buffer.getColorBufferTexture());
 		this.bufferSprite = new Sprite(bufferRegion);
 	}
+	/**
+	 * This class encapsulate default FBO logic provided by GDX.FrameBuffer
+	 * @author Henry on 29/06/17.
+	 */
 	public EscapyFrameBuffer(final Resolution resolution) {
 		this(resolution, false);
 	}
+	/**
+	 * This class encapsulate default FBO logic provided by GDX.FrameBuffer
+	 * @author Henry on 29/06/17.
+	 */
 	public EscapyFrameBuffer(final Resolution resolution, boolean depth) {
 		this(new FrameBuffer(Pixmap.Format.RGBA8888, resolution.width, resolution.height, depth));
 	}
