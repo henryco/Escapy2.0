@@ -2,11 +2,24 @@ package net.irregular.escapy.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import net.irregular.escapy.MainGdx;
+import net.irregular.escapy.engine.env.EscapyApplication;
+import net.irregular.escapy.environment.MainEnvironment;
+import net.irregular.escapy.environment.modules.MainModule;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new MainGdx(), config);
+		config.resizable = false;
+		config.vSyncEnabled = true;
+		config.fullscreen = true;
+//		config.width = 1280;
+//		config.height = 720;
+		config.width = 1920;
+		config.height = 1080;
+		config.forceExit = true;
+		config.foregroundFPS = 25;
+
+		new LwjglApplication(new EscapyApplication(MainEnvironment.class, new MainModule()), config);
+
 	}
 }
