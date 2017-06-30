@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.program.gl20.shader.sub;
+package net.irregular.escapy.engine.graphic.render.program.gl20.shader.sub.blend;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -6,14 +6,16 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import net.irregular.escapy.engine.env.context.annotation.Dante;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.graphic.render.program.gl20.shader.core.MultiSourceShader;
+import net.irregular.escapy.engine.graphic.render.program.gl20.shader.core.ShaderFile;
 
 import java.util.function.Function;
 
 /**
  * @author Henry on 29/06/17.
- */ @EscapyAPI
+ */ @EscapyAPI @Dante
 public class EscapyBlendRenderer implements MultiSourceShader {
 
 	private ShaderProgram shaderProgram;
@@ -40,9 +42,7 @@ public class EscapyBlendRenderer implements MultiSourceShader {
 
 	@Override
 	public void loadProgram(ShaderFile shaderFile) {
-		ShaderProgram.pedantic = false;
-		shaderProgram = new ShaderProgram(shaderFile.VERTEX, shaderFile.FRAGMENT);
-		checkStatus(shaderProgram);
+		shaderProgram = createProgram(shaderFile);
 	}
 
 

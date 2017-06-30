@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
  */
 public interface SingleSourceShader extends EscapyShader {
 
-	void setSourceName(String sourceName);
 	void draw(Batch batch, float x, float y, Texture source);
 	void draw(Batch batch, float x, float y, float width, float height, TextureRegion source);
 	void draw(Batch batch, Sprite source);

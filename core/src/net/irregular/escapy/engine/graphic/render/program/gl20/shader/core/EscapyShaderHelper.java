@@ -24,6 +24,13 @@ public interface EscapyShaderHelper extends Named {
 		}
 	}
 
+	default ShaderProgram createProgram(ShaderFile file) {
+		ShaderProgram.pedantic = false;
+		ShaderProgram shaderProgram = new ShaderProgram(file.VERTEX, file.FRAGMENT);
+		checkStatus(shaderProgram);
+		return shaderProgram;
+	}
+
 	default void begin(Batch batch, Runnable r) {
 		ShaderProgram defaultShader = batch.getShader();
 		r.run();
