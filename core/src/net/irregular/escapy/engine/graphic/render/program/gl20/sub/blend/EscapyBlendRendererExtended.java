@@ -1,10 +1,10 @@
-package net.irregular.escapy.engine.graphic.render.program.gl20.shader.sub.blend;
+package net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend;
 
 import net.irregular.escapy.engine.env.context.annotation.Dante;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
-import net.irregular.escapy.engine.graphic.render.program.gl20.shader.core.ShaderFile;
-import net.irregular.escapy.engine.graphic.render.program.gl20.shader.core.uniform.StandardUniforms;
-import net.irregular.escapy.engine.graphic.render.program.gl20.shader.core.uniform.Uniforms;
+import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
+import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.StandardUniforms;
+import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.Uniforms;
 
 import java.util.Collection;
 

@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.program.gl20.shader.core;
+package net.irregular.escapy.engine.graphic.render.program.gl20.core;
 
 /**
  * @author Henry on 30/06/17.

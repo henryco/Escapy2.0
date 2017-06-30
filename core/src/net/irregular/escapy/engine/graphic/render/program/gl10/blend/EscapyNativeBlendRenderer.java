@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.program.gl10;
+package net.irregular.escapy.engine.graphic.render.program.gl10.blend;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL30;

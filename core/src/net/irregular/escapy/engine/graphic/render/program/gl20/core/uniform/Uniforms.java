@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.program.gl20.shader.core.uniform;
+package net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform;
 
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import net.irregular.escapy.engine.env.context.annotation.Dante;

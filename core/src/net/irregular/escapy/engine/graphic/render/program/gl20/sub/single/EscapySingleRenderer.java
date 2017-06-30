@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.program.gl20.shader.sub.single;
+package net.irregular.escapy.engine.graphic.render.program.gl20.sub.single;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
-import net.irregular.escapy.engine.graphic.render.program.gl20.shader.core.ShaderFile;
-import net.irregular.escapy.engine.graphic.render.program.gl20.shader.core.SingleSourceShader;
+import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
+import net.irregular.escapy.engine.graphic.render.program.gl20.core.SingleSourceShader;
 
 /**
  * @author Henry on 30/06/17.

@@ -1,7 +1,7 @@
-package net.irregular.escapy.engine.graphic.render.program.gl20.shader.core;
+package net.irregular.escapy.engine.graphic.render.program.gl20.core;
 
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
-import net.irregular.escapy.engine.graphic.render.program.gl20.shader.core.uniform.UniformsProvider;
+import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.UniformsProvider;
 
 /**
  * @author Henry on 29/06/17.
