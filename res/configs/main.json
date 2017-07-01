@@ -1,0 +1,7 @@
+{
+  "fps": 25,
+  "main_filepath": "/levels",
+  "root_path": "/res",
+  "configs_path": "/configs",
+  "main_scene": "/start.json"
+}

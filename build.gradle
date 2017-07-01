@@ -54,6 +54,7 @@ project(":core") {
         compile "com.kotcrab.vis:vis-ui:1.3.0"
         compile "net.dermetfan.libgdx-utils:libgdx-utils:0.13.4"
         compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:0.13.4"
+        compile "com.googlecode.json-simple:json-simple:1.1.1"
         testCompile "junit:junit:4.11"
         compile "com.squareup.dagger:dagger:$daggerVersion"
         compile "com.squareup.dagger:dagger-compiler:$daggerVersion"
