@@ -3,6 +3,11 @@ package net.irregular.escapy.engine.graphic.render.program.shader;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.StandardUniforms;
 import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.EscapyBlendRendererExtended;
@@ -11,7 +16,7 @@ import net.irregular.escapy.engine.graphic.screen.Resolution;
 
 /**
  * @author Henry on 30/06/17.
- */
+ */ @EscapyAPI
 public class AbsLightSource {
 
 	private final EscapyUniformBlender uniformBlender;
@@ -45,6 +50,21 @@ public class AbsLightSource {
 		uniformBlender.setSourcesNames("targetMap", "u_lightMap");
 		uniformBlender.loadProgram(shaderFile);
 	}
+
+
+	// TODO: 01/07/17 create interface
+	public void draw(Batch batch, float x, float y, Texture target, Texture map) {
+		uniformBlender.draw(batch, x, y, target, map);
+	}
+
+	public void draw(Batch batch, float x, float y, float width, float height, TextureRegion target, TextureRegion map) {
+		uniformBlender.draw(batch, x, y, width, height, target, map);
+	}
+
+	public void draw(Batch batch, Sprite target, Sprite map) {
+		uniformBlender.draw(batch, target, map);
+	}
+
 
 
 	public void setColor(Color color) {
