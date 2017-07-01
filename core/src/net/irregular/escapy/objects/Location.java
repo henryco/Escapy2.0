@@ -1,5 +1,6 @@
 package net.irregular.escapy.objects;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,10 +12,13 @@ import java.util.List;
 public class Location implements Loadable {
 
     private String name;
+    private List<Location> locations;
     private List<Layer> layers;
 
     public Location(String name) {
         this.name = name;
+        this.locations = new ArrayList<Location>();
+        this.layers = new ArrayList<Layer>();
     }
 
     public String getName() {
@@ -27,6 +31,10 @@ public class Location implements Loadable {
 
     public List<Layer> getLayers() {
         return this.layers;
+    }
+
+    public List<Location> getLocations() {
+        return this.locations;
     }
 
     public Layer findLayer(String name) {
@@ -45,6 +53,10 @@ public class Location implements Loadable {
     public void addNewLayer(Layer layer) {
         layers.add(layer);
         this.sortLayers();
+    }
+
+    public void addNewLocation(Location location) {
+        locations.add(location);
     }
 
     private void sortLayers() {

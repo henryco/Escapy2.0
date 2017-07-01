@@ -64,6 +64,7 @@ project(":core") {
         compile "net.dermetfan.libgdx-utils:libgdx-utils:0.13.4"
         compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:0.13.4"
         compile "com.google.dagger:dagger:$daggerVersion"
+        compile "com.googlecode.json-simple:json-simple:1.1.1"
         apt "com.google.dagger:dagger-compiler:$daggerVersion"
     }
 }
