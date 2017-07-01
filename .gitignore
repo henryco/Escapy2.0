@@ -14,7 +14,7 @@ hs_err_pid*
 .apt_generated/
 .gwt/
 gwt-unitCache/
-www-test/
+www-d/
 .gwt-tmp/
 
 ## Android Studio and Intellij and Android in general
