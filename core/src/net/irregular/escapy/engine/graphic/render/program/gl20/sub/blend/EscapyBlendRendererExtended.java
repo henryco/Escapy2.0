@@ -4,14 +4,14 @@ import net.irregular.escapy.engine.env.context.annotation.Dante;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.StandardUniforms;
-import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.Uniforms;
+import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.Uniform;
 
 import java.util.Collection;
 
 /**
  * @author Henry on 29/06/17.
  */ @EscapyAPI @Dante
-public class EscapyBlendRendererExtended extends EscapyBlendRenderer {
+public class EscapyBlendRendererExtended extends EscapyBlendRenderer implements EscapyUniformBlender {
 
 	public final StandardUniforms uniformProvider = new StandardUniforms();
 
@@ -25,9 +25,13 @@ public class EscapyBlendRendererExtended extends EscapyBlendRenderer {
 
 
 	@Override
-	public Collection<Uniforms> getUniforms() {
+	public Collection<Uniform> getUniforms() {
 		return uniformProvider.getUniforms();
 	}
 
+	@Override
+	public StandardUniforms getStandardUniforms() {
+		return uniformProvider;
+	}
 
 }

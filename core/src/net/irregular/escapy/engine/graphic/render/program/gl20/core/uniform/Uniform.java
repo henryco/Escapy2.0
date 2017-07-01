@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 /**
  * @author Henry on 29/06/17.
  */ @EscapyAPI @Dante
-public final class Uniforms<T> {
+public final class Uniform<T> {
 
 	private Consumer<ShaderProgram> loader;
 	private EscapyArray<T> uni;
@@ -32,7 +32,7 @@ public final class Uniforms<T> {
 	 * изменить код, просто смирись и используй и тебе понравится.</b>
 	 * @param uniformType Type of uniform value to be set in java environment (can be array).
 	 */ @EscapyAPI @Dante
-	public Uniforms(Class<T> uniformType) {
+	public Uniform(Class<T> uniformType) {
 
 	 	this.uni = new EscapyArray<T>(uniformType){};
 		this.str = new EscapyArray<String>(String.class){};
@@ -72,7 +72,7 @@ public final class Uniforms<T> {
 	}
 
 	@EscapyAPI
-	public Uniforms addUniform(String name, T val) {
+	public Uniform addUniform(String name, T val) {
 		uni.add(val);
 		str.add(name);
 		uniforms = uni.container;

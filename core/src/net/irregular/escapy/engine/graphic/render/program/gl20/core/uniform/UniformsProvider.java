@@ -9,7 +9,7 @@ import java.util.Collection;
  */
 public interface UniformsProvider {
 
-	default Collection<Uniforms> getUniforms() {
+	default Collection<Uniform> getUniforms() {
 		return null;
 	}
 
