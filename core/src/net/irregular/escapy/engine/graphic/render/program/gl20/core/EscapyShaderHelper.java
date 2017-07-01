@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.program.gl20.shader.core;
+package net.irregular.escapy.engine.graphic.render.program.gl20.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;

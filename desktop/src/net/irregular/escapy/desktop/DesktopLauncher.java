@@ -2,7 +2,7 @@ package net.irregular.escapy.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import net.irregular.escapy.engine.env.EscapyApplication;
+import net.irregular.escapy.engine.env.EscapyApplicationAdapter;
 import net.irregular.escapy.environment.MainEnvironment;
 import net.irregular.escapy.environment.modules.MainModule;
 
@@ -19,7 +19,7 @@ public class DesktopLauncher {
 		config.forceExit = true;
 		config.foregroundFPS = 25;
 
-		new LwjglApplication(new EscapyApplication(MainEnvironment.class, new MainModule()), config);
+		new LwjglApplication(new EscapyApplicationAdapter(MainEnvironment.class, new MainModule()), config);
 
 	}
 }

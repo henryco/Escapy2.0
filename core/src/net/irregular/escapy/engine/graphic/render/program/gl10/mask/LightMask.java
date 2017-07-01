@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.mask;
+package net.irregular.escapy.engine.graphic.render.program.gl10.mask;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;

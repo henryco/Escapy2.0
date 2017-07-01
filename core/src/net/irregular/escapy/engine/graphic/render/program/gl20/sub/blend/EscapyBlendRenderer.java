@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.program.gl20.shader.sub.blend;
+package net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import net.irregular.escapy.engine.env.context.annotation.Dante;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
-import net.irregular.escapy.engine.graphic.render.program.gl20.shader.core.MultiSourceShader;
-import net.irregular.escapy.engine.graphic.render.program.gl20.shader.core.ShaderFile;
+import net.irregular.escapy.engine.graphic.render.program.gl20.core.MultiSourceShader;
+import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
 
 import java.util.function.Function;
 

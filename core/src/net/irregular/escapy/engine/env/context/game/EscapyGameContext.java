@@ -1,10 +1,11 @@
 package net.irregular.escapy.engine.env.context.game;
 
 import com.badlogic.gdx.Game;
+import net.irregular.escapy.engine.env.context.annotation.meta.AnnotationProcessor;
+import net.irregular.escapy.engine.env.context.game.configuration.DefaultEscapyGameContextConfiguration;
+import net.irregular.escapy.engine.env.context.game.configuration.EscapyGameContextConfiguration;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreenContext;
-import net.irregular.escapy.engine.env.context.annotation.meta.AnnotationProcessor;
-
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -28,7 +29,7 @@ public abstract class EscapyGameContext extends Game implements EscapyScreenCont
 	 * In other cases use it as {@link EscapyScreenContext}
 	 */
 	protected EscapyGameContext(Collection<EscapyScreen> escapyScreens) {
-		this(escapyScreens, new EscapyGameContextConfiguration());
+		this(escapyScreens, new DefaultEscapyGameContextConfiguration());
 	}
 
 	/**

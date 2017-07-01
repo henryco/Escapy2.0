@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.program.gl20.shader.core.uniform;
+package net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform;
 
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
@@ -9,7 +9,7 @@ import java.util.Collection;
  */
 public interface UniformsProvider {
 
-	default Collection<Uniforms> getUniforms() {
+	default Collection<Uniform> getUniforms() {
 		return null;
 	}
 

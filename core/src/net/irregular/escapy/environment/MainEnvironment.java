@@ -2,6 +2,7 @@ package net.irregular.escapy.environment;
 
 import net.irregular.escapy.engine.env.context.game.EscapyGameContext;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
+
 import javax.inject.Inject;
 import java.util.Collection;
 
