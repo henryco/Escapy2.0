@@ -24,13 +24,13 @@ public class AbsLightSource {
 	public AbsLightSource() {
 		this(new EscapyBlendRendererExtended(),
 				new ShaderFile(
-						Gdx.files.internal("/shaders/lightSource/lightSrc.vert").readString(),
-						Gdx.files.internal("/shaders/lightSource/lightSrc_N.frag").readString()
+						Gdx.files.internal("/shaders/light/source/lightSrc.vert").readString(),
+						Gdx.files.internal("/shaders/light/source/lightSrc_N.frag").readString()
 				)
 		);
 	}
 
-	public AbsLightSource(EscapyUniformBlender uniformBlender, ShaderFile shaderFile) {
+	protected AbsLightSource(EscapyUniformBlender uniformBlender, ShaderFile shaderFile) {
 		this.uniformBlender = uniformBlender;
 		initBlender(shaderFile);
 	}
