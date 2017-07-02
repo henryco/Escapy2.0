@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render;
+package net.irregular.escapy.engine.graphic.render.mapping;
 
 
 import net.irregular.escapy.engine.graphic.render.mapping.GraphicRenderer;
