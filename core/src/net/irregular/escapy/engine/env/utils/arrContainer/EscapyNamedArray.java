@@ -1,11 +1,12 @@
 package net.irregular.escapy.engine.env.utils.arrContainer;
 
+import net.irregular.escapy.engine.env.context.annotation.Dante;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 
 /**
  * @author Henry on 19/10/16.
- */ @EscapyAPI
-public class EscapyNamedArray <T> extends EscapyArray <T> {
+ */ @EscapyAPI @Dante
+public class EscapyNamedArray<T> extends EscapyIndexArray<T> {
 
 
 	private String[] names;
