@@ -1,72 +1,33 @@
 package net.irregular.escapy.engine.env.utils.arrContainer;
 
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 /**
- * @author Henry on 02/10/16.
+ * @author Henry on 02/07/17.
  */
-public abstract class EscapyArray<T> {
+public interface EscapyArray<T> {
 
-	public T[] container;
-	private Class<T> obClass;
+	EscapyArray add(T ob);
 
+	EscapyArray set(int index, T ob);
 
-	public EscapyArray(Class<T> obClass) {
-		this.obClass = obClass;
-		this.container = instanceArray(obClass, 0);
-	}
+	EscapyArray removeLast();
 
-	public EscapyArray add(T ob) {
-		container = addObjToArray(obClass, container, ob);
-		return this;
-	}
+	EscapyArray forEach(Consumer<T> consumer);
 
-	public EscapyArray removeLast(){
-		container = removeLast(obClass, container);
-		return this;
-	}
+	Stream<T> stream();
 
-	public EscapyArray forEach(Consumer<T> consumer) {
-		Arrays.stream(container).forEach(consumer);
-		return this;
-	}
+	int size();
 
-	public int size(){
-		return container.length;
-	}
+	T get(int index);
 
-	public T get(int index) {
-		if (container.length > index) return container[index];
+	EscapyArray clear();
+
+	default T getLast() {
+		final int index = size() - 1;
+		if (index >= 0) return get(index);
 		return null;
 	}
 
-	public T getLast(){
-		return container[container.length - 1];
-	}
-
-	public EscapyArray clear() {
-		container = instanceArray(obClass, 0);
-		return this;
-	}
-
-	@SuppressWarnings("unchecked")
-	private static <U> U[] instanceArray(Class<U> obClass, int length) {
-		return (U[]) Array.newInstance(obClass, length);
-	}
-
-	protected static <U> U[] addObjToArray(Class<U> obClass, U[] superArray, U ob) {
-		U[] tmp = instanceArray(obClass, superArray.length + 1);
-		System.arraycopy(superArray, 0, tmp, 0, superArray.length);
-		tmp[tmp.length - 1] = ob;
-		return tmp;
-	}
-
-	protected static <U> U[] removeLast(Class<U> obClass, U[] superArray){
-		U[] tmp = instanceArray(obClass, superArray.length - 1);
-		System.arraycopy(superArray, 0, tmp, 0, tmp.length);
-		return tmp;
-	}
 }
