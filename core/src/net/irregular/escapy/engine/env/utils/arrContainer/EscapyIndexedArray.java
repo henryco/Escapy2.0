@@ -4,67 +4,56 @@ package net.irregular.escapy.engine.env.utils.arrContainer;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.function.Consumer;
+import java.util.Iterator;
 import java.util.stream.Stream;
 
 /**
  * @author Henry on 02/10/16.
  */
-public class EscapyIndexArray<T> implements EscapyArray<T> {
+public class EscapyIndexedArray<T> implements EscapyArray<T> {
 
 	public T[] container;
 	private Class<T> obClass;
 
 	
-	public EscapyIndexArray(Class<T> obClass) {
+	public EscapyIndexedArray(Class<T> obClass) {
 		this(obClass, 0);
 	}
 
-	public EscapyIndexArray(Class<T> obClass, int initialCap) {
+	public EscapyIndexedArray(Class<T> obClass, int initialCap) {
 		this.obClass = obClass;
 		this.container = instanceArray(obClass, initialCap);
 	}
 
-	public EscapyIndexArray(Class<T> obClass, Collection<T> collection) {
+	public EscapyIndexedArray(Class<T> obClass, Collection<T> collection) {
 		this.obClass = obClass;
 		addAll(collection);
 	}
 
 	@Override
-	public EscapyArray addAll(Collection<T> collection) {
+	public void addAll(Collection<T> collection) {
 		this.container = collection.toArray(instanceArray(obClass, 0));
-		return this;
 	}
 
 	@Override
-	public EscapyArray add(T ob) {
+	public void add(T ob) {
 		container = addObjToArray(obClass, container, ob);
-		return this;
 	}
 
 	@Override
-	public EscapyArray set(int index, T ob) {
+	public void set(int index, T ob) {
 		if (index >= 0 && index < container.length)
 			container[index] = ob;
-		return this;
 	}
 
 	@Override
-	public EscapyArray removeLast() {
+	public void removeLast() {
 		container = removeLast(obClass, container);
-		return this;
 	}
 
 	@Override
-	public EscapyArray remove(int index) {
+	public void remove(int index) {
 		container = remove(obClass, container, index);
-		return this;
-	}
-
-	@Override
-	public EscapyArray forEach(Consumer<T> consumer) {
-		Arrays.stream(container).forEach(consumer);
-		return this;
 	}
 
 	@Override
@@ -86,9 +75,27 @@ public class EscapyIndexArray<T> implements EscapyArray<T> {
 
 
 	@Override
-	public EscapyArray clear() {
+	public void clear() {
 		container = instanceArray(obClass, 0);
-		return this;
+	}
+
+
+	@Override
+	public Iterator<T> iterator() {
+		return new Iterator<T>() {
+
+			private int currentIndex = 0;
+
+			@Override
+			public boolean hasNext() {
+				return currentIndex < container.length && container[currentIndex] != null;
+			}
+
+			@Override
+			public T next() {
+				return container[currentIndex++];
+			}
+		};
 	}
 
 

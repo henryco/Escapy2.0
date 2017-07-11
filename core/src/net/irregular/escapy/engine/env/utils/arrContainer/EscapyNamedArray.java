@@ -5,12 +5,13 @@ import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
 
 
 /**
  * @author Henry on 19/10/16.
  */ @EscapyAPI @Dante
-public class EscapyNamedArray<T> extends EscapyIndexArray<T> {
+public class EscapyNamedArray<T> extends EscapyIndexedArray<T> implements EscapyAssociatedArray<T> {
 
 
 	private String[] names;
@@ -35,49 +36,47 @@ public class EscapyNamedArray<T> extends EscapyIndexArray<T> {
 		addAll(names, objects);
 	}
 
-	public EscapyNamedArray addAll(Collection<String> names, Collection<T> objects) {
+
+	@Override
+	public void addAll(Collection<String> names, Collection<T> objects) {
 		addAll(objects);
 		this.names = names.toArray(new String[0]);
 		copyNames();
-		return this;
 	}
 
 	@Override
-	public EscapyArray add(T ob) {
-		return this.add(ob, Integer.toString(ob.hashCode()));
+	public void add(T ob) {
+		this.add(ob, Integer.toString(ob.hashCode()));
 	}
 
-	public EscapyArray add(T ob, String name) {
+	@Override
+	public void add(T ob, String name) {
 
 		this.names = addObjToArray(String.class, names, name);
 		copyNames();
-		return super.add(ob);
+		super.add(ob);
 	}
 
-	@EscapyAPI
+	@EscapyAPI @Override
 	public T get(String name) {
 		for (int i = 0; i < names.length; i++) if (names[i].equals(name)) return container[i];
 		return null;
 	}
 
-	@EscapyAPI
-	public EscapyNamedArray set(String name, T obj) {
+	@EscapyAPI @Override
+	public void set(String name, T obj) {
 		for (int i = 0; i < names.length; i++)
 			if (names[i].equalsIgnoreCase(name))
 				container[i] = obj;
-		return this;
 	}
 
-	@EscapyAPI
-	public EscapyNamedArray remove(String name) {
-
-		for (int i = 0; i < names.length; i++) {
+	@EscapyAPI @Override
+	public void remove(String name) {
+		for (int i = 0; i < names.length; i++)
 			if (names[i].equals(name)) {
 				remove(i);
 				copyNames();
-			}
 		}
-		return this;
 	}
 
 	@EscapyAPI
@@ -86,22 +85,29 @@ public class EscapyNamedArray<T> extends EscapyIndexArray<T> {
 	}
 
 	@Override
-	public EscapyArray clear() {
+	public void clear() {
 		this.names = new String[0];
 		copyNames();
-		return super.clear();
+		super.clear();
 	}
 
 	@Override
-	public EscapyArray removeLast() {
+	public void removeLast() {
 		names = removeLast(String.class, names);
 		copyNames();
-		return super.removeLast();
+		super.removeLast();
 	}
 
-	private void copyNames(){
-		namesCopy = new String[names.length];
-		System.arraycopy(names, 0, namesCopy, 0, namesCopy.length);
+	@Override
+	public T getLast() {
+		return super.getLast();
+	}
+
+	@Override
+	public Collection<Entry<T>> getEntrySet() {
+		Collection<Entry<T>> collection = new LinkedList<>();
+		for (int i = 0; i < size(); i ++) collection.add(new Entry<>(names[i], get(i)));
+ 		return collection;
 	}
 
 	@Override
@@ -110,5 +116,11 @@ public class EscapyNamedArray<T> extends EscapyIndexArray<T> {
 				"container=" + Arrays.toString(container) +
 				", names=" + Arrays.toString(names) +
 				'}';
+	}
+
+
+	private void copyNames(){
+		namesCopy = new String[names.length];
+		System.arraycopy(names, 0, namesCopy, 0, namesCopy.length);
 	}
 }

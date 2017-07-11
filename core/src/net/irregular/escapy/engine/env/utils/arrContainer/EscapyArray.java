@@ -1,25 +1,22 @@
 package net.irregular.escapy.engine.env.utils.arrContainer;
 
 import java.util.Collection;
-import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 /**
  * @author Henry on 02/07/17.
  */
-public interface EscapyArray<T> {
+public interface EscapyArray<T> extends Iterable <T> {
 
-	EscapyArray addAll(Collection<T> collection);
+	void addAll(Collection<T> collection);
 
-	EscapyArray add(T ob);
+	void add(T ob);
 
-	EscapyArray set(int index, T ob);
+	void set(int index, T ob);
 
-	EscapyArray removeLast();
+	void removeLast();
 
-	EscapyArray remove(int index);
-
-	EscapyArray forEach(Consumer<T> consumer);
+	void remove(int index);
 
 	Stream<T> stream();
 
@@ -27,7 +24,7 @@ public interface EscapyArray<T> {
 
 	T get(int index);
 
-	EscapyArray clear();
+	void clear();
 
 	default T getLast() {
 		final int index = size() - 1;

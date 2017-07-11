@@ -1,4 +1,4 @@
-package net.irregular.escapy.map.objects;
+package net.irregular.escapy.map.object;
 
 import java.util.Arrays;
 
@@ -7,22 +7,25 @@ import java.util.Arrays;
  */
 public class ObjectDetails {
 
-	private String name;
+	private final String name;
 	private float scale, thickness;
 	public final float[] position;
 
 	{
-		name = null;
 		scale = 1f;
 		thickness = 0f;
 		position = new float[2];
 	}
 
 
-	public ObjectDetails() {}
-	public ObjectDetails(String name, float scale, float thickness) {
-		this();
+	public ObjectDetails() {
+		this(null);
+	}
+	public ObjectDetails(String name) {
 		this.name = name;
+	}
+	public ObjectDetails(String name, float scale, float thickness) {
+		this(name);
 		this.scale = scale;
 		this.thickness = thickness;
 	}
@@ -55,11 +58,6 @@ public class ObjectDetails {
 	public ObjectDetails setPosition(float[] position) {
 		this.position[0] = position[0];
 		this.position[1] = position[1];
-		return this;
-	}
-
-	public ObjectDetails setName(String name) {
-		this.name = name;
 		return this;
 	}
 

@@ -1,5 +1,7 @@
 package net.irregular.escapy.map;
 
+import net.irregular.escapy.map.location.Location;
+
 import java.util.Map;
 
 /**

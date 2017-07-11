@@ -3,7 +3,7 @@ package net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import net.irregular.escapy.engine.env.context.annotation.Dante;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
-import net.irregular.escapy.engine.env.utils.arrContainer.EscapyIndexArray;
+import net.irregular.escapy.engine.env.utils.arrContainer.EscapyIndexedArray;
 
 import java.util.function.Consumer;
 
@@ -13,8 +13,8 @@ import java.util.function.Consumer;
 public final class Uniform<T> {
 
 	private Consumer<ShaderProgram> loader;
-	private EscapyIndexArray<T> uni;
-	private EscapyIndexArray<String> str;
+	private EscapyIndexedArray<T> uni;
+	private EscapyIndexedArray<String> str;
 	private T[] uniforms;
 	private String[] names;
 
@@ -34,8 +34,8 @@ public final class Uniform<T> {
 	 */ @EscapyAPI @Dante
 	public Uniform(Class<T> uniformType) {
 
-	 	this.uni = new EscapyIndexArray<T>(uniformType){};
-		this.str = new EscapyIndexArray<String>(String.class){};
+	 	this.uni = new EscapyIndexedArray<T>(uniformType){};
+		this.str = new EscapyIndexedArray<String>(String.class){};
 		this.uniforms = uni.container;
 		this.names = str.container;
 		try {
