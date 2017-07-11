@@ -1,5 +1,6 @@
 package net.irregular.escapy.engine.env.utils.arrContainer;
 
+import java.util.Collection;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
@@ -7,6 +8,8 @@ import java.util.stream.Stream;
  * @author Henry on 02/07/17.
  */
 public interface EscapyArray<T> {
+
+	EscapyArray addAll(Collection<T> collection);
 
 	EscapyArray add(T ob);
 

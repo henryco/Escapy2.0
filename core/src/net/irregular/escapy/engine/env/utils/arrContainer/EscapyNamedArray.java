@@ -3,6 +3,9 @@ package net.irregular.escapy.engine.env.utils.arrContainer;
 import net.irregular.escapy.engine.env.context.annotation.Dante;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 
+import java.util.Collection;
+
+
 /**
  * @author Henry on 19/10/16.
  */ @EscapyAPI @Dante
@@ -18,12 +21,26 @@ public class EscapyNamedArray<T> extends EscapyIndexArray<T> {
 		this.names = new String[0];
 	}
 
-	@Override
-	public EscapyArray add(T ob) {
-		return this.addSource(ob, Integer.toString(ob.hashCode()));
+	@EscapyAPI
+	public EscapyNamedArray(Class<T> obClass, int initCap) {
+		super(obClass, initCap);
+		this.names = new String[initCap];
+		this.namesCopy = new String[initCap];
 	}
 
-	public EscapyArray addSource(T ob, String name) {
+	@EscapyAPI
+	public EscapyNamedArray(Class<T> obClass, Collection<String> names, Collection<T> objects) {
+		super(obClass, objects);
+		this.names = names.toArray(new String[0]);
+		this.namesCopy = names.toArray(new String[0]);
+	}
+
+	@Override
+	public EscapyArray add(T ob) {
+		return this.add(ob, Integer.toString(ob.hashCode()));
+	}
+
+	public EscapyArray add(T ob, String name) {
 
 		this.names = addObjToArray(String.class, names, name);
 		copyNames();
@@ -34,6 +51,14 @@ public class EscapyNamedArray<T> extends EscapyIndexArray<T> {
 	public T get(String name) {
 		for (int i = 0; i < names.length; i++) if (names[i].equalsIgnoreCase(name)) return container[i];
 		return null;
+	}
+
+	@EscapyAPI
+	public EscapyNamedArray set(String name, T obj) {
+		for (int i = 0; i < names.length; i++)
+			if (names[i].equalsIgnoreCase(name))
+				container[i] = obj;
+		return this;
 	}
 
 	@EscapyAPI
