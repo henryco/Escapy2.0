@@ -17,6 +17,8 @@ public interface EscapyArray<T> {
 
 	EscapyArray removeLast();
 
+	EscapyArray remove(int index);
+
 	EscapyArray forEach(Consumer<T> consumer);
 
 	Stream<T> stream();

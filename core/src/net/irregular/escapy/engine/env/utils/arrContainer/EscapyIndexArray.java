@@ -56,6 +56,12 @@ public class EscapyIndexArray<T> implements EscapyArray<T> {
 	}
 
 	@Override
+	public EscapyArray remove(int index) {
+		container = remove(obClass, container, index);
+		return this;
+	}
+
+	@Override
 	public EscapyArray forEach(Consumer<T> consumer) {
 		Arrays.stream(container).forEach(consumer);
 		return this;
@@ -95,6 +101,19 @@ public class EscapyIndexArray<T> implements EscapyArray<T> {
 		U[] tmp = instanceArray(obClass, superArray.length + 1);
 		System.arraycopy(superArray, 0, tmp, 0, superArray.length);
 		tmp[tmp.length - 1] = ob;
+		return tmp;
+	}
+
+	protected static <U> U[] remove(Class<U> obClass, U[] superArray, int index) {
+		if (index >= superArray.length || index < 0) return superArray;
+		U[] tmp = instanceArray(obClass, superArray.length - 1);
+		int k = 0;
+		for (int i = 0; i < superArray.length; i++) {
+			if (i != index) {
+				tmp[k] = superArray[i];
+				k++;
+			}
+		}
 		return tmp;
 	}
 
