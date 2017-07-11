@@ -91,6 +91,7 @@ public class EscapyIndexedArray<T> implements EscapyArray<T> {
 
 	@Override
 	public void sort(Comparator<T> comparator) {
+		if (comparator == null) return;
 		Arrays.sort(container, comparator);
 	}
 

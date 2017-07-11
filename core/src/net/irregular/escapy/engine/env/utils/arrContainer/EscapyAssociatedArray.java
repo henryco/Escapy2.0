@@ -1,6 +1,8 @@
 package net.irregular.escapy.engine.env.utils.arrContainer;
 
 
+import net.irregular.escapy.engine.env.utils.Named;
+
 import java.util.Collection;
 import java.util.Comparator;
 
@@ -12,6 +14,8 @@ public interface EscapyAssociatedArray <T> extends Iterable<T> {
 	void addAll(Collection<String> names, Collection<T> objects);
 
 	void add(T ob, String name);
+
+	<U extends Named> void add(U ob);
 
 	T get(String name);
 

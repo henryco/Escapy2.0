@@ -1,9 +1,11 @@
 package net.irregular.escapy.map.layer;
 
+import net.irregular.escapy.engine.env.utils.Named;
+
 /**
  * @author Henry on 11/07/17.
  */
-public class LayerShifter {
+public class LayerShifter implements Named {
 
 	public final String name;
 	public final float[] direct;
@@ -48,5 +50,10 @@ public class LayerShifter {
 	public void setDirect(float[] direct) {
 		this.direct[0] = direct[0];
 		this.direct[1] = direct[1];
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 }

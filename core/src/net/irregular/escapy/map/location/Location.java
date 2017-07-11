@@ -1,11 +1,13 @@
 package net.irregular.escapy.map.location;
 
+import net.irregular.escapy.engine.env.utils.Named;
+
 import java.util.*;
 
 /**
  * @author Henry on 11/07/17.
  */
-public class Location {
+public class Location implements Named {
 
 	private final String name;
 	private final Map<String, SubLocation> subLocationMap;
@@ -52,6 +54,7 @@ public class Location {
 		return locations;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}

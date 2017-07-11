@@ -2,6 +2,7 @@ package net.irregular.escapy.engine.env.utils.arrContainer;
 
 import net.irregular.escapy.engine.env.context.annotation.Dante;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
+import net.irregular.escapy.engine.env.utils.Named;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -57,6 +58,16 @@ public class EscapyNamedArray<T> extends EscapyIndexedArray<T> implements Escapy
 		copyNames();
 		super.add(ob);
 	}
+
+
+
+	@Override @SuppressWarnings("unchecked")
+	public <U extends Named<T>> void add(U ob) {
+		try {
+			add((T) ob, ob.getName());
+		} catch (Exception ignored) {}
+	}
+
 
 	@EscapyAPI @Override
 	public T get(String name) {
@@ -114,6 +125,7 @@ public class EscapyNamedArray<T> extends EscapyIndexedArray<T> implements Escapy
 	@Override
 	public void sort(Comparator<T> comparator) {
 
+		if (comparator == null) return;
 		LinkedList<Entry<T>> entries = (LinkedList<Entry<T>>) getEntrySet();
 		entries.sort((o1, o2) -> comparator.compare(o1.getObject(), o2.getObject()));
 		Collection<T> objects = new LinkedList<>();
