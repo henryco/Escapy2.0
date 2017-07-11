@@ -2,6 +2,7 @@ package net.irregular.escapy.engine.env.utils.arrContainer;
 
 
 import java.util.Collection;
+import java.util.Comparator;
 
 /**
  * @author Henry on 11/07/17.
@@ -28,6 +29,7 @@ public interface EscapyAssociatedArray <T> extends Iterable<T> {
 
 	Collection<Entry<T>> getEntrySet();
 
+	T[] getArray();
 
 	final class Entry<U> {
 
@@ -48,4 +50,5 @@ public interface EscapyAssociatedArray <T> extends Iterable<T> {
 		}
 	}
 
+	void sort(Comparator<T> comparator);
 }

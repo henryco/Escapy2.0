@@ -1,6 +1,7 @@
 package net.irregular.escapy.engine.env.utils.arrContainer;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.stream.Stream;
 
 /**
@@ -31,5 +32,9 @@ public interface EscapyArray<T> extends Iterable <T> {
 		if (index >= 0) return get(index);
 		return null;
 	}
+
+	T[] getArray();
+
+	void sort(Comparator<T> comparator);
 
 }

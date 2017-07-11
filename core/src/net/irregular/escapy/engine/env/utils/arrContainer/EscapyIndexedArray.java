@@ -1,9 +1,12 @@
 package net.irregular.escapy.engine.env.utils.arrContainer;
 
 
+import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
@@ -25,7 +28,7 @@ public class EscapyIndexedArray<T> implements EscapyArray<T> {
 		this.container = instanceArray(obClass, initialCap);
 	}
 
-	public EscapyIndexedArray(Class<T> obClass, Collection<T> collection) {
+	@EscapyAPI public EscapyIndexedArray(Class<T> obClass, Collection<T> collection) {
 		this.obClass = obClass;
 		addAll(collection);
 	}
@@ -79,6 +82,17 @@ public class EscapyIndexedArray<T> implements EscapyArray<T> {
 		container = instanceArray(obClass, 0);
 	}
 
+
+	@Override
+	public T[] getArray() {
+		return container;
+	}
+
+
+	@Override
+	public void sort(Comparator<T> comparator) {
+		Arrays.sort(container, comparator);
+	}
 
 	@Override
 	public Iterator<T> iterator() {

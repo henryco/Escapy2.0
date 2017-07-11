@@ -1,5 +1,6 @@
 package net.irregular.escapy.map.layer;
 
+import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
 import net.irregular.escapy.map.object.GameObject;
 
@@ -16,7 +17,7 @@ public class Layer {
 	private LayerShifter layerShifter;
 
 	public final String name;
-	public final EscapyNamedArray<GameObject> gameObjects;
+	public final EscapyAssociatedArray<GameObject> gameObjects;
 
 
 	public Layer(String name) {
@@ -40,7 +41,7 @@ public class Layer {
 
 	public void setGameObjects(Collection<GameObject> objects) {
 		Collection<String> objectNames = new LinkedList<>();
-		objects.forEach(gameObject -> objectNames.add(gameObject.getObjectDetails().getName()));
+		for (GameObject object: objects) objectNames.add(object.getObjectDetails().getName());
 		gameObjects.addAll(objectNames, objects);
 	}
 

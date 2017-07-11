@@ -5,6 +5,7 @@ import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 
@@ -109,6 +110,21 @@ public class EscapyNamedArray<T> extends EscapyIndexedArray<T> implements Escapy
 		for (int i = 0; i < size(); i ++) collection.add(new Entry<>(names[i], get(i)));
  		return collection;
 	}
+
+	@Override
+	public void sort(Comparator<T> comparator) {
+
+		LinkedList<Entry<T>> entries = (LinkedList<Entry<T>>) getEntrySet();
+		entries.sort((o1, o2) -> comparator.compare(o1.getObject(), o2.getObject()));
+		Collection<T> objects = new LinkedList<>();
+		Collection<String> names = new LinkedList<>();
+		for (Entry<T> entry: entries) {
+			objects.add(entry.getObject());
+			names.add(entry.getName());
+		}
+		addAll(names, objects);
+	}
+
 
 	@Override
 	public String toString() {
