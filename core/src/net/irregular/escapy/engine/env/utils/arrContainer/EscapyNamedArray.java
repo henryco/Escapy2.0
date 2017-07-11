@@ -31,9 +31,15 @@ public class EscapyNamedArray<T> extends EscapyIndexArray<T> {
 
 	@EscapyAPI
 	public EscapyNamedArray(Class<T> obClass, Collection<String> names, Collection<T> objects) {
-		super(obClass, objects);
+		super(obClass);
+		addAll(names, objects);
+	}
+
+	public EscapyNamedArray addAll(Collection<String> names, Collection<T> objects) {
+		addAll(objects);
 		this.names = names.toArray(new String[0]);
 		copyNames();
+		return this;
 	}
 
 	@Override

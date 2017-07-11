@@ -2,6 +2,8 @@ package net.irregular.escapy.map;
 
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
 
+import java.util.Collection;
+
 
 /**
  * @author Henry on 11/07/17.
@@ -9,16 +11,25 @@ import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
 public class Layer {
 
 	private String name;
-	private float axisZ = 0;
-	private final float[] offset = {0,0};
-	private final float[] pinPoint = {0,0};
+	private float axisZ;
+	private final float[] offset;
+	private final float[] pinPoint;
+	public final EscapyNamedArray<GameObject> gameObjects;
 
-	private EscapyNamedArray<GameObject> objectsArray;
+
+	{
+		gameObjects = new EscapyNamedArray<>(GameObject.class);
+		pinPoint = new float[]{0,0};
+		offset = new float[]{0,0};
+		axisZ = 0;
+	}
 
 
-	public Layer() {
-		objectsArray = new EscapyNamedArray<>(GameObject.class);
-		objectsArray.
+	public Layer() {}
+	public Layer(Collection<GameObject> objects,
+				 Collection<String> objectNames) {
+		this();
+		gameObjects.addAll(objectNames, objects);
 	}
 
 
