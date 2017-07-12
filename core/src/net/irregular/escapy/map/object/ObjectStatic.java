@@ -27,6 +27,11 @@ public class ObjectStatic implements GameObject {
 
 
 	@Override
+	public void renderLightMap(Batch batch) {
+
+	}
+
+	@Override
 	public void renderGraphics(Batch batch) {
 
 	}
