@@ -22,7 +22,6 @@ public class ObjectStatic implements GameObject {
 
 	private String textureNormal;
 	private String textureLight;
-	private String textureHeight;
 	private String texture;
 
 
@@ -37,11 +36,6 @@ public class ObjectStatic implements GameObject {
 	}
 
 	@Override
-	public void renderHeightMap(Batch batch) {
-
-	}
-
-	@Override
 	public void renderNormalsMap(Batch batch) {
 
 	}
@@ -52,7 +46,6 @@ public class ObjectStatic implements GameObject {
 				"objectDetails=" + objectDetails +
 				", textureNormal='" + textureNormal + '\'' +
 				", textureLight='" + textureLight + '\'' +
-				", textureHeight='" + textureHeight + '\'' +
 				", texture='" + texture + '\'' +
 				'}';
 	}
@@ -70,10 +63,6 @@ public class ObjectStatic implements GameObject {
 
 	public void setTextureLight(String textureLight) {
 		this.textureLight = textureLight;
-	}
-
-	public void setTextureHeight(String textureHeight) {
-		this.textureHeight = textureHeight;
 	}
 
 	public void setTexture(String texture) {
