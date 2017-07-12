@@ -4,7 +4,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import net.irregular.escapy.engine.env.EscapyApplicationAdapter;
 import net.irregular.escapy.environment.MainEnvironment;
-import net.irregular.escapy.environment.modules.MainModule;
+import net.irregular.escapy.environment.main.MainModule;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
