@@ -1,6 +1,8 @@
 package net.irregular.escapy.map.object;
 
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+
 /**
  * @author Henry on 11/07/17.
  */
@@ -24,7 +26,20 @@ public class ObjectStatic implements GameObject {
 	private String texture;
 
 
+	@Override
+	public void renderGraphics(Batch batch) {
 
+	}
+
+	@Override
+	public void renderHeightMap(Batch batch) {
+
+	}
+
+	@Override
+	public void renderNormalsMap(Batch batch) {
+
+	}
 
 	@Override
 	public String toString() {
@@ -44,5 +59,19 @@ public class ObjectStatic implements GameObject {
 	}
 
 
+	public void setTextureNormal(String textureNormal) {
+		this.textureNormal = textureNormal;
+	}
 
+	public void setTextureLight(String textureLight) {
+		this.textureLight = textureLight;
+	}
+
+	public void setTextureHeight(String textureHeight) {
+		this.textureHeight = textureHeight;
+	}
+
+	public void setTexture(String texture) {
+		this.texture = texture;
+	}
 }
