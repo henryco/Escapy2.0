@@ -3,6 +3,7 @@ package net.irregular.escapy.map.layer;
 import net.irregular.escapy.engine.env.utils.Named;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
+import net.irregular.escapy.map.layer.shift.LayerShifter;
 import net.irregular.escapy.map.object.GameObject;
 
 import java.util.Collection;
@@ -22,17 +23,14 @@ public class Layer implements Named {
 
 
 	public Layer(String name) {
-
 		this.name = name;
 		gameObjects = new EscapyNamedArray<>(GameObject.class);
 		axisZ = 0;
 	}
 
-
 	public Layer(String name,
 				 Collection<GameObject> objects,
 				 LayerShifter layerShifter) {
-
 		this(name);
 		setGameObjects(objects);
 		setLayerShifter(layerShifter);

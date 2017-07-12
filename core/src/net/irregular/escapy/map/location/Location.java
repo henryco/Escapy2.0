@@ -20,11 +20,6 @@ public class Location implements Named {
 		this.subLocationMap = new HashMap<>();
 	}
 
-	public Location(String name, List<SubLocation> subLocations) {
-		this(name);
-		for (SubLocation location: subLocations) addSubLocation(location);
-	}
-
 	public Location(String name, SubLocation ... subLocations) {
 		this(name);
 		for (SubLocation location: subLocations) addSubLocation(location);

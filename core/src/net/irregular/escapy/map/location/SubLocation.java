@@ -29,21 +29,24 @@ public class SubLocation implements Named {
 					   Collection<Layer> layers,
 					   Comparator<Layer> layerComparator) {
 		this(name);
-		setLayers(layers);
 		setLayerComparator(layerComparator);
+		setLayers(layers);
 	}
 
 
 	public void addLayer(Layer layer) {
-		layerArray.add(layer, layer.getName());
+		layerArray.add(layer);
 		layerArray.sort(layerComparator);
 	}
 
 
 	public void setLayers(Collection<Layer> layers) {
 		Collection<String> names = new LinkedList<>();
-		for (Layer l: layers) names.add(l.getName());
+		for (Layer l: layers) {
+			names.add(l.getName());
+		}
 		layerArray.addAll(names, layers);
+		layerArray.sort(layerComparator);
 	}
 
 	public void setLayerComparator(Comparator<Layer> comparator) {
