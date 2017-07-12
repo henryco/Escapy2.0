@@ -1,7 +1,7 @@
 package net.irregular.escapy.map.object;
 
 
-import com.badlogic.gdx.graphics.g2d.Batch;
+import net.irregular.escapy.map.object.texture.StaticTexturePath;
 
 /**
  * @author Henry on 11/07/17.
@@ -10,62 +10,56 @@ public class ObjectStatic implements GameObject {
 
 
 	private final ObjectDetails objectDetails;
+	private final GameObjectRenderer objectRenderer;
+	private StaticTexturePath texturePath;
 
 
-	public ObjectStatic() {
-		this(new ObjectDetails());
+
+	public ObjectStatic(GameObjectRenderer<ObjectStatic> objectRenderer) {
+		this(objectRenderer, new ObjectDetails());
 	}
-	public ObjectStatic(ObjectDetails objectDetails) {
+
+	public ObjectStatic(GameObjectRenderer<ObjectStatic> objectRenderer,
+						ObjectDetails objectDetails) {
 		this.objectDetails = objectDetails;
+		this.objectRenderer = objectRenderer;
+		objectRenderer.bindGameObject(this);
+	}
+
+	public ObjectStatic(GameObjectRenderer<ObjectStatic> objectRenderer,
+						ObjectDetails objectDetails,
+						StaticTexturePath texturePath) {
+		this(objectRenderer, objectDetails);
+		setTexturePath(texturePath);
 	}
 
 
-	private String textureNormal;
-	private String textureLight;
-	private String texture;
-
-
-	@Override
-	public void renderLightMap(Batch batch) {
-
-	}
-
-	@Override
-	public void renderGraphics(Batch batch) {
-
-	}
-
-	@Override
-	public void renderNormalsMap(Batch batch) {
-
-	}
 
 	@Override
 	public String toString() {
 		return "ObjectStatic{" +
 				"objectDetails=" + objectDetails +
-				", textureNormal='" + textureNormal + '\'' +
-				", textureLight='" + textureLight + '\'' +
-				", texture='" + texture + '\'' +
+				", objectRenderer=" + objectRenderer +
+				", texturePath=" + texturePath +
 				'}';
 	}
-
 
 	@Override
 	public ObjectDetails getObjectDetails() {
 		return objectDetails;
 	}
 
-
-	public void setTextureNormal(String textureNormal) {
-		this.textureNormal = textureNormal;
+	@Override
+	public GameObjectRenderer getGameObjectRenderer() {
+		return objectRenderer;
 	}
 
-	public void setTextureLight(String textureLight) {
-		this.textureLight = textureLight;
+
+	public StaticTexturePath getTexturePath() {
+		return texturePath;
 	}
 
-	public void setTexture(String texture) {
-		this.texture = texture;
+	public void setTexturePath(StaticTexturePath texturePath) {
+		this.texturePath = texturePath;
 	}
 }
