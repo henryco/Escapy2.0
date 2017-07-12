@@ -22,7 +22,7 @@ public class ContainerModule {
 	public MapContainer mapContainer(
 			@Named("mockLocations") Collection<Location> locations) {
 
-		return new MapContainer(locations);
+		return null;
 	}
 
 }

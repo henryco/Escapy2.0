@@ -3,9 +3,7 @@ package net.irregular.escapy.engine.map.location;
 import com.badlogic.gdx.utils.Disposable;
 import net.irregular.escapy.engine.env.utils.Named;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Henry on 11/07/17.
@@ -13,8 +11,8 @@ import java.util.List;
 public class Location implements Named, Disposable {
 
 	private final String name;
-	private final List<String> subLocationList;
 	private final SubLocationLoader subLocationLoader;
+	private final Map<String, String> subLocationMap;
 
 	private SubLocation actual;
 	private SubLocation last;
@@ -24,24 +22,25 @@ public class Location implements Named, Disposable {
 	private Location(String name,
 					 SubLocationLoader subLocationLoader) {
 		this.name = name;
-		this.subLocationList = new ArrayList<>();
+		this.subLocationMap = new HashMap<>();
 		this.actual = null;
 		this.last = null;
 		this.subLocationLoader = subLocationLoader;
 	}
 
 	public Location(String name,
-					Collection<String> subLocations,
+					Collection<Map.Entry<String, String>> subLocations,
 					SubLocationLoader subLocationLoader) {
 		this(name, subLocationLoader);
-		for (String location: subLocations) addSubLocation(location);
+		for (Map.Entry<String, String> location: subLocations)
+			addSubLocation(location.getKey(), location.getValue());
 	}
 
 
 
 	public void switchSubLocation(String location) {
 
-		if (!subLocationList.contains(location)) return;
+		if (!subLocationMap.containsKey(location)) return;
 		if (last != null && location.equals(last.getName())) {
 			final SubLocation local = actual;
 			actual = last;
@@ -53,18 +52,20 @@ public class Location implements Named, Disposable {
 			last.dispose();
 
 		last = actual;
-		actual = subLocationLoader.loadSubLocation(location);
+		actual = subLocationLoader.loadSubLocation(subLocationMap.get(location));
 	}
 
 
 	public SubLocation getSublocation() {
 		return actual;
 	}
-	public List<String> getSublocations() {
-		return subLocationList;
+	public List<Map.Entry<String, String>> getSublocations() {
+		List<Map.Entry<String, String>> list = new LinkedList<>();
+		list.addAll(subLocationMap.entrySet());
+		return list;
 	}
-	public void addSubLocation(String location) {
-		subLocationList.add(location);
+	public void addSubLocation(String locationName, String locationPath) {
+		subLocationMap.put(locationName, locationPath);
 	}
 
 

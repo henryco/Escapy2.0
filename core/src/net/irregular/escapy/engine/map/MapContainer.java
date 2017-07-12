@@ -1,6 +1,7 @@
 package net.irregular.escapy.engine.map;
 
 import net.irregular.escapy.engine.map.location.Location;
+import net.irregular.escapy.engine.map.location.LocationLoader;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,45 +12,42 @@ import java.util.Map;
  */
 public class MapContainer {
 
-	private Map<String, Location> locationMap;
+	private final Map<String, String> locationMap;
+	private final LocationLoader locationLoader;
 	private Location location;
 
 
-	public MapContainer() {
+	public MapContainer(LocationLoader locationLoader) {
+		this.locationLoader = locationLoader;
 		locationMap = new HashMap<>();
 		location = null;
 	}
 
-	public MapContainer(Collection<Location> locations) {
-		this();
+	public MapContainer(LocationLoader locationLoader,
+						Collection<Map.Entry<String, String>> locations) {
+		this(locationLoader);
 		setLocations(locations);
 	}
-
-	public MapContainer(Location... locations) {
-		this();
-		setLocations(locations);
-	}
-
 
 	public void switchLocation(String name) {
-		if (location != null) location.dispose();
-		this.location = locationMap.get(name);
+
+		if (location != null && locationMap.containsKey(name))
+			location.dispose();
+
+		location = locationLoader.loadLocation(locationMap.get(name));
 	}
 
 	public Location getLogation() {
 		return location;
 	}
 
-	public void setLocations(Location... locations) {
-		for (Location l : locations) addLocation(l);
+	public void setLocations(Collection<Map.Entry<String, String>> locations) {
+		for (Map.Entry<String, String> l: locations)
+			addLocation(l.getKey(), l.getValue());
 	}
 
-	public void setLocations(Collection<Location> locations) {
-		for (Location l: locations) addLocation(l);
-	}
-
-	public void addLocation(Location location) {
-		locationMap.put(location.getName(), location);
+	public void addLocation(String locationName, String locationPath) {
+		locationMap.put(locationName, locationPath);
 	}
 
 }
