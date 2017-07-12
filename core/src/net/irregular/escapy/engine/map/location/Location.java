@@ -1,42 +1,47 @@
 package net.irregular.escapy.engine.map.location;
 
+import com.badlogic.gdx.utils.Disposable;
 import net.irregular.escapy.engine.env.utils.Named;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Henry on 11/07/17.
  */
-public class Location implements Named {
+public class Location implements Named, Disposable {
 
 	private final String name;
-	private final Map<String, SubLocation> subLocationMap;
+	private final List<String> subLocationList;
+	private final SubLocationLoader subLocationLoader;
 
 	private SubLocation actual;
 	private SubLocation last;
 
 
 
-	private Location(String name) {
+	private Location(String name,
+					 SubLocationLoader subLocationLoader) {
 		this.name = name;
-		this.subLocationMap = new HashMap<>();
+		this.subLocationList = new ArrayList<>();
 		this.actual = null;
 		this.last = null;
+		this.subLocationLoader = subLocationLoader;
 	}
 
-	public Location(String name, SubLocation ... subLocations) {
-		this(name);
-		for (SubLocation location: subLocations) addSubLocation(location);
-	}
-
-	public Location(String name, Collection<SubLocation> subLocations) {
-		this(name, subLocations.toArray(new SubLocation[0]));
+	public Location(String name,
+					Collection<String> subLocations,
+					SubLocationLoader subLocationLoader) {
+		this(name, subLocationLoader);
+		for (String location: subLocations) addSubLocation(location);
 	}
 
 
 
 	public void switchSubLocation(String location) {
 
+		if (!subLocationList.contains(location)) return;
 		if (last != null && location.equals(last.getName())) {
 			final SubLocation local = actual;
 			actual = last;
@@ -44,30 +49,33 @@ public class Location implements Named {
 			return;
 		}
 
+		if (last != null)
+			last.dispose();
+
 		last = actual;
-		actual = subLocationMap.get(location);
+		actual = subLocationLoader.loadSubLocation(location);
 	}
 
-
-	public void addSubLocation(SubLocation location) {
-		subLocationMap.put(location.getName(), location);
-	}
 
 	public SubLocation getSublocation() {
 		return actual;
 	}
-
-	public List<SubLocation> getSublocations() {
-		List<SubLocation> locations = new ArrayList<>();
-		for (Map.Entry<String, SubLocation> entry : subLocationMap.entrySet())
-			locations.add(entry.getValue());
-		return locations;
+	public List<String> getSublocations() {
+		return subLocationList;
 	}
+	public void addSubLocation(String location) {
+		subLocationList.add(location);
+	}
+
 
 	@Override
 	public String getName() {
 		return name;
 	}
 
-
+	@Override
+	public void dispose() {
+		if (last != null) last.dispose();
+		if (actual != null) actual.dispose();
+	}
 }

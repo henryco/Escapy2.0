@@ -32,6 +32,7 @@ public class MapContainer {
 
 
 	public void switchLocation(String name) {
+		if (location != null) location.dispose();
 		this.location = locationMap.get(name);
 	}
 

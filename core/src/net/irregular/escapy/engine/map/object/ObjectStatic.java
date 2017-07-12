@@ -33,8 +33,6 @@ public class ObjectStatic implements GameObject {
 		setTexturePath(texturePath);
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "ObjectStatic{" +

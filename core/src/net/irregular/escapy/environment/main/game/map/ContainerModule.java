@@ -20,12 +20,9 @@ public class ContainerModule {
 
 	@Provides @Singleton
 	public MapContainer mapContainer(
-			@Named("mockLocations") Collection<Location> locations,
-			@Named("mockActualLocation") String actual) {
+			@Named("mockLocations") Collection<Location> locations) {
 
-		MapContainer container = new MapContainer(locations);
-		container.switchLocation(actual);
-		return container;
+		return new MapContainer(locations);
 	}
 
 }
