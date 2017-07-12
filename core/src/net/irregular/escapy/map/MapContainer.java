@@ -12,15 +12,12 @@ import java.util.Map;
 public class MapContainer {
 
 	private Map<String, Location> locationMap;
-	private Location locationActual;
-	private Location locationLast;
-
+	private Location location;
 
 
 	public MapContainer() {
 		locationMap = new HashMap<>();
-		locationLast = null;
-		locationActual = null;
+		location = null;
 	}
 
 	public MapContainer(Collection<Location> locations) {
@@ -34,8 +31,12 @@ public class MapContainer {
 	}
 
 
-	public Location getLocationActual() {
-		return locationActual;
+	public void switchLocation(String name) {
+		this.location = locationMap.get(name);
+	}
+
+	public Location getLogation() {
+		return location;
 	}
 
 	public void setLocations(Location... locations) {
@@ -49,20 +50,5 @@ public class MapContainer {
 	public void addLocation(Location location) {
 		locationMap.put(location.getName(), location);
 	}
-
-	public void switchLocation(String location) {
-
-		if (locationLast != null && location.equals(locationLast.getName())) {
-			final Location local = locationActual;
-			locationActual = locationLast;
-			locationLast = local;
-			return;
-		}
-
-		locationLast = locationActual;
-		locationActual = locationMap.get(location);
-	}
-
-
 
 }

@@ -12,12 +12,16 @@ public class Location implements Named {
 	private final String name;
 	private final Map<String, SubLocation> subLocationMap;
 
+	private SubLocation actual;
+	private SubLocation last;
 
 
 
 	private Location(String name) {
 		this.name = name;
 		this.subLocationMap = new HashMap<>();
+		this.actual = null;
+		this.last = null;
 	}
 
 	public Location(String name, SubLocation ... subLocations) {
@@ -31,15 +35,26 @@ public class Location implements Named {
 
 
 
+	public void switchSubLocation(String location) {
 
+		if (last != null && location.equals(last.getName())) {
+			final SubLocation local = actual;
+			actual = last;
+			last = local;
+			return;
+		}
+
+		last = actual;
+		actual = subLocationMap.get(location);
+	}
 
 
 	public void addSubLocation(SubLocation location) {
 		subLocationMap.put(location.getName(), location);
 	}
 
-	public SubLocation getSublocation(String name) {
-		return subLocationMap.get(name);
+	public SubLocation getSublocation() {
+		return actual;
 	}
 
 	public List<SubLocation> getSublocations() {

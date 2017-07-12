@@ -62,7 +62,7 @@ public class EscapyNamedArray<T> extends EscapyIndexedArray<T> implements Escapy
 
 
 	@Override @SuppressWarnings("unchecked")
-	public <U extends Named<T>> void add(U ob) {
+	public <U extends Named> void add(U ob) {
 		try {
 			add((T) ob, ob.getName());
 		} catch (Exception ignored) {}
