@@ -5,5 +5,5 @@ package net.irregular.escapy.engine.map.location;
  */
 public interface LocationLoader {
 
-	Location loadLocation(String name);
+	Location loadLocation(String path);
 }

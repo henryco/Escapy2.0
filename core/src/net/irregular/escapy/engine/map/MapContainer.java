@@ -31,10 +31,15 @@ public class MapContainer {
 
 	public void switchLocation(String name) {
 
-		if (location != null && locationMap.containsKey(name))
-			location.dispose();
-
+		Location temp = location;
 		location = locationLoader.loadLocation(locationMap.get(name));
+
+		if (location == null) {
+			location = temp;
+			return;
+		}
+
+		if (temp != null) temp.dispose();
 	}
 
 	public Location getLogation() {

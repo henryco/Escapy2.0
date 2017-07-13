@@ -1,5 +1,0 @@
-{
-  "level_name": "test_level",
-  "map_path": "map.json",
-  "game_objects": ["player.json"]
-}

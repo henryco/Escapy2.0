@@ -5,5 +5,5 @@ package net.irregular.escapy.engine.map.location.sub;
  */
 public interface SubLocationLoader {
 
-	SubLocation loadSubLocation(String name);
+	SubLocation loadSubLocation(String path);
 }
