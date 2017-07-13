@@ -1,7 +1,6 @@
 package net.irregular.escapy.engine.map.layer;
 
-import com.badlogic.gdx.utils.Disposable;
-import net.irregular.escapy.engine.env.utils.Named;
+import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
 import net.irregular.escapy.engine.map.layer.shift.LayerShifter;
@@ -14,7 +13,7 @@ import java.util.LinkedList;
 /**
  * @author Henry on 11/07/17.
  */
-public class Layer implements Named, Disposable {
+public class Layer implements EscapyObject {
 
 	private float axisZ;
 	private LayerShifter layerShifter;

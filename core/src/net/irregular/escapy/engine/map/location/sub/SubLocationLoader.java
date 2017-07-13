@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.map.location;
+package net.irregular.escapy.engine.map.location.sub;
 
 /**
  * @author Henry on 12/07/17.

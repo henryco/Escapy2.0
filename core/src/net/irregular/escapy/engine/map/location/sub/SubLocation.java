@@ -1,7 +1,6 @@
-package net.irregular.escapy.engine.map.location;
+package net.irregular.escapy.engine.map.location.sub;
 
-import com.badlogic.gdx.utils.Disposable;
-import net.irregular.escapy.engine.env.utils.Named;
+import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
 import net.irregular.escapy.engine.map.layer.Layer;
@@ -14,7 +13,7 @@ import java.util.LinkedList;
 /**
  * @author Henry on 11/07/17.
  */
-public class SubLocation implements Named, Disposable {
+public class SubLocation implements EscapyObject {
 
 	public final String name;
 	public final EscapyAssociatedArray<Layer> layerArray;

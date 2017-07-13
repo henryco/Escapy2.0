@@ -3,7 +3,7 @@ package net.irregular.escapy.environment.main.game.map;
 import dagger.Module;
 import dagger.Provides;
 import net.irregular.escapy.engine.map.location.Location;
-import net.irregular.escapy.engine.map.location.SubLocationLoader;
+import net.irregular.escapy.engine.map.location.sub.SubLocationLoader;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

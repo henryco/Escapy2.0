@@ -1,14 +1,15 @@
 package net.irregular.escapy.engine.map.location;
 
-import com.badlogic.gdx.utils.Disposable;
-import net.irregular.escapy.engine.env.utils.Named;
+import net.irregular.escapy.engine.env.utils.EscapyObject;
+import net.irregular.escapy.engine.map.location.sub.SubLocation;
+import net.irregular.escapy.engine.map.location.sub.SubLocationLoader;
 
 import java.util.*;
 
 /**
  * @author Henry on 11/07/17.
  */
-public class Location implements Named, Disposable {
+public class Location implements EscapyObject {
 
 	private final String name;
 	private final SubLocationLoader subLocationLoader;
