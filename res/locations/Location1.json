@@ -1,6 +1,0 @@
-{
-  "type": "Location",
-  "name": "Location1",
-  "enter": "some name",
-  "subLocations": ["some name", "other name"]
-}

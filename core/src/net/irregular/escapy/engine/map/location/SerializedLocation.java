@@ -15,6 +15,6 @@ public final class SerializedLocation {
 	@SerializedName("type") @Expose public String type;
 	@SerializedName("name") @Expose public String name;
 	@SerializedName("enter") @Expose public String enter;
-	@SerializedName("subLocations") @Expose
+	@SerializedName("subLocationsPath") @Expose
 	public List<String> subLocations = null;
 }

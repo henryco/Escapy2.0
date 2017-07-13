@@ -1,0 +1,6 @@
+{
+  "type": "Location",
+  "name": "Location1",
+  "enter": "SubOne",
+  "subLocationsPath": ["SubLocationOne.json"]
+}
