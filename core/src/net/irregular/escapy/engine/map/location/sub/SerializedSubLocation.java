@@ -24,7 +24,7 @@ public final class SerializedSubLocation {
 		@SerializedName("name") @Expose public String name;
 		@SerializedName("scale") @Expose public float scale;
 		@SerializedName("thickness") @Expose public float thickness;
-		@SerializedName("position") @Expose public List<Float> position = null;
+		@SerializedName("position2f") @Expose public List<Float> position = null;
 	}
 
 
@@ -45,9 +45,9 @@ public final class SerializedSubLocation {
 
 	public static final class SerializedShift {
 		@SerializedName("logic") @Expose public String logic;
-		@SerializedName("offset") @Expose public List<Float> offset = null;
-		@SerializedName("pinPoint") @Expose public List<Float> pinPoint = null;
-		@SerializedName("directVec") @Expose public List<Float> directVec = null;
+		@SerializedName("offset2f") @Expose public List<Float> offset = null;
+		@SerializedName("pinPoint2f") @Expose public List<Float> pinPoint = null;
+		@SerializedName("directVec2f") @Expose public List<Float> directVec = null;
 	}
 
 
