@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.map.location.sub;
+package net.irregular.escapy.engine.map.location;
 
 import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;

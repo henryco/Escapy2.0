@@ -1,9 +1,12 @@
-package net.irregular.escapy.engine.map.location;
+package net.irregular.escapy.engine.map.zloader.imp;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import net.irregular.escapy.engine.map.location.sub.SerializedSubLocation;
-import net.irregular.escapy.engine.map.location.sub.SubLocationLoader;
+import net.irregular.escapy.engine.map.location.Location;
+import net.irregular.escapy.engine.map.zloader.LocationLoader;
+import net.irregular.escapy.engine.map.zloader.SubLocationLoader;
+import net.irregular.escapy.engine.map.zloader.serial.SerializedLocation;
+import net.irregular.escapy.engine.map.zloader.serial.SerializedSubLocation;
 
 import java.io.FileInputStream;
 import java.io.InputStreamReader;

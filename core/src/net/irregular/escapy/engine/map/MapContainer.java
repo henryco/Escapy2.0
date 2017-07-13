@@ -1,7 +1,7 @@
 package net.irregular.escapy.engine.map;
 
 import net.irregular.escapy.engine.map.location.Location;
-import net.irregular.escapy.engine.map.location.LocationLoader;
+import net.irregular.escapy.engine.map.zloader.LocationLoader;
 
 import java.util.Collection;
 import java.util.HashMap;

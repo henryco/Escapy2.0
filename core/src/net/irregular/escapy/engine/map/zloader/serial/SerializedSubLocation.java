@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.map.location.sub;
+package net.irregular.escapy.engine.map.zloader.serial;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,8 +1,7 @@
 package net.irregular.escapy.engine.map.location;
 
 import net.irregular.escapy.engine.env.utils.EscapyObject;
-import net.irregular.escapy.engine.map.location.sub.SubLocation;
-import net.irregular.escapy.engine.map.location.sub.SubLocationLoader;
+import net.irregular.escapy.engine.map.zloader.SubLocationLoader;
 
 import java.util.*;
 

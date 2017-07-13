@@ -1,4 +1,7 @@
-package net.irregular.escapy.engine.map.location.sub;
+package net.irregular.escapy.engine.map.zloader.imp;
+
+import net.irregular.escapy.engine.map.location.SubLocation;
+import net.irregular.escapy.engine.map.zloader.SubLocationLoader;
 
 /**
  * @author Henry on 13/07/17.
