@@ -34,20 +34,19 @@ public class LayerShifter implements LayerShift {
 		this.direct[1] = direct[1];
 	}
 
-
 	private LayerShiftLogic shiftLogic;
-	public void setShiftLogic(LayerShiftLogic shiftLogic) {
+	public LayerShiftLogic getLayerShiftLogic() {
+		return shiftLogic;
+	}
+	public void setLayerShiftLogic(LayerShiftLogic shiftLogic) {
 		this.shiftLogic = shiftLogic;
 	}
 
 
+
 	public LayerShifter(LayerShiftLogic shiftLogic) {
-		setShiftLogic(shiftLogic);
+		setLayerShiftLogic(shiftLogic);
 	}
 
-	public float[] calculateShift() {
-		if (shiftLogic == null) return new float[]{0,0};
-		return shiftLogic.calculateShift(this);
-	}
 
 }

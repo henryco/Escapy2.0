@@ -3,7 +3,7 @@ package net.irregular.escapy.engine.map.layer;
 import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
-import net.irregular.escapy.engine.map.layer.shift.LayerShifter;
+import net.irregular.escapy.engine.map.layer.shift.LayerShift;
 import net.irregular.escapy.engine.map.object.GameObject;
 
 import java.util.Collection;
@@ -15,23 +15,29 @@ import java.util.LinkedList;
  */
 public class Layer implements EscapyObject {
 
-	private float axisZ;
-	private LayerShifter layerShifter;
+
+	private LayerShift layerShifter;
 
 	public final String name;
+	public final float axisZ;
 	public final EscapyAssociatedArray<GameObject> gameObjects;
 
 
-	public Layer(String name) {
-		this.name = name;
-		gameObjects = new EscapyNamedArray<>(GameObject.class);
-		axisZ = 0;
+	public Layer(final String name) {
+		this(name, 0);
 	}
 
-	public Layer(String name,
+	public Layer(final String name, final float axisZ) {
+		this.name = name;
+		this.axisZ = axisZ;
+		this.gameObjects = new EscapyNamedArray<>(GameObject.class);
+	}
+
+	public Layer(final String name,
+				 final float axisZ,
 				 Collection<GameObject> objects,
-				 LayerShifter layerShifter) {
-		this(name);
+				 LayerShift layerShifter) {
+		this(name, axisZ);
 		setGameObjects(objects);
 		setLayerShifter(layerShifter);
 	}
@@ -46,26 +52,22 @@ public class Layer implements EscapyObject {
 
 
 
-
-	public LayerShifter getLayerShifter() {
+	public LayerShift getLayerShifter() {
 		return layerShifter;
 	}
-	public void setLayerShifter(LayerShifter layerShifter) {
+	public void setLayerShifter(LayerShift layerShifter) {
 		this.layerShifter = layerShifter;
 	}
 	public float getAxisZ() {
 		return axisZ;
 	}
-	public void setAxisZ(float axisZ) {
-		this.axisZ = axisZ;
-	}
+
+
 
 	@Override public String getName() {
 		return name;
 	}
-
-	@Override
-	public void dispose() {
+	@Override public void dispose() {
 		for (GameObject gameObject: gameObjects) gameObject.dispose();
 	}
 }
