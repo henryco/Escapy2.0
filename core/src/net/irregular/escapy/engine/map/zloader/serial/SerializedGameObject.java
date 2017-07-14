@@ -13,7 +13,7 @@ public final class SerializedGameObject implements EscapySerialized {
 
 
 	@SerializedName("details") @Expose public SerializedDetails details;
-	@SerializedName("static") @Expose public SerializedStatic serializedStatic;
+	@SerializedName("static") @Expose public SerializedStatic staticObject;
 	//TODO MORE OBJECT TYPES
 
 
