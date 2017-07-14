@@ -1,14 +1,16 @@
 package net.irregular.escapy.engine.map.zloader.imp;
 
 import com.google.gson.Gson;
+import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.map.layer.Layer;
 import net.irregular.escapy.engine.map.layer.shift.LayerShift;
-import net.irregular.escapy.engine.map.layer.shift.LayerShiftLogicInstancer;
+import net.irregular.escapy.engine.map.layer.shift.LayerShiftLogic;
 import net.irregular.escapy.engine.map.layer.shift.LayerShifter;
 import net.irregular.escapy.engine.map.location.SubLocation;
 import net.irregular.escapy.engine.map.object.GameObject;
-import net.irregular.escapy.engine.map.object.ObjectDetails;
+import net.irregular.escapy.engine.map.zloader.GameObjectLoader;
 import net.irregular.escapy.engine.map.zloader.SubLocationLoader;
+import net.irregular.escapy.engine.map.zloader.serial.SerializedGameObject;
 import net.irregular.escapy.engine.map.zloader.serial.SerializedSubLocation;
 
 import java.io.FileInputStream;
@@ -19,7 +21,8 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import static net.irregular.escapy.engine.map.zloader.serial.SerializedSubLocation.*;
+import static net.irregular.escapy.engine.map.zloader.serial.SerializedSubLocation.SerializedLayer;
+import static net.irregular.escapy.engine.map.zloader.serial.SerializedSubLocation.SerializedShift;
 
 /**
  * @author Henry on 13/07/17.
@@ -28,14 +31,16 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 	private final Comparator<Layer> layerComparator;
-	private final LayerShiftLogicInstancer shiftLogicInstancer;
-
+	private final EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer;
+	private final GameObjectLoader<SerializedGameObject> gameObjectLoader;
 
 
 	public DefaultSubLocationLoader(Comparator<Layer> layerComparator,
-									LayerShiftLogicInstancer shiftLogicInstancer) {
+									EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer,
+									GameObjectLoader<SerializedGameObject> gameObjectLoader) {
 
 		this.layerComparator = layerComparator;
+		this.gameObjectLoader = gameObjectLoader;
 		this.shiftLogicInstancer = shiftLogicInstancer;
 	}
 
@@ -74,40 +79,20 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 	private LayerShift loadLayerShift(SerializedShift serializedShift) {
 
 		LayerShifter shifter = new LayerShifter(null);
-		shifter.setDirect(floatToFloat2f(serializedShift.directVec));
-		shifter.setOffset(floatToFloat2f(serializedShift.offset));
-		shifter.setPinPoint(floatToFloat2f(serializedShift.pinPoint));
-		shifter.setLayerShiftLogic(shiftLogicInstancer.load(serializedShift.logic));
+		shifter.setDirect(floatListToArray(serializedShift.directVec));
+		shifter.setOffset(floatListToArray(serializedShift.offset));
+		shifter.setPinPoint(floatListToArray(serializedShift.pinPoint));
+		shifter.setLayerShiftLogic(shiftLogicInstancer.load(serializedShift.name));
 		return shifter;
 	}
 
 
-	private Collection<GameObject> loadGameObjects(List<SerializedObject> serializedObjects) {
+	private Collection<GameObject> loadGameObjects(List<SerializedGameObject> serializedObjects) {
 
 		Collection<GameObject> gameObjects = new LinkedList<>();
-		for (SerializedObject object: serializedObjects) {
-
-			ObjectDetails details = loadObjectDetails(object.details);
-
-
-
-		}
-
-		return null;
+		for (SerializedGameObject object: serializedObjects)
+			gameObjects.add(gameObjectLoader.loadGameObject(object));
+		return gameObjects;
 	}
 
-
-	private ObjectDetails loadObjectDetails(SerializedDetails serialized) {
-
-		ObjectDetails details = new ObjectDetails(serialized.name);
-		details.setScale(serialized.scale);
-		details.setThickness(serialized.thickness);
-		details.setPosition(floatToFloat2f(serialized.position));
-		return details;
-	}
-
-
-	private static float[] floatToFloat2f(List<Float> floats) {
-		return new float[]{floats.get(0), floats.get(1)};
-	}
 }

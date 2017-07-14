@@ -9,7 +9,7 @@
 			"axis_z": 0,
 
 			"shift": {
-				"logic": "void",
+				"name": "void",
 				"offset2f": [0, 0],
 				"pinPoint2f": [0, 0],
 				"directVec2f": [0, 0]
@@ -36,7 +36,7 @@
 			"name": "layer1",
 			"axis_z": 0.5,
 			"shift": {
-				"logic": "void",
+				"name": "void",
 				"offset2f": [0, 0],
 				"pinPoint2f": [0, 0],
 				"directVec2f": [0, 0]

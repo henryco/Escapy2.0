@@ -6,11 +6,11 @@ import java.lang.reflect.Method;
 /**
  * @author Henry on 14/07/17.
  */
-public interface EscapyInstanceLoader {
+public interface EscapyInstanceLoader<T> {
 
 
 	@SuppressWarnings("unchecked")
-	default <T> T load(String name, Object ... args) {
+	default T load(String name, Object ... args) {
 		try {
 
 			Method[] methods = this.getClass().getDeclaredMethods();
