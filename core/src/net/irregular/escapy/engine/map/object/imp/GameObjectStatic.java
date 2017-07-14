@@ -45,21 +45,17 @@ public class GameObjectStatic implements GameObject {
 				'}';
 	}
 
-	@Override
-	public ObjectDetails getObjectDetails() {
+
+	@Override public ObjectDetails getObjectDetails() {
 		return objectDetails;
 	}
-
-	@Override
-	public GameObjectRenderer getGameObjectRenderer() {
+	@Override public GameObjectRenderer getGameObjectRenderer() {
 		return objectRenderer;
 	}
-
 
 	public GameObjectStaticTexturePath getTexturePath() {
 		return texturePath;
 	}
-
 	public void setTexturePath(GameObjectStaticTexturePath texturePath) {
 		this.texturePath = texturePath;
 	}
