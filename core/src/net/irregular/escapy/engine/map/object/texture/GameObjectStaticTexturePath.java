@@ -3,16 +3,16 @@ package net.irregular.escapy.engine.map.object.texture;
 /**
  * @author Henry on 12/07/17.
  */
-public class StaticTexturePath {
+public class GameObjectStaticTexturePath {
 
 	private String textureNormal;
 	private String textureLight;
 	private String texture;
 
 
-	public StaticTexturePath() {}
+	public GameObjectStaticTexturePath() {}
 
-	public StaticTexturePath(String textureNormal, String textureLight, String texture) {
+	public GameObjectStaticTexturePath(String textureNormal, String textureLight, String texture) {
 		this.textureNormal = textureNormal;
 		this.textureLight = textureLight;
 		this.texture = texture;

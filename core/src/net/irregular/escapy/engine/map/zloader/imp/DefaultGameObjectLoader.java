@@ -3,8 +3,9 @@ package net.irregular.escapy.engine.map.zloader.imp;
 import net.irregular.escapy.engine.map.object.GameObject;
 import net.irregular.escapy.engine.map.object.GameObjectRenderer;
 import net.irregular.escapy.engine.map.object.ObjectDetails;
-import net.irregular.escapy.engine.map.object.ObjectStatic;
-import net.irregular.escapy.engine.map.object.texture.StaticTexturePath;
+import net.irregular.escapy.engine.map.object.imp.GameObjectStatic;
+import net.irregular.escapy.engine.map.object.renderer.GameObjectStaticRenderer;
+import net.irregular.escapy.engine.map.object.texture.GameObjectStaticTexturePath;
 import net.irregular.escapy.engine.map.zloader.GameObjectLoader;
 import net.irregular.escapy.engine.map.zloader.serial.SerializedGameObject;
 
@@ -25,9 +26,8 @@ public class DefaultGameObjectLoader implements GameObjectLoader<SerializedGameO
 		details.setThickness(serialized.details.thickness);
 		details.setPosition(floatListToArray(serialized.details.position));
 
-
 		if (serialized.staticObject != null)
-			return loadStaticObject(details, serialized.staticObject, null);
+			return loadStaticObject(details, serialized.staticObject, new GameObjectStaticRenderer());
 
 		// TODO MORE OBJECTS
 		return null;
@@ -37,14 +37,13 @@ public class DefaultGameObjectLoader implements GameObjectLoader<SerializedGameO
 
 	private GameObject loadStaticObject(ObjectDetails details,
 										SerializedStatic serializedStatic,
-										GameObjectRenderer<ObjectStatic> staticRenderer) {
+										GameObjectRenderer<GameObjectStatic> staticRenderer) {
 
-		StaticTexturePath texturePath = new StaticTexturePath();
+		GameObjectStaticTexturePath texturePath = new GameObjectStaticTexturePath();
 		texturePath.setTexture(serializedStatic.texture);
 		texturePath.setTextureLight(serializedStatic.textureLight);
 		texturePath.setTextureNormal(serializedStatic.textureNormal);
-
-		return new ObjectStatic(staticRenderer, details, texturePath);
+		return new GameObjectStatic(staticRenderer, details, texturePath);
 	}
 
 
