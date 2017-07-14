@@ -3,6 +3,7 @@ package net.irregular.escapy.engine.map.zloader.imp;
 import com.google.gson.Gson;
 import net.irregular.escapy.engine.map.layer.Layer;
 import net.irregular.escapy.engine.map.layer.shift.LayerShift;
+import net.irregular.escapy.engine.map.layer.shift.LayerShiftLogicInstancer;
 import net.irregular.escapy.engine.map.layer.shift.LayerShifter;
 import net.irregular.escapy.engine.map.location.SubLocation;
 import net.irregular.escapy.engine.map.object.GameObject;
@@ -27,8 +28,15 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 	private final Comparator<Layer> layerComparator;
-	public DefaultSubLocationLoader(Comparator<Layer> layerComparator) {
+	private final LayerShiftLogicInstancer shiftLogicInstancer;
+
+
+
+	public DefaultSubLocationLoader(Comparator<Layer> layerComparator,
+									LayerShiftLogicInstancer shiftLogicInstancer) {
+
 		this.layerComparator = layerComparator;
+		this.shiftLogicInstancer = shiftLogicInstancer;
 	}
 
 
@@ -53,7 +61,7 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 
-	private static Layer loadLayer(SerializedLayer serializedLayer) {
+	private Layer loadLayer(SerializedLayer serializedLayer) {
 
 		Layer layer = new Layer(serializedLayer.name, serializedLayer.axisZ);
 		layer.setLayerShifter(loadLayerShift(serializedLayer.shift));
@@ -63,19 +71,18 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 
-	private static LayerShift loadLayerShift(SerializedShift serializedShift) {
+	private LayerShift loadLayerShift(SerializedShift serializedShift) {
 
-		// TODO LAYER SHIFT LOGIC
 		LayerShifter shifter = new LayerShifter(null);
 		shifter.setDirect(floatToFloat2f(serializedShift.directVec));
 		shifter.setOffset(floatToFloat2f(serializedShift.offset));
 		shifter.setPinPoint(floatToFloat2f(serializedShift.pinPoint));
-
+		shifter.setLayerShiftLogic(shiftLogicInstancer.load(serializedShift.logic));
 		return shifter;
 	}
 
 
-	private static Collection<GameObject> loadGameObjects(List<SerializedObject> serializedObjects) {
+	private Collection<GameObject> loadGameObjects(List<SerializedObject> serializedObjects) {
 
 		Collection<GameObject> gameObjects = new LinkedList<>();
 		for (SerializedObject object: serializedObjects) {
@@ -90,7 +97,7 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 	}
 
 
-	private static ObjectDetails loadObjectDetails(SerializedDetails serialized) {
+	private ObjectDetails loadObjectDetails(SerializedDetails serialized) {
 
 		ObjectDetails details = new ObjectDetails(serialized.name);
 		details.setScale(serialized.scale);

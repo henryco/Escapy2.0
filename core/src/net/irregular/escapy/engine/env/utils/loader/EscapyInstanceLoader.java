@@ -1,6 +1,5 @@
 package net.irregular.escapy.engine.env.utils.loader;
 
-import javax.inject.Named;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -11,20 +10,21 @@ public interface EscapyInstanceLoader {
 
 
 	@SuppressWarnings("unchecked")
-	default <T> T load(String name) {
+	default <T> T load(String name, Object ... args) {
 		try {
 
 			Method[] methods = this.getClass().getDeclaredMethods();
 
 			for (Method method: methods) {
-				Named named = method.getAnnotation(Named.class);
+				EscapyInstanced named = method.getAnnotation(EscapyInstanced.class);
 				if (named != null && named.value().equals(name))
-					return (T) method.invoke(this);
+					return (T) method.invoke(this, args);
 			}
 
 			for (Method method: methods) {
-				if (method.getName().equals(name))
-					return (T) method.invoke(this);
+				if (method.getAnnotation(EscapyInstanced.class) != null
+						&& method.getName().equals(name))
+					return (T) method.invoke(this, args);
 			}
 
 		} catch (IllegalAccessException | InvocationTargetException e) {
