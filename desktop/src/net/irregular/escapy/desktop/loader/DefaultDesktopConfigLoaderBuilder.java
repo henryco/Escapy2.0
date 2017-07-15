@@ -25,12 +25,12 @@ public class DefaultDesktopConfigLoaderBuilder {
 
 	public DefaultDesktopConfigLoaderBuilder(String path) {
 		this();
-		this.path = path;
+		setPath(path);
 	}
 
 	public DefaultDesktopConfigLoaderBuilder(String path, String name) {
 		this(path);
-		this.name = name;
+		setName(name);
 	}
 
 	public DefaultDesktopConfigLoaderBuilder(Class loadedClass,
@@ -44,8 +44,7 @@ public class DefaultDesktopConfigLoaderBuilder {
 											 String name,
 											 Class loadedClass,
 											 Class<? extends EscapySerialized> serializedClass) {
-		this.path = path;
-		this.name = name;
+		this(name, path);
 		this.loadedClass = loadedClass;
 		this.serializedClass = serializedClass;
 	}

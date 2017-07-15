@@ -1,0 +1,14 @@
+{
+	"type": "EscapyConfiguration",
+	"name": "MainConfiguration",
+	
+	"resizable": false,
+	"vSync": true,
+	"fullscreen": true,
+	"forceExit": true,
+	
+	"scrWidth": 1920,
+	"scrHeight": 1080,
+	
+	"fps": 25
+}
