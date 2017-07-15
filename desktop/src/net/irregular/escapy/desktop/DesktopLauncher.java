@@ -7,7 +7,7 @@ import net.irregular.escapy.environment.MainEnvironment;
 import net.irregular.escapy.environment.main.MainModule;
 
 public class DesktopLauncher {
-	public static void main (String[] arg) {
+	public static void main (String[] arg) throws Exception {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.resizable = false;
 		config.vSyncEnabled = true;
@@ -18,6 +18,16 @@ public class DesktopLauncher {
 		config.height = 1080;
 		config.forceExit = true;
 		config.foregroundFPS = 25;
+
+
+//		LwjglApplicationConfiguration config = new DefaultDesktopConfigLoaderBuilder()
+//				.setLoadedClass(LwjglApplicationConfiguration.class)
+//				.setSerializedClass(SerializedDesktopConfig.class)
+//				.setPath("")
+//				.setName("")
+//				.build()
+//		.loadDesktopConfig();
+
 
 		new LwjglApplication(new EscapyApplicationAdapter(MainEnvironment.class, new MainModule()), config);
 
