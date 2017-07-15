@@ -1,0 +1,62 @@
+{
+	"type": "SubLocation",
+	"name": "SubOne",
+	"location": "Location1",
+
+	"layers": [
+		{
+			"name": "layer0",
+			"axis_z": 0,
+
+			"shift": {
+				"name": "void",
+				"offset2f": [0, 0],
+				"pinPoint2f": [0, 0],
+				"directVec2f": [0, 0]
+			},
+
+			"objects": [
+				{
+					"details": {
+						"name": "",
+						"scale": 1,
+						"thickness": 0.5,
+						"position2f": [0, 0]
+					},
+
+					"static": {
+						"textureNormal": "",
+						"textureLight": "",
+						"texture": ""
+					}
+				}
+			]
+		},
+		{
+			"name": "layer1",
+			"axis_z": 0.5,
+			"shift": {
+				"name": "void",
+				"offset2f": [0, 0],
+				"pinPoint2f": [0, 0],
+				"directVec2f": [0, 0]
+			},
+
+			"objects": [
+				{
+					"details": {
+						"name": "",
+						"scale": 1,
+						"thickness": 0.5,
+						"position2f": [
+							0,
+							0
+						]
+					}
+				}
+			]
+		}
+
+
+	]
+}

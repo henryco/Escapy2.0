@@ -4,23 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-// TODO: Auto-generated Javadoc
 
-/**
- * The Class EscapyAbsContainer.
- *
- * @param <T>
- *            the generic type
- */
-public abstract class EscapyAbsContainer<T extends EscapyContainerable> 
+public abstract class EscapyAbsContainer<T extends EscapyContainerable>
 	implements EscapyContainer<T> {
 
-	/** The buffer. */
 	protected List<T> targetsList, buffer;
 	
-	/**
-	 * Instantiates a new escapy abs container.
-	 */
 	public EscapyAbsContainer() {
 		initContainer();
 	}
