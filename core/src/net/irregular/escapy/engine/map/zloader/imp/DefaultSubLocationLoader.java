@@ -2,6 +2,7 @@ package net.irregular.escapy.engine.map.zloader.imp;
 
 import com.google.gson.Gson;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
+import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.map.layer.Layer;
 import net.irregular.escapy.engine.map.layer.shift.LayerShift;
 import net.irregular.escapy.engine.map.layer.shift.LayerShiftLogic;
@@ -9,6 +10,7 @@ import net.irregular.escapy.engine.map.layer.shift.LayerShifter;
 import net.irregular.escapy.engine.map.location.SubLocation;
 import net.irregular.escapy.engine.map.object.GameObject;
 import net.irregular.escapy.engine.map.zloader.GameObjectLoader;
+import net.irregular.escapy.engine.map.zloader.RenderContainerLoader;
 import net.irregular.escapy.engine.map.zloader.SubLocationLoader;
 import net.irregular.escapy.engine.map.zloader.serial.SerializedGameObject;
 import net.irregular.escapy.engine.map.zloader.serial.SerializedSubLocation;
@@ -33,15 +35,18 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 	private final Comparator<Layer> layerComparator;
 	private final EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer;
 	private final GameObjectLoader<SerializedGameObject> gameObjectLoader;
+	private final RenderContainerLoader<Collection<Layer>> renderContainerLoader;
 
 
 	public DefaultSubLocationLoader(Comparator<Layer> layerComparator,
 									EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer,
-									GameObjectLoader<SerializedGameObject> gameObjectLoader) {
+									GameObjectLoader<SerializedGameObject> gameObjectLoader,
+									RenderContainerLoader<Collection<Layer>> renderContainerLoader) {
 
 		this.layerComparator = layerComparator;
 		this.gameObjectLoader = gameObjectLoader;
 		this.shiftLogicInstancer = shiftLogicInstancer;
+		this.renderContainerLoader = renderContainerLoader;
 	}
 
 
@@ -61,7 +66,9 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 		for (SerializedLayer layer: serialized.layers)
 			layers.add(loadLayer(layer));
 
-		return new SubLocation(serialized.name, layers, layerComparator);
+		EscapyRenderable renderContainer = renderContainerLoader.loadRenderContainer(path, layers);
+
+		return new SubLocation(serialized.name, layers, layerComparator, renderContainer);
 	}
 
 

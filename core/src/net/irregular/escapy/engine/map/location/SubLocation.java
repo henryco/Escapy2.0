@@ -3,6 +3,7 @@ package net.irregular.escapy.engine.map.location;
 import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
+import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.map.layer.Layer;
 
 import java.util.Collection;
@@ -19,14 +20,16 @@ public class SubLocation implements EscapyObject {
 
 	private final EscapyAssociatedArray<Layer> layerArray;
 	private final Comparator<Layer> layerComparator;
-
+	private final EscapyRenderable renderContainer;
 
 	public SubLocation(String name,
 					   Collection<Layer> layers,
-					   Comparator<Layer> layerComparator) {
+					   Comparator<Layer> layerComparator,
+					   EscapyRenderable renderContainer) {
 
 		this.layerArray = new EscapyNamedArray<>(Layer.class);
 		this.layerComparator = layerComparator;
+		this.renderContainer = renderContainer;
 		this.name = name;
 		setLayers(layers);
 	}
@@ -44,7 +47,9 @@ public class SubLocation implements EscapyObject {
 	}
 
 
-
+	public EscapyRenderable getRenderable() {
+		return renderContainer;
+	}
 
 
 	@Override
