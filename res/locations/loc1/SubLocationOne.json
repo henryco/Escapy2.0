@@ -3,7 +3,20 @@
 	"name": "SubOne",
 	"location": "Location1",
 
-	"renderContainer": "subOneRender.json",
+	"renderContainer": [
+		{
+			"name": "background",
+			"layers": [
+				"layer0"
+			]
+		},
+		{
+			"name": "foreground",
+			"layers": [
+				"layer1"
+			]
+		}
+	],
 
 	"layers": [
 		{

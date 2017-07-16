@@ -2,7 +2,6 @@ package net.irregular.escapy.engine.map.zloader.imp;
 
 import com.google.gson.Gson;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
-import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.map.layer.Layer;
 import net.irregular.escapy.engine.map.layer.shift.LayerShift;
 import net.irregular.escapy.engine.map.layer.shift.LayerShiftLogic;
@@ -10,7 +9,6 @@ import net.irregular.escapy.engine.map.layer.shift.LayerShifter;
 import net.irregular.escapy.engine.map.location.SubLocation;
 import net.irregular.escapy.engine.map.object.GameObject;
 import net.irregular.escapy.engine.map.zloader.GameObjectLoader;
-import net.irregular.escapy.engine.map.zloader.RenderContainerLoader;
 import net.irregular.escapy.engine.map.zloader.SubLocationLoader;
 import net.irregular.escapy.engine.map.zloader.serial.SerializedGameObject;
 import net.irregular.escapy.engine.map.zloader.serial.SerializedSubLocation;
@@ -18,13 +16,14 @@ import net.irregular.escapy.engine.map.zloader.serial.SerializedSubLocation;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.AbstractMap;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 
-import static net.irregular.escapy.engine.map.zloader.serial.SerializedSubLocation.SerializedLayer;
-import static net.irregular.escapy.engine.map.zloader.serial.SerializedSubLocation.SerializedShift;
+import static net.irregular.escapy.engine.map.zloader.serial.SerializedSubLocation.*;
+
 
 /**
  * @author Henry on 13/07/17.
@@ -32,21 +31,15 @@ import static net.irregular.escapy.engine.map.zloader.serial.SerializedSubLocati
 public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
-	private final Comparator<Layer> layerComparator;
 	private final EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer;
 	private final GameObjectLoader<SerializedGameObject> gameObjectLoader;
-	private final RenderContainerLoader<Collection<Layer>> renderContainerLoader;
 
 
-	public DefaultSubLocationLoader(Comparator<Layer> layerComparator,
-									EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer,
-									GameObjectLoader<SerializedGameObject> gameObjectLoader,
-									RenderContainerLoader<Collection<Layer>> renderContainerLoader) {
+	public DefaultSubLocationLoader(EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer,
+									GameObjectLoader<SerializedGameObject> gameObjectLoader) {
 
-		this.layerComparator = layerComparator;
 		this.gameObjectLoader = gameObjectLoader;
 		this.shiftLogicInstancer = shiftLogicInstancer;
-		this.renderContainerLoader = renderContainerLoader;
 	}
 
 
@@ -66,9 +59,10 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 		for (SerializedLayer layer: serialized.layers)
 			layers.add(loadLayer(layer));
 
-		EscapyRenderable renderContainer = renderContainerLoader.loadRenderContainer(path, layers);
+		Collection<Entry<String, Layer[]>> layerContainer
+				= loadRenderContainer(serialized.renderContainers, layers);
 
-		return new SubLocation(serialized.name, layers, layerComparator, renderContainer);
+		return new SubLocation(serialized.name, layers, layerContainer);
 	}
 
 
@@ -100,6 +94,30 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 		for (SerializedGameObject object: serializedObjects)
 			gameObjects.add(gameObjectLoader.loadGameObject(object));
 		return gameObjects;
+	}
+
+
+
+	private Collection<Entry<String, Layer[]>> loadRenderContainer(
+			List<SerializedRenderContainer> serialized, Collection<Layer> layers) {
+
+
+		Collection<Entry<String, Layer[]>> collection = new LinkedList<>();
+
+		for (SerializedRenderContainer container: serialized) {
+			Layer[] multiLayer = new Layer[container.layers.size()];
+			for (int i = 0; i < multiLayer.length; i++) {
+				for (Layer layer : layers) {
+					if (layer.getName().equals(container.layers.get(i))) {
+						multiLayer[i] = layer;
+						break;
+					}
+				}
+			}
+			collection.add(new AbstractMap.SimpleEntry<>(container.getName(), multiLayer));
+		}
+
+		return collection;
 	}
 
 }

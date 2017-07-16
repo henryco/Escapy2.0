@@ -18,7 +18,7 @@ public final class SerializedSubLocation implements EscapySerialized {
 	@SerializedName("name") @Expose public String name;
 	@SerializedName("location") @Expose public String location;
 	@SerializedName("layers") @Expose public List<SerializedLayer> layers = null;
-
+	@SerializedName("renderContainer") @Expose public List<SerializedRenderContainer> renderContainers = null;
 
 
 	public static final class SerializedLayer implements EscapySerialized {
@@ -38,6 +38,17 @@ public final class SerializedSubLocation implements EscapySerialized {
 		@SerializedName("offset2f") @Expose public List<Float> offset = null;
 		@SerializedName("pinPoint2f") @Expose public List<Float> pinPoint = null;
 		@SerializedName("directVec2f") @Expose public List<Float> directVec = null;
+
+		@Override public String getName() {
+			return name;
+		}
+	}
+
+
+	public static final class SerializedRenderContainer implements EscapySerialized {
+
+		@SerializedName("name") @Expose public String name;
+		@SerializedName("layers") @Expose public List<String> layers = null;
 
 		@Override public String getName() {
 			return name;
