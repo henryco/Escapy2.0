@@ -1,7 +1,8 @@
-package net.irregular.escapy.desktop.loader;
+package net.irregular.escapy.desktop.loader.builder;
 
 
 import com.google.gson.Gson;
+import net.irregular.escapy.desktop.loader.DesktopConfigLoader;
 import net.irregular.escapy.engine.env.utils.EscapySerialized;
 
 import java.io.FileInputStream;

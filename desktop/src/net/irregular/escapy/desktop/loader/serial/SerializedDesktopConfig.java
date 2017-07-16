@@ -1,4 +1,4 @@
-package net.irregular.escapy.desktop.loader;
+package net.irregular.escapy.desktop.loader.serial;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +7,7 @@ import net.irregular.escapy.engine.env.utils.EscapySerialized;
 /**
  * @author Henry on 15/07/17.
  */
-public class SerializedDesktopConfig implements EscapySerialized {
+public final class SerializedDesktopConfig implements EscapySerialized {
 
 	@SerializedName("type") @Expose public String type;
 	@SerializedName("name") @Expose public String name;

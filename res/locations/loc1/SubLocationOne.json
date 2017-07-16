@@ -3,6 +3,8 @@
 	"name": "SubOne",
 	"location": "Location1",
 
+	"renderContainer": "subOneRender.json",
+
 	"layers": [
 		{
 			"name": "layer0",

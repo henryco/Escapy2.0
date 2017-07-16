@@ -16,31 +16,25 @@ import java.util.LinkedList;
 public class SubLocation implements EscapyObject {
 
 	public final String name;
-	public final EscapyAssociatedArray<Layer> layerArray;
-	private Comparator<Layer> layerComparator;
 
+	private final EscapyAssociatedArray<Layer> layerArray;
+	private final Comparator<Layer> layerComparator;
 
-	public SubLocation(String name) {
-		this.name = name;
-		layerArray = new EscapyNamedArray<>(Layer.class);
-	}
 
 	public SubLocation(String name,
 					   Collection<Layer> layers,
 					   Comparator<Layer> layerComparator) {
-		this(name);
-		setLayerComparator(layerComparator);
+
+		this.layerArray = new EscapyNamedArray<>(Layer.class);
+		this.layerComparator = layerComparator;
+		this.name = name;
 		setLayers(layers);
 	}
 
 
-	public void addLayer(Layer layer) {
-		layerArray.add(layer);
-		layerArray.sort(layerComparator);
-	}
 
 
-	public void setLayers(Collection<Layer> layers) {
+	private void setLayers(Collection<Layer> layers) {
 		Collection<String> names = new LinkedList<>();
 		for (Layer l: layers) {
 			names.add(l.getName());
@@ -49,9 +43,9 @@ public class SubLocation implements EscapyObject {
 		layerArray.sort(layerComparator);
 	}
 
-	public void setLayerComparator(Comparator<Layer> comparator) {
-		this.layerComparator = comparator;
-	}
+
+
+
 
 	@Override
 	public String getName() {
