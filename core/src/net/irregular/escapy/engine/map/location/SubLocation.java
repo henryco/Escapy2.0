@@ -1,9 +1,8 @@
 package net.irregular.escapy.engine.map.location;
 
-import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
-import net.irregular.escapy.engine.map.layer.Layer;
+import net.irregular.escapy.engine.map.layer.EscapyLayer;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -13,41 +12,47 @@ import java.util.Map.Entry;
 /**
  * @author Henry on 11/07/17.
  */
-public class SubLocation implements EscapyObject {
+public class SubLocation implements EscapySubLocation {
 
 	public final String name;
 
-	private final EscapyAssociatedArray<Layer> layerArray;
-	private final EscapyAssociatedArray<Layer[]> layerContainer;
+	public final EscapyAssociatedArray<EscapyLayer> layerArray;
+	public final EscapyAssociatedArray<EscapyLayer[]> layerGroupArray;
 
 
 	public SubLocation(String name,
-					   Collection<Layer> layers,
-					   Collection<Entry<String, Layer[]>> layerContainer) {
+					   Collection<EscapyLayer> layers,
+					   Collection<Entry<String, EscapyLayer[]>> layerGroupArray) {
 
 		this.name = name;
-		this.layerArray = new EscapyNamedArray<>(Layer.class);
-		this.layerContainer = new EscapyNamedArray<>(Layer[].class);
-		setLayerContainer(layerContainer);
+		this.layerArray = new EscapyNamedArray<>(EscapyLayer.class);
+		this.layerGroupArray = new EscapyNamedArray<>(EscapyLayer[].class);
+		setLayerGroupArray(layerGroupArray);
 		setLayers(layers);
 	}
 
 
-	public EscapyAssociatedArray<Layer[]> getLayerContainer() {
-		return layerContainer;
+	@Override
+	public EscapyAssociatedArray<EscapyLayer> getLayers() {
+		return layerArray;
+	}
+
+	@Override
+	public EscapyAssociatedArray<EscapyLayer[]> getLayerGroups() {
+		return layerGroupArray;
 	}
 
 
 
-	private void setLayers(Collection<Layer> layers) {
+	private void setLayers(Collection<EscapyLayer> layers) {
 		Collection<String> names = new LinkedList<>();
-		for (Layer l: layers) names.add(l.getName());
+		for (EscapyLayer l: layers) names.add(l.getName());
 		layerArray.addAll(names, layers);
 	}
 
-	private void setLayerContainer(Collection<Entry<String, Layer[]>> container) {
-		for (Entry<String, Layer[]> entry: container)
-			layerContainer.add(entry.getValue(), entry.getKey());
+	private void setLayerGroupArray(Collection<Entry<String, EscapyLayer[]>> container) {
+		for (Entry<String, EscapyLayer[]> entry: container)
+			layerGroupArray.add(entry.getValue(), entry.getKey());
 	}
 
 
@@ -59,6 +64,6 @@ public class SubLocation implements EscapyObject {
 
 	@Override
 	public void dispose() {
-		for (Layer layer: layerArray) layer.dispose();
+		for (EscapyLayer layer: layerArray) layer.dispose();
 	}
 }

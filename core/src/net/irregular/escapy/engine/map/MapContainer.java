@@ -1,6 +1,6 @@
 package net.irregular.escapy.engine.map;
 
-import net.irregular.escapy.engine.map.location.Location;
+import net.irregular.escapy.engine.map.location.EscapyLocation;
 import net.irregular.escapy.engine.map.zloader.LocationLoader;
 
 import java.util.Collection;
@@ -15,7 +15,7 @@ public class MapContainer {
 
 	private final Map<String, String> locationMap;
 	private final LocationLoader locationLoader;
-	private Location location;
+	private EscapyLocation location;
 
 
 	public MapContainer(LocationLoader locationLoader) {
@@ -32,7 +32,7 @@ public class MapContainer {
 
 	public void switchLocation(String name) {
 
-		Location temp = location;
+		EscapyLocation temp = location;
 		location = locationLoader.loadLocation(locationMap.get(name));
 
 		if (location == null) {
@@ -44,7 +44,7 @@ public class MapContainer {
 	}
 
 
-	public Location getLogation() {
+	public EscapyLocation getLogation() {
 		return location;
 	}
 

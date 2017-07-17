@@ -1,10 +1,10 @@
 package net.irregular.escapy.engine.map.zloader.builder;
 
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
-import net.irregular.escapy.engine.map.layer.Layer;
+import net.irregular.escapy.engine.map.layer.EscapyLayer;
 import net.irregular.escapy.engine.map.layer.shift.LayerShiftLogic;
-import net.irregular.escapy.engine.map.location.Location;
-import net.irregular.escapy.engine.map.location.SubLocation;
+import net.irregular.escapy.engine.map.location.EscapyLocation;
+import net.irregular.escapy.engine.map.location.EscapySubLocation;
 import net.irregular.escapy.engine.map.object.GameObject;
 import net.irregular.escapy.engine.map.zloader.GameObjectLoader;
 import net.irregular.escapy.engine.map.zloader.LocationLoader;
@@ -21,9 +21,9 @@ public class DefaultLocationLoaderBuilder implements LocationLoaderBuilder {
 
 	private EscapyInstanceLoader<GameObject> gameObjectInstanceAttributeLoader;
 	private EscapyInstanceLoader<LayerShiftLogic> subLocationLayerShiftLogicInstanceLoader;
-	private EscapyInstanceLoader<Layer> subLocationLayerInstanceAttributeLoader;
-	private EscapyInstanceLoader<Location> locationInstanceAttributeLoader;
-	private EscapyInstanceLoader<SubLocation> subLocationInstanceAttributeLoader;
+	private EscapyInstanceLoader<EscapyLayer> subLocationLayerInstanceAttributeLoader;
+	private EscapyInstanceLoader<EscapyLocation> locationInstanceAttributeLoader;
+	private EscapyInstanceLoader<EscapySubLocation> subLocationInstanceAttributeLoader;
 
 
 
@@ -56,7 +56,7 @@ public class DefaultLocationLoaderBuilder implements LocationLoaderBuilder {
 
 
 	public DefaultLocationLoaderBuilder setSubLocationLayerInstanceAttributeLoader
-			(EscapyInstanceLoader<Layer> subLocationLayerInstanceAttributeLoader) {
+			(EscapyInstanceLoader<EscapyLayer> subLocationLayerInstanceAttributeLoader) {
 		this.subLocationLayerInstanceAttributeLoader = subLocationLayerInstanceAttributeLoader;
 		return this;
 	}
@@ -68,13 +68,13 @@ public class DefaultLocationLoaderBuilder implements LocationLoaderBuilder {
 	}
 
 	public DefaultLocationLoaderBuilder setLocationInstanceAttributeLoader
-			(EscapyInstanceLoader<Location> locationInstanceAttributeLoader) {
+			(EscapyInstanceLoader<EscapyLocation> locationInstanceAttributeLoader) {
 		this.locationInstanceAttributeLoader = locationInstanceAttributeLoader;
 		return this;
 	}
 
 	public DefaultLocationLoaderBuilder setSubLocationInstanceAttributeLoader
-			(EscapyInstanceLoader<SubLocation> subLocationInstanceAttributeLoader) {
+			(EscapyInstanceLoader<EscapySubLocation> subLocationInstanceAttributeLoader) {
 		this.subLocationInstanceAttributeLoader = subLocationInstanceAttributeLoader;
 		return this;
 	}

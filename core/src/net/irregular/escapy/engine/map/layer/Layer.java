@@ -1,6 +1,5 @@
 package net.irregular.escapy.engine.map.layer;
 
-import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
 import net.irregular.escapy.engine.map.layer.shift.LayerShift;
@@ -13,7 +12,7 @@ import java.util.LinkedList;
 /**
  * @author Henry on 11/07/17.
  */
-public class Layer implements EscapyObject {
+public class Layer implements EscapyLayer {
 
 
 	private LayerShift layerShifter;
@@ -43,31 +42,37 @@ public class Layer implements EscapyObject {
 	}
 
 
-
 	public void setGameObjects(Collection<GameObject> objects) {
 		Collection<String> objectNames = new LinkedList<>();
 		for (GameObject object: objects) objectNames.add(object.getObjectDetails().getName());
 		gameObjects.addAll(objectNames, objects);
 	}
 
-
-
-	public LayerShift getLayerShifter() {
-		return layerShifter;
-	}
 	public void setLayerShifter(LayerShift layerShifter) {
 		this.layerShifter = layerShifter;
 	}
-	public float getAxisZ() {
+
+
+
+	@Override public EscapyAssociatedArray<GameObject> getGameObjects() {
+		return gameObjects;
+	}
+	@Override public LayerShift getLayerShifter() {
+		return layerShifter;
+	}
+	@Override public float getAxisZ() {
 		return axisZ;
 	}
-
-
-
 	@Override public String getName() {
 		return name;
 	}
-	@Override public void dispose() {
-		for (GameObject gameObject: gameObjects) gameObject.dispose();
+
+
+
+	@Override
+	public void dispose() {
+		for (GameObject gameObject: gameObjects)
+			gameObject.dispose();
 	}
+
 }

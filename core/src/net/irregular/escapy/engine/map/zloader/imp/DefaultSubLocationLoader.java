@@ -2,10 +2,12 @@ package net.irregular.escapy.engine.map.zloader.imp;
 
 import com.google.gson.Gson;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
+import net.irregular.escapy.engine.map.layer.EscapyLayer;
 import net.irregular.escapy.engine.map.layer.Layer;
 import net.irregular.escapy.engine.map.layer.shift.LayerShift;
 import net.irregular.escapy.engine.map.layer.shift.LayerShiftLogic;
 import net.irregular.escapy.engine.map.layer.shift.LayerShifter;
+import net.irregular.escapy.engine.map.location.EscapySubLocation;
 import net.irregular.escapy.engine.map.location.SubLocation;
 import net.irregular.escapy.engine.map.object.GameObject;
 import net.irregular.escapy.engine.map.zloader.GameObjectLoader;
@@ -31,14 +33,14 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 	private final EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer;
-	private final EscapyInstanceLoader<Layer> layerInstanceAttributeLoader;
-	private final EscapyInstanceLoader<SubLocation> subLocationInstanceAttributeLoader;
+	private final EscapyInstanceLoader<EscapyLayer> layerInstanceAttributeLoader;
+	private final EscapyInstanceLoader<EscapySubLocation> subLocationInstanceAttributeLoader;
 	private final GameObjectLoader<SerializedGameObject> gameObjectLoader;
 
 
 	public DefaultSubLocationLoader(EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer,
-									EscapyInstanceLoader<Layer> layerInstanceAttributeLoader,
-									EscapyInstanceLoader<SubLocation> subLocationInstanceAttributeLoader,
+									EscapyInstanceLoader<EscapyLayer> layerInstanceAttributeLoader,
+									EscapyInstanceLoader<EscapySubLocation> subLocationInstanceAttributeLoader,
 									GameObjectLoader<SerializedGameObject> gameObjectLoader) {
 
 		this.shiftLogicInstancer = shiftLogicInstancer;
@@ -49,9 +51,9 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 	@Override
-	public SubLocation loadSubLocation(String path) {
+	public EscapySubLocation loadSubLocation(String path) {
 
-		Collection<Layer> layers = new LinkedList<>();
+		Collection<EscapyLayer> layers = new LinkedList<>();
 		SerializedSubLocation serialized;
 
 		try {
@@ -63,10 +65,10 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 		for (SerializedLayer layer: serialized.layers)
 			layers.add(loadLayer(layer));
 
-		Collection<Entry<String, Layer[]>> layerContainer
+		Collection<Entry<String, EscapyLayer[]>> layerContainer
 				= loadRenderContainer(serialized.layerGroups, layers);
 
-		SubLocation subLocation = new SubLocation(serialized.name, layers, layerContainer);
+		EscapySubLocation subLocation = new SubLocation(serialized.name, layers, layerContainer);
 		if (subLocationInstanceAttributeLoader != null)
 			return subLocationInstanceAttributeLoader.loadInstanceAttributes(subLocation, serialized.attributes);
 
@@ -75,7 +77,7 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 
-	private Layer loadLayer(SerializedLayer serializedLayer) {
+	private EscapyLayer loadLayer(SerializedLayer serializedLayer) {
 
 		Layer layer = new Layer(serializedLayer.name, serializedLayer.axisZ);
 		layer.setLayerShifter(loadLayerShift(serializedLayer.shift));
@@ -97,11 +99,11 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 
-	private Layer loadLayerAttributes(Layer layer, Collection<String> attributes) {
+	private EscapyLayer loadLayerAttributes(EscapyLayer layer, Collection<String> attributes) {
 
 		if (layer == null || layerInstanceAttributeLoader == null) return layer;
 		for (String attr: attributes) {
-			Layer loaded = layerInstanceAttributeLoader.loadInstance(attr, layer);
+			EscapyLayer loaded = layerInstanceAttributeLoader.loadInstance(attr, layer);
 			layer = loaded != null ? loaded : layer;
 		}
 		return layer;
@@ -119,16 +121,16 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 
-	private Collection<Entry<String, Layer[]>> loadRenderContainer(
-			Collection<SerializedLayerGroup> serialized, Collection<Layer> layers) {
+	private Collection<Entry<String, EscapyLayer[]>> loadRenderContainer(
+			Collection<SerializedLayerGroup> serialized, Collection<EscapyLayer> layers) {
 
 
-		Collection<Entry<String, Layer[]>> collection = new LinkedList<>();
+		Collection<Entry<String, EscapyLayer[]>> collection = new LinkedList<>();
 
 		for (SerializedLayerGroup container: serialized) {
-			Layer[] multiLayer = new Layer[container.layers.size()];
+			EscapyLayer[] multiLayer = new Layer[container.layers.size()];
 			for (int i = 0; i < multiLayer.length; i++) {
-				for (Layer layer : layers) {
+				for (EscapyLayer layer : layers) {
 					if (layer.getName().equals(container.layers.get(i))) {
 						multiLayer[i] = layer;
 						break;

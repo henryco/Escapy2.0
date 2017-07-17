@@ -1,6 +1,6 @@
 package net.irregular.escapy.engine.map.location;
 
-import net.irregular.escapy.engine.env.utils.EscapyObject;
+import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.map.zloader.SubLocationLoader;
 
 import java.util.*;
@@ -8,14 +8,14 @@ import java.util.*;
 /**
  * @author Henry on 11/07/17.
  */
-public class Location implements EscapyObject {
+public class Location implements EscapyLocation {
 
-	private final String name;
-	private final SubLocationLoader subLocationLoader;
-	private final Map<String, String> subLocationMap;
+	public final String name;
+	public final SubLocationLoader subLocationLoader;
+	public final Map<String, String> subLocationMap;
 
-	private SubLocation actual;
-	private SubLocation last;
+	private EscapySubLocation actual;
+	private EscapySubLocation last;
 
 
 
@@ -38,11 +38,12 @@ public class Location implements EscapyObject {
 
 
 
+	@Override
 	public void switchSubLocation(String location) {
 
 		if (!subLocationMap.containsKey(location)) return;
 		if (last != null && location.equals(last.getName())) {
-			final SubLocation local = actual;
+			final EscapySubLocation local = actual;
 			actual = last;
 			last = local;
 			return;
@@ -59,14 +60,19 @@ public class Location implements EscapyObject {
 	}
 
 
-	public SubLocation getSublocation() {
+	@Override
+	public EscapySubLocation getSubLocation() {
 		return actual;
 	}
-	public List<Map.Entry<String, String>> getSublocations() {
-		List<Map.Entry<String, String>> list = new LinkedList<>();
-		list.addAll(subLocationMap.entrySet());
+
+	@Override
+	public Collection<EscapyAssociatedArray.Entry<String>> getSubLocations() {
+		List<EscapyAssociatedArray.Entry<String>> list = new LinkedList<>();
+		subLocationMap.forEach((key, value) -> list.add(new EscapyAssociatedArray.Entry<>(key, value)));
 		return list;
 	}
+
+	@Override
 	public void addSubLocation(String locationName, String locationPath) {
 		subLocationMap.put(locationName, locationPath);
 	}
