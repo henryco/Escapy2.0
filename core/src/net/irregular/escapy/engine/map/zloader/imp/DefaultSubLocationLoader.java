@@ -32,18 +32,20 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 	private final EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer;
 	private final EscapyInstanceLoader<Layer> layerInstanceAttributeLoader;
+	private final EscapyInstanceLoader<SubLocation> subLocationInstanceAttributeLoader;
 	private final GameObjectLoader<SerializedGameObject> gameObjectLoader;
 
 
 	public DefaultSubLocationLoader(EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer,
 									EscapyInstanceLoader<Layer> layerInstanceAttributeLoader,
+									EscapyInstanceLoader<SubLocation> subLocationInstanceAttributeLoader,
 									GameObjectLoader<SerializedGameObject> gameObjectLoader) {
 
-		this.gameObjectLoader = gameObjectLoader;
 		this.shiftLogicInstancer = shiftLogicInstancer;
 		this.layerInstanceAttributeLoader = layerInstanceAttributeLoader;
+		this.subLocationInstanceAttributeLoader = subLocationInstanceAttributeLoader;
+		this.gameObjectLoader = gameObjectLoader;
 	}
-
 
 
 	@Override
@@ -64,9 +66,11 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 		Collection<Entry<String, Layer[]>> layerContainer
 				= loadRenderContainer(serialized.layerGroups, layers);
 
+		SubLocation subLocation = new SubLocation(serialized.name, layers, layerContainer);
+		if (subLocationInstanceAttributeLoader != null)
+			return subLocationInstanceAttributeLoader.loadInstanceAttributes(subLocation, serialized.attributes);
 
-
-		return  new SubLocation(serialized.name, layers, layerContainer);
+		return subLocation;
 	}
 
 
@@ -87,7 +91,7 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 		shifter.setDirect(floatListToArray(serializedShift.directVec));
 		shifter.setOffset(floatListToArray(serializedShift.offset));
 		shifter.setPinPoint(floatListToArray(serializedShift.pinPoint));
-		shifter.setLayerShiftLogic(shiftLogicInstancer.load(serializedShift.name));
+		shifter.setLayerShiftLogic(shiftLogicInstancer.loadInstance(serializedShift.name));
 		return shifter;
 	}
 
@@ -95,11 +99,10 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 	private Layer loadLayerAttributes(Layer layer, Collection<String> attributes) {
 
-		if (layer != null && layerInstanceAttributeLoader != null) {
-			for (String attr: attributes) {
-				Layer loaded = layerInstanceAttributeLoader.load(attr, layer);
-				layer = loaded != null ? loaded : layer;
-			}
+		if (layer == null || layerInstanceAttributeLoader == null) return layer;
+		for (String attr: attributes) {
+			Layer loaded = layerInstanceAttributeLoader.loadInstance(attr, layer);
+			layer = loaded != null ? loaded : layer;
 		}
 		return layer;
 	}

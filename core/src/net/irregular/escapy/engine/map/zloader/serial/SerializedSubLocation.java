@@ -19,6 +19,7 @@ public final class SerializedSubLocation implements EscapySerialized {
 	@SerializedName("location") @Expose public String location;
 	@SerializedName("layers") @Expose public List<SerializedLayer> layers = null;
 	@SerializedName("layerGroups") @Expose public List<SerializedLayerGroup> layerGroups = null;
+	@SerializedName("attributes") @Expose public List<String> attributes = null;
 
 
 	public static final class SerializedLayer implements EscapySerialized {

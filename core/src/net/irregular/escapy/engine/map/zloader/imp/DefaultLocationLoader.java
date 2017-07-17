@@ -2,6 +2,7 @@ package net.irregular.escapy.engine.map.zloader.imp;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.map.location.Location;
 import net.irregular.escapy.engine.map.zloader.LocationLoader;
 import net.irregular.escapy.engine.map.zloader.SubLocationLoader;
@@ -23,9 +24,15 @@ import java.util.Map;
 public class DefaultLocationLoader implements LocationLoader {
 
 	private final SubLocationLoader subLocationLoader;
-	public DefaultLocationLoader(SubLocationLoader subLocationLoader) {
+	private final EscapyInstanceLoader<Location> locationInstanceAttributeLoader;
+
+
+	public DefaultLocationLoader(SubLocationLoader subLocationLoader,
+								 EscapyInstanceLoader<Location> locationInstanceAttributeLoader) {
 		this.subLocationLoader = subLocationLoader;
+		this.locationInstanceAttributeLoader = locationInstanceAttributeLoader;
 	}
+
 
 
 	@Override
@@ -83,8 +90,14 @@ public class DefaultLocationLoader implements LocationLoader {
 		Location location = new Location(serialized.name, subLocations, subLocationLoader);
 		location.switchSubLocation(serialized.enter);
 
+		if (locationInstanceAttributeLoader != null)
+			location = locationInstanceAttributeLoader.loadInstanceAttributes(location, serialized.attributes);
+
 		return location;
 	}
+
+
+
 
 
 }

@@ -31,7 +31,7 @@ public class DefaultGameObjectLoader implements GameObjectLoader<SerializedGameO
 		GameObject gameObject = proxyLoadedGameObject(serialized);
 		if (gameObject != null && gameObjectInstanceAttributeLoader != null) {
 			for (String attr: serialized.attributes) {
-				GameObject loaded = gameObjectInstanceAttributeLoader.load(attr, gameObject);
+				GameObject loaded = gameObjectInstanceAttributeLoader.loadInstance(attr, gameObject);
 				gameObject = loaded != null ? loaded : gameObject;
 			}
 		}

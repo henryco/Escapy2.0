@@ -3,6 +3,8 @@
 	"name": "SubOne",
 	"location": "Location1",
 
+	"attributes": [],
+
 	"layerGroups": [
 		{
 			"name": "background",
