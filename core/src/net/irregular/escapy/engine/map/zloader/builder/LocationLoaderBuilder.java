@@ -8,4 +8,8 @@ import net.irregular.escapy.engine.map.zloader.LocationLoader;
 public interface LocationLoaderBuilder {
 
 	LocationLoader build();
+
+	static LocationLoaderBuilder Default() {
+		return new DefaultLocationLoaderBuilder();
+	}
 }

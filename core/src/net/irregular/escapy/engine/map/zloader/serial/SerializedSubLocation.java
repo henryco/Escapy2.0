@@ -26,6 +26,7 @@ public final class SerializedSubLocation implements EscapySerialized {
 		@SerializedName("axis_z") @Expose public float axisZ;
 		@SerializedName("shift") @Expose public SerializedShift shift;
 		@SerializedName("objects") @Expose public List<SerializedGameObject> objects = null;
+		@SerializedName("attributes") @Expose public List<String> attributes = null;
 
 		@Override public String getName() {
 			return name;

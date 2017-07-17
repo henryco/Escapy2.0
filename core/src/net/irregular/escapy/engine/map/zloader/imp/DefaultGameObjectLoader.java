@@ -1,5 +1,6 @@
 package net.irregular.escapy.engine.map.zloader.imp;
 
+import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.map.object.GameObject;
 import net.irregular.escapy.engine.map.object.GameObjectRenderer;
 import net.irregular.escapy.engine.map.object.ObjectDetails;
@@ -17,9 +18,29 @@ import static net.irregular.escapy.engine.map.zloader.serial.SerializedGameObjec
 public class DefaultGameObjectLoader implements GameObjectLoader<SerializedGameObject> {
 
 
+	private final EscapyInstanceLoader<GameObject> gameObjectInstanceAttributeLoader;
+
+	public DefaultGameObjectLoader(EscapyInstanceLoader<GameObject> gameObjectInstanceAttributeLoader) {
+		this.gameObjectInstanceAttributeLoader = gameObjectInstanceAttributeLoader;
+	}
+
 
 	@Override
 	public GameObject loadGameObject(SerializedGameObject serialized) {
+
+		GameObject gameObject = proxyLoadedGameObject(serialized);
+		if (gameObject != null && gameObjectInstanceAttributeLoader != null) {
+			for (String attr: serialized.attributes) {
+				GameObject loaded = gameObjectInstanceAttributeLoader.load(attr, gameObject);
+				gameObject = loaded != null ? loaded : gameObject;
+			}
+		}
+
+		return gameObject;
+	}
+
+
+	private GameObject proxyLoadedGameObject(SerializedGameObject serialized) {
 
 		ObjectDetails details = new ObjectDetails(serialized.details.name);
 		details.setScale(serialized.details.scale);
@@ -32,7 +53,6 @@ public class DefaultGameObjectLoader implements GameObjectLoader<SerializedGameO
 		// TODO MORE OBJECTS
 		return null;
 	}
-
 
 
 	private GameObject loadStaticObject(ObjectDetails details,

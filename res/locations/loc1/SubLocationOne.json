@@ -23,6 +23,8 @@
 			"name": "layer0",
 			"axis_z": 0,
 
+			"attributes": [],
+
 			"shift": {
 				"name": "void",
 				"offset2f": [0, 0],
@@ -43,9 +45,12 @@
 						"textureNormal": "",
 						"textureLight": "",
 						"texture": ""
-					}
+					},
+
+					"attributes": ["atr1", "atr2"]
 				}
 			]
+
 		},
 		{
 			"name": "layer1",

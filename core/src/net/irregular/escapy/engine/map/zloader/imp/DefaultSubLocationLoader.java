@@ -19,7 +19,6 @@ import java.io.Reader;
 import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map.Entry;
 
 import static net.irregular.escapy.engine.map.zloader.serial.SerializedSubLocation.*;
@@ -32,14 +31,17 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 	private final EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer;
+	private final EscapyInstanceLoader<Layer> layerInstanceAttributeLoader;
 	private final GameObjectLoader<SerializedGameObject> gameObjectLoader;
 
 
 	public DefaultSubLocationLoader(EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer,
+									EscapyInstanceLoader<Layer> layerInstanceAttributeLoader,
 									GameObjectLoader<SerializedGameObject> gameObjectLoader) {
 
 		this.gameObjectLoader = gameObjectLoader;
 		this.shiftLogicInstancer = shiftLogicInstancer;
+		this.layerInstanceAttributeLoader = layerInstanceAttributeLoader;
 	}
 
 
@@ -62,7 +64,9 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 		Collection<Entry<String, Layer[]>> layerContainer
 				= loadRenderContainer(serialized.layerGroups, layers);
 
-		return new SubLocation(serialized.name, layers, layerContainer);
+
+
+		return  new SubLocation(serialized.name, layers, layerContainer);
 	}
 
 
@@ -72,7 +76,7 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 		Layer layer = new Layer(serializedLayer.name, serializedLayer.axisZ);
 		layer.setLayerShifter(loadLayerShift(serializedLayer.shift));
 		layer.setGameObjects(loadGameObjects(serializedLayer.objects));
-		return layer;
+		return loadLayerAttributes(layer, serializedLayer.attributes);
 	}
 
 
@@ -88,7 +92,21 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 	}
 
 
-	private Collection<GameObject> loadGameObjects(List<SerializedGameObject> serializedObjects) {
+
+	private Layer loadLayerAttributes(Layer layer, Collection<String> attributes) {
+
+		if (layer != null && layerInstanceAttributeLoader != null) {
+			for (String attr: attributes) {
+				Layer loaded = layerInstanceAttributeLoader.load(attr, layer);
+				layer = loaded != null ? loaded : layer;
+			}
+		}
+		return layer;
+	}
+
+
+
+	private Collection<GameObject> loadGameObjects(Collection<SerializedGameObject> serializedObjects) {
 
 		Collection<GameObject> gameObjects = new LinkedList<>();
 		for (SerializedGameObject object: serializedObjects)
@@ -99,7 +117,7 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 	private Collection<Entry<String, Layer[]>> loadRenderContainer(
-			List<SerializedLayerGroup> serialized, Collection<Layer> layers) {
+			Collection<SerializedLayerGroup> serialized, Collection<Layer> layers) {
 
 
 		Collection<Entry<String, Layer[]>> collection = new LinkedList<>();
