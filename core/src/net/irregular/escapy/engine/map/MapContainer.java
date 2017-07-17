@@ -20,8 +20,8 @@ public class MapContainer {
 
 	public MapContainer(LocationLoader locationLoader) {
 		this.locationLoader = locationLoader;
-		locationMap = new HashMap<>();
-		location = null;
+		this.locationMap = new HashMap<>();
+		this.location = null;
 	}
 
 	public MapContainer(LocationLoader locationLoader,
