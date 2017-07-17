@@ -5,6 +5,7 @@ import net.irregular.escapy.engine.map.zloader.LocationLoader;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -42,8 +43,18 @@ public class MapContainer {
 		if (temp != null) temp.dispose();
 	}
 
+
 	public Location getLogation() {
 		return location;
+	}
+
+
+
+
+	public Collection<String> getLocations() {
+		Collection<String> collection = new LinkedList<>();
+		locationMap.forEach((key, value) -> collection.add(key));
+		return collection;
 	}
 
 	public void setLocations(Collection<Map.Entry<String, String>> locations) {

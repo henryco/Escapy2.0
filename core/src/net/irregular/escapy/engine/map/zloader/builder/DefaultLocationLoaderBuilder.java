@@ -25,6 +25,8 @@ public class DefaultLocationLoaderBuilder implements LocationLoaderBuilder {
 	private EscapyInstanceLoader<Location> locationInstanceAttributeLoader;
 	private EscapyInstanceLoader<SubLocation> subLocationInstanceAttributeLoader;
 
+
+
 	@Override
 	public LocationLoader build() {
 
