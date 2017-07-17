@@ -60,7 +60,7 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 			layers.add(loadLayer(layer));
 
 		Collection<Entry<String, Layer[]>> layerContainer
-				= loadRenderContainer(serialized.renderContainers, layers);
+				= loadRenderContainer(serialized.layerGroups, layers);
 
 		return new SubLocation(serialized.name, layers, layerContainer);
 	}
@@ -99,12 +99,12 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 	private Collection<Entry<String, Layer[]>> loadRenderContainer(
-			List<SerializedRenderContainer> serialized, Collection<Layer> layers) {
+			List<SerializedLayerGroup> serialized, Collection<Layer> layers) {
 
 
 		Collection<Entry<String, Layer[]>> collection = new LinkedList<>();
 
-		for (SerializedRenderContainer container: serialized) {
+		for (SerializedLayerGroup container: serialized) {
 			Layer[] multiLayer = new Layer[container.layers.size()];
 			for (int i = 0; i < multiLayer.length; i++) {
 				for (Layer layer : layers) {

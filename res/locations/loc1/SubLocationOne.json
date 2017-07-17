@@ -3,7 +3,7 @@
 	"name": "SubOne",
 	"location": "Location1",
 
-	"renderContainer": [
+	"layerGroups": [
 		{
 			"name": "background",
 			"layers": [
