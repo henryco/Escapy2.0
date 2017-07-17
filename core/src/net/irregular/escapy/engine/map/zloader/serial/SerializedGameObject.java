@@ -22,7 +22,6 @@ public final class SerializedGameObject implements EscapySerialized {
 	public static final class SerializedDetails implements EscapySerialized {
 		@SerializedName("name") @Expose public String name;
 		@SerializedName("scale") @Expose public float scale;
-		@SerializedName("thickness") @Expose public float thickness;
 		@SerializedName("position2f") @Expose public List<Float> position = null;
 
 		@Override public String getName() {

@@ -39,7 +39,6 @@
 					"details": {
 						"name": "",
 						"scale": 1,
-						"thickness": 0.5,
 						"position2f": [0, 0]
 					},
 
@@ -69,7 +68,6 @@
 					"details": {
 						"name": "",
 						"scale": 1,
-						"thickness": 0.5,
 						"position2f": [
 							0,
 							0

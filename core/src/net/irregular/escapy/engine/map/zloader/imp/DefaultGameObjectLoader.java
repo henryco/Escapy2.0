@@ -39,7 +39,6 @@ public class DefaultGameObjectLoader implements GameObjectLoader<SerializedGameO
 
 		ObjectDetails details = new ObjectDetails(serialized.details.name);
 		details.setScale(serialized.details.scale);
-		details.setThickness(serialized.details.thickness);
 		details.setPosition(floatListToArray(serialized.details.position));
 
 		if (serialized.staticObject != null)

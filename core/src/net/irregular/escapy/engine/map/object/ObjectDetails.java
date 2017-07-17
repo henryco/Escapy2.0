@@ -8,12 +8,11 @@ import java.util.Arrays;
 public class ObjectDetails {
 
 	private final String name;
-	private float scale, thickness;
+	private float scale;
 	public final float[] position;
 
 	{
 		scale = 1f;
-		thickness = 0f;
 		position = new float[2];
 	}
 
@@ -24,13 +23,12 @@ public class ObjectDetails {
 	public ObjectDetails(String name) {
 		this.name = name;
 	}
-	public ObjectDetails(String name, float scale, float thickness) {
+	public ObjectDetails(String name, float scale) {
 		this(name);
 		this.scale = scale;
-		this.thickness = thickness;
 	}
-	public ObjectDetails(String name, float scale, float thickness, float[] position) {
-		this(name, scale, thickness);
+	public ObjectDetails(String name, float scale, float[] position) {
+		this(name, scale);
 		setPosition(position);
 	}
 
@@ -40,7 +38,6 @@ public class ObjectDetails {
 		return "ObjectDetails{" +
 				"name='" + name + '\'' +
 				", scale=" + scale +
-				", thickness=" + thickness +
 				", position=" + Arrays.toString(position) +
 				'}';
 	}
@@ -50,10 +47,6 @@ public class ObjectDetails {
 		return this;
 	}
 
-	public ObjectDetails setThickness(float thickness) {
-		this.thickness = thickness;
-		return this;
-	}
 
 	public ObjectDetails setPosition(float[] position) {
 		this.position[0] = position[0];
@@ -65,9 +58,6 @@ public class ObjectDetails {
 		return scale;
 	}
 
-	public float getThickness() {
-		return thickness;
-	}
 
 	public float[] getPosition() {
 		return position;
