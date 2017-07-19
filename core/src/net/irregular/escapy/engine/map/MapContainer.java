@@ -35,6 +35,14 @@ public class MapContainer {
 			locationMap.put(l.getKey(), l.getValue());
 	}
 
+	public MapContainer(LocationLoader locationLoader,
+						Collection<Map.Entry<String, String>> locations,
+						EscapyProxyListener... listeners) {
+		this(locationLoader, locations);
+		addLocationProxyListeners(listeners);
+	}
+
+
 
 
 	public void switchLocation(String name) {
