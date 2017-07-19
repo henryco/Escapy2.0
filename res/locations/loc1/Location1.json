@@ -2,6 +2,11 @@
 	"type": "Location",
 	"name": "Location1",
 	"enter": "SubOne",
-	"subLocationsPath": ["SubLocationOne.json"],
-	"attributes": ["", "", ""]
+	"attributes": ["", "", ""],
+	"subLocations": [
+		{
+			"name": "SubOne",
+			"path": "SubLocationOne.json"
+		}
+	]
 }

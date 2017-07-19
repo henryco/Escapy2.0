@@ -16,8 +16,20 @@ public final class SerializedLocation implements EscapySerialized {
 	@SerializedName("type") @Expose public String type;
 	@SerializedName("name") @Expose public String name;
 	@SerializedName("enter") @Expose public String enter;
-	@SerializedName("subLocationsPath") @Expose public List<String> subLocations = null;
+	@SerializedName("subLocations") @Expose public List<SerializedSubLocationUnit> subLocations = null;
 	@SerializedName("attributes") @Expose public List<String> attributes = null;
+
+
+
+	public static final class SerializedSubLocationUnit implements EscapySerialized {
+		@SerializedName("name") @Expose public String name;
+		@SerializedName("path") @Expose public String path;
+		@Override public String getName() {
+			return name;
+		}
+	}
+
+
 
 	@Override
 	public String getName() {

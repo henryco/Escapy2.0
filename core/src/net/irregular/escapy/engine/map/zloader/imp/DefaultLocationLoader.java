@@ -1,14 +1,12 @@
 package net.irregular.escapy.engine.map.zloader.imp;
 
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.map.location.EscapyLocation;
 import net.irregular.escapy.engine.map.location.Location;
 import net.irregular.escapy.engine.map.zloader.LocationLoader;
 import net.irregular.escapy.engine.map.zloader.SubLocationLoader;
 import net.irregular.escapy.engine.map.zloader.serial.SerializedLocation;
-import net.irregular.escapy.engine.map.zloader.serial.SerializedSubLocation;
 
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -17,6 +15,8 @@ import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
+
+import static net.irregular.escapy.engine.map.zloader.serial.SerializedLocation.SerializedSubLocationUnit;
 
 
 /**
@@ -50,41 +50,8 @@ public class DefaultLocationLoader implements LocationLoader {
 		Collection<Map.Entry<String, String>> subLocations = new LinkedList<>();
 		if (serialized.subLocations != null) {
 			String folder = path.substring(0, path.lastIndexOf("/") + 1);
-
-
-			for (String file: serialized.subLocations) try {
-
-				String subFile = folder + file;
-				JsonReader jsonReader = new JsonReader(new InputStreamReader(new FileInputStream(subFile)));
-
-
-				String type = null;
-				String name = null;
-				String loc = null;
-
-
-				jsonReader.beginObject();
-				for (int i = 0; i < 3; i++)
-					switch (jsonReader.nextName()) {
-						case "type":
-							type = jsonReader.nextString();
-							break;
-						case "name":
-							name = jsonReader.nextString();
-							break;
-						case "location":
-							loc = jsonReader.nextString();
-							break;
-					}
-				jsonReader.endObject();
-
-
-				if (loc.equals(serialized.name) && type.equals(SerializedSubLocation.VALID_TYPE)) {
-					subLocations.add(new AbstractMap.SimpleEntry<>(name, subFile));
-				}
-
-
-			} catch (Exception ignored) {return null;}
+			for (SerializedSubLocationUnit subLocationUnit: serialized.subLocations)
+				subLocations.add(new AbstractMap.SimpleEntry<>(subLocationUnit.name, folder + subLocationUnit.path));
 		}
 
 
