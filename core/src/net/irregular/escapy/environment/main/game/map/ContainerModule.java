@@ -1,7 +1,7 @@
 package net.irregular.escapy.environment.main.game.map;
 
-import net.irregular.escapy.engine.map.MapContainer;
-import net.irregular.escapy.engine.map.core.location.Location;
+import net.irregular.escapy.engine.group.map.MapContainer;
+import net.irregular.escapy.engine.group.map.core.location.Location;
 
 import javax.inject.Named;
 import java.util.Collection;
