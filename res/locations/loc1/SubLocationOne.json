@@ -1,7 +1,6 @@
 {
 	"type": "SubLocation",
 	"name": "SubOne",
-	"location": "Location1",
 
 	"attributes": ["", "", "", ""],
 

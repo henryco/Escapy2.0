@@ -2,8 +2,8 @@ package net.irregular.escapy.engine.map;
 
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyInstanceObserver;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyListener;
-import net.irregular.escapy.engine.map.location.EscapyLocation;
-import net.irregular.escapy.engine.map.zloader.LocationLoader;
+import net.irregular.escapy.engine.map.core.location.EscapyLocation;
+import net.irregular.escapy.engine.map.loader.LocationLoader;
 
 import java.util.Collection;
 import java.util.HashMap;

@@ -1,11 +1,18 @@
 {
 	"type": "LocationsConfiguration",
 	"name": "LocationsMainConfig",
+
 	"locations": [
 		{
 			"name": "Location1",
 			"path": "/loc1/Location1.json"
 		}
-	]
+	],
 
+	"renderers": [
+		{
+			"name": "Location1.SubOne",
+			"path": "/loc1/SubOneRenderer.json"
+		}
+	]
 }
