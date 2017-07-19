@@ -19,8 +19,8 @@ public class MapContainer {
 	private final EscapyProxyInstanceObserver locationInstanceObserver;
 	private final Map<String, String> locationMap;
 	private final LocationLoader locationLoader;
-	private EscapyLocation location;
 
+	private EscapyLocation location;
 
 
 	public MapContainer(LocationLoader locationLoader,
@@ -45,7 +45,7 @@ public class MapContainer {
 
 
 
-	public void switchLocation(String name) {
+	public EscapyLocation switchLocation(String name) {
 
 		EscapyLocation temp = location;
 		EscapyLocation preLocation = locationLoader.loadLocation(locationMap.get(name));
@@ -54,10 +54,11 @@ public class MapContainer {
 
 		if (location == null) {
 			location = temp;
-			return;
+			return location;
 		}
 
 		if (temp != null) temp.dispose();
+		return location;
 	}
 
 

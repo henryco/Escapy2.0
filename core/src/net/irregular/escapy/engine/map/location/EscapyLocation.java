@@ -10,7 +10,7 @@ import java.util.Collection;
  */
 public interface EscapyLocation extends EscapyObject {
 
-	void switchSubLocation(String location);
+	EscapySubLocation switchSubLocation(String location);
 
 	EscapySubLocation getSubLocation();
 

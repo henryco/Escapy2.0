@@ -39,14 +39,14 @@ public class Location implements EscapyLocation {
 
 
 	@Override
-	public void switchSubLocation(String location) {
+	public EscapySubLocation switchSubLocation(String location) {
 
-		if (!subLocationMap.containsKey(location)) return;
+		if (!subLocationMap.containsKey(location)) return actual;
 		if (last != null && location.equals(last.getName())) {
 			final EscapySubLocation local = actual;
 			actual = last;
 			last = local;
-			return;
+			return actual;
 		}
 
 		if (last != null)
@@ -57,6 +57,8 @@ public class Location implements EscapyLocation {
 		if (actual == null) {
 			actual = last;
 		}
+
+		return actual;
 	}
 
 
