@@ -1,5 +1,7 @@
 package net.irregular.escapy.engine.map;
 
+import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyInstanceObserver;
+import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyListener;
 import net.irregular.escapy.engine.map.location.EscapyLocation;
 import net.irregular.escapy.engine.map.zloader.LocationLoader;
 
@@ -13,27 +15,34 @@ import java.util.Map;
  */
 public class MapContainer {
 
+
+	private final EscapyProxyInstanceObserver locationInstanceObserver;
 	private final Map<String, String> locationMap;
 	private final LocationLoader locationLoader;
 	private EscapyLocation location;
 
 
-	public MapContainer(LocationLoader locationLoader) {
-		this.locationLoader = locationLoader;
-		this.locationMap = new HashMap<>();
-		this.location = null;
-	}
 
 	public MapContainer(LocationLoader locationLoader,
 						Collection<Map.Entry<String, String>> locations) {
-		this(locationLoader);
-		setLocations(locations);
+
+		this.locationInstanceObserver = new EscapyProxyInstanceObserver();
+		this.locationLoader = locationLoader;
+		this.locationMap = new HashMap<>();
+		this.location = null;
+
+		for (Map.Entry<String, String> l: locations)
+			locationMap.put(l.getKey(), l.getValue());
 	}
+
+
 
 	public void switchLocation(String name) {
 
 		EscapyLocation temp = location;
-		location = locationLoader.loadLocation(locationMap.get(name));
+		EscapyLocation preLocation = locationLoader.loadLocation(locationMap.get(name));
+
+		location = locationInstanceObserver.proxyObservedInstance(preLocation);
 
 		if (location == null) {
 			location = temp;
@@ -44,12 +53,15 @@ public class MapContainer {
 	}
 
 
-	public EscapyLocation getLogation() {
-		return location;
+
+
+	public void addLocationProxyListeners(EscapyProxyListener... listeners) {
+		locationInstanceObserver.addProxyListeners(listeners);
 	}
 
-
-
+	public void removeLocationProxyListeners(EscapyProxyListener... listeners) {
+		locationInstanceObserver.removeProxyListeners(listeners);
+	}
 
 	public Collection<String> getLocations() {
 		Collection<String> collection = new LinkedList<>();
@@ -57,13 +69,8 @@ public class MapContainer {
 		return collection;
 	}
 
-	public void setLocations(Collection<Map.Entry<String, String>> locations) {
-		for (Map.Entry<String, String> l: locations)
-			addLocation(l.getKey(), l.getValue());
-	}
-
-	public void addLocation(String locationName, String locationPath) {
-		locationMap.put(locationName, locationPath);
+	public EscapyLocation getLogation() {
+		return location;
 	}
 
 }
