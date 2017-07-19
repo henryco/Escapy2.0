@@ -6,7 +6,7 @@ import net.irregular.escapy.engine.group.render.core.EscapyRenderer;
 /**
  * @author Henry on 20/07/17.
  */
-public interface RendererLoader extends EscapyLoaderUtils {
+public interface RendererLoader<ARGUMENT_TYPE> extends EscapyLoaderUtils {
 
-	EscapyRenderer loadRenderer(String path);
+	EscapyRenderer loadRenderer(String path, ARGUMENT_TYPE arg);
 }

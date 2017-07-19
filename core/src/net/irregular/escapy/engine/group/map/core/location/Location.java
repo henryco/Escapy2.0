@@ -53,6 +53,7 @@ public class Location implements EscapyLocation {
 		actual = subLocationLoader.loadSubLocation(subLocationMap.get(location));
 		if (actual == null) {
 			actual = last;
+			return null;
 		}
 
 		return actual;
