@@ -67,7 +67,8 @@ public class DefaultRenderer implements EscapyRenderer {
 
 			maskFBO.begin(() -> {
 				maskFBO.wipe();
-				mask.renderMask(mainFBO.getTexture());
+				if (mask != null) mask.renderMask(mainFBO.getTexture());
+				else mainFBO.renderGraphics(batch);
 			});
 
 			maskFBO.renderGraphics(batch);

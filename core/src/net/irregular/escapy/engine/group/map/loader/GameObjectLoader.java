@@ -1,7 +1,7 @@
 package net.irregular.escapy.engine.group.map.loader;
 
-import net.irregular.escapy.engine.env.utils.EscapySerialized;
 import net.irregular.escapy.engine.env.utils.loader.EscapyLoaderUtils;
+import net.irregular.escapy.engine.env.utils.serial.EscapySerialized;
 import net.irregular.escapy.engine.group.map.core.object.GameObject;
 
 /**

@@ -3,7 +3,7 @@ package net.irregular.escapy.desktop.loader.builder;
 
 import com.google.gson.Gson;
 import net.irregular.escapy.desktop.loader.DesktopConfigLoader;
-import net.irregular.escapy.engine.env.utils.EscapySerialized;
+import net.irregular.escapy.engine.env.utils.serial.EscapySerialized;
 
 import java.io.FileInputStream;
 import java.io.InputStreamReader;

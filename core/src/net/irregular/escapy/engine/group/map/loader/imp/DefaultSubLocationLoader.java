@@ -90,6 +90,8 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 	private LayerShift loadLayerShift(SerializedShift serializedShift) {
 
 		LayerShifter shifter = new LayerShifter(null);
+		if (serializedShift == null) return shifter;
+
 		shifter.setDirect(floatListToArray(serializedShift.directVec));
 		shifter.setOffset(floatListToArray(serializedShift.offset));
 		shifter.setPinPoint(floatListToArray(serializedShift.pinPoint));

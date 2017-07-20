@@ -1,5 +1,34 @@
 {
+
 	"type": "Renderer",
-	"name": "Location1.SubOne"
+	"name": "Location1.SubOne",
+
+
+	"renderGroups": [
+		{
+			"name": "background",
+			"mask": {
+				"name": "mask0",
+				"colorRGBA": [100, 100, 100, 255],
+				"mode": {
+					"src": "GL_DST_COLOR",
+					"dst": "GL_ONE_MINUS_SRC_ALPHA"
+				}
+			}
+		},
+		{
+			"name": "foreground",
+			"mask": {
+				"name": "mask1",
+				"colorRGBA": [100, 100, 100, 255],
+				"mode": {
+					"src": "GL_DST_COLOR",
+					"dst": "GL_ONE_MINUS_SRC_ALPHA"
+				}
+			}
+		}
+	]
+
+
 
 }

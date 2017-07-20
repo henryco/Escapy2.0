@@ -70,9 +70,9 @@ public class LightMask {
 	}
 
 
-	public void setMaskFunc(int dst, int src) {
-		blendFunc[0] = dst;
-		blendFunc[1] = src;
+	public void setMaskFunc(int src, int dst) {
+		blendFunc[0] = src;
+		blendFunc[1] = dst;
 	}
 
 	public void setMaskFunc(int[] func) {

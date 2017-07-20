@@ -2,7 +2,7 @@ package net.irregular.escapy.desktop.loader.serial;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import net.irregular.escapy.engine.env.utils.EscapySerialized;
+import net.irregular.escapy.engine.env.utils.serial.EscapySerialized;
 
 /**
  * @author Henry on 15/07/17.

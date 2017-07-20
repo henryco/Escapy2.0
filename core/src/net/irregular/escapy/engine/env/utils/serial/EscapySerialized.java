@@ -1,4 +1,6 @@
-package net.irregular.escapy.engine.env.utils;
+package net.irregular.escapy.engine.env.utils.serial;
+
+import net.irregular.escapy.engine.env.utils.Named;
 
 /**
  * @author Henry on 14/07/17.

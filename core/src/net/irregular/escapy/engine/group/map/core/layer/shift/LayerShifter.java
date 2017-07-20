@@ -12,6 +12,7 @@ public class LayerShifter implements LayerShift {
 		return offset;
 	}
 	public void setOffset(float[] offset) {
+		if (offset == null) return;
 		this.offset[0] = offset[0];
 		this.offset[1] = offset[1];
 	}
@@ -21,6 +22,7 @@ public class LayerShifter implements LayerShift {
 		return pinPoint;
 	}
 	public void setPinPoint(float[] pinPoint) {
+		if (pinPoint == null) return;
 		this.pinPoint[0] = pinPoint[0];
 		this.pinPoint[1] = pinPoint[1];
 	}
@@ -30,6 +32,7 @@ public class LayerShifter implements LayerShift {
 		return direct;
 	}
 	public void setDirect(float[] direct) {
+		if (direct == null) return;
 		this.direct[0] = direct[0];
 		this.direct[1] = direct[1];
 	}
