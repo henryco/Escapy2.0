@@ -9,6 +9,9 @@ import net.irregular.escapy.engine.group.map.core.layer.EscapyLayer;
  */
 public interface EscapySubLocation extends EscapyObject {
 
+	EscapyLocation getParentLocation();
+	void setParentLocation(EscapyLocation parentLocation);
+
 	EscapyAssociatedArray<EscapyLayer> getLayers();
 	EscapyAssociatedArray<EscapyLayer[]> getLayerGroups();
 }

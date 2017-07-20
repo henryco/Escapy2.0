@@ -6,7 +6,7 @@
 	"subLocations": [
 		{
 			"name": "SubOne",
-			"path": "SubLocationOne.json"
+			"path": "/loc1/SubLocationOne.json"
 		}
 	]
 }

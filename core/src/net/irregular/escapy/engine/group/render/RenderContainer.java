@@ -26,7 +26,9 @@ public class RenderContainer {
 		@Override
 		public void onProxyMethodInvoked(Object methodResult, String methodName) {
 			if (methodResult != null && methodResult instanceof EscapySubLocation) {
-				EscapySubLocation subLocation = (EscapySubLocation) methodResult;
+				final EscapySubLocation subLocation = (EscapySubLocation) methodResult;
+				final String parentName = subLocation.getParentLocation().getName();
+
 				renderer = rendererLoader.loadRenderer("", subLocation);
 			}
 		}

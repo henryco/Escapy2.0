@@ -15,9 +15,10 @@ import java.util.Map.Entry;
 public class SubLocation implements EscapySubLocation {
 
 	public final String name;
-
 	public final EscapyAssociatedArray<EscapyLayer> layerArray;
 	public final EscapyAssociatedArray<EscapyLayer[]> layerGroupArray;
+
+	private EscapyLocation parentLocation;
 
 
 	public SubLocation(String name,
@@ -31,6 +32,16 @@ public class SubLocation implements EscapySubLocation {
 		setLayers(layers);
 	}
 
+
+	@Override
+	public EscapyLocation getParentLocation() {
+		return parentLocation;
+	}
+
+	@Override
+	public void setParentLocation(EscapyLocation parentLocation) {
+		this.parentLocation = parentLocation;
+	}
 
 	@Override
 	public EscapyAssociatedArray<EscapyLayer> getLayers() {
