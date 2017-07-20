@@ -33,7 +33,7 @@ public interface EscapyArray<T> extends Iterable <T> {
 		return null;
 	}
 
-	T[] getArray();
+	T[] asArray();
 
 	void sort(Comparator<T> comparator);
 

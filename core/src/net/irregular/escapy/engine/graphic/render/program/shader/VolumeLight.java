@@ -44,6 +44,9 @@ public class VolumeLight {
 		uniforms.addFloatUniform("threshold");
 	}
 
+
+
+
 	public void draw(Batch batch, float x, float y, Texture colorMap, Texture normalMap, Texture maskMap) {
 		uniformBlender.draw(batch, x, y, colorMap, normalMap, maskMap);
 	}
@@ -54,6 +57,7 @@ public class VolumeLight {
 					 TextureRegion colorMap, TextureRegion normalMap, TextureRegion maskMap) {
 		uniformBlender.draw(batch, x, y, width, height, colorMap, normalMap, maskMap);
 	}
+
 
 
 
