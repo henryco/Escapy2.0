@@ -14,12 +14,28 @@ import java.util.Map;
  */
 public class RenderContainer {
 
-	private final Map<String, String> rendererMap;
+	private final Map<String, Map<String, String>> rendererMap;
 	private final RendererLoader<EscapySubLocation> rendererLoader;
 	private final EscapyProxyListener proxyListener;
 
 	private EscapyRenderer renderer;
 
+
+
+
+	public static final class TargetGroup {
+
+		public final String name;
+		public final String subName;
+		public final String path;
+
+		public TargetGroup(String name, String subName, String path) {
+			this.name = name;
+			this.subName = subName;
+			this.path = path;
+		}
+
+	}
 
 	private final class RenderProxyListener implements EscapyProxyListener {
 
@@ -28,8 +44,8 @@ public class RenderContainer {
 			if (methodResult != null && methodResult instanceof EscapySubLocation) {
 				final EscapySubLocation subLocation = (EscapySubLocation) methodResult;
 				final String parentName = subLocation.getParentLocation().getName();
-
-				renderer = rendererLoader.loadRenderer("", subLocation);
+				final String path = rendererMap.get(parentName).get(subLocation.getName());
+				renderer = rendererLoader.loadRenderer(path, subLocation);
 			}
 		}
 
@@ -38,14 +54,16 @@ public class RenderContainer {
 
 
 	public RenderContainer(RendererLoader<EscapySubLocation> rendererLoader,
-						   Collection<Map.Entry<String, String>> renderers) {
+						   Collection<TargetGroup> renderers) {
 
 		this.rendererLoader = rendererLoader;
 		this.rendererMap = new HashMap<>();
 		this.proxyListener = new RenderProxyListener();
 
-		for (Map.Entry<String, String> r: renderers)
-			rendererMap.put(r.getKey(), r.getValue());
+		for (TargetGroup group: renderers) {
+			Map<String, String> map = rendererMap.computeIfAbsent(group.name, k -> new HashMap<>());
+			map.put(group.subName, group.path);
+		}
 	}
 
 
