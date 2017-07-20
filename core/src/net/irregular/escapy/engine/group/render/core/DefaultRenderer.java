@@ -3,8 +3,10 @@ package net.irregular.escapy.engine.group.render.core;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFBO;
+import net.irregular.escapy.engine.graphic.render.fbo.EscapyFrameBuffer;
 import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
+import net.irregular.escapy.engine.graphic.screen.Resolution;
 
 /**
  * @author Henry on 20/07/17.
@@ -12,15 +14,35 @@ import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
 public class DefaultRenderer implements EscapyRenderer {
 
 
-	private EscapyAssociatedArray<EscapyRenderable> renderGroups;
-	private EscapyAssociatedArray<LightMask> lightMasks;
+	private final EscapyAssociatedArray<EscapyRenderable> renderGroups;
+	private final EscapyAssociatedArray<LightMask> lightMasks;
+
+	private final String name;
+	private final Batch batch;
+
+	private final EscapyFBO[] fboRenderGroup;
+	private final EscapyFBO[] fboMaskGroup;
 
 
-	private EscapyFBO[] fboRenderGroup;
-	private EscapyFBO[] fboMaskGroup;
 
+	public DefaultRenderer(String name,
+						   EscapyAssociatedArray<EscapyRenderable> renderGroups,
+						   EscapyAssociatedArray<LightMask> lightMasks,
+						   Batch batch,
+						   int scrWidth,
+						   int scrHeight) {
 
-	private Batch batch;
+		this.fboRenderGroup = new EscapyFBO[renderGroups.size()];
+		this.fboMaskGroup = new EscapyFBO[lightMasks.size()];
+
+		this.renderGroups = renderGroups;
+		this.lightMasks = lightMasks;
+		this.batch = batch;
+		this.name = name;
+
+		resize(scrWidth, scrHeight);
+	}
+
 
 
 
@@ -60,6 +82,17 @@ public class DefaultRenderer implements EscapyRenderer {
 	@Override
 	public void resize(int width, int height) {
 
+		final Resolution resolution = new Resolution(width, height);
+
+		for (int i = 0; i < fboRenderGroup.length; i++)
+			fboRenderGroup[i] = new EscapyFrameBuffer(resolution);
+		for (int i = 0; i < fboMaskGroup.length; i++)
+			fboMaskGroup[i] = new EscapyFrameBuffer(resolution);
 	}
 
+
+	@Override
+	public String getName() {
+		return name;
+	}
 }

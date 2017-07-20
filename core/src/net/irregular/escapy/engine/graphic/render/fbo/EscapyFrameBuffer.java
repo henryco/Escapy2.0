@@ -76,4 +76,6 @@ public class EscapyFrameBuffer implements EscapyFBO {
 	public Sprite getSprite() {
 		return bufferSprite;
 	}
+
+
 }
