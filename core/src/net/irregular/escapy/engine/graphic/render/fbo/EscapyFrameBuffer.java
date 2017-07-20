@@ -1,6 +1,7 @@
 package net.irregular.escapy.engine.graphic.render.fbo;
 
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -64,6 +65,11 @@ public class EscapyFrameBuffer implements EscapyFBO {
 	@Override
 	public TextureRegion getTextureRegion() {
 		return bufferRegion;
+	}
+
+	@Override
+	public Texture getTexture() {
+		return buffer.getColorBufferTexture();
 	}
 
 	@Override

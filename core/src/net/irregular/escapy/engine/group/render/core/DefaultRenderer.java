@@ -16,22 +16,41 @@ public class DefaultRenderer implements EscapyRenderer {
 	private EscapyAssociatedArray<LightMask> lightMasks;
 
 
-	private EscapyFBO[] fboRenerGroup;
+	private EscapyFBO[] fboRenderGroup;
+	private EscapyFBO[] fboMaskGroup;
 
 
 	private Batch batch;
 
+
+
 	@Override
 	public void render(float delta) {
 
-		for (int i = 0; i < renderGroups.size(); i++) {
-			final int k = i;
-			fboRenerGroup[i].begin(() -> {
+		wipe();
 
-				renderGroups.asArray()[k].renderGraphics(batch);
+		for (int i = 0; i < renderGroups.size(); i++) {
+
+			final LightMask mask = lightMasks.asArray()[i];
+
+			final EscapyRenderable renderer = renderGroups.asArray()[i];
+			final EscapyFBO mainFBO = fboRenderGroup[i];
+			final EscapyFBO maskFBO = fboMaskGroup[i];
+
+
+			mainFBO.begin(() -> {
+				mainFBO.wipe();
+				renderer.renderGraphics(batch);
 			});
 
+			maskFBO.begin(() -> {
+				maskFBO.wipe();
+				mask.renderMask(mainFBO.getTexture());
+			});
+
+			maskFBO.renderGraphics(batch);
 		}
+
 
 	}
 

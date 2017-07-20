@@ -1,5 +1,6 @@
 package net.irregular.escapy.engine.graphic.render.fbo;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
@@ -30,5 +31,6 @@ public interface EscapyFBO extends GraphicRenderer, Wipeable, Named {
 	float getHeight();
 
 	@EscapyAPI TextureRegion getTextureRegion();
+	@EscapyAPI Texture getTexture();
 	@EscapyAPI Sprite getSprite();
 }
