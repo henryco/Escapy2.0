@@ -42,7 +42,13 @@ public class RenderContainer {
 		@Override
 		public void onProxyMethodInvoked(Object methodResult, String methodName) {
 
-			if (methodResult != null && methodResult instanceof EscapySubLocation) {
+			System.out.println("Listener:RESULT: "+methodResult);
+			System.out.println("Listener:NAME: "+methodName);
+			System.out.println();
+
+			if (methodResult != null
+					&& methodResult instanceof EscapySubLocation && methodName.equals("switchSubLocation"))
+			{
 				final EscapySubLocation subLocation = (EscapySubLocation) methodResult;
 				final String parentName = subLocation.getParentLocation().getName();
 				final String path = rendererMap.get(parentName).get(subLocation.getName());
@@ -52,6 +58,7 @@ public class RenderContainer {
 		}
 
 	}
+
 
 
 
@@ -72,7 +79,9 @@ public class RenderContainer {
 
 
 	public void render(float delta) {
-		if (renderer != null) renderer.render(delta);
+		if (renderer != null) {
+			renderer.render(delta);
+		}
 	}
 
 	public void resize(int width, int height) {

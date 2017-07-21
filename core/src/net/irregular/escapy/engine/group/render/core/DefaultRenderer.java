@@ -49,6 +49,8 @@ public class DefaultRenderer implements EscapyRenderer {
 
 		namedGroups.add(renderGroups);
 		namedGroups.add(lightMasks);
+
+		System.out.println("DEFAULT_RENDERER");
 	}
 
 
@@ -76,7 +78,6 @@ public class DefaultRenderer implements EscapyRenderer {
 				if (mask != null) mask.renderMask(mainFBO.getTexture());
 				else mainFBO.renderGraphics(batch);
 			});
-
 			maskFBO.renderGraphics(batch);
 		}
 

@@ -37,7 +37,7 @@ public class GameScreen implements EscapyScreen {
 
 	@Override
 	public void dispose() {
-		groupContainer.getMapContainer().getLogation().dispose();
+		groupContainer.getMapContainer().getLocation().dispose();
 	}
 
 

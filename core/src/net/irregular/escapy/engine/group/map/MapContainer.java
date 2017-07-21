@@ -61,7 +61,9 @@ public class MapContainer {
 		return location;
 	}
 
-
+	public void switchLocation(String locationName, String subLocationName) {
+		switchLocation(locationName).switchSubLocation(subLocationName);
+	}
 
 
 	public void addLocationProxyListeners(EscapyProxyListener... listeners) {
@@ -78,7 +80,7 @@ public class MapContainer {
 		return collection;
 	}
 
-	public EscapyLocation getLogation() {
+	public EscapyLocation getLocation() {
 		return location;
 	}
 

@@ -26,7 +26,7 @@ public class SimpleShiftLogic implements EscapyInstanceLoader<LayerShiftLogic> {
 			@Override
 			public float[] calculateShift(LayerShift shift) {
 				// TODO: 21/07/17
-				return new float[0];
+				return new float[]{0,0};
 			}
 		};
 	}

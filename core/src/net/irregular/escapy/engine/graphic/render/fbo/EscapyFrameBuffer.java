@@ -59,7 +59,9 @@ public class EscapyFrameBuffer implements EscapyFBO {
 
 	@Override
 	public void renderGraphics(Batch batch) {
-		bufferSprite.draw(batch);
+		batch.begin();
+	 	bufferSprite.draw(batch);
+	 	batch.end();
 	}
 
 	@Override

@@ -51,6 +51,7 @@ public class Location implements EscapyLocation {
 
 		last = actual;
 		actual = subLocationLoader.loadSubLocation(subLocationMap.get(location));
+		actual.setParentLocation(this);
 		if (actual == null) {
 			actual = last;
 			return null;

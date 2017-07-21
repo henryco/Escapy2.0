@@ -46,7 +46,10 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 		try {
 			Reader reader = new InputStreamReader(Gdx.files.internal(path).read());
 			serialized = new Gson().fromJson(reader, SerializedRenderer.class);
-		} catch (Exception ignored) {return null;}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 
 		final EscapyAssociatedArray<EscapyRenderable> renderGroups = loadRenderGroups(arg.getLayerGroups());
 		final EscapyAssociatedArray<LightMask> maskGroups = loadMaskGroups(serialized);
@@ -104,26 +107,27 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 					render(batch, r -> r.renderNormalsMap(batch));
 				}
 
+
+
+
 				private void render(Batch batch, Consumer<EscapyRenderable> renderableConsumer) {
-
 					for (EscapyLayer layer: entry.getObject()) {
-
 						float[] position = camera.getPosition();
-
 						camera.update(() -> {
 							float[] shift = layer.getLayerShifter().calculateShift();
 							camera.translateCamera(shift);
 						});
-
 						batch.setProjectionMatrix(camera.getProjection());
-
+						batch.begin();
 						for (GameObject gameObject : layer.getGameObjects()) {
 							renderableConsumer.accept(gameObject.getGameObjectRenderer().getRenderer());
 						}
-
+						batch.end();
 						camera.update(() -> camera.setCameraPosition(position));
 					}
 				}
+
+
 
 			};
 

@@ -57,8 +57,6 @@ public class DefaultLocationLoader implements LocationLoader {
 
 
 		EscapyLocation location = new Location(serialized.name, subLocations, subLocationLoader);
-		location.switchSubLocation(serialized.enter);
-
 		if (locationInstanceAttributeLoader != null)
 			location = locationInstanceAttributeLoader.loadInstanceAttributes(location, serialized.attributes);
 

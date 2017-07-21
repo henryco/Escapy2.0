@@ -1,6 +1,6 @@
 package net.irregular.escapy.engine.group.render.loader.serial;
 
-import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.GL20;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import net.irregular.escapy.engine.env.utils.serial.EscapySimpleSerialized;
@@ -49,8 +49,8 @@ public final class SerializedRenderer extends EscapySimpleSerialized  {
 
 			public int[] loadGLMode() {
 				try {
-					int m_src = (int) GL30.class.getDeclaredField(src).get(GL30.class);
-					int m_dst = (int) GL30.class.getDeclaredField(dst).get(GL30.class);
+					int m_src = (int) GL20.class.getDeclaredField(src).get(GL20.class);
+					int m_dst = (int) GL20.class.getDeclaredField(dst).get(GL20.class);
 					return new int[]{m_src, m_dst};
 				} catch (Exception e) {
 					e.printStackTrace();
