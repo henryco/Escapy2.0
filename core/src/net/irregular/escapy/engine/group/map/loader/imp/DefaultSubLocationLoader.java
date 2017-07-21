@@ -57,7 +57,7 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 		SerializedSubLocation serialized;
 
 		try {
-			Reader reader = new InputStreamReader(Gdx.files.external(path).read());
+			Reader reader = new InputStreamReader(Gdx.files.internal(path).read());
 			serialized = new Gson().fromJson(reader, SerializedSubLocation.class);
 			if (serialized.layers == null) return null;
 		} catch (Exception ignored) {return null;}

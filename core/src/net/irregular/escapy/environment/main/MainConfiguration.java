@@ -11,6 +11,7 @@ public class MainConfiguration extends EscapyGameContextConfiguration {
 
 	@Override
 	public String getConfigsFilePath() {
-		return System.getProperty("user.dir") + separator + "res" + separator + "configurations";
+		String local = System.getProperty("user.dir").replace(separator+"core"+separator+"assets", "");
+		return local + separator + "res" + separator + "configurations";
 	}
 }

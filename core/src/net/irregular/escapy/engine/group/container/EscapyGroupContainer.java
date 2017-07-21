@@ -45,12 +45,12 @@ public class EscapyGroupContainer {
 
 
 
-	public Boolean initialize() {
+	public boolean initialize() {
 
 		try {
 
 			String path = Escapy.getConfigsFilePath() + separator + configFile;
-			Reader reader = new InputStreamReader(Gdx.files.external(path).read());
+			Reader reader = new InputStreamReader(Gdx.files.internal(path).read());
 
 			SerializedGroup serialized = new Gson().fromJson(reader, SerializedGroup.class);
 
@@ -61,7 +61,7 @@ public class EscapyGroupContainer {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			return false;
 		}
 	}
 
@@ -74,7 +74,7 @@ public class EscapyGroupContainer {
 		for (SerializedPath serializedPath: group) {
 
 			final String path = Escapy.getConfigsFilePath() + serializedPath.path;
-			final String[] names = serializedPath.name.split(".");
+			final String[] names = serializedPath.name.split(":");
 
 			if (names.length != 2) throw new RuntimeException();
 			targetGroups.add(new TargetGroup(names[0], names[1], path));

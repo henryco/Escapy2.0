@@ -43,7 +43,7 @@ public class DefaultLocationLoader implements LocationLoader {
 		final SerializedLocation serialized;
 
 		try {
-			Reader reader = new InputStreamReader(Gdx.files.external(path).read());
+			Reader reader = new InputStreamReader(Gdx.files.internal(path).read());
 			serialized = new Gson().fromJson(reader, SerializedLocation.class);
 		} catch (Exception ignored) {return null;}
 

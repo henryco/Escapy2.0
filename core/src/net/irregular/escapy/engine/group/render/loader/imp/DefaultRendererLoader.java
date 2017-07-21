@@ -17,7 +17,6 @@ import net.irregular.escapy.engine.group.render.core.EscapyRenderer;
 import net.irregular.escapy.engine.group.render.loader.RendererLoader;
 import net.irregular.escapy.engine.group.render.loader.serial.SerializedRenderer;
 
-import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.function.Consumer;
@@ -45,7 +44,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 		final SerializedRenderer serialized;
 		try {
-			Reader reader = new InputStreamReader(new FileInputStream(path));
+			Reader reader = new InputStreamReader(Gdx.files.internal(path).read());
 			serialized = new Gson().fromJson(reader, SerializedRenderer.class);
 		} catch (Exception ignored) {return null;}
 
