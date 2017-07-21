@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
 
+import static java.io.File.separator;
 import static net.irregular.escapy.engine.group.map.loader.serial.SerializedLocation.SerializedSubLocationUnit;
 
 
@@ -49,7 +50,7 @@ public class DefaultLocationLoader implements LocationLoader {
 
 		Collection<Map.Entry<String, String>> subLocations = new LinkedList<>();
 		if (serialized.subLocations != null) {
-			String folder = path.substring(0, path.lastIndexOf("/") + 1);
+			String folder = path.substring(0, path.lastIndexOf(separator) + 1);
 			for (SerializedSubLocationUnit subLocationUnit: serialized.subLocations)
 				subLocations.add(new AbstractMap.SimpleEntry<>(subLocationUnit.name, folder + subLocationUnit.path));
 		}

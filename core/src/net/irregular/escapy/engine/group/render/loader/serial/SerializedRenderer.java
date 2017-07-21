@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Henry on 20/07/17.
  */
-public class SerializedRenderer extends EscapySimpleSerialized  {
+public final class SerializedRenderer extends EscapySimpleSerialized  {
 
 
 	@Override public String getValidType() {
