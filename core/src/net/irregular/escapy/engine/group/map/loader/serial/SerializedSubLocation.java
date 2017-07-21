@@ -18,15 +18,12 @@ public final class SerializedSubLocation extends EscapySimpleSerialized {
 
 	@SerializedName("layers") @Expose public List<SerializedLayer> layers = null;
 	@SerializedName("layerGroups") @Expose public List<SerializedLayerGroup> layerGroups = null;
-	@SerializedName("attributes") @Expose public List<String> attributes = null;
-
 
 	public static final class SerializedLayer extends EscapySimpleSerialized {
 
 		@SerializedName("axis_z") @Expose public float axisZ;
 		@SerializedName("shift") @Expose public SerializedShift shift;
 		@SerializedName("objects") @Expose public List<SerializedGameObject> objects = null;
-		@SerializedName("attributes") @Expose public List<String> attributes = null;
 	}
 
 

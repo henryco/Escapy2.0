@@ -3,7 +3,6 @@
 	"type": "Renderer",
 	"name": "Location1:SubOne",
 
-
 	"renderGroups": [
 		{
 			"name": "background",
@@ -18,6 +17,7 @@
 		},
 		{
 			"name": "foreground",
+
 			"mask": {
 				"name": "mask_foreground",
 				"colorRGBA": [40,40,40,250],
@@ -25,7 +25,11 @@
 					"src": "GL_DST_COLOR",
 					"dst": "GL_ONE_MINUS_SRC_ALPHA"
 				}
-			}
+			},
+
+			"lights": [
+
+			]
 		}
 	]
 

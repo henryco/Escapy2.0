@@ -15,9 +15,6 @@ public final class SerializedGameObject extends EscapySimpleSerialized {
 
 
 	@SerializedName("details") @Expose public SerializedDetails details = new SerializedDetails();
-	@SerializedName("attributes") @Expose public List<String> attributes = null;
-
-
 	@SerializedName("static") @Expose public SerializedStatic staticObject;
 	//TODO MORE OBJECT TYPES
 

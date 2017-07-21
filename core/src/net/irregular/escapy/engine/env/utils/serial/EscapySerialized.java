@@ -2,6 +2,9 @@ package net.irregular.escapy.engine.env.utils.serial;
 
 import net.irregular.escapy.engine.env.utils.Named;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 /**
  * @author Henry on 14/07/17.
  */
@@ -15,6 +18,9 @@ public interface EscapySerialized extends Named {
 	}
 	default String getName() {
 		return "";
+	}
+	default Collection<String> getAttributes() {
+		return new LinkedList<>();
 	}
 
 	default boolean isValid() {

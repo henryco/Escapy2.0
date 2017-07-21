@@ -16,7 +16,7 @@ public final class SerializedRenderer extends EscapySimpleSerialized  {
 	@Override public String getValidType() {
 		return "Renderer";
 	}
-	@SerializedName("renderGroups") @Expose public List<SerializedRenderGroup> renderGroups;
+	@SerializedName("renderGroups") @Expose public List<SerializedRenderGroup> renderGroups = null;
 
 
 	public static final class SerializedRenderGroup extends EscapySimpleSerialized {

@@ -17,7 +17,6 @@ public final class SerializedLocation extends EscapySimpleSerialized {
 	}
 
 	@SerializedName("subLocations") @Expose public List<SerializedSubLocationUnit> subLocations = null;
-	@SerializedName("attributes") @Expose public List<String> attributes = null;
 
 
 	public static final class SerializedSubLocationUnit extends EscapySimpleSerialized {
