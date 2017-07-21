@@ -38,7 +38,7 @@ public class GameObjectStaticRenderer implements GameObjectRenderer<GameObjectSt
 
 		for (int i = 0; i < 3; i++) {
 			if (paths[i] != null && !paths[i].isEmpty()) {
-				sprites[i] = new Sprite(new Texture(Gdx.files.external(paths[i])));
+				sprites[i] = new Sprite(new Texture(Gdx.files.internal(paths[i])));
 				sprites[i].setScale(gameObject.getObjectDetails().getScale());
 			}
 		}

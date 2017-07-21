@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map.Entry;
 
+import static java.io.File.separator;
 import static net.irregular.escapy.engine.group.map.loader.serial.SerializedSubLocation.*;
 
 
@@ -55,6 +56,8 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 		Collection<EscapyLayer> layers = new LinkedList<>();
 		SerializedSubLocation serialized;
+		String folder = path.substring(0, path.lastIndexOf(separator));
+
 
 		try {
 			Reader reader = new InputStreamReader(Gdx.files.internal(path).read());
@@ -63,7 +66,7 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 		} catch (Exception ignored) {return null;}
 
 		for (SerializedLayer layer: serialized.layers)
-			layers.add(loadLayer(layer));
+			layers.add(loadLayer(folder, layer));
 
 		Collection<Entry<String, EscapyLayer[]>> layerContainer
 				= loadRenderContainer(serialized.layerGroups, layers);
@@ -77,11 +80,11 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 
-	private EscapyLayer loadLayer(SerializedLayer serializedLayer) {
+	private EscapyLayer loadLayer(String path, SerializedLayer serializedLayer) {
 
 		Layer layer = new Layer(serializedLayer.name, serializedLayer.axisZ);
 		layer.setLayerShifter(loadLayerShift(serializedLayer.shift));
-		layer.setGameObjects(loadGameObjects(serializedLayer.objects));
+		layer.setGameObjects(loadGameObjects(path, serializedLayer.objects));
 		return loadLayerAttributes(layer, serializedLayer.attributes);
 	}
 
@@ -113,11 +116,11 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 
-	private Collection<GameObject> loadGameObjects(Collection<SerializedGameObject> serializedObjects) {
+	private Collection<GameObject> loadGameObjects(String path, Collection<SerializedGameObject> serializedObjects) {
 
 		Collection<GameObject> gameObjects = new LinkedList<>();
 		for (SerializedGameObject object: serializedObjects)
-			gameObjects.add(gameObjectLoader.loadGameObject(object));
+			gameObjects.add(gameObjectLoader.loadGameObject(path, object));
 		return gameObjects;
 	}
 

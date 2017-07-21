@@ -3,30 +3,28 @@ package net.irregular.escapy.engine.group.map.loader.serial;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import net.irregular.escapy.engine.env.utils.serial.EscapySerialized;
+import net.irregular.escapy.engine.env.utils.serial.EscapySimpleSerialized;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * @author Henry on 14/07/17.
  */
-public final class SerializedGameObject implements EscapySerialized {
+public final class SerializedGameObject extends EscapySimpleSerialized {
 
 
-	@SerializedName("details") @Expose public SerializedDetails details;
+	@SerializedName("details") @Expose public SerializedDetails details = new SerializedDetails();
 	@SerializedName("attributes") @Expose public List<String> attributes = null;
+
 
 	@SerializedName("static") @Expose public SerializedStatic staticObject;
 	//TODO MORE OBJECT TYPES
 
 
-	public static final class SerializedDetails implements EscapySerialized {
-		@SerializedName("name") @Expose public String name;
+	public static final class SerializedDetails extends EscapySimpleSerialized {
 		@SerializedName("scale") @Expose public float scale = 1f;
-		@SerializedName("position2f") @Expose public List<Float> position = null;
-
-		@Override public String getName() {
-			return name;
-		}
+		@SerializedName("position2f") @Expose public List<Float> position = Arrays.asList(0f,0f);
 	}
 
 

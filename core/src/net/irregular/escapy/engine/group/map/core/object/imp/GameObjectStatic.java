@@ -12,29 +12,22 @@ import net.irregular.escapy.engine.group.map.core.object.texture.GameObjectStati
 public class GameObjectStatic implements GameObject {
 
 
+	private final GameObjectRenderer<GameObjectStatic> objectRenderer;
+	private final GameObjectStaticTexturePath texturePath;
 	private final ObjectDetails objectDetails;
-	private final GameObjectRenderer objectRenderer;
-	private GameObjectStaticTexturePath texturePath;
 
-
-
-	public GameObjectStatic(GameObjectRenderer<GameObjectStatic> objectRenderer) {
-		this(objectRenderer, new ObjectDetails());
-	}
-
-	public GameObjectStatic(GameObjectRenderer<GameObjectStatic> objectRenderer,
-							ObjectDetails objectDetails) {
-		this.objectDetails = objectDetails;
-		this.objectRenderer = objectRenderer;
-		objectRenderer.bindGameObject(this);
-	}
 
 	public GameObjectStatic(GameObjectRenderer<GameObjectStatic> objectRenderer,
 							ObjectDetails objectDetails,
 							GameObjectStaticTexturePath texturePath) {
-		this(objectRenderer, objectDetails);
-		setTexturePath(texturePath);
+
+		this.objectDetails = objectDetails;
+		this.objectRenderer = objectRenderer;
+		this.texturePath = texturePath;
+
+		objectRenderer.bindGameObject(this);
 	}
+
 
 	@Override
 	public String toString() {
@@ -56,7 +49,5 @@ public class GameObjectStatic implements GameObject {
 	public GameObjectStaticTexturePath getTexturePath() {
 		return texturePath;
 	}
-	public void setTexturePath(GameObjectStaticTexturePath texturePath) {
-		this.texturePath = texturePath;
-	}
+
 }

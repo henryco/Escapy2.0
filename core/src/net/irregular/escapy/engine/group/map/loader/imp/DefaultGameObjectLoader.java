@@ -26,37 +26,42 @@ public class DefaultGameObjectLoader implements GameObjectLoader<SerializedGameO
 
 
 	@Override
-	public GameObject loadGameObject(SerializedGameObject serialized) {
+	public GameObject loadGameObject(String path, SerializedGameObject serialized) {
 
-		GameObject gameObject = proxyLoadedGameObject(serialized);
+		GameObject gameObject = proxyLoadedGameObject(path, serialized);
 		if (gameObjectInstanceAttributeLoader != null)
 			gameObject = gameObjectInstanceAttributeLoader.loadInstanceAttributes(gameObject, serialized.attributes);
 		return gameObject;
 	}
 
 
-	private GameObject proxyLoadedGameObject(SerializedGameObject serialized) {
+	private GameObject proxyLoadedGameObject(String path, SerializedGameObject serialized) {
 
 		ObjectDetails details = new ObjectDetails(serialized.details.name);
 		details.setScale(serialized.details.scale);
 		details.setPosition(floatListToArray(serialized.details.position));
 
 		if (serialized.staticObject != null)
-			return loadStaticObject(details, serialized.staticObject, new GameObjectStaticRenderer());
+			return loadStaticObject(path, details, serialized.staticObject, new GameObjectStaticRenderer());
 
 		// TODO MORE OBJECTS
 		return null;
 	}
 
 
-	private GameObject loadStaticObject(ObjectDetails details,
+	private GameObject loadStaticObject(String path, ObjectDetails details,
 										SerializedStatic serializedStatic,
 										GameObjectRenderer<GameObjectStatic> staticRenderer) {
 
 		GameObjectStaticTexturePath texturePath = new GameObjectStaticTexturePath();
-		texturePath.setTexture(serializedStatic.texture);
-		texturePath.setTextureLight(serializedStatic.textureLight);
-		texturePath.setTextureNormal(serializedStatic.textureNormal);
+
+		if (serializedStatic.texture != null)
+			texturePath.setTexture(path +serializedStatic.texture);
+		if (serializedStatic.textureLight != null)
+			texturePath.setTextureLight(path + serializedStatic.textureLight);
+		if (serializedStatic.textureNormal != null)
+			texturePath.setTextureNormal(path + serializedStatic.textureNormal);
+
 		return new GameObjectStatic(staticRenderer, details, texturePath);
 	}
 

@@ -9,6 +9,6 @@ import net.irregular.escapy.engine.group.map.core.object.GameObject;
  */
 public interface GameObjectLoader<T extends EscapySerialized> extends EscapyLoaderUtils {
 
-	GameObject loadGameObject(T serialized);
+	GameObject loadGameObject(String path, T serialized);
 
 }

@@ -45,6 +45,7 @@ public interface EscapyInstanceLoader<INSTANCE_TYPE> {
 	}
 
 	default INSTANCE_TYPE loadInstanceAttributes(INSTANCE_TYPE instance, Collection<String> attributes) {
+		if (attributes == null || attributes.isEmpty()) return instance;
 		return loadInstanceAttributes(instance, attributes.toArray(new String[0]));
 	}
 
