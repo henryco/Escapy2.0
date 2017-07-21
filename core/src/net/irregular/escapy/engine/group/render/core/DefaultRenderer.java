@@ -8,11 +8,15 @@ import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 /**
  * @author Henry on 20/07/17.
  */
 public class DefaultRenderer implements EscapyRenderer {
 
+	private final Collection<EscapyAssociatedArray> namedGroups;
 
 	private final EscapyAssociatedArray<EscapyRenderable> renderGroups;
 	private final EscapyAssociatedArray<LightMask> lightMasks;
@@ -24,13 +28,14 @@ public class DefaultRenderer implements EscapyRenderer {
 	private final EscapyFBO[] fboMaskGroup;
 
 
-
 	public DefaultRenderer(String name,
 						   EscapyAssociatedArray<EscapyRenderable> renderGroups,
 						   EscapyAssociatedArray<LightMask> lightMasks,
 						   Batch batch,
 						   int scrWidth,
 						   int scrHeight) {
+
+		this.namedGroups = new LinkedList<>();
 
 		this.fboRenderGroup = new EscapyFBO[renderGroups.size()];
 		this.fboMaskGroup = new EscapyFBO[lightMasks.size()];
@@ -41,9 +46,10 @@ public class DefaultRenderer implements EscapyRenderer {
 		this.name = name;
 
 		resize(scrWidth, scrHeight);
+
+		namedGroups.add(renderGroups);
+		namedGroups.add(lightMasks);
 	}
-
-
 
 
 	@Override
@@ -78,6 +84,15 @@ public class DefaultRenderer implements EscapyRenderer {
 	}
 
 
+	@Override @SuppressWarnings("unchecked")
+	public <T> T getRendererAttribute(String name) {
+
+		Object attribute;
+		for (EscapyAssociatedArray array: namedGroups)
+			if ((attribute = array.get(name)) != null)
+				return (T) attribute;
+		return null;
+	}
 
 
 	@Override

@@ -12,4 +12,5 @@ public interface EscapyRenderer extends Wipeable, Named {
 
 	void resize(int width, int height);
 
+	<T> T getRendererAttribute(String name);
 }

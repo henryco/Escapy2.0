@@ -2,75 +2,64 @@
 	"type": "SubLocation",
 	"name": "SubOne",
 
-	"attributes": ["", "", "", ""],
+	"attributes": [],
 
 	"layerGroups": [
 		{
 			"name": "background",
 			"layers": [
-				"layer0"
+				"layer_background_0"
 			]
 		},
 		{
 			"name": "foreground",
 			"layers": [
-				"layer1"
+				"layer_foreground_0"
 			]
 		}
 	],
 
-	"layers": [
-		{
-			"name": "layer0",
-			"axis_z": 0,
 
-			"attributes": [],
+	"layers": [
+
+
+		{
+			"name": "layer_background_0",
+			"axis_z": -1,
 
 			"shift": {
-				"name": "void",
+				"name": "move",
 				"offset2f": [0, 0],
 				"pinPoint2f": [0, 0],
-				"directVec2f": [0, 0]
+				"directVec2f": [-1, -1]
 			},
 
 			"objects": [
 				{
+					"attributes": ["FULL_SCREEN"],
+					"static": {
+						"texture": "/resources/background.png"
+					}
+				}
+			]
+		},
+
+
+		{
+			"name": "layer_foreground_0",
+			"axis_z": 0.5,
+
+			"objects": [
+				{
 					"details": {
-						"name": "",
+						"name": "Loc_33",
 						"scale": 1,
 						"position2f": [0, 0]
 					},
-
 					"static": {
-						"textureNormal": "",
-						"textureLight": "",
-						"texture": ""
-					},
-
-					"attributes": ["atr1", "atr2"]
-				}
-			]
-
-		},
-		{
-			"name": "layer1",
-			"axis_z": 0.5,
-			"shift": {
-				"name": "void",
-				"offset2f": [0, 0],
-				"pinPoint2f": [0, 0],
-				"directVec2f": [0, 0]
-			},
-
-			"objects": [
-				{
-					"details": {
-						"name": "",
-						"scale": 1,
-						"position2f": [
-							0,
-							0
-						]
+						"textureNormal": "/resources/Loc_33N.png",
+						"textureLight": "/resources/Loc_33L.png",
+						"texture": "/resources/Loc_33.png"
 					}
 				}
 			]

@@ -12,7 +12,7 @@
 	"renderers": [
 		{
 			"name": "Location1.SubOne",
-			"path": "/locations/loc1/SubOneRenderer.json"
+			"path": "/locations/loc1/renderer/SubOneRenderer.json"
 		}
 	]
 }
