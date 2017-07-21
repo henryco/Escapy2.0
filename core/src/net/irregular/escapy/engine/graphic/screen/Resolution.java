@@ -3,7 +3,7 @@ package net.irregular.escapy.engine.graphic.screen;
 /**
  * @author Henry on 27/06/17.
  */
-public class Resolution {
+public final class Resolution {
 
 	public final int width, height;
 	public final boolean bool;

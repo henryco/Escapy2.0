@@ -16,6 +16,7 @@ public class MenuScreen implements EscapyScreen {
 	@Override
 	public void show() {
 
+		System.out.println("MENU SCREEN");
 		context.setScreen(GameScreen.class);
 	}
 

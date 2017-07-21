@@ -34,11 +34,9 @@ public class EscapyGroupContainer {
 
 
 
-
 	public EscapyGroupContainer(String configFile,
 								LocationLoader locationLoader,
 								RendererLoader<EscapySubLocation> rendererLoader) {
-
 		this.rendererLoader = rendererLoader;
 		this.locationLoader = locationLoader;
 		this.configFile = configFile;
@@ -47,7 +45,7 @@ public class EscapyGroupContainer {
 
 
 
-	public boolean initialize() {
+	public Boolean initialize() {
 
 		try {
 
@@ -63,9 +61,8 @@ public class EscapyGroupContainer {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-
-		return false;
 	}
 
 

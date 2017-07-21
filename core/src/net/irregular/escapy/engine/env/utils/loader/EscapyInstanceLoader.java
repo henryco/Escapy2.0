@@ -7,11 +7,11 @@ import java.util.Collection;
 /**
  * @author Henry on 14/07/17.
  */
-public interface EscapyInstanceLoader<T> {
+public interface EscapyInstanceLoader<INSTANCE_TYPE> {
 
 
 	@SuppressWarnings("unchecked")
-	default T loadInstance(String name, Object ... args) {
+	default INSTANCE_TYPE loadInstance(String name, Object ... args) {
 		try {
 
 			Method[] methods = this.getClass().getDeclaredMethods();
@@ -19,13 +19,13 @@ public interface EscapyInstanceLoader<T> {
 			for (Method method: methods) {
 				EscapyInstanced named = method.getAnnotation(EscapyInstanced.class);
 				if (named != null && named.value().equals(name))
-					return (T) method.invoke(this, args);
+					return (INSTANCE_TYPE) method.invoke(this, args);
 			}
 
 			for (Method method: methods) {
 				if (method.getAnnotation(EscapyInstanced.class) != null
 						&& method.getName().equals(name))
-					return (T) method.invoke(this, args);
+					return (INSTANCE_TYPE) method.invoke(this, args);
 			}
 
 		} catch (IllegalAccessException | InvocationTargetException e) {
@@ -35,16 +35,16 @@ public interface EscapyInstanceLoader<T> {
 	}
 
 
-	default T loadInstanceAttributes(T instance, String ... attributes) {
+	default INSTANCE_TYPE loadInstanceAttributes(INSTANCE_TYPE instance, String ... attributes) {
 		if (instance == null) return instance;
 		for (String attr: attributes) {
-			T loaded = this.loadInstance(attr, instance);
+			INSTANCE_TYPE loaded = this.loadInstance(attr, instance);
 			instance = loaded != null ? loaded : instance;
 		}
 		return instance;
 	}
 
-	default T loadInstanceAttributes(T instance, Collection<String> attributes) {
+	default INSTANCE_TYPE loadInstanceAttributes(INSTANCE_TYPE instance, Collection<String> attributes) {
 		return loadInstanceAttributes(instance, attributes.toArray(new String[0]));
 	}
 

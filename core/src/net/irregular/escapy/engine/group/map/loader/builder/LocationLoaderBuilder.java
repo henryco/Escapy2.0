@@ -9,7 +9,7 @@ public interface LocationLoaderBuilder {
 
 	LocationLoader build();
 
-	static LocationLoaderBuilder Default() {
+	static DefaultLocationLoaderBuilder Default() {
 		return new DefaultLocationLoaderBuilder();
 	}
 }
