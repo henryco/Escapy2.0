@@ -49,8 +49,6 @@ public class DefaultRenderer implements EscapyRenderer {
 
 		namedGroups.add(renderGroups);
 		namedGroups.add(lightMasks);
-
-		System.out.println("DEFAULT_RENDERER");
 	}
 
 
@@ -101,10 +99,14 @@ public class DefaultRenderer implements EscapyRenderer {
 
 		final Resolution resolution = new Resolution(width, height);
 
-		for (int i = 0; i < fboRenderGroup.length; i++)
+		for (int i = 0; i < fboRenderGroup.length; i++) {
 			fboRenderGroup[i] = new EscapyFrameBuffer(resolution);
-		for (int i = 0; i < fboMaskGroup.length; i++)
+			fboRenderGroup[i].setFlip(false, true);
+		}
+		for (int i = 0; i < fboMaskGroup.length; i++) {
 			fboMaskGroup[i] = new EscapyFrameBuffer(resolution);
+			fboMaskGroup[i].setFlip(false, true);
+		}
 	}
 
 

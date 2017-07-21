@@ -58,6 +58,12 @@ public class EscapyFrameBuffer implements EscapyFBO {
 	}
 
 	@Override
+	public void setFlip(boolean x, boolean y) {
+		bufferSprite.setFlip(x, y);
+		bufferRegion.flip(x, y);
+	}
+
+	@Override
 	public void renderGraphics(Batch batch) {
 		batch.begin();
 	 	bufferSprite.draw(batch);
@@ -80,4 +86,8 @@ public class EscapyFrameBuffer implements EscapyFBO {
 	}
 
 
+	@Override
+	public void dispose() {
+		buffer.dispose();
+	}
 }
