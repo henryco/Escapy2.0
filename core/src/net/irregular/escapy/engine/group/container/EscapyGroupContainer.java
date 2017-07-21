@@ -9,6 +9,7 @@ import net.irregular.escapy.engine.group.map.MapContainer;
 import net.irregular.escapy.engine.group.map.core.location.EscapySubLocation;
 import net.irregular.escapy.engine.group.map.loader.LocationLoader;
 import net.irregular.escapy.engine.group.render.RenderContainer;
+import net.irregular.escapy.engine.group.render.core.EscapyRenderer;
 import net.irregular.escapy.engine.group.render.loader.RendererLoader;
 
 import java.io.InputStreamReader;
@@ -106,7 +107,7 @@ public class EscapyGroupContainer {
 		return mapContainer;
 	}
 
-	public RenderContainer getRenderContainer() {
+	public EscapyRenderer getRenderContainer() {
 		return renderContainer;
 	}
 

@@ -12,15 +12,13 @@ import java.util.Map;
 /**
  * @author Henry on 19/07/17.
  */
-public class RenderContainer {
+public class RenderContainer implements EscapyRenderer {
 
 	private final Map<String, Map<String, String>> rendererMap;
 	private final RendererLoader<EscapySubLocation> rendererLoader;
 	private final EscapyProxyListener proxyListener;
 
 	private EscapyRenderer renderer;
-
-
 
 
 	public static final class TargetGroup {
@@ -34,32 +32,28 @@ public class RenderContainer {
 			this.subName = subName;
 			this.path = path;
 		}
-
 	}
+
 
 	private final class RenderProxyListener implements EscapyProxyListener {
 
 		@Override
 		public void onProxyMethodInvoked(Object methodResult, String methodName) {
-
-			System.out.println("Listener:RESULT: "+methodResult);
-			System.out.println("Listener:NAME: "+methodName);
-			System.out.println();
-
 			if (methodResult != null
 					&& methodResult instanceof EscapySubLocation && methodName.equals("switchSubLocation"))
 			{
 				final EscapySubLocation subLocation = (EscapySubLocation) methodResult;
 				final String parentName = subLocation.getParentLocation().getName();
 				final String path = rendererMap.get(parentName).get(subLocation.getName());
-
 				renderer = rendererLoader.loadRenderer(path, subLocation);
 			}
 		}
-
 	}
 
 
+	public EscapyProxyListener getProxyListener() {
+		return proxyListener;
+	}
 
 
 	public RenderContainer(RendererLoader<EscapySubLocation> rendererLoader,
@@ -77,18 +71,28 @@ public class RenderContainer {
 
 
 
+	@Override
+	public <T> T getRendererAttribute(String name) {
+		return renderer.getRendererAttribute(name);
+	}
 
+	@Override
 	public void render(float delta) {
 		if (renderer != null) {
 			renderer.render(delta);
 		}
 	}
 
+	@Override
 	public void resize(int width, int height) {
-		if (renderer != null) renderer.resize(width, height);
+		if (renderer != null) {
+			renderer.resize(width, height);
+		}
 	}
 
-	public EscapyProxyListener getProxyListener() {
-		return proxyListener;
+	@Override
+	public String getName() {
+		return renderer.getName();
 	}
+
 }
