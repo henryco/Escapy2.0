@@ -11,6 +11,7 @@ import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.MultiSourceShader;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
 
+import java.util.Arrays;
 import java.util.function.Function;
 
 /**
@@ -43,7 +44,11 @@ public class EscapyBlendRenderer implements MultiSourceShader {
 	@Override
 	public void loadProgram(ShaderFile shaderFile) {
 
-		shaderProgram = createProgram(shaderFile);
+//		shaderProgram = createProgram(shaderFile);
+		shaderProgram = createProxyProgram(shaderFile, (method, objects) -> {
+			System.out.println("\nListener:NAME: "+method.getName());
+			System.out.println("Listener:ARGS: "+ Arrays.toString(objects));
+		});
 	}
 
 

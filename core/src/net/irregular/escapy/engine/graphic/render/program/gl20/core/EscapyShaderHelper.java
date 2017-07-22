@@ -35,17 +35,19 @@ public interface EscapyShaderHelper extends Named {
 	}
 
 
+	//todo fixme
 	default ShaderProgram createProxyProgram(ShaderFile file, BiConsumer<Method, Object[]> listener) {
 
 		final ShaderProgram program = createProgram(file);
 		final Class obClass = program.getClass();
 
-		return (ShaderProgram) Proxy.newProxyInstance(obClass.getClassLoader(), obClass.getInterfaces(),
+		Object proxyInstance = Proxy.newProxyInstance(obClass.getClassLoader(), obClass.getInterfaces(),
 				(Object proxy, Method method, Object[] args) -> {
 					listener.accept(method, args);
 					return method.invoke(program, args);
 				}
 		);
+		return (ShaderProgram) proxyInstance;
 	}
 
 
