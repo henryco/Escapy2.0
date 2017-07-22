@@ -27,6 +27,7 @@ public class GameObjAttrInstLoader implements EscapyInstanceLoader<GameObject> {
 //		System.out.println(width + " : " + height + " : " + sw + " : " + sh + " : " + scaleW + " : " + scaleH);
 
 		float scale = Math.max(scaleW, scaleH);
+//		scale = 0.5f;
 		gameObject.getGameObjectRenderer().setScale(scale);
 
 		return gameObject;
