@@ -10,4 +10,7 @@ public interface GameObjectRenderer<T extends GameObject> extends Disposable {
 
 	void bindGameObject(T gameObject);
 	EscapyRenderable getRenderer();
+
+	float getRenderedWidth();
+	float getRenderedHeight();
 }

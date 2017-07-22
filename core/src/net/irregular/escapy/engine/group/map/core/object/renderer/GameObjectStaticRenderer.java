@@ -44,6 +44,15 @@ public class GameObjectStaticRenderer implements GameObjectRenderer<GameObjectSt
 		}
 	}
 
+	@Override
+	public float getRenderedWidth() {
+		return sprites[0] != null ? sprites[0].getWidth() : 0;
+	}
+
+	@Override
+	public float getRenderedHeight() {
+		return sprites[0] != null ? sprites[0].getHeight() : 0;
+	}
 
 	@Override
 	public EscapyRenderable getRenderer() {

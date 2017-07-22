@@ -56,13 +56,11 @@ public class DefaultRenderer implements EscapyRenderer {
 		namedGroups.add(renderGroups);
 		namedGroups.add(lightMasks);
 
-		AbsLightSource.debug = true;
-
 		lightSource = new AbsLightSource();
 		lightSource.setAngles(1, 1);
 		lightSource.setColor(new Color(Color.FIREBRICK));
 		lightSource.setCorrect(0);
-		lightSource.setRadius(0, 1);
+		lightSource.setRadius(0.5f, 1);
 		lightSource.setCoeff(1);
 		lightSource.setUmbra(0, 1);
 		lightSource.setResolution(new Resolution(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
@@ -93,11 +91,8 @@ public class DefaultRenderer implements EscapyRenderer {
 				if (mask != null) mask.renderMask(mainFBO.getTexture());
 				else mainFBO.renderGraphics(batch);
 			});
-//			maskFBO.renderGraphics(batch);
+			maskFBO.renderGraphics(batch);
 		}
-
-
-		lightSource.draw(batch, 0, 0, fboLightGroup[1].getTexture(), fboLightGroup[1].getTexture());
 
 
 	}
