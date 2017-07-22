@@ -8,6 +8,8 @@ import dagger.Provides;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
+import net.irregular.escapy.engine.group.container.EscapyGroupContainer;
+import net.irregular.escapy.environment.main.group.GroupModule;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -15,17 +17,21 @@ import javax.inject.Singleton;
 /**
  * @author Henry on 28/06/17.
  */
-@Module(library = true)
+@Module(library = true, includes = {GroupModule.class})
 public class SplashScreenModule {
+
 
 	@Provides @Singleton @Named("screen_splash")
 	public EscapyScreen provideSplashScreen(
+
+			EscapyGroupContainer groupContainer,
+
 			@Named("camera_splash") EscapyCamera camera,
 			@Named("logo_splash") String logo,
 			@Named("batch_splash") Batch batch,
-			@Named("time_splash") float time) {
-
-		return new SplashScreen(logo, camera, batch, time);
+			@Named("time_splash") float time
+	) {
+		return new SplashScreen(logo, camera, batch, time, groupContainer);
 	}
 
 

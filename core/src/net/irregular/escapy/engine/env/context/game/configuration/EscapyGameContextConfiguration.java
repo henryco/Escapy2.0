@@ -1,11 +1,7 @@
 package net.irregular.escapy.engine.env.context.game.configuration;
 
-
-
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.env.context.annotation.meta.AnnotationProcessor;
-
-
 
 /**
  * @author Henry on 28/06/17.
@@ -18,5 +14,11 @@ public abstract class EscapyGameContextConfiguration {
 		return new AnnotationProcessor();
 	}
 
+	public String getConfigsFilePath() {
+		return System.getProperty("user.dir");
+	}
 
+	public String getWorkDir() {
+		return System.getProperty("user.dir");
+	}
 }

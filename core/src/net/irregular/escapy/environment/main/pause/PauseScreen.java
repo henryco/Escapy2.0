@@ -25,25 +25,6 @@ public class PauseScreen implements EscapyScreen {
 
 	}
 
-	@Override
-	public void pause() {
-
-	}
-
-	@Override
-	public void resume() {
-
-	}
-
-	@Override
-	public void hide() {
-
-	}
-
-	@Override
-	public void dispose() {
-
-	}
 
 	@Override
 	public void setScreenContext(EscapyScreenContext screenContext) {

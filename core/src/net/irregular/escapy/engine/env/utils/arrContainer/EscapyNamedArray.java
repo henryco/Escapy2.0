@@ -54,7 +54,7 @@ public class EscapyNamedArray<T> extends EscapyIndexedArray<T> implements Escapy
 	@Override
 	public void add(T ob, String name) {
 
-		this.names = addObjToArray(String.class, names, name);
+		this.names = addObjToArray(String.class, names, name != null ? name : Integer.toString(ob.hashCode()));
 		copyNames();
 		super.add(ob);
 	}

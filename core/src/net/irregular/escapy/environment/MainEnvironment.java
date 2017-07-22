@@ -1,6 +1,7 @@
 package net.irregular.escapy.environment;
 
 import net.irregular.escapy.engine.env.context.game.EscapyGameContext;
+import net.irregular.escapy.engine.env.context.game.configuration.EscapyGameContextConfiguration;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
 
 import javax.inject.Inject;
@@ -15,10 +16,11 @@ public class MainEnvironment extends EscapyGameContext {
 
 	@Inject
 	protected MainEnvironment(
-			Collection<EscapyScreen> screens,
-			EscapyScreen initialScreen) {
+			Collection<EscapyScreen> escapyScreens,
+			EscapyScreen initialScreen,
+			EscapyGameContextConfiguration contextConfiguration) {
 
-		super(screens);
+		super(escapyScreens, contextConfiguration);
 		this.initialScreen = initialScreen;
 	}
 

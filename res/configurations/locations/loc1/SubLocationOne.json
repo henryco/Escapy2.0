@@ -1,0 +1,70 @@
+{
+	"type": "SubLocation",
+	"name": "SubOne",
+
+	"attributes": [],
+
+	"layerGroups": [
+		{
+			"name": "background",
+			"layers": [
+				"layer_background_0"
+			]
+		},
+		{
+			"name": "foreground",
+			"layers": [
+				"layer_foreground_0"
+			]
+		}
+	],
+
+
+	"layers": [
+
+
+		{
+			"name": "layer_background_0",
+			"axis_z": -1,
+
+			"shift": {
+				"name": "move",
+				"offset2f": [0, 0],
+				"pinPoint2f": [0, 0],
+				"directVec2f": [-1, -1]
+			},
+
+			"objects": [
+				{
+					"attributes": ["FULL_SCREEN"],
+					"static": {
+						"texture": "/resources/background.png"
+					}
+				}
+			]
+		},
+
+
+		{
+			"name": "layer_foreground_0",
+			"axis_z": 0.5,
+
+			"objects": [
+				{
+					"details": {
+						"name": "Loc_33",
+						"scale": 1,
+						"position2f": [0, 0]
+					},
+					"static": {
+						"textureNormal": "/resources/Loc_33N.png",
+						"textureLight": "/resources/Loc_33L.png",
+						"texture": "/resources/Loc_33.png"
+					}
+				}
+			]
+		}
+
+
+	]
+}

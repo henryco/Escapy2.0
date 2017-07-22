@@ -48,6 +48,7 @@ public abstract class EscapyGameContext extends Game implements EscapyScreenCont
 			classEscapyScreenMap.put(escapyScreen.getClass(), escapyScreen);
 		});
 
+		Escapy.getInstance().setContextConfiguration(contextConfiguration);
 	}
 
 

@@ -33,7 +33,7 @@ public interface EscapyAssociatedArray <T> extends Iterable<T> {
 
 	Collection<Entry<T>> getEntrySet();
 
-	T[] getArray();
+	T[] asArray();
 
 	final class Entry<U> {
 

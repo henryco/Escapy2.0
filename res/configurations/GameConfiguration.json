@@ -1,0 +1,18 @@
+{
+	"type": "GameConfiguration",
+	"name": "GameMainConfig",
+
+	"locations": [
+		{
+			"name": "Location1",
+			"path": "/locations/Location1.json"
+		}
+	],
+
+	"renderers": [
+		{
+			"name": "Location1:SubOne",
+			"path": "/locations/loc1/renderers/SubOneRenderer.json"
+		}
+	]
+}

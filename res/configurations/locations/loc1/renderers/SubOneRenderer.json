@@ -1,0 +1,38 @@
+{
+
+	"type": "Renderer",
+	"name": "Location1:SubOne",
+
+	"renderGroups": [
+		{
+			"name": "background",
+			"mask": {
+				"name": "mask_background",
+				"colorRGBA": [60, 60, 60, 250],
+				"mode": {
+					"src": "GL_DST_COLOR",
+					"dst": "GL_ONE_MINUS_SRC_ALPHA"
+				}
+			}
+		},
+		{
+			"name": "foreground",
+
+			"mask": {
+				"name": "mask_foreground",
+				"colorRGBA": [40,40,40,250],
+				"mode": {
+					"src": "GL_DST_COLOR",
+					"dst": "GL_ONE_MINUS_SRC_ALPHA"
+				}
+			},
+
+			"lights": [
+
+			]
+		}
+	]
+
+
+
+}

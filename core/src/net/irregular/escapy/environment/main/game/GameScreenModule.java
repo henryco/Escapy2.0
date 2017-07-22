@@ -3,6 +3,8 @@ package net.irregular.escapy.environment.main.game;
 import dagger.Module;
 import dagger.Provides;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
+import net.irregular.escapy.engine.group.container.EscapyGroupContainer;
+import net.irregular.escapy.environment.main.group.GroupModule;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -10,12 +12,14 @@ import javax.inject.Singleton;
 /**
  * @author Henry on 28/06/17.
  */
-@Module(library = true)
+@Module(library = true, includes = {
+		GroupModule.class
+})
 public class GameScreenModule {
 
 	@Provides @Singleton @Named("screen_game")
-	public EscapyScreen providesGameScreen() {
-		return new GameScreen();
+	public EscapyScreen providesGameScreen(EscapyGroupContainer groupContainer) {
+		return new GameScreen(groupContainer);
 	}
 
 }

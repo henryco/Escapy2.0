@@ -70,10 +70,13 @@ public class EscapyCamera implements Wipeable {
 
 
 
-
 //	------------------------- POSITION --------------------------------
 	public void setCameraPosition(float[] position, boolean absolute) {
 		this.setCameraPosition(position[0], position[1], absolute);
+	}
+
+	public void setCameraPosition(float[] position) {
+		setCameraPosition(position, true);
 	}
 
 	private void setCameraPosition(float x, float y) {
@@ -84,6 +87,7 @@ public class EscapyCamera implements Wipeable {
 		if (absolute) setCameraPosition(x, y);
 		else setCameraPosition(x + .5f * resolution.width, y + .5f * resolution.height);
 	}
+
 	public void setCameraPosition(TransVec position, boolean absolute) {
 		this.setCameraPosition(position.x, position.y, absolute);
 	}
@@ -96,6 +100,8 @@ public class EscapyCamera implements Wipeable {
 		return new TransVec(getPosition());
 	}
 //	------------------------- POSITION --------------------------------
+
+
 
 
 

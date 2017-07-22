@@ -83,8 +83,7 @@ public class EscapyIndexedArray<T> implements EscapyArray<T> {
 	}
 
 
-	@Override
-	public T[] getArray() {
+	public T[] asArray() {
 		return container;
 	}
 

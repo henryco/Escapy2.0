@@ -1,0 +1,11 @@
+{
+	"type": "Location",
+	"name": "Location1",
+	"attributes": ["", "", ""],
+	"subLocations": [
+		{
+			"name": "SubOne",
+			"path": "/loc1/SubLocationOne.json"
+		}
+	]
+}

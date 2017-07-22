@@ -2,6 +2,7 @@ package net.irregular.escapy.environment.main;
 
 import dagger.Module;
 import dagger.Provides;
+import net.irregular.escapy.engine.env.context.game.configuration.EscapyGameContextConfiguration;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
 import net.irregular.escapy.environment.MainEnvironment;
 import net.irregular.escapy.environment.main.game.GameScreenModule;
@@ -45,6 +46,11 @@ public class MainModule {
 		screenList.add(pauseScreen);
 		screenList.add(gameScreen);
 		return screenList;
+	}
+
+	@Provides @Singleton
+	protected EscapyGameContextConfiguration provideConfiguration() {
+		return new MainConfiguration();
 	}
 
 }
