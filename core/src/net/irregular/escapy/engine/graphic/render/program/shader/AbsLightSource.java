@@ -8,11 +8,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
+import net.irregular.escapy.engine.env.context.game.Escapy;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.StandardUniforms;
 import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.EscapyBlendRendererExtended;
 import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.EscapyUniformBlender;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
+
+import static java.io.File.separator;
 
 /**
  * @author Henry on 30/06/17.
@@ -20,17 +23,20 @@ import net.irregular.escapy.engine.graphic.screen.Resolution;
 @EscapyAPI
 public class AbsLightSource {
 
+	private static final String DIR_PATH = Escapy.getWorkDir() +
+			separator + "shaders" + separator + "light" + separator + "source" + separator + "lightSrc";
+
 	private final EscapyUniformBlender uniformBlender;
 
 	public AbsLightSource() {
 		this(new EscapyBlendRendererExtended(),
 				new ShaderFile(
-						Gdx.files.internal("/shaders/light/source/lightSrc.vert").readString(),
-						Gdx.files.internal("/shaders/light/source/lightSrc_N.frag").readString()
+						Gdx.files.internal(DIR_PATH + ".vert").readString(),
+						Gdx.files.internal(DIR_PATH + "_N.frag").readString()
 				)
 		);
 	}
-	protected AbsLightSource(EscapyUniformBlender uniformBlender, ShaderFile shaderFile) {
+	public AbsLightSource(EscapyUniformBlender uniformBlender, ShaderFile shaderFile) {
 		this.uniformBlender = uniformBlender;
 		initBlender(shaderFile);
 	}
@@ -58,14 +64,29 @@ public class AbsLightSource {
 
 
 	// TODO: 01/07/17 create interface
+	/**
+	 * Create and draw light source
+	 * @param target texture where render into
+	 * @param map lightmap, actually might be TARGET or null
+	 */
 	public void draw(Batch batch, float x, float y, Texture target, Texture map) {
 		uniformBlender.draw(batch, x, y, target, map);
 	}
 
+	/**
+	 * Create and draw light source
+	 * @param target texture where render into
+	 * @param map lightmap, actually might be TARGET or null
+	 */
 	public void draw(Batch batch, float x, float y, float width, float height, TextureRegion target, TextureRegion map) {
 		uniformBlender.draw(batch, x, y, width, height, target, map);
 	}
 
+	/**
+	 * Create and draw light source
+	 * @param target texture where render into
+	 * @param map lightmap, actually might be TARGET or null
+	 */
 	public void draw(Batch batch, Sprite target, Sprite map) {
 		uniformBlender.draw(batch, target, map);
 	}
@@ -97,6 +118,10 @@ public class AbsLightSource {
 	public void setUmbra(float coeff, float power) {
 		uniformBlender.getStandardUniforms().setFloatArrayUniform("u_umbra", coeff, power);
 	}
+
+	/**
+	 * Angles range <-1, 1>
+	 */
 	public void setAngles(float rot, float size) {
 		uniformBlender.getStandardUniforms().setFloatArrayUniform("u_angles", rot, size);
 	}

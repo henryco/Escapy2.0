@@ -18,4 +18,7 @@ public abstract class EscapyGameContextConfiguration {
 		return System.getProperty("user.dir");
 	}
 
+	public String getWorkDir() {
+		return System.getProperty("user.dir");
+	}
 }

@@ -78,13 +78,13 @@ public class EscapyBlendRenderer implements MultiSourceShader {
 
 
 	private void bindTextures(Batch batch, Texture... source) {
-		bindTextures(batch, t -> ((Texture) t), (Object) source);
+		bindTextures(batch, t -> ((Texture) t), (Object[]) source);
 	}
 	private void bindTextures(Batch batch, Sprite ... sources) {
-		bindTextures(batch, s -> ((Sprite) s).getTexture(), (Object) sources);
+		bindTextures(batch, s -> ((Sprite) s).getTexture(), (Object[]) sources);
 	}
 	private void bindTextures(Batch batch, TextureRegion ... sources) {
-		bindTextures(batch, r -> ((TextureRegion) r).getTexture(), (Object) sources);
+		bindTextures(batch, r -> ((TextureRegion) r).getTexture(), (Object[]) sources);
 	}
 	private void bindTextures(Batch batch, Function<Object, Texture> adapterFunction, Object ... sources) {
 		shaderProgram.begin();

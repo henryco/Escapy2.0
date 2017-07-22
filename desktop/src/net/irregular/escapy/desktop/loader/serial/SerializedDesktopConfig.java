@@ -16,6 +16,7 @@ public final class SerializedDesktopConfig implements EscapySerialized {
 	@SerializedName("vSync") @Expose public boolean vSyncEnabled;
 	@SerializedName("fullscreen") @Expose public boolean fullscreen;
 	@SerializedName("forceExit") @Expose public boolean forceExit;
+	@SerializedName("useGL30") @Expose public boolean useGL30;
 
 	@SerializedName("scrWidth") @Expose public int width;
 	@SerializedName("scrHeight") @Expose public int height;

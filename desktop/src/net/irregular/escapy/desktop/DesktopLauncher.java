@@ -20,7 +20,6 @@ public class DesktopLauncher {
 				.setName("MainConfiguration")
 				.build()
 		.loadDesktopConfig();
-
 		new LwjglApplication(new EscapyApplicationAdapter(MainEnvironment.class, new MainModule()), config);
 
 	}

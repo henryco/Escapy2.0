@@ -19,6 +19,7 @@ public class GameScreen implements EscapyScreen {
 		this.groupContainer = groupContainer;
 	}
 
+
 	@Override
 	public void show() {
 

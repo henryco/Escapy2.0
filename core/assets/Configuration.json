@@ -6,6 +6,7 @@
 	"vSync": true,
 	"fullscreen": false,
 	"forceExit": true,
+	"useGL30": true,
 	
 	"scrWidth": 1920,
 	"scrHeight": 1080,

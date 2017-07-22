@@ -23,4 +23,8 @@ public class Escapy {
 	public static String getConfigsFilePath() {
 		return ourInstance.contextConfiguration.getConfigsFilePath();
 	}
+
+	public static String getWorkDir() {
+		return ourInstance.contextConfiguration.getWorkDir();
+	}
 }
