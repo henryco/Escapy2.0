@@ -56,6 +56,8 @@ public class DefaultRenderer implements EscapyRenderer {
 		namedGroups.add(renderGroups);
 		namedGroups.add(lightMasks);
 
+		AbsLightSource.debug = true;
+
 		lightSource = new AbsLightSource();
 		lightSource.setAngles(1, 1);
 		lightSource.setColor(new Color(Color.FIREBRICK));
@@ -64,7 +66,6 @@ public class DefaultRenderer implements EscapyRenderer {
 		lightSource.setCoeff(1);
 		lightSource.setUmbra(0, 1);
 		lightSource.setResolution(new Resolution(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-
 	}
 
 

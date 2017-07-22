@@ -5,6 +5,6 @@ package net.irregular.escapy.engine.env.utils.proxy;
  */
 public interface EscapyProxyListener {
 
-	void onProxyMethodInvoked(Object methodResult, String methodName);
+	void onProxyMethodInvoked(Object methodResult, String methodName, Object[] args);
 
 }

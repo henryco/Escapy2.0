@@ -50,7 +50,7 @@ public class MapContainer {
 		EscapyLocation temp = location;
 		EscapyLocation preLocation = locationLoader.loadLocation(locationMap.get(name));
 
-		location = locationInstanceObserver.proxyObservedInstance(preLocation);
+		location = locationInstanceObserver.create(preLocation);
 
 		if (location == null) {
 			location = temp;

@@ -1,6 +1,5 @@
 package net.irregular.escapy.engine.env.utils.proxy;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
@@ -24,33 +23,27 @@ public class EscapyProxyInstanceObserver {
 
 
 	@SuppressWarnings("unchecked")
-	public <T> T proxyObservedInstance(T instance) {
+	public <T> T create(T instance) {
 
 		final Class instanceClass = instance.getClass();
+		return (T) Proxy.newProxyInstance(instanceClass.getClassLoader(), instanceClass.getInterfaces(),
+				(Object proxy, Method method, Object[] args) -> {
 
-		return (T) Proxy.newProxyInstance(
-				instanceClass.getClassLoader(),
-				instanceClass.getInterfaces(),
-				new InvocationHandler() {
+					try {
 
-			@Override
-			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+						Object result = method.invoke(instance, args);
+						for (EscapyProxyListener listener : proxyListeners)
+							listener.onProxyMethodInvoked(result, method.getName(), args);
+						return result;
 
-				try {
+					} catch (Exception e) {
+						e.printStackTrace();
+						System.exit(4);
+					}
 
-					Object result = method.invoke(instance, args);
-					for (EscapyProxyListener listener : proxyListeners)
-						listener.onProxyMethodInvoked(result, method.getName());
-					return result;
-
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.exit(4);
+					throw new RuntimeException("proxyObservedInstanceError");
 				}
-
-				throw new RuntimeException("proxyObservedInstanceError");
-			}
-		});
+		);
 	}
 
 

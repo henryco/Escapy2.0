@@ -5,13 +5,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import net.irregular.escapy.engine.env.context.annotation.Dante;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.MultiSourceShader;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
+import net.irregular.escapy.engine.graphic.render.program.gl20.proxy.EscapyProxyShaderProgram;
+import net.irregular.escapy.engine.graphic.render.program.gl20.proxy.ProxyShaderProgram;
 
-import java.util.Arrays;
 import java.util.function.Function;
 
 /**
@@ -19,12 +19,12 @@ import java.util.function.Function;
  */ @EscapyAPI @Dante
 public class EscapyBlendRenderer implements MultiSourceShader {
 
-	private ShaderProgram shaderProgram;
+	private EscapyProxyShaderProgram shaderProgram;
 	private String[] sourcesNames;
-
+	private boolean debug;
 
 	@EscapyAPI public EscapyBlendRenderer() {
-		shaderProgram = SpriteBatch.createDefaultShader();
+		shaderProgram = new ProxyShaderProgram(SpriteBatch.createDefaultShader());
 	}
 	@EscapyAPI public EscapyBlendRenderer(ShaderFile shaderFile) {
 		loadProgram(shaderFile);
@@ -43,12 +43,7 @@ public class EscapyBlendRenderer implements MultiSourceShader {
 
 	@Override
 	public void loadProgram(ShaderFile shaderFile) {
-
-//		shaderProgram = createProgram(shaderFile);
-		shaderProgram = createProxyProgram(shaderFile, (method, objects) -> {
-			System.out.println("\nListener:NAME: "+method.getName());
-			System.out.println("Listener:ARGS: "+ Arrays.toString(objects));
-		});
+		shaderProgram = createProxyProgram(shaderFile, debug);
 	}
 
 
@@ -96,12 +91,16 @@ public class EscapyBlendRenderer implements MultiSourceShader {
 		shaderProgram.begin();
 		for (int i = sources.length - 1; i >= 0; i--)
 			adapterFunction.apply(sources[i]).bind(i);
-		batch.setShader(shaderProgram);
+		batch.setShader(shaderProgram.getShaderProgram());
 		for (int i = sourcesNames.length - 1; i >= 0; i--)
 			shaderProgram.setUniformi(sourcesNames[i], i);
 		provideUniforms(shaderProgram);
 		shaderProgram.end();
 	}
 
+	public EscapyBlendRenderer setDebug(boolean debug) {
+		this.debug = debug;
+		return this;
+	}
 }
 

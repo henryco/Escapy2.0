@@ -38,7 +38,7 @@ public class RenderContainer implements EscapyRenderer {
 	private final class RenderProxyListener implements EscapyProxyListener {
 
 		@Override
-		public void onProxyMethodInvoked(Object methodResult, String methodName) {
+		public void onProxyMethodInvoked(Object methodResult, String methodName, Object[] args) {
 			if (methodResult != null
 					&& methodResult instanceof EscapySubLocation && methodName.equals("switchSubLocation"))
 			{

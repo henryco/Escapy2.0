@@ -25,11 +25,12 @@ public class AbsLightSource {
 
 	private static final String DIR_PATH = Escapy.getWorkDir() +
 			separator + "shaders" + separator + "light" + separator + "source" + separator + "lightSrc";
+	public static boolean debug = false;
 
 	private final EscapyUniformBlender uniformBlender;
 
 	public AbsLightSource() {
-		this(new EscapyBlendRendererExtended(),
+		this(new EscapyBlendRendererExtended().setDebug(debug),
 				new ShaderFile(
 						Gdx.files.internal(DIR_PATH + ".vert").readString(),
 						Gdx.files.internal(DIR_PATH + "_N.frag").readString()

@@ -24,6 +24,11 @@ public class EscapyBlendRendererExtended extends EscapyBlendRenderer implements 
 	}
 
 
+	public EscapyBlendRendererExtended setDebug(boolean debug) {
+		super.setDebug(debug);
+		return this;
+	}
+
 	@Override
 	public Collection<Uniform> getUniforms() {
 		return uniformProvider.getUniforms();
