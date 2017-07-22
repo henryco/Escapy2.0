@@ -1,6 +1,5 @@
 package net.irregular.escapy.engine.group.render.core;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
@@ -32,6 +31,7 @@ public class DefaultRenderer implements EscapyRenderer {
 	private final EscapyFBO[] fboLightGroup;
 
 	AbsLightSource lightSource;
+	EscapyFBO tempFbo;
 
 	public DefaultRenderer(String name,
 						   EscapyAssociatedArray<EscapyRenderable> renderGroups,
@@ -60,10 +60,12 @@ public class DefaultRenderer implements EscapyRenderer {
 		lightSource.setAngles(1, 1);
 		lightSource.setColor(new Color(Color.FIREBRICK));
 		lightSource.setCorrect(0);
-		lightSource.setRadius(0.5f, 1);
+		lightSource.setRadius(0, 1);
 		lightSource.setCoeff(1);
 		lightSource.setUmbra(0, 1);
-		lightSource.setResolution(new Resolution(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+		lightSource.setResolution(new Resolution(256, 256));
+
+		tempFbo = new EscapyFrameBuffer(new Resolution(256, 256), true);
 	}
 
 
@@ -91,10 +93,16 @@ public class DefaultRenderer implements EscapyRenderer {
 				if (mask != null) mask.renderMask(mainFBO.getTexture());
 				else mainFBO.renderGraphics(batch);
 			});
-			maskFBO.renderGraphics(batch);
+//			maskFBO.renderGraphics(batch);
 		}
 
+		fboLightGroup[0].begin(() -> {
+			fboLightGroup[0].wipe();
+			lightSource.draw(batch, tempFbo.getSprite(), tempFbo.getSprite());
+		});
 
+		fboLightGroup[0].renderGraphics(batch);
+//		for (EscapyFBO fbo: fboRenderGroup) fbo.renderGraphics(batch);
 	}
 
 
@@ -125,7 +133,6 @@ public class DefaultRenderer implements EscapyRenderer {
 		for (int i = 0; i < fboLightGroup.length; i++) {
 			fboLightGroup[i] = new EscapyFrameBuffer(resolution);
 			fboLightGroup[i].setFlip(false, true);
-			fboLightGroup[i].begin(fboLightGroup[i]::wipe);
 		}
 	}
 
