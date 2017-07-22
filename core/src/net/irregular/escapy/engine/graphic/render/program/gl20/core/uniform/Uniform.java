@@ -41,7 +41,11 @@ public final class Uniform<T> {
 		this.str = new EscapyIndexedArray<String>(String.class){};
 		this.uniforms = uni.container;
 		this.names = str.container;
+
+
 		try {
+
+
 			if (isIndexOf(uniformType, 0)){
 				iArr = (Integer[]) uniforms;
 
@@ -55,6 +59,9 @@ public final class Uniform<T> {
 						program.setUniformi(names[i], iArr[i]);
 				};
 			}
+
+
+
 			else if (isIndexOf(uniformType, 0f)){
 				fArr = (Float[]) uniforms;
 
@@ -68,42 +75,106 @@ public final class Uniform<T> {
 						program.setUniformf(names[i], fArr[i]);
 				};
 			}
+
+
+
 			else if (isIndexOf(uniformType, new Float[0])) {
 				fFArr = (Float[][]) uniforms;
 
 				loader = program -> {
-					for (int k = 0; k < fFArr.length; k++)
-						for (int i = 0; i < fFArr[k].length; i++)
-							program.setUniformf(names[k], fFArr[k][i]);
+					for (int k = 0; k < fFArr.length; k++) {
+						Float[] arr = fFArr[k];
+						switch (arr.length) {
+							case 0: break;
+							case 1: program.setUniformf(names[k], arr[0]);
+								break;
+							case 2: program.setUniformf(names[k], arr[0], arr[1]);
+								break;
+							case 3: program.setUniformf(names[k], arr[0], arr[1], arr[2]);
+								break;
+							case 4: program.setUniformf(names[k], arr[0], arr[1], arr[2], arr[3]);
+								break;
+							default:
+								float[] prim = new float[arr.length];
+								for (int i = 0; i < prim.length; i++) prim[i] = arr[i];
+								program.setUniform1fv(names[k], prim, 0, arr.length);
+								break;
+						}
+					}
 				};
 
 				proxyLoader = program -> {
-					for (int k = 0; k < fFArr.length; k++)
-						for (int i = 0; i < fFArr[k].length; i++)
-							program.setUniformf(names[k], fFArr[k][i]);
+					for (int k = 0; k < fFArr.length; k++) {
+						Float[] arr = fFArr[k];
+						switch (arr.length) {
+							case 0: break;
+							case 1: program.setUniformf(names[k], arr[0]);
+								break;
+							case 2: program.setUniformf(names[k], arr[0], arr[1]);
+								break;
+							case 3: program.setUniformf(names[k], arr[0], arr[1], arr[2]);
+								break;
+							case 4: program.setUniformf(names[k], arr[0], arr[1], arr[2], arr[3]);
+								break;
+							default:
+								float[] prim = new float[arr.length];
+								for (int i = 0; i < prim.length; i++) prim[i] = arr[i];
+								program.setUniform1fv(names[k], prim, 0, arr.length);
+								break;
+						}
+					}
 				};
 			}
+
+
+
+
 			else if (isIndexOf(uniformType, new Integer[0])) {
 				iIArr = (Integer[][]) uniforms;
+
 				loader = program -> {
-					for (int k = 0; k < iIArr.length; k++)
-						for (int i = 0; i < iIArr[k].length; i++)
-							program.setUniformi(names[k], iIArr[k][i]);
+					for (int k = 0; k < iIArr.length; k++) {
+						Integer[] arr = iIArr[k];
+						switch (arr.length) {
+							case 0: break;
+							case 1: program.setUniformi(names[k], arr[0]);
+								break;
+							case 2: program.setUniformi(names[k], arr[0], arr[1]);
+								break;
+							case 3: program.setUniformi(names[k], arr[0], arr[1], arr[2]);
+								break;
+							case 4: program.setUniformi(names[k], arr[0], arr[1], arr[2], arr[3]);
+								break;
+						}
+					}
 				};
 
 				proxyLoader = program -> {
-					for (int k = 0; k < iIArr.length; k++)
-						for (int i = 0; i < iIArr[k].length; i++)
-							program.setUniformi(names[k], iIArr[k][i]);
+					for (int k = 0; k < iIArr.length; k++) {
+						Integer[] arr = iIArr[k];
+						switch (arr.length) {
+							case 0: break;
+							case 1: program.setUniformi(names[k], arr[0]);
+								break;
+							case 2: program.setUniformi(names[k], arr[0], arr[1]);
+								break;
+							case 3: program.setUniformi(names[k], arr[0], arr[1], arr[2]);
+								break;
+							case 4: program.setUniformi(names[k], arr[0], arr[1], arr[2], arr[3]);
+								break;
+						}
+					}
 				};
 			}
+
+
 
 		} catch (Exception ignored) {}
 	}
 
-	private boolean isIndexOf(Class<T> tc, Object arg1){
+	private boolean isIndexOf(Class<T> tc, Object arg){
 		try{
-			return tc.isAssignableFrom(arg1.getClass());
+			return tc.isAssignableFrom(arg.getClass());
 		}catch(Exception e){
 			return false;
 		}

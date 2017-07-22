@@ -97,7 +97,6 @@ public class DefaultRenderer implements EscapyRenderer {
 		}
 
 
-
 		lightSource.draw(batch, 0, 0, fboLightGroup[1].getTexture(), fboLightGroup[1].getTexture());
 
 
