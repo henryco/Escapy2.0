@@ -8,7 +8,10 @@ import com.badlogic.gdx.utils.TimeUtils;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.env.utils.Named;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.Date;
+import java.util.function.BiConsumer;
 
 /**
  * @author Henry on 29/06/17.
@@ -30,6 +33,21 @@ public interface EscapyShaderHelper extends Named {
 		checkStatus(shaderProgram);
 		return shaderProgram;
 	}
+
+
+	default ShaderProgram createProxyProgram(ShaderFile file, BiConsumer<Method, Object[]> listener) {
+
+		final ShaderProgram program = createProgram(file);
+		final Class obClass = program.getClass();
+
+		return (ShaderProgram) Proxy.newProxyInstance(obClass.getClassLoader(), obClass.getInterfaces(),
+				(Object proxy, Method method, Object[] args) -> {
+					listener.accept(method, args);
+					return method.invoke(program, args);
+				}
+		);
+	}
+
 
 	default void begin(Batch batch, Runnable r) {
 		ShaderProgram defaultShader = batch.getShader();

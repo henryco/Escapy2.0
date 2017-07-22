@@ -42,6 +42,7 @@ public class EscapyBlendRenderer implements MultiSourceShader {
 
 	@Override
 	public void loadProgram(ShaderFile shaderFile) {
+
 		shaderProgram = createProgram(shaderFile);
 	}
 
