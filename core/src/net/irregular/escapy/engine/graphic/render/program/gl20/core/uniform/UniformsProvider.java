@@ -14,8 +14,9 @@ public interface UniformsProvider {
 	}
 
 	default void provideUniforms(final ShaderProgram shaderProgram) {
-		if (getUniforms() != null && shaderProgram != null)
+		if (getUniforms() != null && shaderProgram != null) {
 			getUniforms().forEach(uniform -> uniform.loadUniforms(shaderProgram));
+		}
 	}
 
 }

@@ -41,22 +41,32 @@ public final class Uniform<T> {
 		try {
 			if (isIndexOf(uniformType, 0)){
 				iArr = (Integer[]) uniforms;
-				loader = program -> {for (int i = 0; i < iArr.length; i++) program.setUniformi(names[i], iArr[i]);};
+				loader = program -> {
+					for (int i = 0; i < iArr.length; i++)
+						program.setUniformi(names[i], iArr[i]);
+				};
 			}
 			else if (isIndexOf(uniformType, 0f)){
 				fArr = (Float[]) uniforms;
-				loader = program -> {for (int i = 0; i < fArr.length; i++) program.setUniformf(names[i], fArr[i]);};
+				loader = program -> {
+					for (int i = 0; i < fArr.length; i++)
+						program.setUniformf(names[i], fArr[i]);
+				};
 			}
 			else if (isIndexOf(uniformType, new Float[0])) {
 				fFArr = (Float[][]) uniforms;
 				loader = program -> {
-					for (int k = 0; k < fFArr.length; k++) for (int i = 0; i < fFArr[k].length; i++) program.setUniformf(names[k], fFArr[k][i]);
+					for (int k = 0; k < fFArr.length; k++)
+						for (int i = 0; i < fFArr[k].length; i++)
+							program.setUniformf(names[k], fFArr[k][i]);
 				};
 			}
 			else if (isIndexOf(uniformType, new Integer[0])) {
 				iIArr = (Integer[][]) uniforms;
 				loader = program -> {
-					for (int k = 0; k < iIArr.length; k++) for (int i = 0; i < iIArr[k].length; i++) program.setUniformi(names[k], iIArr[k][i]);
+					for (int k = 0; k < iIArr.length; k++)
+						for (int i = 0; i < iIArr[k].length; i++)
+							program.setUniformi(names[k], iIArr[k][i]);
 				};
 			}
 
