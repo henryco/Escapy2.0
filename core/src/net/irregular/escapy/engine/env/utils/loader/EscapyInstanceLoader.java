@@ -30,6 +30,8 @@ public interface EscapyInstanceLoader<INSTANCE_TYPE> {
 			}
 
 		} catch (IllegalAccessException | InvocationTargetException e) {
+			if (e instanceof InvocationTargetException)
+				((InvocationTargetException) e).getTargetException().printStackTrace();
 			e.printStackTrace();
 		}
 		return null;

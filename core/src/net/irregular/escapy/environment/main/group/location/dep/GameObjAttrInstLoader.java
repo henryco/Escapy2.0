@@ -24,11 +24,14 @@ public class GameObjAttrInstLoader implements EscapyInstanceLoader<GameObject> {
 		float scaleW = width / sw;
 		float scaleH = height/ sh;
 
-//		System.out.println(width + " : " + height + " : " + sw + " : " + sh + " : " + scaleW + " : " + scaleH);
-
 		float scale = Math.max(scaleW, scaleH);
-//		scale = 0.5f;
+		float[] position = gameObject.getObjectDetails().getPosition();
+
+		position[0] += .5f * (width - sw);
+		position[1] += .5f * (height - sh);
+
 		gameObject.getGameObjectRenderer().setScale(scale);
+		gameObject.getObjectDetails().setPosition(position);
 
 		return gameObject;
 	}
