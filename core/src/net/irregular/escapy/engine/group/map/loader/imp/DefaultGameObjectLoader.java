@@ -40,6 +40,8 @@ public class DefaultGameObjectLoader implements GameObjectLoader<SerializedGameO
 		ObjectDetails details = new ObjectDetails(serialized.details.name);
 		details.setScale(serialized.details.scale);
 		details.setPosition(floatListToArray(serialized.details.position));
+		details.setSize(floatListToArray(serialized.details.size));
+		details.setFlip(booleanListToArray(serialized.details.flip));
 
 		if (serialized.staticObject != null)
 			return loadStaticObject(path, details, serialized.staticObject, new GameObjectStaticRenderer());

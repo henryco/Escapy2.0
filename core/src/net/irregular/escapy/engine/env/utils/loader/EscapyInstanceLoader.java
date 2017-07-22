@@ -2,6 +2,7 @@ package net.irregular.escapy.engine.env.utils.loader;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -14,12 +15,15 @@ public interface EscapyInstanceLoader<INSTANCE_TYPE> {
 	default INSTANCE_TYPE loadInstance(String name, Object ... args) {
 		try {
 
+			System.out.println("loadInstance: "+name + " : " + Arrays.toString(args));
+
 			Method[] methods = this.getClass().getDeclaredMethods();
 
 			for (Method method: methods) {
 				EscapyInstanced named = method.getAnnotation(EscapyInstanced.class);
-				if (named != null && named.value().equals(name))
+				if (named != null && named.value().equals(name)) {
 					return (INSTANCE_TYPE) method.invoke(this, args);
+				}
 			}
 
 			for (Method method: methods) {

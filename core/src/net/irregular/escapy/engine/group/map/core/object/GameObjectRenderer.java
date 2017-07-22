@@ -13,4 +13,9 @@ public interface GameObjectRenderer<T extends GameObject> extends Disposable {
 
 	float getRenderedWidth();
 	float getRenderedHeight();
+
+	void setPosition(float x, float y);
+	void setScale(float scale);
+	void setFlip(boolean x, boolean y);
+	void setSize(float w, float h);
 }

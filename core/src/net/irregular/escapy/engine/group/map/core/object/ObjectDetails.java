@@ -7,13 +7,19 @@ import java.util.Arrays;
  */
 public class ObjectDetails {
 
-	private final String name;
-	private float scale;
+	public final String name;
 	public final float[] position;
+	public final float[] size;
+	public final boolean[] flip;
+
+	private float scale;
+
 
 	{
 		scale = 1f;
-		position = new float[2];
+		position = new float[]{0, 0};
+		size = new float[]{0, 0};
+		flip = new boolean[]{false, false};
 	}
 
 
@@ -52,6 +58,26 @@ public class ObjectDetails {
 		this.position[0] = position[0];
 		this.position[1] = position[1];
 		return this;
+	}
+
+	public ObjectDetails setSize(float[] size) {
+		this.size[0] = size[0];
+		this.size[1] = size[1];
+		return this;
+	}
+
+	public ObjectDetails setFlip(boolean[] flip) {
+		this.flip[0] = flip[0];
+		this.flip[1] = flip[1];
+		return this;
+	}
+
+	public float[] getSize() {
+		return size;
+	}
+
+	public boolean[] getFlip() {
+		return flip;
 	}
 
 	public float getScale() {

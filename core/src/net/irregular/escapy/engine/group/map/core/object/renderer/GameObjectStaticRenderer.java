@@ -39,6 +39,10 @@ public class GameObjectStaticRenderer implements GameObjectRenderer<GameObjectSt
 		for (int i = 0; i < 3; i++) {
 			if (paths[i] != null && !paths[i].isEmpty()) {
 				sprites[i] = new Sprite(new Texture(Gdx.files.internal(paths[i])));
+
+				if (gameObject.getObjectDetails().size[0] > 0 && gameObject.getObjectDetails().size[1] > 0)
+					sprites[i].setSize(gameObject.getObjectDetails().size[0], gameObject.getObjectDetails().size[1]);
+				sprites[i].setFlip(gameObject.getObjectDetails().flip[0], gameObject.getObjectDetails().flip[1]);
 				sprites[i].setScale(gameObject.getObjectDetails().getScale());
 			}
 		}
@@ -55,6 +59,30 @@ public class GameObjectStaticRenderer implements GameObjectRenderer<GameObjectSt
 	}
 
 	@Override
+	public void setPosition(float x, float y) {
+		gameObject.getObjectDetails().position[0] = x;
+		gameObject.getObjectDetails().position[1] = y;
+	}
+
+	@Override
+	public void setScale(float scale) {
+		for (Sprite s: sprites) if (s != null) s.setScale(scale);
+		gameObject.getObjectDetails().setScale(scale);
+	}
+
+	@Override
+	public void setFlip(boolean x, boolean y) {
+		for (Sprite s: sprites) if (s != null) s.setFlip(x, y);
+		gameObject.getObjectDetails().setFlip(new boolean[]{x, y});
+	}
+
+	@Override
+	public void setSize(float w, float h) {
+		for (Sprite s: sprites) if (s != null) s.setSize(w, h);
+		gameObject.getObjectDetails().setSize(new float[]{w, h});
+	}
+
+	@Override
 	public EscapyRenderable getRenderer() {
 		return renderable;
 	}
@@ -63,7 +91,8 @@ public class GameObjectStaticRenderer implements GameObjectRenderer<GameObjectSt
 	@Override
 	public void dispose() {
 		for (Sprite sprite: sprites)
-			sprite.getTexture().dispose();
+			if (sprite != null)
+				sprite.getTexture().dispose();
 	}
 
 
