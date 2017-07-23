@@ -16,7 +16,6 @@ public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 	private final int[] blendMode;
 	private final Batch batch;
 
-
 	@EscapyAPI
 	public NativeSeparateBlendRenderer() {
 		this(Separate.ADD_RGBA());
@@ -25,6 +24,7 @@ public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 	public NativeSeparateBlendRenderer(int[] blendMode) {
 		this.blendMode = new int[4];
 		this.batch = new SpriteBatch();
+		setColorBlendMode(blendMode);
 	}
 
 
@@ -37,7 +37,7 @@ public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 		batch.begin();
 		batch.enableBlending();
 
-		setBlendFunction(blendMode);
+		setBlendFunction(blendMode, batch);
 
 		batchConsumer.accept(batch);
 
@@ -60,10 +60,10 @@ public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 	}
 
 
-	private void setBlendFunction(int[] program) {
+	private void setBlendFunction(int[] program, Batch batch) {
 		batch.setBlendFunction(-1, -1);
-		Gdx.gl30.glBlendFuncSeparate(program[0], program[1], program[2], program[3]);
-		Gdx.gl30.glBlendEquationSeparate(GL30.GL_FUNC_ADD, GL30.GL_FUNC_ADD);
+		Gdx.gl20.glBlendFuncSeparate(program[0], program[1], program[2], program[3]);
+		Gdx.gl20.glBlendEquationSeparate(GL30.GL_FUNC_ADD, GL30.GL_FUNC_ADD);
 	}
 
 

@@ -20,7 +20,7 @@ public final class SerializedBlender extends EscapySimpleSerialized {
 
 		@SerializedName("srcRGB") @Expose public String srcRGB = "GL_SRC_ALPHA";
 		@SerializedName("dstRGB") @Expose public String dstRGB = "GL_ONE";
-		@SerializedName("srcALPHA") @Expose public String srcALPHA = "GL_SRC_ALPHA";
+		@SerializedName("srcALPHA") @Expose public String srcALPHA = "GL_ONE";
 		@SerializedName("dstALPHA") @Expose public String dstALPHA = "GL_ONE_MINUS_SRC_COLOR";
 
 		public int[] loadGLMode() {

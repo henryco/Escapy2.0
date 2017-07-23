@@ -32,7 +32,7 @@
 				"mode": {
 					"srcRGB": "GL_SRC_ALPHA",
 					"dstRGB": "GL_ONE",
-					"srcALPHA": "GL_SRC_ALPHA",
+					"srcALPHA": "GL_ONE",
 					"dstALPHA": "GL_ONE_MINUS_SRC_COLOR"
 				}
 			},
@@ -67,7 +67,7 @@
 				{
 					"colorRGB": [40, 34, 200],
 					"resolution2i": [256, 256],
-					"position2f": [450, 200],
+					"position2f": [300, 200],
 					"angles2f": [0, 0],
 					"radius2f": [0, 1],
 					"umbra2f": [0, 1],
