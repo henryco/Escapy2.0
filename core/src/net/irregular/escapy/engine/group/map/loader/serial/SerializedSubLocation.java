@@ -17,7 +17,7 @@ public final class SerializedSubLocation extends EscapySimpleSerialized {
 	}
 
 	@SerializedName("layers") @Expose public List<SerializedLayer> layers = null;
-	@SerializedName("layerGroups") @Expose public List<SerializedLayerGroup> layerGroups = null;
+	@SerializedName("renderGroups") @Expose public List<SerializedLayerGroup> layerGroups = null;
 
 	public static final class SerializedLayer extends EscapySimpleSerialized {
 

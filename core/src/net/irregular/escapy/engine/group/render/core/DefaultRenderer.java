@@ -118,8 +118,11 @@ public class DefaultRenderer implements EscapyRenderer {
 					lightFBO.wipe();
 					blender.blend(b -> {
 						mainFBO.getSprite().draw(b);
-						for (LightSource source: lightSource)
+						for (LightSource source: lightSource) {
+							
 							source.drawBuffer(b);
+
+						}
 					});
 				});
 

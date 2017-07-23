@@ -63,7 +63,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 		final EscapyAssociatedArray<EscapyRenderable> renderGroups = loadRenderGroups(arg.getLayerGroups());
 		final EscapyAssociatedArray<EscapyGLBlendRenderer> blenders = loadBlender(serialized);
 		final EscapyAssociatedArray<EscapyVolumeLight> volumeProcessors = loadVolumeProcessors(serialized, resolution);
-		final EscapyAssociatedArray<LightSource[]> lightSources = loadLightGroups(serialized, resolution);
+		final EscapyAssociatedArray<LightSource[]> lightSources = loadLightGroups(arg.getLayerGroups(), serialized, resolution);
 		final EscapyAssociatedArray<LightMask> maskGroups = loadMaskGroups(serialized);
 
 		final Batch batch = new SpriteBatch();
@@ -79,17 +79,29 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 
 
-	private EscapyAssociatedArray<LightSource[]> loadLightGroups(SerializedRenderer serialized, Resolution scrDim) {
+	private EscapyAssociatedArray<LightSource[]> loadLightGroups(EscapyAssociatedArray<EscapyLayer[]> layerGroups,
+																 SerializedRenderer serialized,
+																 Resolution scrDim) {
 
 		EscapyAssociatedArray<LightSource[]> lightSources = new EscapyNamedArray<>(LightSource[].class);
 		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
 
+			EscapyLayer[] layers = layerGroups.get(renderGroup.name);
 			List<SerializedLight> lights = renderGroup.lights;
+
 			LightSource[] lightGroup = new LightSource[lights.size()];
+
 			for (int i = 0; i < lightGroup.length; i++) {
 
 				LightSource source = new LightSource(new EscapyLightSource(), scrDim.width, scrDim.height);
 				SerializedLight light = lights.get(i);
+
+				for (EscapyLayer layer: layers) {
+					if (light.shift.equals(layer.getName())) {
+						// TODO: 24/07/17
+						break;
+					}
+				}
 
 				source.setResolution(new Resolution(light.resolution2i.get(0), light.resolution2i.get(1)));
 				source.setPosition(light.position2f.get(0), light.position2f.get(1));
@@ -141,23 +153,6 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 
 
-	private EscapyAssociatedArray<EscapyGLBlendRenderer> loadBlender(SerializedRenderer serialized) {
-
-		EscapyAssociatedArray<EscapyGLBlendRenderer> blenders = new EscapyNamedArray<>(EscapyGLBlendRenderer.class);
-		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
-
-			SerializedBlender serializedBlender = renderGroup.blender;
-			int[] glMode = serializedBlender.blendMode.loadGLMode();
-			EscapyGLBlendRenderer blender = new NativeSeparateBlendRenderer(glMode);
-			blenders.add(blender, serializedBlender.name);
-		}
-		return blenders;
-	}
-
-
-
-
-
 	private EscapyAssociatedArray<LightMask> loadMaskGroups(SerializedRenderer serialized) {
 
 		EscapyAssociatedArray<LightMask> maskGroups = new EscapyNamedArray<>(LightMask.class);
@@ -175,6 +170,22 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 		return maskGroups;
 	}
 
+
+
+
+
+	private EscapyAssociatedArray<EscapyGLBlendRenderer> loadBlender(SerializedRenderer serialized) {
+
+		EscapyAssociatedArray<EscapyGLBlendRenderer> blenders = new EscapyNamedArray<>(EscapyGLBlendRenderer.class);
+		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
+
+			SerializedBlender serializedBlender = renderGroup.blender;
+			int[] glMode = serializedBlender.blendMode.loadGLMode();
+			EscapyGLBlendRenderer blender = new NativeSeparateBlendRenderer(glMode);
+			blenders.add(blender, serializedBlender.name);
+		}
+		return blenders;
+	}
 
 
 
