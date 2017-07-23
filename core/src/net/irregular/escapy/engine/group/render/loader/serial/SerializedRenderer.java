@@ -25,7 +25,9 @@ public final class SerializedRenderer extends EscapySimpleSerialized  {
 			return "RenderGroup";
 		}
 		@SerializedName("mask") @Expose public SerializedLightMask lightMask;
+		@SerializedName("lights") @Expose public List<SerializedLight> lights = null;
 	}
+
 
 
 	public static final class SerializedLightMask extends EscapySimpleSerialized {
