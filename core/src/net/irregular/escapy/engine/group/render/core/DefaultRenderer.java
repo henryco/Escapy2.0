@@ -77,11 +77,9 @@ public class DefaultRenderer implements EscapyRenderer {
 		for (int i = 0; i < renderGroups.size(); i++) {
 
 			final LightMask mask = lightMasks.asArray()[i];
-
 			final EscapyRenderable renderer = renderGroups.asArray()[i];
 			final EscapyFBO mainFBO = fboRenderGroup[i];
 			final EscapyFBO maskFBO = fboMaskGroup[i];
-
 
 			mainFBO.begin(() -> {
 				mainFBO.wipe();
@@ -93,16 +91,9 @@ public class DefaultRenderer implements EscapyRenderer {
 				if (mask != null) mask.renderMask(mainFBO.getTexture());
 				else mainFBO.renderGraphics(batch);
 			});
-//			maskFBO.renderGraphics(batch);
 		}
 
-		fboLightGroup[0].begin(() -> {
-			fboLightGroup[0].wipe();
-			lightSource.draw(batch, tempFbo.getSprite(), tempFbo.getSprite());
-		});
 
-		fboLightGroup[0].renderGraphics(batch);
-//		for (EscapyFBO fbo: fboRenderGroup) fbo.renderGraphics(batch);
 	}
 
 
