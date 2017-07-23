@@ -27,6 +27,21 @@
 				}
 			},
 
+			"blend": {
+				"name": "blend_foreground",
+				"mode": {
+					"srcRGB": "GL_SRC_ALPHA",
+					"dstRGB": "GL_ONE",
+					"srcALPHA": "GL_SRC_ALPHA",
+					"dstALPHA": "GL_ONE_MINUS_SRC_COLOR"
+				}
+			},
+
+			"processor": {
+
+
+			},
+
 			"lights": [
 				{
 					"colorRGB": [200, 200, 200],

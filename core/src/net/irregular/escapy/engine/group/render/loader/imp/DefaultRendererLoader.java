@@ -9,6 +9,8 @@ import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
 import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
+import net.irregular.escapy.engine.graphic.render.program.gl10.blend.EscapyGLBlendRenderer;
+import net.irregular.escapy.engine.graphic.render.program.gl10.blend.NativeSeparateBlendRenderer;
 import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
 import net.irregular.escapy.engine.graphic.render.program.shader.EscapyLightSource;
 import net.irregular.escapy.engine.graphic.render.program.shader.proxy.LightSource;
@@ -19,6 +21,7 @@ import net.irregular.escapy.engine.group.map.core.object.EscapyGameObject;
 import net.irregular.escapy.engine.group.render.core.DefaultRenderer;
 import net.irregular.escapy.engine.group.render.core.EscapyRenderer;
 import net.irregular.escapy.engine.group.render.loader.RendererLoader;
+import net.irregular.escapy.engine.group.render.loader.serial.SerializedBlender;
 import net.irregular.escapy.engine.group.render.loader.serial.SerializedLight;
 import net.irregular.escapy.engine.group.render.loader.serial.SerializedRenderer;
 
@@ -61,13 +64,15 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 		final EscapyAssociatedArray<EscapyRenderable> renderGroups = loadRenderGroups(arg.getLayerGroups());
 		final EscapyAssociatedArray<LightSource[]> lightSources = loadLightGroups(serialized, resolution);
+		final EscapyAssociatedArray<EscapyGLBlendRenderer> blenders = loadBlender(serialized);
 		final EscapyAssociatedArray<LightMask> maskGroups = loadMaskGroups(serialized);
+
 		final Batch batch = new SpriteBatch();
 
 
 		return new DefaultRenderer(
 				serialized.name, renderGroups, maskGroups,
-				lightSources, null, null,
+				lightSources, null, blenders,
 				resolution, batch
 		);
 	}
@@ -112,6 +117,19 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 	}
 
 
+	private EscapyAssociatedArray<EscapyGLBlendRenderer> loadBlender(SerializedRenderer serialized) {
+
+		EscapyAssociatedArray<EscapyGLBlendRenderer> blenders = new EscapyNamedArray<>(EscapyGLBlendRenderer.class);
+		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
+
+			SerializedBlender serializedBlender = renderGroup.blender;
+			int[] glMode = serializedBlender.blendMode.loadGLMode();
+			EscapyGLBlendRenderer blender = new NativeSeparateBlendRenderer(glMode);
+			blenders.add(blender, serializedBlender.name);
+		}
+
+		return blenders;
+	}
 
 
 	private EscapyAssociatedArray<LightMask> loadMaskGroups(SerializedRenderer serialized) {

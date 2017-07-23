@@ -26,6 +26,7 @@ public final class SerializedRenderer extends EscapySimpleSerialized  {
 			return "RenderGroup";
 		}
 		@SerializedName("mask") @Expose public SerializedLightMask lightMask;
+		@SerializedName("blend") @Expose public SerializedBlender blender = new SerializedBlender();
 		@SerializedName("lights") @Expose public List<SerializedLight> lights = new LinkedList<>();
 	}
 
@@ -37,7 +38,7 @@ public final class SerializedRenderer extends EscapySimpleSerialized  {
 			return "LightMask";
 		}
 		@SerializedName("colorRGBA") @Expose public List<Integer> colorRGBA = null;
-		@SerializedName("mode") @Expose public SerializedMaskMode mode;
+		@SerializedName("mode") @Expose public SerializedMaskMode mode = new SerializedMaskMode();
 
 
 		public int[] loadColorRGBA() {
@@ -47,8 +48,8 @@ public final class SerializedRenderer extends EscapySimpleSerialized  {
 
 
 		public static final class SerializedMaskMode extends EscapySimpleSerialized {
-			@SerializedName("src") @Expose public String src;
-			@SerializedName("dst") @Expose public String dst;
+			@SerializedName("src") @Expose public String src = "GL_DST_COLOR";
+			@SerializedName("dst") @Expose public String dst = "GL_ONE_MINUS_SRC_ALPHA";
 
 			public int[] loadGLMode() {
 				try {

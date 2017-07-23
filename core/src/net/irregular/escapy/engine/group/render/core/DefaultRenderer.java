@@ -146,18 +146,14 @@ public class DefaultRenderer implements EscapyRenderer {
 
 		final Resolution resolution = new Resolution(width, height);
 
-		for (int i = 0; i < fboRenderGroup.length; i++) {
+		for (int i = 0; i < fboRenderGroup.length; i++)
 			fboRenderGroup[i] = new EscapyFrameBuffer(resolution);
-		}
-		for (int i = 0; i < fboMaskGroup.length; i++) {
+		for (int i = 0; i < fboMaskGroup.length; i++)
 			fboMaskGroup[i] = new EscapyFrameBuffer(resolution);
-		}
-		for (int i = 0; i < fboLightGroup.length; i++) {
+		for (int i = 0; i < fboLightGroup.length; i++)
 			fboLightGroup[i] = new EscapyFrameBuffer(resolution);
-		}
-		for (int i = 0; i < fboNormalGroup.length; i++) {
+		for (int i = 0; i < fboNormalGroup.length; i++)
 			fboNormalGroup[i] = new EscapyFrameBuffer(resolution);
-		}
 	}
 
 
