@@ -8,6 +8,7 @@ import net.irregular.escapy.engine.graphic.render.fbo.EscapyFrameBuffer;
 import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
 import net.irregular.escapy.engine.graphic.render.program.shader.AbsLightSource;
+import net.irregular.escapy.engine.graphic.render.program.shader.proxy.LightSource;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
 
 import java.util.Collection;
@@ -30,8 +31,7 @@ public class DefaultRenderer implements EscapyRenderer {
 	private final EscapyFBO[] fboMaskGroup;
 	private final EscapyFBO[] fboLightGroup;
 
-	AbsLightSource lightSource;
-	EscapyFBO tempFbo;
+	LightSource lightSource;
 
 	public DefaultRenderer(String name,
 						   EscapyAssociatedArray<EscapyRenderable> renderGroups,
@@ -56,7 +56,9 @@ public class DefaultRenderer implements EscapyRenderer {
 		namedGroups.add(renderGroups);
 		namedGroups.add(lightMasks);
 
-		lightSource = new AbsLightSource();
+		lightSource = new LightSource(new AbsLightSource());
+		lightSource.setScale(1f);
+		lightSource.setPosition(500, 500);
 		lightSource.setAngles(0f, 0f);
 		lightSource.setColor(new Color(Color.FIREBRICK));
 		lightSource.setCorrect(0.0f);
@@ -65,7 +67,6 @@ public class DefaultRenderer implements EscapyRenderer {
 		lightSource.setUmbra(0, 1);
 		lightSource.setResolution(new Resolution(256, 256));
 
-		tempFbo = new EscapyFrameBuffer(new Resolution(256, 256), true);
 	}
 
 
@@ -92,6 +93,8 @@ public class DefaultRenderer implements EscapyRenderer {
 				else mainFBO.renderGraphics(batch);
 			});
 		}
+
+		lightSource.draw(batch);
 
 
 	}

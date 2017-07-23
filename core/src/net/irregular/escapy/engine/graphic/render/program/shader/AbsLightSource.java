@@ -23,11 +23,14 @@ import static java.io.File.separator;
 @EscapyAPI
 public class AbsLightSource {
 
-	private static final String DIR_PATH = Escapy.getWorkDir() +
-			separator + "shaders" + separator + "light" + separator + "source" + separator + "lightSrc";
 	public static boolean debug = false;
+	private static final String DIR_PATH = Escapy.getWorkDir() + separator + "shaders" + separator
+			+ "light" + separator + "source" + separator + "lightSrc";
+
 
 	private final EscapyUniformBlender uniformBlender;
+
+
 
 	public AbsLightSource() {
 		this(new EscapyBlendRendererExtended().setDebug(debug),
@@ -119,7 +122,6 @@ public class AbsLightSource {
 	public void setUmbra(float coeff, float power) {
 		uniformBlender.getStandardUniforms().setFloatArrayUniform("u_umbra", coeff, power);
 	}
-
 	/**
 	 * Angles range <-1, 1>
 	 */
@@ -132,7 +134,7 @@ public class AbsLightSource {
 
 
 
-//	---------------------------------------- SET ---------------------------------------------
+//	---------------------------------------- GET ---------------------------------------------
 	public Color getColor() {
 		Float[] color = uniformBlender.getStandardUniforms().getFloatArrayUniform("u_color");
 		return new Color(color[0], color[1], color[2], 1f);
@@ -156,6 +158,5 @@ public class AbsLightSource {
 	public Float[] getAngles() {
 		return uniformBlender.getStandardUniforms().getFloatArrayUniform("u_angles");
 	}
-
 
 }
