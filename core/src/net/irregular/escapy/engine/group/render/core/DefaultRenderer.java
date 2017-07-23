@@ -1,5 +1,6 @@
 package net.irregular.escapy.engine.group.render.core;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
@@ -56,7 +57,7 @@ public class DefaultRenderer implements EscapyRenderer {
 		namedGroups.add(renderGroups);
 		namedGroups.add(lightMasks);
 
-		lightSource = new LightSource(new AbsLightSource());
+		lightSource = new LightSource(new AbsLightSource(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		lightSource.setPosition(500, 500);
 		lightSource.setAngles(0f, 0f);
 		lightSource.setColor(new Color(Color.FIREBRICK));
@@ -64,7 +65,7 @@ public class DefaultRenderer implements EscapyRenderer {
 		lightSource.setRadius(0, 1);
 		lightSource.setCoeff(1);
 		lightSource.setUmbra(0, 1);
-		lightSource.setResolution(new Resolution(256, 256));
+		lightSource.setResolution(new Resolution(512, 512));
 
 	}
 
