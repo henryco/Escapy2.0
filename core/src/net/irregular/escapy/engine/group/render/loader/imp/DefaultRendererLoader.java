@@ -1,6 +1,7 @@
 package net.irregular.escapy.engine.group.render.loader.imp;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.google.gson.Gson;
@@ -9,6 +10,8 @@ import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
 import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
+import net.irregular.escapy.engine.graphic.render.program.shader.EscapyLightSource;
+import net.irregular.escapy.engine.graphic.render.program.shader.proxy.LightSource;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
 import net.irregular.escapy.engine.group.map.core.layer.EscapyLayer;
 import net.irregular.escapy.engine.group.map.core.location.EscapySubLocation;
@@ -16,10 +19,12 @@ import net.irregular.escapy.engine.group.map.core.object.EscapyGameObject;
 import net.irregular.escapy.engine.group.render.core.DefaultRenderer;
 import net.irregular.escapy.engine.group.render.core.EscapyRenderer;
 import net.irregular.escapy.engine.group.render.loader.RendererLoader;
+import net.irregular.escapy.engine.group.render.loader.serial.SerializedLight;
 import net.irregular.escapy.engine.group.render.loader.serial.SerializedRenderer;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.List;
 import java.util.function.Consumer;
 
 import static net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray.Entry;
@@ -52,19 +57,59 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 			return null;
 		}
 
+		final Resolution resolution = new Resolution(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
 		final EscapyAssociatedArray<EscapyRenderable> renderGroups = loadRenderGroups(arg.getLayerGroups());
+		final EscapyAssociatedArray<LightSource[]> lightSources = loadLightGroups(serialized, resolution);
 		final EscapyAssociatedArray<LightMask> maskGroups = loadMaskGroups(serialized);
 		final Batch batch = new SpriteBatch();
 
-		final Resolution resolution = new Resolution(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		return new DefaultRenderer(
 				serialized.name, renderGroups, maskGroups,
-				null, null, null,
+				lightSources, null, null,
 				resolution, batch
 		);
 	}
 
+
+
+
+	private EscapyAssociatedArray<LightSource[]> loadLightGroups(SerializedRenderer serialized, Resolution scrDim) {
+
+		EscapyAssociatedArray<LightSource[]> lightSources = new EscapyNamedArray<>(LightSource[].class);
+		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
+
+			List<SerializedLight> lights = renderGroup.lights;
+			LightSource[] lightGroup = new LightSource[lights.size()];
+			for (int i = 0; i < lightGroup.length; i++) {
+
+				LightSource source = new LightSource(new EscapyLightSource(), scrDim.width, scrDim.height);
+				SerializedLight light = lights.get(i);
+
+				source.setResolution(new Resolution(light.resolution2i.get(0), light.resolution2i.get(1)));
+				source.setPosition(light.position2f.get(0), light.position2f.get(1));
+				source.setAngles(light.angles2f.get(0), light.angles2f.get(1));
+				source.setRadius(light.radius2f.get(0), light.radius2f.get(1));
+				source.setUmbra(light.umbra2f.get(0), light.umbra2f.get(1));
+				source.setCorrect(light.correct);
+				source.setCoeff(light.coeff);
+				source.setScale(light.scale);
+
+				float r = ((float) light.colorRGB.get(0)) / 255f;
+				float g = ((float) light.colorRGB.get(1)) / 255f;
+				float b = ((float) light.colorRGB.get(2)) / 255f;
+
+				source.setColor(new Color(r, g, b, 1f));
+
+				lightGroup[i] = source;
+			}
+
+			lightSources.add(lightGroup, serialized.name);
+		}
+
+		return lightSources;
+	}
 
 
 
@@ -112,8 +157,6 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 				}
 
 
-
-
 				private void render(Batch batch, Consumer<EscapyRenderable> renderableConsumer) {
 					for (EscapyLayer layer: entry.getObject()) {
 						float[] position = camera.getPosition();
@@ -130,8 +173,6 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 						camera.update(() -> camera.setCameraPosition(position));
 					}
 				}
-
-
 
 			};
 

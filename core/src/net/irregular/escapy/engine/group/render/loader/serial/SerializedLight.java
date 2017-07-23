@@ -17,6 +17,7 @@ public final class SerializedLight extends EscapySimpleSerialized {
 	@SerializedName("angles2f") @Expose public List<Float> angles2f = null;
 	@SerializedName("radius2f") @Expose public List<Float> radius2f = null;
 	@SerializedName("umbra2f") @Expose public List<Float> umbra2f = null;
-	@SerializedName("correct") @Expose public int correct;
-	@SerializedName("coeff") @Expose public int coeff;
+	@SerializedName("correct") @Expose public float correct;
+	@SerializedName("coeff") @Expose public float coeff;
+	@SerializedName("scale") @Expose public float scale;
 }

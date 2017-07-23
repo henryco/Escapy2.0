@@ -5,6 +5,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import net.irregular.escapy.engine.env.utils.serial.EscapySimpleSerialized;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public final class SerializedRenderer extends EscapySimpleSerialized  {
 			return "RenderGroup";
 		}
 		@SerializedName("mask") @Expose public SerializedLightMask lightMask;
-		@SerializedName("lights") @Expose public List<SerializedLight> lights = null;
+		@SerializedName("lights") @Expose public List<SerializedLight> lights = new LinkedList<>();
 	}
 
 
