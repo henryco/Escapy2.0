@@ -181,29 +181,33 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
 
 			SerializedBlender serializedBlender = renderGroup.blender;
-			int[] glMode = serializedBlender.blendMode.loadGLMode();
 
-			EscapyGLBlendRenderer blender = new NativeSeparateBlendRenderer(glMode) {
-				private float[] matrixValues;
+			EscapyGLBlendRenderer blender =
+					new NativeSeparateBlendRenderer(serializedBlender.blendMode.loadGLMode()) {
 
-				@Override
-				public synchronized void begin(Batch batch) {
-					this.matrixValues = batch.getProjectionMatrix().getValues();
-					camera.update();
-					batch.setProjectionMatrix(camera.getProjection());
-					super.begin(batch);
-				}
+						private float[] matrixValues;
 
-				@Override
-				public synchronized void end(Batch batch) {
-					super.end(batch);
-					Matrix4 matrix = batch.getProjectionMatrix();
-					matrix.set(matrixValues);
-					batch.setProjectionMatrix(matrix);
-				}
+						@Override
+						public synchronized void begin(Batch batch) {
 
-			};
+							camera.update();
+							this.matrixValues = batch.getProjectionMatrix().getValues();
+							batch.setProjectionMatrix(camera.getProjection());
 
+							super.begin(batch);
+						}
+
+						@Override
+						public synchronized void end(Batch batch) {
+
+							super.end(batch);
+
+							Matrix4 matrix = batch.getProjectionMatrix();
+							matrix.set(matrixValues);
+							batch.setProjectionMatrix(matrix);
+						}
+
+					};
 			blenders.add(blender, serializedBlender.name);
 		}
 		return blenders;
