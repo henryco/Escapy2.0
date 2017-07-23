@@ -6,15 +6,21 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
+import net.irregular.escapy.engine.env.context.game.Escapy;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.StandardUniforms;
 import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.BlendRendererExtended;
 import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.EscapyUniformBlender;
 
+import static java.io.File.separator;
+
 /**
  * @author Henry on 02/07/17.
  */ @EscapyAPI
 public class EscapyVolumeLight {
+
+	private static final String DIR_PATH = Escapy.getWorkDir() + separator + "shaders" + separator
+			+ "light" + separator + "volume" + separator + "dynamicLights";
 
 	private final EscapyUniformBlender uniformBlender;
 
@@ -24,8 +30,8 @@ public class EscapyVolumeLight {
 	protected EscapyVolumeLight(EscapyUniformBlender uniformBlender) {
 		this.uniformBlender = uniformBlender;
 		this.uniformBlender.loadProgram(new ShaderFile(
-				Gdx.files.internal("/shaders/light/volume/dynamicLights.vert").readString(),
-				Gdx.files.internal("/shaders/light/volume/dynamicLights.frag").readString()
+				Gdx.files.internal(DIR_PATH + ".vert").readString(),
+				Gdx.files.internal(DIR_PATH + ".frag").readString()
 		));
 		init();
 	}

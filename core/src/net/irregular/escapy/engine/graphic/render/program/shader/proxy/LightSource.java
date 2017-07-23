@@ -16,7 +16,7 @@ public class LightSource {
 
 	public final EscapyLightSource lightSource;
 	public final float[] position;
-	private final Texture region;
+	private Texture region;
 
 	private EscapyFBO buffer;
 	private boolean update;
@@ -28,11 +28,12 @@ public class LightSource {
 	}
 	public LightSource(EscapyLightSource lightSource, int scrW, int scrH) {
 
-		this.region = new Texture(scrW, scrH, Pixmap.Format.RGBA8888);
 		this.lightSource = lightSource;
 		this.position = new float[]{0, 0};
 		this.scale = 1f;
+
 		setResolution(new Resolution(128, 128));
+		resize(scrW, scrH);
 		update();
 	}
 
@@ -56,12 +57,12 @@ public class LightSource {
 
 
 	public void drawBuffer(Batch batch) {
-		buffer.renderGraphics(batch);
+		buffer.getSprite().draw(batch);
 	}
 
 	public void draw(Batch batch) {
 		prepareBuffer(batch);
-		drawBuffer(batch);
+		buffer.renderGraphics(batch);
 	}
 
 
@@ -102,6 +103,11 @@ public class LightSource {
 	public float getScale() {
 		return scale;
 	}
+
+	public void resize(int w, int h) {
+		update(() -> this.region = new Texture(w, h, Pixmap.Format.RGBA8888));
+	}
+
 
 
 

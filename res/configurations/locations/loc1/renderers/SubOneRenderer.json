@@ -39,7 +39,16 @@
 
 			"processor": {
 
+				"name": "processor_foreground",
+				"spriteSize": 0,
+				"threshold": 0,
+				"height": 0,
 
+				"intensity": {
+					"ambient": 0,
+					"direct": 0,
+					"shadow": 0
+				}
 			},
 
 			"lights": [

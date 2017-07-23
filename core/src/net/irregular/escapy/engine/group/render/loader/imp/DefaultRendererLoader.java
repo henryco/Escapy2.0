@@ -13,6 +13,7 @@ import net.irregular.escapy.engine.graphic.render.program.gl10.blend.EscapyGLBle
 import net.irregular.escapy.engine.graphic.render.program.gl10.blend.NativeSeparateBlendRenderer;
 import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
 import net.irregular.escapy.engine.graphic.render.program.shader.EscapyLightSource;
+import net.irregular.escapy.engine.graphic.render.program.shader.EscapyVolumeLight;
 import net.irregular.escapy.engine.graphic.render.program.shader.proxy.LightSource;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
 import net.irregular.escapy.engine.group.map.core.layer.EscapyLayer;
@@ -21,9 +22,7 @@ import net.irregular.escapy.engine.group.map.core.object.EscapyGameObject;
 import net.irregular.escapy.engine.group.render.core.DefaultRenderer;
 import net.irregular.escapy.engine.group.render.core.EscapyRenderer;
 import net.irregular.escapy.engine.group.render.loader.RendererLoader;
-import net.irregular.escapy.engine.group.render.loader.serial.SerializedBlender;
-import net.irregular.escapy.engine.group.render.loader.serial.SerializedLight;
-import net.irregular.escapy.engine.group.render.loader.serial.SerializedRenderer;
+import net.irregular.escapy.engine.group.render.loader.serial.*;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -31,7 +30,6 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import static net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray.Entry;
-import static net.irregular.escapy.engine.group.render.loader.serial.SerializedRenderer.SerializedLightMask;
 import static net.irregular.escapy.engine.group.render.loader.serial.SerializedRenderer.SerializedRenderGroup;
 
 
@@ -63,8 +61,9 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 		final Resolution resolution = new Resolution(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		final EscapyAssociatedArray<EscapyRenderable> renderGroups = loadRenderGroups(arg.getLayerGroups());
-		final EscapyAssociatedArray<LightSource[]> lightSources = loadLightGroups(serialized, resolution);
 		final EscapyAssociatedArray<EscapyGLBlendRenderer> blenders = loadBlender(serialized);
+		final EscapyAssociatedArray<EscapyVolumeLight> volumeProcessors = loadVolumeProcessors(serialized, resolution);
+		final EscapyAssociatedArray<LightSource[]> lightSources = loadLightGroups(serialized, resolution);
 		final EscapyAssociatedArray<LightMask> maskGroups = loadMaskGroups(serialized);
 
 		final Batch batch = new SpriteBatch();
@@ -72,7 +71,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 		return new DefaultRenderer(
 				serialized.name, renderGroups, maskGroups,
-				lightSources, null, blenders,
+				lightSources, volumeProcessors, blenders,
 				resolution, batch
 		);
 	}
@@ -104,17 +103,42 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 				float r = ((float) light.colorRGB.get(0)) / 255f;
 				float g = ((float) light.colorRGB.get(1)) / 255f;
 				float b = ((float) light.colorRGB.get(2)) / 255f;
-
 				source.setColor(new Color(r, g, b, 1f));
 
 				lightGroup[i] = source;
 			}
-
-			lightSources.add(lightGroup, serialized.name);
+			lightSources.add(lightGroup, serialized.name + ":lights");
 		}
-
 		return lightSources;
 	}
+
+
+
+
+
+	private EscapyAssociatedArray<EscapyVolumeLight> loadVolumeProcessors(SerializedRenderer serialized, Resolution scrDim) {
+
+		EscapyAssociatedArray<EscapyVolumeLight> volumes = new EscapyNamedArray<>(EscapyVolumeLight.class);
+		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
+
+			SerializedVolumeProcessor processor = renderGroup.processor;
+			EscapyVolumeLight volumeLight = new EscapyVolumeLight();
+
+			volumeLight.setFieldSize(scrDim.width, scrDim.height);
+			volumeLight.setHeight(processor.height);
+			volumeLight.setThreshold(processor.threshold);
+			volumeLight.setSpriteSize(processor.spriteSize);
+			volumeLight.setAmbientIntensity(processor.intensity.ambient);
+			volumeLight.setDirectIntensity(processor.intensity.direct);
+			volumeLight.setShadowIntensity(processor.intensity.shadow);
+
+			volumes.add(volumeLight, processor.name);
+		}
+		return volumes;
+	}
+
+
+
 
 
 	private EscapyAssociatedArray<EscapyGLBlendRenderer> loadBlender(SerializedRenderer serialized) {
@@ -127,15 +151,16 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 			EscapyGLBlendRenderer blender = new NativeSeparateBlendRenderer(glMode);
 			blenders.add(blender, serializedBlender.name);
 		}
-
 		return blenders;
 	}
+
+
+
 
 
 	private EscapyAssociatedArray<LightMask> loadMaskGroups(SerializedRenderer serialized) {
 
 		EscapyAssociatedArray<LightMask> maskGroups = new EscapyNamedArray<>(LightMask.class);
-
 		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
 			SerializedLightMask serializedLightMask = renderGroup.lightMask;
 
@@ -149,6 +174,8 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 		}
 		return maskGroups;
 	}
+
+
 
 
 

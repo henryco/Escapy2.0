@@ -111,7 +111,7 @@ public class DefaultRenderer implements EscapyRenderer {
 				lightFBO.begin(() -> {
 					lightFBO.wipe();
 					blender.blend(b -> {
-						mainFBO.renderGraphics(b);
+						mainFBO.getSprite().draw(b);
 						for (LightSource source: lightSource)
 							source.drawBuffer(b);
 					});
@@ -122,7 +122,8 @@ public class DefaultRenderer implements EscapyRenderer {
 					renderer.renderNormalsMap(batch);
 				});
 
-				volume.draw(batch, lightFBO.getSprite(), normalFBO.getSprite(), maskFBO.getSprite());
+//				volume.draw(batch, 0, 0, mainFBO.getTexture(), normalFBO.getTexture(), maskFBO.getTexture());
+				mainFBO.renderGraphics(batch);
 			} else {
 				maskFBO.renderGraphics(batch);
 			}
@@ -146,14 +147,16 @@ public class DefaultRenderer implements EscapyRenderer {
 
 		final Resolution resolution = new Resolution(width, height);
 
-		for (int i = 0; i < fboRenderGroup.length; i++)
-			fboRenderGroup[i] = new EscapyFrameBuffer(resolution);
-		for (int i = 0; i < fboMaskGroup.length; i++)
-			fboMaskGroup[i] = new EscapyFrameBuffer(resolution);
-		for (int i = 0; i < fboLightGroup.length; i++)
-			fboLightGroup[i] = new EscapyFrameBuffer(resolution);
-		for (int i = 0; i < fboNormalGroup.length; i++)
-			fboNormalGroup[i] = new EscapyFrameBuffer(resolution);
+		for (int i = 0; i < fboRenderGroup.length; i++) fboRenderGroup[i] = new EscapyFrameBuffer(resolution);
+		for (int i = 0; i < fboMaskGroup.length; i++) fboMaskGroup[i] = new EscapyFrameBuffer(resolution);
+		for (int i = 0; i < fboLightGroup.length; i++) fboLightGroup[i] = new EscapyFrameBuffer(resolution);
+		for (int i = 0; i < fboNormalGroup.length; i++) fboNormalGroup[i] = new EscapyFrameBuffer(resolution);
+
+		for (EscapyVolumeLight v: volumeProcessors)
+			v.setFieldSize(width, height);
+		for (LightSource[] sources: lightSources) {
+			for (LightSource s : sources) s.resize(width, height);
+		}
 	}
 
 
