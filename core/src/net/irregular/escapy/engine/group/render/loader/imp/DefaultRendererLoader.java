@@ -103,8 +103,8 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 				float r = ((float) light.colorRGB.get(0)) / 255f;
 				float g = ((float) light.colorRGB.get(1)) / 255f;
 				float b = ((float) light.colorRGB.get(2)) / 255f;
-				source.setColor(new Color(r, g, b, 1f));
 
+				source.setColor(new Color(r, g, b, 1f));
 				lightGroup[i] = source;
 			}
 			lightSources.add(lightGroup, serialized.name + ":lights");

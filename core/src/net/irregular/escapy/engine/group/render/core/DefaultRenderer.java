@@ -123,7 +123,13 @@ public class DefaultRenderer implements EscapyRenderer {
 				});
 
 //				volume.draw(batch, 0, 0, mainFBO.getTexture(), normalFBO.getTexture(), maskFBO.getTexture());
-				mainFBO.renderGraphics(batch);
+//				mainFBO.renderGraphics(batch);
+
+				batch.begin();
+				for (LightSource source: lightSource)
+					source.drawBuffer(batch);
+				batch.end();
+
 			} else {
 				maskFBO.renderGraphics(batch);
 			}

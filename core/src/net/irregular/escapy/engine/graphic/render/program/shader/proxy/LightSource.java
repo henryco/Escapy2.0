@@ -88,7 +88,11 @@ public class LightSource {
 	public void setPosition(float x, float y) {
 		this.position[0] = x;
 		this.position[1] = y;
-		buffer.getSprite().setPosition(x, y);
+
+		float w = buffer.getSprite().getWidth() * scale;
+		float h = buffer.getSprite().getHeight() * scale;
+
+		buffer.getSprite().setPosition(x - 0.5f * w, y - 0.5f * h);
 	}
 	public void setScale(float scale) {
 		this.scale = scale;
