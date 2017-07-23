@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Matrix4;
 import com.google.gson.Gson;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
@@ -181,7 +182,28 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 			SerializedBlender serializedBlender = renderGroup.blender;
 			int[] glMode = serializedBlender.blendMode.loadGLMode();
-			EscapyGLBlendRenderer blender = new NativeSeparateBlendRenderer(glMode);
+
+			EscapyGLBlendRenderer blender = new NativeSeparateBlendRenderer(glMode) {
+				private float[] matrixValues;
+
+				@Override
+				public synchronized void begin(Batch batch) {
+					this.matrixValues = batch.getProjectionMatrix().getValues();
+					camera.update();
+					batch.setProjectionMatrix(camera.getProjection());
+					super.begin(batch);
+				}
+
+				@Override
+				public synchronized void end(Batch batch) {
+					super.end(batch);
+					Matrix4 matrix = batch.getProjectionMatrix();
+					matrix.set(matrixValues);
+					batch.setProjectionMatrix(matrix);
+				}
+
+			};
+
 			blenders.add(blender, serializedBlender.name);
 		}
 		return blenders;
