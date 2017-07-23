@@ -57,7 +57,6 @@ public class DefaultRenderer implements EscapyRenderer {
 		namedGroups.add(lightMasks);
 
 		lightSource = new LightSource(new AbsLightSource());
-		lightSource.setScale(1f);
 		lightSource.setPosition(500, 500);
 		lightSource.setAngles(0f, 0f);
 		lightSource.setColor(new Color(Color.FIREBRICK));
@@ -118,15 +117,12 @@ public class DefaultRenderer implements EscapyRenderer {
 
 		for (int i = 0; i < fboRenderGroup.length; i++) {
 			fboRenderGroup[i] = new EscapyFrameBuffer(resolution);
-			fboRenderGroup[i].setFlip(false, true);
 		}
 		for (int i = 0; i < fboMaskGroup.length; i++) {
 			fboMaskGroup[i] = new EscapyFrameBuffer(resolution);
-			fboMaskGroup[i].setFlip(false, true);
 		}
 		for (int i = 0; i < fboLightGroup.length; i++) {
 			fboLightGroup[i] = new EscapyFrameBuffer(resolution);
-			fboLightGroup[i].setFlip(false, true);
 		}
 	}
 

@@ -4,7 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import net.irregular.escapy.engine.graphic.render.fbo.EscapyFBO;
+import net.irregular.escapy.engine.graphic.render.fbo.EscapyFrameBuffer;
 import net.irregular.escapy.engine.graphic.render.program.shader.AbsLightSource;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
 
@@ -16,7 +17,9 @@ public class LightSource {
 	public final AbsLightSource lightSource;
 	public final float[] position;
 
-	private final Sprite region;
+	private EscapyFBO buffer;
+	private Texture region;
+	private boolean update;
 	private float scale;
 
 	public LightSource() {
@@ -25,39 +28,47 @@ public class LightSource {
 	public LightSource(AbsLightSource lightSource) {
 		this.lightSource = lightSource;
 		this.position = new float[]{0, 0};
-		this.region = new Sprite();
 		this.scale = 1f;
-		rebind();
+
+		setResolution(new Resolution(128, 128));
+		update();
 	}
 
 
 
-	public void rebind() {
-		region.setPosition(position[0], position[1]);
-		region.setScale(scale);
+	public void update() {
+		update = true;
 	}
 
 
 
 	public void draw(Batch batch) {
-		lightSource.draw(batch, region, region);
+
+		if (update) {
+			buffer.begin(() -> {
+				buffer.wipe();
+				lightSource.draw(batch, 0, 0, region, region);
+			});
+			update = false;
+		}
+
+		buffer.renderGraphics(batch);
 	}
 
 
 
 	public void setResolution(Resolution resolution) {
 		lightSource.setResolution(resolution);
-		region.setTexture(new Texture(resolution.width, resolution.height, Pixmap.Format.RGBA8888));
-		rebind();
+		buffer = new EscapyFrameBuffer();
+		region = new Texture(resolution.width, resolution.height, Pixmap.Format.RGBA8888);
+		update();
 	}
 	public void setPosition(float x, float y) {
 		this.position[0] = x;
 		this.position[1] = y;
-		rebind();
 	}
 	public void setScale(float scale) {
 		this.scale = scale;
-		rebind();
 	}
 	public void setPosition(float[] position2f) {
 		setPosition(position2f[0], position2f[1]);

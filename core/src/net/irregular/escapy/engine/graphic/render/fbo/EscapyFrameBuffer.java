@@ -1,5 +1,6 @@
 package net.irregular.escapy.engine.graphic.render.fbo;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -27,7 +28,7 @@ public class EscapyFrameBuffer implements EscapyFBO {
 		this.buffer = buffer;
 		this.bufferRegion = new TextureRegion(buffer.getColorBufferTexture());
 		this.bufferSprite = new Sprite(bufferRegion);
-
+		setFlip(false, true);
 		if (initialWipe) begin(this::wipe);
 	}
 
@@ -53,6 +54,9 @@ public class EscapyFrameBuffer implements EscapyFBO {
 	 */ @EscapyAPI
 	public EscapyFrameBuffer(final Resolution resolution) {
 	 	this(resolution, false);
+	}
+	public EscapyFrameBuffer() {
+	 	this(new Resolution(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 	}
 
 	@Override
