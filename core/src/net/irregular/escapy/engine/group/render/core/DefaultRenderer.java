@@ -57,9 +57,9 @@ public class DefaultRenderer implements EscapyRenderer {
 		namedGroups.add(lightMasks);
 
 		lightSource = new AbsLightSource();
-		lightSource.setAngles(1, 1);
+		lightSource.setAngles(0f, 0f);
 		lightSource.setColor(new Color(Color.FIREBRICK));
-		lightSource.setCorrect(0);
+		lightSource.setCorrect(0.0f);
 		lightSource.setRadius(0, 1);
 		lightSource.setCoeff(1);
 		lightSource.setUmbra(0, 1);

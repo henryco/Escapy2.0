@@ -28,7 +28,18 @@
 			},
 
 			"lights": [
-
+				{
+					"name": "",
+					"type": "AbsLight",
+					"colorRGB": [200, 200, 200],
+					"resolution2i": [256, 256],
+					"position2f": [0, 0],
+					"angles2f": [0, 0],
+					"radius2f": [0, 1],
+					"umbra2f": [0, 1],
+					"correct": 0,
+					"coeff": 1
+				}
 			]
 		}
 	]
