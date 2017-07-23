@@ -116,17 +116,15 @@ public class DefaultRenderer implements EscapyRenderer {
 
 				lightFBO.begin(() -> {
 					lightFBO.wipe();
-					blender.blend(b -> {
-						mainFBO.getSprite().draw(b);
+					blender.blend(batch, () -> {
 						for (LightSource source: lightSource) {
-							
-							source.drawBuffer(b);
-
+							source.drawBuffer(batch);
 						}
 					});
 				});
 
-				volume.draw(batch, 0, 0, lightFBO.getTexture(), normalFBO.getTexture(), maskFBO.getTexture());
+				lightFBO.renderGraphics(batch);
+//				volume.draw(batch, 0, 0, lightFBO.getTexture(), normalFBO.getTexture(), maskFBO.getTexture());
 
 			} else {
 				maskFBO.renderGraphics(batch);

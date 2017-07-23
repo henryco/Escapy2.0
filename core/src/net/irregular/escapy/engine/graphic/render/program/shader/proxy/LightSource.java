@@ -78,6 +78,12 @@ public class LightSource {
 
 
 
+
+	public void resize(int w, int h) {
+		update(() -> this.region = new Texture(w, h, Pixmap.Format.RGBA8888));
+	}
+
+
 	public void setResolution(Resolution resolution) {
 		lightSource.setResolution(resolution);
 		buffer = new EscapyFrameBuffer(resolution);
@@ -85,6 +91,8 @@ public class LightSource {
 		setScale(scale);
 		update();
 	}
+
+
 	public void setPosition(float x, float y) {
 		this.position[0] = x;
 		this.position[1] = y;
@@ -94,10 +102,14 @@ public class LightSource {
 
 		buffer.getSprite().setPosition(x - 0.5f * w, y - 0.5f * h);
 	}
+
+
 	public void setScale(float scale) {
 		this.scale = scale;
 		buffer.getSprite().setScale(scale);
 	}
+
+
 	public void setPosition(float[] position2f) {
 		setPosition(position2f[0], position2f[1]);
 	}
@@ -108,9 +120,7 @@ public class LightSource {
 		return scale;
 	}
 
-	public void resize(int w, int h) {
-		update(() -> this.region = new Texture(w, h, Pixmap.Format.RGBA8888));
-	}
+
 
 
 

@@ -4,14 +4,12 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 
-import java.util.function.Consumer;
-
 /**
  * @author Henry on 29/06/17.
  */ @EscapyAPI
 public interface EscapyGLBlendRenderer {
 
-	void blend(Consumer<Batch> batchConsumer);
+	void blend(Batch batch, Runnable drawClosure);
 	void setColorBlendMode(int[] colorBlendMode);
 	int[] getColorBlendMode();
 

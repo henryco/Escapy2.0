@@ -3,10 +3,8 @@ package net.irregular.escapy.engine.graphic.render.program.gl10.blend;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 
-import java.util.function.Consumer;
 
 /**
  * @author Henry on 30/06/17.
@@ -14,7 +12,6 @@ import java.util.function.Consumer;
 public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 
 	private final int[] blendMode;
-	private final Batch batch;
 
 
 	@EscapyAPI
@@ -24,13 +21,12 @@ public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 
 	public NativeSeparateBlendRenderer(int[] blendMode) {
 		this.blendMode = new int[4];
-		this.batch = new SpriteBatch();
 		setColorBlendMode(blendMode);
 	}
 
 
 	@Override
-	public void blend(Consumer<Batch> batchConsumer) {
+	public void blend(Batch batch, Runnable drawClosure) {
 
 		int srcFunc = batch.getBlendSrcFunc();
 		int dstFunc = batch.getBlendDstFunc();
@@ -39,8 +35,7 @@ public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 		batch.enableBlending();
 
 		setBlendFunction(blendMode, batch);
-
-		batchConsumer.accept(batch);
+		drawClosure.run();
 
 		batch.disableBlending();
 		batch.end();
