@@ -12,7 +12,7 @@ import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 
 	private final int[] blendMode;
-
+	private int srcFunc, dstFunc;
 
 	@EscapyAPI
 	public NativeSeparateBlendRenderer() {
@@ -22,28 +22,48 @@ public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 	public NativeSeparateBlendRenderer(int[] blendMode) {
 		this.blendMode = new int[4];
 		setColorBlendMode(blendMode);
+		reset();
 	}
 
 
 	@Override
-	public void blend(Batch batch, Runnable drawClosure) {
+	public synchronized void begin(Batch batch) {
 
-		int srcFunc = batch.getBlendSrcFunc();
-		int dstFunc = batch.getBlendDstFunc();
+		this.srcFunc = batch.getBlendSrcFunc();
+		this.dstFunc = batch.getBlendDstFunc();
 
 		batch.begin();
 		batch.enableBlending();
 
 		setBlendFunction(blendMode, batch);
-		drawClosure.run();
+	}
+
+
+	@Override
+	public synchronized void end(Batch batch) {
 
 		batch.disableBlending();
 		batch.end();
 
 		batch.begin();
-		batch.setBlendFunction(srcFunc, dstFunc);
+		batch.setBlendFunction(this.srcFunc, this.dstFunc);
 		batch.end();
+
+		reset();
 	}
+
+
+	private void setBlendFunction(int[] program, Batch batch) {
+		batch.setBlendFunction(-1, -1);
+		Gdx.gl20.glBlendFuncSeparate(program[0], program[1], program[2], program[3]);
+		Gdx.gl20.glBlendEquationSeparate(GL30.GL_FUNC_ADD, GL30.GL_FUNC_ADD);
+	}
+
+	private void reset() {
+		this.dstFunc = -1;
+		this.srcFunc = -1;
+	}
+
 
 	@Override
 	public void setColorBlendMode(int[] colorBlendMode) {
@@ -54,13 +74,5 @@ public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 	public int[] getColorBlendMode() {
 		return this.blendMode.clone();
 	}
-
-
-	private void setBlendFunction(int[] program, Batch batch) {
-		batch.setBlendFunction(-1, -1);
-		Gdx.gl20.glBlendFuncSeparate(program[0], program[1], program[2], program[3]);
-		Gdx.gl20.glBlendEquationSeparate(GL30.GL_FUNC_ADD, GL30.GL_FUNC_ADD);
-	}
-
 
 }

@@ -9,7 +9,15 @@ import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
  */ @EscapyAPI
 public interface EscapyGLBlendRenderer {
 
-	void blend(Batch batch, Runnable drawClosure);
+ 	void begin(Batch batch);
+ 	void end(Batch batch);
+
+	default void blend(Batch batch, Runnable drawClosure) {
+		begin(batch);
+		drawClosure.run();
+		end(batch);
+	}
+
 	void setColorBlendMode(int[] colorBlendMode);
 	int[] getColorBlendMode();
 
