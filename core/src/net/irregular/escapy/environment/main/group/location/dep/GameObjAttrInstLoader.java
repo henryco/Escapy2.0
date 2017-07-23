@@ -3,16 +3,16 @@ package net.irregular.escapy.environment.main.group.location.dep;
 import com.badlogic.gdx.Gdx;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanced;
-import net.irregular.escapy.engine.group.map.core.object.GameObject;
+import net.irregular.escapy.engine.group.map.core.object.EscapyGameObject;
 
 /**
  * @author Henry on 21/07/17.
  */
-public class GameObjAttrInstLoader implements EscapyInstanceLoader<GameObject> {
+public class GameObjAttrInstLoader implements EscapyInstanceLoader<EscapyGameObject> {
 
 
 	@EscapyInstanced("FULL_SCREEN")
-	public GameObject fullScreenAttribute(GameObject gameObject) {
+	public EscapyGameObject fullScreenAttribute(EscapyGameObject gameObject) {
 
 
 		float width = Gdx.graphics.getWidth();

@@ -11,24 +11,24 @@ import java.util.function.Consumer;
 /**
  * @author Henry on 30/06/17.
  */ @EscapyAPI
-public class EscapyNativeBlendRenderer implements GLBlendProgram {
+public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 
-	private int[] blendMode;
+	private final int[] blendMode;
 	private final Batch batch;
 
 
 	@EscapyAPI
-	public EscapyNativeBlendRenderer() {
-		this(ADD_RGBA);
+	public NativeSeparateBlendRenderer() {
+		this(Separate.ADD_RGBA());
 	}
 	@EscapyAPI
-	public EscapyNativeBlendRenderer(int[] blendMode) {
-		setColorBlendMode(blendMode);
+	public NativeSeparateBlendRenderer(int[] blendMode) {
+		this.blendMode = new int[4];
 		this.batch = new SpriteBatch();
 	}
 
 
-	@EscapyAPI
+	@Override
 	public void blend(Consumer<Batch> batchConsumer) {
 
 		int srcFunc = batch.getBlendSrcFunc();
@@ -37,7 +37,7 @@ public class EscapyNativeBlendRenderer implements GLBlendProgram {
 		batch.begin();
 		batch.enableBlending();
 
-		setProgram(blendMode);
+		setBlendFunction(blendMode);
 
 		batchConsumer.accept(batch);
 
@@ -49,22 +49,20 @@ public class EscapyNativeBlendRenderer implements GLBlendProgram {
 		batch.end();
 	}
 
-
+	@Override
 	public void setColorBlendMode(int[] colorBlendMode) {
-		this.blendMode = colorBlendMode.clone();
+		System.arraycopy(colorBlendMode, 0, blendMode, 0, 4);
 	}
 
-	@EscapyAPI public int[] getColorBlendMode() {
+	@Override
+	public int[] getColorBlendMode() {
 		return this.blendMode.clone();
 	}
 
 
-	private void setProgram(int[] program) {
-		this.setProgram(program[0], program[1], program[2], program[3]);
-	}
-	private void setProgram(int p1, int p2, int p3, int p4) {
+	private void setBlendFunction(int[] program) {
 		batch.setBlendFunction(-1, -1);
-		Gdx.gl30.glBlendFuncSeparate(p1, p2, p3, p4);
+		Gdx.gl30.glBlendFuncSeparate(program[0], program[1], program[2], program[3]);
 		Gdx.gl30.glBlendEquationSeparate(GL30.GL_FUNC_ADD, GL30.GL_FUNC_ADD);
 	}
 

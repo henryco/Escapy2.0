@@ -5,13 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
-import net.irregular.escapy.engine.group.map.core.object.GameObjectRenderer;
+import net.irregular.escapy.engine.group.map.core.object.EscapyGameObjectRenderer;
 import net.irregular.escapy.engine.group.map.core.object.imp.GameObjectStatic;
 
 /**
  * @author Henry on 14/07/17.
  */
-public class GameObjectStaticRenderer implements GameObjectRenderer<GameObjectStatic> {
+public class GameObjectStaticRenderer implements EscapyGameObjectRenderer<GameObjectStatic> {
 
 
 	private final EscapyRenderable renderable;

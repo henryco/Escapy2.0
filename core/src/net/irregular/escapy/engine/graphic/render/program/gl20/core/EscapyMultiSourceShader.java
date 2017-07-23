@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 /**
  * @author Henry on 29/06/17.
  */
-public interface MultiSourceShader extends EscapyShader {
+public interface EscapyMultiSourceShader extends EscapyShader {
 
 	void setSourcesNames(String ... sourcesNames);
 	void draw(Batch batch, float x, float y, Texture ... source);

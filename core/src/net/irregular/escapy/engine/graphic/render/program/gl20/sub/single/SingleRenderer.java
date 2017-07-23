@@ -7,20 +7,20 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
+import net.irregular.escapy.engine.graphic.render.program.gl20.core.EscapySingleSourceShader;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
-import net.irregular.escapy.engine.graphic.render.program.gl20.core.SingleSourceShader;
 
 /**
  * @author Henry on 30/06/17.
  */ @EscapyAPI
-public class EscapySingleRenderer implements SingleSourceShader {
+public class SingleRenderer implements EscapySingleSourceShader {
 
 	private ShaderProgram shaderProgram;
 
-	@EscapyAPI public EscapySingleRenderer() {
+	@EscapyAPI public SingleRenderer() {
 		this.shaderProgram = SpriteBatch.createDefaultShader();
 	}
-	@EscapyAPI public EscapySingleRenderer(ShaderFile shaderFile) {
+	@EscapyAPI public SingleRenderer(ShaderFile shaderFile) {
 		loadProgram(shaderFile);
 	}
 

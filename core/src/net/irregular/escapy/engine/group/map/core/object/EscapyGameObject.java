@@ -5,10 +5,10 @@ import net.irregular.escapy.engine.env.utils.EscapyObject;
 /**
  * @author Henry on 11/07/17.
  */
-public interface GameObject extends EscapyObject {
+public interface EscapyGameObject extends EscapyObject {
 
 	ObjectDetails getObjectDetails();
-	GameObjectRenderer getGameObjectRenderer();
+	EscapyGameObjectRenderer getGameObjectRenderer();
 
 	default String getName() {
 		return getObjectDetails().getName();

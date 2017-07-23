@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFBO;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFrameBuffer;
-import net.irregular.escapy.engine.graphic.render.program.shader.AbsLightSource;
+import net.irregular.escapy.engine.graphic.render.program.shader.EscapyLightSource;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
 
 /**
@@ -14,7 +14,7 @@ import net.irregular.escapy.engine.graphic.screen.Resolution;
  */
 public class LightSource {
 
-	public final AbsLightSource lightSource;
+	public final EscapyLightSource lightSource;
 	public final float[] position;
 	private final Texture region;
 
@@ -24,9 +24,9 @@ public class LightSource {
 
 
 	public LightSource(int scrW, int scrH) {
-		this(new AbsLightSource(), scrW, scrH);
+		this(new EscapyLightSource(), scrW, scrH);
 	}
-	public LightSource(AbsLightSource lightSource, int scrW, int scrH) {
+	public LightSource(EscapyLightSource lightSource, int scrW, int scrH) {
 
 		this.region = new Texture(scrW, scrH, Pixmap.Format.RGBA8888);
 		this.lightSource = lightSource;

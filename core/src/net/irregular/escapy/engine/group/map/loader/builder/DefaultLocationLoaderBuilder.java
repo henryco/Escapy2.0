@@ -5,7 +5,7 @@ import net.irregular.escapy.engine.group.map.core.layer.EscapyLayer;
 import net.irregular.escapy.engine.group.map.core.layer.shift.LayerShiftLogic;
 import net.irregular.escapy.engine.group.map.core.location.EscapyLocation;
 import net.irregular.escapy.engine.group.map.core.location.EscapySubLocation;
-import net.irregular.escapy.engine.group.map.core.object.GameObject;
+import net.irregular.escapy.engine.group.map.core.object.EscapyGameObject;
 import net.irregular.escapy.engine.group.map.loader.GameObjectLoader;
 import net.irregular.escapy.engine.group.map.loader.LocationLoader;
 import net.irregular.escapy.engine.group.map.loader.SubLocationLoader;
@@ -19,7 +19,7 @@ import net.irregular.escapy.engine.group.map.loader.imp.DefaultSubLocationLoader
  */
 public class DefaultLocationLoaderBuilder implements LocationLoaderBuilder {
 
-	private EscapyInstanceLoader<GameObject> gameObjectInstanceAttributeLoader;
+	private EscapyInstanceLoader<EscapyGameObject> gameObjectInstanceAttributeLoader;
 	private EscapyInstanceLoader<LayerShiftLogic> subLocationLayerShiftLogicInstanceLoader;
 	private EscapyInstanceLoader<EscapyLayer> subLocationLayerInstanceAttributeLoader;
 	private EscapyInstanceLoader<EscapyLocation> locationInstanceAttributeLoader;
@@ -62,7 +62,7 @@ public class DefaultLocationLoaderBuilder implements LocationLoaderBuilder {
 	}
 
 	public DefaultLocationLoaderBuilder setGameObjectInstanceAttributeLoader
-			(EscapyInstanceLoader<GameObject> gameObjectInstanceAttributeLoader) {
+			(EscapyInstanceLoader<EscapyGameObject> gameObjectInstanceAttributeLoader) {
 		this.gameObjectInstanceAttributeLoader = gameObjectInstanceAttributeLoader;
 		return this;
 	}

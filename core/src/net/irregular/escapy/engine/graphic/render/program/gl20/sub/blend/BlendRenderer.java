@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.irregular.escapy.engine.env.context.annotation.Dante;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
-import net.irregular.escapy.engine.graphic.render.program.gl20.core.MultiSourceShader;
+import net.irregular.escapy.engine.graphic.render.program.gl20.core.EscapyMultiSourceShader;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
 import net.irregular.escapy.engine.graphic.render.program.gl20.proxy.EscapyProxyShaderProgram;
 import net.irregular.escapy.engine.graphic.render.program.gl20.proxy.ProxyShaderProgram;
@@ -17,19 +17,19 @@ import java.util.function.Function;
 /**
  * @author Henry on 29/06/17.
  */ @EscapyAPI @Dante
-public class EscapyBlendRenderer implements MultiSourceShader {
+public class BlendRenderer implements EscapyMultiSourceShader {
 
 	private EscapyProxyShaderProgram shaderProgram;
 	private String[] sourcesNames;
 	private boolean debug;
 
-	@EscapyAPI public EscapyBlendRenderer() {
+	@EscapyAPI public BlendRenderer() {
 		shaderProgram = new ProxyShaderProgram(SpriteBatch.createDefaultShader());
 	}
-	@EscapyAPI public EscapyBlendRenderer(ShaderFile shaderFile) {
+	@EscapyAPI public BlendRenderer(ShaderFile shaderFile) {
 		loadProgram(shaderFile);
 	}
-	@EscapyAPI public EscapyBlendRenderer(ShaderFile shaderFile, String ... sourcesNames) {
+	@EscapyAPI public BlendRenderer(ShaderFile shaderFile, String ... sourcesNames) {
 		this(shaderFile);
 		setSourcesNames(sourcesNames);
 	}
@@ -98,7 +98,7 @@ public class EscapyBlendRenderer implements MultiSourceShader {
 		shaderProgram.end();
 	}
 
-	public EscapyBlendRenderer setDebug(boolean debug) {
+	public BlendRenderer setDebug(boolean debug) {
 		this.debug = debug;
 		return this;
 	}

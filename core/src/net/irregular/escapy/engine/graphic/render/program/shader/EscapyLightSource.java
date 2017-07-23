@@ -11,7 +11,7 @@ import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.env.context.game.Escapy;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.StandardUniforms;
-import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.EscapyBlendRendererExtended;
+import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.BlendRendererExtended;
 import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.EscapyUniformBlender;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
 
@@ -21,7 +21,7 @@ import static java.io.File.separator;
  * @author Henry on 30/06/17.
  */
 @EscapyAPI
-public class AbsLightSource {
+public class EscapyLightSource {
 
 	public static boolean debug = false;
 	private static final String DIR_PATH = Escapy.getWorkDir() + separator + "shaders" + separator
@@ -32,15 +32,15 @@ public class AbsLightSource {
 
 
 
-	public AbsLightSource() {
-		this(new EscapyBlendRendererExtended().setDebug(debug),
+	public EscapyLightSource() {
+		this(new BlendRendererExtended().setDebug(debug),
 				new ShaderFile(
 						Gdx.files.internal(DIR_PATH + ".vert").readString(),
 						Gdx.files.internal(DIR_PATH + "_N.frag").readString()
 				)
 		);
 	}
-	public AbsLightSource(EscapyUniformBlender uniformBlender, ShaderFile shaderFile) {
+	public EscapyLightSource(EscapyUniformBlender uniformBlender, ShaderFile shaderFile) {
 		this.uniformBlender = uniformBlender;
 		initBlender(shaderFile);
 	}

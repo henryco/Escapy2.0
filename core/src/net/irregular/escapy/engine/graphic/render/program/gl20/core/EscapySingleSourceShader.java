@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 /**
  * @author Henry on 29/06/17.
  */
-public interface SingleSourceShader extends EscapyShader {
+public interface EscapySingleSourceShader extends EscapyShader {
 
 	void draw(Batch batch, float x, float y, Texture source);
 	void draw(Batch batch, float x, float y, float width, float height, TextureRegion source);

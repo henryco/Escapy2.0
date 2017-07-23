@@ -1,8 +1,8 @@
 package net.irregular.escapy.engine.group.map.loader.imp;
 
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
-import net.irregular.escapy.engine.group.map.core.object.GameObject;
-import net.irregular.escapy.engine.group.map.core.object.GameObjectRenderer;
+import net.irregular.escapy.engine.group.map.core.object.EscapyGameObject;
+import net.irregular.escapy.engine.group.map.core.object.EscapyGameObjectRenderer;
 import net.irregular.escapy.engine.group.map.core.object.ObjectDetails;
 import net.irregular.escapy.engine.group.map.core.object.imp.GameObjectStatic;
 import net.irregular.escapy.engine.group.map.core.object.renderer.GameObjectStaticRenderer;
@@ -18,24 +18,24 @@ import static net.irregular.escapy.engine.group.map.loader.serial.SerializedGame
 public class DefaultGameObjectLoader implements GameObjectLoader<SerializedGameObject> {
 
 
-	private final EscapyInstanceLoader<GameObject> gameObjectInstanceAttributeLoader;
+	private final EscapyInstanceLoader<EscapyGameObject> gameObjectInstanceAttributeLoader;
 
-	public DefaultGameObjectLoader(EscapyInstanceLoader<GameObject> gameObjectInstanceAttributeLoader) {
+	public DefaultGameObjectLoader(EscapyInstanceLoader<EscapyGameObject> gameObjectInstanceAttributeLoader) {
 		this.gameObjectInstanceAttributeLoader = gameObjectInstanceAttributeLoader;
 	}
 
 
 	@Override
-	public GameObject loadGameObject(String path, SerializedGameObject serialized) {
+	public EscapyGameObject loadGameObject(String path, SerializedGameObject serialized) {
 
-		GameObject gameObject = proxyLoadedGameObject(path, serialized);
+		EscapyGameObject gameObject = proxyLoadedGameObject(path, serialized);
 		if (gameObjectInstanceAttributeLoader != null)
 			gameObject = gameObjectInstanceAttributeLoader.loadInstanceAttributes(gameObject, serialized.attributes);
 		return gameObject;
 	}
 
 
-	private GameObject proxyLoadedGameObject(String path, SerializedGameObject serialized) {
+	private EscapyGameObject proxyLoadedGameObject(String path, SerializedGameObject serialized) {
 
 		ObjectDetails details = new ObjectDetails(serialized.details.name);
 		details.setScale(serialized.details.scale);
@@ -51,9 +51,9 @@ public class DefaultGameObjectLoader implements GameObjectLoader<SerializedGameO
 	}
 
 
-	private GameObject loadStaticObject(String path, ObjectDetails details,
-										SerializedStatic serializedStatic,
-										GameObjectRenderer<GameObjectStatic> staticRenderer) {
+	private EscapyGameObject loadStaticObject(String path, ObjectDetails details,
+											  SerializedStatic serializedStatic,
+											  EscapyGameObjectRenderer<GameObjectStatic> staticRenderer) {
 
 		GameObjectStaticTexturePath texturePath = new GameObjectStaticTexturePath();
 

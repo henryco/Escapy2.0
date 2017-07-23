@@ -9,9 +9,10 @@ import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
 import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
+import net.irregular.escapy.engine.graphic.screen.Resolution;
 import net.irregular.escapy.engine.group.map.core.layer.EscapyLayer;
 import net.irregular.escapy.engine.group.map.core.location.EscapySubLocation;
-import net.irregular.escapy.engine.group.map.core.object.GameObject;
+import net.irregular.escapy.engine.group.map.core.object.EscapyGameObject;
 import net.irregular.escapy.engine.group.render.core.DefaultRenderer;
 import net.irregular.escapy.engine.group.render.core.EscapyRenderer;
 import net.irregular.escapy.engine.group.render.loader.RendererLoader;
@@ -55,9 +56,12 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 		final EscapyAssociatedArray<LightMask> maskGroups = loadMaskGroups(serialized);
 		final Batch batch = new SpriteBatch();
 
+		final Resolution resolution = new Resolution(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
 		return new DefaultRenderer(
-				serialized.name, renderGroups, maskGroups, batch,
-				Gdx.graphics.getWidth(), Gdx.graphics.getHeight()
+				serialized.name, renderGroups, maskGroups,
+				null, null, null,
+				resolution, batch
 		);
 	}
 
@@ -119,7 +123,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 						});
 						batch.setProjectionMatrix(camera.getProjection());
 						batch.begin();
-						for (GameObject gameObject : layer.getGameObjects()) {
+						for (EscapyGameObject gameObject : layer.getGameObjects()) {
 							renderableConsumer.accept(gameObject.getGameObjectRenderer().getRenderer());
 						}
 						batch.end();

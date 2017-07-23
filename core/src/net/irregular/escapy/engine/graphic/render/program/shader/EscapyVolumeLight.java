@@ -8,20 +8,20 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.StandardUniforms;
-import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.EscapyBlendRendererExtended;
+import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.BlendRendererExtended;
 import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.EscapyUniformBlender;
 
 /**
  * @author Henry on 02/07/17.
  */ @EscapyAPI
-public class VolumeLight {
+public class EscapyVolumeLight {
 
 	private final EscapyUniformBlender uniformBlender;
 
-	public VolumeLight() {
-		this(new EscapyBlendRendererExtended());
+	public EscapyVolumeLight() {
+		this(new BlendRendererExtended());
 	}
-	protected VolumeLight(EscapyUniformBlender uniformBlender) {
+	protected EscapyVolumeLight(EscapyUniformBlender uniformBlender) {
 		this.uniformBlender = uniformBlender;
 		this.uniformBlender.loadProgram(new ShaderFile(
 				Gdx.files.internal("/shaders/light/volume/dynamicLights.vert").readString(),
