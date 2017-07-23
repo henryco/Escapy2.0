@@ -204,17 +204,23 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 				private void render(Batch batch, Consumer<EscapyRenderable> renderableConsumer) {
 					for (EscapyLayer layer: entry.getObject()) {
+
 						float[] position = camera.getPosition();
+
 						camera.update(() -> {
 							float[] shift = layer.getLayerShifter().calculateShift();
 							camera.translateCamera(shift);
 						});
+
 						batch.setProjectionMatrix(camera.getProjection());
 						batch.begin();
+
 						for (EscapyGameObject gameObject : layer.getGameObjects()) {
 							renderableConsumer.accept(gameObject.getGameObjectRenderer().getRenderer());
 						}
+
 						batch.end();
+
 						camera.update(() -> camera.setCameraPosition(position));
 					}
 				}

@@ -16,11 +16,12 @@ public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 	private final int[] blendMode;
 	private final Batch batch;
 
+
 	@EscapyAPI
 	public NativeSeparateBlendRenderer() {
 		this(Separate.ADD_RGBA());
 	}
-	@EscapyAPI
+
 	public NativeSeparateBlendRenderer(int[] blendMode) {
 		this.blendMode = new int[4];
 		this.batch = new SpriteBatch();

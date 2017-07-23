@@ -40,14 +40,14 @@
 			"processor": {
 
 				"name": "processor_foreground",
-				"spriteSize": 0,
+				"spriteSize": 1,
 				"threshold": 0,
 				"height": 0,
 
 				"intensity": {
-					"ambient": 0,
-					"direct": 0,
-					"shadow": 0
+					"ambient": 0.75,
+					"direct": 0.2,
+					"shadow": 8
 				}
 			},
 

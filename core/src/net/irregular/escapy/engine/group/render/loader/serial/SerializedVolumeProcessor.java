@@ -14,15 +14,15 @@ public class SerializedVolumeProcessor extends EscapySimpleSerialized {
 		return "VolumeProcessor";
 	}
 
-	@SerializedName("spriteSize") @Expose public float spriteSize = 0;
+	@SerializedName("spriteSize") @Expose public float spriteSize = 1;
 	@SerializedName("threshold") @Expose public float threshold = 0;
 	@SerializedName("height") @Expose public float height = 0;
 	@SerializedName("intensity") @Expose public SerializedVolumeIntensity intensity = new SerializedVolumeIntensity();
 
 	public static final class SerializedVolumeIntensity extends EscapySimpleSerialized {
-		@SerializedName("ambient") @Expose public float ambient = 0;
-		@SerializedName("direct") @Expose public float direct = 0;
-		@SerializedName("shadow") @Expose public float shadow = 0;
+		@SerializedName("ambient") @Expose public float ambient = 0.75f;
+		@SerializedName("direct") @Expose public float direct = 0.2f;
+		@SerializedName("shadow") @Expose public float shadow = 8;
 	}
 
 }

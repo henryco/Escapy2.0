@@ -19,21 +19,29 @@ import static java.io.File.separator;
  */ @EscapyAPI
 public class EscapyVolumeLight {
 
-	private static final String DIR_PATH = Escapy.getWorkDir() + separator + "shaders" + separator
-			+ "light" + separator + "volume" + separator + "dynamicLights";
-
+ 	public static boolean debug = false;
+	private static final String DIR_PATH = Escapy.getWorkDir()+separator+"shaders"+separator +"light"+separator+"volume"+separator+"dynamicLights";
 	private final EscapyUniformBlender uniformBlender;
 
 	public EscapyVolumeLight() {
-		this(new BlendRendererExtended());
+		this(new BlendRendererExtended().setDebug(debug));
 	}
+
 	protected EscapyVolumeLight(EscapyUniformBlender uniformBlender) {
+
 		this.uniformBlender = uniformBlender;
 		this.uniformBlender.loadProgram(new ShaderFile(
 				Gdx.files.internal(DIR_PATH + ".vert").readString(),
 				Gdx.files.internal(DIR_PATH + ".frag").readString()
 		));
 		init();
+
+		setAmbientIntensity(0.75f);
+		setDirectIntensity(0.2f);
+		setShadowIntensity(8);
+		setSpriteSize(1);
+		setThreshold(0);
+		setHeight(0);
 	}
 
 
