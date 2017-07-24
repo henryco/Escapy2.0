@@ -7,11 +7,13 @@ import com.badlogic.gdx.math.Matrix4;
 import com.google.gson.Gson;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
+import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
 import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.graphic.render.program.gl10.blend.EscapyGLBlendRenderer;
 import net.irregular.escapy.engine.graphic.render.program.gl10.blend.NativeSeparateBlendRenderer;
 import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
+import net.irregular.escapy.engine.graphic.render.program.gl20.core.EscapyMultiSourceShader;
 import net.irregular.escapy.engine.graphic.render.program.shader.EscapyLightSource;
 import net.irregular.escapy.engine.graphic.render.program.shader.EscapyVolumeLight;
 import net.irregular.escapy.engine.graphic.render.program.shader.proxy.LightSource;
@@ -38,11 +40,16 @@ import static net.irregular.escapy.engine.group.render.loader.serial.SerializedR
  */
 public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> {
 
-
+	private final EscapyInstanceLoader<EscapyMultiSourceShader> lightShaderLoader;
 	private final EscapyCamera camera;
-	public DefaultRendererLoader(EscapyCamera camera) {
+
+
+	public DefaultRendererLoader(EscapyInstanceLoader<EscapyMultiSourceShader> lightShaderLoader,
+								 EscapyCamera camera) {
+		this.lightShaderLoader = lightShaderLoader;
 		this.camera = camera;
 	}
+
 
 
 
@@ -62,6 +69,8 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 		final EscapyAssociatedArray<EscapyRenderable> renderGroups = loadRenderGroups(arg.getLayerGroups(), serialized);
 		final EscapyAssociatedArray<EscapyGLBlendRenderer> blenders = loadBlender(serialized);
+		final EscapyAssociatedArray<EscapyMultiSourceShader> lightShaders = loadLightShaders(serialized);
+
 		final EscapyAssociatedArray<EscapyVolumeLight> volumeProcessors = loadVolumeProcessors(serialized, resolution);
 		final EscapyAssociatedArray<LightSource[]> lightSources = loadLightGroups(arg.getLayerGroups(), serialized, resolution);
 		final EscapyAssociatedArray<LightMask> maskGroups = loadMaskGroups(serialized);
@@ -70,9 +79,22 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 		return new DefaultRenderer(
 				serialized.name, renderGroups, maskGroups,
 				lightSources, volumeProcessors, blenders,
-				resolution
+				lightShaders, resolution
 		);
 	}
+
+
+
+
+
+	private EscapyAssociatedArray<EscapyMultiSourceShader> loadLightShaders(SerializedRenderer serialized) {
+		EscapyAssociatedArray<EscapyMultiSourceShader> lightShaders = new EscapyNamedArray<>(EscapyMultiSourceShader.class);
+		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
+			lightShaders.add(lightShaderLoader.loadInstance(renderGroup.lightGroup.type), renderGroup.lightGroup.name);
+		}
+		return lightShaders;
+	}
+
 
 
 
@@ -85,7 +107,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
 
 			EscapyLayer[] layers = layerGroups.get(renderGroup.name);
-			List<SerializedLight> lights = renderGroup.lights;
+			List<SerializedLight> lights = renderGroup.lightGroup.lights;
 
 			LightSource[] lightGroup = new LightSource[lights.size()];
 			for (int i = 0; i < lightGroup.length; i++) {
@@ -100,6 +122,8 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 						break;
 					}
 				}
+
+
 
 				final LayerShift finalLayerShifter = layerShifter;
 				LightSource source = new LightSource(new EscapyLightSource(), scrDim.width, scrDim.height) {
@@ -121,6 +145,8 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 				};
 
+
+
 				source.setResolution(new Resolution(light.resolution2i.get(0), light.resolution2i.get(1)));
 				source.setPosition(light.position2f.get(0), light.position2f.get(1));
 				source.setAngles(light.angles2f.get(0), light.angles2f.get(1));
@@ -137,7 +163,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 				source.setColor(new Color(r, g, b, 1f));
 				lightGroup[i] = source;
 			}
-			lightSources.add(lightGroup, serialized.name + ":lights");
+			lightSources.add(lightGroup, renderGroup.lightGroup.name);
 		}
 		return lightSources;
 	}

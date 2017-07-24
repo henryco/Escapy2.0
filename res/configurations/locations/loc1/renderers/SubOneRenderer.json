@@ -5,6 +5,7 @@
 
 	"renderGroups": [
 
+
 		{
 			"name": "background",
 
@@ -17,6 +18,7 @@
 				}
 			}
 		},
+
 
 		{
 			"name": "foreground",
@@ -54,35 +56,42 @@
 				}
 			},
 
-			"lights": [
-				{
-					"shift": "layer_foreground_0",
-					"colorRGB": [178, 34, 34],
-					"resolution2i": [512, 512],
-					"position2f": [256, 256],
-					"angles2f": [0, 0],
-					"radius2f": [0, 1],
-					"umbra2f": [0, 1],
-					"correct": 0,
-					"scale": 1,
-					"coeff": 1
-				},
+			"lightGroup": {
 
-				{
-					"shift": "layer_foreground_0",
-					"colorRGB": [40, 34, 200],
-					"resolution2i": [256, 256],
-					"position2f": [300, 200],
-					"angles2f": [0, 0],
-					"radius2f": [0, 1],
-					"umbra2f": [0, 1],
-					"correct": 0,
-					"scale": 2,
-					"coeff": 1
-				}
+				"name": "lights_foreground",
+				"type": "ADD_OVERLAY_STRONG",
 
-			]
+				"lights": [
+					{
+						"shift": "layer_foreground_0",
+						"colorRGB": [178, 34, 34],
+						"resolution2i": [512, 512],
+						"position2f": [256, 256],
+						"angles2f": [0, 0],
+						"radius2f": [0, 1],
+						"umbra2f": [0, 1],
+						"correct": 0,
+						"scale": 1,
+						"coeff": 1
+					},
+
+					{
+						"shift": "layer_foreground_0",
+						"colorRGB": [40, 34, 200],
+						"resolution2i": [256, 256],
+						"position2f": [300, 200],
+						"angles2f": [0, 0],
+						"radius2f": [0, 1],
+						"umbra2f": [0, 1],
+						"correct": 0,
+						"scale": 2,
+						"coeff": 1
+					}
+
+				]
+			}
 		}
+
 	]
 
 

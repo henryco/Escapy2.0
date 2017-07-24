@@ -27,10 +27,12 @@ public final class SerializedRenderer extends EscapySimpleSerialized  {
 		@SerializedName("mask") @Expose public SerializedLightMask lightMask;
 		@SerializedName("blend") @Expose public SerializedBlender blender = new SerializedBlender();
 		@SerializedName("processor") @Expose public SerializedVolumeProcessor processor = new SerializedVolumeProcessor();
-		@SerializedName("lights") @Expose public List<SerializedLight> lights = new LinkedList<>();
+		@SerializedName("lightGroup") @Expose public SerializedLightGroup lightGroup = new SerializedLightGroup();
 	}
 
-
+	public static final class SerializedLightGroup extends EscapySimpleSerialized {
+		@SerializedName("lights") @Expose public List<SerializedLight> lights = new LinkedList<>();
+	}
 
 
 }
