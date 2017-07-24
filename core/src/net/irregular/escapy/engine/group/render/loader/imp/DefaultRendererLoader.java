@@ -18,6 +18,7 @@ import net.irregular.escapy.engine.graphic.render.program.shader.EscapyVolumeLig
 import net.irregular.escapy.engine.graphic.render.program.shader.proxy.LightSource;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
 import net.irregular.escapy.engine.group.map.core.layer.EscapyLayer;
+import net.irregular.escapy.engine.group.map.core.layer.shift.LayerShift;
 import net.irregular.escapy.engine.group.map.core.location.EscapySubLocation;
 import net.irregular.escapy.engine.group.map.core.object.EscapyGameObject;
 import net.irregular.escapy.engine.group.render.core.DefaultRenderer;
@@ -91,18 +92,38 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 			List<SerializedLight> lights = renderGroup.lights;
 
 			LightSource[] lightGroup = new LightSource[lights.size()];
-
 			for (int i = 0; i < lightGroup.length; i++) {
 
-				LightSource source = new LightSource(new EscapyLightSource(), scrDim.width, scrDim.height);
 				SerializedLight light = lights.get(i);
 
-				for (EscapyLayer layer: layers) {
+				LayerShift layerShifter = null;
+				if (light.shift == null) layerShifter = layers[0].getLayerShifter();
+				else for (EscapyLayer layer: layers) {
 					if (light.shift.equals(layer.getName())) {
-						// TODO: 24/07/17
+						layerShifter = layer.getLayerShifter();
 						break;
 					}
 				}
+
+				final LayerShift finalLayerShifter = layerShifter;
+				LightSource source = new LightSource(new EscapyLightSource(), scrDim.width, scrDim.height) {
+
+					private float[] state_shift = {0, 0};
+
+					@Override
+					public void prepareBuffer(Batch batch, boolean force) {
+						super.prepareBuffer(batch, force);
+
+						float[] shift = finalLayerShifter.calculateShift();
+						float tx = shift[0] - state_shift[0];
+						float ty = shift[1] - state_shift[1];
+
+						getBuffer().getSprite().translate(tx, ty);
+
+						this.state_shift = shift;
+					}
+
+				};
 
 				source.setResolution(new Resolution(light.resolution2i.get(0), light.resolution2i.get(1)));
 				source.setPosition(light.position2f.get(0), light.position2f.get(1));

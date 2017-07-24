@@ -85,8 +85,12 @@ public class LightSource {
 
 
 	public void setResolution(Resolution resolution) {
+
 		lightSource.setResolution(resolution);
+
+		if (buffer != null) buffer.dispose();
 		buffer = new EscapyFrameBuffer(resolution);
+
 		setPosition(position);
 		setScale(scale);
 		update();
@@ -94,6 +98,7 @@ public class LightSource {
 
 
 	public void setPosition(float x, float y) {
+
 		this.position[0] = x;
 		this.position[1] = y;
 
@@ -105,6 +110,7 @@ public class LightSource {
 
 
 	public void setScale(float scale) {
+
 		this.scale = scale;
 		buffer.getSprite().setScale(scale);
 	}
@@ -120,7 +126,9 @@ public class LightSource {
 		return scale;
 	}
 
-
+	public EscapyFBO getBuffer() {
+		return buffer;
+	}
 
 
 
