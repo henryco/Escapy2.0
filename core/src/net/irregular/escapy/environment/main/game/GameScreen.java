@@ -32,7 +32,7 @@ public class GameScreen implements EscapyScreen {
 
 	@Override
 	public void render(float delta) {
-		camera.update(() -> camera.translateCamera(3f * delta, 0));
+//		camera.update(() -> camera.translateCamera(3f * delta, 0));
 		groupContainer.getRenderContainer().render(delta);
 	}
 

@@ -45,14 +45,14 @@
 			"processor": {
 
 				"name": "processor_foreground",
-				"spriteSize": 1,
+				"spriteSize": 55,
 				"threshold": 0,
-				"height": 0,
+				"height": 0.8175,
 
 				"intensity": {
-					"ambient": 0.75,
-					"direct": 0.2,
-					"shadow": 8
+					"ambient": 0.45,
+					"direct": 9,
+					"shadow": 0.65
 				}
 			},
 
@@ -63,28 +63,32 @@
 
 				"lights": [
 					{
+						"name": "light0",
 						"shift": "layer_foreground_0",
 						"colorRGB": [178, 34, 34],
 						"resolution2i": [512, 512],
-						"position2f": [256, 256],
+						"position2f": [600, 456],
 						"angles2f": [0, 0],
 						"radius2f": [0, 1],
 						"umbra2f": [0, 1],
 						"correct": 0,
-						"scale": 1,
+						"alpha": 1,
+						"scale": 2,
 						"coeff": 1
 					},
 
 					{
+						"name": "light1",
 						"shift": "layer_foreground_0",
 						"colorRGB": [40, 34, 200],
 						"resolution2i": [256, 256],
-						"position2f": [300, 200],
+						"position2f": [420, 200],
 						"angles2f": [0, 0],
 						"radius2f": [0, 1],
 						"umbra2f": [0, 1],
 						"correct": 0,
-						"scale": 2,
+						"alpha": 1,
+						"scale": 3,
 						"coeff": 1
 					}
 

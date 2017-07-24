@@ -18,8 +18,9 @@ public final class SerializedLight extends EscapySimpleSerialized {
 	@SerializedName("angles2f") @Expose public List<Float> angles2f =  Arrays.asList(0f, 0f);
 	@SerializedName("radius2f") @Expose public List<Float> radius2f = Arrays.asList(0f, 1f);
 	@SerializedName("umbra2f") @Expose public List<Float> umbra2f = Arrays.asList(0f, 1f);
-	@SerializedName("correct") @Expose public float correct = 0;
-	@SerializedName("coeff") @Expose public float coeff = 1;
-	@SerializedName("scale") @Expose public float scale = 1;
+	@SerializedName("correct") @Expose public float correct = 0f;
+	@SerializedName("alpha") @Expose public float alpha = 1f;
+	@SerializedName("coeff") @Expose public float coeff = 1f;
+	@SerializedName("scale") @Expose public float scale = 1f;
 	@SerializedName("shift") @Expose public String shift = null;
 }

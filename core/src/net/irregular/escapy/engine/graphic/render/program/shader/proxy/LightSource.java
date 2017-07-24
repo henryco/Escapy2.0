@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFBO;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFrameBuffer;
 import net.irregular.escapy.engine.graphic.render.program.shader.EscapyLightSource;
@@ -12,24 +13,28 @@ import net.irregular.escapy.engine.graphic.screen.Resolution;
 /**
  * @author Henry on 23/07/17.
  */
-public class LightSource {
+public class LightSource implements EscapyObject {
 
 	public final EscapyLightSource lightSource;
 	public final float[] position;
+	public final String name;
+
 	private Texture region;
 
 	private EscapyFBO buffer;
 	private boolean update;
 	private float scale;
+	private float alpha;
 
 
-	public LightSource(int scrW, int scrH) {
-		this(new EscapyLightSource(), scrW, scrH);
+	public LightSource(String name, int scrW, int scrH) {
+		this(name, new EscapyLightSource(), scrW, scrH);
 	}
-	public LightSource(EscapyLightSource lightSource, int scrW, int scrH) {
+	public LightSource(String name, EscapyLightSource lightSource, int scrW, int scrH) {
 
 		this.lightSource = lightSource;
 		this.position = new float[]{0, 0};
+		this.name = name;
 		this.scale = 1f;
 
 		setResolution(new Resolution(128, 128));
@@ -108,6 +113,11 @@ public class LightSource {
 		buffer.getSprite().setPosition(x - 0.5f * w, y - 0.5f * h);
 	}
 
+	public void setAlpha(float alpha) {
+
+		this.alpha = alpha;
+		buffer.getSprite().setAlpha(alpha);
+	}
 
 	public void setScale(float scale) {
 
@@ -124,6 +134,9 @@ public class LightSource {
 	}
 	public float getScale() {
 		return scale;
+	}
+	public float getAlpha() {
+		return alpha;
 	}
 
 	public EscapyFBO getBuffer() {
@@ -177,4 +190,14 @@ public class LightSource {
 		return lightSource.getAngles();
 	}
 
+
+	@Override
+	public void dispose() {
+		buffer.dispose();
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
 }

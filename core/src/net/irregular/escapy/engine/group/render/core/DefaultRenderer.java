@@ -44,9 +44,13 @@ public class DefaultRenderer implements EscapyRenderer {
 						   EscapyAssociatedArray<EscapyMultiSourceShader> lightBlenders,
 						   Resolution resolution) {
 
-		this.batchGroup = new Batch[]{new SpriteBatch(), new SpriteBatch(), new SpriteBatch()};
 		this.namedGroups = new LinkedList<>();
 		this.fboGroup = new EscapyFBO[5];
+		this.batchGroup = new Batch[]{
+				new SpriteBatch(),
+				new SpriteBatch(),
+				new SpriteBatch()
+		};
 
 		this.volumeProcessors = volumeProcessors;
 		this.lightBlenders = lightBlenders;
@@ -100,7 +104,6 @@ public class DefaultRenderer implements EscapyRenderer {
 			});
 
 
-
 			if (mask == null) maskFBO = mainFBO;
 			else {
 				maskFBO.begin(() -> {
@@ -109,6 +112,8 @@ public class DefaultRenderer implements EscapyRenderer {
 				});
 			}
 
+
+			maskFBO.renderGraphics(batch_post);
 
 
 			if (lightSource != null && lightSource.length != 0) {
@@ -138,17 +143,10 @@ public class DefaultRenderer implements EscapyRenderer {
 					lightBlender.draw(batch_post, mainFBO.getSprite(), lightFBO.getSprite());
 				});
 
-				maskFBO.renderGraphics(batch_post);
-				colorFBO.renderGraphics(batch_post);
 
 				volume.draw(batch_post, colorFBO.getSprite(), normalFBO.getSprite(), maskFBO.getSprite());
-
-			} else {
-				maskFBO.renderGraphics(batch_post);
 			}
 		}
-
-
 	}
 
 

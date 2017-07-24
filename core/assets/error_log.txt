@@ -26,3 +26,39 @@ Vertex shader
 Fragment shader:
 0:1(1): error: syntax error, unexpected '/'
 
+Mon Jul 24 21:55:52 CEST 2017
+ERROR: BlendRendererExtended[2062796730]
+Fragment shader:
+0:65(38): error: `uv' undeclared
+0:65(17): error: no matching function for call to `texture2D(sampler2D, error)'; candidates are:
+0:65(17): error:    vec4 texture2D(sampler2D, vec2)
+0:65(17): error:    vec4 texture2D(sampler2D, vec2, float)
+
+Mon Jul 24 21:55:52 CEST 2017
+ERROR: BlendRendererExtended[115695541]
+Fragment shader:
+0:65(38): error: `uv' undeclared
+0:65(17): error: no matching function for call to `texture2D(sampler2D, error)'; candidates are:
+0:65(17): error:    vec4 texture2D(sampler2D, vec2)
+0:65(17): error:    vec4 texture2D(sampler2D, vec2, float)
+
+Mon Jul 24 22:43:48 CEST 2017
+ERROR: BlendRendererExtended[714400660]
+Fragment shader:
+0:67(22): error: no matching function for call to `dot(vec3)'; candidates are:
+0:67(22): error:    float dot(float, float)
+0:67(22): error:    float dot(vec2, vec2)
+0:67(22): error:    float dot(vec3, vec3)
+0:67(22): error:    float dot(vec4, vec4)
+0:67(17): error: cannot construct `vec4' from a non-numeric data type
+
+Mon Jul 24 22:43:48 CEST 2017
+ERROR: BlendRendererExtended[863298781]
+Fragment shader:
+0:67(22): error: no matching function for call to `dot(vec3)'; candidates are:
+0:67(22): error:    float dot(float, float)
+0:67(22): error:    float dot(vec2, vec2)
+0:67(22): error:    float dot(vec3, vec3)
+0:67(22): error:    float dot(vec4, vec4)
+0:67(17): error: cannot construct `vec4' from a non-numeric data type
+
