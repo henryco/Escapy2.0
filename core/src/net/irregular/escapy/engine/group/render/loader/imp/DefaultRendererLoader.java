@@ -126,7 +126,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 
 				final LayerShift finalLayerShifter = layerShifter;
-				LightSource source = new LightSource(new EscapyLightSource(), scrDim.width, scrDim.height) {
+				LightSource source = new LightSource(light.name, new EscapyLightSource(), scrDim.width, scrDim.height) {
 
 					private float[] state_shift = {0, 0};
 

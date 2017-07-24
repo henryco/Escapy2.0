@@ -63,6 +63,7 @@
 
 				"lights": [
 					{
+						"name": "light0",
 						"shift": "layer_foreground_0",
 						"colorRGB": [178, 34, 34],
 						"resolution2i": [512, 512],
@@ -71,11 +72,13 @@
 						"radius2f": [0, 1],
 						"umbra2f": [0, 1],
 						"correct": 0,
+						"alpha": 1,
 						"scale": 2,
 						"coeff": 1
 					},
 
 					{
+						"name": "light1",
 						"shift": "layer_foreground_0",
 						"colorRGB": [40, 34, 200],
 						"resolution2i": [256, 256],
@@ -84,6 +87,7 @@
 						"radius2f": [0, 1],
 						"umbra2f": [0, 1],
 						"correct": 0,
+						"alpha": 1,
 						"scale": 3,
 						"coeff": 1
 					}
