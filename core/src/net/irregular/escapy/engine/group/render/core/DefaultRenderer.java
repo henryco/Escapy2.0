@@ -44,9 +44,13 @@ public class DefaultRenderer implements EscapyRenderer {
 						   EscapyAssociatedArray<EscapyMultiSourceShader> lightBlenders,
 						   Resolution resolution) {
 
-		this.batchGroup = new Batch[]{new SpriteBatch(), new SpriteBatch(), new SpriteBatch()};
 		this.namedGroups = new LinkedList<>();
 		this.fboGroup = new EscapyFBO[5];
+		this.batchGroup = new Batch[]{
+				new SpriteBatch(),
+				new SpriteBatch(),
+				new SpriteBatch()
+		};
 
 		this.volumeProcessors = volumeProcessors;
 		this.lightBlenders = lightBlenders;
