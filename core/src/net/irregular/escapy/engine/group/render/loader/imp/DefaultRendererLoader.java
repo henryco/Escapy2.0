@@ -234,7 +234,6 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 
 
-
 	private EscapyAssociatedArray<EscapyRenderable> loadRenderGroups(EscapyAssociatedArray<EscapyLayer[]> layerGroups,
 																	 SerializedRenderer serialized) {
 

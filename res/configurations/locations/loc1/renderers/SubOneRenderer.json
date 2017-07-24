@@ -7,6 +7,7 @@
 
 		{
 			"name": "background",
+
 			"mask": {
 				"name": "mask_background",
 				"colorRGBA": [60, 60, 60, 250],

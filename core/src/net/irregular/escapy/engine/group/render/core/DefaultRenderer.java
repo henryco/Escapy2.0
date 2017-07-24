@@ -54,7 +54,7 @@ public class DefaultRenderer implements EscapyRenderer {
 		this.fboNormalGroup = new EscapyFBO[renderGroups.size()];
 		this.fboRenderGroup = new EscapyFBO[renderGroups.size()];
 		this.fboLightGroup = new EscapyFBO[lightSources.size()];
-		this.fboMaskGroup = new EscapyFBO[lightMasks.size()];
+		this.fboMaskGroup = new EscapyFBO[renderGroups.size()];
 
 		this.volumeProcessors = volumeProcessors;
 		this.renderGroups = renderGroups;
@@ -93,10 +93,11 @@ public class DefaultRenderer implements EscapyRenderer {
 			final LightSource[] lightSource = lightSources.asArray()[i];
 			final LightMask mask = lightMasks.asArray()[i];
 
-			final EscapyFBO normalFBO = fboNormalGroup[i];
-			final EscapyFBO lightFBO = fboLightGroup[i];
-			final EscapyFBO mainFBO = fboRenderGroup[i];
-			final EscapyFBO maskFBO = fboMaskGroup[i];
+			EscapyFBO normalFBO = fboNormalGroup[i];
+			EscapyFBO lightFBO = fboLightGroup[i];
+			EscapyFBO mainFBO = fboRenderGroup[i];
+			EscapyFBO maskFBO = fboMaskGroup[i];
+
 
 
 			mainFBO.begin(() -> {
@@ -104,21 +105,30 @@ public class DefaultRenderer implements EscapyRenderer {
 				renderer.renderGraphics(batch_pre);
 			});
 
-			maskFBO.begin(() -> {
-				maskFBO.wipe();
-				if (mask != null) mask.renderMask(mainFBO.getTexture());
-				else mainFBO.renderGraphics(batch_pre);
-			});
 
-			if (lightSource != null) {
+
+			if (mask == null) maskFBO = mainFBO;
+			else {
+				maskFBO.begin(() -> {
+					wipe();
+					mask.renderMask(mainFBO.getTexture());
+				});
+			}
+
+
+
+
+			if (lightSource != null && lightSource.length != 0) {
 
 				for (LightSource source: lightSource)
 					source.prepareBuffer(batch_pre);
+
 
 				normalFBO.begin(() -> {
 					normalFBO.color(0.502f, 0.502f, 1f, 1f);
 					renderer.renderNormalsMap(batch_pre);
 				});
+
 
 				lightFBO.begin(() -> {
 					lightFBO.wipe();
@@ -128,6 +138,7 @@ public class DefaultRenderer implements EscapyRenderer {
 						}
 					});
 				});
+
 
 				maskFBO.renderGraphics(batch_post);
 //				volume.draw(batch_post, 0, 0, lightFBO.getTexture(), normalFBO.getTexture(), maskFBO.getTexture());
