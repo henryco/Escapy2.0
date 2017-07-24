@@ -36,7 +36,7 @@ public class GameScreen implements EscapyScreen {
 //		camera.update(() -> camera.translateCamera(3f * delta, 0));
 //		float[] position = source.getPosition();
 //		source.setPosition(position[0] - 1, position[1]);
-		source.translate(1, 0);
+//		source.translate(1, 0);
 		groupContainer.getRenderContainer().render(delta);
 	}
 
