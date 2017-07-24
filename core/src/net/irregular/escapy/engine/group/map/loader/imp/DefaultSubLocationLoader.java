@@ -10,7 +10,7 @@ import net.irregular.escapy.engine.group.map.core.layer.shift.LayerShiftLogic;
 import net.irregular.escapy.engine.group.map.core.layer.shift.LayerShifter;
 import net.irregular.escapy.engine.group.map.core.location.EscapySubLocation;
 import net.irregular.escapy.engine.group.map.core.location.SubLocation;
-import net.irregular.escapy.engine.group.map.core.object.GameObject;
+import net.irregular.escapy.engine.group.map.core.object.EscapyGameObject;
 import net.irregular.escapy.engine.group.map.loader.GameObjectLoader;
 import net.irregular.escapy.engine.group.map.loader.SubLocationLoader;
 import net.irregular.escapy.engine.group.map.loader.serial.SerializedGameObject;
@@ -116,9 +116,9 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
 
-	private Collection<GameObject> loadGameObjects(String path, Collection<SerializedGameObject> serializedObjects) {
+	private Collection<EscapyGameObject> loadGameObjects(String path, Collection<SerializedGameObject> serializedObjects) {
 
-		Collection<GameObject> gameObjects = new LinkedList<>();
+		Collection<EscapyGameObject> gameObjects = new LinkedList<>();
 		for (SerializedGameObject object: serializedObjects)
 			gameObjects.add(gameObjectLoader.loadGameObject(path, object));
 		return gameObjects;

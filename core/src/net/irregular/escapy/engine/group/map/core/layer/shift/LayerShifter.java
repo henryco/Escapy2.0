@@ -7,7 +7,7 @@ package net.irregular.escapy.engine.group.map.core.layer.shift;
 public class LayerShifter implements LayerShift {
 
 
-	public final float[] offset = new float[2];
+	public final float[] offset = {0,0};
 	public float[] getOffset() {
 		return offset;
 	}
@@ -17,7 +17,7 @@ public class LayerShifter implements LayerShift {
 		this.offset[1] = offset[1];
 	}
 
-	public final float[] pinPoint = new float[2];
+	public final float[] pinPoint = {0,0};
 	public float[] getPinPoint() {
 		return pinPoint;
 	}
@@ -27,7 +27,7 @@ public class LayerShifter implements LayerShift {
 		this.pinPoint[1] = pinPoint[1];
 	}
 
-	public final float[] direct = new float[]{-1,0};
+	public final float[] direct = {0,0};
 	public float[] getDirect() {
 		return direct;
 	}

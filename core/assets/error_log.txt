@@ -5,3 +5,24 @@ Vertex shader
 Fragment shader:
 0:1(10): error: GLSL 3.30 is not supported. Supported versions are: 1.10, 1.20, 1.30, 1.00 ES, 3.00 ES, and 3.10 ES
 
+Mon Jul 24 18:36:47 CEST 2017
+ERROR: BlendRenderer[546859534]
+Vertex shader
+0:1(1): error: syntax error, unexpected '/'
+Fragment shader:
+0:1(1): error: syntax error, unexpected '/'
+
+Mon Jul 24 18:40:50 CEST 2017
+ERROR: BlendRenderer[772238031]
+Vertex shader
+0:1(1): error: syntax error, unexpected '/'
+Fragment shader:
+0:1(1): error: syntax error, unexpected '/'
+
+Mon Jul 24 18:41:49 CEST 2017
+ERROR: BlendRenderer[1128068572]
+Vertex shader
+0:1(1): error: syntax error, unexpected '/'
+Fragment shader:
+0:1(1): error: syntax error, unexpected '/'
+

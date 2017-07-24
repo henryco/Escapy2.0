@@ -7,13 +7,19 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.TimeUtils;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.env.utils.Named;
+import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyInstanceObserver;
+import net.irregular.escapy.engine.graphic.render.program.gl20.proxy.EscapyProxyShaderProgram;
+import net.irregular.escapy.engine.graphic.render.program.gl20.proxy.ProxyShaderProgram;
 
+import java.util.Arrays;
 import java.util.Date;
+
 
 /**
  * @author Henry on 29/06/17.
  */ @EscapyAPI
 public interface EscapyShaderHelper extends Named {
+
 
 	@EscapyAPI
 	default void checkStatus(ShaderProgram program) {
@@ -24,12 +30,25 @@ public interface EscapyShaderHelper extends Named {
 		}
 	}
 
+
 	default ShaderProgram createProgram(ShaderFile file) {
 		ShaderProgram.pedantic = false;
 		ShaderProgram shaderProgram = new ShaderProgram(file.VERTEX, file.FRAGMENT);
 		checkStatus(shaderProgram);
 		return shaderProgram;
 	}
+
+
+	default EscapyProxyShaderProgram createProxyProgram(ShaderFile file, boolean debug) {
+
+		EscapyProxyShaderProgram program = new ProxyShaderProgram(createProgram(file));
+		if (!debug) return program;
+
+		return new EscapyProxyInstanceObserver((methodResult, methodName, args) ->
+				System.out.println("EBR["+this.hashCode()+"]: "+methodName + " : "+ Arrays.toString(args))
+		).create(program);
+	}
+
 
 	default void begin(Batch batch, Runnable r) {
 		ShaderProgram defaultShader = batch.getShader();

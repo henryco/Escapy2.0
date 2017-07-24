@@ -3,7 +3,7 @@ package net.irregular.escapy.engine.group.map.core.layer;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
 import net.irregular.escapy.engine.group.map.core.layer.shift.LayerShift;
-import net.irregular.escapy.engine.group.map.core.object.GameObject;
+import net.irregular.escapy.engine.group.map.core.object.EscapyGameObject;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -19,7 +19,7 @@ public class Layer implements EscapyLayer {
 
 	public final String name;
 	public final float axisZ;
-	public final EscapyAssociatedArray<GameObject> gameObjects;
+	public final EscapyAssociatedArray<EscapyGameObject> gameObjects;
 
 
 	public Layer(final String name) {
@@ -29,12 +29,12 @@ public class Layer implements EscapyLayer {
 	public Layer(final String name, final float axisZ) {
 		this.name = name;
 		this.axisZ = axisZ;
-		this.gameObjects = new EscapyNamedArray<>(GameObject.class);
+		this.gameObjects = new EscapyNamedArray<>(EscapyGameObject.class);
 	}
 
 	public Layer(final String name,
 				 final float axisZ,
-				 Collection<GameObject> objects,
+				 Collection<EscapyGameObject> objects,
 				 LayerShift layerShifter) {
 		this(name, axisZ);
 		setGameObjects(objects);
@@ -42,9 +42,9 @@ public class Layer implements EscapyLayer {
 	}
 
 
-	public void setGameObjects(Collection<GameObject> objects) {
+	public void setGameObjects(Collection<EscapyGameObject> objects) {
 		Collection<String> objectNames = new LinkedList<>();
-		for (GameObject object: objects) objectNames.add(object.getObjectDetails().getName());
+		for (EscapyGameObject object: objects) objectNames.add(object.getObjectDetails().getName());
 		gameObjects.addAll(objectNames, objects);
 	}
 
@@ -54,7 +54,7 @@ public class Layer implements EscapyLayer {
 
 
 
-	@Override public EscapyAssociatedArray<GameObject> getGameObjects() {
+	@Override public EscapyAssociatedArray<EscapyGameObject> getGameObjects() {
 		return gameObjects;
 	}
 	@Override public LayerShift getLayerShifter() {
@@ -71,7 +71,7 @@ public class Layer implements EscapyLayer {
 
 	@Override
 	public void dispose() {
-		for (GameObject gameObject: gameObjects)
+		for (EscapyGameObject gameObject: gameObjects)
 			gameObject.dispose();
 	}
 

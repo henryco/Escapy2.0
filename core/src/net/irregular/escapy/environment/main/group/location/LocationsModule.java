@@ -5,7 +5,7 @@ import dagger.Provides;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
 import net.irregular.escapy.engine.group.map.core.layer.shift.LayerShiftLogic;
-import net.irregular.escapy.engine.group.map.core.object.GameObject;
+import net.irregular.escapy.engine.group.map.core.object.EscapyGameObject;
 import net.irregular.escapy.engine.group.map.loader.LocationLoader;
 import net.irregular.escapy.engine.group.map.loader.builder.DefaultLocationLoaderBuilder;
 import net.irregular.escapy.engine.group.map.loader.builder.LocationLoaderBuilder;
@@ -28,7 +28,7 @@ public class LocationsModule {
 	@Provides @Singleton
 	public LocationLoader provideLocationLoader(
 			EscapyInstanceLoader<LayerShiftLogic> shiftLogic,
-			EscapyInstanceLoader<GameObject> gameObjectInstanceAttributeLoader) {
+			EscapyInstanceLoader<EscapyGameObject> gameObjectInstanceAttributeLoader) {
 
 		DefaultLocationLoaderBuilder builder = LocationLoaderBuilder.Default();
 		builder.setSubLocationLayerShiftLogicInstanceLoader(shiftLogic);
@@ -46,7 +46,7 @@ public class LocationsModule {
 
 
 	@Provides @Singleton
-	protected EscapyInstanceLoader<GameObject> provideGameObjInstanceAttrLoader() {
+	protected EscapyInstanceLoader<EscapyGameObject> provideGameObjInstanceAttrLoader() {
 		return new GameObjAttrInstLoader();
 	}
 

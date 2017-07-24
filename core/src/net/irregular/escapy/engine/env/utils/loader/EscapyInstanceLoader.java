@@ -18,8 +18,9 @@ public interface EscapyInstanceLoader<INSTANCE_TYPE> {
 
 			for (Method method: methods) {
 				EscapyInstanced named = method.getAnnotation(EscapyInstanced.class);
-				if (named != null && named.value().equals(name))
+				if (named != null && named.value().equals(name)) {
 					return (INSTANCE_TYPE) method.invoke(this, args);
+				}
 			}
 
 			for (Method method: methods) {
@@ -29,6 +30,8 @@ public interface EscapyInstanceLoader<INSTANCE_TYPE> {
 			}
 
 		} catch (IllegalAccessException | InvocationTargetException e) {
+			if (e instanceof InvocationTargetException)
+				((InvocationTargetException) e).getTargetException().printStackTrace();
 			e.printStackTrace();
 		}
 		return null;

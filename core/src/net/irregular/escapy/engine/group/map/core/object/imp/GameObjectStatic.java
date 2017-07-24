@@ -1,23 +1,23 @@
 package net.irregular.escapy.engine.group.map.core.object.imp;
 
 
-import net.irregular.escapy.engine.group.map.core.object.GameObject;
-import net.irregular.escapy.engine.group.map.core.object.GameObjectRenderer;
+import net.irregular.escapy.engine.group.map.core.object.EscapyGameObject;
+import net.irregular.escapy.engine.group.map.core.object.EscapyGameObjectRenderer;
 import net.irregular.escapy.engine.group.map.core.object.ObjectDetails;
 import net.irregular.escapy.engine.group.map.core.object.texture.GameObjectStaticTexturePath;
 
 /**
  * @author Henry on 11/07/17.
  */
-public class GameObjectStatic implements GameObject {
+public class GameObjectStatic implements EscapyGameObject {
 
 
-	private final GameObjectRenderer<GameObjectStatic> objectRenderer;
+	private final EscapyGameObjectRenderer<GameObjectStatic> objectRenderer;
 	private final GameObjectStaticTexturePath texturePath;
 	private final ObjectDetails objectDetails;
 
 
-	public GameObjectStatic(GameObjectRenderer<GameObjectStatic> objectRenderer,
+	public GameObjectStatic(EscapyGameObjectRenderer<GameObjectStatic> objectRenderer,
 							ObjectDetails objectDetails,
 							GameObjectStaticTexturePath texturePath) {
 
@@ -42,7 +42,7 @@ public class GameObjectStatic implements GameObject {
 	@Override public ObjectDetails getObjectDetails() {
 		return objectDetails;
 	}
-	@Override public GameObjectRenderer getGameObjectRenderer() {
+	@Override public EscapyGameObjectRenderer getGameObjectRenderer() {
 		return objectRenderer;
 	}
 

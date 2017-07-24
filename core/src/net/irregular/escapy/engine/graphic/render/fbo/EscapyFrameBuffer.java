@@ -1,5 +1,6 @@
 package net.irregular.escapy.engine.graphic.render.fbo;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -23,19 +24,40 @@ public class EscapyFrameBuffer implements EscapyFBO {
 	 * This class encapsulate default FBO logic provided by GDX.FrameBuffer
 	 * @author Henry on 29/06/17.
 	 */ @EscapyAPI
-	public EscapyFrameBuffer(final FrameBuffer buffer) {
+	public EscapyFrameBuffer(final FrameBuffer buffer, boolean initialWipe) {
 		this.buffer = buffer;
 		this.bufferRegion = new TextureRegion(buffer.getColorBufferTexture());
 		this.bufferSprite = new Sprite(bufferRegion);
+		setFlip(false, true);
+		if (initialWipe) begin(this::wipe);
 	}
+
+	/**
+	 * This class encapsulate default FBO logic provided by GDX.FrameBuffer
+	 * @author Henry on 29/06/17.
+	 */ @EscapyAPI
+	public EscapyFrameBuffer(final Resolution resolution, boolean initialWipe) {
+		this(new FrameBuffer(Pixmap.Format.RGBA8888, resolution.width, resolution.height, resolution.bool), initialWipe);
+	}
+
+	/**
+	 * This class encapsulate default FBO logic provided by GDX.FrameBuffer
+	 * @author Henry on 29/06/17.
+	 */ @EscapyAPI
+	public EscapyFrameBuffer(final FrameBuffer buffer) {
+	 	this(buffer, false);
+	}
+
 	/**
 	 * This class encapsulate default FBO logic provided by GDX.FrameBuffer
 	 * @author Henry on 29/06/17.
 	 */ @EscapyAPI
 	public EscapyFrameBuffer(final Resolution resolution) {
-		this(new FrameBuffer(Pixmap.Format.RGBA8888, resolution.width, resolution.height, resolution.bool));
+	 	this(resolution, false);
 	}
-
+	public EscapyFrameBuffer() {
+	 	this(new Resolution(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+	}
 
 	@Override
 	public void begin() {

@@ -20,6 +20,7 @@ public interface EscapyFBO extends GraphicRenderer, Wipeable, EscapyObject {
 		return this;
 	}
 
+
 	default String getName() {
 		return this.getClass().getSimpleName()+"[" + hashCode() + "]";
 	}

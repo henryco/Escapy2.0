@@ -22,6 +22,8 @@ public final class SerializedGameObject extends EscapySimpleSerialized {
 	public static final class SerializedDetails extends EscapySimpleSerialized {
 		@SerializedName("scale") @Expose public float scale = 1f;
 		@SerializedName("position2f") @Expose public List<Float> position = Arrays.asList(0f,0f);
+		@SerializedName("size2f") @Expose public List<Float> size = Arrays.asList(0f, 0f);
+		@SerializedName("flip2b") @Expose public List<Boolean> flip = Arrays.asList(false, false);
 	}
 
 
