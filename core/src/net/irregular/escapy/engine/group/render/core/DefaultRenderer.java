@@ -1,19 +1,26 @@
 package net.irregular.escapy.engine.group.render.core;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import net.irregular.escapy.engine.env.context.game.Escapy;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFBO;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFrameBuffer;
 import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.graphic.render.program.gl10.blend.EscapyGLBlendRenderer;
 import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
+import net.irregular.escapy.engine.graphic.render.program.gl20.core.EscapyMultiSourceShader;
+import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
+import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.BlendRenderer;
 import net.irregular.escapy.engine.graphic.render.program.shader.EscapyVolumeLight;
 import net.irregular.escapy.engine.graphic.render.program.shader.proxy.LightSource;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
 
 import java.util.Collection;
 import java.util.LinkedList;
+
+import static java.io.File.separator;
 
 /**
  * @author Henry on 20/07/17.
@@ -39,6 +46,8 @@ public class DefaultRenderer implements EscapyRenderer {
 	private final EscapyFBO[] fboLightGroup;
 	private final EscapyFBO[] fboNormalGroup;
 
+
+	private final EscapyMultiSourceShader blendShader;
 
 	public DefaultRenderer(String name,
 						   EscapyAssociatedArray<EscapyRenderable> renderGroups,
@@ -76,6 +85,14 @@ public class DefaultRenderer implements EscapyRenderer {
 		namedGroups.add(this.lightMasks);
 		namedGroups.add(this.blenders);
 
+		String DIR_PATH = Escapy.getWorkDir() + separator + "shaders" + separator
+				+ "blend" + separator + "ADD_OVERLAY_STRONG" + separator + "ADD_OVERLAY_STRONG";
+
+		String vert = Gdx.files.internal(DIR_PATH + ".vert").readString();
+		String frag = Gdx.files.internal(DIR_PATH + ".frag").readString();
+
+		ShaderFile file = new ShaderFile(vert, frag);
+		blendShader = new BlendRenderer(file, "targetMap", "blendMap");
 	}
 
 
@@ -140,7 +157,12 @@ public class DefaultRenderer implements EscapyRenderer {
 				});
 
 
-				maskFBO.renderGraphics(batch_post);
+				normalFBO.begin(() -> {
+					wipe();
+					blendShader.draw(batch_post, mainFBO.getSprite(), lightFBO.getSprite());
+				}).renderGraphics(batch_post);
+
+
 //				volume.draw(batch_post, 0, 0, lightFBO.getTexture(), normalFBO.getTexture(), maskFBO.getTexture());
 
 			} else {
