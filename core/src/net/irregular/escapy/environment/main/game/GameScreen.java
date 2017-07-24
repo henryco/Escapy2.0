@@ -4,6 +4,7 @@ import net.irregular.escapy.engine.env.context.annotation.ScreenName;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreenContext;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
+import net.irregular.escapy.engine.graphic.render.program.shader.proxy.LightSource;
 import net.irregular.escapy.engine.group.container.EscapyGroupContainer;
 
 /**
@@ -17,7 +18,7 @@ public class GameScreen implements EscapyScreen {
 	private final EscapyGroupContainer groupContainer;
 	private final EscapyCamera camera;
 
-
+	LightSource source;
 
 	public GameScreen(EscapyGroupContainer groupContainer,
 					  EscapyCamera camera) {
@@ -27,12 +28,15 @@ public class GameScreen implements EscapyScreen {
 
 	@Override
 	public void show() {
-
+		source = groupContainer.getRenderContainer().getRendererAttribute("lights_foreground:light1");
 	}
 
 	@Override
 	public void render(float delta) {
 //		camera.update(() -> camera.translateCamera(3f * delta, 0));
+//		float[] position = source.getPosition();
+//		source.setPosition(position[0] - 1, position[1]);
+		source.translate(1, 0);
 		groupContainer.getRenderContainer().render(delta);
 	}
 

@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.TimeUtils;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
-import net.irregular.escapy.engine.env.utils.Named;
+import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyInstanceObserver;
 import net.irregular.escapy.engine.graphic.render.program.gl20.proxy.EscapyProxyShaderProgram;
 import net.irregular.escapy.engine.graphic.render.program.gl20.proxy.ProxyShaderProgram;
@@ -18,7 +18,7 @@ import java.util.Date;
 /**
  * @author Henry on 29/06/17.
  */ @EscapyAPI
-public interface EscapyShaderHelper extends Named {
+public interface EscapyShaderHelper extends EscapyObject {
 
 
 	@EscapyAPI

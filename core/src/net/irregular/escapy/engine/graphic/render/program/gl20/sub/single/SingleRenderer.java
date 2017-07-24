@@ -28,11 +28,16 @@ public class SingleRenderer implements EscapySingleSourceShader {
 
 	@Override
 	public void loadProgram(ShaderFile shaderFile) {
+		dispose();
 		shaderProgram = createProgram(shaderFile);
 	}
 
-
-
+	@Override
+	public void dispose() {
+		if (shaderProgram != null) {
+			shaderProgram.dispose();
+		}
+	}
 
 	@Override
 	public void draw(Batch batch, float x, float y, Texture source) {

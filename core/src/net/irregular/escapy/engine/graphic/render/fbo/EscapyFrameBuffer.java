@@ -55,9 +55,16 @@ public class EscapyFrameBuffer implements EscapyFBO {
 	public EscapyFrameBuffer(final Resolution resolution) {
 	 	this(resolution, false);
 	}
+
+	/**
+	 * This class encapsulate default FBO logic provided by GDX.FrameBuffer
+	 * @author Henry on 29/06/17.
+	 */ @EscapyAPI
 	public EscapyFrameBuffer() {
 	 	this(new Resolution(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 	}
+
+
 
 	@Override
 	public void begin() {
@@ -110,6 +117,6 @@ public class EscapyFrameBuffer implements EscapyFBO {
 
 	@Override
 	public void dispose() {
-		buffer.dispose();
+		if (buffer != null) buffer.dispose();
 	}
 }

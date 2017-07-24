@@ -90,7 +90,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 	private EscapyAssociatedArray<EscapyMultiSourceShader> loadLightShaders(SerializedRenderer serialized) {
 		EscapyAssociatedArray<EscapyMultiSourceShader> lightShaders = new EscapyNamedArray<>(EscapyMultiSourceShader.class);
 		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
-			lightShaders.add(lightShaderLoader.loadInstance(renderGroup.lightGroup.type), renderGroup.lightGroup.name);
+			lightShaders.add(lightShaderLoader.loadInstance(renderGroup.lightGroup.type), renderGroup.lightGroup.type);
 		}
 		return lightShaders;
 	}
@@ -178,7 +178,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
 
 			SerializedVolumeProcessor processor = renderGroup.processor;
-			EscapyVolumeLight volumeLight = new EscapyVolumeLight();
+			EscapyVolumeLight volumeLight = new EscapyVolumeLight(processor.name);
 
 			volumeLight.setFieldSize(scrDim.width, scrDim.height);
 			volumeLight.setHeight(processor.height);

@@ -104,13 +104,13 @@ public class LightSource implements EscapyObject {
 
 	public void setPosition(float x, float y) {
 
-		this.position[0] = x;
-		this.position[1] = y;
-
 		float w = buffer.getSprite().getWidth() * scale;
 		float h = buffer.getSprite().getHeight() * scale;
 
-		buffer.getSprite().setPosition(x - 0.5f * w, y - 0.5f * h);
+		position[0] = x  - 0.5f * w;
+		position[1] = y - 0.5f * h;
+
+		buffer.getSprite().setPosition(position[0], position[1]);
 	}
 
 	public void setAlpha(float alpha) {
@@ -125,23 +125,32 @@ public class LightSource implements EscapyObject {
 		buffer.getSprite().setScale(scale);
 	}
 
+	public void translate(float x, float y) {
+		float[] position = getPosition();
+		setPosition(position[0] + x, position[1] + y);
+	}
 
 	public void setPosition(float[] position2f) {
 		setPosition(position2f[0], position2f[1]);
 	}
 	public float[] getPosition() {
-		return position.clone();
+		float w = buffer.getSprite().getWidth() * scale;
+		float h = buffer.getSprite().getHeight() * scale;
+		return new float[]{position[0] + 0.5f * w, position[1] + 0.5f * h};
 	}
+
+
 	public float getScale() {
 		return scale;
 	}
 	public float getAlpha() {
 		return alpha;
 	}
-
 	public EscapyFBO getBuffer() {
 		return buffer;
 	}
+
+
 
 
 
