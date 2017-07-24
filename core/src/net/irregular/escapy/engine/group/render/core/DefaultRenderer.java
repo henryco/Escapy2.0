@@ -1,6 +1,7 @@
 package net.irregular.escapy.engine.group.render.core;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFBO;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFrameBuffer;
@@ -28,7 +29,10 @@ public class DefaultRenderer implements EscapyRenderer {
 	private final EscapyAssociatedArray<EscapyVolumeLight> volumeProcessors;
 
 	private final String name;
-	private final Batch batch;
+
+	private final Batch batch_pre;
+	private final Batch batch_blend;
+	private final Batch batch_post;
 
 	private final EscapyFBO[] fboRenderGroup;
 	private final EscapyFBO[] fboMaskGroup;
@@ -43,8 +47,7 @@ public class DefaultRenderer implements EscapyRenderer {
 						   EscapyAssociatedArray<EscapyVolumeLight> volumeProcessors,
 						   EscapyAssociatedArray<EscapyGLBlendRenderer> blenders,
 
-						   Resolution resolution,
-						   Batch batch) {
+						   Resolution resolution) {
 
 		this.namedGroups = new LinkedList<>();
 
@@ -59,7 +62,10 @@ public class DefaultRenderer implements EscapyRenderer {
 		this.lightMasks = lightMasks;
 		this.blenders = blenders;
 
-		this.batch = batch;
+		this.batch_pre = new SpriteBatch();
+		this.batch_blend = new SpriteBatch();
+		this.batch_post = new SpriteBatch();
+
 		this.name = name;
 
 		resize(resolution.width, resolution.height);
@@ -95,41 +101,43 @@ public class DefaultRenderer implements EscapyRenderer {
 
 			mainFBO.begin(() -> {
 				mainFBO.wipe();
-				renderer.renderGraphics(batch);
+				renderer.renderGraphics(batch_pre);
 			});
 
 			maskFBO.begin(() -> {
 				maskFBO.wipe();
 				if (mask != null) mask.renderMask(mainFBO.getTexture());
-				else mainFBO.renderGraphics(batch);
+				else mainFBO.renderGraphics(batch_pre);
 			});
 
 			if (lightSource != null) {
 
 				for (LightSource source: lightSource)
-					source.prepareBuffer(batch);
+					source.prepareBuffer(batch_pre);
 
 				normalFBO.begin(() -> {
 					normalFBO.color(0.502f, 0.502f, 1f, 1f);
-					renderer.renderNormalsMap(batch);
+					renderer.renderNormalsMap(batch_pre);
 				});
 
 				lightFBO.begin(() -> {
 					lightFBO.wipe();
-					blender.blend(batch, () -> {
+					blender.blend(batch_blend, () -> {
 						for (LightSource source: lightSource) {
-							source.drawBuffer(batch);
+							source.drawBuffer(batch_blend);
 						}
 					});
 				});
 
-				lightFBO.renderGraphics(batch);
-//				volume.draw(batch, 0, 0, lightFBO.getTexture(), normalFBO.getTexture(), maskFBO.getTexture());
+				maskFBO.renderGraphics(batch_post);
+//				volume.draw(batch_post, 0, 0, lightFBO.getTexture(), normalFBO.getTexture(), maskFBO.getTexture());
 
 			} else {
-				maskFBO.renderGraphics(batch);
+				maskFBO.renderGraphics(batch_post);
 			}
 		}
+
+
 	}
 
 
@@ -154,8 +162,9 @@ public class DefaultRenderer implements EscapyRenderer {
 		for (int i = 0; i < fboLightGroup.length; i++) fboLightGroup[i] = new EscapyFrameBuffer(resolution);
 		for (int i = 0; i < fboNormalGroup.length; i++) fboNormalGroup[i] = new EscapyFrameBuffer(resolution);
 
-		for (EscapyVolumeLight v: volumeProcessors)
+		for (EscapyVolumeLight v: volumeProcessors) {
 			v.setFieldSize(width, height);
+		}
 		for (LightSource[] sources: lightSources) {
 			for (LightSource s : sources) s.resize(width, height);
 		}

@@ -3,7 +3,6 @@ package net.irregular.escapy.engine.group.render.loader.imp;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.google.gson.Gson;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
@@ -31,7 +30,6 @@ import java.io.Reader;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray.Entry;
 import static net.irregular.escapy.engine.group.render.loader.serial.SerializedRenderer.SerializedRenderGroup;
 
 
@@ -62,19 +60,17 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 		final Resolution resolution = new Resolution(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-		final EscapyAssociatedArray<EscapyRenderable> renderGroups = loadRenderGroups(arg.getLayerGroups());
+		final EscapyAssociatedArray<EscapyRenderable> renderGroups = loadRenderGroups(arg.getLayerGroups(), serialized);
 		final EscapyAssociatedArray<EscapyGLBlendRenderer> blenders = loadBlender(serialized);
 		final EscapyAssociatedArray<EscapyVolumeLight> volumeProcessors = loadVolumeProcessors(serialized, resolution);
 		final EscapyAssociatedArray<LightSource[]> lightSources = loadLightGroups(arg.getLayerGroups(), serialized, resolution);
 		final EscapyAssociatedArray<LightMask> maskGroups = loadMaskGroups(serialized);
 
-		final Batch batch = new SpriteBatch();
-
 
 		return new DefaultRenderer(
 				serialized.name, renderGroups, maskGroups,
 				lightSources, volumeProcessors, blenders,
-				resolution, batch
+				resolution
 		);
 	}
 
@@ -239,10 +235,11 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 
 
-	private EscapyAssociatedArray<EscapyRenderable> loadRenderGroups(EscapyAssociatedArray<EscapyLayer[]> layerGroups) {
+	private EscapyAssociatedArray<EscapyRenderable> loadRenderGroups(EscapyAssociatedArray<EscapyLayer[]> layerGroups,
+																	 SerializedRenderer serialized) {
 
 		EscapyAssociatedArray<EscapyRenderable> renderGroups = new EscapyNamedArray<>(EscapyRenderable.class);
-		for (Entry<EscapyLayer[]> entry : layerGroups.getEntrySet()) {
+		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
 
 			EscapyRenderable renderable = new EscapyRenderable() {
 
@@ -261,10 +258,9 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 
 				private void render(Batch batch, Consumer<EscapyRenderable> renderableConsumer) {
-					for (EscapyLayer layer: entry.getObject()) {
+					for (EscapyLayer layer: layerGroups.get(renderGroup.name)) {
 
 						float[] position = camera.getPosition();
-
 						camera.update(() -> {
 							float[] shift = layer.getLayerShifter().calculateShift();
 							camera.translateCamera(shift);
@@ -285,7 +281,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 			};
 
-			renderGroups.add(renderable, entry.getName());
+			renderGroups.add(renderable, renderGroup.name);
 		}
 
 		return renderGroups;

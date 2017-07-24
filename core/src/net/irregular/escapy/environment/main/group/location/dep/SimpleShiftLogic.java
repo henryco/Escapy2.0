@@ -23,10 +23,19 @@ public class SimpleShiftLogic implements EscapyInstanceLoader<LayerShiftLogic> {
 	public LayerShiftLogic moveShiftLogic() {
 
 		return new LayerShiftLogic() {
+			float[] initial = camera.getPosition();
+
 			@Override
 			public float[] calculateShift(LayerShift shift) {
-				// TODO: 21/07/17
-				return new float[]{0,0};
+
+				float[] position = camera.getPosition();
+
+				float tx = position[0] - initial[0];
+				float ty = position[1] - initial[1];
+
+				float[] direct = shift.getDirect();
+
+				return new float[]{tx * direct[0], ty * direct[1]};
 			}
 		};
 	}
