@@ -61,6 +61,19 @@
 						"textureLight": "/resources/Loc_33L.png",
 						"texture": "/resources/Loc_33.png"
 					}
+				},
+
+				{
+					"details": {
+						"name": "mockPlayer",
+						"scale": 4,
+						"position2f": [400, 170]
+					},
+					"static": {
+						"textureNormal": "/resources/mockN.png",
+						"textureLight": "/resources/mockL.png",
+						"texture": "/resources/mock.png"
+					}
 				}
 			]
 		}
