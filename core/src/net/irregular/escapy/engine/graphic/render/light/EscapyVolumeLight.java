@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.program.shader;
+package net.irregular.escapy.engine.graphic.render.light;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,8 +13,6 @@ import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.Stan
 import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.BlendRendererExtended;
 import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.EscapyUniformBlender;
 
-import static java.io.File.separator;
-
 /**
  * @author Henry on 02/07/17.
  */ @EscapyAPI
@@ -23,7 +21,8 @@ public class EscapyVolumeLight implements EscapyObject {
  	private final String name;
 
  	public static boolean debug = false;
-	private static final String DIR_PATH = Escapy.getWorkDir()+separator+"shaders"+separator +"light"+separator+"volume"+separator+"dynamicLights";
+	private static final String DIR_PATH = Escapy.getProperty("DYNAMIC_LIGHT_SHADER_FILE_PATH");
+
 	private final EscapyUniformBlender uniformBlender;
 
 	public EscapyVolumeLight(String name) {

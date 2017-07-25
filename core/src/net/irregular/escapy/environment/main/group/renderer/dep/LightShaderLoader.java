@@ -19,7 +19,7 @@ public class LightShaderLoader implements EscapyInstanceLoader<EscapyMultiSource
 
 
 	private static String getDirPath() {
-		return  Escapy.getWorkDir() + separator + "shaders" + separator + "blend" + separator;
+		return Escapy.getProperty("BLEND_SHADERS_ROOT_DIR_PATH");
 	}
 	private static String load(String path) {
 		return Gdx.files.internal(path).readString();
@@ -32,7 +32,7 @@ public class LightShaderLoader implements EscapyInstanceLoader<EscapyMultiSource
 
 	@EscapyInstanced("ADD_OVERLAY_STRONG")
 	public EscapyMultiSourceShader loadAddOverlayStrongShader() {
-		String program = "ADD_OVERLAY_STRONG" + separator + "ADD_OVERLAY_STRONG";
+		String program = separator + "ADD_OVERLAY_STRONG" + separator + "ADD_OVERLAY_STRONG";
 		return new BlendRenderer(loadMulti(program), sources);
 	}
 

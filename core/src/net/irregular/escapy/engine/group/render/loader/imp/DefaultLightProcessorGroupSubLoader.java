@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
-import net.irregular.escapy.engine.graphic.render.program.shader.EscapyVolumeLight;
+import net.irregular.escapy.engine.graphic.render.light.EscapyVolumeLight;
 import net.irregular.escapy.engine.group.render.loader.RendererVoidSubLoader;
 import net.irregular.escapy.engine.group.render.loader.serial.SerializedRenderer;
 import net.irregular.escapy.engine.group.render.loader.serial.SerializedVolumeProcessor;

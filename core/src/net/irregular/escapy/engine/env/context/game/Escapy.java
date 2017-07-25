@@ -1,6 +1,11 @@
 package net.irregular.escapy.engine.env.context.game;
 
 import net.irregular.escapy.engine.env.context.game.configuration.EscapyGameContextConfiguration;
+import net.irregular.escapy.engine.env.context.game.configuration.util.DefaultPropertyKeysContainer;
+import net.irregular.escapy.engine.env.context.game.configuration.util.PropertyKeysContainer;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Henry on 21/07/17.
@@ -12,12 +17,26 @@ public class Escapy {
 		return ourInstance;
 	}
 
-	private Escapy() {}
 
-	private EscapyGameContextConfiguration contextConfiguration;
-	public void setContextConfiguration(EscapyGameContextConfiguration contextConfiguration) {
-		this.contextConfiguration = contextConfiguration;
+	private final PropertyKeysContainer propertyKeysContainer;
+	private final Map<String, Object> configValuesMap;
+
+	private Escapy() {
+		this.configValuesMap = new HashMap<>();
+		this.propertyKeysContainer = new DefaultPropertyKeysContainer(configValuesMap);
 	}
+
+
+
+
+	private EscapyGameContextConfiguration contextConfiguration = null;
+	public void setContextConfiguration(EscapyGameContextConfiguration contextConfiguration) {
+		if (this.contextConfiguration != null) throw new RuntimeException("Context configuration already exists");
+
+		this.contextConfiguration = contextConfiguration;
+		contextConfiguration.configurePropertyKeys(propertyKeysContainer);
+	}
+
 
 
 	public static String getConfigsFilePath() {
@@ -27,4 +46,17 @@ public class Escapy {
 	public static String getWorkDir() {
 		return ourInstance.contextConfiguration.getWorkDir();
 	}
+
+	public static String getResourcesDir() {
+		return ourInstance.contextConfiguration.getResourcesDir();
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public static <T> T getProperty(String propertyKey) {
+		return (T) ourInstance.configValuesMap.get(propertyKey);
+	}
+
+
+
 }

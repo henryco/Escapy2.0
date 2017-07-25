@@ -2,12 +2,12 @@ package net.irregular.escapy.engine.group.render.loader.builder;
 
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
+import net.irregular.escapy.engine.graphic.render.light.EscapyVolumeLight;
+import net.irregular.escapy.engine.graphic.render.light.proxy.LightSource;
 import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.graphic.render.program.gl10.blend.EscapyGLBlendRenderer;
 import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.EscapyMultiSourceShader;
-import net.irregular.escapy.engine.graphic.render.program.shader.EscapyVolumeLight;
-import net.irregular.escapy.engine.graphic.render.program.shader.proxy.LightSource;
 import net.irregular.escapy.engine.group.map.core.location.EscapySubLocation;
 import net.irregular.escapy.engine.group.render.core.EscapyRenderer;
 import net.irregular.escapy.engine.group.render.loader.RendererLoader;

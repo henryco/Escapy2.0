@@ -6,12 +6,12 @@ import net.irregular.escapy.engine.env.utils.Named;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFBO;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFrameBuffer;
+import net.irregular.escapy.engine.graphic.render.light.EscapyVolumeLight;
+import net.irregular.escapy.engine.graphic.render.light.proxy.LightSource;
 import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.graphic.render.program.gl10.blend.EscapyGLBlendRenderer;
 import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.EscapyMultiSourceShader;
-import net.irregular.escapy.engine.graphic.render.program.shader.EscapyVolumeLight;
-import net.irregular.escapy.engine.graphic.render.program.shader.proxy.LightSource;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
 
 import java.util.Collection;

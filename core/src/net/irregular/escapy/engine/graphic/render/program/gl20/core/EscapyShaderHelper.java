@@ -45,7 +45,7 @@ public interface EscapyShaderHelper extends EscapyObject {
 		if (!debug) return program;
 
 		return new EscapyProxyInstanceObserver((methodResult, methodName, args) ->
-				System.out.println("EBR["+this.hashCode()+"]: "+methodName + " : "+ Arrays.toString(args))
+				System.out.println("SHADER_SHELL["+this.hashCode()+"]: "+methodName + " : "+ Arrays.toString(args))
 		).create(program);
 	}
 

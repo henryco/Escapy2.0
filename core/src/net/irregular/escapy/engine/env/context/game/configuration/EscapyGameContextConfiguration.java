@@ -2,6 +2,7 @@ package net.irregular.escapy.engine.env.context.game.configuration;
 
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.env.context.annotation.meta.AnnotationProcessor;
+import net.irregular.escapy.engine.env.context.game.configuration.util.PropertyKeysContainer;
 
 /**
  * @author Henry on 28/06/17.
@@ -21,4 +22,12 @@ public abstract class EscapyGameContextConfiguration {
 	public String getWorkDir() {
 		return System.getProperty("user.dir");
 	}
+
+	public String getResourcesDir() {
+		return System.getProperty("user.dir");
+	}
+
+	public void configurePropertyKeys(PropertyKeysContainer propertyKeysContainer) {}
+
+
 }
