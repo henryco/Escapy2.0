@@ -91,6 +91,13 @@ public class RenderContainer implements EscapyRenderer {
 	}
 
 	@Override
+	public void dispose() {
+		if (renderer != null) {
+			renderer.dispose();
+		}
+	}
+
+	@Override
 	public String getName() {
 		return renderer.getName();
 	}

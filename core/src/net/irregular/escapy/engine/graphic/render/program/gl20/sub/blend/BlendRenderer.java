@@ -43,9 +43,16 @@ public class BlendRenderer implements EscapyMultiSourceShader {
 
 	@Override
 	public void loadProgram(ShaderFile shaderFile) {
+		dispose();
 		shaderProgram = createProxyProgram(shaderFile, debug);
 	}
 
+	@Override
+	public void dispose() {
+		if (shaderProgram != null) {
+			shaderProgram.dispose();
+		}
+	}
 
 	@Override
 	public void draw(Batch batch, float x, float y, Texture... source) {

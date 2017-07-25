@@ -7,7 +7,7 @@ import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.EscapyMultiSourceShader;
 import net.irregular.escapy.engine.group.map.core.location.EscapySubLocation;
 import net.irregular.escapy.engine.group.render.loader.RendererLoader;
-import net.irregular.escapy.engine.group.render.loader.imp.DefaultRendererLoader;
+import net.irregular.escapy.engine.group.render.loader.builder.RendererLoaderBuilder;
 import net.irregular.escapy.environment.main.group.renderer.dep.LightShaderLoader;
 import net.irregular.escapy.environment.main.group.util.CameraModule;
 
@@ -29,7 +29,10 @@ public class RendererModule {
 			@Named("default_camera") EscapyCamera camera,
 			EscapyInstanceLoader<EscapyMultiSourceShader> lightShaderLoader) {
 
-		return new DefaultRendererLoader(lightShaderLoader, camera);
+		return RendererLoaderBuilder.Default()
+				.setCamera(camera)
+				.setLightShaderInstanceLoader(lightShaderLoader)
+		.build();
 	}
 
 

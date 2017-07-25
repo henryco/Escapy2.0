@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.env.context.game.Escapy;
+import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.StandardUniforms;
 import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.BlendRendererExtended;
@@ -17,18 +18,21 @@ import static java.io.File.separator;
 /**
  * @author Henry on 02/07/17.
  */ @EscapyAPI
-public class EscapyVolumeLight {
+public class EscapyVolumeLight implements EscapyObject {
+
+ 	private final String name;
 
  	public static boolean debug = false;
 	private static final String DIR_PATH = Escapy.getWorkDir()+separator+"shaders"+separator +"light"+separator+"volume"+separator+"dynamicLights";
 	private final EscapyUniformBlender uniformBlender;
 
-	public EscapyVolumeLight() {
-		this(new BlendRendererExtended().setDebug(debug));
+	public EscapyVolumeLight(String name) {
+		this(name, new BlendRendererExtended().setDebug(debug));
 	}
 
-	protected EscapyVolumeLight(EscapyUniformBlender uniformBlender) {
+	protected EscapyVolumeLight(String name, EscapyUniformBlender uniformBlender) {
 
+		this.name = name;
 		this.uniformBlender = uniformBlender;
 		this.uniformBlender.loadProgram(new ShaderFile(
 				Gdx.files.internal(DIR_PATH + ".vert").readString(),
@@ -59,7 +63,14 @@ public class EscapyVolumeLight {
 	}
 
 
+	@Override
+	public void dispose() {
+	}
 
+	@Override
+	public String getName() {
+		return name;
+	}
 
 	public void draw(Batch batch, float x, float y, Texture colorMap, Texture normalMap, Texture maskMap) {
 		uniformBlender.draw(batch, x, y, colorMap, normalMap, maskMap);

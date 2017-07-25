@@ -2,6 +2,7 @@ package net.irregular.escapy.engine.group.render.core;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import net.irregular.escapy.engine.env.utils.Named;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFBO;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFrameBuffer;
@@ -153,6 +154,35 @@ public class DefaultRenderer implements EscapyRenderer {
 	@Override @SuppressWarnings("unchecked")
 	public <T> T getRendererAttribute(String name) {
 
+		String[] names = name.split(":");
+		if (names != null && !names[0].equals(name)) {
+
+			Object parent = getRendererAttribute(names[0]);
+			for (int i = 1; i < names.length; i++) {
+
+				if (parent instanceof Object[]) {
+					for (Object o: ((Object[]) parent)) {
+						if (o instanceof Named) {
+							if (((Named) o).getName().equals(names[i]))
+								parent = o;
+						} else break;
+					}
+				}
+
+				else if (parent instanceof Iterable) {
+					for (Object o : ((Iterable) parent)) {
+						if (o instanceof Named) {
+							if (((Named) o).getName().equals(names[i]))
+								parent = o;
+						} else break;
+					}
+				}
+
+				else return null;
+			}
+			return (T) parent;
+		}
+
 		Object attribute;
 		for (EscapyAssociatedArray array: namedGroups)
 			if ((attribute = array.get(name)) != null)
@@ -174,6 +204,14 @@ public class DefaultRenderer implements EscapyRenderer {
 		}
 	}
 
+	@Override
+	public void dispose() {
+		for (EscapyFBO fbo: fboGroup) fbo.dispose();
+		for (EscapyVolumeLight v: volumeProcessors) v.dispose();
+		for (LightSource[] sources: lightSources) {
+			for (LightSource s : sources) s.dispose();
+		}
+	}
 
 	@Override
 	public String getName() {
