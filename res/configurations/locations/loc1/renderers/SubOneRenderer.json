@@ -2,9 +2,9 @@
 
 	"type": "Renderer",
 	"name": "Location1:SubOne",
+	"attributes": [],
 
 	"renderGroups": [
-
 
 		{
 			"name": "background",

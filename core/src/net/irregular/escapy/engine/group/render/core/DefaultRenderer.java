@@ -14,7 +14,6 @@ import net.irregular.escapy.engine.graphic.render.program.shader.EscapyVolumeLig
 import net.irregular.escapy.engine.graphic.render.program.shader.proxy.LightSource;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -156,7 +155,6 @@ public class DefaultRenderer implements EscapyRenderer {
 	public <T> T getRendererAttribute(String name) {
 
 		String[] names = name.split(":");
-		System.out.println("names: "+Arrays.toString(names));
 		if (names != null && !names[0].equals(name)) {
 
 			Object parent = getRendererAttribute(names[0]);
