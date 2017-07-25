@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.program.shader.proxy;
+package net.irregular.escapy.engine.graphic.render.light.proxy;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFBO;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFrameBuffer;
-import net.irregular.escapy.engine.graphic.render.program.shader.EscapyLightSource;
+import net.irregular.escapy.engine.graphic.render.light.EscapyLightSource;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
 
 /**

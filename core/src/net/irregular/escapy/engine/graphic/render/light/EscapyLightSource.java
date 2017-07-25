@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.program.shader;
+package net.irregular.escapy.engine.graphic.render.light;
 
 
 import com.badlogic.gdx.Gdx;
@@ -15,8 +15,6 @@ import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.BlendRe
 import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.EscapyUniformBlender;
 import net.irregular.escapy.engine.graphic.screen.Resolution;
 
-import static java.io.File.separator;
-
 /**
  * @author Henry on 30/06/17.
  */
@@ -24,9 +22,7 @@ import static java.io.File.separator;
 public class EscapyLightSource {
 
 	public static boolean debug = false;
-	private static final String DIR_PATH = Escapy.getWorkDir() + separator + "shaders" + separator
-			+ "light" + separator + "source" + separator + "lightSrc";
-
+	private static final String DIR_PATH = Escapy.getProperty("LIGHT_SOURCE_SHADER_FILE_PATH");
 
 	private final EscapyUniformBlender uniformBlender;
 
