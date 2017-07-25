@@ -43,10 +43,28 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 	private final EscapyInstanceLoader<EscapyMultiSourceShader> lightShaderLoader;
 	private final EscapyCamera camera;
 
+	private final EscapyInstanceLoader<EscapyGLBlendRenderer> glBlenderAttrInstLoader;
+	private final EscapyInstanceLoader<EscapyRenderable> renderGroupAttrInstLoader;
+	private final EscapyInstanceLoader<EscapyVolumeLight> volumeLightAttrInstLoader;
+	private final EscapyInstanceLoader<LightSource> lightSourceAttrInstLoader;
+	private final EscapyInstanceLoader<LightMask> lightMaskAttrInstLoader;
+
 
 	public DefaultRendererLoader(EscapyInstanceLoader<EscapyMultiSourceShader> lightShaderLoader,
+								 EscapyInstanceLoader<EscapyGLBlendRenderer> glBlenderAttrInstLoader,
+								 EscapyInstanceLoader<EscapyRenderable> renderGroupAttrInstLoader,
+								 EscapyInstanceLoader<EscapyVolumeLight> volumeLightAttrInstLoader,
+								 EscapyInstanceLoader<LightSource> lightSourceAttrInstLoader,
+								 EscapyInstanceLoader<LightMask> lightMaskAttrInstLoader,
 								 EscapyCamera camera) {
+
 		this.lightShaderLoader = lightShaderLoader;
+		this.glBlenderAttrInstLoader = glBlenderAttrInstLoader;
+		this.renderGroupAttrInstLoader = renderGroupAttrInstLoader;
+		this.volumeLightAttrInstLoader = volumeLightAttrInstLoader;
+		this.lightSourceAttrInstLoader = lightSourceAttrInstLoader;
+		this.lightMaskAttrInstLoader = lightMaskAttrInstLoader;
+
 		this.camera = camera;
 	}
 
@@ -161,6 +179,10 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 				float b = ((float) light.colorRGB.get(2)) / 255f;
 
 				source.setColor(new Color(r, g, b, 1f));
+
+				if (lightSourceAttrInstLoader != null)
+					source = lightSourceAttrInstLoader.loadInstanceAttributes(source, light.attributes);
+
 				lightGroup[i] = source;
 			}
 			lightSources.add(lightGroup, renderGroup.lightGroup.name);
@@ -188,6 +210,9 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 			volumeLight.setDirectIntensity(processor.intensity.direct);
 			volumeLight.setShadowIntensity(processor.intensity.shadow);
 
+			if (volumeLightAttrInstLoader != null)
+				volumeLight = volumeLightAttrInstLoader.loadInstanceAttributes(volumeLight, processor.attributes);
+
 			volumes.add(volumeLight, processor.name);
 		}
 		return volumes;
@@ -207,8 +232,11 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 				LightMask mask = new LightMask(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 				mask.setMaskFunc(serializedLightMask.mode.loadGLMode());
 				mask.setColor(serializedLightMask.loadColorRGBA());
-				maskGroups.add(mask, serializedLightMask.name);
 
+				if (lightMaskAttrInstLoader != null)
+					mask = lightMaskAttrInstLoader.loadInstanceAttributes(mask, serializedLightMask.attributes);
+
+				maskGroups.add(mask, serializedLightMask.name);
 			} else maskGroups.add(null, null);
 		}
 		return maskGroups;
@@ -251,6 +279,10 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 						}
 
 					};
+
+			if (glBlenderAttrInstLoader != null)
+				blender = glBlenderAttrInstLoader.loadInstanceAttributes(blender, serializedBlender.attributes);
+
 			blenders.add(blender, serializedBlender.name);
 		}
 		return blenders;
@@ -265,7 +297,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 		EscapyAssociatedArray<EscapyRenderable> renderGroups = new EscapyNamedArray<>(EscapyRenderable.class);
 		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
-
+			
 			EscapyRenderable renderable = new EscapyRenderable() {
 
 				@Override
@@ -305,6 +337,9 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 				}
 
 			};
+
+			if (renderGroupAttrInstLoader != null)
+				renderable = renderGroupAttrInstLoader.loadInstanceAttributes(renderable, renderGroup.attributes);
 
 			renderGroups.add(renderable, renderGroup.name);
 		}

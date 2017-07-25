@@ -8,6 +8,7 @@
 
 		{
 			"name": "background",
+			"attributes": [],
 
 			"mask": {
 				"name": "mask_background",
@@ -24,6 +25,7 @@
 			"name": "foreground",
 
 			"mask": {
+				"attributes": [],
 				"name": "mask_foreground",
 				"colorRGBA": [40,40,40,250],
 				"mode": {
@@ -33,6 +35,7 @@
 			},
 
 			"blend": {
+				"attributes": [],
 				"name": "blend_foreground",
 				"mode": {
 					"srcRGB": "GL_SRC_ALPHA",
@@ -43,7 +46,7 @@
 			},
 
 			"processor": {
-
+				"attributes": [],
 				"name": "processor_foreground",
 				"spriteSize": 55,
 				"threshold": 0,
@@ -63,6 +66,7 @@
 
 				"lights": [
 					{
+						"attributes": [],
 						"name": "light0",
 						"shift": "layer_foreground_0",
 						"colorRGB": [178, 34, 34],
@@ -78,6 +82,7 @@
 					},
 
 					{
+						"attributes": [],
 						"name": "light1",
 						"shift": "layer_foreground_0",
 						"colorRGB": [40, 34, 200],
