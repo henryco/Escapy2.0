@@ -5,7 +5,7 @@
 	"locations": [
 		{
 			"name": "Location1",
-			"path": "/locations\\Location1.json"
+			"path": "/locations/Location1.json"
 		}
 	],
 

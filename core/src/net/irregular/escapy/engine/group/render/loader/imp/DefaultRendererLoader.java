@@ -64,7 +64,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 		final SerializedRenderer serialized;
 		try {
-			Reader reader = new InputStreamReader(Gdx.files.internal(path).read());
+			Reader reader = new InputStreamReader(Gdx.files.internal(safePath(path)).read());
 			serialized = new Gson().fromJson(reader, SerializedRenderer.class);
 		} catch (Exception e) {
 			new EscapyLogger("RendererLoader").fileJava().log(e, true);

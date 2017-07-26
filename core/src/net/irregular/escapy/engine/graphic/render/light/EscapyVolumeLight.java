@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.env.context.game.Escapy;
+import net.irregular.escapy.engine.env.utils.EscapyFiles;
 import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.StandardUniforms;
@@ -34,8 +35,8 @@ public class EscapyVolumeLight implements EscapyObject {
 		this.name = name;
 		this.uniformBlender = uniformBlender;
 		this.uniformBlender.loadProgram(new ShaderFile(
-				Gdx.files.internal(DIR_PATH + ".vert").readString(),
-				Gdx.files.internal(DIR_PATH + ".frag").readString()
+				Gdx.files.internal(EscapyFiles.safePath(DIR_PATH) + ".vert").readString(),
+				Gdx.files.internal(EscapyFiles.safePath(DIR_PATH) + ".frag").readString()
 		));
 		init();
 

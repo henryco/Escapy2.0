@@ -2,6 +2,7 @@ package net.irregular.escapy.environment.main.group.renderer.dep;
 
 import com.badlogic.gdx.Gdx;
 import net.irregular.escapy.engine.env.context.game.Escapy;
+import net.irregular.escapy.engine.env.utils.EscapyFiles;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanced;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.EscapyMultiSourceShader;
@@ -22,7 +23,7 @@ public class LightShaderLoader implements EscapyInstanceLoader<EscapyMultiSource
 		return Escapy.getProperty("BLEND_SHADERS_ROOT_DIR_PATH");
 	}
 	private static String load(String path) {
-		return Gdx.files.internal(path).readString();
+		return Gdx.files.internal(EscapyFiles.safePath(path)).readString();
 	}
 	private static ShaderFile loadMulti(String path) {
 		return new ShaderFile(load(getDirPath() + path + ".vert"), load(getDirPath() + path + ".frag"));
