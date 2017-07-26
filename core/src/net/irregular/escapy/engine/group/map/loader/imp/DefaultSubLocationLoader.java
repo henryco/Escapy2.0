@@ -2,6 +2,7 @@ package net.irregular.escapy.engine.group.map.loader.imp;
 
 import com.badlogic.gdx.Gdx;
 import com.google.gson.Gson;
+import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.group.map.core.layer.EscapyLayer;
 import net.irregular.escapy.engine.group.map.core.layer.Layer;
@@ -63,7 +64,10 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 			Reader reader = new InputStreamReader(Gdx.files.internal(path).read());
 			serialized = new Gson().fromJson(reader, SerializedSubLocation.class);
 			if (serialized.layers == null) return null;
-		} catch (Exception ignored) {return null;}
+		} catch (Exception e) {
+			new EscapyLogger("SubLocationLoader").fileJava().log(e, true);
+			return null;
+		}
 
 		for (SerializedLayer layer: serialized.layers)
 			layers.add(loadLayer(folder, layer));

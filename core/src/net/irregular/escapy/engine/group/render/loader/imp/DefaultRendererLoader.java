@@ -2,6 +2,7 @@ package net.irregular.escapy.engine.group.render.loader.imp;
 
 import com.badlogic.gdx.Gdx;
 import com.google.gson.Gson;
+import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.graphic.render.light.EscapyVolumeLight;
@@ -66,7 +67,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 			Reader reader = new InputStreamReader(Gdx.files.internal(path).read());
 			serialized = new Gson().fromJson(reader, SerializedRenderer.class);
 		} catch (Exception e) {
-			e.printStackTrace();
+			new EscapyLogger("RendererLoader").fileJava().log(e, true);
 			return null;
 		}
 

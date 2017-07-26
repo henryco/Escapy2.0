@@ -1,5 +1,7 @@
 package net.irregular.escapy.engine.env.utils.loader;
 
+import net.irregular.escapy.engine.env.utils.EscapyLogger;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -30,9 +32,10 @@ public interface EscapyInstanceLoader<INSTANCE_TYPE> {
 			}
 
 		} catch (IllegalAccessException | InvocationTargetException e) {
-			if (e instanceof InvocationTargetException)
-				((InvocationTargetException) e).getTargetException().printStackTrace();
-			e.printStackTrace();
+			if (e instanceof InvocationTargetException) {
+				Throwable targetException = ((InvocationTargetException) e).getTargetException();
+				new EscapyLogger("LoadInstance").fileJava().log(targetException, true);
+			} else new EscapyLogger("LoadInstance").fileJava().log(e, true);
 		}
 		return null;
 	}
@@ -51,5 +54,6 @@ public interface EscapyInstanceLoader<INSTANCE_TYPE> {
 		if (attributes == null || attributes.isEmpty()) return instance;
 		return loadInstanceAttributes(instance, attributes.toArray(new String[0]));
 	}
+
 
 }

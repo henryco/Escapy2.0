@@ -2,6 +2,7 @@ package net.irregular.escapy.engine.group.map.loader.imp;
 
 import com.badlogic.gdx.Gdx;
 import com.google.gson.Gson;
+import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.group.map.core.location.EscapyLocation;
 import net.irregular.escapy.engine.group.map.core.location.Location;
@@ -45,7 +46,11 @@ public class DefaultLocationLoader implements LocationLoader {
 		try {
 			Reader reader = new InputStreamReader(Gdx.files.internal(path).read());
 			serialized = new Gson().fromJson(reader, SerializedLocation.class);
-		} catch (Exception ignored) {return null;}
+
+		} catch (Exception e) {
+			new EscapyLogger("LocationLoader").fileJava().log(e, true);
+			return null;
+		}
 
 
 		Collection<Map.Entry<String, String>> subLocations = new LinkedList<>();

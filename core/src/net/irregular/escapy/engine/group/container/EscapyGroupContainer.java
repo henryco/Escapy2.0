@@ -3,6 +3,7 @@ package net.irregular.escapy.engine.group.container;
 import com.badlogic.gdx.Gdx;
 import com.google.gson.Gson;
 import net.irregular.escapy.engine.env.context.game.Escapy;
+import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyListener;
 import net.irregular.escapy.engine.group.container.serial.SerializedGroup;
 import net.irregular.escapy.engine.group.map.MapContainer;
@@ -61,7 +62,7 @@ public class EscapyGroupContainer {
 			return true;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			new EscapyLogger("GroupInitialization").fileJava().log(e, true);
 			return false;
 		}
 	}

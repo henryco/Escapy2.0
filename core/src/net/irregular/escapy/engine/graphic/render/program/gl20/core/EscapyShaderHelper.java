@@ -1,18 +1,15 @@
 package net.irregular.escapy.engine.graphic.render.program.gl20.core;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.utils.TimeUtils;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
+import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyInstanceObserver;
 import net.irregular.escapy.engine.graphic.render.program.gl20.proxy.EscapyProxyShaderProgram;
 import net.irregular.escapy.engine.graphic.render.program.gl20.proxy.ProxyShaderProgram;
 
 import java.util.Arrays;
-import java.util.Date;
 
 
 /**
@@ -25,8 +22,10 @@ public interface EscapyShaderHelper extends EscapyObject {
 	default void checkStatus(ShaderProgram program) {
 		System.err.println(program.isCompiled() ? "COMPILED: "+this.getName() : "ERROR: "+this.getName()+"\n"+program.getLog()+"\n");
 		if (!program.isCompiled()) {
-			FileHandle file = Gdx.files.local("error_log.txt");
-			file.writeString(new Date(TimeUtils.millis()).toString()+"\nERROR: "+this.getName()+"\n"+program.getLog()+"\n", true);
+//			FileHandle file = Gdx.files.local("error_gl_log.txt");
+//			file.writeString(new Date(TimeUtils.millis()).toString()+
+//					"\nERROR: "+this.getName()+"\n"+program.getLog()+"\n", true);
+			new EscapyLogger().fileGL().name("SHADER ERROR "+this.getName()).log(program.getLog());
 		}
 	}
 

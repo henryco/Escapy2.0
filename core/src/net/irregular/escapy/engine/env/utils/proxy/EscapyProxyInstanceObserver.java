@@ -1,5 +1,8 @@
 package net.irregular.escapy.engine.env.utils.proxy;
 
+import net.irregular.escapy.engine.env.utils.EscapyLogger;
+
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
@@ -37,7 +40,12 @@ public class EscapyProxyInstanceObserver {
 						return result;
 
 					} catch (Exception e) {
-						e.printStackTrace();
+						EscapyLogger logger = new EscapyLogger("ProxyObservedInstance").fileJava();
+						if (e instanceof InvocationTargetException) {
+							Throwable exception = ((InvocationTargetException) e).getTargetException();
+							logger.log(exception, true);
+						} else logger.log(e, true);
+
 						System.exit(4);
 					}
 
