@@ -3,6 +3,8 @@ package net.irregular.escapy.engine.group.container;
 import com.badlogic.gdx.Gdx;
 import com.google.gson.Gson;
 import net.irregular.escapy.engine.env.context.game.Escapy;
+import net.irregular.escapy.engine.env.utils.EscapyFiles;
+import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyListener;
 import net.irregular.escapy.engine.group.container.serial.SerializedGroup;
 import net.irregular.escapy.engine.group.map.MapContainer;
@@ -51,7 +53,7 @@ public class EscapyGroupContainer {
 		try {
 
 			String path = Escapy.getConfigsFilePath() + separator + configFile;
-			Reader reader = new InputStreamReader(Gdx.files.internal(path).read());
+			Reader reader = new InputStreamReader(Gdx.files.internal(EscapyFiles.safePath(path)).read());
 
 			SerializedGroup serialized = new Gson().fromJson(reader, SerializedGroup.class);
 
@@ -61,7 +63,7 @@ public class EscapyGroupContainer {
 			return true;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			new EscapyLogger("GroupInitialization").fileJava().log(e, true);
 			return false;
 		}
 	}
@@ -74,7 +76,8 @@ public class EscapyGroupContainer {
 		Collection<TargetGroup> targetGroups = new LinkedList<>();
 		for (SerializedPath serializedPath: group) {
 
-			final String path = Escapy.getConfigsFilePath() + serializedPath.path;
+			final String path = Escapy.getConfigsFilePath() +
+					serializedPath.path.replace("\\", separator).replace("/", separator);
 			final String[] names = serializedPath.name.split(":");
 
 			if (names.length != 2) throw new RuntimeException();
@@ -94,7 +97,8 @@ public class EscapyGroupContainer {
 		for (SerializedPath serializedPath: group) {
 
 			final String path = Escapy.getConfigsFilePath() + serializedPath.path;
-			locations.add(new AbstractMap.SimpleEntry<>(serializedPath.name, path));
+			locations.add(new AbstractMap.SimpleEntry<>(serializedPath.name,
+					path.replace("\\", separator).replace("/", separator)));
 		}
 
 		return new MapContainer(locationLoader, locations, listener);

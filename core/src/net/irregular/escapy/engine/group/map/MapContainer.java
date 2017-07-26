@@ -1,5 +1,6 @@
 package net.irregular.escapy.engine.group.map;
 
+import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyInstanceObserver;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyListener;
 import net.irregular.escapy.engine.group.map.core.location.EscapyLocation;
@@ -47,18 +48,26 @@ public class MapContainer {
 
 	public EscapyLocation switchLocation(String name) {
 
-		EscapyLocation temp = location;
-		EscapyLocation preLocation = locationLoader.loadLocation(locationMap.get(name));
+		try {
 
-		location = locationInstanceObserver.create(preLocation);
+			EscapyLocation temp = location;
+			EscapyLocation preLocation = locationLoader.loadLocation(locationMap.get(name));
 
-		if (location == null) {
-			location = temp;
+			location = locationInstanceObserver.create(preLocation);
+
+			if (location == null) {
+				location = temp;
+				return location;
+			}
+
+			if (temp != null) temp.dispose();
 			return location;
+
+		} catch (Exception e) {
+			new EscapyLogger("MapContainer").fileJava().log(e, true);
 		}
 
-		if (temp != null) temp.dispose();
-		return location;
+		return null;
 	}
 
 	public void switchLocation(String locationName, String subLocationName) {

@@ -1,5 +1,6 @@
 package net.irregular.escapy.engine.group.render;
 
+import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyListener;
 import net.irregular.escapy.engine.group.map.core.location.EscapySubLocation;
 import net.irregular.escapy.engine.group.render.core.EscapyRenderer;
@@ -45,7 +46,12 @@ public class RenderContainer implements EscapyRenderer {
 				final EscapySubLocation subLocation = (EscapySubLocation) methodResult;
 				final String parentName = subLocation.getParentLocation().getName();
 				final String path = rendererMap.get(parentName).get(subLocation.getName());
-				renderer = rendererLoader.loadRenderer(path, subLocation);
+
+				try {
+					renderer = rendererLoader.loadRenderer(path, subLocation);
+				} catch (Exception e) {
+					new EscapyLogger("RenderContainer").fileJava().log(e, true);
+				}
 			}
 		}
 	}

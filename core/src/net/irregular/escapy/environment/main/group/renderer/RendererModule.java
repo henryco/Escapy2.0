@@ -2,6 +2,7 @@ package net.irregular.escapy.environment.main.group.renderer;
 
 import dagger.Module;
 import dagger.Provides;
+import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.EscapyMultiSourceShader;
@@ -29,10 +30,15 @@ public class RendererModule {
 			@Named("default_camera") EscapyCamera camera,
 			EscapyInstanceLoader<EscapyMultiSourceShader> lightShaderLoader) {
 
-		return RendererLoaderBuilder.Default()
-				.setCamera(camera)
-				.setLightShaderInstanceLoader(lightShaderLoader)
-		.build();
+		try {
+			return RendererLoaderBuilder.Default()
+					.setCamera(camera)
+					.setLightShaderInstanceLoader(lightShaderLoader)
+					.build();
+		} catch (Exception e) {
+			new EscapyLogger("RenderLoaderProvider").fileJava().log(e, true);
+			return null;
+		}
 	}
 
 

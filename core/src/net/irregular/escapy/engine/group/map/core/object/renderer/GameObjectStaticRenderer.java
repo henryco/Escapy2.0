@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import net.irregular.escapy.engine.env.utils.EscapyFiles;
 import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.group.map.core.object.EscapyGameObjectRenderer;
 import net.irregular.escapy.engine.group.map.core.object.imp.GameObjectStatic;
@@ -38,7 +39,7 @@ public class GameObjectStaticRenderer implements EscapyGameObjectRenderer<GameOb
 
 		for (int i = 0; i < 3; i++) {
 			if (paths[i] != null && !paths[i].isEmpty()) {
-				sprites[i] = new Sprite(new Texture(Gdx.files.internal(paths[i])));
+				sprites[i] = new Sprite(new Texture(Gdx.files.internal(EscapyFiles.safePath(paths[i]))));
 
 				if (gameObject.getObjectDetails().size[0] > 0 && gameObject.getObjectDetails().size[1] > 0)
 					sprites[i].setSize(gameObject.getObjectDetails().size[0], gameObject.getObjectDetails().size[1]);
