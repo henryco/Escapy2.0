@@ -1,11 +1,10 @@
-package net.irregular.escapy.engine.graphic.render.light;
+package net.irregular.escapy.engine.graphic.render.light.processor;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
-import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.StandardUniforms;
 import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.BlendRendererExtended;
@@ -14,7 +13,7 @@ import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.EscapyU
 /**
  * @author Henry on 02/07/17.
  */ @EscapyAPI
-public class EscapyVolumeLight implements EscapyObject {
+public class EscapyVolumeLight implements EscapyLightProcessor {
 
 	public static boolean debug = false;
 	private final String name;
@@ -75,6 +74,8 @@ public class EscapyVolumeLight implements EscapyObject {
 	}
 
 
+
+
 	public void draw(Batch batch, float x, float y, Texture colorMap, Texture normalMap, Texture maskMap) {
 		if (enable) uniformBlender.draw(batch, x, y, colorMap, normalMap, maskMap);
 	}
@@ -89,11 +90,40 @@ public class EscapyVolumeLight implements EscapyObject {
 
 
 
-
-//	---------------------------------------- SET ---------------------------------------------
+	@Override
 	public void setFieldSize(float width, float height) {
 		uniformBlender.getStandardUniforms().setFloatArrayUniform("fieldSize", width, height);
 	}
+	@Override
+	public Float[] getFieldSize() {
+		return uniformBlender.getStandardUniforms().getFloatArrayUniform("fieldSize");
+	}
+
+
+	@Override
+	public void setThreshold(float threshold) {
+		uniformBlender.getStandardUniforms().setFloatUniform("threshold", threshold);
+	}
+	@Override
+	public float getThreshold() {
+		return uniformBlender.getStandardUniforms().getFloatUniform("threshold");
+	}
+
+
+	@Override
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+	@Override
+	public boolean isEnable() {
+		return enable;
+	}
+
+
+
+
+
+//	---------------------------------------- SET ---------------------------------------------
 	public void setAmbientIntensity(float ambientIntensity) {
 		uniformBlender.getStandardUniforms().setFloatUniform("ambientIntensity", ambientIntensity);
 	}
@@ -109,19 +139,10 @@ public class EscapyVolumeLight implements EscapyObject {
 	public void setHeight(float height) {
 		uniformBlender.getStandardUniforms().setFloatUniform("height", height);
 	}
-	public void setThreshold(float threshold) {
-		uniformBlender.getStandardUniforms().setFloatUniform("threshold", threshold);
-	}
-	public void setEnable(boolean enable) {
-		this.enable = enable;
-	}
 
 
 
 //	---------------------------------------- GET --------------------------------------------
-	public Float[] getFieldSize() {
-		return uniformBlender.getStandardUniforms().getFloatArrayUniform("fieldSize");
-	}
 	public float getAmbientIntensity() {
 		return uniformBlender.getStandardUniforms().getFloatUniform("ambientIntensity");
 	}
@@ -136,12 +157,6 @@ public class EscapyVolumeLight implements EscapyObject {
 	}
 	public float getHeight() {
 		return uniformBlender.getStandardUniforms().getFloatUniform("height");
-	}
-	public float getThreshold() {
-		return uniformBlender.getStandardUniforms().getFloatUniform("threshold");
-	}
-	public boolean isEnable() {
-		return enable;
 	}
 
 

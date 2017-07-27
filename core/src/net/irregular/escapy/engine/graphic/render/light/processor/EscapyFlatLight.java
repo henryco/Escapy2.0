@@ -1,10 +1,9 @@
-package net.irregular.escapy.engine.graphic.render.light;
+package net.irregular.escapy.engine.graphic.render.light.processor;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import net.irregular.escapy.engine.env.utils.EscapyObject;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.uniform.StandardUniforms;
 import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.BlendRendererExtended;
@@ -13,12 +12,12 @@ import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.EscapyU
 /**
  * @author Henry on 27/07/17.
  */
-public class EscapyFlatLight implements EscapyObject {
+public class EscapyFlatLight implements EscapyLightProcessor {
 
 	public static boolean debug = false;
 	private final String name;
 	private final EscapyUniformBlender uniformBlender;
-
+	private final Float[] fieldSize;
 	private boolean enable;
 
 
@@ -33,10 +32,13 @@ public class EscapyFlatLight implements EscapyObject {
 								ShaderFile shaderFile) {
 
 		this.name = name;
+		this.fieldSize = new Float[2];
 		this.uniformBlender = uniformBlender;
 		this.uniformBlender.loadProgram(shaderFile);
+
 		init();
 
+		setFieldSize(0,0);
 		setThreshold(0);
 		setEnable(true);
 	}
@@ -79,9 +81,16 @@ public class EscapyFlatLight implements EscapyObject {
 
 
 //	---------------------------------------- SET ---------------------------------------------
+	@Override
+	public void setFieldSize(float width, float height) {
+		this.fieldSize[0] = width;
+		this.fieldSize[1] = height;
+	}
+	@Override
 	public void setThreshold(float threshold) {
 		uniformBlender.getStandardUniforms().setFloatUniform("threshold", threshold);
 	}
+	@Override
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
@@ -89,13 +98,18 @@ public class EscapyFlatLight implements EscapyObject {
 
 
 //	---------------------------------------- GET --------------------------------------------
+	@Override
+	public Float[] getFieldSize() {
+		return fieldSize.clone();
+	}
+	@Override
 	public float getThreshold() {
 		return uniformBlender.getStandardUniforms().getFloatUniform("threshold");
 	}
+	@Override
 	public boolean isEnable() {
 		return enable;
 	}
-
 
 
 

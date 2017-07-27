@@ -4,46 +4,78 @@ import com.badlogic.gdx.Gdx;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyNamedArray;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
-import net.irregular.escapy.engine.graphic.render.light.EscapyVolumeLight;
+import net.irregular.escapy.engine.graphic.render.light.processor.EscapyFlatLight;
+import net.irregular.escapy.engine.graphic.render.light.processor.EscapyLightProcessor;
+import net.irregular.escapy.engine.graphic.render.light.processor.EscapyVolumeLight;
 import net.irregular.escapy.engine.group.render.loader.RendererVoidSubLoader;
+import net.irregular.escapy.engine.group.render.loader.serial.SerializedLightProcessor;
 import net.irregular.escapy.engine.group.render.loader.serial.SerializedRenderer;
-import net.irregular.escapy.engine.group.render.loader.serial.SerializedVolumeProcessor;
+
+import static net.irregular.escapy.engine.group.render.loader.serial.SerializedRenderer.SerializedRenderGroup;
 
 /**
  * @author Henry on 25/07/17.
  */
 public class DefaultLightProcessorGroupSubLoader
-		implements RendererVoidSubLoader<EscapyVolumeLight, SerializedRenderer> {
+		implements RendererVoidSubLoader<EscapyLightProcessor, SerializedRenderer> {
 
 
-	private final EscapyInstanceLoader<EscapyVolumeLight> volumeLightAttrInstLoader;
-	public DefaultLightProcessorGroupSubLoader(EscapyInstanceLoader<EscapyVolumeLight> volumeLightAttrInstLoader) {
+	private final EscapyInstanceLoader<EscapyLightProcessor> volumeLightAttrInstLoader;
+	public DefaultLightProcessorGroupSubLoader(EscapyInstanceLoader<EscapyLightProcessor> volumeLightAttrInstLoader) {
 		this.volumeLightAttrInstLoader = volumeLightAttrInstLoader;
 	}
 
 
 	@Override
-	public EscapyAssociatedArray<EscapyVolumeLight> loadRendererPart(SerializedRenderer serialized) {
+	public EscapyAssociatedArray<EscapyLightProcessor> loadRendererPart(SerializedRenderer serialized) {
 
-		EscapyAssociatedArray<EscapyVolumeLight> volumes = new EscapyNamedArray<>(EscapyVolumeLight.class);
-		for (SerializedRenderer.SerializedRenderGroup renderGroup : serialized.renderGroups) {
+		EscapyAssociatedArray<EscapyLightProcessor> volumes = new EscapyNamedArray<>(EscapyLightProcessor.class);
+		for (SerializedRenderGroup renderGroup : serialized.renderGroups) {
 
-			SerializedVolumeProcessor processor = renderGroup.processor;
-			EscapyVolumeLight volumeLight = new EscapyVolumeLight(processor.name);
+			final SerializedLightProcessor processor = renderGroup.processor;
 
-			volumeLight.setFieldSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-			volumeLight.setHeight(processor.height);
-			volumeLight.setThreshold(processor.threshold);
-			volumeLight.setSpriteSize(processor.spriteSize);
-			volumeLight.setAmbientIntensity(processor.intensity.ambient);
-			volumeLight.setDirectIntensity(processor.intensity.direct);
-			volumeLight.setShadowIntensity(processor.intensity.shadow);
+			EscapyLightProcessor lightProcessor = loadLightProcessor(processor);
+			lightProcessor.setFieldSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+			lightProcessor.setThreshold(processor.threshold);
+			lightProcessor.setEnable(processor.enable);
 
 			if (volumeLightAttrInstLoader != null)
-				volumeLight = volumeLightAttrInstLoader.loadInstanceAttributes(volumeLight, processor.attributes);
+				lightProcessor = volumeLightAttrInstLoader.loadInstanceAttributes(lightProcessor, processor.attributes);
 
-			volumes.add(volumeLight, processor.name);
+			volumes.add(lightProcessor, processor.name);
 		}
+
 		return volumes;
 	}
+
+
+
+	private static EscapyLightProcessor loadLightProcessor(SerializedLightProcessor processor) {
+
+		final String type = processor.type;
+		if (type.equals(SerializedLightProcessor.TYPE_FLAT))
+			return loadFlatProcessor(processor);
+		if (type.equals(SerializedLightProcessor.TYPE_VOLUMETRIC))
+			return loadVolumetricProcessor(processor);
+		return null;
+	}
+
+
+
+	private static EscapyVolumeLight loadVolumetricProcessor(SerializedLightProcessor processor) {
+
+		final EscapyVolumeLight volumeLight = new EscapyVolumeLight(processor.name);
+		volumeLight.setAmbientIntensity(processor.intensity.ambient);
+		volumeLight.setDirectIntensity(processor.intensity.direct);
+		volumeLight.setShadowIntensity(processor.intensity.shadow);
+		volumeLight.setSpriteSize(processor.spriteSize);
+		volumeLight.setHeight(processor.height);
+		return volumeLight;
+	}
+
+	private static EscapyFlatLight loadFlatProcessor(SerializedLightProcessor processor) {
+		return new EscapyFlatLight(processor.name);
+	}
+
+
 }

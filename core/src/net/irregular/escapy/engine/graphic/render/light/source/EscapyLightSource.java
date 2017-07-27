@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.graphic.render.light;
+package net.irregular.escapy.engine.graphic.render.light.source;
 
 
 import com.badlogic.gdx.graphics.Color;

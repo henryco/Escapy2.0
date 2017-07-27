@@ -6,8 +6,10 @@ import net.irregular.escapy.engine.env.utils.Named;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFBO;
 import net.irregular.escapy.engine.graphic.render.fbo.EscapyFrameBuffer;
-import net.irregular.escapy.engine.graphic.render.light.EscapyVolumeLight;
-import net.irregular.escapy.engine.graphic.render.light.proxy.LightSource;
+import net.irregular.escapy.engine.graphic.render.light.processor.EscapyFlatLight;
+import net.irregular.escapy.engine.graphic.render.light.processor.EscapyLightProcessor;
+import net.irregular.escapy.engine.graphic.render.light.processor.EscapyVolumeLight;
+import net.irregular.escapy.engine.graphic.render.light.source.LightSource;
 import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.graphic.render.program.gl10.blend.EscapyGLBlendRenderer;
 import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
@@ -25,11 +27,12 @@ public class DefaultRenderer implements EscapyRenderer {
 	private final Collection<EscapyAssociatedArray> namedGroups;
 
 	private final EscapyAssociatedArray<EscapyMultiSourceShader> lightBlenders;
+	private final EscapyAssociatedArray<EscapyLightProcessor> lightProcessors;
 	private final EscapyAssociatedArray<EscapyGLBlendRenderer> blenders;
 	private final EscapyAssociatedArray<EscapyRenderable> renderGroups;
 	private final EscapyAssociatedArray<LightMask> lightMasks;
 	private final EscapyAssociatedArray<LightSource[]> lightSources;
-	private final EscapyAssociatedArray<EscapyVolumeLight> volumeProcessors;
+
 
 	private final String name;
 
@@ -40,7 +43,7 @@ public class DefaultRenderer implements EscapyRenderer {
 						   EscapyAssociatedArray<EscapyRenderable> renderGroups,
 						   EscapyAssociatedArray<LightMask> lightMasks,
 						   EscapyAssociatedArray<LightSource[]> lightSources,
-						   EscapyAssociatedArray<EscapyVolumeLight> volumeProcessors,
+						   EscapyAssociatedArray<EscapyLightProcessor> lightProcessors,
 						   EscapyAssociatedArray<EscapyGLBlendRenderer> blenders,
 						   EscapyAssociatedArray<EscapyMultiSourceShader> lightBlenders,
 						   Resolution resolution) {
@@ -53,7 +56,7 @@ public class DefaultRenderer implements EscapyRenderer {
 				new SpriteBatch()
 		};
 
-		this.volumeProcessors = volumeProcessors;
+		this.lightProcessors = lightProcessors;
 		this.lightBlenders = lightBlenders;
 		this.renderGroups = renderGroups;
 		this.lightSources = lightSources;
@@ -63,7 +66,7 @@ public class DefaultRenderer implements EscapyRenderer {
 
 		resize(resolution.width, resolution.height);
 
-		namedGroups.add(this.volumeProcessors);
+		namedGroups.add(this.lightProcessors);
 		namedGroups.add(this.lightBlenders);
 		namedGroups.add(this.renderGroups);
 		namedGroups.add(this.lightSources);
@@ -80,10 +83,10 @@ public class DefaultRenderer implements EscapyRenderer {
 		for (int i = 0; i < renderGroups.size(); i++) {
 
 			final EscapyMultiSourceShader lightBlender = lightBlenders.asArray()[i];
+			final EscapyLightProcessor processor = lightProcessors.asArray()[i];
 			final EscapyGLBlendRenderer blender = blenders.asArray()[i];
 			final EscapyRenderable renderer = renderGroups.asArray()[i];
 
-			final EscapyVolumeLight volume = volumeProcessors.asArray()[i];
 			final LightSource[] lightSource = lightSources.asArray()[i];
 			final LightMask mask = lightMasks.asArray()[i];
 
@@ -142,10 +145,6 @@ public class DefaultRenderer implements EscapyRenderer {
 			for (LightSource source: lightSource)
 				source.prepareBuffer(batch_pre);
 
-			normalFBO.begin(() -> {
-				normalFBO.color(0.502f, 0.502f, 1f, 1f);
-				renderer.renderNormalsMap(batch_pre);
-			});
 
 			lightFBO.begin(() -> {
 				lightFBO.wipe();
@@ -156,15 +155,33 @@ public class DefaultRenderer implements EscapyRenderer {
 				});
 			});
 
+
 			colorFBO.begin(() -> {
 				wipe();
 				lightBlender.draw(batch_post, mainFBO.getSprite(), lightFBO.getSprite());
 			});
 
-			volume.draw(batch_post, colorFBO.getSprite(), normalFBO.getSprite(), maskFBO.getSprite());
+
+			if (processor instanceof EscapyVolumeLight) {
+
+				normalFBO.begin(() -> {
+					normalFBO.color(0.502f, 0.502f, 1f, 1f);
+					renderer.renderNormalsMap(batch_pre);
+				});
+
+				((EscapyVolumeLight) processor).draw(batch_post, colorFBO.getSprite(), normalFBO.getSprite(), maskFBO.getSprite());
+			}
+
+			else if (processor instanceof EscapyFlatLight) {
+				((EscapyFlatLight) processor).draw(batch_post, colorFBO.getSprite(), maskFBO.getSprite());
+			}
+
 
 		}
+
 	}
+
+
 
 
 	@Override @SuppressWarnings("unchecked")
@@ -213,7 +230,7 @@ public class DefaultRenderer implements EscapyRenderer {
 		final Resolution resolution = new Resolution(width, height);
 
 		for (int i = 0; i < fboGroup.length; i++) fboGroup[i] = new EscapyFrameBuffer(resolution);
-		for (EscapyVolumeLight v: volumeProcessors) v.setFieldSize(width, height);
+		for (EscapyLightProcessor p: lightProcessors) p.setFieldSize(width, height);
 
 		for (LightSource[] sources: lightSources) {
 			for (LightSource s : sources) s.resize(width, height);
@@ -223,7 +240,7 @@ public class DefaultRenderer implements EscapyRenderer {
 	@Override
 	public void dispose() {
 		for (EscapyFBO fbo: fboGroup) fbo.dispose();
-		for (EscapyVolumeLight v: volumeProcessors) v.dispose();
+		for (EscapyLightProcessor p: lightProcessors) p.dispose();
 		for (LightSource[] sources: lightSources) {
 			for (LightSource s : sources) s.dispose();
 		}
