@@ -53,7 +53,7 @@ public class EscapyGroupContainer {
 		try {
 
 			String path = Escapy.getConfigsFilePath() + separator + configFile;
-			Reader reader = new InputStreamReader(Gdx.files.internal(EscapyFiles.safePath(path)).read());
+			Reader reader = new InputStreamReader(Gdx.files.internal(EscapyFiles.safetyPath(path)).read());
 
 			SerializedGroup serialized = new Gson().fromJson(reader, SerializedGroup.class);
 

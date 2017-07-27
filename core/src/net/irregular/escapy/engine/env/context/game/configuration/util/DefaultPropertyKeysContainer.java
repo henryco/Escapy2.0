@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * @author Henry on 26/07/17.
  */
-public class DefaultPropertyKeysContainer implements PropertyKeysContainer{
+public class DefaultPropertyKeysContainer implements PropertyKeysStorage {
 
 	private final Map<String, Object> objectMap;
 	public DefaultPropertyKeysContainer(Map<String, Object> objectMap) {
@@ -16,24 +16,24 @@ public class DefaultPropertyKeysContainer implements PropertyKeysContainer{
 	private Object tempObj = null;
 
 	@Override
-	public PropertyKeysContainer addProperty(String key, Object property) {
+	public PropertyKeysStorage addProperty(String key, Object property) {
 		return and();
 	}
 
 	@Override
-	public PropertyKeysContainer addPropertyKey(String key) {
+	public PropertyKeysStorage addPropertyKey(String key) {
 		this.tempKey = key;
 		return this;
 	}
 
 	@Override
-	public PropertyKeysContainer addPropertyValue(Object value) {
+	public PropertyKeysStorage addPropertyValue(Object value) {
 		this.tempObj = value;
 		return this;
 	}
 
 	@Override
-	public PropertyKeysContainer and() {
+	public PropertyKeysStorage and() {
 		if (tempKey != null && tempObj != null)
 			objectMap.put(tempKey, tempObj);
 		tempKey = null;

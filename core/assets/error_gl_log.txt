@@ -1,0 +1,56 @@
+Thu Jul 27 21:43:48 CEST 2017
+[SHADER ERROR BlendRendererExtended[11317965]]:
+Vertex shader
+0:48(40): error: `gl_FragColor' undeclared
+0:48(40): error: value of type vec4 cannot be assigned to variable of type error
+0:51(17): error: `gl_FragCoord' undeclared
+0:51(17): error: type mismatch
+0:51(17): error: operands to arithmetic operators must be numeric
+0:51(12): error: cannot construct `vec2' from a non-numeric data type
+0:52(53): warning: `uv' used uninitialized
+0:57(52): warning: `uv' used uninitialized
+0:65(2): error: `gl_FragColor' undeclared
+0:65(2): error: value of type vec4 cannot be assigned to variable of type error
+0:68(7): error: `gl_FragColor' undeclared
+0:68(7): error: value of type vec4 cannot be assigned to variable of type error
+Fragment shader:
+0:2(1): error: `attribute' variables may not be declared in the fragment shader
+0:2(1): error: illegal type for a varying variable
+0:3(1): error: `attribute' variables may not be declared in the fragment shader
+0:3(1): error: illegal type for a varying variable
+0:11(21): error: type mismatch
+0:11(16): error: cannot construct `vec4' from a non-numeric data type
+0:12(2): error: `gl_Position' undeclared
+0:12(35): error: type mismatch
+0:12(30): error: cannot construct `vec4' from a non-numeric data type
+0:12(16): error: operands to arithmetic operators must be numeric
+
+
+Thu Jul 27 21:43:48 CEST 2017
+[SHADER ERROR BlendRendererExtended[70608103]]:
+Vertex shader
+0:48(40): error: `gl_FragColor' undeclared
+0:48(40): error: value of type vec4 cannot be assigned to variable of type error
+0:51(17): error: `gl_FragCoord' undeclared
+0:51(17): error: type mismatch
+0:51(17): error: operands to arithmetic operators must be numeric
+0:51(12): error: cannot construct `vec2' from a non-numeric data type
+0:52(53): warning: `uv' used uninitialized
+0:57(52): warning: `uv' used uninitialized
+0:65(2): error: `gl_FragColor' undeclared
+0:65(2): error: value of type vec4 cannot be assigned to variable of type error
+0:68(7): error: `gl_FragColor' undeclared
+0:68(7): error: value of type vec4 cannot be assigned to variable of type error
+Fragment shader:
+0:2(1): error: `attribute' variables may not be declared in the fragment shader
+0:2(1): error: illegal type for a varying variable
+0:3(1): error: `attribute' variables may not be declared in the fragment shader
+0:3(1): error: illegal type for a varying variable
+0:11(21): error: type mismatch
+0:11(16): error: cannot construct `vec4' from a non-numeric data type
+0:12(2): error: `gl_Position' undeclared
+0:12(35): error: type mismatch
+0:12(30): error: cannot construct `vec4' from a non-numeric data type
+0:12(16): error: operands to arithmetic operators must be numeric
+
+

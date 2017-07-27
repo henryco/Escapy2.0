@@ -23,7 +23,7 @@ public class LightShaderLoader implements EscapyInstanceLoader<EscapyMultiSource
 		return Escapy.getProperty("BLEND_SHADERS_ROOT_DIR_PATH");
 	}
 	private static String load(String path) {
-		return Gdx.files.internal(EscapyFiles.safePath(path)).readString();
+		return Gdx.files.internal(EscapyFiles.safetyPath(path)).readString();
 	}
 	private static ShaderFile loadMulti(String path) {
 		return new ShaderFile(load(getDirPath() + path + ".vert"), load(getDirPath() + path + ".frag"));

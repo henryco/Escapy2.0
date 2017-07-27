@@ -7,7 +7,7 @@ import static java.io.File.separator;
  */ // TODO: 26/07/17
 public interface EscapyFiles {
 
-	static String safePath(String path) {
+	static String safetyPath(String path) {
 		return path.replace("\\", separator).replace("/", separator);
 	}
 }

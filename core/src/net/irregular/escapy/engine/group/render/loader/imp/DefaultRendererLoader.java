@@ -5,8 +5,8 @@ import com.google.gson.Gson;
 import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
-import net.irregular.escapy.engine.graphic.render.light.EscapyVolumeLight;
-import net.irregular.escapy.engine.graphic.render.light.proxy.LightSource;
+import net.irregular.escapy.engine.graphic.render.light.processor.EscapyLightProcessor;
+import net.irregular.escapy.engine.graphic.render.light.source.LightSource;
 import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.graphic.render.program.gl10.blend.EscapyGLBlendRenderer;
 import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
@@ -35,7 +35,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 	private final RendererSubLoader<EscapyMultiSourceShader, SerializedRenderer, Void> lightShaderGroupSubLoader;
 	private final RendererSubLoader<EscapyRenderable, SerializedRenderer, EscapyAssociatedArray<EscapyLayer[]>> renderableGruopSubLoader;
 	private final RendererSubLoader<LightSource[], SerializedRenderer, EscapyAssociatedArray<EscapyLayer[]>> lightGroupSubLoader;
-	private final RendererSubLoader<EscapyVolumeLight, SerializedRenderer, Void> lightProcessorGroupSubLoader;
+	private final RendererSubLoader<EscapyLightProcessor, SerializedRenderer, Void> lightProcessorGroupSubLoader;
 
 	private final EscapyInstanceLoader<EscapyRenderer> rendererAttrInstLoader;
 
@@ -45,7 +45,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 								 RendererSubLoader<EscapyMultiSourceShader, SerializedRenderer, Void> lightShaderGroupSubLoader,
 								 RendererSubLoader<EscapyRenderable, SerializedRenderer, EscapyAssociatedArray<EscapyLayer[]>> renderableGruopSubLoader,
 								 RendererSubLoader<LightSource[], SerializedRenderer, EscapyAssociatedArray<EscapyLayer[]>> lightGroupSubLoader,
-								 RendererSubLoader<EscapyVolumeLight, SerializedRenderer, Void> lightProcessorGroupSubLoader,
+								 RendererSubLoader<EscapyLightProcessor, SerializedRenderer, Void> lightProcessorGroupSubLoader,
 								 EscapyInstanceLoader<EscapyRenderer> rendererAttrInstLoader) {
 
 		this.maskGroupSubLoader = maskGroupSubLoader;
@@ -64,7 +64,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 
 		final SerializedRenderer serialized;
 		try {
-			Reader reader = new InputStreamReader(Gdx.files.internal(safePath(path)).read());
+			Reader reader = new InputStreamReader(Gdx.files.internal(safetyPath(path)).read());
 			serialized = new Gson().fromJson(reader, SerializedRenderer.class);
 		} catch (Exception e) {
 			new EscapyLogger("RendererLoader").fileJava().log(e, true);
@@ -77,8 +77,8 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 		final EscapyAssociatedArray<EscapyRenderable> renderGroups = loadRenderGroups(arg.getLayerGroups(), serialized);
 		final EscapyAssociatedArray<EscapyGLBlendRenderer> blenders = loadBlender(serialized);
 		final EscapyAssociatedArray<EscapyMultiSourceShader> lightShaders = loadLightShaders(serialized);
+		final EscapyAssociatedArray<EscapyLightProcessor> volumeProcessors = loadVolumeProcessors(serialized);
 
-		final EscapyAssociatedArray<EscapyVolumeLight> volumeProcessors = loadVolumeProcessors(serialized);
 		final EscapyAssociatedArray<LightSource[]> lightSources = loadLightGroups(arg.getLayerGroups(), serialized);
 		final EscapyAssociatedArray<LightMask> maskGroups = loadMaskGroups(serialized);
 
@@ -117,7 +117,7 @@ public class DefaultRendererLoader implements RendererLoader<EscapySubLocation> 
 	}
 
 
-	private EscapyAssociatedArray<EscapyVolumeLight> loadVolumeProcessors(SerializedRenderer serialized) {
+	private EscapyAssociatedArray<EscapyLightProcessor> loadVolumeProcessors(SerializedRenderer serialized) {
 		return lightProcessorGroupSubLoader.loadRendererPart(serialized);
 	}
 

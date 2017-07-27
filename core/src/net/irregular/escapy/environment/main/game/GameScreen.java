@@ -4,7 +4,7 @@ import net.irregular.escapy.engine.env.context.annotation.ScreenName;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
 import net.irregular.escapy.engine.env.context.screen.EscapyScreenContext;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
-import net.irregular.escapy.engine.graphic.render.light.proxy.LightSource;
+import net.irregular.escapy.engine.graphic.render.light.source.LightSource;
 import net.irregular.escapy.engine.group.container.EscapyGroupContainer;
 
 /**

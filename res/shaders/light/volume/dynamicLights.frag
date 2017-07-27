@@ -63,11 +63,7 @@ void main() {
             finVec.a = min(finVec.a, a_min);
 
         	gl_FragColor = finVec;
-
-//        	gl_FragColor = vec4(vec3(a), 1.);
         }
-
 	}
 	else gl_FragColor = col;
-
 }

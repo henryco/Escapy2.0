@@ -2,8 +2,8 @@ package net.irregular.escapy.engine.group.render.loader.builder;
 
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
-import net.irregular.escapy.engine.graphic.render.light.EscapyVolumeLight;
-import net.irregular.escapy.engine.graphic.render.light.proxy.LightSource;
+import net.irregular.escapy.engine.graphic.render.light.processor.EscapyLightProcessor;
+import net.irregular.escapy.engine.graphic.render.light.source.LightSource;
 import net.irregular.escapy.engine.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.engine.graphic.render.program.gl10.blend.EscapyGLBlendRenderer;
 import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
@@ -24,7 +24,7 @@ public class DefaultRendererLoaderBuilder implements RendererLoaderBuilder<Escap
 	private EscapyInstanceLoader<EscapyGLBlendRenderer> glBlenderAttributeInstanceLoader;
 	private EscapyInstanceLoader<EscapyRenderable> renderGroupAttributeInstanceLoader;
 	private EscapyInstanceLoader<LightSource> lightSourceAttributeInstanceLoader;
-	private EscapyInstanceLoader<EscapyVolumeLight> volumeLightAttributeInstanceLoader;
+	private EscapyInstanceLoader<EscapyLightProcessor> volumeLightAttributeInstanceLoader;
 
 
 	private EscapyInstanceLoader<EscapyMultiSourceShader> lightShaderInstanceLoader;
@@ -86,7 +86,7 @@ public class DefaultRendererLoaderBuilder implements RendererLoaderBuilder<Escap
 	}
 
 	public DefaultRendererLoaderBuilder setVolumeLightAttributeInstanceLoader
-			(EscapyInstanceLoader<EscapyVolumeLight> volumeLightAttributeInstanceLoader) {
+			(EscapyInstanceLoader<EscapyLightProcessor> volumeLightAttributeInstanceLoader) {
 		this.volumeLightAttributeInstanceLoader = volumeLightAttributeInstanceLoader;
 		return this;
 	}

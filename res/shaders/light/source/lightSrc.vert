@@ -28,5 +28,4 @@ void main(){
 	v_umbraPower = u_umbra.t;
 	if (v_angDiff == 1) v_theta = (2.0 / abs(v_angles.s - v_angles.t));
 	else v_theta = (2.0 / (2*c_pi - (abs(v_angles.s) + abs(v_angles.t))));
-
 }

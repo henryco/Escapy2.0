@@ -2,7 +2,7 @@ package net.irregular.escapy.engine.env.context.game;
 
 import net.irregular.escapy.engine.env.context.game.configuration.EscapyGameContextConfiguration;
 import net.irregular.escapy.engine.env.context.game.configuration.util.DefaultPropertyKeysContainer;
-import net.irregular.escapy.engine.env.context.game.configuration.util.PropertyKeysContainer;
+import net.irregular.escapy.engine.env.context.game.configuration.util.PropertyKeysStorage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +18,7 @@ public class Escapy {
 	}
 
 
-	private final PropertyKeysContainer propertyKeysContainer;
+	private final PropertyKeysStorage propertyKeysContainer;
 	private final Map<String, Object> configValuesMap;
 
 	private Escapy() {

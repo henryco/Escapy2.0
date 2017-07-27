@@ -46,11 +46,14 @@
 			},
 
 			"processor": {
+
 				"attributes": [],
+				"type": "volumetric",
 				"name": "processor_foreground",
 				"spriteSize": 55,
 				"threshold": 0,
 				"height": 0.8175,
+				"enable": true,
 
 				"intensity": {
 					"ambient": 0.45,

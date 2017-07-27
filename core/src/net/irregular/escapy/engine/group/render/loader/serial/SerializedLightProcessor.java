@@ -7,16 +7,20 @@ import net.irregular.escapy.engine.env.utils.serial.EscapySimpleSerialized;
 /**
  * @author Henry on 23/07/17.
  */
-public final class SerializedVolumeProcessor extends EscapySimpleSerialized {
+public final class SerializedLightProcessor extends EscapySimpleSerialized {
 
+	public static final String TYPE_FLAT = "flat";
+	public static final String TYPE_VOLUMETRIC = "volumetric";
 
-	@Override public String getValidType() {
-		return "VolumeProcessor";
+	{
+		super.type = TYPE_FLAT;
 	}
 
 	@SerializedName("spriteSize") @Expose public float spriteSize = 55f;
 	@SerializedName("threshold") @Expose public float threshold = 0f;
 	@SerializedName("height") @Expose public float height = 0.8175f;
+	@SerializedName("normalMapping") @Expose public boolean normalMapping = true;
+	@SerializedName("enable") @Expose public boolean enable = true;
 	@SerializedName("intensity") @Expose public SerializedVolumeIntensity intensity = new SerializedVolumeIntensity();
 
 	public static final class SerializedVolumeIntensity extends EscapySimpleSerialized {
