@@ -39,7 +39,7 @@ public class GameObjectStaticRenderer implements EscapyGameObjectRenderer<GameOb
 
 		for (int i = 0; i < 3; i++) {
 			if (paths[i] != null && !paths[i].isEmpty()) {
-				sprites[i] = new Sprite(new Texture(Gdx.files.internal(EscapyFiles.safePath(paths[i]))));
+				sprites[i] = new Sprite(new Texture(Gdx.files.internal(EscapyFiles.safetyPath(paths[i]))));
 
 				if (gameObject.getObjectDetails().size[0] > 0 && gameObject.getObjectDetails().size[1] > 0)
 					sprites[i].setSize(gameObject.getObjectDetails().size[0], gameObject.getObjectDetails().size[1]);

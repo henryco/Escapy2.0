@@ -32,8 +32,8 @@ public class EscapyLightSource {
 	public EscapyLightSource() {
 		this(new BlendRendererExtended().setDebug(debug),
 				new ShaderFile(
-						Gdx.files.internal(EscapyFiles.safePath(DIR_PATH) + ".vert").readString(),
-						Gdx.files.internal(EscapyFiles.safePath(DIR_PATH) + "_N.frag").readString()
+						Gdx.files.internal(EscapyFiles.safetyPath(DIR_PATH) + ".vert").readString(),
+						Gdx.files.internal(EscapyFiles.safetyPath(DIR_PATH) + "_N.frag").readString()
 				)
 		);
 	}

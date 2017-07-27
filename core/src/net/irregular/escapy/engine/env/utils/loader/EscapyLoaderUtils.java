@@ -18,7 +18,7 @@ public interface EscapyLoaderUtils {
 		return new boolean[]{booleans.get(0), booleans.get(1)};
 	}
 
-	default String safePath(String path) {
-		return EscapyFiles.safePath(path);
+	default String safetyPath(String path) {
+		return EscapyFiles.safetyPath(path);
 	}
 }

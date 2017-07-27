@@ -57,11 +57,11 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 		Collection<EscapyLayer> layers = new LinkedList<>();
 		SerializedSubLocation serialized;
-		String folder = path.substring(0, path.lastIndexOf(separator));
-
+		String safePath = safetyPath(path);
+		String folder = safePath.substring(0, safePath.lastIndexOf(separator));
 
 		try {
-			Reader reader = new InputStreamReader(Gdx.files.internal(safePath(path)).read());
+			Reader reader = new InputStreamReader(Gdx.files.internal(safePath).read());
 			serialized = new Gson().fromJson(reader, SerializedSubLocation.class);
 			if (serialized.layers == null) return null;
 		} catch (Exception e) {

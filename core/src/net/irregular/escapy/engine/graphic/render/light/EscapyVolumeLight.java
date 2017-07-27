@@ -35,8 +35,8 @@ public class EscapyVolumeLight implements EscapyObject {
 		this.name = name;
 		this.uniformBlender = uniformBlender;
 		this.uniformBlender.loadProgram(new ShaderFile(
-				Gdx.files.internal(EscapyFiles.safePath(DIR_PATH) + ".vert").readString(),
-				Gdx.files.internal(EscapyFiles.safePath(DIR_PATH) + ".frag").readString()
+				Gdx.files.internal(EscapyFiles.safetyPath(DIR_PATH) + ".vert").readString(),
+				Gdx.files.internal(EscapyFiles.safetyPath(DIR_PATH) + ".frag").readString()
 		));
 		init();
 
