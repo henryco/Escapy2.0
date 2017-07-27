@@ -99,54 +99,136 @@ public class DefaultRenderer implements EscapyRenderer {
 			Batch batch_post = batchGroup[2];
 
 
-			mainFBO.begin(() -> {
-				mainFBO.wipe();
-				renderer.renderGraphics(batch_pre);
-			});
 
+			if (mask == null) {
 
-			if (mask == null) maskFBO = mainFBO;
+				if (lightSource == null || lightSource.length == 0) {
+					renderer.renderGraphics(batch_pre);
+					continue;
+				}
+
+				else {
+
+					mainFBO.begin(() -> {
+						mainFBO.wipe();
+						renderer.renderGraphics(batch_pre);
+					});
+
+					maskFBO = mainFBO;
+
+				}
+
+			}
+
 			else {
-				maskFBO.begin(() -> {
-					wipe();
-					mask.renderMask(mainFBO.getTexture());
+
+				mainFBO.begin(() -> {
+					mainFBO.wipe();
+					renderer.renderGraphics(batch_pre);
 				});
+
+				if (lightSource == null || lightSource.length == 0) {
+					mask.renderMask(mainFBO.getTexture());
+					continue;
+				}
+
+				else {
+
+					maskFBO.begin(() -> {
+						wipe();
+						mask.renderMask(mainFBO.getTexture());
+					});
+
+				}
+
 			}
 
 
 			maskFBO.renderGraphics(batch_post);
 
 
-			if (lightSource != null && lightSource.length != 0) {
 
-				for (LightSource source: lightSource)
-					source.prepareBuffer(batch_pre);
+			for (LightSource source: lightSource)
+				source.prepareBuffer(batch_pre);
 
 
-				normalFBO.begin(() -> {
-					normalFBO.color(0.502f, 0.502f, 1f, 1f);
-					renderer.renderNormalsMap(batch_pre);
+			normalFBO.begin(() -> {
+				normalFBO.color(0.502f, 0.502f, 1f, 1f);
+				renderer.renderNormalsMap(batch_pre);
+			});
+
+
+			lightFBO.begin(() -> {
+				lightFBO.wipe();
+				blender.blend(batch_blend, () -> {
+					for (LightSource source: lightSource) {
+						source.drawBuffer(batch_blend);
+					}
 				});
+			});
 
 
-				lightFBO.begin(() -> {
-					lightFBO.wipe();
-					blender.blend(batch_blend, () -> {
-						for (LightSource source: lightSource) {
-							source.drawBuffer(batch_blend);
-						}
-					});
-				});
+			colorFBO.begin(() -> {
+				wipe();
+				lightBlender.draw(batch_post, mainFBO.getSprite(), lightFBO.getSprite());
+			});
 
 
-				colorFBO.begin(() -> {
-					wipe();
-					lightBlender.draw(batch_post, mainFBO.getSprite(), lightFBO.getSprite());
-				});
+			volume.draw(batch_post, colorFBO.getSprite(), normalFBO.getSprite(), maskFBO.getSprite());
 
 
-				volume.draw(batch_post, colorFBO.getSprite(), normalFBO.getSprite(), maskFBO.getSprite());
-			}
+
+
+//			mainFBO.begin(() -> {
+//				mainFBO.wipe();
+//				renderer.renderGraphics(batch_pre);
+//			});
+//
+//
+//			if (mask == null) maskFBO = mainFBO;
+//			else {
+//				maskFBO.begin(() -> {
+//					wipe();
+//					mask.renderMask(mainFBO.getTexture());
+//				});
+//			}
+//
+//
+//			maskFBO.renderGraphics(batch_post);
+//
+//
+//			if (lightSource != null && lightSource.length != 0) {
+//
+//				for (LightSource source: lightSource)
+//					source.prepareBuffer(batch_pre);
+//
+//
+//				normalFBO.begin(() -> {
+//					normalFBO.color(0.502f, 0.502f, 1f, 1f);
+//					renderer.renderNormalsMap(batch_pre);
+//				});
+//
+//
+//				lightFBO.begin(() -> {
+//					lightFBO.wipe();
+//					blender.blend(batch_blend, () -> {
+//						for (LightSource source: lightSource) {
+//							source.drawBuffer(batch_blend);
+//						}
+//					});
+//				});
+//
+//
+//				colorFBO.begin(() -> {
+//					wipe();
+//					lightBlender.draw(batch_post, mainFBO.getSprite(), lightFBO.getSprite());
+//				});
+//
+//
+//				volume.draw(batch_post, colorFBO.getSprite(), normalFBO.getSprite(), maskFBO.getSprite());
+//			}
+
+
 		}
 	}
 
