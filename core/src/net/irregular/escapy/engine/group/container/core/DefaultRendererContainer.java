@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.group.render;
+package net.irregular.escapy.engine.group.container.core;
 
 import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyListener;
@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * @author Henry on 19/07/17.
  */
-public class RenderContainer implements EscapyRenderer {
+public class DefaultRendererContainer implements EscapyRenderer {
 
 	private final Map<String, Map<String, String>> rendererMap;
 	private final RendererLoader<EscapySubLocation> rendererLoader;
@@ -62,8 +62,8 @@ public class RenderContainer implements EscapyRenderer {
 	}
 
 
-	public RenderContainer(RendererLoader<EscapySubLocation> rendererLoader,
-						   Collection<TargetGroup> renderers) {
+	public DefaultRendererContainer(RendererLoader<EscapySubLocation> rendererLoader,
+									Collection<TargetGroup> renderers) {
 
 		this.rendererLoader = rendererLoader;
 		this.rendererMap = new HashMap<>();

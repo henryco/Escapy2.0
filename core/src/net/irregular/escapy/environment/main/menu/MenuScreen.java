@@ -25,8 +25,11 @@ public class MenuScreen implements EscapyScreen {
 	public void show() {
 
 		System.out.println("MENU SCREEN");
-		System.out.println(groupContainer.getMapContainer().getLocations());
-		groupContainer.getMapContainer().switchLocation("Location1", "SubOne");
+		System.out.println(groupContainer.getLocationContainer().getLocations());
+
+		groupContainer.getLocationContainer()
+				.switchLocation("Location1")
+				.switchSubLocation("SubOne");
 
 		context.setScreen(GameScreen.class);
 	}

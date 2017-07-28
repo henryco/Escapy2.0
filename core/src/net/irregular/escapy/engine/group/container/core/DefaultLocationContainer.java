@@ -1,9 +1,10 @@
-package net.irregular.escapy.engine.group.map;
+package net.irregular.escapy.engine.group.container.core;
 
 import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyInstanceObserver;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyListener;
 import net.irregular.escapy.engine.group.map.core.location.EscapyLocation;
+import net.irregular.escapy.engine.group.map.core.location.EscapyLocationContainer;
 import net.irregular.escapy.engine.group.map.loader.LocationLoader;
 
 import java.util.Collection;
@@ -14,7 +15,7 @@ import java.util.Map;
 /**
  * @author Henry on 11/07/17.
  */
-public class MapContainer {
+public class DefaultLocationContainer implements EscapyLocationContainer {
 
 
 	private final EscapyProxyInstanceObserver locationInstanceObserver;
@@ -24,8 +25,8 @@ public class MapContainer {
 	private EscapyLocation location;
 
 
-	public MapContainer(LocationLoader locationLoader,
-						Collection<Map.Entry<String, String>> locations) {
+	public DefaultLocationContainer(LocationLoader locationLoader,
+									Collection<Map.Entry<String, String>> locations) {
 
 		this.locationInstanceObserver = new EscapyProxyInstanceObserver();
 		this.locationLoader = locationLoader;
@@ -36,16 +37,16 @@ public class MapContainer {
 			locationMap.put(l.getKey(), l.getValue());
 	}
 
-	public MapContainer(LocationLoader locationLoader,
-						Collection<Map.Entry<String, String>> locations,
-						EscapyProxyListener... listeners) {
+	public DefaultLocationContainer(LocationLoader locationLoader,
+									Collection<Map.Entry<String, String>> locations,
+									EscapyProxyListener... listeners) {
 		this(locationLoader, locations);
 		addLocationProxyListeners(listeners);
 	}
 
 
 
-
+	@Override
 	public EscapyLocation switchLocation(String name) {
 
 		try {
@@ -64,7 +65,7 @@ public class MapContainer {
 			return location;
 
 		} catch (Exception e) {
-			new EscapyLogger("MapContainer").fileJava().log(e, true);
+			new EscapyLogger("LocationContainer").fileJava().log(e, true);
 		}
 
 		return null;
@@ -83,12 +84,15 @@ public class MapContainer {
 		locationInstanceObserver.removeProxyListeners(listeners);
 	}
 
+
+	@Override
 	public Collection<String> getLocations() {
 		Collection<String> collection = new LinkedList<>();
 		locationMap.forEach((key, value) -> collection.add(key));
 		return collection;
 	}
 
+	@Override
 	public EscapyLocation getLocation() {
 		return location;
 	}
