@@ -28,7 +28,7 @@ public class GameScreen implements EscapyScreen {
 
 	@Override
 	public void show() {
-		source = groupContainer.getRenderer().getRendererAttribute("lights_foreground:light1");
+		source = groupContainer.getRendererContainer().getRendererAttribute("lights_foreground:light1");
 	}
 
 	@Override
@@ -37,12 +37,12 @@ public class GameScreen implements EscapyScreen {
 //		float[] position = source.getPosition();
 //		source.setPosition(position[0] - 1, position[1]);
 //		source.translate(1, 0);
-		groupContainer.getRenderer().render(delta);
+		groupContainer.getRendererContainer().render(delta);
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		groupContainer.getRenderer().resize(width, height);
+		groupContainer.getRendererContainer().resize(width, height);
 	}
 
 

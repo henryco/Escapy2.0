@@ -1,4 +1,4 @@
-package net.irregular.escapy.engine.group.container.core;
+package net.irregular.escapy.engine.group.container.imp;
 
 import com.badlogic.gdx.Gdx;
 import com.google.gson.Gson;
@@ -7,10 +7,10 @@ import net.irregular.escapy.engine.env.utils.EscapyFiles;
 import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyListener;
 import net.irregular.escapy.engine.group.container.EscapyGroupContainer;
+import net.irregular.escapy.engine.group.container.EscapyLocationContainer;
+import net.irregular.escapy.engine.group.container.EscapyRendererContainer;
 import net.irregular.escapy.engine.group.container.serial.SerializedGroup;
-import net.irregular.escapy.engine.group.map.core.location.EscapyLocationContainer;
 import net.irregular.escapy.engine.group.map.loader.imp.DefaultLocationLoader;
-import net.irregular.escapy.engine.group.render.core.EscapyRenderer;
 import net.irregular.escapy.engine.group.render.loader.imp.DefaultRendererLoader;
 
 import java.io.InputStreamReader;
@@ -18,7 +18,7 @@ import java.io.Reader;
 import java.util.*;
 
 import static java.io.File.separator;
-import static net.irregular.escapy.engine.group.container.core.DefaultRendererContainer.TargetGroup;
+import static net.irregular.escapy.engine.group.container.imp.DefaultRendererContainer.TargetGroup;
 import static net.irregular.escapy.engine.group.container.serial.SerializedGroup.SerializedPath;
 
 /**
@@ -32,7 +32,7 @@ public class DefaultGroupContainer implements EscapyGroupContainer {
 	private final String configFile;
 
 	private EscapyLocationContainer locationContainer;
-	private EscapyRenderer renderer;
+	private EscapyRendererContainer rendererContainer;
 
 
 
@@ -47,6 +47,7 @@ public class DefaultGroupContainer implements EscapyGroupContainer {
 
 
 
+	@Override
 	public boolean initialize() {
 
 		try {
@@ -58,7 +59,7 @@ public class DefaultGroupContainer implements EscapyGroupContainer {
 			DefaultRendererContainer ren = initRendererContainer(serialized.renderers);
 
 			this.locationContainer = initLocationContainer(serialized.locations, ren.getProxyListener());
-			this.renderer = ren;
+			this.rendererContainer = ren;
 
 			return true;
 
@@ -104,12 +105,14 @@ public class DefaultGroupContainer implements EscapyGroupContainer {
 
 
 
+	@Override
 	public EscapyLocationContainer getLocationContainer() {
 		return locationContainer;
 	}
 
-	public EscapyRenderer getRenderer() {
-		return renderer;
+	@Override
+	public EscapyRendererContainer getRendererContainer() {
+		return rendererContainer;
 	}
 
 
