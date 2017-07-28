@@ -7,7 +7,6 @@ import net.irregular.escapy.engine.group.map.core.location.EscapyLocation;
 import net.irregular.escapy.engine.group.map.core.location.EscapySubLocation;
 import net.irregular.escapy.engine.group.map.core.object.EscapyGameObject;
 import net.irregular.escapy.engine.group.map.loader.GameObjectLoader;
-import net.irregular.escapy.engine.group.map.loader.LocationLoader;
 import net.irregular.escapy.engine.group.map.loader.SubLocationLoader;
 import net.irregular.escapy.engine.group.map.loader.imp.DefaultGameObjectLoader;
 import net.irregular.escapy.engine.group.map.loader.imp.DefaultLocationLoader;
@@ -28,7 +27,7 @@ public class DefaultLocationLoaderBuilder implements LocationLoaderBuilder {
 
 
 	@Override
-	public LocationLoader build() {
+	public DefaultLocationLoader build() {
 
 		GameObjectLoader gameObjectLoader = new DefaultGameObjectLoader(
 				gameObjectInstanceAttributeLoader

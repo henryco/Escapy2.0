@@ -10,7 +10,6 @@ import net.irregular.escapy.engine.graphic.render.program.gl10.mask.LightMask;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.EscapyMultiSourceShader;
 import net.irregular.escapy.engine.group.map.core.location.EscapySubLocation;
 import net.irregular.escapy.engine.group.render.core.EscapyRenderer;
-import net.irregular.escapy.engine.group.render.loader.RendererLoader;
 import net.irregular.escapy.engine.group.render.loader.imp.*;
 
 /**
@@ -32,7 +31,7 @@ public class DefaultRendererLoaderBuilder implements RendererLoaderBuilder<Escap
 
 
 	@Override
-	public RendererLoader<EscapySubLocation> build() {
+	public DefaultRendererLoader build() {
 
 		if (camera == null) throw new RuntimeException("EscapyCamera cannot be NULL");
 		if (lightShaderInstanceLoader == null) throw new RuntimeException("LightShaderInstanceLoader cannot be NULL");

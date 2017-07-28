@@ -19,8 +19,7 @@ public class MenuScreenModule {
 
 
 	@Provides @Named("screen_menu") @Singleton
-	public EscapyScreen provideMenuScreen(EscapyGroupContainer groupContainer
-	) {
+	public EscapyScreen provideMenuScreen(EscapyGroupContainer groupContainer) {
 		return new MenuScreen(groupContainer);
 	}
 

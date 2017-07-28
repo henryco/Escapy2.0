@@ -6,9 +6,8 @@ import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
 import net.irregular.escapy.engine.graphic.render.program.gl20.core.EscapyMultiSourceShader;
-import net.irregular.escapy.engine.group.map.core.location.EscapySubLocation;
-import net.irregular.escapy.engine.group.render.loader.RendererLoader;
 import net.irregular.escapy.engine.group.render.loader.builder.RendererLoaderBuilder;
+import net.irregular.escapy.engine.group.render.loader.imp.DefaultRendererLoader;
 import net.irregular.escapy.environment.main.group.renderer.dep.LightShaderLoader;
 import net.irregular.escapy.environment.main.group.util.CameraModule;
 
@@ -26,7 +25,7 @@ public class RendererModule {
 
 
 	@Provides @Singleton
-	public RendererLoader<EscapySubLocation> provideRendererLoader(
+	public DefaultRendererLoader provideRendererLoader(
 			@Named("default_camera") EscapyCamera camera,
 			EscapyInstanceLoader<EscapyMultiSourceShader> lightShaderLoader) {
 
@@ -34,7 +33,7 @@ public class RendererModule {
 			return RendererLoaderBuilder.Default()
 					.setCamera(camera)
 					.setLightShaderInstanceLoader(lightShaderLoader)
-					.build();
+			.build();
 		} catch (Exception e) {
 			new EscapyLogger("RenderLoaderProvider").fileJava().log(e, true);
 			return null;
