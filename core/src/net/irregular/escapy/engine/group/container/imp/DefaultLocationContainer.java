@@ -1,10 +1,10 @@
-package net.irregular.escapy.engine.group.container.core;
+package net.irregular.escapy.engine.group.container.imp;
 
 import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyInstanceObserver;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyListener;
+import net.irregular.escapy.engine.group.container.EscapyLocationContainer;
 import net.irregular.escapy.engine.group.map.core.location.EscapyLocation;
-import net.irregular.escapy.engine.group.map.core.location.EscapyLocationContainer;
 import net.irregular.escapy.engine.group.map.loader.LocationLoader;
 
 import java.util.Collection;

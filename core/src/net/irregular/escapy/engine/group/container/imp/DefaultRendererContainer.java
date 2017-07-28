@@ -1,7 +1,9 @@
-package net.irregular.escapy.engine.group.container.core;
+package net.irregular.escapy.engine.group.container.imp;
 
+import net.irregular.escapy.engine.env.utils.EscapyFiles;
 import net.irregular.escapy.engine.env.utils.EscapyLogger;
 import net.irregular.escapy.engine.env.utils.proxy.EscapyProxyListener;
+import net.irregular.escapy.engine.group.container.EscapyRendererContainer;
 import net.irregular.escapy.engine.group.map.core.location.EscapySubLocation;
 import net.irregular.escapy.engine.group.render.core.EscapyRenderer;
 import net.irregular.escapy.engine.group.render.loader.RendererLoader;
@@ -13,7 +15,7 @@ import java.util.Map;
 /**
  * @author Henry on 19/07/17.
  */
-public class DefaultRendererContainer implements EscapyRenderer {
+public class DefaultRendererContainer implements EscapyRendererContainer<EscapySubLocation> {
 
 	private final Map<String, Map<String, String>> rendererMap;
 	private final RendererLoader<EscapySubLocation> rendererLoader;
@@ -41,17 +43,9 @@ public class DefaultRendererContainer implements EscapyRenderer {
 		@Override
 		public void onProxyMethodInvoked(Object methodResult, String methodName, Object[] args) {
 			if (methodResult != null
-					&& methodResult instanceof EscapySubLocation && methodName.equals("switchSubLocation"))
-			{
-				final EscapySubLocation subLocation = (EscapySubLocation) methodResult;
-				final String parentName = subLocation.getParentLocation().getName();
-				final String path = rendererMap.get(parentName).get(subLocation.getName());
-
-				try {
-					renderer = rendererLoader.loadRenderer(path, subLocation);
-				} catch (Exception e) {
-					new EscapyLogger("RenderContainer").fileJava().log(e, true);
-				}
+					&& methodResult instanceof EscapySubLocation
+					&& methodName.equals("switchSubLocation")) {
+				renderer = switchRenderer((EscapySubLocation) methodResult);
 			}
 		}
 	}
@@ -76,10 +70,26 @@ public class DefaultRendererContainer implements EscapyRenderer {
 	}
 
 
+	@Override
+	public EscapyRenderer switchRenderer(EscapySubLocation rendererSource) {
+
+		final String parentName = rendererSource.getParentLocation().getName();
+		final String path = rendererMap.get(parentName).get(rendererSource.getName());
+
+		try {
+			this.renderer = rendererLoader.loadRenderer(EscapyFiles.safetyPath(path), rendererSource);
+			return this.renderer;
+		} catch (Exception e) {
+			new EscapyLogger("RenderContainer").fileJava().log(e, true);
+		}
+		return null;
+	}
 
 	@Override
 	public <T> T getRendererAttribute(String name) {
-		return renderer.getRendererAttribute(name);
+		if (renderer != null)
+			return renderer.getRendererAttribute(name);
+		return null;
 	}
 
 	@Override
@@ -105,7 +115,9 @@ public class DefaultRendererContainer implements EscapyRenderer {
 
 	@Override
 	public String getName() {
-		return renderer.getName();
+		if (renderer != null)
+			return renderer.getName();
+		return null;
 	}
 
 }
