@@ -2,8 +2,8 @@ package net.irregular.escapy.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import net.irregular.escapy.desktop.config.builder.DesktopConfigLoaderBuilder;
-import net.irregular.escapy.desktop.config.serial.SerializedDesktopConfig;
+import net.irregular.escapy.engine.desktop.builder.DesktopConfigLoaderBuilder;
+import net.irregular.escapy.engine.desktop.serial.SerializedDesktopConfig;
 import net.irregular.escapy.engine.env.EscapyApplicationAdapter;
 import net.irregular.escapy.environment.MainEnvironment;
 import net.irregular.escapy.environment.main.MainModule;

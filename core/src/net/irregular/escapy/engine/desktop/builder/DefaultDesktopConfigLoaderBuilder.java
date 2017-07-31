@@ -1,8 +1,8 @@
-package net.irregular.escapy.desktop.config.builder;
+package net.irregular.escapy.engine.desktop.builder;
 
 
 import com.google.gson.Gson;
-import net.irregular.escapy.desktop.config.DesktopConfigLoader;
+import net.irregular.escapy.engine.desktop.DesktopConfigLoader;
 import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.env.utils.serial.EscapySerialized;
 

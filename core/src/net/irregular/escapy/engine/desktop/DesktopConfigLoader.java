@@ -1,4 +1,4 @@
-package net.irregular.escapy.desktop.config;
+package net.irregular.escapy.engine.desktop;
 
 
 /**

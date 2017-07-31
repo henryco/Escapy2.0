@@ -1,6 +1,6 @@
-package net.irregular.escapy.desktop.config.builder;
+package net.irregular.escapy.engine.desktop.builder;
 
-import net.irregular.escapy.desktop.config.DesktopConfigLoader;
+import net.irregular.escapy.engine.desktop.DesktopConfigLoader;
 
 /**
  * @author Henry on 31/07/17.

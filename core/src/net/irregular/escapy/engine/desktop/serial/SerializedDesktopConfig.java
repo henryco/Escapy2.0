@@ -1,4 +1,4 @@
-package net.irregular.escapy.desktop.config.serial;
+package net.irregular.escapy.engine.desktop.serial;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
