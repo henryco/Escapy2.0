@@ -1,9 +1,9 @@
 package net.irregular.escapy.environment.pause;
 
 
-import net.irregular.escapy.engine.env.context.annotation.ScreenName;
-import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
-import net.irregular.escapy.engine.env.context.screen.EscapyScreenContext;
+import net.irregular.escapy.env.context.annotation.ScreenName;
+import net.irregular.escapy.env.context.screen.EscapyScreen;
+import net.irregular.escapy.env.context.screen.EscapyScreenContext;
 
 /**
  * @author Henry on 28/06/17.

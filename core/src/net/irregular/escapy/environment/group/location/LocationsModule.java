@@ -2,16 +2,16 @@ package net.irregular.escapy.environment.group.location;
 
 import dagger.Module;
 import dagger.Provides;
-import net.irregular.escapy.engine.env.utils.EscapyLogger;
-import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
-import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
-import net.irregular.escapy.engine.group.map.core.layer.shift.LayerShiftLogic;
-import net.irregular.escapy.engine.group.map.core.object.EscapyGameObject;
-import net.irregular.escapy.engine.group.map.loader.builder.LocationLoaderBuilder;
-import net.irregular.escapy.engine.group.map.loader.imp.DefaultLocationLoader;
+import net.irregular.escapy.env.utils.EscapyLogger;
+import net.irregular.escapy.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.environment.group.location.dep.GameObjAttrInstLoader;
 import net.irregular.escapy.environment.group.location.dep.SimpleShiftLogic;
 import net.irregular.escapy.environment.group.util.CameraModule;
+import net.irregular.escapy.graphic.camera.EscapyCamera;
+import net.irregular.escapy.group.map.core.layer.shift.LayerShiftLogic;
+import net.irregular.escapy.group.map.core.object.EscapyGameObject;
+import net.irregular.escapy.group.map.loader.builder.LocationLoaderBuilder;
+import net.irregular.escapy.group.map.loader.imp.DefaultLocationLoader;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

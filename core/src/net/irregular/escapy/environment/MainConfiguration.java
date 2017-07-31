@@ -1,7 +1,7 @@
 package net.irregular.escapy.environment;
 
-import net.irregular.escapy.engine.env.context.game.configuration.EscapyGameContextConfiguration;
-import net.irregular.escapy.engine.env.context.game.configuration.util.PropertyKeysStorage;
+import net.irregular.escapy.env.context.game.configuration.EscapyGameContextConfiguration;
+import net.irregular.escapy.env.context.game.configuration.util.PropertyKeysStorage;
 
 import static java.io.File.separator;
 

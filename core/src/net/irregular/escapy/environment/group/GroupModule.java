@@ -2,12 +2,12 @@ package net.irregular.escapy.environment.group;
 
 import dagger.Module;
 import dagger.Provides;
-import net.irregular.escapy.engine.group.container.EscapyGroupContainer;
-import net.irregular.escapy.engine.group.container.imp.DefaultGroupContainer;
-import net.irregular.escapy.engine.group.map.loader.imp.DefaultLocationLoader;
-import net.irregular.escapy.engine.group.render.loader.imp.DefaultRendererLoader;
 import net.irregular.escapy.environment.group.location.LocationsModule;
 import net.irregular.escapy.environment.group.renderer.RendererModule;
+import net.irregular.escapy.group.container.EscapyGroupContainer;
+import net.irregular.escapy.group.container.imp.DefaultGroupContainer;
+import net.irregular.escapy.group.map.loader.imp.DefaultLocationLoader;
+import net.irregular.escapy.group.render.loader.imp.DefaultRendererLoader;
 
 import javax.inject.Singleton;
 

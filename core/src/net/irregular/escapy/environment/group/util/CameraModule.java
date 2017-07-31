@@ -3,8 +3,8 @@ package net.irregular.escapy.environment.group.util;
 import com.badlogic.gdx.Gdx;
 import dagger.Module;
 import dagger.Provides;
-import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
-import net.irregular.escapy.engine.graphic.screen.Resolution;
+import net.irregular.escapy.graphic.camera.EscapyCamera;
+import net.irregular.escapy.graphic.screen.Resolution;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

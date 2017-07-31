@@ -2,14 +2,14 @@ package net.irregular.escapy.environment.group.renderer;
 
 import dagger.Module;
 import dagger.Provides;
-import net.irregular.escapy.engine.env.utils.EscapyLogger;
-import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
-import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
-import net.irregular.escapy.engine.graphic.render.program.gl20.core.EscapyMultiSourceShader;
-import net.irregular.escapy.engine.group.render.loader.builder.RendererLoaderBuilder;
-import net.irregular.escapy.engine.group.render.loader.imp.DefaultRendererLoader;
+import net.irregular.escapy.env.utils.EscapyLogger;
+import net.irregular.escapy.env.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.environment.group.renderer.dep.LightShaderLoader;
 import net.irregular.escapy.environment.group.util.CameraModule;
+import net.irregular.escapy.graphic.camera.EscapyCamera;
+import net.irregular.escapy.graphic.render.program.gl20.core.EscapyMultiSourceShader;
+import net.irregular.escapy.group.render.loader.builder.RendererLoaderBuilder;
+import net.irregular.escapy.group.render.loader.imp.DefaultRendererLoader;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

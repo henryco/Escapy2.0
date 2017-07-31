@@ -3,11 +3,11 @@ package net.irregular.escapy.environment.splash;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
-import net.irregular.escapy.engine.env.context.screen.EscapyScreenContext;
-import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
-import net.irregular.escapy.engine.group.container.EscapyGroupContainer;
+import net.irregular.escapy.env.context.screen.EscapyScreen;
+import net.irregular.escapy.env.context.screen.EscapyScreenContext;
 import net.irregular.escapy.environment.menu.MenuScreen;
+import net.irregular.escapy.graphic.camera.EscapyCamera;
+import net.irregular.escapy.group.container.EscapyGroupContainer;
 
 import javax.inject.Inject;
 import java.util.concurrent.atomic.AtomicBoolean;

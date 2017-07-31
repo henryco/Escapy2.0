@@ -1,10 +1,10 @@
 package net.irregular.escapy.environment.menu;
 
-import net.irregular.escapy.engine.env.context.annotation.ScreenName;
-import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
-import net.irregular.escapy.engine.env.context.screen.EscapyScreenContext;
-import net.irregular.escapy.engine.group.container.EscapyGroupContainer;
+import net.irregular.escapy.env.context.annotation.ScreenName;
+import net.irregular.escapy.env.context.screen.EscapyScreen;
+import net.irregular.escapy.env.context.screen.EscapyScreenContext;
 import net.irregular.escapy.environment.game.GameScreen;
+import net.irregular.escapy.group.container.EscapyGroupContainer;
 
 /**
  * @author Henry on 28/06/17.

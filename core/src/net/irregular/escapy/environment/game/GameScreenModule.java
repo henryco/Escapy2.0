@@ -2,10 +2,10 @@ package net.irregular.escapy.environment.game;
 
 import dagger.Module;
 import dagger.Provides;
-import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
-import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
-import net.irregular.escapy.engine.group.container.EscapyGroupContainer;
+import net.irregular.escapy.env.context.screen.EscapyScreen;
 import net.irregular.escapy.environment.group.GroupModule;
+import net.irregular.escapy.graphic.camera.EscapyCamera;
+import net.irregular.escapy.group.container.EscapyGroupContainer;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

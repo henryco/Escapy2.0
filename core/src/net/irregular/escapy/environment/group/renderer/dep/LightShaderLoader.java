@@ -1,13 +1,13 @@
 package net.irregular.escapy.environment.group.renderer.dep;
 
 import com.badlogic.gdx.Gdx;
-import net.irregular.escapy.engine.env.context.game.Escapy;
-import net.irregular.escapy.engine.env.utils.EscapyFiles;
-import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
-import net.irregular.escapy.engine.env.utils.loader.EscapyInstanced;
-import net.irregular.escapy.engine.graphic.render.program.gl20.core.EscapyMultiSourceShader;
-import net.irregular.escapy.engine.graphic.render.program.gl20.core.ShaderFile;
-import net.irregular.escapy.engine.graphic.render.program.gl20.sub.blend.BlendRenderer;
+import net.irregular.escapy.env.context.game.Escapy;
+import net.irregular.escapy.env.utils.EscapyFiles;
+import net.irregular.escapy.env.utils.loader.EscapyInstanceLoader;
+import net.irregular.escapy.env.utils.loader.EscapyInstanced;
+import net.irregular.escapy.graphic.render.program.gl20.core.EscapyMultiSourceShader;
+import net.irregular.escapy.graphic.render.program.gl20.core.ShaderFile;
+import net.irregular.escapy.graphic.render.program.gl20.sub.blend.BlendRenderer;
 
 import static java.io.File.separator;
 

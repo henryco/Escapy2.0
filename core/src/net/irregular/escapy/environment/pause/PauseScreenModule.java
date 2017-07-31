@@ -2,7 +2,7 @@ package net.irregular.escapy.environment.pause;
 
 import dagger.Module;
 import dagger.Provides;
-import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
+import net.irregular.escapy.env.context.screen.EscapyScreen;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

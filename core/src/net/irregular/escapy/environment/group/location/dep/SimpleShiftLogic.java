@@ -1,10 +1,10 @@
 package net.irregular.escapy.environment.group.location.dep;
 
-import net.irregular.escapy.engine.env.utils.loader.EscapyInstanceLoader;
-import net.irregular.escapy.engine.env.utils.loader.EscapyInstanced;
-import net.irregular.escapy.engine.graphic.camera.EscapyCamera;
-import net.irregular.escapy.engine.group.map.core.layer.shift.LayerShift;
-import net.irregular.escapy.engine.group.map.core.layer.shift.LayerShiftLogic;
+import net.irregular.escapy.env.utils.loader.EscapyInstanceLoader;
+import net.irregular.escapy.env.utils.loader.EscapyInstanced;
+import net.irregular.escapy.graphic.camera.EscapyCamera;
+import net.irregular.escapy.group.map.core.layer.shift.LayerShift;
+import net.irregular.escapy.group.map.core.layer.shift.LayerShiftLogic;
 
 /**
  * @author Henry on 21/07/17.
