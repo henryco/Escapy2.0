@@ -3,6 +3,7 @@ package net.irregular.escapy.desktop.config.builder;
 
 import com.google.gson.Gson;
 import net.irregular.escapy.desktop.config.DesktopConfigLoader;
+import net.irregular.escapy.engine.env.context.annotation.EscapyAPI;
 import net.irregular.escapy.engine.env.utils.serial.EscapySerialized;
 
 import java.io.FileInputStream;
@@ -13,7 +14,7 @@ import java.lang.reflect.Field;
 /**
  * @author Henry on 15/07/17.
  */
-public class DefaultDesktopConfigLoaderBuilder {
+public class DefaultDesktopConfigLoaderBuilder implements DesktopConfigLoaderBuilder {
 
 	private String path;
 	private String name;
@@ -22,18 +23,22 @@ public class DefaultDesktopConfigLoaderBuilder {
 	private Class<? extends EscapySerialized> serializedClass;
 
 
+	@EscapyAPI
 	public DefaultDesktopConfigLoaderBuilder() {}
 
+	@EscapyAPI
 	public DefaultDesktopConfigLoaderBuilder(String path) {
 		this();
 		setPath(path);
 	}
 
+	@EscapyAPI
 	public DefaultDesktopConfigLoaderBuilder(String path, String name) {
 		this(path);
 		setName(name);
 	}
 
+	@EscapyAPI
 	public DefaultDesktopConfigLoaderBuilder(Class loadedClass,
 											 Class<? extends EscapySerialized> serializedClass) {
 		this();
@@ -41,6 +46,7 @@ public class DefaultDesktopConfigLoaderBuilder {
 		this.serializedClass = serializedClass;
 	}
 
+	@EscapyAPI
 	public DefaultDesktopConfigLoaderBuilder(String path,
 											 String name,
 											 Class loadedClass,
@@ -52,7 +58,7 @@ public class DefaultDesktopConfigLoaderBuilder {
 
 
 
-	@SuppressWarnings("unchecked")
+	@Override @SuppressWarnings("unchecked")
 	public DesktopConfigLoader build() {
 
 		return new DesktopConfigLoader() {
