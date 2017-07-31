@@ -1,6 +1,6 @@
 package net.irregular.escapy.group.map.core.object;
 
-import net.irregular.escapy.env.utils.EscapyObject;
+import net.irregular.escapy.environment.utils.EscapyObject;
 
 /**
  * @author Henry on 11/07/17.

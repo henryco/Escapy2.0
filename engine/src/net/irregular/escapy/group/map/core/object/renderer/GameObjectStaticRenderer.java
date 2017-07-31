@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import net.irregular.escapy.env.utils.EscapyFiles;
+import net.irregular.escapy.environment.utils.EscapyFiles;
 import net.irregular.escapy.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.group.map.core.object.EscapyGameObjectRenderer;
 import net.irregular.escapy.group.map.core.object.imp.GameObjectStatic;

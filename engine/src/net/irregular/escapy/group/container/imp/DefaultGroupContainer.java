@@ -2,10 +2,10 @@ package net.irregular.escapy.group.container.imp;
 
 import com.badlogic.gdx.Gdx;
 import com.google.gson.Gson;
-import net.irregular.escapy.env.context.game.Escapy;
-import net.irregular.escapy.env.utils.EscapyFiles;
-import net.irregular.escapy.env.utils.EscapyLogger;
-import net.irregular.escapy.env.utils.proxy.EscapyProxyListener;
+import net.irregular.escapy.environment.context.game.Escapy;
+import net.irregular.escapy.environment.utils.EscapyFiles;
+import net.irregular.escapy.environment.utils.EscapyLogger;
+import net.irregular.escapy.environment.utils.proxy.EscapyProxyListener;
 import net.irregular.escapy.group.container.EscapyGroupContainer;
 import net.irregular.escapy.group.container.EscapyLocationContainer;
 import net.irregular.escapy.group.container.EscapyRendererContainer;

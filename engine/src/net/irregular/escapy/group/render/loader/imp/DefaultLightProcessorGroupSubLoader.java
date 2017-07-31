@@ -1,9 +1,9 @@
 package net.irregular.escapy.group.render.loader.imp;
 
 import com.badlogic.gdx.Gdx;
-import net.irregular.escapy.env.utils.arrContainer.EscapyAssociatedArray;
-import net.irregular.escapy.env.utils.arrContainer.EscapyNamedArray;
-import net.irregular.escapy.env.utils.loader.EscapyInstanceLoader;
+import net.irregular.escapy.environment.utils.arrContainer.EscapyAssociatedArray;
+import net.irregular.escapy.environment.utils.arrContainer.EscapyNamedArray;
+import net.irregular.escapy.environment.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.graphic.render.light.processor.EscapyFlatLight;
 import net.irregular.escapy.graphic.render.light.processor.EscapyLightProcessor;
 import net.irregular.escapy.graphic.render.light.processor.EscapyVolumeLight;

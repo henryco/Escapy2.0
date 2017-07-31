@@ -3,7 +3,7 @@ package net.irregular.escapy.graphic.render.program.gl10.blend;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import net.irregular.escapy.env.context.annotation.EscapyAPI;
+import net.irregular.escapy.environment.context.annotation.EscapyAPI;
 
 
 /**

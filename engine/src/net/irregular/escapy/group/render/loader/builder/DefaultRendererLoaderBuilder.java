@@ -1,6 +1,6 @@
 package net.irregular.escapy.group.render.loader.builder;
 
-import net.irregular.escapy.env.utils.loader.EscapyInstanceLoader;
+import net.irregular.escapy.environment.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.graphic.camera.EscapyCamera;
 import net.irregular.escapy.graphic.render.light.processor.EscapyLightProcessor;
 import net.irregular.escapy.graphic.render.light.source.LightSource;

@@ -1,6 +1,6 @@
 package net.irregular.escapy.group.render.core;
 
-import net.irregular.escapy.env.utils.EscapyObject;
+import net.irregular.escapy.environment.utils.EscapyObject;
 import net.irregular.escapy.graphic.screen.Wipeable;
 
 /**

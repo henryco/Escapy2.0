@@ -1,6 +1,6 @@
 package net.irregular.escapy.graphic.render.light.processor;
 
-import net.irregular.escapy.env.utils.EscapyObject;
+import net.irregular.escapy.environment.utils.EscapyObject;
 
 /**
  * @author Henry on 27/07/17.

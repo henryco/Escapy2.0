@@ -1,8 +1,8 @@
 package net.irregular.escapy;
 
-import net.irregular.escapy.env.context.game.EscapyGameContext;
-import net.irregular.escapy.env.context.game.configuration.EscapyGameContextConfiguration;
-import net.irregular.escapy.env.context.screen.EscapyScreen;
+import net.irregular.escapy.environment.context.game.EscapyGameContext;
+import net.irregular.escapy.environment.context.game.configuration.EscapyGameContextConfiguration;
+import net.irregular.escapy.environment.context.screen.EscapyScreen;
 
 import javax.inject.Inject;
 import java.util.Collection;

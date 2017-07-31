@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import net.irregular.escapy.env.context.annotation.EscapyAPI;
+import net.irregular.escapy.environment.context.annotation.EscapyAPI;
 import net.irregular.escapy.graphic.render.program.gl20.core.ShaderFile;
 import net.irregular.escapy.graphic.render.program.gl20.core.uniform.StandardUniforms;
 import net.irregular.escapy.graphic.render.program.gl20.sub.blend.BlendRendererExtended;

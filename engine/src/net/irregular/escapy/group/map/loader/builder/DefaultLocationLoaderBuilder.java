@@ -1,6 +1,6 @@
 package net.irregular.escapy.group.map.loader.builder;
 
-import net.irregular.escapy.env.utils.loader.EscapyInstanceLoader;
+import net.irregular.escapy.environment.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.group.map.core.layer.EscapyLayer;
 import net.irregular.escapy.group.map.core.layer.shift.LayerShiftLogic;
 import net.irregular.escapy.group.map.core.location.EscapyLocation;

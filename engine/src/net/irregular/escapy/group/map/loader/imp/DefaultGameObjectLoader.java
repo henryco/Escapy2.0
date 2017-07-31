@@ -1,6 +1,6 @@
 package net.irregular.escapy.group.map.loader.imp;
 
-import net.irregular.escapy.env.utils.loader.EscapyInstanceLoader;
+import net.irregular.escapy.environment.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.group.map.core.object.EscapyGameObject;
 import net.irregular.escapy.group.map.core.object.EscapyGameObjectRenderer;
 import net.irregular.escapy.group.map.core.object.ObjectDetails;

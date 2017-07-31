@@ -2,8 +2,8 @@ package net.irregular.escapy.group.render.core;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import net.irregular.escapy.env.utils.Named;
-import net.irregular.escapy.env.utils.arrContainer.EscapyAssociatedArray;
+import net.irregular.escapy.environment.utils.Named;
+import net.irregular.escapy.environment.utils.arrContainer.EscapyAssociatedArray;
 import net.irregular.escapy.graphic.render.fbo.EscapyFBO;
 import net.irregular.escapy.graphic.render.fbo.EscapyFrameBuffer;
 import net.irregular.escapy.graphic.render.light.processor.EscapyFlatLight;

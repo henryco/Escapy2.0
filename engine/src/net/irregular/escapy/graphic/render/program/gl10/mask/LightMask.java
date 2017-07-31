@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
-import net.irregular.escapy.env.context.annotation.Dante;
-import net.irregular.escapy.env.context.annotation.EscapyAPI;
+import net.irregular.escapy.environment.context.annotation.Dante;
+import net.irregular.escapy.environment.context.annotation.EscapyAPI;
 
 /**
  * @author Henry on 23/09/16.

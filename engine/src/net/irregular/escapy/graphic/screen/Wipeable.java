@@ -2,7 +2,7 @@ package net.irregular.escapy.graphic.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import net.irregular.escapy.env.context.annotation.EscapyAPI;
+import net.irregular.escapy.environment.context.annotation.EscapyAPI;
 
 /**
  * @author Henry on 29/06/17.

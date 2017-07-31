@@ -1,7 +1,7 @@
 package net.irregular.escapy.graphic.render.program.gl20.core.uniform;
 
-import net.irregular.escapy.env.context.annotation.Dante;
-import net.irregular.escapy.env.context.annotation.EscapyAPI;
+import net.irregular.escapy.environment.context.annotation.Dante;
+import net.irregular.escapy.environment.context.annotation.EscapyAPI;
 
 import java.util.ArrayList;
 import java.util.Collection;

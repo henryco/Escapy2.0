@@ -2,8 +2,8 @@ package net.irregular.escapy.group.map.loader.imp;
 
 import com.badlogic.gdx.Gdx;
 import com.google.gson.Gson;
-import net.irregular.escapy.env.utils.EscapyLogger;
-import net.irregular.escapy.env.utils.loader.EscapyInstanceLoader;
+import net.irregular.escapy.environment.utils.EscapyLogger;
+import net.irregular.escapy.environment.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.group.map.core.location.EscapyLocation;
 import net.irregular.escapy.group.map.core.location.Location;
 import net.irregular.escapy.group.map.loader.LocationLoader;
