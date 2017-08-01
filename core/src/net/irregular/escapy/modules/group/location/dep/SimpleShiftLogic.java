@@ -28,5 +28,4 @@ public class SimpleShiftLogic implements EscapyInstanceLoader<LayerShiftLogic> {
 			}
 		};
 	}
-
 }
