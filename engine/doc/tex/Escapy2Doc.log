@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.19)  2 AUG 2017 01:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.19)  2 AUG 2017 01:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -530,29 +530,39 @@ Overfull \hbox (88.71434pt too wide) in paragraph at lines 167--169
  [] 
  []
 
-[8 <./img/7.png>] (./Escapy2Doc.aux) ) 
+<img/8.png, id=52, 1107.13625pt x 304.13625pt>
+File: img/8.png Graphic file (type png)
+ <use img/8.png>
+Package pdftex.def Info: img/8.png used on input line 172.
+(pdftex.def)             Requested size: 532.29282pt x 146.22041pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 172--174
+ [] 
+ []
+
+[8 <./img/7.png> <./img/8.png>] (./Escapy2Doc.aux) ) 
 Here is how much of TeX's memory you used:
- 6493 strings out of 493806
- 91582 string characters out of 6155775
- 178620 words of memory out of 5000000
- 9702 multiletter control sequences out of 15000+600000
+ 6499 strings out of 493806
+ 91649 string characters out of 6155775
+ 178630 words of memory out of 5000000
+ 9707 multiletter control sequences out of 15000+600000
  18859 words of font info for 43 fonts, out of 8000000 for 9000
  788 hyphenation exceptions out of 8191
- 39i,6n,38p,925b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
- </root/.texlive2016/texmf-var/fonts/pk/l
-jfour/lh/lh-t2a/labx1200.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/l
-h/lh-t2a/labx1440.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2
-a/labi1095.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/lati1
-095.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm1095.600
-pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1095.600pk> </r
-oot/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx2488.600pk> </root/.te
-xlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm1200.600pk> </root/.texlive20
-16/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1728.600pk></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Escapy2Doc.pdf (9 pages, 405492 bytes).
+ 39i,6n,38p,963b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </root/.texlive2016/texmf-
+var/fonts/pk/ljfour/lh/lh-t2a/labx1200.600pk> </root/.texlive2016/texmf-var/fon
+ts/pk/ljfour/lh/lh-t2a/labx1440.600pk> </root/.texlive2016/texmf-var/fonts/pk/l
+jfour/lh/lh-t2a/labi1095.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/l
+h/lh-t2a/lati1095.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2
+a/larm1095.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1
+095.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx2488.600
+pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm1200.600pk> </r
+oot/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1728.600pk></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on Escapy2Doc.pdf (9 pages, 457917 bytes).
 PDF statistics:
- 392 PDF objects out of 1000 (max. 8388607)
+ 395 PDF objects out of 1000 (max. 8388607)
  62 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
