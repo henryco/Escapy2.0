@@ -1,5 +1,6 @@
 \select@language {russian}
 \contentsline {chapter}{\numberline {1}\IeC {\CYRN }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyro } \IeC {\cyrr }\IeC {\cyra }\IeC {\cyrb }\IeC {\cyro }\IeC {\cyrt }\IeC {\cyrery }}{3}
-\contentsline {chapter}{\numberline {2}Package Context}{5}
+\contentsline {chapter}{\numberline {2}Context}{5}
 \contentsline {section}{\numberline {2.1}Game}{5}
 \contentsline {section}{\numberline {2.2}Annotation}{5}
+\contentsline {chapter}{\numberline {3}Utils}{6}
