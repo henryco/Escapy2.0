@@ -102,7 +102,10 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 		shifter.setDirect(floatListToArray(serializedShift.directVec));
 		shifter.setOffset(floatListToArray(serializedShift.offset));
 		shifter.setPinPoint(floatListToArray(serializedShift.pinPoint));
-		shifter.setLayerShiftLogic(shiftLogicInstancer.loadInstance(serializedShift.name));
+
+		LayerShiftLogic shiftLogic = shiftLogicInstancer.loadInstance(serializedShift.name);
+		shifter.setLayerShiftLogic(shiftLogic);
+
 		return shifter;
 	}
 
