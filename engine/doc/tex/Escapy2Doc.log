@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.19)  1 AUG 2017 16:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.19)  1 AUG 2017 19:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -426,27 +426,33 @@ File: uni-4.def 2013/05/13 UCS: Unicode data U+0400..U+04FF
 
  [1
 
-] [2
+]
+Overfull \hbox (2.2215pt too wide) in paragraph at lines 87--88
+\T2A/cmr/m/n/10.95 Каждому из вы-ше-пе-ре-чис-лен-ных па-ке-тов по-свя-ще-на от
+-дель-ная гла-ва, по-дроб-нее со струк-
+ []
+
+[2
 
 ]
 {\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 1.
 <img/1.png, id=17, 1108.14pt x 359.3425pt>
 File: img/1.png Graphic file (type png)
  <use img/1.png>
-Package pdftex.def Info: img/1.png used on input line 88.
+Package pdftex.def Info: img/1.png used on input line 95.
 (pdftex.def)             Requested size: 554.47308pt x 179.8024pt.
 
-Overfull \hbox (110.8946pt too wide) in paragraph at lines 88--90
+Overfull \hbox (110.8946pt too wide) in paragraph at lines 95--97
  [] 
  []
 
 <img/2.png, id=19, 1003.75pt x 321.2pt>
 File: img/2.png Graphic file (type png)
  <use img/2.png>
-Package pdftex.def Info: img/2.png used on input line 91.
+Package pdftex.def Info: img/2.png used on input line 98.
 (pdftex.def)             Requested size: 554.47308pt x 177.43982pt.
 
-Overfull \hbox (110.8946pt too wide) in paragraph at lines 91--92
+Overfull \hbox (110.8946pt too wide) in paragraph at lines 98--99
  [][] 
  []
 
@@ -456,45 +462,45 @@ Overfull \hbox (110.8946pt too wide) in paragraph at lines 91--92
 File: img/3.png Graphic file (type png)
 
 <use img/3.png>
-Package pdftex.def Info: img/3.png used on input line 96.
+Package pdftex.def Info: img/3.png used on input line 103.
 (pdftex.def)             Requested size: 554.47308pt x 210.39264pt.
 
-Overfull \hbox (110.8946pt too wide) in paragraph at lines 96--98
+Overfull \hbox (110.8946pt too wide) in paragraph at lines 103--105
  [] 
  []
 
-<img/4.png, id=26, 1124.2pt x 451.6875pt>
+<img/4.png, id=26, 1124.2pt x 441.65pt>
 File: img/4.png Graphic file (type png)
  <use img/4.png>
-Package pdftex.def Info: img/4.png used on input line 102.
-(pdftex.def)             Requested size: 532.29282pt x 213.86456pt.
+Package pdftex.def Info: img/4.png used on input line 109.
+(pdftex.def)             Requested size: 532.29282pt x 209.11201pt.
 
-Overfull \hbox (88.71434pt too wide) in paragraph at lines 102--104
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 109--111
  [] 
  []
 
-[4 <./img/3.png> <./img/4.png>] [5] (./Escapy2Doc.aux)
+[4 <./img/3.png> <./img/4.png>]
+{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 2.
+[5
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+] (./Escapy2Doc.aux) ) 
 Here is how much of TeX's memory you used:
  6430 strings out of 493806
  90702 string characters out of 6155775
- 176590 words of memory out of 5000000
+ 177590 words of memory out of 5000000
  9649 multiletter control sequences out of 15000+600000
  14683 words of font info for 36 fonts, out of 8000000 for 9000
  788 hyphenation exceptions out of 8191
- 39i,6n,38p,518b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
- </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/lati1095.600pk> </ro
-ot/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm1095.600pk> </root/.tex
-live2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1095.600pk> </root/.texlive201
-6/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx2488.600pk> </root/.texlive2016/texmf
--var/fonts/pk/ljfour/lh/lh-t2a/larm1200.600pk> </root/.texlive2016/texmf-var/fo
-nts/pk/ljfour/lh/lh-t2a/labx1728.600pk>
-Output written on Escapy2Doc.pdf (6 pages, 226982 bytes).
+ 39i,6n,38p,925b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/
+lati1095.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm109
+5.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1095.600pk
+> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx2488.600pk> </roo
+t/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm1200.600pk> </root/.texl
+ive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1728.600pk>
+Output written on Escapy2Doc.pdf (6 pages, 236753 bytes).
 PDF statistics:
- 249 PDF objects out of 1000 (max. 8388607)
+ 277 PDF objects out of 1000 (max. 8388607)
  39 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)

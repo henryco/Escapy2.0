@@ -1,8 +1,8 @@
-package net.irregular.escapy.environment.utils.arrContainer;
+package net.irregular.escapy.environment.utils.array;
 
 import net.irregular.escapy.environment.context.annotation.Dante;
 import net.irregular.escapy.environment.context.annotation.EscapyAPI;
-import net.irregular.escapy.environment.utils.Named;
+import net.irregular.escapy.environment.utils.EscapyNamed;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -68,7 +68,7 @@ public class EscapyNamedArray<T> extends EscapyIndexedArray<T> implements Escapy
 
 
 	@Override @SuppressWarnings("unchecked")
-	public <U extends Named> void add(U ob) {
+	public <U extends EscapyNamed> void add(U ob) {
 		try {
 			add((T) ob, ob.getName());
 		} catch (Exception ignored) {}

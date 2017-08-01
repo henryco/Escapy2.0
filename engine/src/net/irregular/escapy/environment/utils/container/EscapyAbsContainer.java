@@ -1,10 +1,10 @@
-package net.irregular.escapy.environment.utils.absContainer;
+package net.irregular.escapy.environment.utils.container;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-
+@Deprecated
 public abstract class EscapyAbsContainer<T extends EscapyContainerable>
 	implements EscapyContainer<T> {
 

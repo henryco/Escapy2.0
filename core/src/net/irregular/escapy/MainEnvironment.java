@@ -7,7 +7,7 @@ import net.irregular.escapy.environment.context.screen.EscapyScreen;
 import javax.inject.Inject;
 import java.util.Collection;
 
-public class MainEnvironment extends EscapyGameContext {
+public final class MainEnvironment extends EscapyGameContext {
 
 	private final EscapyScreen initialScreen;
 

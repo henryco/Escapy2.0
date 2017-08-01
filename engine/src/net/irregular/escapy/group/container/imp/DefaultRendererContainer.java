@@ -1,7 +1,7 @@
 package net.irregular.escapy.group.container.imp;
 
-import net.irregular.escapy.environment.utils.EscapyFiles;
 import net.irregular.escapy.environment.utils.EscapyLogger;
+import net.irregular.escapy.environment.utils.files.EscapyFiles;
 import net.irregular.escapy.environment.utils.proxy.EscapyProxyListener;
 import net.irregular.escapy.group.container.EscapyRendererContainer;
 import net.irregular.escapy.group.map.core.location.EscapySubLocation;

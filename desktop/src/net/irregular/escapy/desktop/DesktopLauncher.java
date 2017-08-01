@@ -10,9 +10,9 @@ import net.irregular.escapy.modules.MainModule;
 
 import static java.io.File.separator;
 
-public class DesktopLauncher {
+public final class DesktopLauncher {
 
-	public static void main (String[] arg) throws Exception {
+	public static void main(String[] arg) throws Exception {
 
 		LwjglApplicationConfiguration config = EscapyDesktopConfigLoaderBuilder.Default()
 				.setLoadedClass(LwjglApplicationConfiguration.class)

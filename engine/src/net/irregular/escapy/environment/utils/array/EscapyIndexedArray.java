@@ -1,4 +1,4 @@
-package net.irregular.escapy.environment.utils.arrContainer;
+package net.irregular.escapy.environment.utils.array;
 
 
 import net.irregular.escapy.environment.context.annotation.EscapyAPI;

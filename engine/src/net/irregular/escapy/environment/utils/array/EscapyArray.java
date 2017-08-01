@@ -1,4 +1,4 @@
-package net.irregular.escapy.environment.utils.arrContainer;
+package net.irregular.escapy.environment.utils.array;
 
 import java.util.Collection;
 import java.util.Comparator;

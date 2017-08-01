@@ -2,7 +2,7 @@ package net.irregular.escapy.modules.group.renderer.dep;
 
 import com.badlogic.gdx.Gdx;
 import net.irregular.escapy.environment.context.game.Escapy;
-import net.irregular.escapy.environment.utils.EscapyFiles;
+import net.irregular.escapy.environment.utils.files.EscapyFiles;
 import net.irregular.escapy.environment.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.environment.utils.loader.EscapyInstanced;
 import net.irregular.escapy.graphic.render.program.gl20.core.EscapyMultiSourceShader;

@@ -1,6 +1,6 @@
 package net.irregular.escapy.environment.utils.loader;
 
-import net.irregular.escapy.environment.utils.EscapyFiles;
+import net.irregular.escapy.environment.utils.files.EscapyFiles;
 
 import java.util.List;
 

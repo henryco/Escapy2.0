@@ -1,4 +1,4 @@
-package net.irregular.escapy.environment.utils;
+package net.irregular.escapy.environment.utils.files;
 
 import static java.io.File.separator;
 

@@ -3,7 +3,7 @@ package net.irregular.escapy.graphic.render.program.gl20.core.uniform;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import net.irregular.escapy.environment.context.annotation.Dante;
 import net.irregular.escapy.environment.context.annotation.EscapyAPI;
-import net.irregular.escapy.environment.utils.arrContainer.EscapyIndexedArray;
+import net.irregular.escapy.environment.utils.array.EscapyIndexedArray;
 import net.irregular.escapy.graphic.render.program.gl20.proxy.EscapyProxyShaderProgram;
 
 import java.util.function.Consumer;

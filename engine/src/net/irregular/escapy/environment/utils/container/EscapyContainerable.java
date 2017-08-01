@@ -1,9 +1,10 @@
-package net.irregular.escapy.environment.utils.absContainer;
+package net.irregular.escapy.environment.utils.container;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface EscapyContainerable.
  */
+@Deprecated
 public interface EscapyContainerable {
 
 	/**

@@ -1,5 +1,6 @@
-package net.irregular.escapy.environment.utils.absContainer;
+package net.irregular.escapy.environment.utils.container;
 
+@Deprecated
 public interface EscapyContainer <T> {
 	
 	int addSource(T source);
