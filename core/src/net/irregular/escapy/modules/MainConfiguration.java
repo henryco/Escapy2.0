@@ -25,4 +25,5 @@ public class MainConfiguration extends EscapyGameContextConfiguration {
 				.addPropertyValue(getResourcesDir() + separator + "shaders" + separator + "blend")
 		.save();
 	}
+
 }
