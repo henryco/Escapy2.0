@@ -6,9 +6,6 @@ import net.irregular.escapy.group.map.core.layer.shift.LayerShiftLogic;
 import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.utils.loader.EscapyInstanced;
 
-/**
- * @author Henry on 21/07/17.
- */
 public class SimpleShiftLogic implements EscapyInstanceLoader<LayerShiftLogic> {
 
 	private final EscapyCamera camera;
