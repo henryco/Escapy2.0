@@ -1,12 +1,12 @@
 package net.irregular.escapy.group.container.imp;
 
-import net.irregular.escapy.environment.utils.EscapyLogger;
-import net.irregular.escapy.environment.utils.files.EscapyFiles;
-import net.irregular.escapy.environment.utils.proxy.EscapyProxyListener;
 import net.irregular.escapy.group.container.EscapyRendererContainer;
 import net.irregular.escapy.group.map.core.location.EscapySubLocation;
 import net.irregular.escapy.group.render.core.EscapyRenderer;
 import net.irregular.escapy.group.render.loader.RendererLoader;
+import net.irregular.escapy.utils.EscapyLogger;
+import net.irregular.escapy.utils.files.EscapyFiles;
+import net.irregular.escapy.utils.proxy.EscapyProxyListener;
 
 import java.util.Collection;
 import java.util.HashMap;

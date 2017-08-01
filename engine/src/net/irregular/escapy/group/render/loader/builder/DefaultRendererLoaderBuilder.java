@@ -1,6 +1,5 @@
 package net.irregular.escapy.group.render.loader.builder;
 
-import net.irregular.escapy.environment.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.graphic.camera.EscapyCamera;
 import net.irregular.escapy.graphic.render.light.processor.EscapyLightProcessor;
 import net.irregular.escapy.graphic.render.light.source.LightSource;
@@ -11,6 +10,7 @@ import net.irregular.escapy.graphic.render.program.gl20.core.EscapyMultiSourceSh
 import net.irregular.escapy.group.map.core.location.EscapySubLocation;
 import net.irregular.escapy.group.render.core.EscapyRenderer;
 import net.irregular.escapy.group.render.loader.imp.*;
+import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
 
 /**
  * @author Henry on 25/07/17.

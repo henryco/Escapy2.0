@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dagger.Module;
 import dagger.Provides;
-import net.irregular.escapy.environment.context.screen.EscapyScreen;
+import net.irregular.escapy.context.game.screen.EscapyScreen;
 import net.irregular.escapy.graphic.camera.EscapyCamera;
 import net.irregular.escapy.graphic.screen.Resolution;
 import net.irregular.escapy.group.container.EscapyGroupContainer;

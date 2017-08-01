@@ -2,8 +2,6 @@ package net.irregular.escapy.group.render.core;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import net.irregular.escapy.environment.utils.EscapyNamed;
-import net.irregular.escapy.environment.utils.array.EscapyAssociatedArray;
 import net.irregular.escapy.graphic.render.fbo.EscapyFBO;
 import net.irregular.escapy.graphic.render.fbo.EscapyFrameBuffer;
 import net.irregular.escapy.graphic.render.light.processor.EscapyFlatLight;
@@ -15,6 +13,8 @@ import net.irregular.escapy.graphic.render.program.gl10.blend.EscapyGLBlendRende
 import net.irregular.escapy.graphic.render.program.gl10.mask.LightMask;
 import net.irregular.escapy.graphic.render.program.gl20.core.EscapyMultiSourceShader;
 import net.irregular.escapy.graphic.screen.Resolution;
+import net.irregular.escapy.utils.EscapyNamed;
+import net.irregular.escapy.utils.array.EscapyAssociatedArray;
 
 import java.util.Collection;
 import java.util.LinkedList;

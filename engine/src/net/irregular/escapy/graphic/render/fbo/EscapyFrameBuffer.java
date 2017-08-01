@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
-import net.irregular.escapy.environment.context.annotation.EscapyAPI;
+import net.irregular.escapy.context.annotation.EscapyAPI;
 import net.irregular.escapy.graphic.screen.Resolution;
 
 /**

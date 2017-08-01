@@ -1,14 +1,11 @@
 package net.irregular.escapy.modules.menu;
 
-import net.irregular.escapy.environment.context.annotation.ScreenName;
-import net.irregular.escapy.environment.context.screen.EscapyScreen;
-import net.irregular.escapy.environment.context.screen.EscapyScreenContext;
+import net.irregular.escapy.context.annotation.ScreenName;
+import net.irregular.escapy.context.game.screen.EscapyScreen;
+import net.irregular.escapy.context.game.screen.EscapyScreenContext;
 import net.irregular.escapy.group.container.EscapyGroupContainer;
 import net.irregular.escapy.modules.game.GameScreen;
 
-/**
- * @author Henry on 28/06/17.
- */
 @ScreenName("menu_screen")
 public class MenuScreen implements EscapyScreen {
 

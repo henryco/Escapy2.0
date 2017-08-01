@@ -2,7 +2,7 @@ package net.irregular.escapy.modules.game;
 
 import dagger.Module;
 import dagger.Provides;
-import net.irregular.escapy.environment.context.screen.EscapyScreen;
+import net.irregular.escapy.context.game.screen.EscapyScreen;
 import net.irregular.escapy.graphic.camera.EscapyCamera;
 import net.irregular.escapy.group.container.EscapyGroupContainer;
 import net.irregular.escapy.modules.group.GroupModule;

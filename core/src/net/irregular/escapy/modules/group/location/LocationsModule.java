@@ -2,8 +2,6 @@ package net.irregular.escapy.modules.group.location;
 
 import dagger.Module;
 import dagger.Provides;
-import net.irregular.escapy.environment.utils.EscapyLogger;
-import net.irregular.escapy.environment.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.graphic.camera.EscapyCamera;
 import net.irregular.escapy.group.map.core.layer.shift.LayerShiftLogic;
 import net.irregular.escapy.group.map.core.object.EscapyGameObject;
@@ -12,6 +10,8 @@ import net.irregular.escapy.group.map.loader.imp.DefaultLocationLoader;
 import net.irregular.escapy.modules.group.location.dep.GameObjAttrInstLoader;
 import net.irregular.escapy.modules.group.location.dep.SimpleShiftLogic;
 import net.irregular.escapy.modules.group.util.CameraModule;
+import net.irregular.escapy.utils.EscapyLogger;
+import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

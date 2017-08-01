@@ -1,9 +1,9 @@
 package net.irregular.escapy.group.map.core.layer;
 
-import net.irregular.escapy.environment.utils.EscapyObject;
-import net.irregular.escapy.environment.utils.array.EscapyAssociatedArray;
 import net.irregular.escapy.group.map.core.layer.shift.LayerShift;
 import net.irregular.escapy.group.map.core.object.EscapyGameObject;
+import net.irregular.escapy.utils.EscapyObject;
+import net.irregular.escapy.utils.array.EscapyAssociatedArray;
 
 /**
  * @author Henry on 17/07/17.

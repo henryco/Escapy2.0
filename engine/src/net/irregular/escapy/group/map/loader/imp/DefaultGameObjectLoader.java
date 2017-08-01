@@ -1,6 +1,5 @@
 package net.irregular.escapy.group.map.loader.imp;
 
-import net.irregular.escapy.environment.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.group.map.core.object.EscapyGameObject;
 import net.irregular.escapy.group.map.core.object.EscapyGameObjectRenderer;
 import net.irregular.escapy.group.map.core.object.ObjectDetails;
@@ -9,6 +8,7 @@ import net.irregular.escapy.group.map.core.object.renderer.GameObjectStaticRende
 import net.irregular.escapy.group.map.core.object.texture.GameObjectStaticTexturePath;
 import net.irregular.escapy.group.map.loader.GameObjectLoader;
 import net.irregular.escapy.group.map.loader.serial.SerializedGameObject;
+import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
 
 /**
  * @author Henry on 14/07/17.

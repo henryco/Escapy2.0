@@ -1,9 +1,9 @@
 package net.irregular.escapy.modules.group.location.dep;
 
 import com.badlogic.gdx.Gdx;
-import net.irregular.escapy.environment.utils.loader.EscapyInstanceLoader;
-import net.irregular.escapy.environment.utils.loader.EscapyInstanced;
 import net.irregular.escapy.group.map.core.object.EscapyGameObject;
+import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
+import net.irregular.escapy.utils.loader.EscapyInstanced;
 
 /**
  * @author Henry on 21/07/17.

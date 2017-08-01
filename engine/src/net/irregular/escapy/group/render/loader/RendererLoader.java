@@ -1,7 +1,7 @@
 package net.irregular.escapy.group.render.loader;
 
-import net.irregular.escapy.environment.utils.loader.EscapyLoaderUtils;
 import net.irregular.escapy.group.render.core.EscapyRenderer;
+import net.irregular.escapy.utils.loader.EscapyLoaderUtils;
 
 /**
  * @author Henry on 20/07/17.

@@ -2,12 +2,12 @@ package net.irregular.escapy.graphic.render.program.gl20.core;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import net.irregular.escapy.environment.context.annotation.EscapyAPI;
-import net.irregular.escapy.environment.utils.EscapyLogger;
-import net.irregular.escapy.environment.utils.EscapyObject;
-import net.irregular.escapy.environment.utils.proxy.EscapyProxyInstanceObserver;
+import net.irregular.escapy.context.annotation.EscapyAPI;
 import net.irregular.escapy.graphic.render.program.gl20.proxy.EscapyProxyShaderProgram;
 import net.irregular.escapy.graphic.render.program.gl20.proxy.ProxyShaderProgram;
+import net.irregular.escapy.utils.EscapyLogger;
+import net.irregular.escapy.utils.EscapyObject;
+import net.irregular.escapy.utils.proxy.EscapyProxyInstanceObserver;
 
 import java.util.Arrays;
 

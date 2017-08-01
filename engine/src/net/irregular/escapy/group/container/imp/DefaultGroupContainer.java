@@ -2,16 +2,16 @@ package net.irregular.escapy.group.container.imp;
 
 import com.badlogic.gdx.Gdx;
 import com.google.gson.Gson;
-import net.irregular.escapy.environment.context.game.Escapy;
-import net.irregular.escapy.environment.utils.EscapyLogger;
-import net.irregular.escapy.environment.utils.files.EscapyFiles;
-import net.irregular.escapy.environment.utils.proxy.EscapyProxyListener;
+import net.irregular.escapy.context.game.Escapy;
 import net.irregular.escapy.group.container.EscapyGroupContainer;
 import net.irregular.escapy.group.container.EscapyLocationContainer;
 import net.irregular.escapy.group.container.EscapyRendererContainer;
 import net.irregular.escapy.group.container.serial.SerializedGroup;
 import net.irregular.escapy.group.map.loader.imp.DefaultLocationLoader;
 import net.irregular.escapy.group.render.loader.imp.DefaultRendererLoader;
+import net.irregular.escapy.utils.EscapyLogger;
+import net.irregular.escapy.utils.files.EscapyFiles;
+import net.irregular.escapy.utils.proxy.EscapyProxyListener;
 
 import java.io.InputStreamReader;
 import java.io.Reader;

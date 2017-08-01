@@ -4,10 +4,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import net.irregular.escapy.environment.utils.EscapyObject;
 import net.irregular.escapy.graphic.render.fbo.EscapyFBO;
 import net.irregular.escapy.graphic.render.fbo.EscapyFrameBuffer;
 import net.irregular.escapy.graphic.screen.Resolution;
+import net.irregular.escapy.utils.EscapyObject;
 
 /**
  * @author Henry on 23/07/17.

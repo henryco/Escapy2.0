@@ -2,9 +2,9 @@ package net.irregular.escapy.graphic.camera;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Matrix4;
-import net.irregular.escapy.environment.utils.TransVec;
 import net.irregular.escapy.graphic.screen.Resolution;
 import net.irregular.escapy.graphic.screen.Wipeable;
+import net.irregular.escapy.utils.TransVec;
 
 import java.util.function.Function;
 

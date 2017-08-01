@@ -1,8 +1,8 @@
 package net.irregular.escapy.group.map.core.location;
 
-import net.irregular.escapy.environment.utils.array.EscapyAssociatedArray;
-import net.irregular.escapy.environment.utils.array.EscapyNamedArray;
 import net.irregular.escapy.group.map.core.layer.EscapyLayer;
+import net.irregular.escapy.utils.array.EscapyAssociatedArray;
+import net.irregular.escapy.utils.array.EscapyNamedArray;
 
 import java.util.Collection;
 import java.util.LinkedList;

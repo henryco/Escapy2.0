@@ -3,10 +3,10 @@ package net.irregular.escapy.graphic.render.fbo;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import net.irregular.escapy.environment.context.annotation.EscapyAPI;
-import net.irregular.escapy.environment.utils.EscapyObject;
+import net.irregular.escapy.context.annotation.EscapyAPI;
 import net.irregular.escapy.graphic.render.mapping.GraphicRenderer;
 import net.irregular.escapy.graphic.screen.Wipeable;
+import net.irregular.escapy.utils.EscapyObject;
 
 /**
  * @author Henry on 29/06/17.

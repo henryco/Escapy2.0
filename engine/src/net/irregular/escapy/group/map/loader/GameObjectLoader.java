@@ -1,8 +1,8 @@
 package net.irregular.escapy.group.map.loader;
 
-import net.irregular.escapy.environment.utils.loader.EscapyLoaderUtils;
-import net.irregular.escapy.environment.utils.serial.EscapySerialized;
 import net.irregular.escapy.group.map.core.object.EscapyGameObject;
+import net.irregular.escapy.utils.loader.EscapyLoaderUtils;
+import net.irregular.escapy.utils.serial.EscapySerialized;
 
 /**
  * @author Henry on 14/07/17.

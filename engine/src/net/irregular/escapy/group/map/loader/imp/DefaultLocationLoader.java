@@ -2,13 +2,13 @@ package net.irregular.escapy.group.map.loader.imp;
 
 import com.badlogic.gdx.Gdx;
 import com.google.gson.Gson;
-import net.irregular.escapy.environment.utils.EscapyLogger;
-import net.irregular.escapy.environment.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.group.map.core.location.EscapyLocation;
 import net.irregular.escapy.group.map.core.location.Location;
 import net.irregular.escapy.group.map.loader.LocationLoader;
 import net.irregular.escapy.group.map.loader.SubLocationLoader;
 import net.irregular.escapy.group.map.loader.serial.SerializedLocation;
+import net.irregular.escapy.utils.EscapyLogger;
+import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
 
 import java.io.InputStreamReader;
 import java.io.Reader;

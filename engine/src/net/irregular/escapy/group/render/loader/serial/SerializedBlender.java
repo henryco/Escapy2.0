@@ -3,7 +3,7 @@ package net.irregular.escapy.group.render.loader.serial;
 import com.badlogic.gdx.graphics.GL20;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import net.irregular.escapy.environment.utils.serial.EscapySimpleSerialized;
+import net.irregular.escapy.utils.serial.EscapySimpleSerialized;
 
 /**
  * @author Henry on 23/07/17.

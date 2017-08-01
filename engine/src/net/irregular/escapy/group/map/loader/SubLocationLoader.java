@@ -1,7 +1,7 @@
 package net.irregular.escapy.group.map.loader;
 
-import net.irregular.escapy.environment.utils.loader.EscapyLoaderUtils;
 import net.irregular.escapy.group.map.core.location.EscapySubLocation;
+import net.irregular.escapy.utils.loader.EscapyLoaderUtils;
 
 /**
  * @author Henry on 12/07/17.

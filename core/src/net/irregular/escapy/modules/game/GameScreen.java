@@ -1,8 +1,8 @@
 package net.irregular.escapy.modules.game;
 
-import net.irregular.escapy.environment.context.annotation.ScreenName;
-import net.irregular.escapy.environment.context.screen.EscapyScreen;
-import net.irregular.escapy.environment.context.screen.EscapyScreenContext;
+import net.irregular.escapy.context.annotation.ScreenName;
+import net.irregular.escapy.context.game.screen.EscapyScreen;
+import net.irregular.escapy.context.game.screen.EscapyScreenContext;
 import net.irregular.escapy.graphic.camera.EscapyCamera;
 import net.irregular.escapy.graphic.render.light.source.LightSource;
 import net.irregular.escapy.group.container.EscapyGroupContainer;

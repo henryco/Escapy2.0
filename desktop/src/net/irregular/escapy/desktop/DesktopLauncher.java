@@ -3,9 +3,9 @@ package net.irregular.escapy.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import net.irregular.escapy.MainEnvironment;
+import net.irregular.escapy.context.EscapyApplicationAdapter;
 import net.irregular.escapy.desktop.builder.EscapyDesktopConfigLoaderBuilder;
 import net.irregular.escapy.desktop.serial.SerializedDesktopConfig;
-import net.irregular.escapy.environment.EscapyApplicationAdapter;
 import net.irregular.escapy.modules.MainModule;
 
 import static java.io.File.separator;

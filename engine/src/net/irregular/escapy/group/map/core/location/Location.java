@@ -1,7 +1,7 @@
 package net.irregular.escapy.group.map.core.location;
 
-import net.irregular.escapy.environment.utils.array.EscapyAssociatedArray;
 import net.irregular.escapy.group.map.loader.SubLocationLoader;
+import net.irregular.escapy.utils.array.EscapyAssociatedArray;
 
 import java.util.*;
 

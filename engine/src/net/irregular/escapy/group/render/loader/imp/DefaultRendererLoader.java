@@ -2,9 +2,6 @@ package net.irregular.escapy.group.render.loader.imp;
 
 import com.badlogic.gdx.Gdx;
 import com.google.gson.Gson;
-import net.irregular.escapy.environment.utils.EscapyLogger;
-import net.irregular.escapy.environment.utils.array.EscapyAssociatedArray;
-import net.irregular.escapy.environment.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.graphic.render.light.processor.EscapyLightProcessor;
 import net.irregular.escapy.graphic.render.light.source.LightSource;
 import net.irregular.escapy.graphic.render.mapping.EscapyRenderable;
@@ -19,6 +16,9 @@ import net.irregular.escapy.group.render.core.EscapyRenderer;
 import net.irregular.escapy.group.render.loader.RendererLoader;
 import net.irregular.escapy.group.render.loader.RendererSubLoader;
 import net.irregular.escapy.group.render.loader.serial.SerializedRenderer;
+import net.irregular.escapy.utils.EscapyLogger;
+import net.irregular.escapy.utils.array.EscapyAssociatedArray;
+import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
 
 import java.io.InputStreamReader;
 import java.io.Reader;

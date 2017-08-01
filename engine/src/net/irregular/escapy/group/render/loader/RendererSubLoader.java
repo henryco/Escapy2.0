@@ -1,8 +1,8 @@
 package net.irregular.escapy.group.render.loader;
 
-import net.irregular.escapy.environment.utils.array.EscapyAssociatedArray;
-import net.irregular.escapy.environment.utils.loader.EscapyLoaderUtils;
-import net.irregular.escapy.environment.utils.serial.EscapySerialized;
+import net.irregular.escapy.utils.array.EscapyAssociatedArray;
+import net.irregular.escapy.utils.loader.EscapyLoaderUtils;
+import net.irregular.escapy.utils.serial.EscapySerialized;
 
 /**
  * @author Henry on 25/07/17.

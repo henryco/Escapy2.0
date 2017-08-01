@@ -1,6 +1,6 @@
 package net.irregular.escapy.graphic.render.program.gl20.core;
 
-import net.irregular.escapy.environment.context.annotation.EscapyAPI;
+import net.irregular.escapy.context.annotation.EscapyAPI;
 import net.irregular.escapy.graphic.render.program.gl20.core.uniform.UniformsProvider;
 
 /**

@@ -1,15 +1,15 @@
 package net.irregular.escapy.group.render.loader.imp;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import net.irregular.escapy.environment.utils.array.EscapyAssociatedArray;
-import net.irregular.escapy.environment.utils.array.EscapyNamedArray;
-import net.irregular.escapy.environment.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.graphic.camera.EscapyCamera;
 import net.irregular.escapy.graphic.render.mapping.EscapyRenderable;
 import net.irregular.escapy.group.map.core.layer.EscapyLayer;
 import net.irregular.escapy.group.map.core.object.EscapyGameObject;
 import net.irregular.escapy.group.render.loader.RendererSubLoader;
 import net.irregular.escapy.group.render.loader.serial.SerializedRenderer;
+import net.irregular.escapy.utils.array.EscapyAssociatedArray;
+import net.irregular.escapy.utils.array.EscapyNamedArray;
+import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
 
 import java.util.function.Consumer;
 

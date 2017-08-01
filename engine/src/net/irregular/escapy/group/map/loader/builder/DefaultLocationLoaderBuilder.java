@@ -1,6 +1,5 @@
 package net.irregular.escapy.group.map.loader.builder;
 
-import net.irregular.escapy.environment.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.group.map.core.layer.EscapyLayer;
 import net.irregular.escapy.group.map.core.layer.shift.LayerShiftLogic;
 import net.irregular.escapy.group.map.core.location.EscapyLocation;
@@ -11,6 +10,7 @@ import net.irregular.escapy.group.map.loader.SubLocationLoader;
 import net.irregular.escapy.group.map.loader.imp.DefaultGameObjectLoader;
 import net.irregular.escapy.group.map.loader.imp.DefaultLocationLoader;
 import net.irregular.escapy.group.map.loader.imp.DefaultSubLocationLoader;
+import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
 
 
 /**

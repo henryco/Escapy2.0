@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import net.irregular.escapy.environment.context.annotation.EscapyAPI;
+import net.irregular.escapy.context.annotation.EscapyAPI;
 import net.irregular.escapy.graphic.render.program.gl20.core.EscapySingleSourceShader;
 import net.irregular.escapy.graphic.render.program.gl20.core.ShaderFile;
 
