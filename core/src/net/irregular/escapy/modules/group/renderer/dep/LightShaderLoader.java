@@ -30,13 +30,11 @@ public class LightShaderLoader implements EscapyInstanceLoader<EscapyMultiSource
 	}
 
 
-
 	@EscapyInstanced("ADD_OVERLAY_STRONG")
 	public EscapyMultiSourceShader loadAddOverlayStrongShader() {
 		String program = separator + "ADD_OVERLAY_STRONG" + separator + "ADD_OVERLAY_STRONG";
 		return new BlendRenderer(loadMulti(program), sources);
 	}
-
 
 
 

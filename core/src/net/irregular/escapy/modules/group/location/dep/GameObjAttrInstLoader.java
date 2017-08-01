@@ -14,7 +14,6 @@ public class GameObjAttrInstLoader implements EscapyInstanceLoader<EscapyGameObj
 	@EscapyInstanced("FULL_SCREEN")
 	public EscapyGameObject fullScreenAttribute(EscapyGameObject gameObject) {
 
-
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 
