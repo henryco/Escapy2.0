@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationListener;
 import dagger.ObjectGraph;
 import net.irregular.escapy.environment.context.annotation.Dante;
 import net.irregular.escapy.environment.context.annotation.EscapyAPI;
+import net.irregular.escapy.environment.context.game.EscapyGameContext;
 
 /**
  * @author Henry on 27/06/17.
@@ -14,7 +15,7 @@ public class EscapyApplicationAdapter implements ApplicationListener {
 	private ApplicationListener delegateApplicationListener;
 	private Object[] daggerModules;
 
-	public EscapyApplicationAdapter(Class<? extends ApplicationListener> applicationListener,
+	public EscapyApplicationAdapter(Class<? extends EscapyGameContext> applicationListener,
 									Object... daggerModules) {
 		this.setApplicationListenerClass(applicationListener);
 		this.setDaggerModules(daggerModules);

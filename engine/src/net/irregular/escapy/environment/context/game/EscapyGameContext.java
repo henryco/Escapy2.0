@@ -71,13 +71,6 @@ public abstract class EscapyGameContext extends Game implements EscapyScreenCont
 		return classEscapyScreenMap.get(screenClass);
 	}
 
-
-	@Override
-	public void setScreen(EscapyScreen screen) {
-		screen.setScreenContext(this);
-		super.setScreen(screen);
-	}
-
 	@Override
 	public void setScreen(String name) {
 		this.setScreen(this.getScreen(name));
@@ -86,6 +79,12 @@ public abstract class EscapyGameContext extends Game implements EscapyScreenCont
 	@Override
 	public void setScreen(Class<? extends EscapyScreen> screenClass) {
 		this.setScreen(this.getScreen(screenClass));
+	}
+
+	@Override
+	public void setScreen(EscapyScreen screen) {
+		screen.setScreenContext(this);
+		super.setScreen(screen);
 	}
 
 }

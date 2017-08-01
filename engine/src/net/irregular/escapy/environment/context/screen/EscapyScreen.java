@@ -9,7 +9,6 @@ public interface EscapyScreen extends Screen {
 
 	void setScreenContext(EscapyScreenContext screenContext);
 
-
 	default void pause() {
 		System.out.println("Pause: "+this.getClass().getSimpleName());
 	}

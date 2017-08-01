@@ -16,9 +16,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * @author Henry on 28/06/17.
- */
 @Module(library = true, injects = MainEnvironment.class, includes = {
 		SplashScreenModule.class,
 		MenuScreenModule.class,

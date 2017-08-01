@@ -77,6 +77,30 @@
 
 \newpage
 
+\chapter*{О движке}
+Escapy2 это игровой движок написанный на java с использованием библиотек Dagger1, libGdx, box2d и Gson. Поскольку libGdx является лишь низкоуровневой оберткой над lwgjl - движок дает полноту простора в использовании openGL, в свою очередь Dagger делает код более модульным и масштабируемым.
+
+\chapter{Начало работы}
+Вход производится похожим образом как в libGDX и lwgjl - в main с созданием инстанции
+\textbf{LwjglApplication}. Для этого создается объект \textbf{LwjglApplicationConfiguration} который загружается из json файла с помощью 
+\textbf{EscapyDesktopConfigLoader}, о самих загрузчиках и механизме сериализации в движке более подробно потом. 
+
+\begin{center}
+	\includegraphics[width=1.25\linewidth]{img/1.png} 
+  	\label{img:1}
+  	  	
+  	\includegraphics[width=1.25\linewidth]{img/2.png}   	
+\end{center}
+При создании \textbf{LwjglApplication} в качестве аргумента передается\\
+\textbf{EscapyApplicationAdapter}, который в свою очередь в качестве аргумента принимает класс наследующийся от \textbf{EscapyGameContext} и varargs модулей Dagger'a.
+
+\begin{center}
+	\includegraphics[width=1.25\linewidth]{img/3.png} 
+  	\label{img:2} 
+\end{center}
+Подробнее о том как использовать модули Dagger'a можно прочитать на оффициальном  сайте проекта (\textit{http://square.github.io/dagger/}).
+
+
 
 
 \end{document}

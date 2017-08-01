@@ -2,7 +2,7 @@ package net.irregular.escapy.desktop.builder;
 
 
 import com.google.gson.Gson;
-import net.irregular.escapy.desktop.DesktopConfigLoader;
+import net.irregular.escapy.desktop.EscapyDesktopConfigLoader;
 import net.irregular.escapy.environment.context.annotation.EscapyAPI;
 import net.irregular.escapy.environment.utils.serial.EscapySerialized;
 
@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
 /**
  * @author Henry on 15/07/17.
  */
-public class DefaultDesktopConfigLoaderBuilder implements DesktopConfigLoaderBuilder {
+public class DefaultDesktopConfigLoaderBuilder implements EscapyDesktopConfigLoaderBuilder {
 
 	private String path;
 	private String name;
@@ -59,9 +59,9 @@ public class DefaultDesktopConfigLoaderBuilder implements DesktopConfigLoaderBui
 
 
 	@Override @SuppressWarnings("unchecked")
-	public DesktopConfigLoader build() {
+	public EscapyDesktopConfigLoader build() {
 
-		return new DesktopConfigLoader() {
+		return new EscapyDesktopConfigLoader() {
 			@Override
 			public <T> T loadDesktopConfig() {
 

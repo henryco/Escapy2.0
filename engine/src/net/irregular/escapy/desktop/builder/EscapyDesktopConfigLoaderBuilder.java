@@ -1,13 +1,13 @@
 package net.irregular.escapy.desktop.builder;
 
-import net.irregular.escapy.desktop.DesktopConfigLoader;
+import net.irregular.escapy.desktop.EscapyDesktopConfigLoader;
 
 /**
  * @author Henry on 31/07/17.
  */
-public interface DesktopConfigLoaderBuilder {
+public interface EscapyDesktopConfigLoaderBuilder {
 
-	DesktopConfigLoader build();
+	EscapyDesktopConfigLoader build();
 
 	static DefaultDesktopConfigLoaderBuilder Default() {
 		return new DefaultDesktopConfigLoaderBuilder();
