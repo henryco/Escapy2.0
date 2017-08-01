@@ -5,19 +5,7 @@ import net.irregular.escapy.environment.context.game.configuration.util.Property
 
 import static java.io.File.separator;
 
-/**
- * @author Henry on 21/07/17.
- */
 public class MainConfiguration extends EscapyGameContextConfiguration {
-
-
-
-	@Override
-	public String getConfigsFilePath() {
-		return this.getResourcesDir() + separator + "configurations";
-	}
-
-
 
 	@Override
 	public String getResourcesDir() {
@@ -25,17 +13,16 @@ public class MainConfiguration extends EscapyGameContextConfiguration {
 		return local + separator + "res";
 	}
 
-
+	@Override
+	public String getConfigsFilePath() {
+		return this.getResourcesDir() + separator + "configurations";
+	}
 
 	@Override
 	public void configurePropertyKeys(PropertyKeysStorage propertyKeyStorage) {
-
 		propertyKeyStorage
 				.addPropertyKey("BLEND_SHADERS_ROOT_DIR_PATH")
 				.addPropertyValue(getResourcesDir() + separator + "shaders" + separator + "blend")
 		.save();
 	}
-
-
-
 }
