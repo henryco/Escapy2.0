@@ -31,4 +31,5 @@ public class AnnotationProcessor implements ScreenMapProcessorExecutor {
 		}
 		return map;
 	}
+
 }
