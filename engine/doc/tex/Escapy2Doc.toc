@@ -6,3 +6,5 @@
 \contentsline {chapter}{\numberline {3}Utils}{6}
 \contentsline {section}{\numberline {3.1}EscapySimpleSerialized}{7}
 \contentsline {section}{\numberline {3.2}EscapyInstanceLoader}{8}
+\contentsline {chapter}{\numberline {4}Desktop}{9}
+\contentsline {chapter}{\numberline {5}Graphic}{10}
