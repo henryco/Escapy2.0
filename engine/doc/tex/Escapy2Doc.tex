@@ -209,8 +209,7 @@ Builder создает нужную нам инстанцию загрузчик
 \end{itemize*}
 
 \subsection{FBO}
-FBO - иначе Frame Buffer Object, в движке представлен интерфейсом \textit{\textbf{EscapyFBO}} и его стандартной реализацией \textit{\textbf{EscapyFrameBuffer}} которая инкапсулирует \textit{\textbf{FrameBuffer}} из библиотеки libGDX, но с дополнительным полезным и удобным функционалом. О том как работают FrameBuffer'ы следует ознакомится самостоятельно через материалы посвященные \textit{\textbf{openGL}}.
-\\
+FBO - иначе Frame Buffer Object, в движке представлен интерфейсом \textit{\textbf{EscapyFBO}} и его стандартной реализацией \textit{\textbf{EscapyFrameBuffer}} которая инкапсулирует \textit{\textbf{FrameBuffer}} из библиотеки libGDX, но с дополнительным полезным и удобным функционалом. О том как работают FrameBuffer'ы следует ознакомится самостоятельно через материалы посвященные \textit{\textbf{openGL}}.\\
 \subsection{Program}
 Cостоит из двух субпакетов \textit{\textbf{gl10}} и \textit{\textbf{gl20}}.
 Первый использует нативные вызовы openGL без шейдеров в процессе рендеринга, второй в свою очередь нацелен на использование именно шейдеров.
@@ -219,16 +218,35 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 	\item \textit{\textbf{EscapyGLBlendRenderer}} - интерфейс ответственный за блендинг.
 	\item \textit{\textbf{NativeSeparateBlendRenderer}} - нативная реализация интерфейса 		выше
 	\item \textit{\textbf{LightMask}} - маска, используется для например затемнения 			активной области.
-	\\
 \end{itemize*}
-
 \subsubsection{GL20} 
+Пакет направленный на работу с шейдерами удобным способом. Работа осуществляется посредством двух основных интерфейсов \textit{\textbf{EscapyShader}} и \textit{\textbf{UniformsProvider}}, а так же интерфейсов от них налседующихся как \textit{\textbf{EscapySingleSourceShader}} и \textit{\textbf{EscapyMultiSourceShader}}.
+Работа с юниформами (их загрузка и тп) осуществляется посредством вспомогательного класса \textit{\textbf{StandardUniforms}} и \textit{\textbf{Uniform<T>}} внутри него. 
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/9.png} 
+  	\label{img:9} 
+\end{center}
+Выше изображен пример использования класса \textit{\textbf{StandardUniforms}}.
 
+\newpage
+В целом для работы с шейдерами достаточно двух стандартных реализаций интерфейсов
+\textit{\textbf{EscapyUniformSingle}} и \textit{\textbf{EscapyUniformBlender}}. Их реализации предоставленные движком это \textit{\textbf{SingleRendererExtended}} и \textit{\textbf{BlendRendererExtended}} соотвественно. Достаточно в аргументах конструктора этих классов указать файлы .vert и .frag шейдеров, а с помощью метода 
+\textit{\textbf{getStandardUniforms()}} установить значения для юинформов. Хорошим примером может послужить исходный код класса \textit{\textbf{EscapyLightSource}}.
+\\
+\subsection{Light}
+Данный пакет как можно догадаться из названия служит работе со светом. 
+\\Cубпакет \textit{\textbf{source}} отвечает за создание источников света с помощью классов  \textit{\textbf{EscapyLightSource}} и \textit{\textbf{LightSource}} (рекомендуется использовать второй). Субпакет \textit{\textbf{processor}} оветчает за правильную отрисовку источников света посредством интерфейса \textit{\textbf{EscapyLightProcessor}} и его двух стандартных реализаций \textit{\textbf{EscapyFlatLight}} и \textit{\textbf{EscapyVolumeLight}} их ключевое отличие заключается в использовании карты нормалей, в первом случае оная не используется и свет получается плоским как и следует из описания.
+\begin{center}
+	\includegraphics[width=1\linewidth]{img/10.png}
+	Пример с объемным светом.
+	\includegraphics[width=1\linewidth]{img/11.png}  
+	Пример с плоским светом.
+  	\label{img:1011} 
+\end{center}
 
+\chapter{Group}
 
 
 \end{document}
-
-
 
 

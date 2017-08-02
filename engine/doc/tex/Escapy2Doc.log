@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.19)  3 AUG 2017 00:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.19)  3 AUG 2017 01:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -300,7 +300,11 @@ Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
 \TX@delta=\dimen143
 \TX@cols=\count128
 \TX@ftn=\toks29
-) (./Escapy2Doc.aux)
+) (./Escapy2Doc.aux
+
+LaTeX Warning: Label `img:9' multiply defined.
+
+)
 \openout1 = `Escapy2Doc.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
@@ -317,8 +321,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 72.
 LaTeX Font Info:    ... okay on input line 72.
 LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 72.
 LaTeX Font Info:    ... okay on input line 72.
-
-(/usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -561,40 +564,89 @@ Underfull \hbox (badness 10000) in paragraph at lines 199--201
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 212--214
+Underfull \hbox (badness 10000) in paragraph at lines 212--213
 
  []
 
 [10
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 221--223
+Overfull \hbox (54.96997pt too wide) in paragraph at lines 223--225
+\T2A/cmr/m/n/10.95 ин-тер-фей-сов от них нал-се-ду-ю-щих-ся как \T2A/cmr/bx/it/
+10.95 EscapySingleSourceShader \T2A/cmr/m/n/10.95 и \T2A/cmr/bx/it/10.95 Escapy
+MultiSourceShader\T2A/cmr/m/n/10.95 .
+ []
+
+<img/9.png, id=64, 1109.14375pt x 304.13625pt>
+File: img/9.png Graphic file (type png)
+ <use img/9.png>
+Package pdftex.def Info: img/9.png used on input line 226.
+(pdftex.def)             Requested size: 532.29282pt x 145.96053pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 226--228
+ [] 
+ []
+
+[11 <./img/9.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 232--236
 
  []
 
-[11] (./Escapy2Doc.aux) ) 
+
+Overfull \hbox (31.87607pt too wide) in paragraph at lines 237--239
+\T2A/cmr/m/n/10.95 Cубпакет \T2A/cmr/bx/it/10.95 source \T2A/cmr/m/n/10.95 от-в
+е-ча-ет за со-зда-ние ис-точ-ни-ков све-та с по-мо-щью клас-сов \T2A/cmr/bx/it/
+10.95 EscapyLightSource
+ []
+
+
+Overfull \hbox (1.4965pt too wide) in paragraph at lines 237--239
+\T2A/cmr/m/n/10.95 пра-виль-ную от-ри-сов-ку ис-точ-ни-ков све-та по-сред-ством
+ ин-тер-фей-са \T2A/cmr/bx/it/10.95 EscapyLightProcessor
+ []
+
+<img/10.png, id=69, 768.8725pt x 608.2725pt>
+File: img/10.png Graphic file (type png)
+ <use img/10.png>
+Package pdftex.def Info: img/10.png used on input line 240.
+(pdftex.def)             Requested size: 443.57848pt x 350.93272pt.
+
+<img/11.png, id=70, 767.86874pt x 608.2725pt>
+File: img/11.png Graphic file (type png)
+ <use img/11.png>
+Package pdftex.def Info: img/11.png used on input line 242.
+(pdftex.def)             Requested size: 443.57848pt x 351.38751pt.
+ [12 <./img/10.png>] [13 <./img/11.png>]
+{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 6.
+[14
+
+] (./Escapy2Doc.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 6508 strings out of 493806
- 91807 string characters out of 6155775
- 179644 words of memory out of 5000000
- 9716 multiletter control sequences out of 15000+600000
+ 6524 strings out of 493806
+ 92007 string characters out of 6155775
+ 179701 words of memory out of 5000000
+ 9729 multiletter control sequences out of 15000+600000
  18859 words of font info for 43 fonts, out of 8000000 for 9000
  788 hyphenation exceptions out of 8191
- 39i,6n,38p,963b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
- </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t
-2a/labx1200.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx
-1440.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labi1095.60
-0pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/lati1095.600pk> </
-root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm1095.600pk> </root/.t
-exlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1095.600pk> </root/.texlive2
-016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx2488.600pk> </root/.texlive2016/tex
-mf-var/fonts/pk/ljfour/lh/lh-t2a/larm1200.600pk> </root/.texlive2016/texmf-var/
-fonts/pk/ljfour/lh/lh-t2a/labx1728.600pk></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Escapy2Doc.pdf (12 pages, 482659 bytes).
+ 39i,6n,38p,965b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1200.600pk> </ro
+ot/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1440.600pk> </root/.tex
+live2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labi1095.600pk> </root/.texlive201
+6/texmf-var/fonts/pk/ljfour/lh/lh-t2a/lati1095.600pk> </root/.texlive2016/texmf
+-var/fonts/pk/ljfour/lh/lh-t2a/larm1095.600pk> </root/.texlive2016/texmf-var/fo
+nts/pk/ljfour/lh/lh-t2a/labx1095.600pk> </root/.texlive2016/texmf-var/fonts/pk/
+ljfour/lh/lh-t2a/labx2488.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/
+lh/lh-t2a/larm1200.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t
+2a/labx1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb>
+Output written on Escapy2Doc.pdf (15 pages, 1059327 bytes).
 PDF statistics:
- 463 PDF objects out of 1000 (max. 8388607)
- 68 compressed objects within 1 object stream
+ 493 PDF objects out of 1000 (max. 8388607)
+ 75 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
