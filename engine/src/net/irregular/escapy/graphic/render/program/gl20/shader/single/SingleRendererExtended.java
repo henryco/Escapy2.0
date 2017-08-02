@@ -1,4 +1,4 @@
-package net.irregular.escapy.graphic.render.program.gl20.sub.blend;
+package net.irregular.escapy.graphic.render.program.gl20.shader.single;
 
 import net.irregular.escapy.context.annotation.Dante;
 import net.irregular.escapy.context.annotation.EscapyAPI;
@@ -9,25 +9,15 @@ import net.irregular.escapy.graphic.render.program.gl20.core.uniform.Uniform;
 import java.util.Collection;
 
 /**
- * @author Henry on 29/06/17.
- */ @EscapyAPI
-@Dante
-public class BlendRendererExtended extends BlendRenderer implements EscapyUniformBlender {
+ * @author Henry on 30/06/17.
+ */ @EscapyAPI @Dante
+public class SingleRendererExtended extends SingleRenderer implements EscapyUniformSingle {
 
 	public final StandardUniforms uniformProvider = new StandardUniforms();
 
-	@EscapyAPI @Dante public BlendRendererExtended() {}
-	@EscapyAPI @Dante public BlendRendererExtended(ShaderFile shaderFile) {
+	@EscapyAPI public SingleRendererExtended() {}
+	@EscapyAPI public SingleRendererExtended(ShaderFile shaderFile) {
 		super(shaderFile);
-	}
-	@EscapyAPI @Dante public BlendRendererExtended(ShaderFile shaderFile, String... sourcesNames) {
-		super(shaderFile, sourcesNames);
-	}
-
-
-	public BlendRendererExtended setDebug(boolean debug) {
-		super.setDebug(debug);
-		return this;
 	}
 
 	@Override
@@ -39,5 +29,4 @@ public class BlendRendererExtended extends BlendRenderer implements EscapyUnifor
 	public StandardUniforms getStandardUniforms() {
 		return uniformProvider;
 	}
-
 }

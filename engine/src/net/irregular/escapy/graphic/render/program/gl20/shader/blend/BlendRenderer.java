@@ -1,4 +1,4 @@
-package net.irregular.escapy.graphic.render.program.gl20.sub.blend;
+package net.irregular.escapy.graphic.render.program.gl20.shader.blend;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;

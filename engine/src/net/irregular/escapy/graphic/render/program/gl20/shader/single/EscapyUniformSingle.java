@@ -1,4 +1,4 @@
-package net.irregular.escapy.graphic.render.program.gl20.sub.single;
+package net.irregular.escapy.graphic.render.program.gl20.shader.single;
 
 import net.irregular.escapy.graphic.render.program.gl20.core.EscapySingleSourceShader;
 import net.irregular.escapy.graphic.render.program.gl20.core.uniform.StandardUniformsProvider;

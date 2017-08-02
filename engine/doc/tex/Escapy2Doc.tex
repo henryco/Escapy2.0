@@ -1,4 +1,4 @@
- \documentclass[11pt]{report}
+\documentclass[11pt]{report}
 
 \usepackage[T2A]{fontenc}
 \usepackage[utf8x]{inputenc}
@@ -183,6 +183,49 @@ Cодержит аннотации такие как \textit{\textbf{@SreenName(
 Builder создает нужную нам инстанцию загрузчика, после чего остается вызвать на этой инстанции метод <<\textit{\textbf{loadDesktopConfig();}}>> который заинстанцирует нужный нам объект и устновит в нем значения полей считанные из json файла.
 
 \chapter{Graphic}
+Пакет Graphic состоит из трех субпакетов: \begin{itemize*}
+	\item \textit{\textbf{Camera}}
+	\item \textit{\textbf{Render}}
+	\item \textit{\textbf{Screen}}
+\end{itemize*}
+\section{EscapyCamera}
+Класс из пакета \textit{\textbf{Camera}} инкапсулирующий \textit{\textbf{OrtographicCamera}} с дополнительным функционалом - простота и удобство, рекомендуется к использованию.
+
+\section{Render}
+Ключевой субпакет, на данный момент состоит из субпакетов: \begin{itemize*}
+	\item \textit{\textbf{Fbo}}
+	\item \textit{\textbf{Light}}
+	\item \textit{\textbf{Mapping}}
+	\item \textit{\textbf{Program}}
+	\\
+\end{itemize*}
+
+\subsection{Mapping}
+Данный пакет включает в себя 4 интерфейса, три из них содержат методы вызываемые во время отрисовки: \begin{itemize*}
+	\item \textit{\textbf{GraphicRenderer}} - методы этого интерфейса вызываются во время 		отрисовки цветных(обычных) текстур объектов.
+	\item \textit{\textbf{NormalMapRenderer}} - методы вызываются во время отрисовки 			текстур карты нормалей.
+	\item \textit{\textbf{LightMapRenderer}} - методы вызываются во время отрисовки 			текстур карты света.
+	\item \textit{\textbf{EscapyRenderable}} - этот интерфейс наследуется от трех выше 			перечисленных.
+\end{itemize*}
+
+\subsection{FBO}
+FBO - иначе Frame Buffer Object, в движке представлен интерфейсом \textit{\textbf{EscapyFBO}} и его стандартной реализацией \textit{\textbf{EscapyFrameBuffer}} которая инкапсулирует \textit{\textbf{FrameBuffer}} из библиотеки libGDX, но с дополнительным полезным и удобным функционалом. О том как работают FrameBuffer'ы следует ознакомится самостоятельно через материалы посвященные \textit{\textbf{openGL}}.
+\\
+\subsection{Program}
+Cостоит из двух субпакетов \textit{\textbf{gl10}} и \textit{\textbf{gl20}}.
+Первый использует нативные вызовы openGL без шейдеров в процессе рендеринга, второй в свою очередь нацелен на использование именно шейдеров.
+\subsubsection{GL10} 
+Функционалом gl10 пользуются такие классы как например: \begin{itemize*}
+	\item \textit{\textbf{EscapyGLBlendRenderer}} - интерфейс ответственный за блендинг.
+	\item \textit{\textbf{NativeSeparateBlendRenderer}} - нативная реализация интерфейса 		выше
+	\item \textit{\textbf{LightMask}} - маска, используется для например затемнения 			активной области.
+	\\
+\end{itemize*}
+
+\subsubsection{GL20} 
+
+
+
 
 \end{document}
 

@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.irregular.escapy.context.annotation.EscapyAPI;
 import net.irregular.escapy.graphic.render.program.gl20.core.ShaderFile;
 import net.irregular.escapy.graphic.render.program.gl20.core.uniform.StandardUniforms;
-import net.irregular.escapy.graphic.render.program.gl20.sub.blend.BlendRendererExtended;
-import net.irregular.escapy.graphic.render.program.gl20.sub.blend.EscapyUniformBlender;
+import net.irregular.escapy.graphic.render.program.gl20.shader.blend.BlendRendererExtended;
+import net.irregular.escapy.graphic.render.program.gl20.shader.blend.EscapyUniformBlender;
 
 /**
  * @author Henry on 02/07/17.

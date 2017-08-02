@@ -14,6 +14,8 @@ public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 	private final int[] blendMode;
 	private int srcFunc, dstFunc;
 
+	private boolean blend;
+
 	@EscapyAPI
 	public NativeSeparateBlendRenderer() {
 		this(Separate.ADD_RGBA());
@@ -29,6 +31,8 @@ public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 	@Override
 	public synchronized void begin(Batch batch) {
 
+		if (blend) throw new RuntimeException("You cannot call EscapyGLBlendRenderer.BEGIN() before call END()");
+
 		this.srcFunc = batch.getBlendSrcFunc();
 		this.dstFunc = batch.getBlendDstFunc();
 
@@ -36,11 +40,14 @@ public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 		batch.enableBlending();
 
 		setBlendFunction(blendMode, batch);
+		this.blend = true;
 	}
 
 
 	@Override
 	public synchronized void end(Batch batch) {
+
+		if (!blend) throw new RuntimeException("You cannot call EscapyGLBlendRenderer.END() before call BEGIN()");
 
 		batch.disableBlending();
 		batch.end();
@@ -62,6 +69,7 @@ public class NativeSeparateBlendRenderer implements EscapyGLBlendRenderer {
 	private void reset() {
 		this.dstFunc = -1;
 		this.srcFunc = -1;
+		this.blend = false;
 	}
 
 
