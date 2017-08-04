@@ -254,8 +254,13 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 \end{itemize*}
 
 \section{Container}
-
-
+Представлен тремя основными интерфейсами, а так же их реализациями по умолчанию посредством которых осуществляется работа. Интерфейсы вместе с имплементриующими классами:
+\begin{itemize*}
+	\item \textit{\textbf{(I) EscapyGroupContainer: (C) DefaultGroupContainer}}
+	\item \textit{\textbf{(I) EscapyLocationContainer: (C) DefaultLocationContainer}}
+	\item \textit{\textbf{(I) EscapyRendererContainer: (C) DefaultRendererContainer}}
+\end{itemize*}
+Классы \textit{\textbf{DefaultLocationContainer}} и \textit{\textbf{DefaultRendererContainer}} имеют конструкторы с модификатором доступа \textit{\textbf{protected}} потому их невозможно заинстанцировать на прямую, вместо этого надо использовать класс \textit{\textbf{DefaultGroupContainer}}.
 
 \end{document}
 

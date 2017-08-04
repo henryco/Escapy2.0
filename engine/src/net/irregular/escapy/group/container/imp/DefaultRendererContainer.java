@@ -56,7 +56,7 @@ public class DefaultRendererContainer implements EscapyRendererContainer<EscapyS
 	}
 
 
-	public DefaultRendererContainer(RendererLoader<EscapySubLocation> rendererLoader,
+	protected DefaultRendererContainer(RendererLoader<EscapySubLocation> rendererLoader,
 									Collection<TargetGroup> renderers) {
 
 		this.rendererLoader = rendererLoader;

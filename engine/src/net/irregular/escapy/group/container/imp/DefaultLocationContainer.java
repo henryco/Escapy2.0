@@ -25,7 +25,7 @@ public class DefaultLocationContainer implements EscapyLocationContainer {
 	private EscapyLocation location;
 
 
-	public DefaultLocationContainer(LocationLoader locationLoader,
+	protected DefaultLocationContainer(LocationLoader locationLoader,
 									Collection<Map.Entry<String, String>> locations) {
 
 		this.locationInstanceObserver = new EscapyProxyInstanceObserver();
@@ -37,7 +37,7 @@ public class DefaultLocationContainer implements EscapyLocationContainer {
 			locationMap.put(l.getKey(), l.getValue());
 	}
 
-	public DefaultLocationContainer(LocationLoader locationLoader,
+	protected DefaultLocationContainer(LocationLoader locationLoader,
 									Collection<Map.Entry<String, String>> locations,
 									EscapyProxyListener... listeners) {
 		this(locationLoader, locations);
