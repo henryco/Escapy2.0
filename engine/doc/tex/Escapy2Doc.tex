@@ -298,10 +298,21 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 	\includegraphics[width=1.2\linewidth]{img/16.png} 
   	\label{img:160} 
 \end{center} 
-
+Для создания инстанций загрузчиков рекомендуется использовать предназначенные для этого строители: \textit{\textbf{DefaultLocationLoaderBuilder}} и \textit{\textbf{DefaultRendererLoaderBuilder}}.
+ 
 \newpage
 \section{Map}
+Этот субпакет отвечает за игровые объекты, он представлен основными интерфейсами:
+\begin{itemize*} 
+	\item \textit{\textbf{EscapyLocation}} - интерфейс основной локации
+	\item \textit{\textbf{EscapySubLocation}} - интерфейс сублокации внутри основной 			локации
+	\item \textit{\textbf{EscapyLayer}} - интерфейс слоев внутри сублокации
+	\item \textit{\textbf{EscapyLayerShift}} - интерфейс смещения слоя
+	\item \textit{\textbf{EscapyLayerShiftLogic}} - интерфейс логики смещения слоя
+	\item \textit{\textbf{EscapyGameObject}} - интерфейс игровых объектов внутри слоев
+	\item \textit{\textbf{EscapyGameObjectRenderer}} - интерфейс рендерера игровых 				объектов
 
+\end{itemize*}
 
 
 

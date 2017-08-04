@@ -18,6 +18,7 @@ import java.io.Reader;
 import java.util.*;
 
 import static java.io.File.separator;
+import static net.irregular.escapy.group.container.serial.SerializedGroup.SerializedPath;
 
 /**
  * @author Henry on 21/07/17.
@@ -70,10 +71,10 @@ public class DefaultGroupContainer implements EscapyGroupContainer {
 
 
 
-	private DefaultRendererContainer initRendererContainer(List<SerializedGroup.SerializedPath> group) {
+	private DefaultRendererContainer initRendererContainer(List<SerializedPath> group) {
 
 		Collection<DefaultRendererContainer.TargetGroup> targetGroups = new LinkedList<>();
-		for (SerializedGroup.SerializedPath serializedPath: group) {
+		for (SerializedPath serializedPath: group) {
 
 			final String path = Escapy.getConfigsFilePath() + EscapyFiles.safetyPath(serializedPath.path);
 			final String[] names = serializedPath.name.split(":");
@@ -88,11 +89,11 @@ public class DefaultGroupContainer implements EscapyGroupContainer {
 
 
 
-	private DefaultLocationContainer initLocationContainer(List<SerializedGroup.SerializedPath> group,
+	private DefaultLocationContainer initLocationContainer(List<SerializedPath> group,
 														   EscapyProxyListener listener) {
 
 		Collection<Map.Entry<String, String>> locations = new LinkedList<>();
-		for (SerializedGroup.SerializedPath serializedPath: group) {
+		for (SerializedPath serializedPath: group) {
 
 			final String path = Escapy.getConfigsFilePath() + serializedPath.path;
 			locations.add(new AbstractMap.SimpleEntry<>(serializedPath.name, EscapyFiles.safetyPath(path)));
