@@ -18,11 +18,11 @@ import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
  */
 public class DefaultLocationLoaderBuilder implements LocationLoaderBuilder {
 
-	private EscapyInstanceLoader<EscapyGameObject> gameObjectInstanceAttributeLoader;
-	private EscapyInstanceLoader<LayerShiftLogic> subLocationLayerShiftLogicInstanceLoader;
-	private EscapyInstanceLoader<EscapyLayer> subLocationLayerInstanceAttributeLoader;
-	private EscapyInstanceLoader<EscapyLocation> locationInstanceAttributeLoader;
-	private EscapyInstanceLoader<EscapySubLocation> subLocationInstanceAttributeLoader;
+	private EscapyInstanceLoader<EscapyGameObject> gameObjectAttributeLoader;
+	private EscapyInstanceLoader<LayerShiftLogic> subLocationLayerShiftLogicAttributeLoader;
+	private EscapyInstanceLoader<EscapyLayer> subLocationLayerAttributeLoader;
+	private EscapyInstanceLoader<EscapyLocation> locationAttributeLoader;
+	private EscapyInstanceLoader<EscapySubLocation> subLocationAttributeLoader;
 
 
 
@@ -30,51 +30,51 @@ public class DefaultLocationLoaderBuilder implements LocationLoaderBuilder {
 	public DefaultLocationLoader build() {
 
 		GameObjectLoader gameObjectLoader = new DefaultGameObjectLoader(
-				gameObjectInstanceAttributeLoader
+				gameObjectAttributeLoader
 		);
 
 		SubLocationLoader subLocationLoader = new DefaultSubLocationLoader(
-				subLocationLayerShiftLogicInstanceLoader,
-				subLocationLayerInstanceAttributeLoader,
-				subLocationInstanceAttributeLoader,
+				subLocationLayerShiftLogicAttributeLoader,
+				subLocationLayerAttributeLoader,
+				subLocationAttributeLoader,
 				gameObjectLoader
 		);
 
-		return new DefaultLocationLoader(subLocationLoader, locationInstanceAttributeLoader);
+		return new DefaultLocationLoader(subLocationLoader, locationAttributeLoader);
 	}
 
 
 
 
 
-	public DefaultLocationLoaderBuilder setSubLocationLayerShiftLogicInstanceLoader
-			(EscapyInstanceLoader<LayerShiftLogic> subLocationLayerShiftLogicInstanceLoader) {
-		this.subLocationLayerShiftLogicInstanceLoader = subLocationLayerShiftLogicInstanceLoader;
+	public DefaultLocationLoaderBuilder setSubLocationLayerShiftLogicAttributeLoader
+			(EscapyInstanceLoader<LayerShiftLogic> subLocationLayerShiftLogicAttributeLoader) {
+		this.subLocationLayerShiftLogicAttributeLoader = subLocationLayerShiftLogicAttributeLoader;
 		return this;
 	}
 
 
-	public DefaultLocationLoaderBuilder setSubLocationLayerInstanceAttributeLoader
-			(EscapyInstanceLoader<EscapyLayer> subLocationLayerInstanceAttributeLoader) {
-		this.subLocationLayerInstanceAttributeLoader = subLocationLayerInstanceAttributeLoader;
+	public DefaultLocationLoaderBuilder setSubLocationLayerAttributeLoader
+			(EscapyInstanceLoader<EscapyLayer> subLocationLayerAttributeLoader) {
+		this.subLocationLayerAttributeLoader = subLocationLayerAttributeLoader;
 		return this;
 	}
 
-	public DefaultLocationLoaderBuilder setGameObjectInstanceAttributeLoader
-			(EscapyInstanceLoader<EscapyGameObject> gameObjectInstanceAttributeLoader) {
-		this.gameObjectInstanceAttributeLoader = gameObjectInstanceAttributeLoader;
+	public DefaultLocationLoaderBuilder setGameObjectAttributeLoader
+			(EscapyInstanceLoader<EscapyGameObject> gameObjectAttributeLoader) {
+		this.gameObjectAttributeLoader = gameObjectAttributeLoader;
 		return this;
 	}
 
-	public DefaultLocationLoaderBuilder setLocationInstanceAttributeLoader
-			(EscapyInstanceLoader<EscapyLocation> locationInstanceAttributeLoader) {
-		this.locationInstanceAttributeLoader = locationInstanceAttributeLoader;
+	public DefaultLocationLoaderBuilder setLocationAttributeLoader
+			(EscapyInstanceLoader<EscapyLocation> locationAttributeLoader) {
+		this.locationAttributeLoader = locationAttributeLoader;
 		return this;
 	}
 
-	public DefaultLocationLoaderBuilder setSubLocationInstanceAttributeLoader
-			(EscapyInstanceLoader<EscapySubLocation> subLocationInstanceAttributeLoader) {
-		this.subLocationInstanceAttributeLoader = subLocationInstanceAttributeLoader;
+	public DefaultLocationLoaderBuilder setSubLocationAttributeLoader
+			(EscapyInstanceLoader<EscapySubLocation> subLocationAttributeLoader) {
+		this.subLocationAttributeLoader = subLocationAttributeLoader;
 		return this;
 	}
 }

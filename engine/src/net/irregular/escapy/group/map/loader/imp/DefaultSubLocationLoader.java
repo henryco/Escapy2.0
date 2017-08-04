@@ -34,20 +34,20 @@ import static net.irregular.escapy.group.map.loader.serial.SerializedSubLocation
 public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
-	private final EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer;
-	private final EscapyInstanceLoader<EscapyLayer> layerInstanceAttributeLoader;
-	private final EscapyInstanceLoader<EscapySubLocation> subLocationInstanceAttributeLoader;
+	private final EscapyInstanceLoader<LayerShiftLogic> shiftLogicAttributeLoader;
+	private final EscapyInstanceLoader<EscapyLayer> layerAttributeLoader;
+	private final EscapyInstanceLoader<EscapySubLocation> subLocationAttributeLoader;
 	private final GameObjectLoader<SerializedGameObject> gameObjectLoader;
 
 
-	public DefaultSubLocationLoader(EscapyInstanceLoader<LayerShiftLogic> shiftLogicInstancer,
-									EscapyInstanceLoader<EscapyLayer> layerInstanceAttributeLoader,
-									EscapyInstanceLoader<EscapySubLocation> subLocationInstanceAttributeLoader,
+	public DefaultSubLocationLoader(EscapyInstanceLoader<LayerShiftLogic> shiftLogicAttributeLoader,
+									EscapyInstanceLoader<EscapyLayer> layerAttributeLoader,
+									EscapyInstanceLoader<EscapySubLocation> subLocationAttributeLoader,
 									GameObjectLoader<SerializedGameObject> gameObjectLoader) {
 
-		this.shiftLogicInstancer = shiftLogicInstancer;
-		this.layerInstanceAttributeLoader = layerInstanceAttributeLoader;
-		this.subLocationInstanceAttributeLoader = subLocationInstanceAttributeLoader;
+		this.shiftLogicAttributeLoader = shiftLogicAttributeLoader;
+		this.layerAttributeLoader = layerAttributeLoader;
+		this.subLocationAttributeLoader = subLocationAttributeLoader;
 		this.gameObjectLoader = gameObjectLoader;
 	}
 
@@ -76,8 +76,8 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 				= loadRenderContainer(serialized.layerGroups, layers);
 
 		EscapySubLocation subLocation = new SubLocation(serialized.name, layers, layerContainer);
-		if (subLocationInstanceAttributeLoader != null)
-			return subLocationInstanceAttributeLoader.loadInstanceAttributes(subLocation, serialized.attributes);
+		if (subLocationAttributeLoader != null)
+			return subLocationAttributeLoader.loadInstanceAttributes(subLocation, serialized.attributes);
 
 		return subLocation;
 	}
@@ -99,11 +99,14 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 		LayerShifter shifter = new LayerShifter(null);
 		if (serializedShift == null) return shifter;
 
+		shifter.setName(serializedShift.name);
 		shifter.setDirect(floatListToArray(serializedShift.directVec));
 		shifter.setOffset(floatListToArray(serializedShift.offset));
 		shifter.setPinPoint(floatListToArray(serializedShift.pinPoint));
 
-		LayerShiftLogic shiftLogic = shiftLogicInstancer.loadInstance(serializedShift.name);
+		LayerShiftLogic shiftLogic = shift -> new float[]{0,0};
+		if (shiftLogicAttributeLoader != null)
+			shiftLogic = shiftLogicAttributeLoader.loadInstanceAttributes(shiftLogic, serializedShift.attributes);
 		shifter.setLayerShiftLogic(shiftLogic);
 
 		return shifter;
@@ -113,9 +116,9 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 
 	private EscapyLayer loadLayerAttributes(EscapyLayer layer, Collection<String> attributes) {
 
-		if (layer == null || layerInstanceAttributeLoader == null) return layer;
+		if (layer == null || layerAttributeLoader == null) return layer;
 		for (String attr: attributes) {
-			EscapyLayer loaded = layerInstanceAttributeLoader.loadInstance(attr, layer);
+			EscapyLayer loaded = layerAttributeLoader.loadInstance(attr, layer);
 			layer = loaded != null ? loaded : layer;
 		}
 		return layer;

@@ -28,7 +28,8 @@
 			"axis_z": -1,
 
 			"shift": {
-				"name": "move",
+				"name": "layer_shift_0",
+				"attributes": ["move"],
 				"offset2f": [0, 0],
 				"pinPoint2f": [0, 0],
 				"directVec2f": [-1, -1]

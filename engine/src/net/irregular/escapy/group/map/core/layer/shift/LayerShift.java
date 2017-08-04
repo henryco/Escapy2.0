@@ -1,10 +1,12 @@
 package net.irregular.escapy.group.map.core.layer.shift;
 
 
+import net.irregular.escapy.utils.EscapyNamed;
+
 /**
  * @author Henry on 12/07/17.
  */
-public interface LayerShift {
+public interface LayerShift extends EscapyNamed {
 
 	float[] getOffset();
 	float[] getDirect();

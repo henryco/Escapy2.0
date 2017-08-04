@@ -18,12 +18,12 @@ import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
 public class DefaultRendererLoaderBuilder implements RendererLoaderBuilder<EscapySubLocation> {
 
 
-	private EscapyInstanceLoader<EscapyRenderer> rendererAttributeInstanceLoader;
-	private EscapyInstanceLoader<LightMask> lightMaskAttributeInstanceLoader;
-	private EscapyInstanceLoader<EscapyGLBlendRenderer> glBlenderAttributeInstanceLoader;
-	private EscapyInstanceLoader<EscapyRenderable> renderGroupAttributeInstanceLoader;
-	private EscapyInstanceLoader<LightSource> lightSourceAttributeInstanceLoader;
-	private EscapyInstanceLoader<EscapyLightProcessor> volumeLightAttributeInstanceLoader;
+	private EscapyInstanceLoader<EscapyRenderer> rendererAttributeLoader;
+	private EscapyInstanceLoader<LightMask> lightMaskAttributeLoader;
+	private EscapyInstanceLoader<EscapyGLBlendRenderer> glBlenderAttributeLoader;
+	private EscapyInstanceLoader<EscapyRenderable> renderGroupAttributeLoader;
+	private EscapyInstanceLoader<LightSource> lightSourceAttributeLoader;
+	private EscapyInstanceLoader<EscapyLightProcessor> volumeLightAttributeLoader;
 
 
 	private EscapyInstanceLoader<EscapyMultiSourceShader> lightShaderInstanceLoader;
@@ -37,32 +37,32 @@ public class DefaultRendererLoaderBuilder implements RendererLoaderBuilder<Escap
 		if (lightShaderInstanceLoader == null) throw new RuntimeException("LightShaderInstanceLoader cannot be NULL");
 
 		return new DefaultRendererLoader(
-				new DefaultMaskGroupSubLoader(lightMaskAttributeInstanceLoader),
-				new DefaultGLBlenderGroupSubLoader(glBlenderAttributeInstanceLoader, camera),
+				new DefaultMaskGroupSubLoader(lightMaskAttributeLoader),
+				new DefaultGLBlenderGroupSubLoader(glBlenderAttributeLoader, camera),
 				new DefaultLightShaderGroupSubLoader(lightShaderInstanceLoader),
-				new DefaultRenderableGroupSubLoader(camera, renderGroupAttributeInstanceLoader),
-				new DefaultLightGroupSubLoader(lightSourceAttributeInstanceLoader),
-				new DefaultLightProcessorGroupSubLoader(volumeLightAttributeInstanceLoader),
-				rendererAttributeInstanceLoader
+				new DefaultRenderableGroupSubLoader(camera, renderGroupAttributeLoader),
+				new DefaultLightGroupSubLoader(lightSourceAttributeLoader),
+				new DefaultLightProcessorGroupSubLoader(volumeLightAttributeLoader),
+				rendererAttributeLoader
 		);
 	}
 
 
-	public DefaultRendererLoaderBuilder setRendererAttributeInstanceLoader
-			(EscapyInstanceLoader<EscapyRenderer> rendererAttributeInstanceLoader) {
-		this.rendererAttributeInstanceLoader = rendererAttributeInstanceLoader;
+	public DefaultRendererLoaderBuilder setRendererAttributeLoader
+			(EscapyInstanceLoader<EscapyRenderer> rendererAttributeLoader) {
+		this.rendererAttributeLoader = rendererAttributeLoader;
 		return this;
 	}
 
-	public DefaultRendererLoaderBuilder setLightMaskAttributeInstanceLoader
-			(EscapyInstanceLoader<LightMask> lightMaskAttributeInstanceLoader) {
-		this.lightMaskAttributeInstanceLoader = lightMaskAttributeInstanceLoader;
+	public DefaultRendererLoaderBuilder setLightMaskAttributeLoader
+			(EscapyInstanceLoader<LightMask> lightMaskAttributeLoader) {
+		this.lightMaskAttributeLoader = lightMaskAttributeLoader;
 		return this;
 	}
 
-	public DefaultRendererLoaderBuilder setGlBlenderAttributeInstanceLoader
-			(EscapyInstanceLoader<EscapyGLBlendRenderer> glBlenderAttributeInstanceLoader) {
-		this.glBlenderAttributeInstanceLoader = glBlenderAttributeInstanceLoader;
+	public DefaultRendererLoaderBuilder setGlBlenderAttributeLoader
+			(EscapyInstanceLoader<EscapyGLBlendRenderer> glBlenderAttributeLoader) {
+		this.glBlenderAttributeLoader = glBlenderAttributeLoader;
 		return this;
 	}
 
@@ -72,21 +72,21 @@ public class DefaultRendererLoaderBuilder implements RendererLoaderBuilder<Escap
 		return this;
 	}
 
-	public DefaultRendererLoaderBuilder setRenderGroupAttributeInstanceLoader
-			(EscapyInstanceLoader<EscapyRenderable> renderGroupAttributeInstanceLoader) {
-		this.renderGroupAttributeInstanceLoader = renderGroupAttributeInstanceLoader;
+	public DefaultRendererLoaderBuilder setRenderGroupAttributeLoader
+			(EscapyInstanceLoader<EscapyRenderable> renderGroupAttributeLoader) {
+		this.renderGroupAttributeLoader = renderGroupAttributeLoader;
 		return this;
 	}
 
-	public DefaultRendererLoaderBuilder setLightSourceAttributeInstanceLoader
-			(EscapyInstanceLoader<LightSource> lightSourceAttributeInstanceLoader) {
-		this.lightSourceAttributeInstanceLoader = lightSourceAttributeInstanceLoader;
+	public DefaultRendererLoaderBuilder setLightSourceAttributeLoader
+			(EscapyInstanceLoader<LightSource> lightSourceAttributeLoader) {
+		this.lightSourceAttributeLoader = lightSourceAttributeLoader;
 		return this;
 	}
 
-	public DefaultRendererLoaderBuilder setVolumeLightAttributeInstanceLoader
-			(EscapyInstanceLoader<EscapyLightProcessor> volumeLightAttributeInstanceLoader) {
-		this.volumeLightAttributeInstanceLoader = volumeLightAttributeInstanceLoader;
+	public DefaultRendererLoaderBuilder setVolumeLightAttributeLoader
+			(EscapyInstanceLoader<EscapyLightProcessor> volumeLightAttributeLoader) {
+		this.volumeLightAttributeLoader = volumeLightAttributeLoader;
 		return this;
 	}
 

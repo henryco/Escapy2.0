@@ -6,6 +6,7 @@ package net.irregular.escapy.group.map.core.layer.shift;
  */
 public class LayerShifter implements LayerShift {
 
+	private String name;
 
 	public final float[] offset = {0,0};
 	public float[] getOffset() {
@@ -52,4 +53,11 @@ public class LayerShifter implements LayerShift {
 	}
 
 
+	@Override
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 }

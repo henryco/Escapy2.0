@@ -33,8 +33,8 @@ public class LocationsModule {
 
 		try {
 			return LocationLoaderBuilder.Default()
-					.setSubLocationLayerShiftLogicInstanceLoader(shiftLogic)
-					.setGameObjectInstanceAttributeLoader(gameObjectInstanceAttributeLoader)
+					.setSubLocationLayerShiftLogicAttributeLoader(shiftLogic)
+					.setGameObjectAttributeLoader(gameObjectInstanceAttributeLoader)
 			.build();
 		} catch (Exception e) {
 			new EscapyLogger("LocationLoaderProvider").fileJava().log(e, true);
