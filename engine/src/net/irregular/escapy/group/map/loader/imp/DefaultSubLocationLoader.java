@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import net.irregular.escapy.group.map.core.layer.EscapyLayer;
 import net.irregular.escapy.group.map.core.layer.Layer;
 import net.irregular.escapy.group.map.core.layer.shift.LayerShift;
-import net.irregular.escapy.group.map.core.layer.shift.LayerShiftLogic;
 import net.irregular.escapy.group.map.core.layer.shift.LayerShifter;
 import net.irregular.escapy.group.map.core.location.EscapySubLocation;
 import net.irregular.escapy.group.map.core.location.SubLocation;
@@ -35,18 +34,18 @@ import static net.irregular.escapy.group.map.loader.serial.SerializedSubLocation
 public class DefaultSubLocationLoader implements SubLocationLoader {
 
 
-	private final EscapyInstanceLoader<LayerShiftLogic> shiftLogicAttributeLoader;
+	private final EscapyInstanceLoader<LayerShift> shiftAttributeLoader;
 	private final EscapyInstanceLoader<EscapyLayer> layerAttributeLoader;
 	private final EscapyInstanceLoader<EscapySubLocation> subLocationAttributeLoader;
 	private final GameObjectLoader<SerializedGameObject> gameObjectLoader;
 
 
-	public DefaultSubLocationLoader(EscapyInstanceLoader<LayerShiftLogic> shiftLogicAttributeLoader,
+	public DefaultSubLocationLoader(EscapyInstanceLoader<LayerShift> shiftAttributeLoader,
 									EscapyInstanceLoader<EscapyLayer> layerAttributeLoader,
 									EscapyInstanceLoader<EscapySubLocation> subLocationAttributeLoader,
 									GameObjectLoader<SerializedGameObject> gameObjectLoader) {
 
-		this.shiftLogicAttributeLoader = shiftLogicAttributeLoader;
+		this.shiftAttributeLoader = shiftAttributeLoader;
 		this.layerAttributeLoader = layerAttributeLoader;
 		this.subLocationAttributeLoader = subLocationAttributeLoader;
 		this.gameObjectLoader = gameObjectLoader;
@@ -105,11 +104,8 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 		shifter.setOffset(floatListToArray(serializedShift.offset));
 		shifter.setPinPoint(floatListToArray(serializedShift.pinPoint));
 
-		LayerShiftLogic shiftLogic = shift -> new float[]{0,0};
-		if (shiftLogicAttributeLoader != null)
-			shiftLogic = shiftLogicAttributeLoader.loadInstanceAttributes(shiftLogic, serializedShift.attributes);
-		shifter.setLayerShiftLogic(shiftLogic);
-
+		if (shiftAttributeLoader != null)
+			return shiftAttributeLoader.loadInstanceAttributes(shifter, serializedShift.attributes);
 		return shifter;
 	}
 

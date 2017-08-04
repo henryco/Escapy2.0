@@ -6,19 +6,18 @@ import net.irregular.escapy.group.map.core.layer.shift.LayerShiftLogic;
 import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
 import net.irregular.escapy.utils.loader.EscapyInstanced;
 
-public class SimpleShiftLogic implements EscapyInstanceLoader<LayerShiftLogic> {
+public class SimpleShiftAttrInstLoader implements EscapyInstanceLoader<LayerShift> {
 
 	private final EscapyCamera camera;
-	public SimpleShiftLogic(EscapyCamera camera) {
+	public SimpleShiftAttrInstLoader(EscapyCamera camera) {
 		this.camera = camera;
 	}
 
 	@EscapyInstanced("move")
-	public LayerShiftLogic moveShiftLogic(LayerShiftLogic shiftLogic) {
+	public LayerShift moveShiftLogic(LayerShift shift) {
 
-		return new LayerShiftLogic() {
+		LayerShiftLogic layerShiftLogic = new LayerShiftLogic() {
 			float[] initial = camera.getPosition();
-
 			@Override
 			public float[] calculateShift(LayerShift shift) {
 				float[] position = camera.getPosition();
@@ -28,6 +27,7 @@ public class SimpleShiftLogic implements EscapyInstanceLoader<LayerShiftLogic> {
 				return new float[]{tx * direct[0], ty * direct[1]};
 			}
 		};
-
+		shift.setLayerShiftLogic(layerShiftLogic);
+		return shift;
 	}
 }

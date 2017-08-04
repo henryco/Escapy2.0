@@ -3,12 +3,12 @@ package net.irregular.escapy.modules.group.location;
 import dagger.Module;
 import dagger.Provides;
 import net.irregular.escapy.graphic.camera.EscapyCamera;
-import net.irregular.escapy.group.map.core.layer.shift.LayerShiftLogic;
+import net.irregular.escapy.group.map.core.layer.shift.LayerShift;
 import net.irregular.escapy.group.map.core.object.EscapyGameObject;
 import net.irregular.escapy.group.map.loader.builder.LocationLoaderBuilder;
 import net.irregular.escapy.group.map.loader.imp.DefaultLocationLoader;
 import net.irregular.escapy.modules.group.location.dep.GameObjAttrInstLoader;
-import net.irregular.escapy.modules.group.location.dep.SimpleShiftLogic;
+import net.irregular.escapy.modules.group.location.dep.SimpleShiftAttrInstLoader;
 import net.irregular.escapy.modules.group.util.CameraModule;
 import net.irregular.escapy.utils.EscapyLogger;
 import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
@@ -28,12 +28,12 @@ public class LocationsModule {
 
 	@Provides @Singleton
 	public DefaultLocationLoader provideLocationLoader(
-			EscapyInstanceLoader<LayerShiftLogic> shiftLogic,
+			EscapyInstanceLoader<LayerShift> shiftLogic,
 			EscapyInstanceLoader<EscapyGameObject> gameObjectInstanceAttributeLoader) {
 
 		try {
 			return LocationLoaderBuilder.Default()
-					.setSubLocationLayerShiftLogicAttributeLoader(shiftLogic)
+					.setSubLocationLayerShiftAttributeLoader(shiftLogic)
 					.setGameObjectAttributeLoader(gameObjectInstanceAttributeLoader)
 			.build();
 		} catch (Exception e) {
@@ -45,9 +45,9 @@ public class LocationsModule {
 
 
 	@Provides @Singleton
-	protected EscapyInstanceLoader<LayerShiftLogic> provideLayerShiftLogic(
+	protected EscapyInstanceLoader<LayerShift> provideLayerShiftLogic(
 			@Named("default_camera") EscapyCamera camera) {
-		return new SimpleShiftLogic(camera);
+		return new SimpleShiftAttrInstLoader(camera);
 	}
 
 

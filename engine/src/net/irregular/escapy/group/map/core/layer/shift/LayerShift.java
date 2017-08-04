@@ -13,6 +13,7 @@ public interface LayerShift extends EscapyNamed {
 	float[] getPinPoint();
 
 	LayerShiftLogic getLayerShiftLogic();
+	void setLayerShiftLogic(LayerShiftLogic layerShiftLogic);
 
 	default float[] calculateShift() {
 		if (getLayerShiftLogic() == null) return new float[]{0,0};

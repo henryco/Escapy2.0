@@ -1,7 +1,7 @@
 package net.irregular.escapy.group.map.loader.builder;
 
 import net.irregular.escapy.group.map.core.layer.EscapyLayer;
-import net.irregular.escapy.group.map.core.layer.shift.LayerShiftLogic;
+import net.irregular.escapy.group.map.core.layer.shift.LayerShift;
 import net.irregular.escapy.group.map.core.location.EscapyLocation;
 import net.irregular.escapy.group.map.core.location.EscapySubLocation;
 import net.irregular.escapy.group.map.core.object.EscapyGameObject;
@@ -19,7 +19,7 @@ import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
 public class DefaultLocationLoaderBuilder implements LocationLoaderBuilder {
 
 	private EscapyInstanceLoader<EscapyGameObject> gameObjectAttributeLoader;
-	private EscapyInstanceLoader<LayerShiftLogic> subLocationLayerShiftLogicAttributeLoader;
+	private EscapyInstanceLoader<LayerShift> subLocationLayerShiftAttributeLoader;
 	private EscapyInstanceLoader<EscapyLayer> subLocationLayerAttributeLoader;
 	private EscapyInstanceLoader<EscapyLocation> locationAttributeLoader;
 	private EscapyInstanceLoader<EscapySubLocation> subLocationAttributeLoader;
@@ -34,7 +34,7 @@ public class DefaultLocationLoaderBuilder implements LocationLoaderBuilder {
 		);
 
 		SubLocationLoader subLocationLoader = new DefaultSubLocationLoader(
-				subLocationLayerShiftLogicAttributeLoader,
+				subLocationLayerShiftAttributeLoader,
 				subLocationLayerAttributeLoader,
 				subLocationAttributeLoader,
 				gameObjectLoader
@@ -47,9 +47,9 @@ public class DefaultLocationLoaderBuilder implements LocationLoaderBuilder {
 
 
 
-	public DefaultLocationLoaderBuilder setSubLocationLayerShiftLogicAttributeLoader
-			(EscapyInstanceLoader<LayerShiftLogic> subLocationLayerShiftLogicAttributeLoader) {
-		this.subLocationLayerShiftLogicAttributeLoader = subLocationLayerShiftLogicAttributeLoader;
+	public DefaultLocationLoaderBuilder setSubLocationLayerShiftAttributeLoader
+			(EscapyInstanceLoader<LayerShift> subLocationLayerShiftAttributeLoader) {
+		this.subLocationLayerShiftAttributeLoader = subLocationLayerShiftAttributeLoader;
 		return this;
 	}
 
