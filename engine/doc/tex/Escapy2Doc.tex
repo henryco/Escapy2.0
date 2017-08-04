@@ -287,6 +287,22 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 \end{center}
 
 \subsection{Сериализация}
+В случае с классом \textit{\textbf{DefaultGroupContainer}} для сериализации используется json файл который имеет следующую структуру: 
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/13.png} 
+  	\label{img:130} 
+\end{center} 
+В массиве \textit{\textbf{locations}} следует указать имя и путь к файлу из которой должна загружаться локация, в массиве \textit{\textbf{renderers}} так же следует указать путь файла из которого будет загружатся \textit{\textbf{renderer}}, однако имя должно содержать 
+название локации и имя сублокации для \textit{\textbf{renderer'a}} разделенное двоеточием.\\ В конструкторе \textit{\textbf{DefaultGroupContainer}} следует указать путь на json файл объекта, а так же загрузчики \textit{\textbf{DefaultLocationLoader}} и \textit{\textbf{DefaultRendererLoader}}
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/16.png} 
+  	\label{img:160} 
+\end{center} 
+
+\newpage
+\section{Map}
+
+
 
 
 \end{document}
