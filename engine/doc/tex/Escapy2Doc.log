@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.19)  4 AUG 2017 23:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.19)  5 AUG 2017 00:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -710,23 +710,45 @@ Overfull \hbox (88.71434pt too wide) in paragraph at lines 354--356
 <img/19.png, id=104, 1104.125pt x 186.6975pt>
 File: img/19.png Graphic file (type png)
  <use img/19.png>
-Package pdftex.def Info: img/19.png used on input line 360.
+Package pdftex.def Info: img/19.png used on input line 361.
 (pdftex.def)             Requested size: 532.29282pt x 90.00975pt.
 
-Overfull \hbox (88.71434pt too wide) in paragraph at lines 360--362
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 361--363
  [] 
  []
 
-[18 <./img/17.png> <./img/18.png> <./img/19.png>] [19] (./Escapy2Doc.aux)
+[18 <./img/17.png> <./img/18.png> <./img/19.png>]
+<img/20.png, id=112, 1104.125pt x 651.43375pt>
+File: img/20.png Graphic file (type png)
+ <use img/20.png>
+Package pdftex.def Info: img/20.png used on input line 368.
+(pdftex.def)             Requested size: 532.29282pt x 314.06631pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 368--370
+ [] 
+ []
+
+[19 <./img/20.png>] <img/21.png, id=117, 1108.14pt x 948.54375pt>
+File: img/21.png Graphic file (type png)
+
+<use img/21.png>
+Package pdftex.def Info: img/21.png used on input line 378.
+(pdftex.def)             Requested size: 532.29282pt x 455.62872pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 378--380
+ [] 
+ []
+
+[20 <./img/21.png>] (./Escapy2Doc.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 6575 strings out of 493806
- 92671 string characters out of 6155775
- 180807 words of memory out of 5000000
- 9773 multiletter control sequences out of 15000+600000
+ 6594 strings out of 493806
+ 92933 string characters out of 6155775
+ 180833 words of memory out of 5000000
+ 9790 multiletter control sequences out of 15000+600000
  18859 words of font info for 43 fonts, out of 8000000 for 9000
  788 hyphenation exceptions out of 8191
  39i,6n,38p,965b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -740,10 +762,10 @@ ljfour/lh/lh-t2a/labx2488.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/
 lh/lh-t2a/larm1200.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t
 2a/labx1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmsy10.pfb>
-Output written on Escapy2Doc.pdf (20 pages, 1299039 bytes).
+Output written on Escapy2Doc.pdf (21 pages, 1401586 bytes).
 PDF statistics:
- 566 PDF objects out of 1000 (max. 8388607)
- 86 compressed objects within 1 object stream
+ 584 PDF objects out of 1000 (max. 8388607)
+ 88 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 96 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 106 words of extra memory for PDF output out of 10000 (max. 10000000)
 

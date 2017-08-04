@@ -354,12 +354,31 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 	\includegraphics[width=1.2\linewidth]{img/18.png} 
   	\label{img:180} 
 \end{center} 
+
 \subsubsection{RenderGroups}
-Массив \textit{\textbf{RenderGroups}} содержит группу объектов которые будут отрисовываться на графическом конвейере в таком порядке в каком они расположенны в массиве. Каждый объект из такой группы содержит имя, а так же массив слоев.
+Массив \textit{\textbf{"renderGroups"}} содержит группу объектов которые будут отрисовываться на графическом конвейере в таком порядке в каком они расположенны в массиве. Каждый объект из такой группы содержит имя, а так же массив слоев.
 \begin{center}
 	\includegraphics[width=1.2\linewidth]{img/19.png} 
   	\label{img:190} 
 \end{center} 
+
+\subsubsection{Layers}
+Массив \textit{\textbf{"layers"}} это массив слоев, каждый из которых помимо стандартных полей унаследованных от шаблона \textit{\textbf{EscapySerialized}}, содержит уникальное поле \textit{\textbf{"axis\_z"}} определяющее позицию слоя на оси Z. Так же каждый из слоев содержит массив игровых объектов \textit{\textbf{"objects"}}
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/20.png} 
+  	\label{img:200} 
+\end{center} 
+Каждый из таких объектов содержит поля унаследованные от \textit{\textbf{EscapySerilized}}, а так же поле \textit{\textbf{"details"}} содержащее информацию об объекте, здесь стоит обратить внимание на то, что поле \textit{\textbf{"name"}} из \textit{\textbf{"details"}} переопределяет значение аналогичного поля самого объекта.
+\subsubsection{Static, dynamic, etc?}
+На данный момент в движке представленны только статические объекты (не имеющие какой либо анимации и т.п.), потому у игрового объекта есть только поле \textit{\textbf{"static"}} с путями к файлам текстур, однако в будщем это изменится.
+
+\subsubsection{EscapySubLocation целиком}
+Пример ниже иллюстрирует как должен выглядить минимальный полный json файл конфигурирующий станартную реализацию игровой сублокации.
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/21.png} 
+  	\label{img:210} 
+\end{center} 
+
 
 
 

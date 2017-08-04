@@ -20,6 +20,7 @@ import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.AbstractMap;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map.Entry;
@@ -152,6 +153,7 @@ public class DefaultSubLocationLoader implements SubLocationLoader {
 					}
 				}
 			}
+			Arrays.sort(multiLayer, (o1, o2) -> Float.compare(o1.getAxisZ(), o2.getAxisZ()));
 			collection.add(new AbstractMap.SimpleEntry<>(container.getName(), multiLayer));
 		}
 

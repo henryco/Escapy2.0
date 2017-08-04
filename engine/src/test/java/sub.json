@@ -21,6 +21,14 @@
 			"axis_z": 0.5,
 			"attributes": [],
 
+			"shift": {
+				"name": "layer_shift_0",
+				"attributes": ["move"],
+				"offset2f": [0, 0],
+				"pinPoint2f": [0, 0],
+				"directVec2f": [-1, -1]
+			},
+
 			"objects": [
 				{
 					"name": "Loc_33",
