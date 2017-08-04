@@ -311,8 +311,33 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 	\item \textit{\textbf{EscapyLayerShiftLogic}} - интерфейс логики смещения слоя
 	\item \textit{\textbf{EscapyGameObject}} - интерфейс игровых объектов внутри слоев
 	\item \textit{\textbf{EscapyGameObjectRenderer}} - интерфейс рендерера игровых 				объектов
-
+	\\
 \end{itemize*}
+\subsection{DefaultLocationLoaderBuilder}
+Каждый из вышеперечисленных интерфейсов имеет свою имплементацию по умолчанию, и что бы собрать их вместе в одну целую и рабочую группу следует воспользоваться строителем 
+\textit{\textbf{DefaultLocationLoaderBuilder}} который создаст инстанцию имплементирующую 
+\textit{\textbf{DefaultLocationLoader}} которая в свою очередь сможет загрузить локацию из json файла. \textit{\textbf{DefaultLocationLoader}} в конструкторе получает инстанцию очередного загрузчика \textit{\textbf{DefaultSubLocationLoader}}, а тот в свою очередь 
+инстанцию \textit{\textbf{DefaultGameObjectLoader}}. \\\\
+В целом это выглядит следующим образом: 
+\begin{itemize*}
+	\item \textit{\textbf{DefaultLocationLoader}}
+	\begin{itemize*}
+		
+		\item \textit{\textbf{DefaultSubLocationLoader}}
+		\begin{itemize*}
+			\item \textit{\textbf{subLocationLayerShiftLogicAttributeLoader}}
+			\item \textit{\textbf{subLocationLayerAttributeLoader}}
+			\item \textit{\textbf{subLocationAttributeLoader}}
+			\item \textit{\textbf{DefaultGameObjectLoader}}
+			\begin{itemize*}
+				\item \textit{\textbf{gameObjectAttributeLoader}}
+			\end{itemize*}
+		\end{itemize*}
+		\item \textit{\textbf{locationAttributeLoader}}
+		\\
+	\end{itemize*}
+\end{itemize*}
+Как можно заметить в конструктор основных загрузчиков так же передаются загрузчики аттрибутов обозначенных в json файле полем-массивом \textit{\textbf{"attributes": [...]}}, эти загрузчики являются имплементациями \textit{\textbf{EscapyInstanceLoader<T>}}.
 
 
 
