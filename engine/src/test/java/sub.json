@@ -1,0 +1,49 @@
+
+
+{
+	"type": "SubLocation",
+	"name": "SubOne",
+	"attributes": [],
+
+	"renderGroups": [
+		{
+			"name": "foreground",
+			"layers": [
+				"layer_foreground_0"
+			]
+		}
+	],
+
+	"layers": [
+		{
+			"name": "layer_foreground_0",
+			"type": "Layer",
+			"axis_z": 0.5,
+			"attributes": [],
+
+			"objects": [
+				{
+					"name": "Loc_33",
+					"type": "GameObject",
+					"attributes": [],
+
+					"details": {
+						"name": "Loc_33",
+						"type": "ObjectDetails",
+						"scale": 1,
+						"position2f": [0, 0],
+						"size2f": [0, 0],
+						"flip2b": [false, false]
+					},
+
+					"static": {
+						"textureNormal": "/resources/Loc_33N.png",
+						"textureLight": "/resources/Loc_33L.png",
+						"texture": "/resources/Loc_33.png"
+					}
+				}
+			]
+		}
+	]
+}
+

@@ -316,7 +316,7 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 \subsection{DefaultLocationLoaderBuilder}
 Каждый из вышеперечисленных интерфейсов имеет свою имплементацию по умолчанию, и что бы собрать их вместе в одну целую и рабочую группу следует воспользоваться строителем 
 \textit{\textbf{DefaultLocationLoaderBuilder}} который создаст инстанцию имплементирующую 
-\textit{\textbf{DefaultLocationLoader}} которая в свою очередь сможет загрузить локацию из json файла. \textit{\textbf{DefaultLocationLoader}} в конструкторе получает инстанцию очередного загрузчика \textit{\textbf{DefaultSubLocationLoader}}, а тот в свою очередь 
+\textit{\textbf{DefaultLocationLoader}} которая в свою очередь сможет загрузить локацию из json файла. При создании объекта класса \textit{\textbf{DefaultLocationLoader}}, тот в конструкторе получает инстанцию очередного загрузчика \textit{\textbf{DefaultSubLocationLoader}}, а тот в свою очередь 
 инстанцию \textit{\textbf{DefaultGameObjectLoader}}. \\\\
 В целом это выглядит следующим образом: 
 \begin{itemize*}
@@ -339,8 +339,31 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 \end{itemize*}
 Как можно заметить в конструктор основных загрузчиков так же передаются загрузчики аттрибутов обозначенных в json файле полем-массивом \textit{\textbf{"attributes": [...]}}, эти загрузчики являются имплементациями \textit{\textbf{EscapyInstanceLoader<T>}}.
 
+\newpage
+\subsection{Сериализация EscapyLocation}
+Стандартной имплементацией интерфейса \textit{\textbf{EscapyLocation}} является класс под названием \textit{\textbf{Location}}, который загружается из простого json файла вида:
+
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/17.png} 
+  	\label{img:170} 
+\end{center} 
+
+\subsection{Сериализация EscapySubLocation}
+Сублокации за котороые отвечает интерфейс \textit{\textbf{EscapySubLocation}} и его стандартная имплементация \textit{\textbf{SubLocation}} загружаются из json файла вида:
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/18.png} 
+  	\label{img:180} 
+\end{center} 
+\subsubsection{RenderGroups}
+Массив \textit{\textbf{RenderGroups}} содержит группу объектов которые будут отрисовываться на графическом конвейере в таком порядке в каком они расположенны в массиве. Каждый объект из такой группы содержит имя, а так же массив слоев.
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/19.png} 
+  	\label{img:190} 
+\end{center} 
+
 
 
 \end{document}
+
 
 

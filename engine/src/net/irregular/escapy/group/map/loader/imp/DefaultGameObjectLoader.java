@@ -16,10 +16,10 @@ import net.irregular.escapy.utils.loader.EscapyInstanceLoader;
 public class DefaultGameObjectLoader implements GameObjectLoader<SerializedGameObject> {
 
 
-	private final EscapyInstanceLoader<EscapyGameObject> gameObjectInstanceAttributeLoader;
+	private final EscapyInstanceLoader<EscapyGameObject> gameObjectAttributeLoader;
 
-	public DefaultGameObjectLoader(EscapyInstanceLoader<EscapyGameObject> gameObjectInstanceAttributeLoader) {
-		this.gameObjectInstanceAttributeLoader = gameObjectInstanceAttributeLoader;
+	public DefaultGameObjectLoader(EscapyInstanceLoader<EscapyGameObject> gameObjectAttributeLoader) {
+		this.gameObjectAttributeLoader = gameObjectAttributeLoader;
 	}
 
 
@@ -27,15 +27,18 @@ public class DefaultGameObjectLoader implements GameObjectLoader<SerializedGameO
 	public EscapyGameObject loadGameObject(String path, SerializedGameObject serialized) {
 
 		EscapyGameObject gameObject = proxyLoadedGameObject(path, serialized);
-		if (gameObjectInstanceAttributeLoader != null)
-			gameObject = gameObjectInstanceAttributeLoader.loadInstanceAttributes(gameObject, serialized.attributes);
+		if (gameObjectAttributeLoader != null)
+			gameObject = gameObjectAttributeLoader.loadInstanceAttributes(gameObject, serialized.attributes);
 		return gameObject;
 	}
 
 
 	private EscapyGameObject proxyLoadedGameObject(String path, SerializedGameObject serialized) {
 
-		ObjectDetails details = new ObjectDetails(serialized.details.name);
+		String name1 = serialized.name;
+		String name2 = serialized.details.name;
+
+		ObjectDetails details = new ObjectDetails(name2.isEmpty() ? name1 : name2);
 		details.setScale(serialized.details.scale);
 		details.setPosition(floatListToArray(serialized.details.position));
 		details.setSize(floatListToArray(serialized.details.size));
