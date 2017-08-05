@@ -15,30 +15,29 @@ public class GameScreen implements EscapyScreen {
 
 	private EscapyScreenContext screenContext;
 
-	private final EscapyGroupContainer groupContainer;
+	private final EscapyGroupContainer group;
 	private final EscapyCamera camera;
 
 
 	LightSource source;
 
-	public GameScreen(EscapyGroupContainer groupContainer,
+	public GameScreen(EscapyGroupContainer group,
 					  EscapyCamera camera) {
-		this.groupContainer = groupContainer;
+		this.group = group;
 		this.camera = camera;
 
 	}
 
 	@Override
 	public void show() {
-		source = groupContainer.getRendererContainer()
-				.getRendererAttribute("lights_foreground:light1");
-
+		LightSource source = group.getRendererContainer().getRendererAttribute("lights_foreground:light1");
+		System.out.println(source.name);
 	}
 
 
 	@Override
 	public void render(float delta) {
-		groupContainer.getRendererContainer().render(delta);
+		group.getRendererContainer().render(delta);
 	}
 
 
@@ -50,13 +49,13 @@ public class GameScreen implements EscapyScreen {
 
 	@Override
 	public void resize(int width, int height) {
-		groupContainer.getRendererContainer().resize(width, height);
+		group.getRendererContainer().resize(width, height);
 	}
 
 
 	@Override
 	public void dispose() {
-		groupContainer.getLocationContainer().getLocation().dispose();
+		group.getLocationContainer().getLocation().dispose();
 	}
 
 	@Override
