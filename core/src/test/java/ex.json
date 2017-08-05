@@ -39,7 +39,27 @@
 			"srcALPHA": "GL_ONE",
 			"dstALPHA": "GL_ONE_MINUS_SRC_COLOR"
 		}
+	},
+
+
+	"processor": {
+
+		"type": "volumetric",
+		"name": "processor_foreground",
+		"attributes": [],
+
+		"spriteSize": 55,
+		"threshold": 0,
+		"height": 0.8175,
+		"enable": true,
+
+		"intensity": {
+			"ambient": 0.45,
+			"direct": 9,
+			"shadow": 0.65
+		}
 	}
+
 
 }
 
