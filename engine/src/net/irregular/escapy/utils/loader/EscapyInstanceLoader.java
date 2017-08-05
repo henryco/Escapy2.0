@@ -21,14 +21,19 @@ public interface EscapyInstanceLoader<INSTANCE_TYPE> {
 			for (Method method: methods) {
 				EscapyInstanced named = method.getAnnotation(EscapyInstanced.class);
 				if (named != null && named.value().equals(name)) {
+					if (method.getParameterCount() == 0)
+						return (INSTANCE_TYPE) method.invoke(this);
 					return (INSTANCE_TYPE) method.invoke(this, args);
 				}
 			}
 
 			for (Method method: methods) {
 				if (method.getAnnotation(EscapyInstanced.class) != null
-						&& method.getName().equals(name))
+						&& method.getName().equals(name)) {
+					if (method.getParameterCount() == 0)
+						return (INSTANCE_TYPE) method.invoke(this);
 					return (INSTANCE_TYPE) method.invoke(this, args);
+				}
 			}
 
 		} catch (IllegalAccessException | InvocationTargetException e) {
@@ -54,6 +59,5 @@ public interface EscapyInstanceLoader<INSTANCE_TYPE> {
 		if (attributes == null || attributes.isEmpty()) return instance;
 		return loadInstanceAttributes(instance, attributes.toArray(new String[0]));
 	}
-
 
 }

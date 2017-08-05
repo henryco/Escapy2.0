@@ -10,7 +10,6 @@
 #define BlendOverlay(base, blend) 		Blend(base, blend, BlendOverlayf)
 
 
-
 uniform sampler2D targetMap;
 uniform sampler2D blendMap;
 

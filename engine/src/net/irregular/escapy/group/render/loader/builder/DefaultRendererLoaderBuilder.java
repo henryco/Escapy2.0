@@ -24,9 +24,8 @@ public class DefaultRendererLoaderBuilder implements RendererLoaderBuilder<Escap
 	private EscapyInstanceLoader<EscapyRenderable> renderGroupAttributeLoader;
 	private EscapyInstanceLoader<LightSource> lightSourceAttributeLoader;
 	private EscapyInstanceLoader<EscapyLightProcessor> volumeLightAttributeLoader;
+	private EscapyInstanceLoader<EscapyMultiSourceShader> lightShaderAttributeLoader;
 
-
-	private EscapyInstanceLoader<EscapyMultiSourceShader> lightShaderInstanceLoader;
 	private EscapyCamera camera;
 
 
@@ -34,12 +33,11 @@ public class DefaultRendererLoaderBuilder implements RendererLoaderBuilder<Escap
 	public DefaultRendererLoader build() {
 
 		if (camera == null) throw new RuntimeException("EscapyCamera cannot be NULL");
-		if (lightShaderInstanceLoader == null) throw new RuntimeException("LightShaderInstanceLoader cannot be NULL");
 
 		return new DefaultRendererLoader(
 				new DefaultMaskGroupSubLoader(lightMaskAttributeLoader),
 				new DefaultGLBlenderGroupSubLoader(glBlenderAttributeLoader, camera),
-				new DefaultLightShaderGroupSubLoader(lightShaderInstanceLoader),
+				new DefaultLightShaderGroupSubLoader(lightShaderAttributeLoader),
 				new DefaultRenderableGroupSubLoader(camera, renderGroupAttributeLoader),
 				new DefaultLightGroupSubLoader(lightSourceAttributeLoader),
 				new DefaultLightProcessorGroupSubLoader(volumeLightAttributeLoader),
@@ -66,9 +64,9 @@ public class DefaultRendererLoaderBuilder implements RendererLoaderBuilder<Escap
 		return this;
 	}
 
-	public DefaultRendererLoaderBuilder setLightShaderInstanceLoader
-			(EscapyInstanceLoader<EscapyMultiSourceShader> lightShaderInstanceLoader) {
-		this.lightShaderInstanceLoader = lightShaderInstanceLoader;
+	public DefaultRendererLoaderBuilder setLightShaderAttributeLoader
+			(EscapyInstanceLoader<EscapyMultiSourceShader> lightShaderAttributeLoader) {
+		this.lightShaderAttributeLoader = lightShaderAttributeLoader;
 		return this;
 	}
 

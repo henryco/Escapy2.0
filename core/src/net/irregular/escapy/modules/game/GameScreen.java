@@ -30,8 +30,7 @@ public class GameScreen implements EscapyScreen {
 
 	@Override
 	public void show() {
-		LightSource source = group.getRendererContainer().getRendererAttribute("lights_foreground:light1");
-		System.out.println(source.name);
+		source = group.getRendererContainer().getRendererAttribute("lights_foreground:light1");
 	}
 
 

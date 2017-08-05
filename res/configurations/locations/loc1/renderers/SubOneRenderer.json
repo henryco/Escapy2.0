@@ -47,9 +47,10 @@
 
 			"processor": {
 
-				"attributes": [],
 				"type": "volumetric",
 				"name": "processor_foreground",
+				"attributes": [],
+
 				"spriteSize": 55,
 				"threshold": 0,
 				"height": 0.8175,
@@ -65,7 +66,8 @@
 			"lightGroup": {
 
 				"name": "lights_foreground",
-				"type": "ADD_OVERLAY_STRONG",
+				"type": "LightGroup",
+				"attributes": ["ADD_OVERLAY_STRONG"],
 
 				"lights": [
 					{
@@ -105,7 +107,5 @@
 		}
 
 	]
-
-
 
 }

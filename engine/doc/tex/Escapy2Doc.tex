@@ -389,6 +389,13 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 	\item \textit{\textbf{<T> T getRendererAttribute(String name);}}
 \end{itemize*}
 Особое внимание стоит уделить последнему методу из стандартной имплементации - он позволяет получать доступ ко всем объектам рендерера, если те имеют не пустое имя в конфигурационном файле, так же этот метод позволяет получить доступ ко вложенным объектам с помощью оператора \textit{\textbf{":"}}
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/22.png} 
+  	\label{img:220} 
+\end{center} 
+
+\subsection{DefaultRendererLoaderBuilder}
+Аналогично субпакету \textit{\textbf{Map}}, для комфортной работы с рендерером начиная с этапа его загрузки, следует воспользоваться строителем \textit{\textbf{DefaultRendererLoaderBuilder}} которой сам создаст инстанцию загрузчика \textit{\textbf{DefaultRendererLoader}}, а та в свою очередь загрузит нужный рендерер из json файла когда возникнет необходимость. Поскольку для сериализации используется Gson шаблон \textit{\textbf{EscapySerialized}}, который содержит массив с аттрибутами \textit{\textbf{"attributes"}}, то разумеется и загрузчик позволяет на обработку этих самых аттрибутов посредством механизма \textit{\textbf{EscapyInstanceLoader<T>}}.
 
 
 

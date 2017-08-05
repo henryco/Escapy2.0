@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.19)  5 AUG 2017 14:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.19)  5 AUG 2017 15:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -739,19 +739,30 @@ Overfull \hbox (88.71434pt too wide) in paragraph at lines 378--380
  [] 
  []
 
-[21 <./img/21.png>] [22] (./Escapy2Doc.aux)
+[21 <./img/21.png>] <img/22.png, id=125, 1103.12125pt x 125.46875pt>
+File: img/22.png Graphic file (type png)
+
+<use img/22.png>
+Package pdftex.def Info: img/22.png used on input line 393.
+(pdftex.def)             Requested size: 532.29282pt x 60.54402pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 393--395
+ [] 
+ []
+
+[22 <./img/22.png>] (./Escapy2Doc.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 6594 strings out of 493806
- 92933 string characters out of 6155775
- 180833 words of memory out of 5000000
- 9790 multiletter control sequences out of 15000+600000
+ 6600 strings out of 493806
+ 93007 string characters out of 6155775
+ 180844 words of memory out of 5000000
+ 9795 multiletter control sequences out of 15000+600000
  18859 words of font info for 43 fonts, out of 8000000 for 9000
  788 hyphenation exceptions out of 8191
- 39i,6n,38p,965b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,6n,38p,1066b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
  </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1200.600pk> </ro
 ot/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1440.600pk> </root/.tex
 live2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labi1095.600pk> </root/.texlive201
@@ -762,10 +773,10 @@ ljfour/lh/lh-t2a/labx2488.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/
 lh/lh-t2a/larm1200.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t
 2a/labx1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmsy10.pfb>
-Output written on Escapy2Doc.pdf (23 pages, 1425587 bytes).
+Output written on Escapy2Doc.pdf (23 pages, 1442660 bytes).
 PDF statistics:
- 592 PDF objects out of 1000 (max. 8388607)
+ 595 PDF objects out of 1000 (max. 8388607)
  92 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 106 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 111 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -14,7 +14,7 @@ import static java.io.File.separator;
 /**
  * @author Henry on 24/07/17.
  */
-public class LightShaderLoader implements EscapyInstanceLoader<EscapyMultiSourceShader> {
+public class LightShaderAttrLoader implements EscapyInstanceLoader<EscapyMultiSourceShader> {
 
 	private static final String[] sources = {"targetMap", "blendMap"};
 
@@ -31,7 +31,7 @@ public class LightShaderLoader implements EscapyInstanceLoader<EscapyMultiSource
 
 
 	@EscapyInstanced("ADD_OVERLAY_STRONG")
-	public EscapyMultiSourceShader loadAddOverlayStrongShader() {
+	public EscapyMultiSourceShader loadAddOverlayStrongShader(EscapyMultiSourceShader shader) {
 		String program = separator + "ADD_OVERLAY_STRONG" + separator + "ADD_OVERLAY_STRONG";
 		return new BlendRenderer(loadMulti(program), sources);
 	}
