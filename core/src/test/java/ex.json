@@ -14,7 +14,20 @@
 			"processor": {},
 			"lightGroup": {}
 		}
-	]
+	],
+
+
+	"mask": {
+		"name": "mask_background",
+		"type": "Mask",
+		"attributes": [],
+		"colorRGBA": [60, 60, 60, 250],
+		"mode": {
+			"src": "GL_DST_COLOR",
+			"dst": "GL_ONE_MINUS_SRC_ALPHA"
+		}
+	}
+
 
 }
 
