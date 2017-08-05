@@ -38,3 +38,6 @@
 \contentsline {subsection}{\numberline {6.3.4}Mask}{24}
 \contentsline {subsection}{\numberline {6.3.5}Blend}{25}
 \contentsline {subsection}{\numberline {6.3.6}Processor}{25}
+\contentsline {subsection}{\numberline {6.3.7}LightGroup}{26}
+\contentsline {subsubsection}{Lights}{26}
+\contentsline {subsubsection}{LightGroup \IeC {\cyrc }\IeC {\cyre }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrk }\IeC {\cyro }\IeC {\cyrm }}{27}

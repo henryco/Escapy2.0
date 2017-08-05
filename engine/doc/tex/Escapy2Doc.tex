@@ -444,7 +444,34 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
   	\label{img:270} 
 \end{center}
 
+\newpage
+\subsection{LightGroup}
+Этот объект по большому счету является суперконтейнером для источников света. Как и другие объекты движка для сериализации он использует шаблон \textit{\textbf{EscapySerialized}} наследуя от него три основных поля, причем поле \textit{\textbf{"attributes"}} в данном случа может (и по большому счету должно) использоваться для конфигрурирования своих собственных шейдеров для источников света посредством механизма \textit{\textbf{EscapyInstanceLoader}}. Помимо трех основных полей, данный контейнер содержит массив источников света \textit{\textbf{"lights"}}. В целом json шаблон для этого объекта должен выглядить так как на вставке ниже.
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/28.png} 
+  	\label{img:280} 
+\end{center}
+\subsubsection{Lights}
+Данная структура представляет из себя массив объектов конфигурации источнико света. 
+Стоит обратить внимание на поле \textit{\textbf{"colorRGB"}} - это массив из трех эллементов типа \textit{\textbf{Integer}} с дапазоном [0, 255].
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/29.png} 
+  	\label{img:290} 
+\end{center}
+Отдельного внимания заслуживает поле \textit{\textbf{"shift"}} которое отвечает за пункт прицепки света. Теоретически таким пунктом может быть любой сериализуемый объект локации, однако на данный момент такую возможность поддерживают только \textit{\textbf{Слои (Layers)}}. Связывание пункта зацепки с источником света производится посредством их имени.
 
+\subsubsection{LightGroup целиком}
+Выше описанный контейнер источников для стандартной имплементации в минимальном полном виде должен выглядить следующим образом:
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/30.png} 
+  	\label{img:300} 
+\end{center}
+
+
+\chapter*{EOF}
+\section*{Контактная информация}
+\textbf{\\Email: henrycodev@gmail.com} \\\\
+\textbf{Github: henryco}
 
 \end{document}
 
