@@ -26,8 +26,20 @@
 			"src": "GL_DST_COLOR",
 			"dst": "GL_ONE_MINUS_SRC_ALPHA"
 		}
-	}
+	},
 
+
+	"blend": {
+		"name": "blend_foreground",
+		"type": "Blend",
+		"attributes": [],
+		"mode": {
+			"srcRGB": "GL_SRC_ALPHA",
+			"dstRGB": "GL_ONE",
+			"srcALPHA": "GL_ONE",
+			"dstALPHA": "GL_ONE_MINUS_SRC_COLOR"
+		}
+	}
 
 }
 

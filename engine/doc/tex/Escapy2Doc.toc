@@ -35,3 +35,5 @@
 \contentsline {subsection}{\numberline {6.3.1}DefaultRendererLoaderBuilder}{23}
 \contentsline {subsection}{\numberline {6.3.2}\IeC {\CYRS }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrz }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrya }}{23}
 \contentsline {subsection}{\numberline {6.3.3}RenderGroups}{24}
+\contentsline {subsection}{\numberline {6.3.4}Mask}{24}
+\contentsline {subsection}{\numberline {6.3.5}Blend}{25}

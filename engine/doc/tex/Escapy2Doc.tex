@@ -414,8 +414,18 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 	\item \textit{\textbf{mask}} - конфигурирует маску для группы
 	\item \textit{\textbf{blend}} - конфигурирует тип смешивания для группы света
 	\item \textit{\textbf{processor}} - конфигурирует тип обработчика группы света
-	\item \textit{\textbf{lightGroup}} - объект с массивом источников света для данной 			группы
+	\item \textit{\textbf{lightGroup}} - объект с массивом источников света для данной 			группы\\
 \end{itemize*}
+
+\subsection{Mask}
+Объект так же как и все остальные для сериализации наследуется от \textit{\textbf{EscapySerialized}}, помимо унаследованных полей содеежит массив из четырех эллементов типа \textit{\textbf{Integer}} \textit{\textbf{"colorRGBA"}} устанавливающих значения цвета маски в диапазоне [0, 255], а так же объект \textit{\textbf{"mode"}} устанавливающий тип смешения маски.
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/25.png} 
+  	\label{img:250} 
+\end{center}
+
+\newpage
+\subsection{Blend}
 
 \end{document}
 
