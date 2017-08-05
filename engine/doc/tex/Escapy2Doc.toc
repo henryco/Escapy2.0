@@ -1,35 +1,36 @@
 \select@language {russian}
-\contentsline {chapter}{\numberline {1}\IeC {\CYRN }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyro } \IeC {\cyrr }\IeC {\cyra }\IeC {\cyrb }\IeC {\cyro }\IeC {\cyrt }\IeC {\cyrery }}{3}
-\contentsline {chapter}{\numberline {2}Context}{5}
-\contentsline {section}{\numberline {2.1}Game}{5}
-\contentsline {section}{\numberline {2.2}Annotation}{5}
-\contentsline {chapter}{\numberline {3}Utils}{6}
-\contentsline {section}{\numberline {3.1}EscapySimpleSerialized}{7}
-\contentsline {section}{\numberline {3.2}EscapyInstanceLoader}{8}
-\contentsline {subsection}{\numberline {3.2.1}\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrg }\IeC {\cyrr }\IeC {\cyru }\IeC {\cyrz }\IeC {\cyrk }\IeC {\cyra } \IeC {\cyra }\IeC {\cyrt }\IeC {\cyrt }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrb }\IeC {\cyru }\IeC {\cyrt }\IeC {\cyro }\IeC {\cyrv }}{8}
-\contentsline {subsection}{\numberline {3.2.2}\IeC {\CYRI }\IeC {\cyrn }\IeC {\cyrt }\IeC {\cyrs }\IeC {\cyra }\IeC {\cyrn }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrr }\IeC {\cyro }\IeC {\cyrv }\IeC {\cyra }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyre }}{9}
-\contentsline {chapter}{\numberline {4}Desktop}{10}
-\contentsline {chapter}{\numberline {5}Graphic}{11}
-\contentsline {section}{\numberline {5.1}EscapyCamera}{11}
-\contentsline {section}{\numberline {5.2}Render}{11}
-\contentsline {subsection}{\numberline {5.2.1}Mapping}{11}
-\contentsline {subsection}{\numberline {5.2.2}FBO}{12}
-\contentsline {subsection}{\numberline {5.2.3}Program}{12}
-\contentsline {subsubsection}{GL10}{12}
-\contentsline {subsubsection}{GL20}{12}
-\contentsline {subsection}{\numberline {5.2.4}Light}{13}
-\contentsline {chapter}{\numberline {6}Group}{15}
-\contentsline {section}{\numberline {6.1}Container}{15}
-\contentsline {subsection}{\numberline {6.1.1}DefaultGroupContainer}{15}
-\contentsline {subsection}{\numberline {6.1.2}\IeC {\CYRS }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrz }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrya }}{16}
-\contentsline {section}{\numberline {6.2}Map}{17}
-\contentsline {subsection}{\numberline {6.2.1}DefaultLocationLoaderBuilder}{17}
-\contentsline {subsection}{\numberline {6.2.2}\IeC {\CYRS }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrz }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrya } EscapyLocation}{18}
-\contentsline {subsection}{\numberline {6.2.3}\IeC {\CYRS }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrz }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrya } EscapySubLocation}{18}
-\contentsline {subsubsection}{RenderGroups}{18}
-\contentsline {subsubsection}{Layers}{19}
-\contentsline {subsubsection}{Static, dynamic, etc?}{20}
-\contentsline {subsubsection}{EscapySubLocation \IeC {\cyrc }\IeC {\cyre }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrk }\IeC {\cyro }\IeC {\cyrm }}{21}
-\contentsline {section}{\numberline {6.3}Render}{22}
-\contentsline {subsection}{\numberline {6.3.1}DefaultRendererLoaderBuilder}{22}
-\contentsline {subsection}{\numberline {6.3.2}\IeC {\CYRS }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrz }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrya }}{22}
+\contentsline {chapter}{\numberline {1}\IeC {\CYRN }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyro } \IeC {\cyrr }\IeC {\cyra }\IeC {\cyrb }\IeC {\cyro }\IeC {\cyrt }\IeC {\cyrery }}{4}
+\contentsline {chapter}{\numberline {2}Context}{6}
+\contentsline {section}{\numberline {2.1}Game}{6}
+\contentsline {section}{\numberline {2.2}Annotation}{6}
+\contentsline {chapter}{\numberline {3}Utils}{7}
+\contentsline {section}{\numberline {3.1}EscapySimpleSerialized}{8}
+\contentsline {section}{\numberline {3.2}EscapyInstanceLoader}{9}
+\contentsline {subsection}{\numberline {3.2.1}\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrg }\IeC {\cyrr }\IeC {\cyru }\IeC {\cyrz }\IeC {\cyrk }\IeC {\cyra } \IeC {\cyra }\IeC {\cyrt }\IeC {\cyrt }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrb }\IeC {\cyru }\IeC {\cyrt }\IeC {\cyro }\IeC {\cyrv }}{9}
+\contentsline {subsection}{\numberline {3.2.2}\IeC {\CYRI }\IeC {\cyrn }\IeC {\cyrt }\IeC {\cyrs }\IeC {\cyra }\IeC {\cyrn }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrr }\IeC {\cyro }\IeC {\cyrv }\IeC {\cyra }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyre }}{10}
+\contentsline {chapter}{\numberline {4}Desktop}{11}
+\contentsline {chapter}{\numberline {5}Graphic}{12}
+\contentsline {section}{\numberline {5.1}EscapyCamera}{12}
+\contentsline {section}{\numberline {5.2}Render}{12}
+\contentsline {subsection}{\numberline {5.2.1}Mapping}{12}
+\contentsline {subsection}{\numberline {5.2.2}FBO}{13}
+\contentsline {subsection}{\numberline {5.2.3}Program}{13}
+\contentsline {subsubsection}{GL10}{13}
+\contentsline {subsubsection}{GL20}{13}
+\contentsline {subsection}{\numberline {5.2.4}Light}{14}
+\contentsline {chapter}{\numberline {6}Group}{16}
+\contentsline {section}{\numberline {6.1}Container}{16}
+\contentsline {subsection}{\numberline {6.1.1}DefaultGroupContainer}{16}
+\contentsline {subsection}{\numberline {6.1.2}\IeC {\CYRS }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrz }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrya }}{17}
+\contentsline {section}{\numberline {6.2}Map}{18}
+\contentsline {subsection}{\numberline {6.2.1}DefaultLocationLoaderBuilder}{18}
+\contentsline {subsection}{\numberline {6.2.2}C\IeC {\cyre }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrz }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrya }}{19}
+\contentsline {subsection}{\numberline {6.2.3}EscapyLocation}{20}
+\contentsline {subsection}{\numberline {6.2.4}EscapySubLocation}{20}
+\contentsline {subsection}{\numberline {6.2.5}RenderGroups}{20}
+\contentsline {subsection}{\numberline {6.2.6}Layers}{21}
+\contentsline {subsubsection}{Static, dynamic, etc?}{22}
+\contentsline {section}{\numberline {6.3}Render}{23}
+\contentsline {subsection}{\numberline {6.3.1}DefaultRendererLoaderBuilder}{23}
+\contentsline {subsection}{\numberline {6.3.2}\IeC {\CYRS }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrz }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrya }}{23}
+\contentsline {subsection}{\numberline {6.3.3}RenderGroups}{24}

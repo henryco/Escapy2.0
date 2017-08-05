@@ -340,29 +340,32 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 Как можно заметить в конструктор основных загрузчиков так же передаются загрузчики аттрибутов обозначенных в json файле полем-массивом \textit{\textbf{"attributes": [...]}}, эти загрузчики являются имплементациями \textit{\textbf{EscapyInstanceLoader<T>}}.
 
 \newpage
-\subsection{Сериализация EscapyLocation}
-Стандартной имплементацией интерфейса \textit{\textbf{EscapyLocation}} является класс под названием \textit{\textbf{Location}}, который загружается из простого json файла вида:
+\subsection{Cериализация}
+Пример ниже иллюстрирует как должен выглядить минимальный полный json файл конфигурирующий станартную реализацию игровой \textit{\textbf{сублокации}}.
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/21.png} 
+  	\label{img:210} 
+\end{center} 
 
+\subsection{EscapyLocation}
+Стандартной имплементацией интерфейса \textit{\textbf{EscapyLocation}} является класс под названием \textit{\textbf{Location}}, который загружается из простого json файла вида:
 \begin{center}
 	\includegraphics[width=1.2\linewidth]{img/17.png} 
   	\label{img:170} 
 \end{center} 
-
-\subsection{Сериализация EscapySubLocation}
+\subsection{EscapySubLocation}
 Сублокации за котороые отвечает интерфейс \textit{\textbf{EscapySubLocation}} и его стандартная имплементация \textit{\textbf{SubLocation}} загружаются из json файла вида:
 \begin{center}
 	\includegraphics[width=1.2\linewidth]{img/18.png} 
   	\label{img:180} 
 \end{center} 
-
-\subsubsection{RenderGroups}
-Массив \textit{\textbf{"renderGroups"}} содержит группу объектов которые будут отрисовываться на графическом конвейере в таком порядке в каком они расположенны в массиве. Каждый объект из такой группы содержит имя, а так же массив слоев.
+\subsection{RenderGroups}
+Массив \textit{\textbf{"renderGroups"}} содержит массив слоев, которые будут отрисовываться на графическом конвейере в таком порядке в каком они расположенны в массиве. 
 \begin{center}
 	\includegraphics[width=1.2\linewidth]{img/19.png} 
   	\label{img:190} 
 \end{center} 
-
-\subsubsection{Layers}
+\subsection{Layers}
 Массив \textit{\textbf{"layers"}} это массив слоев, каждый из которых помимо стандартных полей унаследованных от шаблона \textit{\textbf{EscapySerialized}}, содержит уникальное поле \textit{\textbf{"axis\_z"}} определяющее позицию слоя на оси Z. Так же каждый из слоев содержит поле \textit{\textbf{shift}} хранящее информацию о смещении слоя и массив игровых объектов \textit{\textbf{"objects"}}
 \begin{center}
 	\includegraphics[width=1.2\linewidth]{img/20.png} 
@@ -371,15 +374,8 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 Каждый из таких объектов содержит поля унаследованные от \textit{\textbf{EscapySerilized}}, а так же поле \textit{\textbf{"details"}} содержащее информацию об объекте, здесь стоит обратить внимание на то, что поле \textit{\textbf{"name"}} из \textit{\textbf{"details"}} переопределяет значение аналогичного поля самого объекта.
 \subsubsection{Static, dynamic, etc?}
 На данный момент в движке представленны только статические объекты (не имеющие какой либо анимации и т.п.), потому у игрового объекта есть только поле \textit{\textbf{"static"}} с путями к файлам текстур, однако в будщем это изменится.
+
 \newpage
-\subsubsection{EscapySubLocation целиком}
-Пример ниже иллюстрирует как должен выглядить минимальный полный json файл конфигурирующий станартную реализацию игровой сублокации.
-\begin{center}
-	\includegraphics[width=1.2\linewidth]{img/21.png} 
-  	\label{img:210} 
-\end{center} 
-
-
 \section{Render}
 Задача этого субпакета заключается, как следует из названия в отрисовке игровых объектов, а так же разнообразных источников света и т.п. Все вышеописанное выполняется посредством одного интерфейса \textit{\textbf{EscapyRenderer}}, а так же его имплемантации по умолчанию - \textit{\textbf{DefaultRenderer}}. Интерфейс содержит три ключевых метода:
 
@@ -403,6 +399,8 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 	\includegraphics[width=1.2\linewidth]{img/23.png} 
   	\label{img:230} 
 \end{center} 
+
+\subsection{RenderGroups}
 
 \end{document}
 

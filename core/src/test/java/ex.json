@@ -4,6 +4,17 @@
 	"name": "Location1:SubOne",
 	"attributes": [],
 
-	"renderGroups": [{}]
+	"renderGroups": [
+		{
+			"name": "foreground",
+			"type": "RenderGroup",
+			"attributes": ["", "", ""],
+			"mask": {},
+			"blend": {},
+			"processor": {},
+			"lightGroup": {}
+		}
+	]
+
 }
 
