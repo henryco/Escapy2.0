@@ -24,11 +24,12 @@
 \contentsline {subsection}{\numberline {6.1.2}\IeC {\CYRS }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrz }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrya }}{17}
 \contentsline {section}{\numberline {6.2}Map}{18}
 \contentsline {subsection}{\numberline {6.2.1}DefaultLocationLoaderBuilder}{18}
-\contentsline {subsection}{\numberline {6.2.2}C\IeC {\cyre }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrz }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrya }}{19}
-\contentsline {subsection}{\numberline {6.2.3}EscapyLocation}{20}
-\contentsline {subsection}{\numberline {6.2.4}EscapySubLocation}{20}
-\contentsline {subsection}{\numberline {6.2.5}RenderGroups}{20}
-\contentsline {subsection}{\numberline {6.2.6}Layers}{21}
+\contentsline {subsection}{\numberline {6.2.2}C\IeC {\cyre }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrz }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrya }}{18}
+\contentsline {subsection}{\numberline {6.2.3}EscapyLocation}{19}
+\contentsline {subsection}{\numberline {6.2.4}EscapySubLocation}{19}
+\contentsline {subsection}{\numberline {6.2.5}RenderGroups}{19}
+\contentsline {subsection}{\numberline {6.2.6}Layers}{20}
+\contentsline {subsubsection}{C\IeC {\cyru }\IeC {\cyrb }\IeC {\cyrl }\IeC {\cyro }\IeC {\cyrk }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrya } \IeC {\cyrc }\IeC {\cyre }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrk }\IeC {\cyro }\IeC {\cyrm }}{21}
 \contentsline {subsubsection}{Static, dynamic, etc?}{22}
 \contentsline {section}{\numberline {6.3}Render}{23}
 \contentsline {subsection}{\numberline {6.3.1}DefaultRendererLoaderBuilder}{23}

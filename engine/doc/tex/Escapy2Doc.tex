@@ -334,19 +334,15 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 			\end{itemize*}
 		\end{itemize*}
 		\item \textit{\textbf{locationAttributeLoader}}
-		\\
 	\end{itemize*}
 \end{itemize*}
-Как можно заметить в конструктор основных загрузчиков так же передаются загрузчики аттрибутов обозначенных в json файле полем-массивом \textit{\textbf{"attributes": [...]}}, эти загрузчики являются имплементациями \textit{\textbf{EscapyInstanceLoader<T>}}.
+Как можно заметить в конструктор основных загрузчиков так же передаются загрузчики аттрибутов обозначенных в json файле полем-массивом \textit{\textbf{"attributes": [...]}}, эти загрузчики являются имплементациями \textit{\textbf{EscapyInstanceLoader<T>}}.\\
+
+\subsection{Cериализация}
+Для сереализации классов данного пакета используются два отдельных json файла которые обрабатываются двумя основными загрузчиками:\\ \textit{\textbf{DefaultLocationLoader}} и
+\textit{\textbf{DefaultSubLocationLoader}}.
 
 \newpage
-\subsection{Cериализация}
-Пример ниже иллюстрирует как должен выглядить минимальный полный json файл конфигурирующий станартную реализацию игровой \textit{\textbf{сублокации}}.
-\begin{center}
-	\includegraphics[width=1.2\linewidth]{img/21.png} 
-  	\label{img:210} 
-\end{center} 
-
 \subsection{EscapyLocation}
 Стандартной имплементацией интерфейса \textit{\textbf{EscapyLocation}} является класс под названием \textit{\textbf{Location}}, который загружается из простого json файла вида:
 \begin{center}
@@ -372,6 +368,14 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
   	\label{img:200} 
 \end{center} 
 Каждый из таких объектов содержит поля унаследованные от \textit{\textbf{EscapySerilized}}, а так же поле \textit{\textbf{"details"}} содержащее информацию об объекте, здесь стоит обратить внимание на то, что поле \textit{\textbf{"name"}} из \textit{\textbf{"details"}} переопределяет значение аналогичного поля самого объекта.
+
+\subsubsection{Cублокация целиком}
+Пример ниже иллюстрирует как должен выглядить минимальный полный json файл конфигурирующий станартную реализацию игровой \textit{\textbf{сублокации}}.
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/21.png} 
+  	\label{img:210} 
+\end{center} 
+
 \subsubsection{Static, dynamic, etc?}
 На данный момент в движке представленны только статические объекты (не имеющие какой либо анимации и т.п.), потому у игрового объекта есть только поле \textit{\textbf{"static"}} с путями к файлам текстур, однако в будщем это изменится.
 
