@@ -19,7 +19,6 @@ public final class SerializedLightProcessor extends EscapySimpleSerialized {
 	@SerializedName("spriteSize") @Expose public float spriteSize = 55f;
 	@SerializedName("threshold") @Expose public float threshold = 0f;
 	@SerializedName("height") @Expose public float height = 0.8175f;
-	@SerializedName("normalMapping") @Expose public boolean normalMapping = true;
 	@SerializedName("enable") @Expose public boolean enable = true;
 	@SerializedName("intensity") @Expose public SerializedVolumeIntensity intensity = new SerializedVolumeIntensity();
 

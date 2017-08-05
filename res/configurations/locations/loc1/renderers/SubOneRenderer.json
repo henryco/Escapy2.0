@@ -47,8 +47,8 @@
 
 			"processor": {
 
-				"type": "volumetric",
 				"name": "processor_foreground",
+				"type": "volumetric",
 				"attributes": [],
 
 				"spriteSize": 55,

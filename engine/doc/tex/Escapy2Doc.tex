@@ -431,7 +431,21 @@ Cостоит из двух субпакетов \textit{\textbf{gl10}} и \text
 	\includegraphics[width=1.2\linewidth]{img/26.png} 
   	\label{img:260} 
 \end{center}
- 
+
+\subsection{Processor}
+Этот объект отвечает за обработку всех источников света принадлежащих к той же самой группе рендера что и сам \textit{\textbf{"processor"}}. Для данного объекта, в его конфигурационном json файле, \textit{\textbf{особое значение имеет поле "type"}}, которое определяет тип процессора света. На данный момент типов два: 
+\begin{enumerate*}
+	\item \textit{\textbf{"volumetric"}} - Объемный тип света, использует карты нормалей.
+	\item \textit{\textbf{"flat"}} - Обычный плоский тип света, не использует карты 			нормалей.
+\end{enumerate*}
+Значением поля \textit{\textbf{"type"}} по умолчанию является \textit{\textbf{type}}, включить поддержку объемного света следует самостоятельно установить значение этого поля на \textit{\textbf{"volumetric"}}.
+\begin{center}
+	\includegraphics[width=1.2\linewidth]{img/27.png} 
+  	\label{img:270} 
+\end{center}
+
+
+
 \end{document}
 
 
