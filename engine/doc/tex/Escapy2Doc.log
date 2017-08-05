@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.19)  5 AUG 2017 15:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.19)  5 AUG 2017 15:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -750,16 +750,26 @@ Overfull \hbox (88.71434pt too wide) in paragraph at lines 393--395
  [] 
  []
 
-[22 <./img/22.png>] (./Escapy2Doc.aux)
+<img/23.png, id=126, 1107.13625pt x 171.64125pt>
+File: img/23.png Graphic file (type png)
+ <use img/23.png>
+Package pdftex.def Info: img/23.png used on input line 403.
+(pdftex.def)             Requested size: 532.29282pt x 82.52042pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 403--405
+ [] 
+ []
+
+[22 <./img/22.png> <./img/23.png>] [23] (./Escapy2Doc.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 6600 strings out of 493806
- 93007 string characters out of 6155775
- 180844 words of memory out of 5000000
- 9795 multiletter control sequences out of 15000+600000
+ 6606 strings out of 493806
+ 93081 string characters out of 6155775
+ 180857 words of memory out of 5000000
+ 9800 multiletter control sequences out of 15000+600000
  18859 words of font info for 43 fonts, out of 8000000 for 9000
  788 hyphenation exceptions out of 8191
  39i,6n,38p,1066b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -773,10 +783,10 @@ ljfour/lh/lh-t2a/labx2488.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/
 lh/lh-t2a/larm1200.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t
 2a/labx1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmsy10.pfb>
-Output written on Escapy2Doc.pdf (23 pages, 1442660 bytes).
+Output written on Escapy2Doc.pdf (24 pages, 1468300 bytes).
 PDF statistics:
- 595 PDF objects out of 1000 (max. 8388607)
- 92 compressed objects within 1 object stream
+ 600 PDF objects out of 1000 (max. 8388607)
+ 94 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 111 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 116 words of extra memory for PDF output out of 10000 (max. 10000000)
 
