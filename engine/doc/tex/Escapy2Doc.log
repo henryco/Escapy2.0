@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.19)  31 JUL 2017 15:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.6.19)  5 AUG 2017 19:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -300,7 +300,11 @@ Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
 \TX@delta=\dimen143
 \TX@cols=\count128
 \TX@ftn=\toks29
-) (./Escapy2Doc.aux)
+) (./Escapy2Doc.aux
+
+LaTeX Warning: Label `img:9' multiply defined.
+
+)
 \openout1 = `Escapy2Doc.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
@@ -317,8 +321,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 72.
 LaTeX Font Info:    ... okay on input line 72.
 LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 72.
 LaTeX Font Info:    ... okay on input line 72.
-
-(/usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
+ (/usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -420,29 +423,463 @@ Package caption Info: End \AtBeginDocument code.
 File: uni-4.def 2013/05/13 UCS: Unicode data U+0400..U+04FF
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Escapy2Doc.toc)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Escapy2Doc.toc [1
+
+])
 \tf@toc=\write3
 \openout3 = `Escapy2Doc.toc'.
 
- [1
+ [2]
+Overfull \hbox (2.2215pt too wide) in paragraph at lines 88--89
+\T2A/cmr/m/n/10.95 Каждому из вы-ше-пе-ре-чис-лен-ных па-ке-тов по-свя-ще-на от
+-дель-ная гла-ва, по-дроб-нее со струк-
+ []
 
-] (./Escapy2Doc.aux) ) 
+[3
+
+]
+{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 1.
+<img/1.png, id=20, 1108.14pt x 359.3425pt>
+File: img/1.png Graphic file (type png)
+ <use img/1.png>
+Package pdftex.def Info: img/1.png used on input line 96.
+(pdftex.def)             Requested size: 554.47308pt x 179.8024pt.
+
+Overfull \hbox (110.8946pt too wide) in paragraph at lines 96--98
+ [] 
+ []
+
+<img/2.png, id=22, 1003.75pt x 321.2pt>
+File: img/2.png Graphic file (type png)
+ <use img/2.png>
+Package pdftex.def Info: img/2.png used on input line 99.
+(pdftex.def)             Requested size: 554.47308pt x 177.43982pt.
+
+Overfull \hbox (110.8946pt too wide) in paragraph at lines 99--100
+ [][] 
+ []
+
+[4
+
+ <./img/1.png> <./img/2.png>] <img/3.png, id=28, 1103.12125pt x 418.56375pt>
+File: img/3.png Graphic file (type png)
+
+<use img/3.png>
+Package pdftex.def Info: img/3.png used on input line 104.
+(pdftex.def)             Requested size: 554.47308pt x 210.39264pt.
+
+Overfull \hbox (110.8946pt too wide) in paragraph at lines 104--106
+ [] 
+ []
+
+<img/4.png, id=29, 1124.2pt x 441.65pt>
+File: img/4.png Graphic file (type png)
+ <use img/4.png>
+Package pdftex.def Info: img/4.png used on input line 110.
+(pdftex.def)             Requested size: 532.29282pt x 209.11201pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 110--112
+ [] 
+ []
+
+[5 <./img/3.png> <./img/4.png>]
+{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 2.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 122.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 122.
+
+Underfull \hbox (badness 10000) in paragraph at lines 126--128
+
+ []
+
+[6
+
+]
+{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 3.
+[7
+
+] <img/5.png, id=47, 1103.12125pt x 436.63126pt>
+File: img/5.png Graphic file (type png)
+ <use img/5.png>
+Package pdftex.def Info: img/5.png used on input line 154.
+(pdftex.def)             Requested size: 532.29282pt x 210.69325pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 154--156
+ [] 
+ []
+
+<img/6.png, id=48, 1102.1175pt x 118.4425pt>
+File: img/6.png Graphic file (type png)
+ <use img/6.png>
+Package pdftex.def Info: img/6.png used on input line 159.
+(pdftex.def)             Requested size: 532.29282pt x 57.20596pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 159--161
+ [] 
+ []
+
+[8 <./img/5.png> <./img/6.png>] <img/7.png, id=54, 1105.12875pt x 521.95pt>
+File: img/7.png Graphic file (type png)
+
+<use img/7.png>
+Package pdftex.def Info: img/7.png used on input line 171.
+(pdftex.def)             Requested size: 532.29282pt x 251.3933pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 171--173
+ [] 
+ []
+
+<img/8.png, id=55, 1105.12875pt x 112.42pt>
+File: img/8.png Graphic file (type png)
+ <use img/8.png>
+Package pdftex.def Info: img/8.png used on input line 176.
+(pdftex.def)             Requested size: 532.29282pt x 54.14624pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 176--178
+ [] 
+ []
+
+[9 <./img/7.png> <./img/8.png>] <img/14.png, id=61, 1105.12875pt x 305.14pt>
+File: img/14.png Graphic file (type png)
+
+<use img/14.png>
+Package pdftex.def Info: img/14.png used on input line 184.
+(pdftex.def)             Requested size: 532.29282pt x 146.96837pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 184--186
+ [] 
+ []
+
+<img/15.png, id=62, 1103.12125pt x 368.37625pt>
+File: img/15.png Graphic file (type png)
+ <use img/15.png>
+Package pdftex.def Info: img/15.png used on input line 190.
+(pdftex.def)             Requested size: 532.29282pt x 177.75728pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 190--192
+ [] 
+ []
+
+[10 <./img/14.png> <./img/15.png>]
+{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 4.
+File: img/1.png Graphic file (type png)
+<use img/1.png>
+Package pdftex.def Info: img/1.png used on input line 198.
+(pdftex.def)             Requested size: 554.47308pt x 179.8024pt.
+
+Overfull \hbox (110.8946pt too wide) in paragraph at lines 198--200
+ [] 
+ []
+
+[11
+
+]
+{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 217--219
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 230--231
+
+ []
+
+[12
+
+]
+Overfull \hbox (54.96997pt too wide) in paragraph at lines 241--243
+\T2A/cmr/m/n/10.95 ин-тер-фей-сов от них нал-се-ду-ю-щих-ся как \T2A/cmr/bx/it/
+10.95 EscapySingleSourceShader \T2A/cmr/m/n/10.95 и \T2A/cmr/bx/it/10.95 Escapy
+MultiSourceShader\T2A/cmr/m/n/10.95 .
+ []
+
+<img/9.png, id=75, 1109.14375pt x 304.13625pt>
+File: img/9.png Graphic file (type png)
+ <use img/9.png>
+Package pdftex.def Info: img/9.png used on input line 244.
+(pdftex.def)             Requested size: 532.29282pt x 145.96053pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 244--246
+ [] 
+ []
+
+[13 <./img/9.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 250--254
+
+ []
+
+
+Overfull \hbox (31.87607pt too wide) in paragraph at lines 255--257
+\T2A/cmr/m/n/10.95 Cубпакет \T2A/cmr/bx/it/10.95 source \T2A/cmr/m/n/10.95 от-в
+е-ча-ет за со-зда-ние ис-точ-ни-ков све-та с по-мо-щью клас-сов \T2A/cmr/bx/it/
+10.95 EscapyLightSource
+ []
+
+
+Overfull \hbox (1.4965pt too wide) in paragraph at lines 255--257
+\T2A/cmr/m/n/10.95 пра-виль-ную от-ри-сов-ку ис-точ-ни-ков све-та по-сред-ством
+ ин-тер-фей-са \T2A/cmr/bx/it/10.95 EscapyLightProcessor
+ []
+
+<img/10.png, id=80, 768.8725pt x 608.2725pt>
+File: img/10.png Graphic file (type png)
+ <use img/10.png>
+Package pdftex.def Info: img/10.png used on input line 258.
+(pdftex.def)             Requested size: 443.57848pt x 350.93272pt.
+
+<img/11.png, id=81, 767.86874pt x 608.2725pt>
+File: img/11.png Graphic file (type png)
+ <use img/11.png>
+Package pdftex.def Info: img/11.png used on input line 260.
+(pdftex.def)             Requested size: 443.57848pt x 351.38751pt.
+ [14 <./img/10.png>] [15 <./img/11.png>]
+{\cyrillictext \CYRG \cyrl \cyra \cyrv \cyra } 6.
+<img/12.png, id=90, 1103.12125pt x 163.61125pt>
+File: img/12.png Graphic file (type png)
+ <use img/12.png>
+Package pdftex.def Info: img/12.png used on input line 284.
+(pdftex.def)             Requested size: 532.29282pt x 78.94942pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 284--287
+ [] 
+ []
+
+[16
+
+ <./img/12.png>] <img/13.png, id=95, 1105.12875pt x 386.44376pt>
+File: img/13.png Graphic file (type png)
+
+<use img/13.png>
+Package pdftex.def Info: img/13.png used on input line 292.
+(pdftex.def)             Requested size: 532.29282pt x 186.12773pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 292--294
+ [] 
+ []
+
+<img/16.png, id=96, 1103.12125pt x 169.63374pt>
+File: img/16.png Graphic file (type png)
+ <use img/16.png>
+Package pdftex.def Info: img/16.png used on input line 298.
+(pdftex.def)             Requested size: 532.29282pt x 81.85551pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 298--300
+ [] 
+ []
+
+[17 <./img/13.png> <./img/16.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 313--315
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 317--322
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 339--340
+
+ []
+
+[18] <img/17.png, id=106, 1108.14pt x 284.06125pt>
+File: img/17.png Graphic file (type png)
+ <use img/17.png>
+Package pdftex.def Info: img/17.png used on input line 349.
+(pdftex.def)             Requested size: 532.29282pt x 136.44753pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 349--351
+ [] 
+ []
+
+<img/18.png, id=107, 1108.14pt x 175.65625pt>
+File: img/18.png Graphic file (type png)
+ <use img/18.png>
+Package pdftex.def Info: img/18.png used on input line 355.
+(pdftex.def)             Requested size: 532.29282pt x 84.37567pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 355--357
+ [] 
+ []
+
+<img/19.png, id=108, 1105.12875pt x 176.66pt>
+File: img/19.png Graphic file (type png)
+ <use img/19.png>
+Package pdftex.def Info: img/19.png used on input line 361.
+(pdftex.def)             Requested size: 532.29282pt x 85.08696pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 361--363
+ [] 
+ []
+
+[19 <./img/17.png> <./img/18.png> <./img/19.png>]
+<img/20.png, id=115, 1106.1325pt x 832.10875pt>
+File: img/20.png Graphic file (type png)
+ <use img/20.png>
+Package pdftex.def Info: img/20.png used on input line 367.
+(pdftex.def)             Requested size: 532.29282pt x 400.42342pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 367--369
+ [] 
+ []
+
+[20 <./img/20.png>] <img/21.png, id=120, 1104.125pt x 1079.03125pt>
+File: img/21.png Graphic file (type png)
+
+<use img/21.png>
+Package pdftex.def Info: img/21.png used on input line 375.
+(pdftex.def)             Requested size: 532.29282pt x 520.21771pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 375--377
+ [] 
+ []
+
+[21 <./img/21.png>] [22] <img/22.png, id=128, 1103.12125pt x 125.46875pt>
+File: img/22.png Graphic file (type png)
+
+<use img/22.png>
+Package pdftex.def Info: img/22.png used on input line 393.
+(pdftex.def)             Requested size: 532.29282pt x 60.54402pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 393--395
+ [] 
+ []
+
+<img/23.png, id=129, 1107.13625pt x 171.64125pt>
+File: img/23.png Graphic file (type png)
+ <use img/23.png>
+Package pdftex.def Info: img/23.png used on input line 403.
+(pdftex.def)             Requested size: 532.29282pt x 82.52042pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 403--405
+ [] 
+ []
+
+[23 <./img/22.png> <./img/23.png>]
+<img/24.png, id=135, 1104.125pt x 243.91125pt>
+File: img/24.png Graphic file (type png)
+ <use img/24.png>
+Package pdftex.def Info: img/24.png used on input line 410.
+(pdftex.def)             Requested size: 532.29282pt x 117.59338pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 410--412
+ [] 
+ []
+
+
+Overfull \hbox (38.97652pt too wide) in paragraph at lines 413--413
+\T2A/cmr/m/n/10.95 уна-сле-до-ван, а его об-ра-бот-ка так же про-из-во-дит-ся с
+ по-мо-щью ин-стан-ции \T2A/cmr/bx/it/10.95 EscapyInstanceLoader\T2A/cmr/m/n/10
+.95 .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 417--418
+
+ []
+
+<img/25.png, id=136, 1104.125pt x 220.825pt>
+File: img/25.png Graphic file (type png)
+ <use img/25.png>
+Package pdftex.def Info: img/25.png used on input line 423.
+(pdftex.def)             Requested size: 532.29282pt x 106.46315pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 423--425
+ [] 
+ []
+
+[24 <./img/24.png> <./img/25.png>]
+<img/26.png, id=143, 1104.125pt x 239.89626pt>
+File: img/26.png Graphic file (type png)
+ <use img/26.png>
+Package pdftex.def Info: img/26.png used on input line 431.
+(pdftex.def)             Requested size: 532.29282pt x 115.6577pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 431--433
+ [] 
+ []
+
+<img/27.png, id=144, 1103.12125pt x 359.3425pt>
+File: img/27.png Graphic file (type png)
+ <use img/27.png>
+Package pdftex.def Info: img/27.png used on input line 443.
+(pdftex.def)             Requested size: 532.29282pt x 173.39812pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 443--445
+ [] 
+ []
+
+[25 <./img/26.png> <./img/27.png>]
+<img/28.png, id=150, 1103.12125pt x 184.69pt>
+File: img/28.png Graphic file (type png)
+ <use img/28.png>
+Package pdftex.def Info: img/28.png used on input line 451.
+(pdftex.def)             Requested size: 532.29282pt x 89.1208pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 451--453
+ [] 
+ []
+
+<img/29.png, id=151, 1101.11375pt x 402.50375pt>
+File: img/29.png Graphic file (type png)
+ <use img/29.png>
+Package pdftex.def Info: img/29.png used on input line 458.
+(pdftex.def)             Requested size: 532.29282pt x 194.58148pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 458--460
+ [] 
+ []
+
+[26 <./img/28.png> <./img/29.png>]
+<img/30.png, id=157, 1101.11375pt x 552.0625pt>
+File: img/30.png Graphic file (type png)
+ <use img/30.png>
+Package pdftex.def Info: img/30.png used on input line 466.
+(pdftex.def)             Requested size: 532.29282pt x 266.88234pt.
+
+Overfull \hbox (88.71434pt too wide) in paragraph at lines 466--468
+ [] 
+ []
+
+[27 <./img/30.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 473--475
+
+ []
+
+[28
+
+] (./Escapy2Doc.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 6401 strings out of 493806
- 90380 string characters out of 6155775
- 176566 words of memory out of 5000000
- 9628 multiletter control sequences out of 15000+600000
- 12980 words of font info for 34 fonts, out of 8000000 for 9000
+ 6654 strings out of 493806
+ 93689 string characters out of 6155775
+ 180950 words of memory out of 5000000
+ 9841 multiletter control sequences out of 15000+600000
+ 18859 words of font info for 43 fonts, out of 8000000 for 9000
  788 hyphenation exceptions out of 8191
- 39i,6n,38p,346b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
- </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/
-larm1095.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx248
-8.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/larm1200.600pk
-> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1728.600pk>
-Output written on Escapy2Doc.pdf (2 pages, 21965 bytes).
+ 39i,6n,38p,1107b,738s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1200.600pk> </ro
+ot/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labx1440.600pk> </root/.tex
+live2016/texmf-var/fonts/pk/ljfour/lh/lh-t2a/labi1095.600pk> </root/.texlive201
+6/texmf-var/fonts/pk/ljfour/lh/lh-t2a/lati1095.600pk> </root/.texlive2016/texmf
+-var/fonts/pk/ljfour/lh/lh-t2a/larm1095.600pk> </root/.texlive2016/texmf-var/fo
+nts/pk/ljfour/lh/lh-t2a/labx1095.600pk> </root/.texlive2016/texmf-var/fonts/pk/
+ljfour/lh/lh-t2a/labx2488.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/
+lh/lh-t2a/larm1200.600pk> </root/.texlive2016/texmf-var/fonts/pk/ljfour/lh/lh-t
+2a/labx1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb>
+Output written on Escapy2Doc.pdf (29 pages, 1836477 bytes).
 PDF statistics:
- 85 PDF objects out of 1000 (max. 8388607)
- 22 compressed objects within 1 object stream
+ 674 PDF objects out of 1000 (max. 8388607)
+ 105 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 151 words of extra memory for PDF output out of 10000 (max. 10000000)
 

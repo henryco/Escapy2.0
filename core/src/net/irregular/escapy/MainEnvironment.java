@@ -1,16 +1,13 @@
 package net.irregular.escapy;
 
-import net.irregular.escapy.engine.env.context.game.EscapyGameContext;
-import net.irregular.escapy.engine.env.context.game.configuration.EscapyGameContextConfiguration;
-import net.irregular.escapy.engine.env.context.screen.EscapyScreen;
+import net.irregular.escapy.context.game.EscapyGameContext;
+import net.irregular.escapy.context.game.configuration.EscapyGameContextConfiguration;
+import net.irregular.escapy.context.game.screen.EscapyScreen;
 
 import javax.inject.Inject;
 import java.util.Collection;
 
-/**
- * @author Henry on 28/06/17.
- */
-public class MainEnvironment extends EscapyGameContext {
+public final class MainEnvironment extends EscapyGameContext {
 
 	private final EscapyScreen initialScreen;
 

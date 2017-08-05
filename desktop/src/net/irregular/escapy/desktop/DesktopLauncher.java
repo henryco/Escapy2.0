@@ -3,18 +3,18 @@ package net.irregular.escapy.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import net.irregular.escapy.MainEnvironment;
-import net.irregular.escapy.engine.desktop.builder.DesktopConfigLoaderBuilder;
-import net.irregular.escapy.engine.desktop.serial.SerializedDesktopConfig;
-import net.irregular.escapy.engine.env.EscapyApplicationAdapter;
-import net.irregular.escapy.environment.MainModule;
+import net.irregular.escapy.context.EscapyApplicationAdapter;
+import net.irregular.escapy.desktop.builder.EscapyDesktopConfigLoaderBuilder;
+import net.irregular.escapy.desktop.serial.SerializedDesktopConfig;
+import net.irregular.escapy.modules.MainModule;
 
 import static java.io.File.separator;
 
-public class DesktopLauncher {
+public final class DesktopLauncher {
 
-	public static void main (String[] arg) throws Exception {
+	public static void main(String[] arg) throws Exception {
 
-		LwjglApplicationConfiguration config = DesktopConfigLoaderBuilder.Default()
+		LwjglApplicationConfiguration config = EscapyDesktopConfigLoaderBuilder.Default()
 				.setLoadedClass(LwjglApplicationConfiguration.class)
 				.setSerializedClass(SerializedDesktopConfig.class)
 				.setPath(System.getProperty("user.dir") + separator + "Configuration.json")
