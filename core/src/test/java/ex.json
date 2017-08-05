@@ -69,8 +69,10 @@
 
 		"lights": [
 			{
-				"attributes": [],
 				"name": "light0",
+				"type": "LightSource",
+				"attributes": [],
+
 				"shift": "layer_foreground_0",
 				"colorRGB": [178, 34, 34],
 				"resolution2i": [512, 512],
