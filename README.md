@@ -3,3 +3,7 @@
    * <a href="https://github.com/henryco/Escapy-des-doc">**Game Design document**</a>
    * <a href="https://github.com/henryco/Escapy">**EscapyGdx**</a>
    * <a href="http://square.github.io/dagger/">**Dagger**</a>
+<br>
+
+<img src="https://raw.githubusercontent.com/henryco/Escapy/master/promo/esWeather.png" />
+<img src="https://raw.githubusercontent.com/henryco/Escapy/master/promo/ims3.png" />
