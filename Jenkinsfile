@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('Initialize') {
       steps {
-        sh 'echo "Initialize"'
+        sh '''echo "Initialize"
+gradle clean'''
       }
     }
     stage('Build') {
