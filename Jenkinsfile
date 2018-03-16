@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Hblog deploy') {
           steps {
-            sh '''sudo cp desktop/build/libs/desktop-SNAPSHOT.jar /root/Programs/Hblog/out/res/public/deploy/Escapy_desktop_SNAPSHOT.jar
+            sh '''cp desktop/build/libs/desktop-SNAPSHOT.jar /root/Programs/Hblog/out/res/public/deploy/Escapy_desktop_SNAPSHOT.jar
 '''
           }
         }
