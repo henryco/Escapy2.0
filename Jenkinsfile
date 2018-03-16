@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Check') {
       steps {
-        sh 'gradle check'
+        sh 'gradle check --stacktrace'
       }
     }
     stage('Build') {
