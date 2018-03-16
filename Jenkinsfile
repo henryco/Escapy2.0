@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Tests') {
       steps {
-        sh 'gradle test'
+        sh 'gradle test --stacktrace'
       }
     }
     stage('Archive ') {
@@ -25,9 +25,15 @@ pipeline {
         }
         stage('Hblog deploy') {
           steps {
-            sh 'echo '
+            sh '''cp desktop/build/libs/desktop-SNAPSHOT.jar /root/Programs/Hblog/out/res/public/deploy/Escapy_desktop_SNAPSHOT.jar
+'''
           }
         }
+      }
+    }
+    stage('Clean') {
+      steps {
+        sh 'pkill -f gradle'
       }
     }
   }
