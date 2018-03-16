@@ -1,18 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('Initialize') {
-      parallel {
-        stage('Clean') {
-          steps {
-            sh 'gradle clean'
-          }
-        }
-        stage('Check') {
-          steps {
-            sh 'gradle check'
-          }
-        }
+    stage('Check') {
+      steps {
+        sh 'gradle check'
       }
     }
     stage('Build') {
