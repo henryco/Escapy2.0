@@ -12,7 +12,27 @@ allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"
 
-    version = '1.0'
+    version = 'SNAPSHOT'
+
+    // experimental block
+    def versionPropsFile = file('version.properties')
+    if (versionPropsFile.canRead()) {
+        def Properties versionProps = new Properties()
+
+        versionProps.load(new FileInputStream(versionPropsFile))
+
+        def code = versionProps['VERSION_BUILD'].toInteger() + 1
+
+        versionProps['VERSION_BUILD']=code.toString()
+        versionProps.store(versionPropsFile.newWriter(), null)
+
+        version = '0.0.' + code
+    } else {
+        throw new GradleException("Could not read version.properties!")
+    }
+    // experimental block
+
+    
     ext {
         appName = "Escapy2.0"
         gdxVersion = '1.9.6'
