@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent none
   stages {
     stage('Initialize') {
       steps {
@@ -8,8 +8,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh '''gradle clean
-gradle desktop:dist -x test'''
+        sh 'gradle desktop:dist -x test'
       }
     }
     stage('Tests') {
