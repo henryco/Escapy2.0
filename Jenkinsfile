@@ -2,9 +2,17 @@ pipeline {
   agent any
   stages {
     stage('Initialize') {
-      steps {
-        sh '''echo "Initialize"
-gradle clean'''
+      parallel {
+        stage('Clean') {
+          steps {
+            sh 'gradle clean'
+          }
+        }
+        stage('Check') {
+          steps {
+            sh 'gradle check'
+          }
+        }
       }
     }
     stage('Build') {
@@ -13,22 +21,22 @@ gradle clean'''
       }
     }
     stage('Tests') {
-      parallel {
-        stage('Tests') {
-          steps {
-            sh 'gradle check'
-          }
-        }
-        stage('Report') {
-          steps {
-            junit 'desktop/build/reports/*.jar'
-          }
-        }
+      steps {
+        sh 'gradle test'
       }
     }
     stage('Archive ') {
-      steps {
-        archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
+      parallel {
+        stage('Archive ') {
+          steps {
+            archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
+          }
+        }
+        stage('Hblog deploy') {
+          steps {
+            sh 'echo '
+          }
+        }
       }
     }
   }
