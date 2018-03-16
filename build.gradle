@@ -25,7 +25,7 @@ allprojects {
 
         versionProps['VERSION_BUILD']=code.toString()
         versionProps.store(versionPropsFile.newWriter(), null)
-
+        System.out.println("set version")
         version = '0.0.' + code.toString()
     } else {
         throw new GradleException("Could not read version.properties!")
