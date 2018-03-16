@@ -17,18 +17,8 @@ pipeline {
       }
     }
     stage('Archive ') {
-      parallel {
-        stage('Archive ') {
-          steps {
-            archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
-          }
-        }
-        stage('Hblog deploy') {
-          steps {
-            sh '''cp desktop/build/libs/desktop-SNAPSHOT.jar /root/Programs/Hblog/out/res/public/deploy/Escapy_desktop_SNAPSHOT.jar
-'''
-          }
-        }
+      steps {
+        archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
       }
     }
     stage('Clean') {
