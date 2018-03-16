@@ -13,8 +13,17 @@ gradle clean'''
       }
     }
     stage('Tests') {
-      steps {
-        sh 'echo "Todo: tests"'
+      parallel {
+        stage('Tests') {
+          steps {
+            sh 'gradle check'
+          }
+        }
+        stage('Report') {
+          steps {
+            junit 'desktop/build/reports/*.jar'
+          }
+        }
       }
     }
     stage('Archive ') {
