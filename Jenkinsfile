@@ -26,7 +26,7 @@ pipeline {
         sh 'cp desktop/build/libs/desktop-SNAPSHOT.jar artifacts/desktop-SNAPSHOT.jar'
         sh 'rm -r -f release'
         sh 'mkdir release'
-        sh 'zip -r release/escapy-desktop-SNAPSHOT.zip artifacts'
+        sh 'zip -r release/desktop-SNAPSHOT.zip artifacts'
         sh 'rm -r -f artifacts'
       }
     }
