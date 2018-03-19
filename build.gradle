@@ -12,7 +12,8 @@ allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"
 
-    version = '1.0'
+    version = 'SNAPSHOT'
+    
     ext {
         appName = "Escapy2.0"
         gdxVersion = '1.9.6'
