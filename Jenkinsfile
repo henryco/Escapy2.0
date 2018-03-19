@@ -33,7 +33,7 @@ pipeline {
     stage('Acrtifacts') {
       steps {
         archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
-        archiveArtifacts(artifacts: 'release/*', onlyIfSuccessful: true)
+        archiveArtifacts(artifacts: 'release/*.zip', onlyIfSuccessful: true)
       }
     }
     stage('Clean') {
