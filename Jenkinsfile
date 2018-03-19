@@ -2,13 +2,33 @@ pipeline {
   agent any
   stages {
     stage('Check') {
-      steps {
-        sh 'gradle check --stacktrace'
+      parallel {
+        stage('Check') {
+          steps {
+            sh 'gradle check --stacktrace'
+          }
+        }
+        stage('rm -r artifacts') {
+          steps {
+            sh '''rm -r artifacts
+'''
+          }
+        }
       }
     }
     stage('Build') {
-      steps {
-        sh 'gradle desktop:dist -x test --stacktrace'
+      parallel {
+        stage('Build') {
+          steps {
+            sh 'gradle desktop:dist -x test --stacktrace'
+          }
+        }
+        stage('mkdir artifacts') {
+          steps {
+            sh '''mkdir artifacts
+'''
+          }
+        }
       }
     }
     stage('Tests') {
@@ -18,14 +38,10 @@ pipeline {
     }
     stage('Prepare Artifacts') {
       steps {
-        archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
-        sh '''rm -r artifacts
-mkdir artifacts
-
-cp -r res artifacts/res 
-cp desktop/build/libs/desktop-SNAPSHOT.jar artifacts/desktop-SNAPSHOT.jar
-cp core/assets/Configuration.json artifacts/Configuration.json
-
+        sh '''cp core/assets/Configuration.json artifacts/Configuration.json
+'''
+        sh 'cp -r res artifacts/res'
+        sh '''cp desktop/build/libs/desktop-SNAPSHOT.jar artifacts/desktop-SNAPSHOT.jar
 '''
       }
     }
