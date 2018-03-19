@@ -34,7 +34,7 @@ pipeline {
       steps {
         archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
         archiveArtifacts(artifacts: 'release/*.zip', onlyIfSuccessful: true)
-        sh '''scp release/desktop-SNAPSHOT.zip root@174.138.0.194:/root/Programs/Hblog/out/res/public/deploy/desktop-SNAPSHOT.zip
+        sh '''cp release/desktop-SNAPSHOT.zip /root/Programs/Hblog/out/res/public/deploy/desktop-SNAPSHOT.zip
 '''
       }
     }
