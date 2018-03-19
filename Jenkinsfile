@@ -17,8 +17,17 @@ pipeline {
       }
     }
     stage('Archive ') {
-      steps {
-        archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
+      parallel {
+        stage('Archive ') {
+          steps {
+            archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
+          }
+        }
+        stage('') {
+          steps {
+            sh 'cp desktop/build/libs/desktop-SNAPSHOT.jar /root/Programs/Hblog/out/res/public/deploy/desktop-SNAPSHOT.jar'
+          }
+        }
       }
     }
     stage('Clean') {
