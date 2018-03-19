@@ -38,7 +38,8 @@ pipeline {
     stage('Clean') {
       steps {
         sh 'pkill -f gradle'
-        sh 'rm -r artifacts'
+        sh '''# rm -r artifacts
+echo !'''
       }
     }
   }
