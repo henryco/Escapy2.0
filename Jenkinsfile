@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('Initial prepare') {
       steps {
-        sh '''rm -r artifacts
+        sh '''[ -e artifacts ] && rm -r artifacts
+
 '''
         sh 'gradle check --stacktrace'
       }
