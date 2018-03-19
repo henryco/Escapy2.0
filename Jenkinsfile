@@ -16,18 +16,22 @@ pipeline {
         sh 'gradle test --stacktrace'
       }
     }
-    stage('Archive ') {
-      parallel {
-        stage('Archive ') {
-          steps {
-            archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
-          }
-        }
-        stage('') {
-          steps {
-            sh 'cp desktop/build/libs/desktop-SNAPSHOT.jar /root/Programs/Hblog/out/res/public/deploy/desktop-SNAPSHOT.jar'
-          }
-        }
+    stage('Prepare Artifacts') {
+      steps {
+        archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
+        sh '''rm -r artifacts
+mkdir artifacts
+
+cp -r res artifacts/res 
+cp desktop/build/libs/desktop-SNAPSHOT.jar artifacts/desktop-SNAPSHOT.jar
+cp core/assets/Configuration.json artifacts/Configuration.json
+
+'''
+      }
+    }
+    stage('Acrtifacts') {
+      steps {
+        archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
       }
     }
     stage('Clean') {
