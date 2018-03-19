@@ -36,7 +36,8 @@ cp core/assets/Configuration.json artifacts/Configuration.json
     }
     stage('Clean') {
       steps {
-        sh 'pkill -f gradle'
+        sh '''pkill -f gradle
+rm -r artifacts'''
       }
     }
   }
