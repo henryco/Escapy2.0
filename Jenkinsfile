@@ -34,7 +34,7 @@ pipeline {
       steps {
         archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
         archiveArtifacts(artifacts: 'release/*.zip', onlyIfSuccessful: true)
-        sh 'chmod a+rwx ./jenkins-scripts/deploy-to-hblog.sh'
+        sh 'cp release/desktop-SNAPSHOT.zip /home/Programs/Hblog/out/res/public/deploy/desktop-SNAPSHOT.zip'
       }
     }
     stage('Clean') {
