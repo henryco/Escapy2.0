@@ -1,19 +1,10 @@
 pipeline {
   agent any
   stages {
-    stage('Check') {
-      parallel {
-        stage('Check') {
-          steps {
-            sh 'gradle check --stacktrace'
-          }
-        }
-        stage('rm -r artifacts') {
-          steps {
-            sh '''rm -r artifacts
+    stage('rm -r artifacts') {
+      steps {
+        sh '''rm -r artifacts
 '''
-          }
-        }
       }
     }
     stage('Build') {
