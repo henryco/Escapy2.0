@@ -1,25 +1,18 @@
 pipeline {
   agent any
   stages {
-    stage('rm -r artifacts') {
+    stage('Initial prepare') {
       steps {
         sh '''rm -r artifacts
 '''
+        sh 'gradle check --stacktrace'
       }
     }
     stage('Build') {
-      parallel {
-        stage('Build') {
-          steps {
-            sh 'gradle desktop:dist -x test --stacktrace'
-          }
-        }
-        stage('mkdir artifacts') {
-          steps {
-            sh '''mkdir artifacts
+      steps {
+        sh 'gradle desktop:dist -x test --stacktrace'
+        sh '''mkdir artifacts
 '''
-          }
-        }
       }
     }
     stage('Tests') {
@@ -43,8 +36,8 @@ pipeline {
     }
     stage('Clean') {
       steps {
-        sh '''pkill -f gradle
-rm -r artifacts'''
+        sh 'pkill -f gradle'
+        sh 'rm -r artifacts'
       }
     }
   }
