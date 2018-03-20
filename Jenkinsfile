@@ -39,7 +39,7 @@ pipeline {
     }
     stage('Clean') {
       steps {
-        sh 'pkill -f gradle'
+        sh 'pkill -f gradle || true'
       }
     }
   }
