@@ -3,19 +3,27 @@ pipeline {
   stages {
     stage('Check') {
       steps {
-        sh 'gradle check -x test --stacktrace'
+        sh 'gradle check -x desktop:dist -x test --stacktrace'
       }
     }
+    
+    stage('Test') {
+      steps {
+        sh '(gradle test --stacktrace) || true'
+        junit 'build/test-results/*.xml'
+        sh 'rm -f -r test-arch'
+        sh 'mkdir test-arch'
+        sh 'zip -r test-arch/test-report.zip build/reports'
+        archiveArtifacts 'test-arch/*.zip'
+      }
+    }
+    
     stage('Build') {
       steps {
         sh 'gradle desktop:dist -x test --stacktrace'
       }
     }
-    stage('Tests') {
-      steps {
-        sh 'gradle test --stacktrace'
-      }
-    }
+    
     stage('Prepare artifacts') {
       steps {
         sh 'rm -f -r artifacts'
@@ -30,6 +38,7 @@ pipeline {
         sh 'rm -r -f artifacts'
       }
     }
+    
     stage('Acrtifacts') {
       steps {
         archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
@@ -37,6 +46,7 @@ pipeline {
         sh 'cp release/desktop-SNAPSHOT.zip /home/Programs/Hblog/out/res/public/deploy/desktop-SNAPSHOT.zip'
       }
     }
+    
     stage('Clean') {
       steps {
         sh 'pkill -f gradle || true'
