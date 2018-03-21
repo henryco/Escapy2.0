@@ -18,7 +18,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'gradle desktop:dist -x test --stacktrace'
+        sh 'gradle desktop:dist --stacktrace'
       }
     }
     stage('Prepare artifacts') {
