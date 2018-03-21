@@ -13,7 +13,7 @@ pipeline {
         sh 'rm -f -r test-arch'
         sh 'mkdir test-arch'
         sh '(zip -r test-arch/test-report.zip build/reports) || true'
-        archiveArtifacts 'test-arch/*.zip'
+        archiveArtifacts(artifacts: 'test-arch/*.zip', allowEmptyArchive: true)
       }
     }
     stage('Build') {
@@ -45,7 +45,7 @@ pipeline {
     }
     stage('Clean') {
       steps {
-        sh 'pkill -f gradle || true'
+        sh '(pkill -f gradle) || true'
       }
     }
   }
