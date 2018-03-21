@@ -12,7 +12,7 @@ pipeline {
         junit(testResults: 'build/test-results/*.xml', allowEmptyResults: true)
         sh 'rm -f -r test-arch'
         sh 'mkdir test-arch'
-        sh 'zip -r test-arch/test-report.zip build/reports'
+        sh '(zip -r test-arch/test-report.zip build/reports) || true'
         archiveArtifacts 'test-arch/*.zip'
       }
     }
