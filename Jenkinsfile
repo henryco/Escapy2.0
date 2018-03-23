@@ -51,8 +51,8 @@ pipeline {
   }
   
   post {
-    always {
-      mail bcc: '', body: "TEST", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "TEST", to: "henrycodev@gmail.com"
+    success {
+      mail bcc: '', body: "<body>Escapy2.0 develope build ${env.BUILD_TAG} deployed successful\n<br> <a href=\"${env.BUILD_URL}\">Build page</a></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 develope build ${env.BUILD_TAG} deployed successful", to: "henrycodev@gmail.com"
     }
   }
   
