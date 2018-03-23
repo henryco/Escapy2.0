@@ -52,7 +52,13 @@ pipeline {
   
   post {
     success {
-      mail bcc: '', body: "<body>Escapy2.0 develope build ${env.BUILD_TAG} deployed successful\n<br> <a href=\"${env.BUILD_URL}\">Build page</a></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 develope build ${env.BUILD_TAG} deployed successful", to: "henrycodev@gmail.com"
+      mail bcc: '', body: "<body><h2 style=\"color:green\">Escapy2.0 develope build ${env.BUILD_TAG} deployed successful</h2> <h3><a href=\"${env.BUILD_URL}\">Build page reference</a></h3><h4>Node:${env.NODE_NAME}</h4></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 develope build ${env.BUILD_NUMBER} SUCCESS", to: "henrycodev@gmail.com"
+    }
+    failure {
+      mail bcc: '', body: "<body><h2 style=\"color:red\">Escapy2.0 develope build ${env.BUILD_TAG} failure</h2> <h3><a href=\"${env.BUILD_URL}\">Build page reference</a></h3><h4>Node:${env.NODE_NAME}</h4></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 develope build ${env.BUILD_NUMBER} FAILURE", to: "henrycodev@gmail.com"
+    }
+    unstable {
+      mail bcc: '', body: "<body><h2 style=\"color:orange\">Escapy2.0 develope build ${env.BUILD_TAG} unstable</h2> <h3><a href=\"${env.BUILD_URL}\">Build page reference</a></h3><h4>Node:${env.NODE_NAME}</h4></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 develope build ${env.BUILD_NUMBER} UNSTABLE", to: "henrycodev@gmail.com"
     }
   }
   
