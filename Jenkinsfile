@@ -52,7 +52,7 @@ pipeline {
   
   post {
     always {
-      sh 'echo "tests"'
+      mail bcc: '', body: "TEST", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "TEST", to: "henrycodev@gmail.com"
     }
   }
   
