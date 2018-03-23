@@ -52,13 +52,13 @@ pipeline {
   
   post {
     success {
-      mail bcc: '', body: "<body><h2 style=\"color:green\">Escapy2.0 develope build ${env.BUILD_TAG} deployed successful</h2> <h3><a href=\"${env.BUILD_URL}\">Build page reference</a></h3><h4>Node:${env.NODE_NAME}</h4></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 develope build ${env.BUILD_NUMBER} SUCCESS", to: "henrycodev@gmail.com"
+      mail bcc: '', body: "<body><h2 style=\"color:green\">Escapy2.0 develope build ${env.BUILD_NUMBER} deployed successful</h2> <h3><a href=\"${env.BUILD_URL}\">Build page reference</a></h3><h4>ID: ${env.BUILD_ID}</h4> <h4><a href=\"${env.GIT_URL}\">Gitub project reference</a></h4> <h4>Commit: ${env.GIT_COMMIT}</h4> <h4>Branch: ${env.GIT_BRANCH}</h4></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 develope build ${env.BUILD_NUMBER} SUCCESS", to: "henrycodev@gmail.com"
     }
     failure {
-      mail bcc: '', body: "<body><h2 style=\"color:red\">Escapy2.0 develope build ${env.BUILD_TAG} failure</h2> <h3><a href=\"${env.BUILD_URL}\">Build page reference</a></h3><h4>Node:${env.NODE_NAME}</h4></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 develope build ${env.BUILD_NUMBER} FAILURE", to: "henrycodev@gmail.com"
+      mail bcc: '', body: "<body><h2 style=\"color:red\">Escapy2.0 develope build ${env.BUILD_NUMBER} failure</h2> <h3><a href=\"${env.BUILD_URL}\">Build page reference</a></h3><h4>ID: ${env.BUILD_ID}</h4></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 develope build ${env.BUILD_NUMBER} FAILURE", to: "henrycodev@gmail.com"
     }
     unstable {
-      mail bcc: '', body: "<body><h2 style=\"color:orange\">Escapy2.0 develope build ${env.BUILD_TAG} unstable</h2> <h3><a href=\"${env.BUILD_URL}\">Build page reference</a></h3><h4>Node:${env.NODE_NAME}</h4></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 develope build ${env.BUILD_NUMBER} UNSTABLE", to: "henrycodev@gmail.com"
+      mail bcc: '', body: "<body><h2 style=\"color:orange\">Escapy2.0 develope build ${env.BUILD_NUMBER} unstable</h2> <h3><a href=\"${env.BUILD_URL}\">Build page reference</a></h3><h4>ID: ${env.BUILD_ID}</h4></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 develope build ${env.BUILD_NUMBER} UNSTABLE", to: "henrycodev@gmail.com"
     }
   }
   
