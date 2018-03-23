@@ -49,4 +49,17 @@ pipeline {
       }
     }
   }
+  
+  post {
+    success {
+      mail bcc: '', body: "<body><h2 style=\"color:green\">Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] deployed successful</h2> <h3>Commit: ${env.GIT_COMMIT}</h3> <br> <ul> <li><b><a href=\"${env.BUILD_URL}\">Build page reference</a></b></li> <li><b><a href=\"${env.GIT_URL}\">Gitub project reference</a></b></li></ul></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] SUCCESS", to: "henrycodev@gmail.com"
+    }
+    failure {
+      mail bcc: '', body: "<body><h2 style=\"color:red\">Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] failure</h2> <h3>Commit: ${env.GIT_COMMIT}</h3> <br> <ul> <li><b><a href=\"${env.BUILD_URL}\">Build page reference</a></b></li> <li><b><a href=\"${env.GIT_URL}\">Gitub project reference</a></b></li></ul></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] FAILURE", to: "henrycodev@gmail.com"
+    }
+    unstable {
+      mail bcc: '', body: "<body><h2 style=\"color:orange\">Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] unstable</h2> <h3>Commit: ${env.GIT_COMMIT}</h3> <br> <ul> <li><b><a href=\"${env.BUILD_URL}\">Build page reference</a></b></li> <li><b><a href=\"${env.GIT_URL}\">Gitub project reference</a></b></li></ul></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] UNSTABLE", to: "henrycodev@gmail.com"
+    }
+  }
+   
 }
