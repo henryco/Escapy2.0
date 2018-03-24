@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import lombok.Getter;
 import net.irregular.escapy.graphic.render.fbo.EscapyFBO;
 import net.irregular.escapy.graphic.render.fbo.EscapyFrameBuffer;
 import net.irregular.escapy.graphic.screen.Resolution;
@@ -14,21 +15,19 @@ import net.irregular.escapy.utils.EscapyObject;
  */
 public class LightSource implements EscapyObject {
 
-	public final EscapyLightSource lightSource;
-	public final float[] position;
-	public final String name;
+	private final EscapyLightSource lightSource;
+	private final float[] position;
+
+	public final @Getter String name;
+
+	private @Getter EscapyFBO buffer;
+	private @Getter float scale;
+	private @Getter float alpha;
 
 	private Texture region;
-
-	private EscapyFBO buffer;
 	private boolean update;
-	private float scale;
-	private float alpha;
 
 
-	public LightSource(String name, int scrW, int scrH) {
-		this(name, new EscapyLightSource(), scrW, scrH);
-	}
 	public LightSource(String name, EscapyLightSource lightSource, int scrW, int scrH) {
 
 		this.lightSource = lightSource;
@@ -41,7 +40,9 @@ public class LightSource implements EscapyObject {
 		update();
 	}
 
-
+	public LightSource(String name, int scrW, int scrH) {
+		this(name, new EscapyLightSource(), scrW, scrH);
+	}
 
 
 	public void prepareBuffer(Batch batch, boolean force) {
@@ -139,18 +140,6 @@ public class LightSource implements EscapyObject {
 	}
 
 
-	public float getScale() {
-		return scale;
-	}
-	public float getAlpha() {
-		return alpha;
-	}
-	public EscapyFBO getBuffer() {
-		return buffer;
-	}
-
-
-
 
 
 
@@ -204,8 +193,4 @@ public class LightSource implements EscapyObject {
 		buffer.dispose();
 	}
 
-	@Override
-	public String getName() {
-		return name;
-	}
 }

@@ -24,7 +24,8 @@ public class CameraModule {
 
 	@Provides
 	public Resolution provideResolution() {
-		return new Resolution(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+//		return new Resolution(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		return new Resolution(1280, 720);
 	}
 
 }

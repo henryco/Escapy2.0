@@ -1,3 +1,7 @@
+plugins {
+    id 'net.ltgt.apt' version '0.10'
+}
+
 apply plugin: "java"
 
 sourceCompatibility = 1.8
@@ -16,6 +20,7 @@ ext {
     ai_Version = '1.8.0'
     dagger_Version = '1.2.5'
     junit_Version = '4.11'
+    lombok_Version = '1.16.20'
 }
 
 repositories {
@@ -40,6 +45,9 @@ dependencies {
     compile "com.squareup.dagger:dagger-compiler:$dagger_Version"
 
     compile "com.google.code.gson:gson:$gson_Version"
+
+    compileOnly "org.projectlombok:lombok:$lombok_Version"
+    apt "org.projectlombok:lombok:$lombok_Version"
 
     testCompile "junit:junit:$junit_Version"
 }
