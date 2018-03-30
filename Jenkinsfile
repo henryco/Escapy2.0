@@ -25,8 +25,7 @@ pipeline {
       steps {
         sh 'rm -f -r artifacts'
         sh 'mkdir artifacts'
-        sh '''cp core/assets/Configuration.json artifacts/Configuration.json
-'''
+        sh 'cp core/assets/Configuration.json artifacts/Configuration.json'
         sh 'cp -r res artifacts/res'
         sh 'cp desktop/build/libs/desktop-SNAPSHOT.jar artifacts/desktop-SNAPSHOT.jar'
         sh 'rm -r -f release'
