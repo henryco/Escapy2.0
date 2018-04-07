@@ -12,12 +12,14 @@ import static java.io.File.separator;
 
 public final class DesktopLauncher {
 
-	public static void main(String[] arg) throws Exception {
+	private static final String CONFIG = System.getProperty("user.dir") + separator + "res" + separator + "Configuration.json";
+
+	public static void main(String[] arg) {
 
 		LwjglApplicationConfiguration config = EscapyDesktopConfigLoaderBuilder.Default()
 				.setLoadedClass(LwjglApplicationConfiguration.class)
 				.setSerializedClass(SerializedDesktopConfig.class)
-				.setPath(System.getProperty("user.dir") + separator + "Configuration.json")
+				.setPath(CONFIG)
 				.setName("MainConfiguration")
 				.build()
 		.loadDesktopConfig();

@@ -2,7 +2,8 @@ package net.irregular.escapy.desktop.builder;
 
 
 import com.google.gson.Gson;
-import net.irregular.escapy.context.annotation.EscapyAPI;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import net.irregular.escapy.desktop.EscapyDesktopConfigLoader;
 import net.irregular.escapy.utils.serial.EscapySerialized;
 
@@ -13,7 +14,7 @@ import java.lang.reflect.Field;
 
 /**
  * @author Henry on 15/07/17.
- */
+ */ @NoArgsConstructor @AllArgsConstructor
 public class DefaultDesktopConfigLoaderBuilder implements EscapyDesktopConfigLoaderBuilder {
 
 	private String path;
@@ -21,42 +22,6 @@ public class DefaultDesktopConfigLoaderBuilder implements EscapyDesktopConfigLoa
 
 	private Class loadedClass;
 	private Class<? extends EscapySerialized> serializedClass;
-
-
-	@EscapyAPI
-	public DefaultDesktopConfigLoaderBuilder() {}
-
-	@EscapyAPI
-	public DefaultDesktopConfigLoaderBuilder(String path) {
-		this();
-		setPath(path);
-	}
-
-	@EscapyAPI
-	public DefaultDesktopConfigLoaderBuilder(String path, String name) {
-		this(path);
-		setName(name);
-	}
-
-	@EscapyAPI
-	public DefaultDesktopConfigLoaderBuilder(Class loadedClass,
-											 Class<? extends EscapySerialized> serializedClass) {
-		this();
-		this.loadedClass = loadedClass;
-		this.serializedClass = serializedClass;
-	}
-
-	@EscapyAPI
-	public DefaultDesktopConfigLoaderBuilder(String path,
-											 String name,
-											 Class loadedClass,
-											 Class<? extends EscapySerialized> serializedClass) {
-		this(name, path);
-		this.loadedClass = loadedClass;
-		this.serializedClass = serializedClass;
-	}
-
-
 
 	@Override @SuppressWarnings("unchecked")
 	public EscapyDesktopConfigLoader build() {

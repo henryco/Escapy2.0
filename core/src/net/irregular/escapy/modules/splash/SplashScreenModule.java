@@ -13,6 +13,7 @@ import net.irregular.escapy.modules.group.GroupModule;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+import java.io.File;
 
 /**
  * @author Henry on 28/06/17.
@@ -52,7 +53,7 @@ public class SplashScreenModule {
 
 	@Provides @Named("logo_splash")
 	String provideSplashLogoUrl() {
-		return "ESCAPY.png";
+		return "res" + File.separator + "ESCAPY.png";
 	}
 
 
