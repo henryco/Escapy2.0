@@ -1,5 +1,11 @@
 pipeline {
   agent any
+  
+  environment {
+    BUILD_TYPE = (env.BRANCH_NAME == 'release') ? 'RELEASE' : 'SNAPSHOT'
+    SCRIPT_TYPE = (env.BRANCH_NAME == 'release') ? './release-update-version.sh' : ((env.BRANCH_NAME == 'release') ? ./build-update-version.sh : 'echo -')
+  }
+  
   stages {
     stage('Check') {
       steps {
@@ -27,18 +33,10 @@ pipeline {
         sh 'mkdir artifacts'
         sh 'cp core/assets/Configuration.json artifacts/Configuration.json'
         sh 'cp -r res artifacts/res'
-        if (env.BRANCH_NAME == 'release') {
-          sh 'cp desktop/build/libs/desktop-RELEASE.jar artifacts/desktop-RELEASE.jar'
-        } else {
-          sh 'cp desktop/build/libs/desktop-SNAPSHOT.jar artifacts/desktop-SNAPSHOT.jar'
-        }
+        sh "cp desktop/build/libs/desktop-${env.BUILD_TYPE}.jar artifacts/desktop-${env.BUILD_TYPE}.jar"
         sh 'rm -r -f release'
         sh 'mkdir release'
-        if (env.BRANCH_NAME == 'release') {
-          sh 'zip -r release/desktop-RELEASE.zip artifacts'
-        } else {
-          sh 'zip -r release/desktop-SNAPSHOT.zip artifacts'
-        }
+        sh "zip -r release/desktop-${env.BUILD_TYPE}.zip artifacts"
         sh 'rm -r -f artifacts'
       }
     }
@@ -46,14 +44,9 @@ pipeline {
       steps {
         archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
         archiveArtifacts(artifacts: 'release/*.zip', onlyIfSuccessful: true)
-        
-        if (env.BRANCH_NAME == 'release') {
-          sh 'cp release/desktop-RELEASE.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-RELEASE.zip'
-          sh 'cd /home/deploy-props/Hblog/scripts/ && ./release-update-version.sh'
-        } else if (env.BRANCH_NAME == 'develope') {
-          sh 'cp release/desktop-SNAPSHOT.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-SNAPSHOT.zip'
-          sh 'cd /home/deploy-props/Hblog/scripts/ && ./build-update-version.sh'
-        }
+        sh "cp release/desktop-${env.BUILD_TYPE}.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-${env.BUILD_TYPE}.zip"
+        sh "cd /home/deploy-props/Hblog/scripts/ && ${env.SCRIPT_TYPE}"
+       
       }
     }
     stage('Clean') {
