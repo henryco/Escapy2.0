@@ -27,10 +27,18 @@ pipeline {
         sh 'mkdir artifacts'
         sh 'cp core/assets/Configuration.json artifacts/Configuration.json'
         sh 'cp -r res artifacts/res'
-        sh 'cp desktop/build/libs/desktop-SNAPSHOT.jar artifacts/desktop-SNAPSHOT.jar'
+        if (env.BRANCH_NAME == 'release') {
+          sh 'cp desktop/build/libs/desktop-RELEASE.jar artifacts/desktop-RELEASE.jar'
+        } else {
+          sh 'cp desktop/build/libs/desktop-SNAPSHOT.jar artifacts/desktop-SNAPSHOT.jar'
+        }
         sh 'rm -r -f release'
         sh 'mkdir release'
-        sh 'zip -r release/desktop-SNAPSHOT.zip artifacts'
+        if (env.BRANCH_NAME == 'release') {
+          sh 'zip -r release/desktop-RELEASE.zip artifacts'
+        } else {
+          sh 'zip -r release/desktop-SNAPSHOT.zip artifacts'
+        }
         sh 'rm -r -f artifacts'
       }
     }
@@ -38,8 +46,14 @@ pipeline {
       steps {
         archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
         archiveArtifacts(artifacts: 'release/*.zip', onlyIfSuccessful: true)
-        sh 'cp release/desktop-SNAPSHOT.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-SNAPSHOT.zip'
-        sh 'cd /home/deploy-props/Hblog/scripts/ && ./build-update-version.sh'
+        
+        if (env.BRANCH_NAME == 'release') {
+          sh 'cp release/desktop-RELEASE.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-RELEASE.zip'
+          sh 'cd /home/deploy-props/Hblog/scripts/ && ./release-update-version.sh'
+        } else if (env.BRANCH_NAME == 'develope') {
+          sh 'cp release/desktop-SNAPSHOT.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-SNAPSHOT.zip'
+          sh 'cd /home/deploy-props/Hblog/scripts/ && ./build-update-version.sh'
+        }
       }
     }
     stage('Clean') {
@@ -60,5 +74,5 @@ pipeline {
       mail bcc: '', body: "<body><h2 style=\"color:orange\">Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] unstable</h2> <h3>Commit: <a style=\"color:black\" href=\"https://github.com/henryco/Escapy2.0/commit/${env.GIT_COMMIT}\">${env.GIT_COMMIT}</a></h3> <br> <ul> <li><b><a href=\"${env.BUILD_URL}\">Build page reference</a></b></li> <li><b><a href=\"${env.GIT_URL}\">Gitub project reference</a></b></li></ul></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] UNSTABLE", to: "henrycodev@gmail.com"
     }
   }
-   
+  
 }
