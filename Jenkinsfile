@@ -25,13 +25,20 @@ pipeline {
       steps {
         sh 'rm -f -r artifacts'
         sh 'mkdir artifacts'
-        sh '''cp core/assets/Configuration.json artifacts/Configuration.json
-'''
+        sh 'cp core/assets/Configuration.json artifacts/Configuration.json'
         sh 'cp -r res artifacts/res'
-        sh 'cp desktop/build/libs/desktop-RELEASE.jar artifacts/desktop-RELEASE.jar'
+        if (env.BRANCH_NAME == 'release') {
+          sh 'cp desktop/build/libs/desktop-RELEASE.jar artifacts/desktop-RELEASE.jar'
+        } else {
+          sh 'cp desktop/build/libs/desktop-SNAPSHOT.jar artifacts/desktop-SNAPSHOT.jar'
+        }
         sh 'rm -r -f release'
         sh 'mkdir release'
-        sh 'zip -r release/desktop-RELEASE.zip artifacts'
+        if (env.BRANCH_NAME == 'release') {
+          sh 'zip -r release/desktop-RELEASE.zip artifacts'
+        } else {
+          sh 'zip -r release/desktop-SNAPSHOT.zip artifacts'
+        }
         sh 'rm -r -f artifacts'
       }
     }
@@ -39,8 +46,14 @@ pipeline {
       steps {
         archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
         archiveArtifacts(artifacts: 'release/*.zip', onlyIfSuccessful: true)
-        sh 'cp release/desktop-RELEASE.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-RELEASE.zip'
-        sh 'cd /home/deploy-props/Hblog/scripts/ && ./release-update-version.sh'
+        
+        if (env.BRANCH_NAME == 'release') {
+          sh 'cp release/desktop-RELEASE.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-RELEASE.zip'
+          sh 'cd /home/deploy-props/Hblog/scripts/ && ./release-update-version.sh'
+        } else if (env.BRANCH_NAME == 'develope') {
+          sh 'cp release/desktop-SNAPSHOT.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-SNAPSHOT.zip'
+          sh 'cd /home/deploy-props/Hblog/scripts/ && ./build-update-version.sh'
+        }
       }
     }
     stage('Clean') {
