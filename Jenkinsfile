@@ -1,11 +1,13 @@
 pipeline {
   agent any
   stages {
+    
     stage('Check') {
       steps {
         sh 'gradle check -x desktop:dist -x test --stacktrace'
       }
     }
+    
     stage('Test') {
       steps {
         sh '(gradle test --stacktrace) || true'
@@ -16,46 +18,75 @@ pipeline {
         archiveArtifacts(artifacts: 'test-arch/*.zip', allowEmptyArchive: true)
       }
     }
+    
     stage('Build') {
       steps {
         sh 'gradle desktop:dist --stacktrace'
       }
     }
-    stage('Prepare artifacts') {
+    
+    
+    stage('Prepare artifacts RELEASE') {
+      when {
+        branch 'release'
+      }
       steps {
         sh 'rm -f -r artifacts'
         sh 'mkdir artifacts'
         sh 'cp core/assets/Configuration.json artifacts/Configuration.json'
         sh 'cp -r res artifacts/res'
-        if (env.BRANCH_NAME == 'release') {
-          sh 'cp desktop/build/libs/desktop-RELEASE.jar artifacts/desktop-RELEASE.jar'
-        } else {
-          sh 'cp desktop/build/libs/desktop-SNAPSHOT.jar artifacts/desktop-SNAPSHOT.jar'
-        }
+        sh 'cp desktop/build/libs/desktop-RELEASE.jar artifacts/desktop-RELEASE.jar'
         sh 'rm -r -f release'
         sh 'mkdir release'
-        if (env.BRANCH_NAME == 'release') {
-          sh 'zip -r release/desktop-RELEASE.zip artifacts'
-        } else {
-          sh 'zip -r release/desktop-SNAPSHOT.zip artifacts'
-        }
+        sh 'zip -r release/desktop-RELEASE.zip artifacts'
         sh 'rm -r -f artifacts'
       }
     }
-    stage('Acrtifacts') {
+    
+    stage('Prepare artifacts DEVELOPE') {
+      when {
+        branch 'develope'
+      }
+      steps {
+        sh 'rm -f -r artifacts'
+        sh 'mkdir artifacts'
+        sh 'cp core/assets/Configuration.json artifacts/Configuration.json'
+        sh 'cp -r res artifacts/res'
+        sh 'cp desktop/build/libs/desktop-SNAPSHOT.jar artifacts/desktop-SNAPSHOT.jar'
+        sh 'rm -r -f release'
+        sh 'mkdir release'
+        sh 'zip -r release/desktop-SNAPSHOT.zip artifacts'
+        sh 'rm -r -f artifacts'
+      }
+    }
+    
+    
+    
+    stage('Acrtifacts RELEASE') {
+      when {
+        branch 'release'
+      }
       steps {
         archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
         archiveArtifacts(artifacts: 'release/*.zip', onlyIfSuccessful: true)
-        
-        if (env.BRANCH_NAME == 'release') {
-          sh 'cp release/desktop-RELEASE.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-RELEASE.zip'
-          sh 'cd /home/deploy-props/Hblog/scripts/ && ./release-update-version.sh'
-        } else if (env.BRANCH_NAME == 'develope') {
-          sh 'cp release/desktop-SNAPSHOT.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-SNAPSHOT.zip'
-          sh 'cd /home/deploy-props/Hblog/scripts/ && ./build-update-version.sh'
-        }
+        sh 'cp release/desktop-RELEASE.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-RELEASE.zip'
+        sh 'cd /home/deploy-props/Hblog/scripts/ && ./release-update-version.sh'
       }
     }
+    
+    stage('Acrtifacts DEVELOPE') {
+      when {
+        branch 'develope'
+      }
+      steps {
+        archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
+        archiveArtifacts(artifacts: 'release/*.zip', onlyIfSuccessful: true)
+        sh 'cp release/desktop-SNAPSHOT.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-SNAPSHOT.zip'
+        sh 'cd /home/deploy-props/Hblog/scripts/ && ./build-update-version.sh'
+      }
+    }
+    
+    
     stage('Clean') {
       steps {
         sh '(pkill -f gradle) || true'
