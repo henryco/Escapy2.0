@@ -10,6 +10,7 @@ public class ShaderFile {
 		this.VERTEX = VERTEX;
 		this.FRAGMENT = FRAGMENT;
 	}
+
 	@Override
 	public String toString() {
 		return "ShaderFile{" +
