@@ -63,7 +63,6 @@ pipeline {
         branch 'develope'
       }
       steps {
-        archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
         archiveArtifacts(artifacts: 'release/*.zip', onlyIfSuccessful: true)
         sh 'cp release/desktop-SNAPSHOT.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-SNAPSHOT.zip'
         sh 'cd /home/deploy-props/Hblog/scripts/ && ./build-update-version.sh'
