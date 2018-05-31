@@ -113,7 +113,9 @@ gradle-app.setting
 .DS_Store
 Thumbs.db
 /engine/build/
+/tests/build
 
 /core/out
 /desktop/out
 /engine/out
+/tests/out

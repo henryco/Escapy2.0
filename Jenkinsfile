@@ -4,17 +4,17 @@ pipeline {
     
     stage('Check') {
       steps {
-        sh 'gradle check -x desktop:dist -x test --stacktrace'
+        sh 'gradle check -x desktop:dist -x tests:test --stacktrace'
       }
     }
     
     stage('Test') {
       steps {
-        sh '(gradle test --stacktrace) || true'
-        junit(testResults: 'build/test-results/*.xml', allowEmptyResults: true)
+        sh '(gradle tests:test --stacktrace) || true'
+        junit(testResults: 'tests/build/test-results/*.xml', allowEmptyResults: true)
         sh 'rm -f -r test-arch'
         sh 'mkdir test-arch'
-        sh '(zip -r test-arch/test-report.zip build/reports) || true'
+        sh '(zip -r test-arch/test-report.zip tests/build/reports) || true'
         archiveArtifacts(artifacts: 'test-arch/*.zip', allowEmptyArchive: true)
       }
     }
