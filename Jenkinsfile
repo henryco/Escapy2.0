@@ -31,15 +31,7 @@ pipeline {
         branch 'release'
       }
       steps {
-        sh 'rm -f -r artifacts'
-        sh 'mkdir artifacts'
-        sh 'cp core/assets/Configuration.json artifacts/Configuration.json'
-        sh 'cp -r res artifacts/res'
-        sh 'cp desktop/build/libs/desktop-RELEASE.jar artifacts/desktop-RELEASE.jar'
-        sh 'rm -r -f release'
-        sh 'mkdir release'
-        sh 'zip -r release/desktop-RELEASE.zip artifacts'
-        sh 'rm -r -f artifacts'
+        sh './package.sh RELEASE'
       }
     }
     
@@ -48,15 +40,7 @@ pipeline {
         branch 'develope'
       }
       steps {
-        sh 'rm -f -r artifacts'
-        sh 'mkdir artifacts'
-        sh 'cp core/assets/Configuration.json artifacts/Configuration.json'
-        sh 'cp -r res artifacts/res'
-        sh 'cp desktop/build/libs/desktop-SNAPSHOT.jar artifacts/desktop-SNAPSHOT.jar'
-        sh 'rm -r -f release'
-        sh 'mkdir release'
-        sh 'zip -r release/desktop-SNAPSHOT.zip artifacts'
-        sh 'rm -r -f artifacts'
+	sh './package.sh SNAPSHOT'
       }
     }
     
