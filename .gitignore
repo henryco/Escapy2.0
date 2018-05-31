@@ -119,3 +119,5 @@ Thumbs.db
 /desktop/out
 /engine/out
 /tests/out
+/artifacts
+/release
