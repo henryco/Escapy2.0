@@ -40,7 +40,7 @@ pipeline {
         branch 'develope'
       }
       steps {
-	sh './package.sh SNAPSHOT'
+        sh './package.sh SNAPSHOT'
       }
     }
     
@@ -51,7 +51,6 @@ pipeline {
         branch 'release'
       }
       steps {
-        archiveArtifacts(artifacts: 'desktop/build/libs/*.jar', allowEmptyArchive: true, onlyIfSuccessful: true)
         archiveArtifacts(artifacts: 'release/*.zip', onlyIfSuccessful: true)
         sh 'cp release/desktop-RELEASE.zip /home/Programs/Hblog/out/res/public/deploy/files/desktop-RELEASE.zip'
         sh 'cd /home/deploy-props/Hblog/scripts/ && ./release-update-version.sh'
@@ -68,16 +67,14 @@ pipeline {
         sh 'cd /home/deploy-props/Hblog/scripts/ && ./build-update-version.sh'
       }
     }
-    
-    
-    stage('Clean') {
-      steps {
-        sh '(pkill -f gradle) || true'
-      }
-    }
+
   }
   
   post {
+
+    always {
+      sh '(pkill -f gradle) || true'
+    }
 
     success {
       script {
