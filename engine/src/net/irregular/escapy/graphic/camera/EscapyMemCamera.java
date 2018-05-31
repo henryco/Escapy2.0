@@ -62,7 +62,6 @@ public class EscapyMemCamera
 		return memento;
 	}
 
-
 	public void save() {
 		initializeMemento(memento, camera).save();
 	}
