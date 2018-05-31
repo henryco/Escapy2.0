@@ -8,7 +8,7 @@ import net.irregular.escapy.utils.memento.EscapyCloneable;
 import net.irregular.escapy.utils.memento.Memento;
 
 public class EscapyMemCamera
-		implements IEscapyCamera {
+		implements IEscapyMemoCam {
 
 	@Data @AllArgsConstructor
 	public final static class CameraData
@@ -62,10 +62,12 @@ public class EscapyMemCamera
 		return memento;
 	}
 
+	@Override
 	public void save() {
 		initializeMemento(memento, camera).save();
 	}
 
+	@Override
 	public void revert() {
 		this.camera = initializeCamera(
 				camera, memento.revert()
