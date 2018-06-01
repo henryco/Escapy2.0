@@ -4,27 +4,29 @@ import lombok.val;
 
 import java.util.Collection;
 
-public interface IEscapyNode {
+public interface IEscapyNode<P> {
 
 	String getId();
 
-	<T> T get(String id);
+	<T extends P> T get(String id);
 
-	IEscapyNode set(Object content);
+	IEscapyNode<P> set(P content);
 
-	IEscapyNode addNode(IEscapyNode node);
+	IEscapyNode<P> addNode(IEscapyNode<P> node);
 
-	IEscapyNode getNodeDirectly(String id);
+	IEscapyNode<P> getNodeDirectly(String id);
 
-	IEscapyNode getNode(String id);
+	IEscapyNode<P> getNode(String id);
 
-	IEscapyNode getNode(String... id);
+	IEscapyNode<P> getNode(String ... id);
 
-	IEscapyNode removeNode(String id);
+	IEscapyNode<P> removeNode(String id);
 
-	IEscapyNode getParent();
+	IEscapyNode<P> getParent();
 
-	Collection<IEscapyNode> getNodes();
+	Collection<IEscapyNode<P>> getNodes();
+
+	void setObserver(IEscapyNodeObserver observer);
 
 
 	default String treeView() {
@@ -36,7 +38,7 @@ public interface IEscapyNode {
 	}
 
 	final class Visualizer {
-		private static String treeView(String prefix, int pSize, IEscapyNode node) {
+		private static String treeView(String prefix, int pSize, IEscapyNode<?> node) {
 
 			val pr = new StringBuilder();
 			for (int i = 0; i < pSize - 1; i++)

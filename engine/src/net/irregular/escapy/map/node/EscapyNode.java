@@ -1,25 +1,28 @@
 package net.irregular.escapy.map.node;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.val;
 import java.util.*;
 
-public class EscapyNode implements IEscapyNode {
+public class EscapyNode<T> implements IEscapyNode<T> {
 
-	private final Map<String, IEscapyNode> cache;
-	private final Map<String, IEscapyNode> nodes;
-	private final Map<IEscapyNode, String> keys;
-	private final Set<IEscapyNode> supervisors;
-	private final Set<IEscapyNode> cached;
+	private final Map<String, IEscapyNode<T>> cache;
+	private final Map<String, IEscapyNode<T>> nodes;
+	private final Map<IEscapyNode<T>, String> keys;
+	private final Set<IEscapyNode<T>> supervisors;
+	private final Set<IEscapyNode<T>> cached;
 	private final String id;
 
-	private IEscapyNode parent;
-	private Object content;
+	private @Setter IEscapyNodeObserver observer;
+	private @Getter IEscapyNode<T> parent;
+	private T content;
 
 	/**
 	 * @param content saved content
 	 * @param id might be NULL
 	 */
-	public EscapyNode(Object content, String id) {
+	public EscapyNode(T content, String id) {
 		this.id = id == null ? UUID.randomUUID().toString() : id;
 		this.supervisors = new HashSet<>();
 		this.cached = new HashSet<>();
@@ -29,7 +32,7 @@ public class EscapyNode implements IEscapyNode {
 		this.content = content;
 	}
 
-	public EscapyNode(Object content) {
+	public EscapyNode(T content) {
 		this(content, null);
 	}
 
@@ -38,13 +41,13 @@ public class EscapyNode implements IEscapyNode {
 	}
 
 	@Override
-	public <T> T get(String id) {
+	public <Z extends T> Z get(String id) {
 		//noinspection unchecked
-		return (T) content;
+		return (Z) content;
 	}
 
 	@Override
-	public IEscapyNode set(Object content) {
+	public IEscapyNode<T> set(T content) {
 		this.content = content;
 		return this;
 	}
@@ -55,20 +58,25 @@ public class EscapyNode implements IEscapyNode {
 	}
 
 	@Override
-	public IEscapyNode addNode(IEscapyNode node) {
+	public IEscapyNode<T> addNode(IEscapyNode<T> node) {
 		((EscapyNode) node).parent = this;
+		node.setObserver(this.observer);
 		nodes.put(node.getId(), node);
+
+		if (observer != null)
+			this.observer.nodeAdded(this, node);
+
 		return this;
 	}
 
 	@Override
-	public IEscapyNode getNodeDirectly(String id) {
+	public IEscapyNode<T> getNodeDirectly(String id) {
 		if (id == null) return null;
 		return nodes.get(id);
 	}
 
 	@Override
-	public IEscapyNode getNode(String id) {
+	public IEscapyNode<T> getNode(String id) {
 
 		if (id == null) return null;
 		id = id.replace(" ", "");
@@ -80,28 +88,28 @@ public class EscapyNode implements IEscapyNode {
 		val ids = id.split(":");
 
 		val result = getNode(ids);
-		saveToCache(id, (EscapyNode) result);
+		saveToCache(id, (EscapyNode<T>) result);
 
 		return result;
 	}
 
 	@Override
-	public IEscapyNode getNode(String ... id) {
+	public IEscapyNode<T> getNode(String ... id) {
 
-		EscapyNode node = this;
+		EscapyNode<T> node = this;
 		for (val i: id)
-			if ((node = (EscapyNode) node.nodes.get(i)) == null)
+			if ((node = (EscapyNode<T>) node.nodes.get(i)) == null)
 				return null;
 		return node;
 	}
 
 	@Override
-	public IEscapyNode removeNode(String id) {
+	public IEscapyNode<T> removeNode(String id) {
 
 		if (id == null) return null;
 		id = id.replace(" ", "");
 
-		EscapyNode node = ((EscapyNode) nodes.remove(id));
+		EscapyNode<T> node = ((EscapyNode<T>) nodes.remove(id));
 		if (node == null) {
 
 			val ids = id.split(":");
@@ -110,37 +118,35 @@ public class EscapyNode implements IEscapyNode {
 			val search_set = new String[ids.length - 1];
 			val search_id = ids[ids.length - 1];
 
-			for (int i = 0; i < ids.length - 1; i++)
-				search_set[i] = ids[i];
+			System.arraycopy(ids, 0, search_set, 0, ids.length - 1);
 
 			val from = getNode(search_set);
-			node = (EscapyNode) from.removeNode(search_id);
+			node = (EscapyNode<T>) from.removeNode(search_id);
 
 			if (node == null) return null;
 		}
 
 		for (val c : node.cached) {
-			if (((EscapyNode) c).parent != null)
-				((EscapyNode) c).parent.removeNode(c.getId());
+			if (((EscapyNode<T>) c).parent != null)
+				((EscapyNode<T>) c).parent.removeNode(c.getId());
 		}
 		node.cached.clear();
 
 		for (val supervisor : node.supervisors) {
 			val key = node.keys.get(supervisor);
-			((EscapyNode) supervisor).cache.remove(key);
+			((EscapyNode<T>) supervisor).cache.remove(key);
 		}
 		node.supervisors.clear();
 		node.parent = null;
+
+		if (observer != null)
+			observer.nodeRemoved(this, node);
+
 		return node;
 	}
 
 	@Override
-	public IEscapyNode getParent() {
-		return parent;
-	}
-
-	@Override
-	public Collection<IEscapyNode> getNodes() {
+	public Collection<IEscapyNode<T>> getNodes() {
 		return nodes.values();
 	}
 
@@ -159,15 +165,15 @@ public class EscapyNode implements IEscapyNode {
 				'}';
 	}
 
-	private void saveToCache(String id, EscapyNode result) {
+	private void saveToCache(String id, EscapyNode<T> result) {
 		if (result == null) return;
 
 		cache.put(id, result);
 		result.supervisors.add(this);
 		result.keys.put(this, id);
 
-		EscapyNode parent = result;
-		while ((parent = (EscapyNode) parent.parent) != null) {
+		EscapyNode<T> parent = result;
+		while ((parent = (EscapyNode<T>) parent.parent) != null) {
 			parent.cached.add(result);
 		}
 	}

@@ -68,6 +68,12 @@ pipeline {
       }
     }
 
+    stage('Finish') {
+      steps {
+        sh 'echo FINISH'
+      }
+    }
+
   }
   
   post {
