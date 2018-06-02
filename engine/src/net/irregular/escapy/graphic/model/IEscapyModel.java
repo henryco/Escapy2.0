@@ -1,4 +1,4 @@
-package net.irregular.escapy.graphic.render.model;
+package net.irregular.escapy.graphic.model;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import net.irregular.escapy.graphic.camera.IEscapyCamera;
@@ -8,23 +8,27 @@ import java.util.Collections;
 
 public interface IEscapyModel extends IEscapyRenderable {
 
+	@FunctionalInterface interface Render {
+		void renderModel(IEscapyCamera camera, Batch batch, float delta);
+	}
+
 	default void preRender(IEscapyCamera camera, Batch batch, float delta) {}
 
 	default void postRender(IEscapyCamera camera, Batch batch, float delta) {}
 
-	default IEscapyRenderModel[] preRenderQueue() {
-		return new IEscapyRenderModel[] {
+	default Render[] preRenderQueue() {
+		return new Render[] {
 				this::preRender
 		};
 	}
 
-	default IEscapyRenderModel[] postRenderQueue() {
-		return new IEscapyRenderModel[] {
+	default Render[] postRenderQueue() {
+		return new Render[] {
 				this::postRender
 		};
 	}
 
-	default Collection<IEscapyModel> getNestedModels() {
+	default Collection<? extends IEscapyModel> getNestedModels() {
 		//noinspection unchecked
 		return Collections.EMPTY_LIST;
 	}

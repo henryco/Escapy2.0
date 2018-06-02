@@ -2,7 +2,7 @@ package net.irregular.escapy.proto;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import net.irregular.escapy.graphic.camera.IEscapyCamera;
-import net.irregular.escapy.graphic.render.model.IEscapyModel;
+import net.irregular.escapy.graphic.model.IEscapyModel;
 import org.junit.Test;
 
 import java.util.Arrays;

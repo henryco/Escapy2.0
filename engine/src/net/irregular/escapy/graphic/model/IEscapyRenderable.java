@@ -1,4 +1,4 @@
-package net.irregular.escapy.graphic.render.model;
+package net.irregular.escapy.graphic.model;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import net.irregular.escapy.graphic.camera.IEscapyCamera;
