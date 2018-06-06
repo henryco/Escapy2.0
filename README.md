@@ -1,11 +1,8 @@
-# ![Escapy2.0](https://raw.githubusercontent.com/henryco/Escapy2.0/master/promo/ESCAPY.png) <br> <a href='http://174.138.0.194:1997/job/Escapy2.0/develope'><img src="http://174.138.0.194:1997/buildStatus/icon?job=Escapy2.0/release" /></a>
-<h3>Java 2D game engine</h3>
+# ![Escapy2.0](https://raw.githubusercontent.com/henryco/Escapy2.0/master/promo/ESCAPY.png) 
+[![Build Status](http://174.138.0.194:1997/buildStatus/icon?job=tinder-samurai/escapy2.0/develope)](http://174.138.0.194:1997/job/tinder-samurai/job/escapy2.0/job/develope/)
+### Java 2D game engine 
 
-   * <a href="https://github.com/henryco/Escapy2.0/blob/master/engine/doc/tex/Escapy2Doc.pdf">**Engine Documentation and User Guide**</a>
-   * <a href="https://github.com/henryco/Escapy-des-doc">**Game Design document**</a>
-   * <a href="https://github.com/henryco/Escapy">**EscapyGdx (old)**</a>
-   * <a href="http://square.github.io/dagger/">**Dagger**</a>
-<br>
-
-<img src="https://raw.githubusercontent.com/henryco/Escapy/master/promo/esWeather.png" />
-<img src="https://raw.githubusercontent.com/henryco/Escapy/master/promo/ims3.png" />
+ * [**Engine Documentation and User Guide**](https://bitbucket.org/tinder-samurai/escapy2.0/src/master/engine/doc/tex/Escapy2Doc.pdf)
+ * [**Game Design document**](https://bitbucket.org/tinder-samurai/escapy-des-doc/src/master/)
+ * [**EscapyGdx (old)**](https://bitbucket.org/tinder-samurai/escapy/src/master/)
+ * [**Dagger**](http://square.github.io/dagger/)
