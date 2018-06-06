@@ -17,4 +17,3 @@ rm -r -f release
 mkdir release
 
 zip -r "release/desktop-${BUILD_TYPE}.zip" artifacts
-rm -r -f artifacts
