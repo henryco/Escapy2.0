@@ -11,7 +11,6 @@ pipeline {
     
     stage('Test') {
       steps {
-	sh '(cd tests/build/test-results && touch *.xml) || true'
         sh 'gradle tests:test --stacktrace'
       }
     }
@@ -67,7 +66,7 @@ pipeline {
 
     stage('Finish') {
       steps {
-        sh 'echo FINISH'
+        sh 'echo FINISH' //todo
       }
     }
 
@@ -76,14 +75,15 @@ pipeline {
   post {
 
     always {
-      sh 'gradle clean'
-      sh '(pkill -f gradle) || true'
       
       junit(testResults: 'tests/build/test-results/*.xml', allowEmptyResults: true)
       sh 'rm -f -r test-arch'
       sh 'mkdir test-arch'
       sh '(zip -r test-arch/test-report.zip tests/build/reports) || true'
       archiveArtifacts(artifacts: 'test-arch/*.zip', allowEmptyArchive: true)
+
+      sh 'gradle clean'
+      sh '(pkill -f gradle) || true'
     }
 
     success {
