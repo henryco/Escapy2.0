@@ -7,6 +7,7 @@ import java.util.function.Function;
 /**
  * @author Henry on 27/06/17.
  */
+@Deprecated
 public class TransVec {
 
 	private float[] translationVectorArray;
