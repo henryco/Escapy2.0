@@ -1,12 +1,13 @@
-package net.irregular.escapy.graphic.model;
+package net.irregular.escapy.map.model;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import net.irregular.escapy.graphic.camera.IEscapyCamera;
+import net.irregular.escapy.graphic.screen.Wipeable;
 
 import java.util.Collection;
 import java.util.Collections;
 
-public interface IEscapyModel extends IEscapyRenderable {
+public interface IEscapyModel extends IEscapyRenderable, Wipeable {
 
 	@FunctionalInterface interface Render {
 		void renderModel(IEscapyCamera camera, Batch batch, float delta);
