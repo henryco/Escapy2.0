@@ -1,4 +1,4 @@
-package net.irregular.escapy.map.comp;
+package net.irregular.escapy.map.comp.annotation;
 
 import java.lang.annotation.*;
 
@@ -10,5 +10,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Target({METHOD, TYPE})
 public @interface EscapyComponent {
-	String[] value();
+	String value();
 }

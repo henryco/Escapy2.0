@@ -1,0 +1,30 @@
+<components>
+
+    <component name="TestComponentOne">
+        <args>
+            <string name="text">hello</string>
+            <integer name="numb">42</integer>
+            <array>
+                <float>1</float>
+                <float>2.5</float>
+            </array>
+
+            <object class="java.util.ArrayList">
+                <constructor>
+                    <integer>10</integer>
+                </constructor>
+                <add>
+                    <string>hello from list</string>
+                    <string>and bai</string>
+                </add>
+            </object>
+
+        </args>
+
+        <components>
+
+        </components>
+
+    </component>
+
+</components>

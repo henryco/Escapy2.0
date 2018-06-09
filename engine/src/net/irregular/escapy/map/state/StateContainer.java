@@ -1,5 +1,5 @@
 package net.irregular.escapy.map.state;
 
-public class StateContainer {
+public class StateContainer implements IEscapyStateContainer {
 
 }
