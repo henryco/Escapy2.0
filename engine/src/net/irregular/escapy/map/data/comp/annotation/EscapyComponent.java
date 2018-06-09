@@ -1,4 +1,4 @@
-package net.irregular.escapy.map.comp.annotation;
+package net.irregular.escapy.map.data.comp.annotation;
 
 import java.lang.annotation.*;
 

@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import lombok.experimental.Delegate;
 
 import java.nio.Buffer;
 import java.nio.FloatBuffer;
@@ -16,7 +17,7 @@ import java.nio.FloatBuffer;
  */
 public interface EscapyProxyShaderProgram {
 
-	public ShaderProgram getShaderProgram();
+	ShaderProgram getShaderProgram();
 
 	static void invalidateAllShaderPrograms(Application app) {
 		ShaderProgram.invalidateAllShaderPrograms(app);

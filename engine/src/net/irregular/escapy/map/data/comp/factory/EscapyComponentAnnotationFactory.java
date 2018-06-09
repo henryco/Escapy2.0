@@ -1,9 +1,9 @@
-package net.irregular.escapy.map.comp.factory;
+package net.irregular.escapy.map.data.comp.factory;
 
 import lombok.val;
-import net.irregular.escapy.map.comp.annotation.Arg;
-import net.irregular.escapy.map.comp.annotation.EscapyComponent;
-import net.irregular.escapy.map.comp.annotation.EscapyComponentFactory;
+import net.irregular.escapy.map.data.comp.annotation.Arg;
+import net.irregular.escapy.map.data.comp.annotation.EscapyComponent;
+import net.irregular.escapy.map.data.comp.annotation.EscapyComponentFactory;
 
 import java.util.*;
 import java.util.function.Function;
@@ -30,13 +30,13 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 			val cfa = factory.getClass().getDeclaredAnnotation(EscapyComponentFactory.class);
 			if (cfa == null) continue;
 
-			val metadata = EscapyComponentFactory.Helper.getMetaData(cfa, factory.getClass());
+			val namespace = EscapyComponentFactory.Helper.getName(cfa, factory.getClass());
 			for (val method : factory.getClass().getDeclaredMethods()) {
 
 				val esc = method.getDeclaredAnnotation(EscapyComponent.class);
 				if (esc == null) continue;
 
-				val componentName = metadata.getName().trim() + ":" + esc.value().trim();
+				val componentName = namespace.trim() + ":" + esc.value().trim();
 				val parameters = method.getParameters();
 				val args = new Map.Entry[parameters.length];
 
@@ -79,7 +79,7 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 	}
 
 	@Override
-	public <T> T crateComponent(String name, Map<String, Object> arguments) {
+	public <T> T createComponent(String name, Map<String, Object> arguments) {
 		//noinspection unchecked
 		return (T) constructors.get(name).apply(arguments);
 	}
