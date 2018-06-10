@@ -50,6 +50,7 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        compile 'com.github.henryco:grinjector:1.2.0'
         compile "com.kotcrab.vis:vis-ui:1.3.0"
     }
 }

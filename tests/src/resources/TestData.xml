@@ -4,7 +4,7 @@
         <args>
             <string name="text">hello</string>
             <integer name="numb">42</integer>
-            <array>
+            <array name="wow" type="integer">
                 <float>1</float>
                 <float>2.5</float>
             </array>
