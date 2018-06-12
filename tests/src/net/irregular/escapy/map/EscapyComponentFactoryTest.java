@@ -5,9 +5,11 @@ import net.irregular.escapy.map.data.comp.annotation.EscapyComponent;
 import net.irregular.escapy.map.data.comp.annotation.EscapyComponentFactory;
 import net.irregular.escapy.map.data.comp.factory.EscapyComponentAnnotationFactory;
 import net.irregular.escapy.map.data.comp.factory.IEscapyComponentFactory;
+import net.irregular.escapy.map.data.core.UtilityCoreComponent;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -112,6 +114,41 @@ public class EscapyComponentFactoryTest {
 		Assert.assertEquals("42", factory.createComponent("CompFactory.BANG.wow", new HashMap<>()).toString());
 	}
 
+
+	@Test
+	public void primitiveTypeComponentTest() {
+		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(new UtilityCoreComponent());
+		Map<String, Object> args = new HashMap<String, Object>() {{
+			put("object", 10);
+		}};
+		Assert.assertEquals(int.class, factory.createComponent("u.p.type", args));
+	}
+
+	@Test
+	public void arrayComponentTest() {
+		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(new UtilityCoreComponent());
+		Map<String, Object> args = new HashMap<String, Object>() {{
+			put("type", Float.class);
+			put("input", new Object[]{10f, 0.5f, 42.2f});
+
+		}};
+		final Object array = factory.createComponent("u.array", args);
+		Assert.assertEquals(Float[].class, array.getClass());
+		Assert.assertArrayEquals(new Float[]{10f, 0.5f, 42.2f}, (Object[]) array);
+	}
+
+	@Test
+	public void arrayPrimitiveComponentTest() {
+		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(new UtilityCoreComponent());
+		Map<String, Object> args = new HashMap<String, Object>() {{
+			put("type", short.class);
+			put("input", new Object[]{((short) 40), ((short) 24), ((short) 15), ((short) 21)});
+		}};
+		final Object array = factory.createComponent("u.array", args);
+
+		Assert.assertEquals(short[].class, array.getClass());
+		Assert.assertArrayEquals(new short[]{40, 24, 15, 21}, (short[]) array);
+	}
 
 	@Test // TODO
 	public void typeTest() throws Exception {

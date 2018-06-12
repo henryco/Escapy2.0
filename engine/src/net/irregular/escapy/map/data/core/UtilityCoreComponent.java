@@ -6,13 +6,13 @@ import net.irregular.escapy.map.data.comp.annotation.EscapyComponentFactory;
 
 import java.lang.reflect.Array;
 
-@EscapyComponent("u") // u for utility
+@EscapyComponentFactory("u") // u for utility
 public class UtilityCoreComponent {
 
 	@EscapyComponentFactory("p") // p for primitive
 	public static final class PrimitivesUtilities {
 
-		@EscapyComponent("type")
+		@EscapyComponent("type") // test: OK
 		public Class<?> primitiveType(@Arg("object") Object o) {
 			try {
 				return (Class<?>) o.getClass().getField("TYPE").get(null);
@@ -30,15 +30,16 @@ public class UtilityCoreComponent {
 	}
 
 
-	@EscapyComponent("array")
-	public <T> T[] newArrayInstance(@Arg("type") Class<T> type, T ... args) {
-		//noinspection unchecked
-		T[] array = (T[]) Array.newInstance(type, args.length);
-		System.arraycopy(args, 0, array, 0, args.length);
+	@EscapyComponent("array") // test: OK
+	public Object newArrayInstance(@Arg("type") Class<?> type, @Arg("input") Object args) {
+		final int l = Array.getLength(args);
+		Object array = Array.newInstance(type, l);
+		for (int i = 0; i < l; i++)
+			Array.set(array, i, Array.get(args, i));
 		return array;
 	}
 
-	@EscapyComponent("class")
+	@EscapyComponent("class") // test: OK
 	public Class<?> findClass(@Arg("object") Object o) {
 		return o.getClass();
 	}
