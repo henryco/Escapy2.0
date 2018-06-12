@@ -33,7 +33,7 @@ public final class Uniform<T> {
 	 * внутреннего состояния не требутся. Алсо это говно работает на рефлексии, но в основном во время инициализации или
 	 * установки значений, на скорости обработки графониума это сказаться не должно.<br><br><b>Даже не пытайся понять или
 	 * изменить код, просто смирись и используй и тебе понравится.</b>
-	 * @param uniformType Type of uniform value to be set in java environment (can be array).
+	 * @param uniformType Type of uniform value to be set in java environment (can be newArrayInstance).
 	 */ @EscapyAPI @Dante
 	public Uniform(Class<T> uniformType) {
 

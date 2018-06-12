@@ -129,7 +129,7 @@ public class TransVec {
 	/**
 	 * Round vec.
 	 *
-	 * @param dta - array for round
+	 * @param dta - newArrayInstance for round
 	 * @return the float[]
 	 */
 	protected float[] roundVec(float[] dta) {
@@ -152,9 +152,9 @@ public class TransVec {
 	}
 
 	/**
-	 * Gets the translation vector array.
+	 * Gets the translation vector newArrayInstance.
 	 *
-	 * @return the translation vector array
+	 * @return the translation vector newArrayInstance
 	 */
 	public float[] getVecArray() {
 		return translationVectorArray;

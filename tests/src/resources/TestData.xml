@@ -66,7 +66,7 @@
 
         <!-- via components you can create arrays -->
         <c:u.array>
-            <!-- first arg defines array type -->
+            <!-- first arg defines newArrayInstance type -->
             <c:u.p.type><o:integer/></c:u.p.type>
             <o:integer>1</o:integer>
             <o:integer>2</o:integer>
