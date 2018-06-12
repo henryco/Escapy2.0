@@ -53,7 +53,8 @@ public class EscapyComponentFactoryTest {
 			put("1", 10);
 			put("2", new Float[5]);
 		}};
-		Map<String, Object> args7 = new HashMap<String, Object>() {{ }};
+		Map<String, Object> args7 = new HashMap<String, Object>() {{
+		}};
 
 		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(new CompFactory());
 
@@ -84,6 +85,18 @@ public class EscapyComponentFactoryTest {
 			put("1", 42);
 		}};
 		Assert.assertEquals("galaxy-42", factory.createComponent("CompFactory:some", args1).toString());
+	}
+
+	@Test // TODO
+	public void typeTest() throws Exception {
+		System.out.println(int.class.getName());
+		show(int.class);
+		show((Class<?>) Class.forName("java.lang.Integer").getField("TYPE").get(null));
+
+	}
+
+	public void show(Class<?> c) {
+		System.out.println(c);
 	}
 
 }

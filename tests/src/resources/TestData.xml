@@ -1,29 +1,88 @@
 <components>
 
-    <component name="TestComponentOne">
-        <args>
-            <string name="text">hello</string>
-            <integer name="numb">42</integer>
-            <array name="wow" type="integer">
-                <float>1</float>
-                <float>2.5</float>
-            </array>
-            <object class="java.util.ArrayList">
-                <constructor>
-                    <integer>10</integer>
-                </constructor>
-                <add>
-                    <string>hello from list</string>
-                    <string>and bai</string>
-                </add>
-            </object>
+    <!-- C for component, "." split modules -->
+    <c:escapy.some>
+        <!-- All declarations are the same -->
 
-        </args>
+        <!-- [java.lang].[F]loat -->
+        <!-- o: == java.lang.* and marks as object-->
+        <!-- also component args can have names -->
+        <o:float name="someArg">5</o:float>
 
-        <components>
+        <o:integer>
+            <!-- [class] attribute defines constructor -->
+            <!--default arg type is java.lang.String -->
+            <new class="java.lang.Integer">
+                42
+            </new>
+        </o:integer>
 
-        </components>
+        <!-- in this place [class] defines object type -->
+        <o:object class="java.lang.Long">
+            <!-- constructor resolved automatically [Long] -->
+            <new>10</new>
+        </o:object>
 
-    </component>
+        <o:object class="java.lang.Byte">
+            <!-- but we can also do this -->
+            <new class="java.lang.Byte">
+                255
+            </new>
+        </o:object>
+
+        <!-- List is abstract so we need define constructor -->
+        <o:object class="java.util.List">
+            <!-- empty constructor -->
+            <new class="java.util.ArrayList"/>
+            <!-- this is method statements -->
+            <m:add>
+                <o:integer>10</o:integer>
+            </m:add>
+        </o:object>
+
+        <!-- (a) -->
+        <o:float>
+            <new/>
+        </o:float>
+        <!-- (a) == (b) -->
+        <!-- (b) -->
+        <o:float/>
+
+
+        <!-- That's how you can create primitives -->
+        <!-- Yes, it uses components, not objects -->
+        <!-- u.p is module UTILS.PRIMITIVES -->
+        <c:u.p.value>
+            <!-- and here we pass object -->
+            <o:integer>50</o:integer>
+        </c:u.p.value>
+
+        <!-- this component execution return primitive type -->
+        <c:u.p.type>
+            <o:float/>
+        </c:u.p.type>
+
+        <!-- via components you can create arrays -->
+        <c:u.array>
+            <!-- first arg defines array type -->
+            <c:u.p.type><o:integer/></c:u.p.type>
+            <o:integer>1</o:integer>
+            <o:integer>2</o:integer>
+            <o:integer>3</o:integer>
+        </c:u.array>
+
+        <!-- Get class via components -->
+        <c:u.class>
+            <o:long/>
+        </c:u.class>
+
+        <!-- Doing the same -->
+        <return>
+            <o:short>
+                <m:get-class/>
+            </o:short>
+        </return>
+
+    </c:escapy.some>
 
 </components>
