@@ -56,7 +56,7 @@ public class EscapyComponentFactoryTest {
 		Map<String, Object> args7 = new HashMap<String, Object>() {{
 		}};
 
-		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(new CompFactory());
+		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(":", new CompFactory());
 
 		Assert.assertEquals("galaxy-42", factory.createComponent("CompFactory:some", args1).toString());
 		Assert.assertEquals("null-10", factory.createComponent("CompFactory:some", args2).toString());
@@ -84,8 +84,34 @@ public class EscapyComponentFactoryTest {
 			put("0", "galaxy");
 			put("1", 42);
 		}};
-		Assert.assertEquals("galaxy-42", factory.createComponent("CompFactory:some", args1).toString());
+		Assert.assertEquals("galaxy-42", factory.createComponent("CompFactory.some", args1).toString());
 	}
+
+
+	@Test
+	public void nestedFactoryTest() {
+		@EscapyComponentFactory
+		final class CompFactory {
+
+			@EscapyComponent("some")
+			public String something(String name, Integer age) {
+				if (age == null) return "WOW";
+				return name + "-" + age.toString();
+			}
+
+			@EscapyComponentFactory("BANG")
+			final class BangFactory {
+				@EscapyComponent("wow")
+				public Integer show() {
+					return 42;
+				}
+			}
+		}
+
+		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(new CompFactory());
+		Assert.assertEquals("42", factory.createComponent("CompFactory.BANG.wow", new HashMap<>()).toString());
+	}
+
 
 	@Test // TODO
 	public void typeTest() throws Exception {

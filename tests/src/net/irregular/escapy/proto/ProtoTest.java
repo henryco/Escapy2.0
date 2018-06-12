@@ -5,6 +5,7 @@ import net.irregular.escapy.graphic.camera.IEscapyCamera;
 import net.irregular.escapy.map.model.IEscapyModel;
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -42,8 +43,31 @@ public class ProtoTest {
 
 			}
 		};
+	}
 
 
+	private static final class A {
+		private class B {}
+		private static class C {}
+		private static final class D {}
+		public class E {}
+		public static class F {}
+		public static final class G {}
+	}
+
+	@Test
+	public void nestedClassProto() throws Exception {
+		A a = new A();
+		for (Class<?> aClass : a.getClass().getDeclaredClasses()) {
+			final Constructor<?>[] cons = aClass.getDeclaredConstructors();
+			if (cons.length != 1) throw new RuntimeException(">1 C");
+			cons[0].setAccessible(true);
+			switch (cons[0].getParameterCount()) {
+				case 0: cons[0].newInstance(); break;
+				case 1: cons[0].newInstance(a); break;
+				default: throw new RuntimeException(">1 A");
+			}
+		}
 	}
 
 }

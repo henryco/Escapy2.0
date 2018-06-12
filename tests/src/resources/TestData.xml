@@ -1,5 +1,7 @@
-<components>
-
+<c:main xmlns:c="https://github.com/henryco"
+        xmlns:o="https://github.com/henryco"
+        xmlns:m="https://github.com/henryco"
+>
     <!-- C for component, "." split modules -->
     <c:escapy.some>
         <!-- All declarations are the same -->
@@ -10,7 +12,7 @@
         <o:float name="someArg">5</o:float>
 
         <o:integer>
-            <!-- [class] attribute defines constructor -->
+            <!-- [class] attribute defines  constructor -->
             <!--default arg type is java.lang.String -->
             <new class="java.lang.Integer">
                 42
@@ -85,4 +87,4 @@
 
     </c:escapy.some>
 
-</components>
+</c:main>
