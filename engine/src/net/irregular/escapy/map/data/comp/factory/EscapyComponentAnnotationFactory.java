@@ -97,6 +97,16 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 					val parameter = (Parameter) args[i].getValue();
 					if (parameter.isVarArgs()) {
 
+						Arg ann = parameter.getDeclaredAnnotation(Arg.class);
+						if (ann != null) {
+							val paramName = ann.value();
+							val varargObject = arguments.get(paramName);
+							if (varargObject != null) {
+								arr[i] = varargObject;
+								break;
+							}
+						}
+
 						int len = arguments.size() - i;
 						Object vars = Array.newInstance(parameter.getType().getComponentType(), len);
 
@@ -121,10 +131,8 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 					method.setAccessible(true);
 					return method.invoke(factory, arr);
 				} catch (Exception e) {
-					e.printStackTrace();
+					throw new RuntimeException("Cannot create component: " + componentName, e);
 				}
-
-				throw new RuntimeException("Cannot create component: " + componentName);
 			});
 
 		}

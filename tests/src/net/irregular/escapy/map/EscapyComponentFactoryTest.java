@@ -138,6 +138,34 @@ public class EscapyComponentFactoryTest {
 	}
 
 	@Test
+	public void arrayComponentVarargTest() {
+		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(new UtilityCoreComponent());
+		Map<String, Object> args = new HashMap<String, Object>() {{
+			put("type", Float.class);
+			put("elements", new Float[] {10f, 0.5f, 42.2f});
+		}};
+		final Object array = factory.createComponent("u.array", args);
+		Assert.assertEquals(Float[].class, array.getClass());
+		Assert.assertArrayEquals(new Float[]{10f, 0.5f, 42.2f}, (Object[]) array);
+	}
+
+	@Test
+	public void arrayComponentVarargTest2() {
+		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(new UtilityCoreComponent());
+		Map<String, Object> args = new HashMap<String, Object>() {{
+			put("type", Integer.class);
+			put("1", new Integer[] {10, 5, 42});
+		}};
+
+		try {
+			factory.createComponent("u.array", args);
+		} catch (RuntimeException e) {
+			assert "Cannot create component: u.array".equals(e.getMessage());
+		}
+
+	}
+
+	@Test
 	public void arrayPrimitiveComponentTest() {
 		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(new UtilityCoreComponent());
 		Map<String, Object> args = new HashMap<String, Object>() {{
@@ -154,7 +182,7 @@ public class EscapyComponentFactoryTest {
 		Assert.assertArrayEquals(new short[]{40, 24, 15, 21}, (short[]) array);
 	}
 
-	@Test // TODO
+	@Test
 	public void typeTest() {
 		@EscapyComponentFactory
 		final class CompFactory {
