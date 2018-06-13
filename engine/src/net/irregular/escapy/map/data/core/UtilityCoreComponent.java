@@ -5,6 +5,7 @@ import net.irregular.escapy.map.data.comp.annotation.EscapyComponent;
 import net.irregular.escapy.map.data.comp.annotation.EscapyComponentFactory;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 
 @EscapyComponentFactory("u") // u for utility
 public class UtilityCoreComponent {
@@ -31,7 +32,7 @@ public class UtilityCoreComponent {
 
 
 	@EscapyComponent("array") // test: OK
-	public Object newArrayInstance(@Arg("type") Class<?> type, @Arg("input") Object args) {
+	public Object newArrayInstance(@Arg("type") Class<?> type, Object ... args) {
 		final int l = Array.getLength(args);
 		Object array = Array.newInstance(type, l);
 		for (int i = 0; i < l; i++)

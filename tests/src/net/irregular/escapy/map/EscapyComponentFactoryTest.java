@@ -9,7 +9,6 @@ import net.irregular.escapy.map.data.core.UtilityCoreComponent;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -129,8 +128,9 @@ public class EscapyComponentFactoryTest {
 		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(new UtilityCoreComponent());
 		Map<String, Object> args = new HashMap<String, Object>() {{
 			put("type", Float.class);
-			put("input", new Object[]{10f, 0.5f, 42.2f});
-
+			put("1", 10f);
+			put("2", 0.5f);
+			put("3", 42.2f);
 		}};
 		final Object array = factory.createComponent("u.array", args);
 		Assert.assertEquals(Float[].class, array.getClass());
@@ -142,7 +142,11 @@ public class EscapyComponentFactoryTest {
 		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(new UtilityCoreComponent());
 		Map<String, Object> args = new HashMap<String, Object>() {{
 			put("type", short.class);
-			put("input", new Object[]{((short) 40), ((short) 24), ((short) 15), ((short) 21)});
+			put("1", ((short) 40));
+			put("2", ((short) 24));
+			put("3", ((short) 15));
+			put("4", ((short) 21));
+
 		}};
 		final Object array = factory.createComponent("u.array", args);
 

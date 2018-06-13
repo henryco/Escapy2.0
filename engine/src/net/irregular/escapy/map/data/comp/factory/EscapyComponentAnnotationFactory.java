@@ -5,7 +5,9 @@ import net.irregular.escapy.map.data.comp.annotation.Arg;
 import net.irregular.escapy.map.data.comp.annotation.EscapyComponent;
 import net.irregular.escapy.map.data.comp.annotation.EscapyComponentFactory;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Parameter;
 import java.util.*;
 import java.util.function.Function;
 
@@ -84,14 +86,27 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 				val arg = param.getDeclaredAnnotation(Arg.class);
 
 				val pName = arg == null ? Integer.toString(i) : arg.value();
-				val pType = param.getType();
-				args[i] = new AbstractMap.SimpleEntry<>(pName, pType);
+				args[i] = new AbstractMap.SimpleEntry<>(pName, param);
 			}
 
 			constructors.put(componentName, (Map<String, Object> arguments) -> {
 
 				Object[] arr = new Object[args.length];
 				for (int i = 0; i < args.length; i++) {
+
+					val parameter = (Parameter) args[i].getValue();
+					if (parameter.isVarArgs()) {
+
+						int len = arguments.size() - i;
+						Object vars = Array.newInstance(parameter.getType().getComponentType(), len);
+
+						for (int v = 0; v < len; v++)
+							Array.set(vars, v, arguments.get(Integer.toString(v + i)));
+						arr[i] = vars;
+
+						break;
+					}
+
 					String argName = (String) args[i].getKey();
 					arr[i] = arguments.get(argName);
 
