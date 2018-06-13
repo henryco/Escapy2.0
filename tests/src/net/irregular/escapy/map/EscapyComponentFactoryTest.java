@@ -9,7 +9,6 @@ import net.irregular.escapy.map.data.core.UtilityCoreComponent;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -129,8 +128,9 @@ public class EscapyComponentFactoryTest {
 		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(new UtilityCoreComponent());
 		Map<String, Object> args = new HashMap<String, Object>() {{
 			put("type", Float.class);
-			put("input", new Object[]{10f, 0.5f, 42.2f});
-
+			put("1", 10f);
+			put("2", 0.5f);
+			put("3", 42.2f);
 		}};
 		final Object array = factory.createComponent("u.array", args);
 		Assert.assertEquals(Float[].class, array.getClass());
@@ -142,7 +142,11 @@ public class EscapyComponentFactoryTest {
 		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(new UtilityCoreComponent());
 		Map<String, Object> args = new HashMap<String, Object>() {{
 			put("type", short.class);
-			put("input", new Object[]{((short) 40), ((short) 24), ((short) 15), ((short) 21)});
+			put("1", new Short((short) 40));
+			put("2", new Short((short) 24));
+			put("3", new Short((short) 15));
+			put("4", new Short((short) 21));
+
 		}};
 		final Object array = factory.createComponent("u.array", args);
 
@@ -151,15 +155,25 @@ public class EscapyComponentFactoryTest {
 	}
 
 	@Test // TODO
-	public void typeTest() throws Exception {
-		System.out.println(int.class.getName());
-		show(int.class);
-		show((Class<?>) Class.forName("java.lang.Integer").getField("TYPE").get(null));
+	public void typeTest() {
+		@EscapyComponentFactory
+		final class CompFactory {
 
+			@EscapyComponent("some")
+			public String something(@Arg("a") int a,
+									@Arg("age") Integer age) {
+				if (age == null) return "WOW";
+				return a + "-" + age.toString();
+			}
+		}
+
+		IEscapyComponentFactory factory = new EscapyComponentAnnotationFactory(new CompFactory());
+		Map<String, Object> args = new HashMap<String, Object>() {{
+			put("a", 40);
+			put("age", 23);
+		}};
+		Assert.assertEquals("40-23", factory.createComponent("CompFactory.some", args));
 	}
 
-	public void show(Class<?> c) {
-		System.out.println(c);
-	}
 
 }

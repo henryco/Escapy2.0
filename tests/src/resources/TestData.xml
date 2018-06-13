@@ -1,6 +1,6 @@
-<c:main xmlns:c="https://github.com/henryco"
-        xmlns:o="https://github.com/henryco"
-        xmlns:m="https://github.com/henryco"
+<c:main xmlns:c="https://henryco.net/escapy"
+        xmlns:o="https://henryco.net/escapy"
+        xmlns:m="https://henryco.net/escapy"
 >
     <!-- C for component, "." split modules -->
     <c:escapy.some>
@@ -51,14 +51,8 @@
         <o:float/>
 
 
-        <!-- That's how you can create primitives -->
         <!-- Yes, it uses components, not objects -->
         <!-- u.p is module UTILS.PRIMITIVES -->
-        <c:u.p.value>
-            <!-- and here we pass object -->
-            <o:integer>50</o:integer>
-        </c:u.p.value>
-
         <!-- this component execution return primitive type -->
         <c:u.p.type>
             <o:float/>
