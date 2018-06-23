@@ -1,4 +1,4 @@
-package net.irregular.escapy.map.data.comp.factory;
+package net.tindersamurai.activecomponent.comp.factory;
 
 import java.util.Map;
 

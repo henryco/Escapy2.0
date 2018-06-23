@@ -1,4 +1,4 @@
-package net.irregular.escapy.map.data.comp.annotation;
+package net.tindersamurai.activecomponent.comp.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

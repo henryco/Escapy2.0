@@ -5,13 +5,13 @@ pipeline {
     stage('Check') {
       steps {
         sh 'gradle clean'
-        sh 'gradle check -x desktop:dist -x tests:test --stacktrace'
+        sh 'gradle check -x desktop:dist -x test --stacktrace'
       }
     }
     
     stage('Test') {
       steps {
-        sh 'gradle tests:test --stacktrace'
+        sh 'gradle test --stacktrace'
       }
     }
     

@@ -1,12 +1,11 @@
-package net.irregular.escapy.map.data.comp.factory;
+package net.tindersamurai.activecomponent.comp.factory;
 
 import lombok.val;
-import net.irregular.escapy.map.data.comp.annotation.Arg;
-import net.irregular.escapy.map.data.comp.annotation.EscapyComponent;
-import net.irregular.escapy.map.data.comp.annotation.EscapyComponentFactory;
+import net.tindersamurai.activecomponent.comp.annotation.Arg;
+import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
+import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
 
 import java.lang.reflect.Array;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Parameter;
 import java.util.*;
 import java.util.function.Function;

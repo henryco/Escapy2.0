@@ -1,4 +1,4 @@
-package net.irregular.escapy.map;
+package net.irregular.escapy.node;
 
 import net.irregular.escapy.map.node.EscapyNode;
 import net.irregular.escapy.map.node.IEscapyNode;

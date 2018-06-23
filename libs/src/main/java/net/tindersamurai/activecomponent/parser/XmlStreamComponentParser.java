@@ -1,4 +1,4 @@
-package net.irregular.escapy.map.data.parser;
+package net.tindersamurai.activecomponent.parser;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;

@@ -1,4 +1,4 @@
-package net.irregular.escapy.map.data.parser;
+package net.tindersamurai.activecomponent.parser;
 
 
 public interface EscapyComponentParser {

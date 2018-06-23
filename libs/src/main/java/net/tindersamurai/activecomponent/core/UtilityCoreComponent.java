@@ -1,8 +1,8 @@
-package net.irregular.escapy.map.data.core;
+package net.tindersamurai.activecomponent.core;
 
-import net.irregular.escapy.map.data.comp.annotation.Arg;
-import net.irregular.escapy.map.data.comp.annotation.EscapyComponent;
-import net.irregular.escapy.map.data.comp.annotation.EscapyComponentFactory;
+import net.tindersamurai.activecomponent.comp.annotation.Arg;
+import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
+import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
 
 import java.lang.reflect.Array;
 

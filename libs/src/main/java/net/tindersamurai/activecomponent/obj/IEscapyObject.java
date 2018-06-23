@@ -1,4 +1,4 @@
-package net.irregular.escapy.map.data.obj;
+package net.tindersamurai.activecomponent.obj;
 
 
 import lombok.val;
