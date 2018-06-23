@@ -1,0 +1,7 @@
+<c:main xmlns:c="https://henryco.net/escapy"
+        xmlns:o="https://henryco.net/escapy"
+        xmlns:m="https://henryco.net/escapy"
+>
+    <o:float name="someArg">5</o:float>
+
+</c:main>

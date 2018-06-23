@@ -1,6 +1,19 @@
 package net.tindersamurai.activecomponent.parser;
 
 
+import net.tindersamurai.activecomponent.comp.factory.IEscapyComponentFactory;
+import net.tindersamurai.activecomponent.obj.IEscapyObjectFactory;
+
 public interface EscapyComponentParser {
-	<T> T parseComponent(String file) throws Exception;
+
+	String PREFIX_COMPONENT = "c";
+	String PREFIX_OBJECT = "o";
+	String PREFIX_METHOD = "m";
+
+
+	void setComponentFactory(IEscapyComponentFactory factory);
+
+	void setObjectFactory(IEscapyObjectFactory factory);
+
+	<T> T parseComponent(String file);
 }

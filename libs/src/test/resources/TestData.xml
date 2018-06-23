@@ -4,7 +4,7 @@
 >
     <!-- C for component, "." split modules -->
     <c:escapy.some>
-        <!-- All declarations are the same -->
+        <!-- All declarations below are the same -->
 
         <!-- [java.lang].[F]loat -->
         <!-- o: == java.lang.* and marks as object-->
