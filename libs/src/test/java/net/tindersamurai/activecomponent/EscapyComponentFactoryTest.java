@@ -1,11 +1,10 @@
-package net.irregular.escapy.map;
-
-import net.irregular.escapy.map.data.comp.annotation.Arg;
-import net.irregular.escapy.map.data.comp.annotation.EscapyComponent;
-import net.irregular.escapy.map.data.comp.annotation.EscapyComponentFactory;
-import net.irregular.escapy.map.data.comp.factory.EscapyComponentAnnotationFactory;
-import net.irregular.escapy.map.data.comp.factory.IEscapyComponentFactory;
-import net.irregular.escapy.map.data.core.UtilityCoreComponent;
+package net.tindersamurai.activecomponent;
+import net.tindersamurai.activecomponent.comp.annotation.Arg;
+import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
+import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
+import net.tindersamurai.activecomponent.comp.factory.EscapyComponentAnnotationFactory;
+import net.tindersamurai.activecomponent.comp.factory.IEscapyComponentFactory;
+import net.tindersamurai.activecomponent.core.UtilityCoreComponent;
 import org.junit.Assert;
 import org.junit.Test;
 

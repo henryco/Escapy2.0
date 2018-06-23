@@ -1,8 +1,7 @@
-package net.irregular.escapy.map;
+package net.tindersamurai.activecomponent;
 
-
-import net.irregular.escapy.map.data.obj.IEscapyObject;
-import net.irregular.escapy.map.data.obj.IEscapyObjectFactory;
+import net.tindersamurai.activecomponent.obj.IEscapyObject;
+import net.tindersamurai.activecomponent.obj.IEscapyObjectFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
