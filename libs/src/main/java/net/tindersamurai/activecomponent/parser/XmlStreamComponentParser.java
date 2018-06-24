@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import net.tindersamurai.activecomponent.comp.factory.EscapyComponentAnnotationFactory;
 import net.tindersamurai.activecomponent.comp.factory.IEscapyComponentFactory;
-import net.tindersamurai.activecomponent.core.UtilityCoreComponent;
 import net.tindersamurai.activecomponent.obj.IEscapyObject;
 import net.tindersamurai.activecomponent.obj.IEscapyObjectFactory;
 
@@ -37,11 +36,11 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 	IEscapyObjectFactory objectFactory;
 
 	/**
-	 * @param componentMmodules instances annotated by {@link net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory}
+	 * @param componentModules instances annotated by {@link net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory}
 	 */
-	public XmlStreamComponentParser(Object ... componentMmodules) {
+	public XmlStreamComponentParser(Object ... componentModules) {
 		setObjectFactory(IEscapyObjectFactory.Default());
-		setComponentFactory(new EscapyComponentAnnotationFactory(componentMmodules));
+		setComponentFactory(new EscapyComponentAnnotationFactory(componentModules));
 	}
 
 	@Override
@@ -108,7 +107,6 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 				}
 			}
 
-			System.out.println(uniComponent);
 			if (uniComponent != null)
 				args.put(
 						uniComponent.componentName == null ? Integer.toString(count) : uniComponent.componentName,
@@ -196,11 +194,14 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 
 			if (reader.isEndElement() && name.equals(reader.getLocalName())) {
 				try {
+
 					val returnClass = Class.forName(type);
 					//noinspection unchecked
 					val instance = objectFactory.createObject(constructor, args);
+
 					for (Consumer<IEscapyObject> method : methods)
 						method.accept(instance);
+
 					val returnInstance = instance.getObject();
 					return new UniComponent(returnClass, param, returnClass.cast(returnInstance));
 				} catch (Exception e) {

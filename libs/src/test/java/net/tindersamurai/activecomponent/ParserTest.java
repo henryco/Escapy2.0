@@ -1,5 +1,6 @@
 package net.tindersamurai.activecomponent;
 
+import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
 import net.tindersamurai.activecomponent.parser.EscapyComponentParser;
@@ -12,7 +13,8 @@ public class ParserTest {
 	public static final class TestComponent {
 
 		@EscapyComponent("main")
-		public void main(Object ...args) {
+		public void main( @Arg("someArg") float numb, Object ...args) {
+			System.out.println(numb);
 			for (Object arg : args)
 				System.out.println(arg);
 		}
