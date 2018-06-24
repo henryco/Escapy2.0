@@ -23,7 +23,7 @@ public class UtilityCoreComponent {
 
 	}
 
-	@EscapyComponent("main")
+	@EscapyComponent("main") // test: OK
 	public void main(Object ... args) {
 		System.out.println("\n<c:u.main>");
 		for (Object arg : args)
