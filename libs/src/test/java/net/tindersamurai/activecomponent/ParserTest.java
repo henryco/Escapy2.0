@@ -15,8 +15,6 @@ public class ParserTest {
 		public void main(Object ...args) {
 			for (Object arg : args)
 				System.out.println(arg);
-
-			// todo
 		}
 	}
 

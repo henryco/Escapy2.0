@@ -37,11 +37,11 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 	IEscapyObjectFactory objectFactory;
 
 	/**
-	 * @param modules instances annotated by {@link net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory}
+	 * @param componentMmodules instances annotated by {@link net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory}
 	 */
-	public XmlStreamComponentParser(Object ... modules) {
+	public XmlStreamComponentParser(Object ... componentMmodules) {
 		setObjectFactory(IEscapyObjectFactory.Default());
-		setComponentFactory(new EscapyComponentAnnotationFactory(new UtilityCoreComponent(), modules));
+		setComponentFactory(new EscapyComponentAnnotationFactory(componentMmodules));
 	}
 
 	@Override

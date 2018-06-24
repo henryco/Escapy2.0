@@ -4,6 +4,7 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
+import net.tindersamurai.activecomponent.core.UtilityCoreComponent;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Parameter;
@@ -23,7 +24,12 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 	public EscapyComponentAnnotationFactory(String nameSpaceSeparator, Object ... componentFactories) {
 		this.nameSpaceSeparator = nameSpaceSeparator;
 		this.constructors = new HashMap<>();
-		initialize(componentFactories, "");
+
+		Object[] factories = new Object[componentFactories.length + 1];
+		System.arraycopy(componentFactories, 0, factories, 1, componentFactories.length);
+		factories[0] = new UtilityCoreComponent();
+
+		initialize(factories, "");
 	}
 
 	public EscapyComponentAnnotationFactory(Collection<Object> componentFactories) {
@@ -35,7 +41,6 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 	}
 
 	private void initialize(Object[] factories, String rootNamespace) {
-		System.out.println(Arrays.toString(factories));
 		for (val factory : factories) {
 
 			val cfa = factory.getClass().getDeclaredAnnotation(EscapyComponentFactory.class);
