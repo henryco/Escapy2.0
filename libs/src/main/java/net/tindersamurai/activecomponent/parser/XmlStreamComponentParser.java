@@ -7,6 +7,7 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.factory.EscapyComponentAnnotationFactory;
 import net.tindersamurai.activecomponent.comp.factory.IEscapyComponentFactory;
 import net.tindersamurai.activecomponent.core.UtilityCoreComponent;
+import net.tindersamurai.activecomponent.obj.IEscapyObject;
 import net.tindersamurai.activecomponent.obj.IEscapyObjectFactory;
 
 import javax.xml.stream.XMLInputFactory;
@@ -16,11 +17,9 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
 
 @Slf4j
 public class XmlStreamComponentParser implements EscapyComponentParser {
@@ -93,6 +92,7 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 	private UniComponent onObject (XMLStreamReader reader) throws XMLStreamException {
 		val name = reader.getLocalName();
 		val atrs = Helper.readAttributes(reader);
+		val methods = new LinkedList<Consumer<IEscapyObject>>();
 
 		String type = Helper.readObjectType(atrs, name);
 		String param = atrs.get(ATTR_NAME);
@@ -127,7 +127,7 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 					switch (reader.getPrefix()) {
 
 						case PREFIX_METHOD: {
-							onMethods(reader);
+							methods.add(onMethods(reader));
 							break;
 						}
 
@@ -156,7 +156,11 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 			if (reader.isEndElement() && name.equals(reader.getLocalName())) {
 				try {
 					val returnClass = Class.forName(type);
-					val returnInstance = objectFactory.createObject(constructor, args).getObject();
+					//noinspection unchecked
+					val instance = objectFactory.createObject(constructor, args);
+					for (Consumer<IEscapyObject> method : methods)
+						method.accept(instance);
+					val returnInstance = instance.getObject();
 					return new UniComponent(returnClass, param, returnClass.cast(returnInstance));
 				} catch (Exception e) {
 					val MSG = "CANNOT INSTANCE OBJECT: " + name;
@@ -165,12 +169,14 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 				}
 			}
 		}
-		return null;
+		return new UniComponent(Object.class, null, null);
 	}
 
 
-	private void onMethods (XMLStreamReader reader) throws XMLStreamException {
+	private Consumer<IEscapyObject> onMethods (XMLStreamReader reader) throws XMLStreamException {
 		val name = reader.getLocalName();
+		List<Entry<Class<?>, Object>> args = new ArrayList<>();
+
 		while (reader.hasNext()) {
 			reader.next();
 
@@ -180,7 +186,11 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 			switch (reader.getPrefix()) {
 
 				case PREFIX_OBJECT: {
-					// todo
+					val uniComponent = onObject(reader);
+					args.add(new AbstractMap.SimpleEntry<>(
+							uniComponent.componentClass,
+							uniComponent.instance
+					));
 					break;
 				}
 
@@ -190,11 +200,11 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 				}
 			}
 
-			if (reader.isEndElement() && name.equals(reader.getLocalName())) {
-				// todo
-				return;
-			}
+			if (reader.isEndElement() && name.equals(reader.getLocalName()))
+				//noinspection unchecked
+				return ieo -> ieo.invokeMethod(name, args.toArray(new Entry[0]));
 		}
+		return v -> {};
 	}
 
 

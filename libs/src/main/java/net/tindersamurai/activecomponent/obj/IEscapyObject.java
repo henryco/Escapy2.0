@@ -39,15 +39,23 @@ public interface IEscapyObject {
 			argValues[i] = args[i].getValue();
 		}
 
-		final Method method; try {
+		Method method; try {
 			method = getObjectClass().getDeclaredMethod(name, argTypes);
 			method.setAccessible(true);
 		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-			return null;
-			// TODO LOGGING
-			// right we just output err to console and log
-			// because it should not stop the game process
+			try {
+				val objTypes = new Class[args.length];
+				for (int i = 0; i < objTypes.length; i++)
+					objTypes[i] = Object.class;
+				method = getObjectClass().getDeclaredMethod(name, objTypes);
+				method.setAccessible(true);
+			} catch (NoSuchMethodException ee) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				// TODO LOGGING
+				// right we just output err to console and log
+				// because it should not stop the game process
+			}
 		}
 
 		try {

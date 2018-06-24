@@ -6,10 +6,7 @@ import net.irregular.escapy.map.model.IEscapyModel;
 import org.junit.Test;
 
 import java.lang.reflect.Constructor;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.UUID;
+import java.util.*;
 
 public class ProtoTest {
 
@@ -29,6 +26,10 @@ public class ProtoTest {
 
 	@Test
 	public void typeTest() {
+		List<Integer> list = new ArrayList<>();
+		System.out.println(list.getClass());
+		System.out.println(Arrays.toString(list.getClass().getDeclaredMethods()));
+
 		Collection<String> collection = Collections.EMPTY_LIST;
 		for (String s : collection) {
 			System.out.println(s);

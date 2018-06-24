@@ -45,6 +45,11 @@
         <m:add>
             <o:integer>10</o:integer>
         </m:add>
+        <m:add>
+            <o:object>
+                <new class="java.lang.Integer">22</new>
+            </o:object>
+        </m:add>
     </o:object>
 
 </c:main>
