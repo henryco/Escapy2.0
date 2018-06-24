@@ -52,27 +52,18 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 			XMLStreamReader reader = inputFactory.createXMLStreamReader(stream);
 
-			while (reader.hasNext()) {
-				reader.next();
+			if (!reader.hasNext())
+				return null;
 
-				if (reader.getPrefix() == null)
-					continue;
+			reader.next();
 
-				switch (reader.getPrefix()) {
+			if (reader.getPrefix() == null || !reader.getPrefix().equals(PREFIX_COMPONENT))
+				return null;
 
-					case PREFIX_COMPONENT: {
-						onComponent(reader);
-						break;
-					}
-
-					case PREFIX_OBJECT: {
-						System.out.println(onObject(reader));
-						break;
-					}
-
-				}
-
-			}
+			final UniComponent component = onComponent(reader);
+			System.out.println(component);
+			//noinspection unchecked
+			return (T) (component != null ? component.instance : null);
 
 		} catch (Exception e) {
 			log.error("Escapy Active Component parsing error", e);
@@ -124,6 +115,7 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 					if (reader.getPrefix() == null)
 						break;
 
+					UniComponent uniComponent = null;
 					switch (reader.getPrefix()) {
 
 						case PREFIX_METHOD: {
@@ -132,20 +124,22 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 						}
 
 						case PREFIX_OBJECT: {
-							val object = onObject(reader);
-							Entry[] n = new Entry[args.length + 1];
-							System.arraycopy(args, 0, n, 0, args.length);
-							n[n.length - 1] = new AbstractMap.SimpleEntry<>(
-									object.componentClass, object.instance
-							);
-							args = n;
+							uniComponent = onObject(reader);
 							break;
 						}
 
 						case PREFIX_COMPONENT: {
-							// todo
+							uniComponent = onComponent(reader);
 							break;
 						}
+					}
+					if (uniComponent != null) {
+						Entry[] n = new Entry[args.length + 1];
+						System.arraycopy(args, 0, n, 0, args.length);
+						n[n.length - 1] = new AbstractMap.SimpleEntry<>(
+								uniComponent.componentClass, uniComponent.instance
+						);
+						args = n;
 					}
 
 					break;
@@ -195,7 +189,11 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 				}
 
 				case PREFIX_COMPONENT: {
-					// todo
+					val uniComponent = onComponent(reader);
+					args.add(new AbstractMap.SimpleEntry<>(
+							uniComponent.componentClass,
+							uniComponent.instance
+					));
 					break;
 				}
 			}
