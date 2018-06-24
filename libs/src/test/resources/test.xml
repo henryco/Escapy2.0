@@ -4,4 +4,14 @@
 >
     <o:float name="someArg">5</o:float>
 
+    <o:object class="java.lang.Number">
+        <new class="java.lang.Byte">
+            127
+        </new>
+    </o:object>
+
+    <!--<o:object class="java.lang.Byte">-->
+        <!--<new/>-->
+    <!--</o:object>-->
+
 </c:main>

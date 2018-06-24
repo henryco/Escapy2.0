@@ -72,13 +72,6 @@
             <o:long/>
         </c:u.class>
 
-        <!-- Doing the same -->
-        <return>
-            <o:short>
-                <m:get-class/>
-            </o:short>
-        </return>
-
     </c:escapy.some>
 
 </c:main>

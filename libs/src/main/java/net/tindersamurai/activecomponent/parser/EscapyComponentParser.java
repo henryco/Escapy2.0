@@ -10,6 +10,10 @@ public interface EscapyComponentParser {
 	String PREFIX_OBJECT = "o";
 	String PREFIX_METHOD = "m";
 
+	String ATTR_NAME = "name";
+	String ATTR_CLASS = "class";
+
+	String OBJECT_NEW = "new";
 
 	void setComponentFactory(IEscapyComponentFactory factory);
 

@@ -37,7 +37,7 @@ public class EscapyObjectFactoryTest {
 	@Test
 	public void nestedObjectInstanceTest() {
 
-		String className = "net.irregular.escapy.map.EscapyObjectFactoryTest$SomeClass";
+		String className = "net.tindersamurai.activecomponent.EscapyObjectFactoryTest$SomeClass";
 		Assert.assertEquals(className, SomeClass.class.getName());
 
 		IEscapyObjectFactory factory = IEscapyObjectFactory.Default();
