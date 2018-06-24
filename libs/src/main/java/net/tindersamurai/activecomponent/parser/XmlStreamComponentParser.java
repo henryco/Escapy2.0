@@ -61,7 +61,6 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 				return null;
 
 			final UniComponent component = onComponent(reader);
-			System.out.println(component);
 			//noinspection unchecked
 			return (T) (component != null ? component.instance : null);
 
@@ -75,8 +74,53 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 
 
 	private UniComponent onComponent (XMLStreamReader reader) throws XMLStreamException {
-		System.out.println(reader.getLocalName() + " : " + reader.getPrefix());
-		return null;
+
+		Map<String, Object> args = new HashMap<>();
+
+		val name = reader.getLocalName();
+		val atrs = Helper.readAttributes(reader);
+
+		val atrName = atrs.get(ATTR_NAME);
+		val nullComponent = new UniComponent(Object.class, atrName, null);
+
+		int count = -1;
+		while (reader.hasNext()) {
+			reader.next();
+
+			if (reader.getPrefix() == null || reader.isEndElement())
+				continue;
+
+			count += 1;
+
+			UniComponent uniComponent = null;
+			switch (reader.getPrefix()) {
+
+				// <o: ...
+				case PREFIX_OBJECT: {
+					uniComponent = onObject(reader);
+					break;
+				}
+
+				// <c: ...
+				case PREFIX_COMPONENT: {
+					uniComponent = onComponent(reader);
+					break;
+				}
+			}
+
+			System.out.println(uniComponent);
+			if (uniComponent != null)
+				args.put(
+						uniComponent.componentName == null ? Integer.toString(count) : uniComponent.componentName,
+						uniComponent.instance == null ? "null" : uniComponent.instance
+				);
+			else
+				args.put(Integer.toString(count), "null");
+		}
+		val component = componentFactory.createComponent(name, args);
+		if (component == null)
+			return nullComponent;
+		return new UniComponent(component.getClass(), atrName, component);
 	}
 
 
@@ -118,16 +162,19 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 					UniComponent uniComponent = null;
 					switch (reader.getPrefix()) {
 
+						// <m: ...
 						case PREFIX_METHOD: {
 							methods.add(onMethods(reader));
 							break;
 						}
 
+						// <o: ...
 						case PREFIX_OBJECT: {
 							uniComponent = onObject(reader);
 							break;
 						}
 
+						// <c: ...
 						case PREFIX_COMPONENT: {
 							uniComponent = onComponent(reader);
 							break;

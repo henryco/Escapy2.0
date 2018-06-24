@@ -23,6 +23,13 @@ public class UtilityCoreComponent {
 
 	}
 
+	@EscapyComponent("main")
+	public void main(Object ... args) {
+		System.out.println("\n<c:u.main>");
+		for (Object arg : args)
+			System.out.println("\t"+arg);
+		System.out.println("</c:u.main>\n");
+	}
 
 	@EscapyComponent("array") // test: OK
 	public Object newArrayInstance(@Arg("type") Class<?> type, @Arg("elements") Object ... args) {

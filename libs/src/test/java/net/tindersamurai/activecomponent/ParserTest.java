@@ -53,7 +53,7 @@ public class ParserTest {
 
 	@Test
 	public void parserNamespaceTest() throws Exception {
-		final EscapyComponentParser parser = new XmlStreamComponentParser();
+		final EscapyComponentParser parser = new XmlStreamComponentParser(new TestComponent());
 		System.out.println(System.getProperty("user.dir"));
 		parser.parseComponent(System.getProperty("user.dir") + "/src/test/resources/test.xml");
 	}

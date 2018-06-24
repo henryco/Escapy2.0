@@ -35,7 +35,7 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 	}
 
 	private void initialize(Object[] factories, String rootNamespace) {
-
+		System.out.println(Arrays.toString(factories));
 		for (val factory : factories) {
 
 			val cfa = factory.getClass().getDeclaredAnnotation(EscapyComponentFactory.class);
