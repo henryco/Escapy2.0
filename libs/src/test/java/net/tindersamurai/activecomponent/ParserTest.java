@@ -20,6 +20,19 @@ public class ParserTest {
 		}
 	}
 
+	public static final class SomeObj {
+		private final Short s;
+		public SomeObj(Short s) {
+			this.s = s;
+		}
+
+		@Override
+		public String toString() {
+			return "SomeObj{" +
+					"s=" + s +
+					'}';
+		}
+	}
 
 	@Test
 	public void parserNamespaceTest() throws Exception {

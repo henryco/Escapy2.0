@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.AbstractMap;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -131,7 +132,13 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 						}
 
 						case PREFIX_OBJECT: {
-							// todo
+							val object = onObject(reader);
+							Entry[] n = new Entry[args.length + 1];
+							System.arraycopy(args, 0, n, 0, args.length);
+							n[n.length - 1] = new AbstractMap.SimpleEntry<>(
+									object.componentClass, object.instance
+							);
+							args = n;
 							break;
 						}
 

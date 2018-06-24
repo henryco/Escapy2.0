@@ -5,6 +5,7 @@ import lombok.val;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.AbstractMap;
+import java.util.Arrays;
 import java.util.Map.Entry;
 
 public interface IEscapyObjectFactory {
@@ -40,7 +41,7 @@ public interface IEscapyObjectFactory {
 				} catch (NoSuchMethodException e) {
 					e.printStackTrace();
 					// TODO LOGGING
-					throw new RuntimeException("Cannot find object constructor: " + name);
+					throw new RuntimeException("Cannot find object constructor: " + name + " " + Arrays.toString(argTypes));
 				}
 
 				try {

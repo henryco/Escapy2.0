@@ -10,8 +10,20 @@
         </new>
     </o:object>
 
-    <!--<o:object class="java.lang.Byte">-->
-        <!--<new/>-->
-    <!--</o:object>-->
+    <o:object class="net.tindersamurai.activecomponent.ParserTest$SomeObj">
+       <o:short>10</o:short>
+    </o:object>
+
+    <o:object class="net.tindersamurai.activecomponent.ParserTest$SomeObj">
+        <new>
+            <o:short>10</o:short>
+        </new>
+    </o:object>
+
+    <o:object>
+        <new class="net.tindersamurai.activecomponent.ParserTest$SomeObj">
+            <o:short>10</o:short>
+        </new>
+    </o:object>
 
 </c:main>
