@@ -34,6 +34,23 @@ public class ParserTest {
 		}
 	}
 
+	public static final class SomeObj2 {
+		private final Short s;
+		private final Integer a;
+		public SomeObj2(Short s, Integer a) {
+			this.s = s;
+			this.a = a;
+		}
+
+		@Override
+		public String toString() {
+			return "SomeObj2{" +
+					"s=" + s +
+					", a=" + a +
+					'}';
+		}
+	}
+
 	@Test
 	public void parserNamespaceTest() throws Exception {
 		final EscapyComponentParser parser = new XmlStreamComponentParser();

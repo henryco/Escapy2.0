@@ -17,7 +17,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.AbstractMap;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -127,7 +127,7 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 					switch (reader.getPrefix()) {
 
 						case PREFIX_METHOD: {
-							// todo
+							onMethods(reader);
 							break;
 						}
 
@@ -166,6 +166,35 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 			}
 		}
 		return null;
+	}
+
+
+	private void onMethods (XMLStreamReader reader) throws XMLStreamException {
+		val name = reader.getLocalName();
+		while (reader.hasNext()) {
+			reader.next();
+
+			if (reader.getPrefix() == null)
+				continue;
+
+			switch (reader.getPrefix()) {
+
+				case PREFIX_OBJECT: {
+					// todo
+					break;
+				}
+
+				case PREFIX_COMPONENT: {
+					// todo
+					break;
+				}
+			}
+
+			if (reader.isEndElement() && name.equals(reader.getLocalName())) {
+				// todo
+				return;
+			}
+		}
 	}
 
 

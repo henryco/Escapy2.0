@@ -26,4 +26,25 @@
         </new>
     </o:object>
 
+    <o:object class="net.tindersamurai.activecomponent.ParserTest$SomeObj2">
+        <o:short>10</o:short>
+        <o:integer>42</o:integer>
+    </o:object>
+
+    <o:object class="net.tindersamurai.activecomponent.ParserTest$SomeObj2">
+       <new>
+           <o:short>10</o:short>
+           <o:integer>42</o:integer>
+       </new>
+    </o:object>
+
+    <o:object class="java.util.List">
+        <!-- empty constructor -->
+        <new class="java.util.ArrayList"/>
+        <!-- this is method statements -->
+        <m:add>
+            <o:integer>10</o:integer>
+        </m:add>
+    </o:object>
+
 </c:main>
