@@ -14,6 +14,16 @@ public class UtilityCoreComponent {
 
 		@EscapyComponent("type") // test: OK
 		public Class<?> primitiveType(@Arg("object") Object o) {
+			System.out.println(o);
+			if (o instanceof String) {
+				String oo = (String) o;
+				String cl = "java.lang." + oo.substring(0, 1).toUpperCase() + oo.substring(1);
+				try {
+					return (Class<?>) Class.forName(cl).getDeclaredField("TYPE").get(null);
+				} catch (ClassNotFoundException | IllegalAccessException | NoSuchFieldException e) {
+					throw new RuntimeException("Object: " + o + " is not primitive!", e);
+				}
+			}
 			try {
 				return (Class<?>) o.getClass().getField("TYPE").get(null);
 			} catch (IllegalAccessException | NoSuchFieldException e) {

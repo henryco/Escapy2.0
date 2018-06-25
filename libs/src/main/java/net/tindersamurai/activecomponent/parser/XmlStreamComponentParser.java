@@ -86,6 +86,15 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 		while (reader.hasNext()) {
 			reader.next();
 
+			if (reader.isCharacters()) {
+				val text = reader.getText().trim();
+				if (text.isEmpty())
+					continue;
+
+				args.put("0", text);
+				continue;
+			}
+
 			if (reader.getPrefix() != null && !reader.isEndElement()) {
 				count += 1;
 

@@ -14,7 +14,14 @@
     <c:u.array>
         <!-- first arg defines newArrayInstance type -->
         <c:u.p.type>
-            <o:integer>0</o:integer>
+            <!--It works -->
+            <!--<o:integer>0</o:integer>-->
+
+            <!--It works-->
+            <!--<o:string>integer</o:string>-->
+
+            <!--It works too-->
+            integer
         </c:u.p.type>
         <o:integer>1</o:integer>
         <o:integer>2</o:integer>
