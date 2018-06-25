@@ -18,6 +18,11 @@ public class ParserTest {
 			for (Object arg : args)
 				System.out.println(arg);
 		}
+
+		@EscapyComponent("test")
+		public int test() {
+			return 1;
+		}
 	}
 
 	public static final class SomeObj {
@@ -56,6 +61,12 @@ public class ParserTest {
 		final EscapyComponentParser parser = new XmlStreamComponentParser(new TestComponent());
 		System.out.println(System.getProperty("user.dir"));
 		parser.parseComponent(System.getProperty("user.dir") + "/src/test/resources/test.xml");
+	}
+
+	@Test
+	public void parseArrayTest() {
+		final EscapyComponentParser parser = new XmlStreamComponentParser(new TestComponent());
+		parser.parseComponent(System.getProperty("user.dir") + "/src/test/resources/test-array.xml");
 	}
 
 }

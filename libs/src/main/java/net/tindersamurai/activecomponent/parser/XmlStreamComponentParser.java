@@ -86,39 +86,42 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 		while (reader.hasNext()) {
 			reader.next();
 
-			if (reader.getPrefix() == null || reader.isEndElement())
-				continue;
+			if (reader.getPrefix() != null && !reader.isEndElement()) {
+				count += 1;
 
-			count += 1;
+				UniComponent uniComponent = null;
+				switch (reader.getPrefix()) {
 
-			UniComponent uniComponent = null;
-			switch (reader.getPrefix()) {
+					// <o: ...
+					case PREFIX_OBJECT: {
+						uniComponent = onObject(reader);
+						break;
+					}
 
-				// <o: ...
-				case PREFIX_OBJECT: {
-					uniComponent = onObject(reader);
-					break;
+					// <c: ...
+					case PREFIX_COMPONENT: {
+						uniComponent = onComponent(reader);
+						break;
+					}
 				}
 
-				// <c: ...
-				case PREFIX_COMPONENT: {
-					uniComponent = onComponent(reader);
-					break;
-				}
+				if (uniComponent != null)
+					args.put(
+							uniComponent.componentName == null ? Integer.toString(count) : uniComponent.componentName,
+							uniComponent.instance == null ? "null" : uniComponent.instance
+					);
+				else
+					args.put(Integer.toString(count), "null");
 			}
 
-			if (uniComponent != null)
-				args.put(
-						uniComponent.componentName == null ? Integer.toString(count) : uniComponent.componentName,
-						uniComponent.instance == null ? "null" : uniComponent.instance
-				);
-			else
-				args.put(Integer.toString(count), "null");
+			if (reader.isEndElement() && name.equals(reader.getLocalName())) {
+				val component = componentFactory.createComponent(name, args);
+				if (component == null)
+					return nullComponent;
+				return new UniComponent(component.getClass(), atrName, component);
+			}
 		}
-		val component = componentFactory.createComponent(name, args);
-		if (component == null)
-			return nullComponent;
-		return new UniComponent(component.getClass(), atrName, component);
+		return nullComponent;
 	}
 
 
