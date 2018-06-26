@@ -1,0 +1,38 @@
+<c:u.debug  xmlns:c="https://henryco.net/escapy"
+           xmlns:o="https://henryco.net/escapy"
+>
+    <o:short>123</o:short>
+
+    <c:u.p.type>
+        <o:float>0</o:float>
+    </c:u.p.type>
+
+    <c:u.class>
+        <o:byte>0</o:byte>
+    </c:u.class>
+
+    <c:u.array>
+        <!-- first arg defines newArrayInstance type -->
+        <c:u.p.type>
+            <!--It works -->
+            <!--<o:integer>0</o:integer>-->
+
+            <!--It works-->
+            <!--<o:string>integer</o:string>-->
+
+            <!--It works too-->
+            integer
+        </c:u.p.type>
+        <o:integer>1</o:integer>
+        <o:integer>2</o:integer>
+        <o:integer>3</o:integer>
+    </c:u.array>
+
+    <c:test.test/>
+    <c:test.test/>
+    <c:test.test/>
+    <c:test.test/>
+
+    <o:string> BANG! </o:string>
+
+</c:u.debug>

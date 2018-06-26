@@ -71,4 +71,9 @@ public class ProtoTest {
 		}
 	}
 
+	@Test
+	public void primTest() throws Exception {
+		Class<?> aClass = Class.forName("java.lang.Integer");
+		System.out.println(aClass.getDeclaredField("TYPE").get(null));
+	}
 }

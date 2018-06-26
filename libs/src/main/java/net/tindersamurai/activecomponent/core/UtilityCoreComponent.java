@@ -14,6 +14,16 @@ public class UtilityCoreComponent {
 
 		@EscapyComponent("type") // test: OK
 		public Class<?> primitiveType(@Arg("object") Object o) {
+			System.out.println(o);
+			if (o instanceof String) {
+				String oo = (String) o;
+				String cl = "java.lang." + oo.substring(0, 1).toUpperCase() + oo.substring(1);
+				try {
+					return (Class<?>) Class.forName(cl).getDeclaredField("TYPE").get(null);
+				} catch (ClassNotFoundException | IllegalAccessException | NoSuchFieldException e) {
+					throw new RuntimeException("Object: " + o + " is not primitive!", e);
+				}
+			}
 			try {
 				return (Class<?>) o.getClass().getField("TYPE").get(null);
 			} catch (IllegalAccessException | NoSuchFieldException e) {
@@ -23,12 +33,32 @@ public class UtilityCoreComponent {
 
 	}
 
-	@EscapyComponent("main") // test: OK
+	@EscapyComponent("debug") // test: OK
+	public void debug(Object ... args) {
+
+		System.out.println("\n<c:u.debug>");
+		for (Object arg : args) try {
+			if (arg.getClass().isArray()) {
+
+				final int l = Array.getLength(arg);
+				StringBuilder ars = new StringBuilder();
+				for (int i = 0; i < l; i++)
+					ars.append(Array.get(arg, i)).append(", ");
+				String res = ars.substring(0, ars.length() - 2);
+				System.out.println("\t" + arg.getClass() + ": [" + res + "]");
+
+			} else {
+				System.out.println("\t" + arg.getClass() + ": " + arg);
+			}
+		} catch (NullPointerException e) {
+			System.out.println("null");
+		}
+		System.out.println("</c:u.debug>\n");
+	}
+
+	@EscapyComponent("main") // test OK
 	public void main(Object ... args) {
-		System.out.println("\n<c:u.main>");
-		for (Object arg : args)
-			System.out.println("\t"+arg);
-		System.out.println("</c:u.main>\n");
+		/* VOID */
 	}
 
 	@EscapyComponent("array") // test: OK
