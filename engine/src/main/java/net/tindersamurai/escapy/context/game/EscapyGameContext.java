@@ -83,7 +83,7 @@ public abstract class EscapyGameContext extends Game implements EscapyScreenCont
 
 	@Override
 	public void setScreen(EscapyScreen screen) {
-		log.info("Set screen: " + screen.getClass().getSimpleName());
+		log.info(screen.getClass().getSimpleName());
 		screen.setScreenContext(this);
 		super.setScreen(screen);
 	}
