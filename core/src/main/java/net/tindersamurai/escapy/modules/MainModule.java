@@ -2,7 +2,11 @@ package net.tindersamurai.escapy.modules;
 
 import com.github.henryco.injector.meta.annotations.Module;
 import com.github.henryco.injector.meta.annotations.Provide;
+import net.tindersamurai.activecomponent.parser.EscapyComponentParser;
+import net.tindersamurai.activecomponent.parser.XmlStreamComponentParser;
+import net.tindersamurai.escapy.components.map.MapFactory;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreen;
+import net.tindersamurai.escapy.modules.map.MapModule;
 import net.tindersamurai.escapy.modules.screen.GameModule;
 import net.tindersamurai.escapy.modules.screen.MenuModule;
 import net.tindersamurai.escapy.modules.screen.SplashModule;
@@ -18,7 +22,8 @@ import java.util.Collection;
 		include = {
 				SplashModule.class,
 				MenuModule.class,
-				GameModule.class
+				GameModule.class,
+				MapModule.class
 		}
 ) public class MainModule {
 

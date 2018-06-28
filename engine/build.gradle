@@ -31,6 +31,7 @@ repositories {
 
 
 dependencies {
+    compile project(":libs")
 
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
@@ -48,8 +49,6 @@ dependencies {
     compile "com.squareup.dagger:dagger-compiler:$dagger_Version"
 
     compile "com.google.code.gson:gson:$gson_Version"
-
-    compile group: 'javax.inject', name: 'javax.inject', version: '1'
 
     compileOnly "org.projectlombok:lombok:$lombok_Version"
     apt "org.projectlombok:lombok:$lombok_Version"
