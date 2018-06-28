@@ -1,14 +1,11 @@
-package net.tindersamurai.escapy.modules;
+package net.tindersamurai.escapy.old.modules;
 
-import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContextConfiguration;
 import net.tindersamurai.escapy.context.game.configuration.util.PropertyKeysStorage;
 
-import javax.inject.Singleton;
-
 import static java.io.File.separator;
 
-@Provide @Singleton
+@Deprecated
 public class MainConfiguration extends EscapyGameContextConfiguration {
 
 	@Override

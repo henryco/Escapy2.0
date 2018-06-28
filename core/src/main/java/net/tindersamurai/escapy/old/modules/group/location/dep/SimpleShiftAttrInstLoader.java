@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.modules.group.location.dep;
+package net.tindersamurai.escapy.old.modules.group.location.dep;
 
 import net.tindersamurai.escapy.graphic.camera.EscapyCamera;
 import net.tindersamurai.escapy.group.map.core.layer.shift.LayerShift;

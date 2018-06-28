@@ -8,7 +8,7 @@ import net.tindersamurai.escapy.context.game.EscapyGameContext;
 
 /**
  * @author Henry on 27/06/17.
- */ @EscapyAPI @Dante
+ */ @EscapyAPI @Dante @Deprecated
 public final class EscapyApplicationAdapter implements ApplicationListener {
 
 	private Class applicationListenerClass;

@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.modules.pause;
+package net.tindersamurai.escapy.old.modules.pause;
 
 
 import net.tindersamurai.escapy.context.annotation.ScreenName;

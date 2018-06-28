@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @author Henry on 21/07/17.
  */
-public class Escapy {
+public final class Escapy {
 
 	private static Escapy ourInstance = new Escapy();
 	public static Escapy getInstance() {

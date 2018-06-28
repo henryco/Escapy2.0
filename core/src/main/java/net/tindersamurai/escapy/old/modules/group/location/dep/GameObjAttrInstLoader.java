@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.modules.group.location.dep;
+package net.tindersamurai.escapy.old.modules.group.location.dep;
 
 import com.badlogic.gdx.Gdx;
 import net.tindersamurai.escapy.group.map.core.object.EscapyGameObject;

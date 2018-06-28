@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.modules.group.location;
+package net.tindersamurai.escapy.old.modules.group.location;
 
 import dagger.Module;
 import dagger.Provides;
@@ -7,9 +7,9 @@ import net.tindersamurai.escapy.group.map.core.layer.shift.LayerShift;
 import net.tindersamurai.escapy.group.map.core.object.EscapyGameObject;
 import net.tindersamurai.escapy.group.map.loader.builder.LocationLoaderBuilder;
 import net.tindersamurai.escapy.group.map.loader.imp.DefaultLocationLoader;
-import net.tindersamurai.escapy.modules.group.location.dep.GameObjAttrInstLoader;
-import net.tindersamurai.escapy.modules.group.location.dep.SimpleShiftAttrInstLoader;
-import net.tindersamurai.escapy.modules.group.util.CameraModule;
+import net.tindersamurai.escapy.old.modules.group.location.dep.GameObjAttrInstLoader;
+import net.tindersamurai.escapy.old.modules.group.location.dep.SimpleShiftAttrInstLoader;
+import net.tindersamurai.escapy.old.modules.group.util.CameraModule;
 import net.tindersamurai.escapy.utils.EscapyLogger;
 import net.tindersamurai.escapy.utils.loader.EscapyInstanceLoader;
 

@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.modules.group.util;
+package net.tindersamurai.escapy.old.modules.group.util;
 
 import com.badlogic.gdx.Gdx;
 import dagger.Module;

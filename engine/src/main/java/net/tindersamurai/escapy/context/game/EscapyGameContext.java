@@ -2,7 +2,6 @@ package net.tindersamurai.escapy.context.game;
 
 import com.badlogic.gdx.Game;
 import net.tindersamurai.escapy.context.annotation.meta.AnnotationProcessor;
-import net.tindersamurai.escapy.context.game.configuration.DefaultEscapyGameContextConfiguration;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContextConfiguration;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreen;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenContext;
@@ -29,7 +28,7 @@ public abstract class EscapyGameContext extends Game implements EscapyScreenCont
 	 * In other cases use it as {@link EscapyScreenContext}
 	 */
 	protected EscapyGameContext(Collection<EscapyScreen> escapyScreens) {
-		this(escapyScreens, new DefaultEscapyGameContextConfiguration());
+		this(escapyScreens, new EscapyGameContextConfiguration() {});
 	}
 
 	/**

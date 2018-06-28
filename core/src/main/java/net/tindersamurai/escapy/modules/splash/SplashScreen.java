@@ -3,66 +3,56 @@ package net.tindersamurai.escapy.modules.splash;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import net.tindersamurai.escapy.context.game.screen.EscapyScreen;
-import net.tindersamurai.escapy.context.game.screen.EscapyScreenContext;
-import net.tindersamurai.escapy.graphic.camera.EscapyCamera;
-import net.tindersamurai.escapy.group.container.EscapyGroupContainer;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.github.henryco.injector.meta.annotations.Provide;
+import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
+import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.modules.menu.MenuScreen;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+@Provide("splash-screen") @Singleton
+public class SplashScreen extends EscapyScreenCore {
 
-/**
- * @author Henry on 28/06/17.
- */
-public class SplashScreen implements EscapyScreen {
-
-
-	private final EscapyGroupContainer groupContainer;
 	private final AtomicBoolean initialized;
+	private final IEscapyCamera camera;
 	private final String logoUrl;
-	private final EscapyCamera camera;
-	private final Batch batch;
 	private final float showTime;
 
-	private EscapyScreenContext screenContext;
 	private Sprite sprite;
+	private Batch batch;
 	private float time;
 
-
-
-
 	@Inject
-	public SplashScreen(String logoUrl,
-						EscapyCamera camera,
-						Batch batch,
-						float timeSec,
-						EscapyGroupContainer groupContainer) {
-
+	public SplashScreen(IEscapyCamera camera,
+						String logoUrl,
+						float showTime
+	) {
 		this.initialized = new AtomicBoolean(false);
-		this.groupContainer = groupContainer;
-		this.showTime = timeSec;
+		this.showTime = showTime;
 		this.logoUrl = logoUrl;
 		this.camera = camera;
-		this.batch = batch;
-		this.time = timeSec;
+		this.time = showTime;
 	}
-
 
 	@Override
 	public void show() {
+		batch = new SpriteBatch();
 		sprite = new Sprite(new Texture(logoUrl));
 		camera.setCameraPosition(sprite.getWidth() * .5f, sprite.getHeight() * .5f, true);
 
-		new Thread(() -> initialized.set(groupContainer.initialize())).start();
+		// todo INITIALIZATION
+		this.initialized.set(true);
 	}
-
 
 	@Override
 	public void render(float delta) {
+
 		if ((time -= delta) <= 0 && initialized.get())
-			screenContext.setScreen(screenContext.getScreen(MenuScreen.class));
+			setScreen(MenuScreen.class);
+
 		else {
 			batch.setProjectionMatrix(camera.update(camera::clear).getProjection());
 			batch.begin();
@@ -70,15 +60,5 @@ public class SplashScreen implements EscapyScreen {
 			batch.end();
 		}
 	}
-
-
-	@Override
-	public void setScreenContext(EscapyScreenContext screenContext) {
-		this.screenContext = screenContext;
-	}
-
-
-
-	@Override public void resize(int width, int height) {}
 
 }

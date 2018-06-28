@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.modules.group.renderer.dep;
+package net.tindersamurai.escapy.old.modules.group.renderer.dep;
 
 import com.badlogic.gdx.Gdx;
 import net.tindersamurai.escapy.context.game.Escapy;

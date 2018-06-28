@@ -17,6 +17,8 @@ public class DefaultPropertyKeysContainer implements PropertyKeysStorage {
 
 	@Override
 	public PropertyKeysStorage addProperty(String key, Object property) {
+		this.tempKey = key;
+		this.tempObj = property;
 		return and();
 	}
 

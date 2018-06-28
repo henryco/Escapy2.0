@@ -1,81 +1,25 @@
 package net.tindersamurai.escapy.modules.game;
 
-import net.tindersamurai.escapy.context.annotation.ScreenName;
-import net.tindersamurai.escapy.context.game.screen.EscapyScreen;
-import net.tindersamurai.escapy.context.game.screen.EscapyScreenContext;
-import net.tindersamurai.escapy.graphic.camera.EscapyCamera;
-import net.tindersamurai.escapy.graphic.render.light.source.LightSource;
-import net.tindersamurai.escapy.group.container.EscapyGroupContainer;
+import com.github.henryco.injector.meta.annotations.Provide;
+import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
 
-/**
- * @author Henry on 28/06/17.
- */
-@ScreenName("game_screen")
-public class GameScreen implements EscapyScreen {
+import javax.inject.Singleton;
 
-	private EscapyScreenContext screenContext;
-
-	private final EscapyGroupContainer group;
-	private final EscapyCamera camera;
-
-
-	LightSource source;
-
-	public GameScreen(EscapyGroupContainer group,
-					  EscapyCamera camera) {
-		this.group = group;
-		this.camera = camera;
-
-	}
+@Provide("game-screen") @Singleton
+public class GameScreen extends EscapyScreenCore {
 
 	@Override
 	public void show() {
-		source = group.getRendererContainer().getRendererAttribute("lights_foreground:light1");
+		// todo
 	}
-
 
 	@Override
 	public void render(float delta) {
-		group.getRendererContainer().render(delta);
+		// todo
 	}
-
-
-
-	private void update(float delta) {
-		System.out.println("update");
-	}
-
 
 	@Override
 	public void resize(int width, int height) {
-		group.getRendererContainer().resize(width, height);
+		// todo
 	}
-
-
-	@Override
-	public void dispose() {
-		group.getLocationContainer().getLocation().dispose();
-	}
-
-	@Override
-	public void hide() {
-
-	}
-
-	@Override
-	public void pause() {
-
-	}
-
-	@Override
-	public void resume() {
-
-	}
-
-	@Override
-	public void setScreenContext(EscapyScreenContext screenContext) {
-		this.screenContext = screenContext;
-	}
-
-
 }

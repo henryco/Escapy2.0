@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.modules.splash;
+package net.tindersamurai.escapy.old.modules.splash;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -9,7 +9,7 @@ import net.tindersamurai.escapy.context.game.screen.EscapyScreen;
 import net.tindersamurai.escapy.graphic.camera.EscapyCamera;
 import net.tindersamurai.escapy.graphic.screen.Resolution;
 import net.tindersamurai.escapy.group.container.EscapyGroupContainer;
-import net.tindersamurai.escapy.modules.group.GroupModule;
+import net.tindersamurai.escapy.old.modules.group.GroupModule;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.modules.pause;
+package net.tindersamurai.escapy.old.modules.pause;
 
 import dagger.Module;
 import dagger.Provides;

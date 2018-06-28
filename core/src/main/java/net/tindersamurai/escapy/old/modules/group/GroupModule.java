@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.modules.group;
+package net.tindersamurai.escapy.old.modules.group;
 
 import dagger.Module;
 import dagger.Provides;
@@ -6,8 +6,8 @@ import net.tindersamurai.escapy.group.container.EscapyGroupContainer;
 import net.tindersamurai.escapy.group.container.imp.DefaultGroupContainer;
 import net.tindersamurai.escapy.group.map.loader.imp.DefaultLocationLoader;
 import net.tindersamurai.escapy.group.render.loader.imp.DefaultRendererLoader;
-import net.tindersamurai.escapy.modules.group.location.LocationsModule;
-import net.tindersamurai.escapy.modules.group.renderer.RendererModule;
+import net.tindersamurai.escapy.old.modules.group.location.LocationsModule;
+import net.tindersamurai.escapy.old.modules.group.renderer.RendererModule;
 
 import javax.inject.Singleton;
 
