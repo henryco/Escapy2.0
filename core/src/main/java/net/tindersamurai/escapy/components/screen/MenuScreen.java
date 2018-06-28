@@ -1,25 +1,23 @@
-package net.tindersamurai.escapy.modules.game;
+package net.tindersamurai.escapy.components.screen;
 
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
 
 import javax.inject.Singleton;
 
-@Provide("game-screen") @Singleton
-public class GameScreen extends EscapyScreenCore {
+@Provide("menu-screen") @Singleton
+public class MenuScreen extends EscapyScreenCore {
+
 
 	@Override
 	public void show() {
-		// todo
+		// todo SOME INITIALIZATION
+		setScreen(GameScreen.class);
 	}
 
 	@Override
 	public void render(float delta) {
-		// todo
+		// todo SOME MENU
 	}
 
-	@Override
-	public void resize(int width, int height) {
-		// todo
-	}
 }

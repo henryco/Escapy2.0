@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.modules.splash;
+package net.tindersamurai.escapy.components.screen;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
-import net.tindersamurai.escapy.modules.menu.MenuScreen;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

@@ -12,6 +12,7 @@ public class EscapyApplication implements ApplicationListener {
 	@Override
 	public void create() {
 
+
 		GrInjector.addModules(MainModule.class);
 		GrInjector.inject(this);
 

@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.modules;
+package net.tindersamurai.escapy.components;
 
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.escapy.context.game.EscapyGameContext;
@@ -7,19 +7,20 @@ import net.tindersamurai.escapy.context.game.screen.EscapyScreen;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Singleton;
 import java.util.Collection;
 
-@Provide
+@Provide @Singleton
 public final class MainEnvironment extends EscapyGameContext {
 
 	private final EscapyScreen initialScreen;
 
 	@Inject
-	protected MainEnvironment(
+	public MainEnvironment(
 			EscapyGameContextConfiguration contextConfiguration,
 			@Named("initial-screen") EscapyScreen initialScreen,
-			Collection<EscapyScreen> escapyScreens) {
-
+			Collection<EscapyScreen> escapyScreens)
+	{
 		super(escapyScreens, contextConfiguration);
 		this.initialScreen = initialScreen;
 	}

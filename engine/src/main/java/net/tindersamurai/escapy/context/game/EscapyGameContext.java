@@ -1,6 +1,7 @@
 package net.tindersamurai.escapy.context.game;
 
 import com.badlogic.gdx.Game;
+import lombok.extern.java.Log;
 import net.tindersamurai.escapy.context.annotation.meta.AnnotationProcessor;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContextConfiguration;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreen;
@@ -14,7 +15,7 @@ import java.util.Map;
  * @author Henry on 28/06/17.
  * Game context class, for using inside main module initialuzation ONLY!
  * In other cases use it as {@link EscapyScreenContext}
- */
+ */ @Log
 public abstract class EscapyGameContext extends Game implements EscapyScreenContext {
 
 	private final Map<String, EscapyScreen> screenMap;
@@ -82,6 +83,7 @@ public abstract class EscapyGameContext extends Game implements EscapyScreenCont
 
 	@Override
 	public void setScreen(EscapyScreen screen) {
+		log.info("Set screen: " + screen.getClass().getSimpleName());
 		screen.setScreenContext(this);
 		super.setScreen(screen);
 	}

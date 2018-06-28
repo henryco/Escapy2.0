@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.modules;
+package net.tindersamurai.escapy.components;
 
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContextConfiguration;
@@ -9,7 +9,7 @@ import javax.inject.Singleton;
 import static java.io.File.separator;
 
 @Provide @Singleton
-public class MainConfiguration extends EscapyGameContextConfiguration {
+public final class MainConfiguration extends EscapyGameContextConfiguration {
 
 	@Override
 	public String getResourcesDir() {
