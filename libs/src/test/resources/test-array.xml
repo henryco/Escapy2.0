@@ -35,4 +35,61 @@
 
     <o:string> BANG! </o:string>
 
+    <!--2D array of Strings-->
+    <c:u.array>
+
+        <!--type: [[Ljava.lang.String;-->
+        <c:u.class>
+            <c:u.array>
+                <c:u.class><o:string/></c:u.class>
+            </c:u.array>
+        </c:u.class>
+
+        <c:u.array>
+            <c:u.class><o:string/></c:u.class>
+            <o:string>test1</o:string>
+        </c:u.array>
+    </c:u.array>
+
+    <c:u.null/>
+    <o:void/>
+
+    <c:u.array-auto>
+        <c:u.entry>
+            <o:string>A</o:string>
+            <o:float>52</o:float>
+        </c:u.entry>
+        <c:u.entry>
+            <o:string>B</o:string>
+            <o:float>42</o:float>
+        </c:u.entry>
+    </c:u.array-auto>
+
+    <c:u.array>
+        <c:u.class-by-name>java.util.Map$Entry</c:u.class-by-name>
+        <c:u.entry>
+            <o:string>B</o:string>
+            <o:float>42</o:float>
+        </c:u.entry>
+        <c:u.entry>
+            <o:string>A</o:string>
+            <o:float>52</o:float>
+        </c:u.entry>
+    </c:u.array>
+
+    <c:u.array-list>
+        <o:float>5</o:float>
+        <o:string>test</o:string>
+        <c:u.array-auto>
+            <c:u.entry>
+                <o:string>A</o:string>
+                <o:float>52</o:float>
+            </c:u.entry>
+            <c:u.entry>
+                <o:string>B</o:string>
+                <o:float>42</o:float>
+            </c:u.entry>
+        </c:u.array-auto>
+    </c:u.array-list>
+
 </c:u.debug>

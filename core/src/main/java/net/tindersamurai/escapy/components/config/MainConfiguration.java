@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.components;
+package net.tindersamurai.escapy.components.config;
 
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContextConfiguration;
@@ -12,21 +12,25 @@ import static java.io.File.separator;
 public final class MainConfiguration extends EscapyGameContextConfiguration {
 
 	@Override
+	public String getWorkDir() {
+		return super.getWorkDir().replace(separator+"core"+separator+"assets", "") + separator;
+	}
+
+	@Override
 	public String getResourcesDir() {
-		String local = System.getProperty("user.dir").replace(separator+"core"+separator+"assets", "");
-		return local + separator + "res";
+		return getWorkDir() + "res" + separator;
 	}
 
 	@Override
 	public String getConfigsFilePath() {
-		return this.getResourcesDir() + separator + "configurations";
+		return this.getResourcesDir() + "config" + separator;
 	}
 
 	@Override
 	public void configurePropertyKeys(PropertyKeysStorage propertyKeyStorage) {
 		propertyKeyStorage
 				.addPropertyKey("BLEND_SHADERS_ROOT_DIR_PATH")
-				.addPropertyValue(getResourcesDir() + separator + "shaders" + separator + "blend")
+				.addPropertyValue(getResourcesDir() + separator + "shaders" + separator + "blend" + separator)
 		.save();
 	}
 

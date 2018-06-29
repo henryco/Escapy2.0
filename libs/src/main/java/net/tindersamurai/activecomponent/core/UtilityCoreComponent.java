@@ -5,6 +5,11 @@ import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
 
 import java.lang.reflect.Array;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map.Entry;
 
 @EscapyComponentFactory("u") // u for utility
 public class UtilityCoreComponent {
@@ -44,7 +49,7 @@ public class UtilityCoreComponent {
 				StringBuilder ars = new StringBuilder();
 				for (int i = 0; i < l; i++)
 					ars.append(Array.get(arg, i)).append(", ");
-				String res = ars.substring(0, ars.length() - 2);
+				String res = ars.substring(0, Math.max(0, ars.length() - 2));
 				System.out.println("\t" + arg.getClass() + ": [" + res + "]");
 
 			} else {
@@ -62,7 +67,8 @@ public class UtilityCoreComponent {
 	}
 
 	@EscapyComponent("array") // test: OK
-	public Object newArrayInstance(@Arg("type") Class<?> type, @Arg("elements") Object ... args) {
+	public Object newArrayInstance(@Arg("type") Class<?> type,
+								   @Arg("elements") Object ... args) {
 		final int l = Array.getLength(args);
 		Object array = Array.newInstance(type, l);
 		for (int i = 0; i < l; i++)
@@ -70,9 +76,39 @@ public class UtilityCoreComponent {
 		return array;
 	}
 
+	@EscapyComponent("array-auto")
+	public Object newAutoArray(@Arg("elements") Object ... args) {
+		return newArrayInstance(args[0].getClass(), args);
+	}
+
+	@EscapyComponent("array-list")
+	public List<?> newArrayList(@Arg("elements") Object ... args) {
+		return new ArrayList<>(Arrays.asList(args));
+	}
+
 	@EscapyComponent("class") // test: OK
 	public Class<?> findClass(@Arg("object") Object o) {
 		return o.getClass();
 	}
 
+	@EscapyComponent("class-by-name")
+	public Class<?> classByName(String name) {
+		try {
+			return Class.forName(name);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Unknown class", e);
+		}
+	}
+
+	@EscapyComponent("entry")
+	public Entry createEntry(@Arg("key") Object key,
+							 @Arg("value") Object value
+	) {
+		return new AbstractMap.SimpleImmutableEntry<>(key, value);
+	}
+
+	@EscapyComponent("null")
+	public Object nullObject(Object ... args) {
+		return null;
+	}
 }

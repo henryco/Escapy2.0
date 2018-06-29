@@ -36,7 +36,7 @@ public interface IEscapyObjectFactory {
 				}
 
 				final Constructor<?> constructor; try {
-					constructor = cla.getConstructor(argTypes);
+					constructor = cla.getDeclaredConstructor(argTypes);
 					constructor.setAccessible(true);
 				} catch (NoSuchMethodException e) {
 					e.printStackTrace();
