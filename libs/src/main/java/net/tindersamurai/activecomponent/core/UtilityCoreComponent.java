@@ -39,7 +39,7 @@ public class UtilityCoreComponent {
 	}
 
 	@EscapyComponent("debug") // test: OK
-	public void debug(Object ... args) {
+	public void debug(@Arg("args") Object ... args) {
 
 		System.out.println("\n<c:u.debug>");
 		for (Object arg : args) try {

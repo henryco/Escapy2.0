@@ -6,7 +6,7 @@ import net.tindersamurai.escapy.context.game.configuration.util.PropertyKeysStor
 /**
  * @author Henry on 28/06/17.
  */
-public abstract class EscapyGameContextConfiguration {
+public abstract class EscapyGameContextConfiguration implements EscapyGameContext {
 
 
 	public AnnotationProcessor getAnnotationProcessor() {

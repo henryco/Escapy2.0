@@ -4,14 +4,14 @@
         xmlns:m="https://tindersamurai.net/escapy/ac/method"
 >
     <c:u.array-auto name="stages">
+
         <c:u.entry>
-            <o:string name="key">demo</o:string>
-            <o:string name="value">locations/demo</o:string>
+            <o:string name="value"> locations/demo </o:string>
+            <o:string name="key"> demo </o:string>
         </c:u.entry>
+
     </c:u.array-auto>
 
-    <o:string name="default">
-        demo
-    </o:string>
+    <o:string name="default"> demo </o:string>
 
 </c:config.main>

@@ -1,8 +1,10 @@
 package net.tindersamurai.escapy.context.game;
 
 import com.badlogic.gdx.Game;
+import lombok.experimental.Delegate;
 import lombok.extern.java.Log;
 import net.tindersamurai.escapy.context.annotation.meta.AnnotationProcessor;
+import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContextConfiguration;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreen;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenContext;
@@ -16,19 +18,19 @@ import java.util.Map;
  * Game context class, for using inside main module initialuzation ONLY!
  * In other cases use it as {@link EscapyScreenContext}
  */ @Log
-public abstract class EscapyGameContext extends Game implements EscapyScreenContext {
+public abstract class EscapyGame extends Game implements EscapyScreenContext, EscapyGameContext {
 
 	private final Map<String, EscapyScreen> screenMap;
 	private final Map<Class<? extends EscapyScreen>, EscapyScreen> classEscapyScreenMap;
 
-
+	private final @Delegate EscapyGameContext gameContext;
 
 	/**
 	 * @author Henry on 28/06/17.
 	 * Game context class, for using inside main module initialuzation ONLY!
 	 * In other cases use it as {@link EscapyScreenContext}
 	 */
-	protected EscapyGameContext(Collection<EscapyScreen> escapyScreens) {
+	protected EscapyGame(Collection<EscapyScreen> escapyScreens) {
 		this(escapyScreens, new EscapyGameContextConfiguration() {});
 	}
 
@@ -37,8 +39,8 @@ public abstract class EscapyGameContext extends Game implements EscapyScreenCont
 	 * Game context class, for using inside main module initialuzation ONLY!
 	 * In other cases use it as {@link EscapyScreenContext}
 	 */
-	protected EscapyGameContext(Collection<EscapyScreen> escapyScreens,
-								EscapyGameContextConfiguration contextConfiguration) {
+	protected EscapyGame(Collection<EscapyScreen> escapyScreens,
+						 EscapyGameContextConfiguration contextConfiguration) {
 		super();
 		screenMap = new HashMap<>();
 		classEscapyScreenMap = new HashMap<>();
@@ -49,6 +51,7 @@ public abstract class EscapyGameContext extends Game implements EscapyScreenCont
 		});
 
 		Escapy.getInstance().setContextConfiguration(contextConfiguration);
+		this.gameContext = contextConfiguration;
 	}
 
 

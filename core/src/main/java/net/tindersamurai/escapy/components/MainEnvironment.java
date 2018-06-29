@@ -1,7 +1,7 @@
 package net.tindersamurai.escapy.components;
 
 import com.github.henryco.injector.meta.annotations.Provide;
-import net.tindersamurai.escapy.context.game.EscapyGameContext;
+import net.tindersamurai.escapy.context.game.EscapyGame;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContextConfiguration;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreen;
 
@@ -11,7 +11,7 @@ import javax.inject.Singleton;
 import java.util.Collection;
 
 @Provide @Singleton
-public final class MainEnvironment extends EscapyGameContext {
+public final class MainEnvironment extends EscapyGame {
 
 	private final EscapyScreen initialScreen;
 

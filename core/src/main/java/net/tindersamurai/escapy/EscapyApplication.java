@@ -2,12 +2,12 @@ package net.tindersamurai.escapy;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.github.henryco.injector.GrInjector;
-import net.tindersamurai.escapy.context.game.EscapyGameContext;
+import net.tindersamurai.escapy.context.game.EscapyGame;
 import net.tindersamurai.escapy.modules.MainModule;
 
 public class EscapyApplication implements ApplicationListener {
 
-	private EscapyGameContext escapyGameContext;
+	private EscapyGame escapyGameContext;
 
 	@Override
 	public void create() {
@@ -16,7 +16,7 @@ public class EscapyApplication implements ApplicationListener {
 		GrInjector.addModules(MainModule.class);
 		GrInjector.inject(this);
 
-		escapyGameContext = GrInjector.getComponent(EscapyGameContext.class);
+		escapyGameContext = GrInjector.getComponent(EscapyGame.class);
 		escapyGameContext.create();
 	}
 

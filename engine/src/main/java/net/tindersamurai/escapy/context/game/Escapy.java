@@ -1,5 +1,6 @@
 package net.tindersamurai.escapy.context.game;
 
+import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContextConfiguration;
 import net.tindersamurai.escapy.context.game.configuration.util.DefaultPropertyKeysContainer;
 import net.tindersamurai.escapy.context.game.configuration.util.PropertyKeysStorage;
@@ -29,7 +30,7 @@ public final class Escapy {
 
 
 
-	private EscapyGameContextConfiguration contextConfiguration = null;
+	private EscapyGameContext contextConfiguration = null;
 	public void setContextConfiguration(EscapyGameContextConfiguration contextConfiguration) {
 		if (this.contextConfiguration != null) throw new RuntimeException("Context configuration already exists");
 
@@ -37,20 +38,9 @@ public final class Escapy {
 		contextConfiguration.configurePropertyKeys(propertyKeysContainer);
 	}
 
-
-
-	public static String getConfigsFilePath() {
-		return ourInstance.contextConfiguration.getConfigsFilePath();
+	public static EscapyGameContext getGameContext() {
+		return ourInstance.contextConfiguration;
 	}
-
-	public static String getWorkDir() {
-		return ourInstance.contextConfiguration.getWorkDir();
-	}
-
-	public static String getResourcesDir() {
-		return ourInstance.contextConfiguration.getResourcesDir();
-	}
-
 
 	@SuppressWarnings("unchecked")
 	public static <T> T getProperty(String propertyKey) {

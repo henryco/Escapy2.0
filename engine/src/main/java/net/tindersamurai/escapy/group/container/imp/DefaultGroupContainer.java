@@ -51,7 +51,7 @@ public class DefaultGroupContainer implements EscapyGroupContainer {
 
 		try {
 
-			String path = Escapy.getConfigsFilePath() + separator + configFile;
+			String path = Escapy.getGameContext().getConfigsFilePath() + separator + configFile;
 			Reader reader = new InputStreamReader(Gdx.files.internal(EscapyFiles.safetyPath(path)).read());
 
 			SerializedGroup serialized = new Gson().fromJson(reader, SerializedGroup.class);
@@ -76,7 +76,7 @@ public class DefaultGroupContainer implements EscapyGroupContainer {
 		Collection<DefaultRendererContainer.TargetGroup> targetGroups = new LinkedList<>();
 		for (SerializedPath serializedPath: group) {
 
-			final String path = Escapy.getConfigsFilePath() + EscapyFiles.safetyPath(serializedPath.path);
+			final String path = Escapy.getGameContext().getConfigsFilePath() + EscapyFiles.safetyPath(serializedPath.path);
 			final String[] names = serializedPath.name.split(":");
 
 			if (names.length != 2) throw new RuntimeException();
@@ -95,7 +95,7 @@ public class DefaultGroupContainer implements EscapyGroupContainer {
 		Collection<Map.Entry<String, String>> locations = new LinkedList<>();
 		for (SerializedPath serializedPath: group) {
 
-			final String path = Escapy.getConfigsFilePath() + serializedPath.path;
+			final String path = Escapy.getGameContext().getConfigsFilePath() + serializedPath.path;
 			locations.add(new AbstractMap.SimpleEntry<>(serializedPath.name, EscapyFiles.safetyPath(path)));
 		}
 

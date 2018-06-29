@@ -4,7 +4,7 @@ import com.badlogic.gdx.ApplicationListener;
 import dagger.ObjectGraph;
 import net.tindersamurai.escapy.context.annotation.Dante;
 import net.tindersamurai.escapy.context.annotation.EscapyAPI;
-import net.tindersamurai.escapy.context.game.EscapyGameContext;
+import net.tindersamurai.escapy.context.game.EscapyGame;
 
 /**
  * @author Henry on 27/06/17.
@@ -15,7 +15,7 @@ public final class EscapyApplicationAdapter implements ApplicationListener {
 	private ApplicationListener delegateApplicationListener;
 	private Object[] daggerModules;
 
-	public EscapyApplicationAdapter(Class<? extends EscapyGameContext> applicationListener,
+	public EscapyApplicationAdapter(Class<? extends EscapyGame> applicationListener,
 									Object... daggerModules) {
 		this.setApplicationListenerClass(applicationListener);
 		this.setDaggerModules(daggerModules);

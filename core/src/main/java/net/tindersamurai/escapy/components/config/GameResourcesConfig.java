@@ -30,7 +30,7 @@ public final class GameResourcesConfig {
 	}
 
 
-	@EscapyComponent("map")
+	@EscapyComponent("location")
 	public void map() {
 
 
