@@ -2,10 +2,11 @@ package net.tindersamurai.escapy.modules.nested;
 
 import com.github.henryco.injector.meta.annotations.Module;
 import com.github.henryco.injector.meta.annotations.Provide;
+import lombok.val;
 import net.tindersamurai.activecomponent.parser.EscapyComponentParser;
-import net.tindersamurai.activecomponent.parser.XmlStreamComponentParser;
-import net.tindersamurai.escapy.components.factory.MainResourcesConfigFactory;
+import net.tindersamurai.escapy.components.config.MainResourcesConfig;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
+import net.tindersamurai.escapy.utils.EscapyUtils;
 
 import javax.inject.Singleton;
 
@@ -26,4 +27,16 @@ import javax.inject.Singleton;
 		return "index.eacxml";
 	}
 
+
+	// FIXME REMOVE
+	@Provide @Singleton public Void test (
+			EscapyComponentParser parser,
+			MainResourcesConfig config
+	) {
+		System.out.println("TEST");
+		val file = config.getDefaultStage().getLocations()[0].getFile().getUrl();
+		System.out.println("FILE: "+ file);
+		parser.parseComponent(file);
+		return EscapyUtils._void();
+	}
 }

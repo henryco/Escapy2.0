@@ -24,14 +24,19 @@ public final class LocationFactory implements EscapyComponentFactoryListener {
 
 	private IEscapyNode<IEscapyModel> lastNode;
 
+	private int depthCounter = 0;
 
 	@Override
 	public boolean enterComponent(String name) {
+		depthCounter++;
+		System.out.println("COUNT: " + depthCounter + " : " + name);
 		return true;
 	}
 
 	@Override
 	public Object leaveComponent(String name, Object instance) {
+		depthCounter--;
+		System.out.println("COUNT: " + depthCounter + " : " + name);
 		return instance;
 	}
 
