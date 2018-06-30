@@ -76,6 +76,11 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 
 	private void processFactoryInstance(Object factory, String namespace) {
 
+		final EscapyComponentFactoryListener listener;
+		if (factory instanceof EscapyComponentFactoryListener)
+			listener = (EscapyComponentFactoryListener) factory;
+		else listener = null;
+
 		for (val method : factory.getClass().getDeclaredMethods()) {
 
 			val esc = method.getDeclaredAnnotation(EscapyComponent.class);
@@ -94,6 +99,9 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 			}
 
 			constructors.put(componentName, (Map<String, Object> arguments) -> {
+
+				if (listener != null && !listener.enterComponent(componentName))
+					return null;
 
 				Object[] arr = new Object[args.length];
 				for (int i = 0; i < args.length; i++) {
@@ -133,7 +141,12 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 
 				try {
 					method.setAccessible(true);
-					return method.invoke(factory, arr);
+					Object o = method.invoke(factory, arr);
+
+					if (listener != null)
+						return listener.leaveComponent(componentName, o);
+					return o;
+
 				} catch (Exception e) {
 					throw new RuntimeException("Cannot create component: " + componentName, e);
 				}

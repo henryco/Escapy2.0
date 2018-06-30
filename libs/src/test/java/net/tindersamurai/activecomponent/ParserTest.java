@@ -3,6 +3,7 @@ package net.tindersamurai.activecomponent;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
+import net.tindersamurai.activecomponent.comp.factory.EscapyComponentFactoryListener;
 import net.tindersamurai.activecomponent.parser.EscapyComponentParser;
 import net.tindersamurai.activecomponent.parser.XmlStreamComponentParser;
 import org.junit.Test;
@@ -10,7 +11,19 @@ import org.junit.Test;
 public class ParserTest {
 
 	@EscapyComponentFactory("test")
-	public static final class TestComponent {
+	public static final class TestComponent implements EscapyComponentFactoryListener {
+
+		@Override
+		public boolean enterComponent(String name) {
+			System.out.println("ENTER: " + name);
+			return true;
+		}
+
+		@Override
+		public Object leaveComponent(String name, Object instance) {
+			System.out.println("LEAVE: " + name + ": " + instance);
+			return instance;
+		}
 
 		@EscapyComponent("main")
 		public void main( @Arg("someArg") float numb, Object ...args) {
