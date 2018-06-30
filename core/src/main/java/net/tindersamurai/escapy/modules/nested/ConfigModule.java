@@ -4,26 +4,33 @@ import com.github.henryco.injector.meta.annotations.Module;
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.activecomponent.parser.EscapyComponentParser;
 import net.tindersamurai.activecomponent.parser.XmlStreamComponentParser;
-import net.tindersamurai.escapy.components.config.GameResourcesConfig;
-import net.tindersamurai.escapy.context.game.configuration.EscapyGameContextConfiguration;
+import net.tindersamurai.escapy.components.factory.MainResourcesConfigFactory;
+import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
 
 import javax.inject.Singleton;
 
 @Module(componentsRootPath =
-		"net.tindersamurai.escapy.components.config"
+		"net.tindersamurai.escapy.components.config",
+		include = { FactoryModule.class }
 ) public final class ConfigModule {
 
 	@Provide @Singleton
 	public EscapyComponentParser provideComponentParser (
-			GameResourcesConfig resourcesFactory
+			MainResourcesConfigFactory resourcesFactory
 	) {
 		return new XmlStreamComponentParser(resourcesFactory);
 	}
 
-	@Provide("game-resources-config-file")
+	@Provide("MainResConfigFile")
 	public String provideResourcesConfigFile (
-			EscapyGameContextConfiguration contextConfiguration
+			EscapyGameContext gameContext
 	) {
-		return contextConfiguration.getConfigsFilePath() + "config.eacxml";
+		return gameContext.getConfigsFilePath() + "config.eacxml";
 	}
+
+	@Provide("DefaultStageFileName") @Singleton
+	public String provideDefaultStageFileName() {
+		return "index.eacxml";
+	}
+
 }

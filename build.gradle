@@ -1,3 +1,7 @@
+plugins {
+    id 'net.ltgt.apt' version '0.10'
+}
+
 buildscript {
     repositories {
         mavenLocal()
@@ -52,6 +56,9 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile 'com.github.henryco:grinjector:1.2.1'
         compile "com.kotcrab.vis:vis-ui:1.3.0"
+
+        compileOnly "org.projectlombok:lombok:$lombok_Version"
+        apt "org.projectlombok:lombok:$lombok_Version"
     }
 }
 

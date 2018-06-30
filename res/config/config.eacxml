@@ -5,10 +5,11 @@
 >
     <c:u.array-auto name="stages">
 
-        <c:u.entry>
-            <o:string name="value"> locations/demo </o:string>
-            <o:string name="key"> demo </o:string>
-        </c:u.entry>
+        <c:config.metadata>
+            <o:string name="id"> demo </o:string>
+            <o:string name="url"> locations/demo </o:string>
+            <o:string name="title"> Demo stage </o:string>
+        </c:config.metadata>
 
     </c:u.array-auto>
 

@@ -1,7 +1,7 @@
-<c:u.main
+<c:location
         xmlns:c="https://tindersamurai.net/escapy/ac/component"
         xmlns:o="https://tindersamurai.net/escapy/ac/object"
         xmlns:m="https://tindersamurai.net/escapy/ac/method"
 >
 
-</c:u.main>
+</c:location>

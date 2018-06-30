@@ -11,7 +11,7 @@ import javax.inject.Singleton;
 import java.io.File;
 
 @Module(
-		include = {StageModule.class}
+		include = { ConfigModule.class }
 ) public final class ScreenModule {
 
 	@Provide("camera_splash") @Singleton

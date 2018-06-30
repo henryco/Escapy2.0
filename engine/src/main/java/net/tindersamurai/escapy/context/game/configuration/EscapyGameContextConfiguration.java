@@ -13,15 +13,15 @@ public abstract class EscapyGameContextConfiguration implements EscapyGameContex
 		return new AnnotationProcessor();
 	}
 
-	public String getConfigsFilePath() {
+	@Override public String getConfigsFilePath() {
 		return System.getProperty("user.dir");
 	}
 
-	public String getWorkDir() {
+	@Override public String getWorkDir() {
 		return System.getProperty("user.dir");
 	}
 
-	public String getResourcesDir() {
+	@Override public String getResourcesDir() {
 		return System.getProperty("user.dir");
 	}
 
