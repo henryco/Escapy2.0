@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
+@Deprecated
 public abstract class EscapySimpleSerialized implements EscapySerialized {
 
 	@SerializedName("type") @Expose public String type = "";

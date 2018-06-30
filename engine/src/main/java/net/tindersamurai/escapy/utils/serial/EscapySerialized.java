@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 /**
  * @author Henry on 14/07/17.
- */
+ */ @Deprecated
 public interface EscapySerialized extends EscapyNamed {
 
 	default String getValidType() {

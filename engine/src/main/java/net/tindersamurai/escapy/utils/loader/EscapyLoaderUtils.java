@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author Henry on 14/07/17.
- */
+ */ @Deprecated
 public interface EscapyLoaderUtils {
 
 	default float[] floatListToArray(List<Float> floats) {

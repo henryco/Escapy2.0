@@ -8,7 +8,7 @@ import java.util.Collection;
 
 /**
  * @author Henry on 14/07/17.
- */
+ */ @Deprecated
 public interface EscapyInstanceLoader<INSTANCE_TYPE> {
 
 
