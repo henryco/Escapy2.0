@@ -66,8 +66,7 @@ pipeline {
 
     stage('Finish') {
       steps {
-	sh '(rm -r artifacts) || true'
-	sh '(rm -r release) || true'
+        // just finish marker
       }
     }
 
@@ -85,6 +84,8 @@ pipeline {
 
       sh 'gradle clean'
       sh '(pkill -f gradle) || true'
+      sh '(rm -r artifacts) || true'
+      sh '(rm -r release) || true'
     }
 
     success {
