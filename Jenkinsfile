@@ -66,7 +66,7 @@ pipeline {
 
     stage('Finish') {
       steps {
-        // just finish marker
+        sh 'echo FINISH'
       }
     }
 
