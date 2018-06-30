@@ -14,13 +14,6 @@ import javax.inject.Singleton;
 		include = { FactoryModule.class }
 ) public final class ConfigModule {
 
-	@Provide @Singleton
-	public EscapyComponentParser provideComponentParser (
-			MainResourcesConfigFactory resourcesFactory
-	) {
-		return new XmlStreamComponentParser(resourcesFactory);
-	}
-
 	@Provide("MainResConfigFile")
 	public String provideResourcesConfigFile (
 			EscapyGameContext gameContext

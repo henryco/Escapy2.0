@@ -12,7 +12,6 @@ import net.tindersamurai.escapy.utils.files.EscapyFiles;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import java.util.Arrays;
 import java.util.Map;
 
 import static net.tindersamurai.escapy.components.config.MainResourcesConfig.StageMetaData.*;

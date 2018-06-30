@@ -1,6 +1,5 @@
 package net.tindersamurai.escapy.utils.memento;
 
-import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class Memento<T extends EscapyCloneable<T>> {
