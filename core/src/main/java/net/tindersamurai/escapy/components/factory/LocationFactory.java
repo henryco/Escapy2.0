@@ -9,4 +9,6 @@ import javax.inject.Singleton;
 @EscapyComponentFactory("location")
 public final class LocationFactory {
 
+
+
 }
