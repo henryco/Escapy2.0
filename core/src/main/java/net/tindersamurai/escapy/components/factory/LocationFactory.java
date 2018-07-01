@@ -10,6 +10,7 @@ import net.tindersamurai.activecomponent.comp.factory.EscapyComponentFactoryList
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.map.node.EscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
+import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
 import net.tindersamurai.escapy.plain.model.LayerModel;
 
 import javax.inject.Singleton;
@@ -20,9 +21,6 @@ public final class LocationFactory implements EscapyComponentFactoryListener {
 
 
 	private @Getter IEscapyNode<IEscapyModel> virtualModel;
-	private @Getter IEscapyModel locationModel;
-
-	private IEscapyNode<IEscapyModel> lastNode;
 
 	private int depthCounter = 0;
 
@@ -42,29 +40,34 @@ public final class LocationFactory implements EscapyComponentFactoryListener {
 
 
 	@EscapyComponent("root")
-	public IEscapyModel root (
-			@Arg("nested") IEscapyModel ... models
+	public IEscapyNode<IEscapyModel> root (
+			@Arg("nested") IEscapyNode<IEscapyModel> ... models
 	) {
-		System.out.println("ROOT: " + models.length);
-		this.locationModel = new LayerModel(models);
-		this.virtualModel = new EscapyNode<>(locationModel, "root");
+		this.virtualModel = new EscapyNode<IEscapyModel>(null, "root") {{
+			setObserver(new IEscapyNodeObserver() {
+				@Override
+				public void nodeAdded(IEscapyNode parent, IEscapyNode node) {
 
-		this.lastNode = virtualModel;
+				}
 
-		return locationModel;
+				@Override
+				public void nodeRemoved(IEscapyNode parent, IEscapyNode node) {
+
+				}
+			});
+			for (IEscapyNode<IEscapyModel> model : models) {
+				addNode(model);
+			}
+		}};
+		return virtualModel;
 	}
 
 	@EscapyComponent("layer")
-	public IEscapyModel layer (
+	public IEscapyNode<IEscapyModel> layer (
 			@Arg("id") String id,
-			@Arg("nested") IEscapyModel ... models
+			@Arg("nested") IEscapyNode<IEscapyModel> ... models
 	) {
-		System.out.println("LAYER: " + id +": " + models.length);
-		val nodeId = id;
-		val layer = new LayerModel(models);
-
-
-		return layer;
+		return new EscapyNode<>(null, id);
 	}
 
 }

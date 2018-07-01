@@ -3,13 +3,11 @@
         xmlns:o="https://tindersamurai.net/escapy/ac/object"
         xmlns:m="https://tindersamurai.net/escapy/ac/method"
 >
+    <c:location.layer>
+        <o:string>layer1</o:string>
+    </c:location.layer>
 
-    <c:location.root/>
-    <c:location.root/>
-
-    <c:location.root>
-        <c:location.root/>
-    </c:location.root>
-
-
+    <c:location.layer>
+        <o:string>layer2</o:string>
+    </c:location.layer>
 </c:location.root>

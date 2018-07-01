@@ -118,9 +118,17 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 
 						int len = Math.max(0, arguments.size() - i);
 						Object vars = Array.newInstance(parameter.getType().getComponentType(), len);
-
-						for (int v = 0; v < len; v++)
-							Array.set(vars, v, arguments.get(Integer.toString(v + i)));
+						for (int v = 0; v < len; v++) {
+							try {
+								Array.set(vars, v, arguments.get(Integer.toString(v + i)));
+							} catch (IllegalArgumentException e) {
+								throw new RuntimeException("Component factory argument type mismatch:\n" +
+										"\tREQUIRED: " + parameter.getType().getComponentType() + "\n" +
+										"\tFOUND: " + arguments.get(Integer.toString(v + i)).getClass() + "\n" +
+										"\tnote: IF YOU PASS ARRAY TO VARARG, YOU SHOULD DO IT BY NAME!"
+										, e);
+							}
+						}
 						arr[i] = vars;
 
 						break;

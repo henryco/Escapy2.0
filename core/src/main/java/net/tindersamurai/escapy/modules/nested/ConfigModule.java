@@ -6,6 +6,7 @@ import lombok.val;
 import net.tindersamurai.activecomponent.parser.EscapyComponentParser;
 import net.tindersamurai.escapy.components.config.MainResourcesConfig;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
+import net.tindersamurai.escapy.map.node.IEscapyNode;
 import net.tindersamurai.escapy.utils.EscapyUtils;
 
 import javax.inject.Singleton;
@@ -36,7 +37,8 @@ import javax.inject.Singleton;
 		System.out.println("TEST");
 		val file = config.getDefaultStage().getLocations()[0].getFile().getUrl();
 		System.out.println("FILE: "+ file);
-		parser.parseComponent(file);
+		IEscapyNode node = parser.parseComponent(file);
+		System.out.println(node.treeView());
 		return EscapyUtils._void();
 	}
 }
