@@ -28,15 +28,15 @@ public final class LocationFactory implements EscapyComponentFactoryListener {
 
 	@Override
 	public boolean enterComponent(String name) {
+		System.out.println("ENTER: " + depthCounter + " : " + name);
 		depthCounter++;
-		System.out.println("COUNT: " + depthCounter + " : " + name);
 		return true;
 	}
 
 	@Override
 	public Object leaveComponent(String name, Object instance) {
 		depthCounter--;
-		System.out.println("COUNT: " + depthCounter + " : " + name);
+		System.out.println("LEAVE: " + depthCounter + " : " + name);
 		return instance;
 	}
 
@@ -45,6 +45,7 @@ public final class LocationFactory implements EscapyComponentFactoryListener {
 	public IEscapyModel root (
 			@Arg("nested") IEscapyModel ... models
 	) {
+		System.out.println("ROOT: " + models.length);
 		this.locationModel = new LayerModel(models);
 		this.virtualModel = new EscapyNode<>(locationModel, "root");
 
@@ -58,7 +59,8 @@ public final class LocationFactory implements EscapyComponentFactoryListener {
 			@Arg("id") String id,
 			@Arg("nested") IEscapyModel ... models
 	) {
-		val nodeId= id;
+		System.out.println("LAYER: " + id +": " + models.length);
+		val nodeId = id;
 		val layer = new LayerModel(models);
 
 

@@ -5,6 +5,7 @@ import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import net.tindersamurai.activecomponent.comp.factory.EscapyComponentAnnotationFactory;
+import net.tindersamurai.activecomponent.comp.factory.EscapyComponentFactoryListener;
 import net.tindersamurai.activecomponent.comp.factory.IEscapyComponentFactory;
 import net.tindersamurai.activecomponent.obj.IEscapyObject;
 import net.tindersamurai.activecomponent.obj.IEscapyObjectFactory;
@@ -73,7 +74,6 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 
 
 	private UniComponent onComponent (XMLStreamReader reader) throws XMLStreamException {
-
 		Map<String, Object> args = new HashMap<>();
 
 		val name = reader.getLocalName();
@@ -82,9 +82,22 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 		val atrName = atrs.get(ATTR_NAME);
 		val nullComponent = new UniComponent(Object.class, atrName, null);
 
+		val componentName = name.substring(1 + name.lastIndexOf(componentFactory.getNameSpaceSeparator()));
+		final EscapyComponentFactoryListener listener;
+		val factory = componentFactory.getFactory(name);
+		if (factory instanceof EscapyComponentFactoryListener)
+			listener = (EscapyComponentFactoryListener) factory;
+		else listener = null;
+
+		boolean enter = true;
+		if (listener != null && !listener.enterComponent(componentName))
+			enter = false;
+
 		int count = -1;
 		while (reader.hasNext()) {
 			reader.next();
+
+			if (!enter) continue;
 
 			if (reader.isCharacters()) {
 				val text = reader.getText().trim();
@@ -97,7 +110,6 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 
 			if (reader.getPrefix() != null && !reader.isEndElement()) {
 				count += 1;
-
 				UniComponent uniComponent = null;
 				switch (reader.getPrefix()) {
 
@@ -121,9 +133,18 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 					);
 				else
 					args.put(Integer.toString(count), "null");
+				continue;
 			}
 
 			if (reader.isEndElement() && name.equals(reader.getLocalName())) {
+
+				if (listener != null) {
+					val component = listener.leaveComponent(componentName, componentFactory.createComponent(name, args));
+					if (component == null)
+						return nullComponent;
+					return new UniComponent(component.getClass(), atrName, component);
+				}
+
 				val component = componentFactory.createComponent(name, args);
 				if (component == null)
 					return nullComponent;

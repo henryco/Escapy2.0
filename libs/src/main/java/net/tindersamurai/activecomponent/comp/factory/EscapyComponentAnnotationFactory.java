@@ -1,5 +1,6 @@
 package net.tindersamurai.activecomponent.comp.factory;
 
+import lombok.Getter;
 import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
@@ -15,7 +16,8 @@ import java.util.function.Function;
 public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory {
 
 	private final Map<String, Function<Map<String, Object>, Object>> constructors;
-	private final String nameSpaceSeparator;
+	private final Map<String, Object> factories;
+	private @Getter final String nameSpaceSeparator;
 
 	public EscapyComponentAnnotationFactory(String nameSpaceSeparator, Collection<Object> componentFactories) {
 		this(nameSpaceSeparator, componentFactories.toArray());
@@ -24,6 +26,7 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 	public EscapyComponentAnnotationFactory(String nameSpaceSeparator, Object ... componentFactories) {
 		this.nameSpaceSeparator = nameSpaceSeparator;
 		this.constructors = new HashMap<>();
+		this.factories = new HashMap<>();
 
 		Object[] factories = new Object[componentFactories.length + 1];
 		System.arraycopy(componentFactories, 0, factories, 1, componentFactories.length);
@@ -75,18 +78,15 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 	}
 
 	private void processFactoryInstance(Object factory, String namespace) {
-
-		final EscapyComponentFactoryListener listener;
-		if (factory instanceof EscapyComponentFactoryListener)
-			listener = (EscapyComponentFactoryListener) factory;
-		else listener = null;
+		this.factories.put(namespace, factory);
 
 		for (val method : factory.getClass().getDeclaredMethods()) {
 
 			val esc = method.getDeclaredAnnotation(EscapyComponent.class);
 			if (esc == null) continue;
 
-			val componentName = namespace.trim() + nameSpaceSeparator + esc.value().trim();
+			val annotationName = esc.value().trim();
+			val componentName = namespace.trim() + nameSpaceSeparator + annotationName;
 			val parameters = method.getParameters();
 			val args = new Map.Entry[parameters.length];
 
@@ -99,9 +99,6 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 			}
 
 			constructors.put(componentName, (Map<String, Object> arguments) -> {
-
-				if (listener != null && !listener.enterComponent(componentName))
-					return null;
 
 				Object[] arr = new Object[args.length];
 				for (int i = 0; i < args.length; i++) {
@@ -119,7 +116,7 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 							}
 						}
 
-						int len = arguments.size() - i;
+						int len = Math.max(0, arguments.size() - i);
 						Object vars = Array.newInstance(parameter.getType().getComponentType(), len);
 
 						for (int v = 0; v < len; v++)
@@ -141,11 +138,7 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 
 				try {
 					method.setAccessible(true);
-					Object o = method.invoke(factory, arr);
-
-					if (listener != null)
-						return listener.leaveComponent(componentName, o);
-					return o;
+					return method.invoke(factory, arr);
 
 				} catch (Exception e) {
 					throw new RuntimeException("Cannot create component: " + componentName, e);
@@ -161,4 +154,10 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 		return (T) constructors.get(name).apply(arguments);
 	}
 
+	@Override
+	public Object getFactory(String name) {
+		val f = factories.get(name);
+		if (f != null) return f;
+		return factories.get(name.substring(0, name.lastIndexOf(nameSpaceSeparator)));
+	}
 }
