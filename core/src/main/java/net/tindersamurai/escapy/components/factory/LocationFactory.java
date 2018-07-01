@@ -56,6 +56,8 @@ public final class LocationFactory implements EscapyComponentFactoryListener {
 				}
 			});
 			for (IEscapyNode<IEscapyModel> model : models) {
+				if (model == null) continue;
+
 				addNode(model);
 			}
 		}};

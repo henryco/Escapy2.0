@@ -129,10 +129,14 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 				if (uniComponent != null)
 					args.put(
 							uniComponent.componentName == null ? Integer.toString(count) : uniComponent.componentName,
-							uniComponent.instance == null ? "null" : uniComponent.instance
+							uniComponent.instance
+//									== null ? "null" : uniComponent.instance
 					);
 				else
-					args.put(Integer.toString(count), "null");
+					args.put(Integer.toString(count),
+							null
+//							"null"
+					);
 				continue;
 			}
 
