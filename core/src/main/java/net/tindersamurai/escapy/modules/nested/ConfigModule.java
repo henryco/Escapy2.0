@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 
 @Module(componentsRootPath =
 		"net.tindersamurai.escapy.components.config",
-		include = { FactoryModule.class }
+		include = { LocationModule.class }
 ) public final class ConfigModule {
 
 	@Provide("MainResConfigFile")
