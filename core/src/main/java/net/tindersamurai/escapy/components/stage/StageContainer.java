@@ -30,6 +30,7 @@ public class StageContainer {
 
 		private EscapyFileMetaData file;
 		private LocationMetaData[] locations;
+		private LocationMetaData defaultLocation;
 		private boolean _default;
 	}
 
@@ -79,6 +80,8 @@ public class StageContainer {
 			val locations = (EscapyFileMetaData[]) stage.get("locations");
 
 			val locs = new LocationMetaData[locations.length];
+			LocationMetaData defLoc = null;
+
 			for (int k = 0; k < locations.length; k++) {
 
 				val isDefaultLoc = locations[k].getId().equals(defLocation);
@@ -87,9 +90,11 @@ public class StageContainer {
 				val locId = locations[k].getId();
 
 				locs[k] = new LocationMetaData(new EscapyFileMetaData(locId, locFile, locName), isDefaultLoc);
+				if (isDefaultLoc)
+					defLoc = locs[k];
 			}
 
-			stages[i] = new StageMetaData(new EscapyFileMetaData(stageId, stageFile, stageName), locs, isDefault);
+			stages[i] = new StageMetaData(new EscapyFileMetaData(stageId, stageFile, stageName), locs, defLoc, isDefault);
 
 			if (isDefault)
 				this.defaultStage = stages[i];

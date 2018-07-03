@@ -19,8 +19,8 @@ public final class MainEnvironment extends EscapyGame {
 	public MainEnvironment(
 			EscapyGameContextConfiguration contextConfiguration,
 			@Named("initial-screen") EscapyScreen initialScreen,
-			Collection<EscapyScreen> escapyScreens)
-	{
+			Collection<EscapyScreen> escapyScreens
+	) {
 		super(escapyScreens, contextConfiguration);
 		this.initialScreen = initialScreen;
 	}

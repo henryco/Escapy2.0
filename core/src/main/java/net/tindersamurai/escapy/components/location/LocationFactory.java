@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.components.factory;
+package net.tindersamurai.escapy.components.location;
 
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.Getter;
@@ -17,7 +17,6 @@ import javax.inject.Singleton;
 @EscapyComponentFactory("location")
 public class LocationFactory  {
 
-	private @Getter IEscapyNode<NodeData> virtualModel;
 	private final IEscapyNodeObserver nodeObserver;
 
 	@Inject
@@ -29,7 +28,7 @@ public class LocationFactory  {
 	public final IEscapyNode<NodeData> root (
 			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
-		return this.virtualModel = new EscapyNode<NodeData> (null, "root") {{
+		return new EscapyNode<NodeData> (null, "root") {{
 			setObserver(nodeObserver);
 			for (IEscapyNode<NodeData> node : nodes)
 				addNode(node);
