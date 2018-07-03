@@ -1,0 +1,1 @@
+package net.tindersamurai.escapy.plain;

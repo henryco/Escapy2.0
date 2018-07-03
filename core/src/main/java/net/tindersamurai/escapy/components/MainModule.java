@@ -1,19 +1,19 @@
-package net.tindersamurai.escapy.modules;
+package net.tindersamurai.escapy.components;
 
 import com.github.henryco.injector.meta.annotations.Module;
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreen;
-import net.tindersamurai.escapy.modules.nested.ScreenModule;
+import net.tindersamurai.escapy.components.config.ConfigModule;
+import net.tindersamurai.escapy.components.screen.ScreenModule;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Module(
-		componentsRootPath = "net.tindersamurai.escapy.components",
+@Module(componentsRootClass = MainModule.class,
 		targetsRootPath = "net.tindersamurai.escapy",
-		include = {ScreenModule.class}
+		include = { ConfigModule.class, ScreenModule.class }
 ) public final class MainModule {
 
 	@Provide("initial-screen") @Singleton

@@ -3,7 +3,7 @@ package net.tindersamurai.escapy;
 import com.badlogic.gdx.ApplicationListener;
 import com.github.henryco.injector.GrInjector;
 import net.tindersamurai.escapy.context.game.EscapyGame;
-import net.tindersamurai.escapy.modules.MainModule;
+import net.tindersamurai.escapy.components.MainModule;
 
 public class EscapyApplication implements ApplicationListener {
 

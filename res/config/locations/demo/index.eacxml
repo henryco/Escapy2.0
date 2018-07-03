@@ -1,4 +1,4 @@
-<c:config.stage
+<c:resource.stage
         xmlns:c="https://tindersamurai.net/escapy/ac/component"
         xmlns:o="https://tindersamurai.net/escapy/ac/object"
         xmlns:m="https://tindersamurai.net/escapy/ac/method"
@@ -9,18 +9,18 @@
 
     <c:u.array-auto name="locations">
 
-        <c:config.metadata>
+        <c:resource.metadata>
             <o:string name="id"> one </o:string>
             <o:string name="url"> one.eacxml </o:string>
             <o:string name="title"> Location 1 </o:string>
-        </c:config.metadata>
+        </c:resource.metadata>
 
-        <c:config.metadata>
+        <c:resource.metadata>
             <o:string name="id"> two </o:string>
             <o:string name="url"> two.eacxml </o:string>
             <o:string name="title"> Location 2 </o:string>
-        </c:config.metadata>
+        </c:resource.metadata>
 
     </c:u.array-auto>
 
-</c:config.stage>
+</c:resource.stage>

@@ -9,7 +9,7 @@ import javax.inject.Singleton;
 import static java.io.File.separator;
 
 @Provide @Singleton
-public final class MainConfiguration extends EscapyGameContextConfiguration {
+public class MainConfiguration extends EscapyGameContextConfiguration {
 
 	@Override
 	public String getWorkDir() {

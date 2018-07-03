@@ -1,5 +1,6 @@
-package net.tindersamurai.escapy.components.location;
+package net.tindersamurai.escapy.components.node;
 
+import com.github.henryco.injector.GrInjector;
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
@@ -7,11 +8,15 @@ import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
 import javax.inject.Singleton;
 
 @Provide @Singleton
-public class LocationNodeObserver implements IEscapyNodeObserver {
+public final class NodeObserver implements IEscapyNodeObserver {
 
-	@Override
+	@Override @SuppressWarnings("unchecked")
 	public void nodeAdded(IEscapyNode parent, IEscapyNode node) {
 		System.out.println("NODE ADDED");
+		if (parent.get() == null) {
+			parent.set(GrInjector.getComponent(NodeData.class));
+			System.out.println("node created");
+		}
 	}
 
 	@Override

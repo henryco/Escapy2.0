@@ -8,7 +8,7 @@ public interface IEscapyNode<P> {
 
 	String getId();
 
-	<T extends P> T get(String id);
+	<T extends P> T get();
 
 	IEscapyNode<P> set(P content);
 

@@ -41,7 +41,7 @@ public class EscapyNode<T> implements IEscapyNode<T> {
 	}
 
 	@Override
-	public <Z extends T> Z get(String id) {
+	public <Z extends T> Z get() {
 		//noinspection unchecked
 		return (Z) content;
 	}

@@ -1,8 +1,10 @@
-package net.tindersamurai.escapy.modules.nested;
+package net.tindersamurai.escapy.components.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.github.henryco.injector.meta.annotations.Module;
 import com.github.henryco.injector.meta.annotations.Provide;
+import net.tindersamurai.escapy.components.config.ConfigModule;
+import net.tindersamurai.escapy.components.stage.StageModule;
 import net.tindersamurai.escapy.graphic.camera.EscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.screen.Resolution;
@@ -10,8 +12,8 @@ import net.tindersamurai.escapy.graphic.screen.Resolution;
 import javax.inject.Singleton;
 import java.io.File;
 
-@Module(
-		include = { ConfigModule.class }
+@Module(componentsRootClass = ScreenModule.class,
+		include = { ConfigModule.class, StageModule.class }
 ) public final class ScreenModule {
 
 	@Provide("camera_splash") @Singleton

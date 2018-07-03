@@ -1,7 +1,8 @@
-package net.tindersamurai.escapy.components.config;
+package net.tindersamurai.escapy.components.stage;
 
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.Value;
 import lombok.val;
 import net.tindersamurai.activecomponent.parser.EscapyComponentParser;
@@ -12,12 +13,13 @@ import net.tindersamurai.escapy.utils.files.EscapyFiles;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
+import java.util.Arrays;
 import java.util.Map;
 
-import static net.tindersamurai.escapy.components.config.MainResourcesConfig.StageMetaData.*;
+import static net.tindersamurai.escapy.components.stage.StageContainer.StageMetaData.*;
 
-@Provide @Singleton
-public final class MainResourcesConfig {
+@Provide @Singleton @ToString
+public final class StageContainer {
 
 	@SuppressWarnings("WeakerAccess")
 	@Value public static final class StageMetaData {
@@ -41,7 +43,7 @@ public final class MainResourcesConfig {
 	private @Getter StageMetaData[] stages;
 
 	@Inject
-	public MainResourcesConfig(
+	public StageContainer(
 			@Named("MainResConfigFile") String mainConfigFile,
 			@Named("DefaultStageFileName") String stageFileName,
 			EscapyComponentParser parser,
@@ -92,6 +94,9 @@ public final class MainResourcesConfig {
 
 			if (isDefault)
 				this.defaultStage = stages[i];
+
+			System.out.println(getDefaultStage());
+			System.out.println(Arrays.toString(getStages()));
 		}
 
 	}

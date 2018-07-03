@@ -1,23 +1,21 @@
-package net.tindersamurai.escapy.components.location;
+package net.tindersamurai.escapy.components.factory;
 
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.Getter;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
-import net.tindersamurai.activecomponent.comp.factory.EscapyComponentFactoryListener;
-import net.tindersamurai.escapy.map.model.IEscapyModel;
+import net.tindersamurai.escapy.components.node.NodeData;
 import net.tindersamurai.escapy.map.node.EscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
-import net.tindersamurai.escapy.plain.node.NodeData;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Provide @Singleton
 @EscapyComponentFactory("location")
-public final class LocationFactory implements EscapyComponentFactoryListener {
+public final class LocationFactory  {
 
 	private @Getter IEscapyNode<NodeData> virtualModel;
 	private final IEscapyNodeObserver nodeObserver;
@@ -28,30 +26,26 @@ public final class LocationFactory implements EscapyComponentFactoryListener {
 	}
 
 	@SafeVarargs @EscapyComponent("root")
-	public final IEscapyNode<NodeData> root(
-			@Arg("nested") IEscapyNode<NodeData>... models
+	public final IEscapyNode<NodeData> root (
+			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
-
-		return null;
+		return this.virtualModel = new EscapyNode<NodeData> (null, "root") {{
+			setObserver(nodeObserver);
+			for (IEscapyNode<NodeData> node : nodes)
+				addNode(node);
+		}};
 	}
 
-	@SafeVarargs @EscapyComponent("layer")
-	public final IEscapyNode<NodeData> layer (
+	@SafeVarargs @EscapyComponent("node")
+	public final IEscapyNode<NodeData> node (
 			@Arg("id") String id,
-			@Arg("nested") IEscapyNode<NodeData> ... models
+			@Arg("data") NodeData data,
+			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
-		return new EscapyNode<>(null, id);
+		return new EscapyNode<NodeData>(data, id) {{
+			for (IEscapyNode<NodeData> node : nodes)
+				addNode(node);
+		}};
 	}
 
-
-
-	@Override
-	public boolean enterComponent(String name) {
-		return true;
-	}
-
-	@Override
-	public Object leaveComponent(String name, Object instance) {
-		return instance;
-	}
 }
