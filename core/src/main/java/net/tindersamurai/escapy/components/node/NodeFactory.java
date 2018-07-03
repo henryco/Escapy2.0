@@ -1,6 +1,5 @@
 package net.tindersamurai.escapy.components.node;
 
-import com.github.henryco.injector.GrInjector;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
@@ -17,8 +16,7 @@ public class NodeFactory {
 	@EscapyComponent("data")
 	public final NodeData data(@Arg("args") Object ... args) {
 
-		val data = GrInjector.getComponent(NodeData.class);
-
+		val data = new NodeData();
 		for (Object arg : args) {
 
 			if (arg instanceof IEscapyModel)

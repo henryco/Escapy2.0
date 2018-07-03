@@ -8,7 +8,7 @@ import net.tindersamurai.escapy.map.model.IEscapyModel;
 @Provide @Data @Log
 public class NodeData {
 
-	{ log.info("Node created [" + this.hashCode() + "]"); }
+	{ log.info("Node created [" + this.hashCode() + super.hashCode() + "]"); }
 
 	private IEscapyModel model;
 }

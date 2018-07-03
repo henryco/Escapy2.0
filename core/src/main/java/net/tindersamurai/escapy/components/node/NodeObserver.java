@@ -1,6 +1,5 @@
 package net.tindersamurai.escapy.components.node;
 
-import com.github.henryco.injector.GrInjector;
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
@@ -14,7 +13,7 @@ public class NodeObserver implements IEscapyNodeObserver {
 	public void nodeAdded(IEscapyNode parent, IEscapyNode node) {
 		System.out.println("NODE ADDED");
 		if (parent.get() == null) {
-			parent.set(GrInjector.getComponent(NodeData.class));
+			parent.set(new NodeData());
 			System.out.println("node created");
 		}
 	}

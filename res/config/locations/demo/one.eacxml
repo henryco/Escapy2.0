@@ -5,7 +5,7 @@
 >
     <c:location.node>
         <o:string>first</o:string>
-
+        <c:node.data>test</c:node.data>
     </c:location.node>
 
     <c:location.node>
