@@ -6,6 +6,6 @@ import net.tindersamurai.escapy.components.factory.FactoryModule;
 
 @Module(componentsRootClass = StageModule.class,
 		include = { ConfigModule.class, FactoryModule.class }
-) public class StageModule {
+) public final class StageModule {
 
 }

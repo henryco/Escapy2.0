@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Provide @Singleton
 @EscapyComponentFactory("resource")
-public final class ResourceFactory {
+public class ResourceFactory {
 
 	private final ResourceFactoryLogic logic;
 

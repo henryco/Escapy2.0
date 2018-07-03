@@ -15,7 +15,7 @@ import javax.inject.Singleton;
 
 @Provide @Singleton
 @EscapyComponentFactory("location")
-public final class LocationFactory  {
+public class LocationFactory  {
 
 	private @Getter IEscapyNode<NodeData> virtualModel;
 	private final IEscapyNodeObserver nodeObserver;

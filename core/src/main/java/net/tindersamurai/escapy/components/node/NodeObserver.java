@@ -8,7 +8,7 @@ import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
 import javax.inject.Singleton;
 
 @Provide @Singleton
-public final class NodeObserver implements IEscapyNodeObserver {
+public class NodeObserver implements IEscapyNodeObserver {
 
 	@Override @SuppressWarnings("unchecked")
 	public void nodeAdded(IEscapyNode parent, IEscapyNode node) {

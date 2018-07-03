@@ -8,7 +8,7 @@ import net.tindersamurai.escapy.map.model.IEscapyModel;
 import javax.inject.Singleton;
 
 @Provide @Singleton
-public final class NodeFactoryLogic {
+public class NodeFactoryLogic {
 
 	public final NodeData data(Object ... args) {
 

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Provide @Singleton
-public final class ResourceFactoryLogic {
+public class ResourceFactoryLogic {
 
 	public EscapyFileMetaData fileMetaData(String id, String url, String name) {
 		return new EscapyFileMetaData(id, url, name);

@@ -6,7 +6,7 @@ import lombok.extern.java.Log;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 
 @Provide @Data @Log
-public final class NodeData {
+public class NodeData {
 
 	{ log.info("Node created [" + this.hashCode() + "]"); }
 

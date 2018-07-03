@@ -12,7 +12,7 @@ import javax.inject.Singleton;
 
 @Provide @Singleton
 @EscapyComponentFactory("node")
-public final class NodeFactory {
+public class NodeFactory {
 
 	private final NodeFactoryLogic logic;
 

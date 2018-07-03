@@ -13,13 +13,12 @@ import net.tindersamurai.escapy.utils.files.EscapyFiles;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import java.util.Arrays;
 import java.util.Map;
 
 import static net.tindersamurai.escapy.components.stage.StageContainer.StageMetaData.*;
 
 @Provide @Singleton @ToString
-public final class StageContainer {
+public class StageContainer {
 
 	@SuppressWarnings("WeakerAccess")
 	@Value public static final class StageMetaData {
@@ -94,9 +93,6 @@ public final class StageContainer {
 
 			if (isDefault)
 				this.defaultStage = stages[i];
-
-			System.out.println(getDefaultStage());
-			System.out.println(Arrays.toString(getStages()));
 		}
 
 	}
