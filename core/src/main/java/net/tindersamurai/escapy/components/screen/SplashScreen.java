@@ -28,8 +28,8 @@ public class SplashScreen extends EscapyScreenCore {
 	private float time;
 
 	@Inject
-	public SplashScreen(IEscapyCamera camera,
-						@Named("logo_splash") String logoUrl,
+	public SplashScreen(@Named("logo_splash") String logoUrl,
+						IEscapyCamera camera,
 						float showTime
 	) {
 		this.initialized = new AtomicBoolean(false);
