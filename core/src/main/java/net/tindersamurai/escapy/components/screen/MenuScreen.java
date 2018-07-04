@@ -5,7 +5,7 @@ import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
 
 import javax.inject.Singleton;
 
-@Provide("menu-screen") @Singleton
+@Provide("menu-screen")
 public class MenuScreen extends EscapyScreenCore {
 
 

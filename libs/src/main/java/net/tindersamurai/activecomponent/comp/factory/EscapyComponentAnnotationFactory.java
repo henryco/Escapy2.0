@@ -158,8 +158,15 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 
 	@Override
 	public <T> T createComponent(String name, Map<String, Object> arguments) {
-		//noinspection unchecked
-		return (T) constructors.get(name).apply(arguments);
+		try {
+			//noinspection unchecked
+			return (T) constructors.get(name).apply(arguments);
+		} catch (NullPointerException e) {
+			val msg= "NULL_POINTER COMPONENT: " + name
+					+ "\nCONSTRUCTOR: " + constructors.get(name)
+					+ "\nARGS: " + arguments.toString();
+			throw new RuntimeException(msg, e);
+		}
 	}
 
 	@Override

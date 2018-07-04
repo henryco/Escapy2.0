@@ -4,13 +4,10 @@
         xmlns:m="https://tindersamurai.net/escapy/ac/method"
 >
     <c:location.node>
-        <o:string>first</o:string>
-        <c:node.data>test</c:node.data>
-    </c:location.node>
-
-    <c:location.node>
-        <o:string>second</o:string>
-
+        <o:string>layer0</o:string>
+        <c:node.data>
+            <c:model.layer/>
+        </c:node.data>
     </c:location.node>
 
 </c:location.root>

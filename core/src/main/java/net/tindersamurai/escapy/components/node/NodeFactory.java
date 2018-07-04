@@ -5,6 +5,7 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
+import net.tindersamurai.escapy.components.node.plain.NodeData;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 
 import javax.inject.Singleton;

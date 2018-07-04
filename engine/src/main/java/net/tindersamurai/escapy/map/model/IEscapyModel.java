@@ -29,7 +29,7 @@ public interface IEscapyModel extends IEscapyRenderable, Wipeable {
 		};
 	}
 
-	default Collection<? extends IEscapyModel> getNestedModels() {
+	default Collection<IEscapyModel> getNestedModels() {
 		//noinspection unchecked
 		return Collections.EMPTY_LIST;
 	}

@@ -9,7 +9,7 @@ import javax.inject.Singleton;
 @Module(componentsRootClass = ConfigModule.class
 ) public final class ConfigModule {
 
-	@Provide("MainResConfigFile")
+	@Provide("MainResConfigFile") @Singleton
 	public String provideResourcesConfigFile (
 			EscapyGameContext gameContext
 	) {

@@ -1,5 +1,7 @@
 package net.tindersamurai.escapy.components.screen;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -9,10 +11,11 @@ import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-@Provide("splash-screen") @Singleton
+@Provide("splash-screen")
 public class SplashScreen extends EscapyScreenCore {
 
 	private final AtomicBoolean initialized;
@@ -26,7 +29,7 @@ public class SplashScreen extends EscapyScreenCore {
 
 	@Inject
 	public SplashScreen(IEscapyCamera camera,
-						String logoUrl,
+						@Named("logo_splash") String logoUrl,
 						float showTime
 	) {
 		this.initialized = new AtomicBoolean(false);
@@ -48,6 +51,9 @@ public class SplashScreen extends EscapyScreenCore {
 
 	@Override
 	public void render(float delta) {
+
+		Gdx.gl.glClearColor(0,0,0,0);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		if ((time -= delta) <= 0 && initialized.get())
 			setScreen(MenuScreen.class);
