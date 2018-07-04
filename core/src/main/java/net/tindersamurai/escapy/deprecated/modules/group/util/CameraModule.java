@@ -1,6 +1,5 @@
-package net.tindersamurai.escapy.old.modules.group.util;
+package net.tindersamurai.escapy.deprecated.modules.group.util;
 
-import com.badlogic.gdx.Gdx;
 import dagger.Module;
 import dagger.Provides;
 import net.tindersamurai.escapy.graphic.camera.EscapyCamera;

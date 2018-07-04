@@ -3,11 +3,8 @@ package net.tindersamurai.escapy.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import net.tindersamurai.escapy.EscapyApplication;
-import net.tindersamurai.escapy.old.MainEnvironment;
-import net.tindersamurai.escapy.context.EscapyApplicationAdapter;
 import net.tindersamurai.escapy.desktop.builder.EscapyDesktopConfigLoaderBuilder;
 import net.tindersamurai.escapy.desktop.serial.SerializedDesktopConfig;
-import net.tindersamurai.escapy.old.modules.MainModule;
 
 import static java.io.File.separator;
 

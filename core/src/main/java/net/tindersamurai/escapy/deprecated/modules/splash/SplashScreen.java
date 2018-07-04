@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.old.modules.splash;
+package net.tindersamurai.escapy.deprecated.modules.splash;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -7,7 +7,7 @@ import net.tindersamurai.escapy.context.game.screen.EscapyScreen;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenContext;
 import net.tindersamurai.escapy.graphic.camera.EscapyCamera;
 import net.tindersamurai.escapy.group.container.EscapyGroupContainer;
-import net.tindersamurai.escapy.old.modules.menu.MenuScreen;
+import net.tindersamurai.escapy.deprecated.modules.menu.MenuScreen;
 
 import javax.inject.Inject;
 import java.util.concurrent.atomic.AtomicBoolean;

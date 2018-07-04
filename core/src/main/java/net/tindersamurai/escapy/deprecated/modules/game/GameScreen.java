@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.old.modules.game;
+package net.tindersamurai.escapy.deprecated.modules.game;
 
 import net.tindersamurai.escapy.context.annotation.ScreenName;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreen;

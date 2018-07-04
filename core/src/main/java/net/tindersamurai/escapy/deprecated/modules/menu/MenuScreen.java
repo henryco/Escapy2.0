@@ -1,10 +1,10 @@
-package net.tindersamurai.escapy.old.modules.menu;
+package net.tindersamurai.escapy.deprecated.modules.menu;
 
 import net.tindersamurai.escapy.context.annotation.ScreenName;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreen;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenContext;
 import net.tindersamurai.escapy.group.container.EscapyGroupContainer;
-import net.tindersamurai.escapy.old.modules.game.GameScreen;
+import net.tindersamurai.escapy.deprecated.modules.game.GameScreen;
 
 @ScreenName("menu_screen")
 public class MenuScreen implements EscapyScreen {

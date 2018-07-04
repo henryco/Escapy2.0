@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.old.modules.group.renderer;
+package net.tindersamurai.escapy.deprecated.modules.group.renderer;
 
 import dagger.Module;
 import dagger.Provides;
@@ -6,8 +6,8 @@ import net.tindersamurai.escapy.graphic.camera.EscapyCamera;
 import net.tindersamurai.escapy.graphic.render.program.gl20.core.EscapyMultiSourceShader;
 import net.tindersamurai.escapy.group.render.loader.builder.RendererLoaderBuilder;
 import net.tindersamurai.escapy.group.render.loader.imp.DefaultRendererLoader;
-import net.tindersamurai.escapy.old.modules.group.renderer.dep.LightShaderAttrLoader;
-import net.tindersamurai.escapy.old.modules.group.util.CameraModule;
+import net.tindersamurai.escapy.deprecated.modules.group.renderer.dep.LightShaderAttrLoader;
+import net.tindersamurai.escapy.deprecated.modules.group.util.CameraModule;
 import net.tindersamurai.escapy.utils.EscapyLogger;
 import net.tindersamurai.escapy.utils.loader.EscapyInstanceLoader;
 

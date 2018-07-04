@@ -1,14 +1,14 @@
-package net.tindersamurai.escapy.old.modules;
+package net.tindersamurai.escapy.deprecated.modules;
 
 import dagger.Module;
 import dagger.Provides;
-import net.tindersamurai.escapy.old.MainEnvironment;
+import net.tindersamurai.escapy.deprecated.MainEnvironment;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContextConfiguration;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreen;
-import net.tindersamurai.escapy.old.modules.game.GameScreenModule;
-import net.tindersamurai.escapy.old.modules.menu.MenuScreenModule;
-import net.tindersamurai.escapy.old.modules.pause.PauseScreenModule;
-import net.tindersamurai.escapy.old.modules.splash.SplashScreenModule;
+import net.tindersamurai.escapy.deprecated.modules.game.GameScreenModule;
+import net.tindersamurai.escapy.deprecated.modules.menu.MenuScreenModule;
+import net.tindersamurai.escapy.deprecated.modules.pause.PauseScreenModule;
+import net.tindersamurai.escapy.deprecated.modules.splash.SplashScreenModule;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.old.modules;
+package net.tindersamurai.escapy.deprecated.modules;
 
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContextConfiguration;
 import net.tindersamurai.escapy.context.game.configuration.util.PropertyKeysStorage;

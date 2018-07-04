@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.old;
+package net.tindersamurai.escapy.deprecated;
 
 import net.tindersamurai.escapy.context.game.EscapyGame;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContextConfiguration;
