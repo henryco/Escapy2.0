@@ -1,0 +1,55 @@
+<c:test.main xmlns:c="https://henryco.net/escapy"
+        xmlns:o="https://henryco.net/escapy"
+        xmlns:m="https://henryco.net/escapy"
+>
+    <o:float name="someArg">5</o:float>
+
+    <o:object class="java.lang.Number">
+        <new class="java.lang.Byte">
+            127
+        </new>
+    </o:object>
+
+    <o:object class="net.tindersamurai.activecomponent.ParserTest$SomeObj">
+       <o:short>10</o:short>
+    </o:object>
+
+    <o:object class="net.tindersamurai.activecomponent.ParserTest$SomeObj">
+        <new>
+            <o:short>10</o:short>
+        </new>
+    </o:object>
+
+    <o:object>
+        <new class="net.tindersamurai.activecomponent.ParserTest$SomeObj">
+            <o:short>10</o:short>
+        </new>
+    </o:object>
+
+    <o:object class="net.tindersamurai.activecomponent.ParserTest$SomeObj2">
+        <o:short>10</o:short>
+        <o:integer>42</o:integer>
+    </o:object>
+
+    <o:object class="net.tindersamurai.activecomponent.ParserTest$SomeObj2">
+       <new>
+           <o:short>10</o:short>
+           <o:integer>42</o:integer>
+       </new>
+    </o:object>
+
+    <o:object class="java.util.List">
+        <!-- empty constructor -->
+        <new class="java.util.ArrayList"/>
+        <!-- this is method statements -->
+        <m:add>
+            <o:integer>10</o:integer>
+        </m:add>
+        <m:add>
+            <o:object>
+                <new class="java.lang.Integer">22</new>
+            </o:object>
+        </m:add>
+    </o:object>
+
+</c:test.main>

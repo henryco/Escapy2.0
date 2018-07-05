@@ -1,0 +1,18 @@
+<c:resource.main
+        xmlns:c="https://tindersamurai.net/escapy/ac/component"
+        xmlns:o="https://tindersamurai.net/escapy/ac/object"
+        xmlns:m="https://tindersamurai.net/escapy/ac/method"
+>
+    <c:u.array-auto name="stages">
+
+        <c:resource.metadata>
+            <o:string name="id"> demo </o:string>
+            <o:string name="url"> locations/demo </o:string>
+            <o:string name="title"> Demo stage </o:string>
+        </c:resource.metadata>
+
+    </c:u.array-auto>
+
+    <o:string name="default"> demo </o:string>
+
+</c:resource.main>

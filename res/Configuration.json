@@ -1,0 +1,15 @@
+{
+	"type": "EscapyConfiguration",
+	"name": "MainConfiguration",
+	
+	"resizable": false,
+	"vSync": true,
+	"fullscreen": false,
+	"forceExit": true,
+	"useGL30": true,
+	
+	"scrWidth": 320,
+	"scrHeight": 240,
+	
+	"fps": 25
+}

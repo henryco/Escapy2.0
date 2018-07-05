@@ -1,0 +1,30 @@
+apply plugin: "java"
+
+sourceCompatibility = 1.8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceSets.test.java.srcDirs = [ "src/test/java/" ]
+
+dependencies {
+
+    compile project(":engine")
+    compile project(":desktop")
+    compile project(":core")
+
+    compile "junit:junit:4.+"
+    compile "org.mockito:mockito-all:1.9.+"
+
+    compile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+
+    testCompile 'junit:junit:4.+'
+    testCompile "org.mockito:mockito-all:1.9.+"
+
+    testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+    testCompile "com.badlogicgames.gdx:gdx:$gdxVersion"
+    testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+}
+
+eclipse.project {
+    name = appName + "-tests"
+}
