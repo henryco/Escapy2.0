@@ -26,14 +26,12 @@ public class Memento<T extends EscapyCloneable<T>> {
 	}
 
 	public Memento<T> revert() {
-		try { bottom = stack.pop();
-		} catch (EmptyStackException ignored) {}
+		if (!stack.isEmpty()) bottom = stack.pop();
 		return this;
 	}
 
 	public T get() {
-		try { return stack.peek();
-		} catch (EmptyStackException e) { return bottom; }
+		return stack.isEmpty() ? bottom : stack.peek();
 	}
 
 }
