@@ -1,13 +1,12 @@
-
-
 apply plugin: "java"
 
 sourceCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-sourceSets.test.java.srcDirs = [ "src/" ]
+sourceSets.test.java.srcDirs = [ "src/test/java/" ]
 
 dependencies {
+
     compile project(":engine")
     compile project(":desktop")
     compile project(":core")

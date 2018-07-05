@@ -5,13 +5,13 @@ pipeline {
     stage('Check') {
       steps {
         sh 'gradle clean'
-        sh 'gradle check -x desktop:dist -x tests:test --stacktrace'
+        sh 'gradle check -x desktop:dist -x test --stacktrace'
       }
     }
     
     stage('Test') {
       steps {
-        sh 'gradle tests:test --stacktrace'
+        sh 'gradle test --stacktrace'
       }
     }
     
@@ -66,8 +66,7 @@ pipeline {
 
     stage('Finish') {
       steps {
-	sh '(rm -r artifacts) || true'
-	sh '(rm -r release) || true'
+        sh 'echo FINISH'
       }
     }
 
@@ -85,6 +84,8 @@ pipeline {
 
       sh 'gradle clean'
       sh '(pkill -f gradle) || true'
+      sh '(rm -r artifacts) || true'
+      sh '(rm -r release) || true'
     }
 
     success {

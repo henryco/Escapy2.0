@@ -8,8 +8,8 @@
 	"forceExit": true,
 	"useGL30": true,
 	
-	"scrWidth": 1920,
-	"scrHeight": 1080,
+	"scrWidth": 320,
+	"scrHeight": 240,
 	
 	"fps": 25
 }
