@@ -4,6 +4,8 @@ import com.github.henryco.injector.meta.annotations.Module;
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.escapy.components.config.ConfigModule;
 import net.tindersamurai.escapy.components.stage.StageModule;
+import net.tindersamurai.escapy.map.location.IEscapyLocation;
+import net.tindersamurai.escapy.map.location.IEscapyLocationHandler;
 
 import javax.inject.Singleton;
 import java.io.File;
@@ -20,6 +22,13 @@ import java.io.File;
 	@Provide("time_splash") @Singleton
 	public float provideSplashTime() {
 		return 3f;
+	}
+
+	@Provide
+	public IEscapyLocation provideLocation (
+			IEscapyLocationHandler handler
+	) {
+		return handler.getLocation();
 	}
 
 }

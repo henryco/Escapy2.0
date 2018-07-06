@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.components.location;
+package net.tindersamurai.escapy.components.factory;
 
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;

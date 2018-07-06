@@ -1,18 +1,27 @@
 package net.tindersamurai.escapy.components.screen;
 
 import com.github.henryco.injector.meta.annotations.Provide;
+import net.tindersamurai.escapy.components.stage.plain.LocationSetter;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
 
-import javax.inject.Singleton;
+import javax.inject.Inject;
 
 @Provide("menu-screen")
 public class MenuScreen extends EscapyScreenCore {
 
+	private final LocationSetter locationSetter;
+
+	@Inject
+	public MenuScreen(LocationSetter locationSetter) {
+		this.locationSetter = locationSetter;
+	}
 
 	@Override
 	public void show() {
-		// todo SOME INITIALIZATION
-		setScreen(GameScreen.class);
+		// todo
+		locationSetter.reset();
+		System.out.println(locationSetter.getStageInfo());
+		setScreen(LoadingScreen.class);
 	}
 
 	@Override
