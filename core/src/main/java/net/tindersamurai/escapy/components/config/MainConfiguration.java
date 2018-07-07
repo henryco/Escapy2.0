@@ -34,4 +34,14 @@ public class MainConfiguration extends EscapyGameContextConfiguration {
 		.save();
 	}
 
+	@Override
+	public int getDefaultScrWidth() {
+		return 1280;
+	}
+
+	@Override
+	public int getDefaultScrHeight() {
+		return 720;
+	}
+
 }

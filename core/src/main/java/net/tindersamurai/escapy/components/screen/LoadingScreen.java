@@ -18,9 +18,8 @@ public class LoadingScreen extends EscapyScreenCore {
 
 	@Override
 	public void show() {
-		locationLoader.loadLocation(status -> {
-			if (!status)
-				throw new RuntimeException("ERROR LOADING");
+		locationLoader.loadLocation(loaded -> {
+			if (!loaded) throw new RuntimeException("ERROR LOADING");
 			LoadingScreen.this.setScreen(GameScreen.class);
 		});
 	}

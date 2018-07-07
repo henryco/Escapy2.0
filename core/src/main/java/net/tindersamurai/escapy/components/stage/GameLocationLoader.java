@@ -3,7 +3,7 @@ package net.tindersamurai.escapy.components.stage;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.val;
 import net.tindersamurai.escapy.components.stage.plain.LocationLoader;
-import net.tindersamurai.escapy.components.stage.plain.LocationSetter;
+import net.tindersamurai.escapy.components.stage.plain.LocationSwitcher;
 import net.tindersamurai.escapy.map.location.IEscapyLocationHandler;
 
 import javax.inject.Inject;
@@ -12,19 +12,19 @@ import javax.inject.Inject;
 public class GameLocationLoader implements LocationLoader {
 
 	private final IEscapyLocationHandler handler;
-	private final LocationSetter setter;
+	private final LocationSwitcher switcher;
 
 	@Inject public GameLocationLoader (
 			IEscapyLocationHandler handler,
-			LocationSetter setter
+			LocationSwitcher switcher
 	) {
+		this.switcher = switcher;
 		this.handler = handler;
-		this.setter = setter;
 	}
 
 	@Override
 	public boolean loadLocation() {
-		val data = setter.getLocationMetaData();
+		val data = switcher.getLocationMetaData();
 		return handler.switchLocation(data.getFile().getUrl());
 	}
 }

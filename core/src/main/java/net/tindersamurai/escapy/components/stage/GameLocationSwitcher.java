@@ -3,7 +3,7 @@ package net.tindersamurai.escapy.components.stage;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.Getter;
 import lombok.val;
-import net.tindersamurai.escapy.components.stage.plain.LocationSetter;
+import net.tindersamurai.escapy.components.stage.plain.LocationSwitcher;
 import net.tindersamurai.escapy.components.stage.plain.StageInfo;
 import net.tindersamurai.escapy.components.stage.plain.StageInfo.StageMetaData;
 import net.tindersamurai.escapy.components.stage.plain.StageInfo.StageMetaData.LocationMetaData;
@@ -16,7 +16,7 @@ import static net.tindersamurai.escapy.map.location.IEscapyLocationHandler.*;
 
 @Provide @Singleton
 public class GameLocationSwitcher
-		implements LocationSetter, HandlerListener {
+		implements LocationSwitcher, HandlerListener {
 
 	private final IEscapyLocationHandler locationHandler;
 	private final @Getter StageInfo stageInfo;

@@ -1,7 +1,7 @@
 package net.tindersamurai.escapy.components.screen;
 
 import com.github.henryco.injector.meta.annotations.Provide;
-import net.tindersamurai.escapy.components.stage.plain.LocationSetter;
+import net.tindersamurai.escapy.components.stage.plain.LocationSwitcher;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
 
 import javax.inject.Inject;
@@ -9,10 +9,10 @@ import javax.inject.Inject;
 @Provide("menu-screen")
 public class MenuScreen extends EscapyScreenCore {
 
-	private final LocationSetter locationSetter;
+	private final LocationSwitcher locationSetter;
 
 	@Inject
-	public MenuScreen(LocationSetter locationSetter) {
+	public MenuScreen(LocationSwitcher locationSetter) {
 		this.locationSetter = locationSetter;
 	}
 

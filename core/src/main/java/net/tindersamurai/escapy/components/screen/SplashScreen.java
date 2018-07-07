@@ -8,11 +8,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
+import net.tindersamurai.escapy.graphic.camera.EscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
+import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
+import net.tindersamurai.escapy.graphic.render.fbo.EscapyFrameBuffer;
+import net.tindersamurai.escapy.graphic.screen.Resolution;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.inject.Singleton;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Provide("splash-screen")
@@ -39,6 +42,9 @@ public class SplashScreen extends EscapyScreenCore {
 		this.time = showTime;
 	}
 
+	private EscapyFBO fbo;
+	private IEscapyCamera cam;
+
 	@Override
 	public void show() {
 		batch = new SpriteBatch();
@@ -47,6 +53,18 @@ public class SplashScreen extends EscapyScreenCore {
 
 		// todo INITIALIZATION
 		this.initialized.set(true);
+		int w = 1280;
+		int h = 720;
+
+		float ch = h;
+		float dif = ch / ((float) Gdx.graphics.getHeight());
+		float cw = ((float) Gdx.graphics.getWidth()) * dif;
+
+		System.out.println("--" + cw + "-" + ch);
+
+		fbo = new EscapyFrameBuffer(new Resolution(w, h));
+		cam = new EscapyCamera(new Resolution((int)cw, (int)ch));
+		cam.setCameraPosition(Gdx.graphics.getWidth() * 0.5f, Gdx.graphics.getHeight() * 0.5f);
 	}
 
 	@Override
@@ -55,15 +73,26 @@ public class SplashScreen extends EscapyScreenCore {
 		Gdx.gl.glClearColor(0,0,0,0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		if ((time -= delta) <= 0 && initialized.get())
-			setScreen(MenuScreen.class);
+//		if ((time -= delta) <= 0 && initialized.get())
+//			setScreen(MenuScreen.class);
+//		else {
+			fbo.begin(() -> {
+				batch.setProjectionMatrix(camera.update(camera::clear).getProjection());
+				batch.begin();
+				Gdx.gl.glClearColor(1,0,0,0.5f);
+				Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+				sprite.draw(batch, Math.abs(time / showTime));
+				batch.end();
+			});
 
-		else {
-			batch.setProjectionMatrix(camera.update(camera::clear).getProjection());
+			batch.setProjectionMatrix(cam.getProjection());
 			batch.begin();
-			sprite.draw(batch, Math.abs(time / showTime));
+			float sx = (((float) Gdx.graphics.getWidth()) - fbo.getSprite().getWidth()) * 0.5f;
+			float sy = (((float) Gdx.graphics.getHeight()) - fbo.getSprite().getHeight()) * 0.5f;
+			fbo.getSprite().setPosition(sx, sy);
+			fbo.getSprite().draw(batch);
 			batch.end();
-		}
+//		}
 	}
 
 }

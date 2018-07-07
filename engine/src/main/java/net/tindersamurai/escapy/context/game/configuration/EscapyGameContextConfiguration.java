@@ -17,6 +17,14 @@ public abstract class EscapyGameContextConfiguration implements EscapyGameContex
 		return System.getProperty("user.dir");
 	}
 
+	@Override public int getDefaultScrWidth() {
+		return 1280;
+	}
+
+	@Override public int getDefaultScrHeight() {
+		return 720;
+	}
+
 	@Override public String getWorkDir() {
 		return System.getProperty("user.dir");
 	}
