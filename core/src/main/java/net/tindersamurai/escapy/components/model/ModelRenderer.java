@@ -8,6 +8,7 @@ import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.map.model.IEscapyModelRenderer;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 @Provide @Log
 public class ModelRenderer implements IEscapyModelRenderer {
@@ -18,7 +19,10 @@ public class ModelRenderer implements IEscapyModelRenderer {
 	private final Batch batch;
 
 	@Inject
-	public ModelRenderer(Batch batch, IEscapyMemoCam camera) {
+	public ModelRenderer(
+			@Named("main-camera") IEscapyMemoCam camera,
+			Batch batch
+	) {
 		this.batch = batch;
 		this.camera = camera;
 	}
