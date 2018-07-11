@@ -1,5 +1,6 @@
 package net.tindersamurai.escapy.components.stage.plain;
 
+import com.badlogic.gdx.Gdx;
 import net.tindersamurai.escapy.map.location.IEscapyLocationHandler;
 
 import java.util.function.Consumer;
@@ -13,7 +14,7 @@ public interface LocationLoader {
 		Logger logger = Logger.getLogger(this.toString());
 		new Thread(() -> {
 			try {
-				onResult.accept(loadLocation());
+				Gdx.app.postRunnable(() -> onResult.accept(loadLocation()));
 			} catch (Exception e) {
 				logger.throwing(
 						IEscapyLocationHandler.class.getName(),

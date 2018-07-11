@@ -1,6 +1,7 @@
 package net.tindersamurai.escapy.graphic.render.fbo;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.tindersamurai.escapy.context.annotation.EscapyAPI;
@@ -16,6 +17,15 @@ public interface EscapyFBO extends GraphicRenderer, Wipeable, EscapyObject {
 	@EscapyAPI default EscapyFBO begin(Runnable r) {
 		begin();
 		r.run();
+		end();
+		return this;
+	}
+
+	default EscapyFBO begin(Batch batch, Runnable r) {
+		begin();
+		batch.begin();
+		r.run();
+		batch.end();
 		end();
 		return this;
 	}

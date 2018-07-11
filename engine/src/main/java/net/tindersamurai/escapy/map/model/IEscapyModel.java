@@ -37,19 +37,19 @@ public interface IEscapyModel extends IEscapyRenderable, Wipeable {
 	default void renderDiffuseModel(IEscapyCamera camera, Batch batch, float delta) {
 		renderDiffuseMap(camera, batch, delta);
 		for (IEscapyModel model : getNestedModels())
-			model.renderDiffuseMap(camera, batch, delta);
+			model.renderDiffuseModel(camera, batch, delta);
 	}
 
 	default void renderNormalModel(IEscapyCamera camera, Batch batch, float delta) {
 		renderNormalMap(camera, batch, delta);
 		for (IEscapyModel model : getNestedModels())
-			model.renderNormalMap(camera, batch, delta);
+			model.renderNormalModel(camera, batch, delta);
 	}
 
 	default void renderLightModel(IEscapyCamera camera, Batch batch, float delta) {
 		renderLightMap(camera, batch, delta);
 		for (IEscapyModel model : getNestedModels())
-			model.renderLightMap(camera, batch, delta);
+			model.renderLightModel(camera, batch, delta);
 	}
 	
 }

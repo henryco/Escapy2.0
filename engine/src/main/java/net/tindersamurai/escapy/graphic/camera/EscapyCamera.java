@@ -36,8 +36,9 @@ public class EscapyCamera implements IEscapyCamera {
 	}
 
 	@Override
-	public void update() {
+	public EscapyCamera update() {
 		camera.update();
+		return this;
 	}
 
 

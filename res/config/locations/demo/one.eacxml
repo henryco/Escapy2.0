@@ -8,6 +8,16 @@
         <c:node.data>
             <c:model.layer/>
         </c:node.data>
+
+        <c:location.node>
+            <o:string>staticBackground</o:string>
+            <c:node.data>
+                <c:model.texture-static>
+                    <o:string>locations/demo/resources/diffuse/background.png</o:string>
+                </c:model.texture-static>
+            </c:node.data>
+        </c:location.node>
+
     </c:location.node>
 
 </c:location.root>

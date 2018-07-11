@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
 import lombok.val;
+import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.map.model.IEscapyModelRenderer;
@@ -17,13 +18,16 @@ public class ModelRenderer implements IEscapyModelRenderer {
 	{ log.info("ModelRenderer instance [" + this.hashCode() + "]"); }
 
 	private final IEscapyMemoCam camera;
+	private final IEscapyCamera finalCamera;
 	private final Batch batch;
 
 	@Inject
 	public ModelRenderer (
 			@Named("main-camera") IEscapyMemoCam camera,
+			@Named("final-camera") IEscapyCamera finalCamera,
 			Batch batch
 	) {
+		this.finalCamera = finalCamera;
 		this.camera = camera;
 		this.batch = batch;
 	}
@@ -48,7 +52,7 @@ public class ModelRenderer implements IEscapyModelRenderer {
 
 	private void postRender(IEscapyModel model, float delta) {
 		for (val postRenderer : model.postRenderQueue())
-			postRenderer.render(camera, batch, delta);
+			postRenderer.render(finalCamera, batch, delta);
 		for (val nested : model.getNestedModels())
 			postRender(nested, delta);
 	}

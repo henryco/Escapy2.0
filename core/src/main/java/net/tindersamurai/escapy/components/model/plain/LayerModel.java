@@ -34,28 +34,40 @@ public class LayerModel implements IEscapyModel {
 	}
 
 	@Override
+	public void renderNormalMap(IEscapyCamera camera, Batch batch, float delta) {
+		clear();
+	}
+
+	@Override
 	public Collection<IEscapyModel> getNestedModels() {
 		return nested;
 	}
 
 	@Override
 	public void renderDiffuseModel(IEscapyCamera camera, Batch batch, float delta) {
-		diffuseBuffer.begin(() -> {
-			diffuseBuffer.clear();
+
+		batch.setProjectionMatrix(camera.getProjection());
+		diffuseBuffer.begin(batch, () -> {
 			renderDiffuseMap(camera, batch, delta);
 			for (IEscapyModel model : getNestedModels())
-				model.renderDiffuseMap(camera, batch, delta);
+				model.renderDiffuseModel(camera, batch, delta);
 		});
 	}
 
 	@Override
 	public void renderNormalModel(IEscapyCamera camera, Batch batch, float delta) {
-		normalsBuffer.begin(() -> {
-			normalsBuffer.clear();
-			renderNormalModel(camera, batch, delta);
+
+		batch.setProjectionMatrix(camera.getProjection());
+		normalsBuffer.begin(batch, () -> {
+			renderNormalMap(camera, batch, delta);
 			for (IEscapyModel model : getNestedModels())
-				model.renderDiffuseMap(camera, batch, delta);
+				model.renderNormalModel(camera, batch, delta);
 		});
 	}
 
+	@Override
+	public void postRender(IEscapyCamera camera, Batch batch, float delta) {
+		batch.setProjectionMatrix(camera.update().getProjection());
+		diffuseBuffer.renderGraphics(batch);
+	}
 }

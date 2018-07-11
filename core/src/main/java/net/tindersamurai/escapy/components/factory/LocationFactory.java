@@ -35,10 +35,9 @@ public class LocationFactory  {
 	public final IEscapyNode<NodeData> root (
 			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
-		NodeData data = new NodeData();
-		data.setModel(new RootModel(viewPortCamera));
-
-		return new EscapyNode<NodeData> (data,"root") {{
+		return new EscapyNode<NodeData> (new NodeData() {{
+			setModel(new RootModel(viewPortCamera));
+		}}, "root" ) {{
 			setObserver(nodeObserver);
 			for (IEscapyNode<NodeData> node : nodes)
 				addNode(node);
@@ -52,6 +51,7 @@ public class LocationFactory  {
 			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
 		return new EscapyNode<NodeData>(data, id) {{
+			setObserver(nodeObserver);
 			for (IEscapyNode<NodeData> node : nodes)
 				addNode(node);
 		}};
