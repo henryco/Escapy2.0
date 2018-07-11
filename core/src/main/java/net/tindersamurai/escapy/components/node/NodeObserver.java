@@ -1,7 +1,7 @@
 package net.tindersamurai.escapy.components.node;
 
 import com.github.henryco.injector.meta.annotations.Provide;
-import net.tindersamurai.escapy.components.model.plain.RootModel;
+import net.tindersamurai.escapy.components.model.plain.EmptyModel;
 import net.tindersamurai.escapy.components.node.plain.NodeData;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
@@ -19,7 +19,7 @@ public class NodeObserver implements IEscapyNodeObserver {
 		while (cParent != null) {
 			if (cParent.get().getModel() != null)
 				break;
-			cParent.get().setModel(new RootModel());
+			cParent.get().setModel(new EmptyModel());
 			cParent = cParent.getParent();
 		}
 

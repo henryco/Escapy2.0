@@ -6,11 +6,13 @@ import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
 import net.tindersamurai.escapy.components.model.plain.RootModel;
 import net.tindersamurai.escapy.components.node.plain.NodeData;
+import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.map.node.EscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 @Provide @Singleton
@@ -18,10 +20,15 @@ import javax.inject.Singleton;
 public class LocationFactory  {
 
 	private final IEscapyNodeObserver nodeObserver;
+	private final IEscapyCamera viewPortCamera;
 
 	@Inject
-	public LocationFactory(IEscapyNodeObserver nodeObserver) {
+	public LocationFactory(
+			@Named("final-camera") IEscapyCamera viewPortCamera,
+			IEscapyNodeObserver nodeObserver
+	) {
 		this.nodeObserver = nodeObserver;
+		this.viewPortCamera = viewPortCamera;
 	}
 
 	@SafeVarargs @EscapyComponent("root")
@@ -29,7 +36,7 @@ public class LocationFactory  {
 			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
 		NodeData data = new NodeData();
-		data.setModel(new RootModel());
+		data.setModel(new RootModel(viewPortCamera));
 
 		return new EscapyNode<NodeData> (data,"root") {{
 			setObserver(nodeObserver);

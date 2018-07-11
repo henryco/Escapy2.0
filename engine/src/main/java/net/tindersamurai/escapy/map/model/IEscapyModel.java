@@ -10,7 +10,7 @@ import java.util.Collections;
 public interface IEscapyModel extends IEscapyRenderable, Wipeable {
 
 	@FunctionalInterface interface Render {
-		void renderModel(IEscapyCamera camera, Batch batch, float delta);
+		void render(IEscapyCamera camera, Batch batch, float delta);
 	}
 
 	default void preRender(IEscapyCamera camera, Batch batch, float delta) {}

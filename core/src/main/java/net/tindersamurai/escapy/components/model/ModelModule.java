@@ -21,12 +21,8 @@ import javax.inject.Singleton;
 
 	@Provide("main-camera") @Singleton
 	public IEscapyMemoCam provideSplashCamera (
-			EscapyGameContext context
-	) {
-		return new EscapyMemCamera(new Resolution (
-				context.getDefaultScrWidth(),
-				context.getDefaultScrHeight()
-		));
+			Resolution resolution ) {
+		return new EscapyMemCamera(resolution);
 	}
 
 	@Provide("final-camera") @Singleton
@@ -55,6 +51,15 @@ import javax.inject.Singleton;
 	@Provide("default-batch") @Singleton
 	public final Batch provideBatch() {
 		return new SpriteBatch();
+	}
+
+	@Provide
+	public Resolution defaultResolution (
+			EscapyGameContext context ) {
+		return new Resolution (
+				context.getDefaultScrWidth(),
+				context.getDefaultScrHeight()
+		);
 	}
 
 }
