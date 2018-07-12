@@ -44,7 +44,11 @@ import javax.inject.Singleton;
 		log.info("Final stage camera resolution: " + resolution);
 
 		return new EscapyMemCamera(resolution) {{
-			setCameraPosition(gw * 0.5f, gh * 0.5f);
+			float cx = gw * 0.5f;
+			float cy = gh * 0.5f;
+			// todo fixme
+			log.info("Camera position: " + cx + " : " + cy);
+			setCameraPosition(cx, cy);
 		}};
 	}
 

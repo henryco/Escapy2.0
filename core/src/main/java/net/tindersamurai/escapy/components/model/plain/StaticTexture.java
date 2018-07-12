@@ -31,6 +31,7 @@ public class StaticTexture implements IEscapyModel {
 
 	@Override
 	public void renderDiffuseMap(IEscapyCamera camera, Batch batch, float delta) {
+		color(0.5f, 0,0, 0.5f);
 		if (maps[0] != null)
 			maps[0].draw(batch);
 	}
@@ -63,8 +64,10 @@ public class StaticTexture implements IEscapyModel {
 		float px = .5f * (width - sw);
 		float py = .5f * (height - sh);
 
+		System.out.println(px + " : " + py);
+
 		sprite.setScale(scale);
-		sprite.setPosition(px, py);
+//		sprite.setPosition(px, py);
 	}
 
 }
