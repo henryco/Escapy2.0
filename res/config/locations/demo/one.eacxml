@@ -3,21 +3,43 @@
         xmlns:o="https://tindersamurai.net/escapy/ac/object"
         xmlns:m="https://tindersamurai.net/escapy/ac/method"
 >
+
+    <c:location.node>  <!-- LAYER NODE -->
+        <o:string name="id">LayerBackground</o:string> <!-- NODE ID -->
+        <c:node.data name="data"> <!-- NODE DATA, just wrapper -->
+            <c:model.layer/>
+        </c:node.data>
+        <c:location.node> <!-- nested nodes -->
+            <o:string>staticBackground</o:string> <!-- node id-->
+            <c:node.data> <!--and again, wrapper-->
+                <c:model.texture-static-full>
+                    <o:string>locations/demo/resources/diffuse/background.png</o:string>
+                </c:model.texture-static-full>
+            </c:node.data>
+            <!--there are no nested nodes, coz textures doesn't need them-->
+        </c:location.node>
+    </c:location.node>
+
+
     <c:location.node>
-        <o:string>layer0</o:string>
+        <o:string>Layer0</o:string>
         <c:node.data>
             <c:model.layer/>
         </c:node.data>
 
         <c:location.node>
-            <o:string>staticBackground</o:string>
+            <o:string>Birudingu</o:string>
             <c:node.data>
                 <c:model.texture-static>
-                    <o:string>locations/demo/resources/diffuse/background.png</o:string>
+                    <c:model.props>
+                        <o:string namd="diffuse"> locations/demo/resources/diffuse/Loc_33.png </o:string>
+                        <o:string namd="normals"> locations/demo/resources/normals/Loc_33.png </o:string>
+                    </c:model.props>
                 </c:model.texture-static>
             </c:node.data>
         </c:location.node>
 
     </c:location.node>
+
 
 </c:location.root>

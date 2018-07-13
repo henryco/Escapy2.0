@@ -41,6 +41,7 @@ import javax.inject.Singleton;
 		if (scW > scH) resolution = new Resolution(((int) (gw * scH)), (int) h);
 		else resolution = new Resolution(((int) w), (int) (gh * scW));
 
+		log.info("Resolution: " + gw + " : " + gh);
 		log.info("Final stage camera resolution: " + resolution);
 
 		return new EscapyMemCamera(resolution) {{

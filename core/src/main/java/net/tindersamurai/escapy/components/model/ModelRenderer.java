@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
 import lombok.val;
-import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.map.model.IEscapyModelRenderer;
@@ -17,14 +16,14 @@ public class ModelRenderer implements IEscapyModelRenderer {
 
 	{ log.info("ModelRenderer instance [" + this.hashCode() + "]"); }
 
+	private final IEscapyMemoCam finalCamera;
 	private final IEscapyMemoCam camera;
-	private final IEscapyCamera finalCamera;
 	private final Batch batch;
 
 	@Inject
 	public ModelRenderer (
+			@Named("final-camera") IEscapyMemoCam finalCamera,
 			@Named("main-camera") IEscapyMemoCam camera,
-			@Named("final-camera") IEscapyCamera finalCamera,
 			Batch batch
 	) {
 		this.finalCamera = finalCamera;
@@ -34,12 +33,11 @@ public class ModelRenderer implements IEscapyModelRenderer {
 
 	@Override
 	public void render(IEscapyModel model, float delta) {
-
-		preRender(model, delta);
-		model.renderDiffuseModel(camera, batch, delta);
-		model.renderNormalModel(camera, batch, delta);
-		model.renderLightModel(camera, batch, delta);
-		postRender(model, delta);
+		camera.safety(() -> preRender(model, delta));
+		camera.safety(() -> model.renderDiffuseModel(camera, batch, delta));
+		camera.safety(() -> model.renderNormalModel(camera, batch, delta));
+		camera.safety(() -> model.renderLightModel(camera, batch, delta));
+		camera.safety(() -> postRender(model, delta));
 	}
 
 

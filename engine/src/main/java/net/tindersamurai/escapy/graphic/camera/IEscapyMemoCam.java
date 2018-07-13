@@ -5,4 +5,10 @@ public interface IEscapyMemoCam extends IEscapyCamera {
 	void save();
 
 	void revert();
+
+	default void safety(Runnable runnable) {
+		save();
+		runnable.run();
+		revert();
+	}
 }

@@ -12,6 +12,7 @@ import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFrameBuffer;
 import net.tindersamurai.escapy.graphic.screen.Resolution;
+import net.tindersamurai.escapy.utils.EscapyUtils;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -75,11 +76,12 @@ public class SplashScreen extends EscapyScreenCore {
 				batch.end();
 			});
 
+			EscapyUtils.centerize(fbo.getSprite(),
+					Gdx.graphics.getWidth(),
+					Gdx.graphics.getHeight()
+			);
 			batch.setProjectionMatrix(fCam.getProjection());
 			batch.begin();
-			float sx = (((float) Gdx.graphics.getWidth()) - fbo.getSprite().getWidth()) * 0.5f;
-			float sy = (((float) Gdx.graphics.getHeight()) - fbo.getSprite().getHeight()) * 0.5f;
-			fbo.getSprite().setPosition(sx, sy);
 			fbo.getSprite().draw(batch);
 			batch.end();
 		}

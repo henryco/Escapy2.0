@@ -92,6 +92,11 @@ public class EscapyCamera implements IEscapyCamera {
 //	----------------------------- ZOOM --------------------------------
 
 
-
-
+	@Override
+	public String toString() {
+		return "EscapyCamera{" +
+				"camera=" + camera +
+				", resolution=" + resolution +
+				'}';
+	}
 }
