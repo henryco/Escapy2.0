@@ -6,9 +6,13 @@ import net.tindersamurai.escapy.graphic.screen.Wipeable;
 
 public interface IEscapyRenderable extends Wipeable {
 
-	default void renderNormalMap(IEscapyCamera camera, Batch batch, float delta) {}
+	default void renderNormalMap(IEscapyCamera camera, Batch batch, float delta) {
+		wipe();
+	}
 
-	default void renderLightMap(IEscapyCamera camera, Batch batch, float delta) {}
+	default void renderLightMap(IEscapyCamera camera, Batch batch, float delta) {
+		wipe();
+	}
 
 	void renderDiffuseMap(IEscapyCamera camera, Batch batch, float delta);
 

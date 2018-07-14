@@ -27,19 +27,19 @@ public class RootModel implements IEscapyModel {
 	@Override
 	public void renderDiffuseMap(IEscapyCamera camera, Batch batch, float delta) {
 		camera.update();
-		clear();
+		wipe();
 	}
 
 	@Override
 	public void renderNormalMap(IEscapyCamera camera, Batch batch, float delta) {
 		camera.update();
-		clear();
+		wipe();
 	}
 
 	@Override
 	public void renderLightMap(IEscapyCamera camera, Batch batch, float delta) {
 		camera.update();
-		clear();
+		wipe();
 	}
 
 	@Override

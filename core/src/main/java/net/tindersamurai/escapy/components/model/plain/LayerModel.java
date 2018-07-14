@@ -32,20 +32,14 @@ public class LayerModel implements IEscapyModel {
 		this.nested = new ArrayList<>();
 		Collections.addAll(this.nested, nested);
 
-
 		log.info("***********\n\nDIFFUSE BUFFER DIM: " + diffuseBuffer.getWidth() + " : " + diffuseBuffer.getHeight());
+		log.info("BUFFER ID: " + diffuseBuffer.toString() + " : " + normalsBuffer.toString());
 		log.info("NORMALS BUFFER DIM: " + normalsBuffer.getWidth() + " : " + normalsBuffer.getHeight() + "\n\n***********");
-
 	}
 
 	@Override
 	public void renderDiffuseMap(IEscapyCamera camera, Batch batch, float delta) {
-		color(0, 0.5f, 0.5f, 0.5f);
-	}
-
-	@Override
-	public void renderNormalMap(IEscapyCamera camera, Batch batch, float delta) {
-		clear();
+		wipe();
 	}
 
 	@Override
