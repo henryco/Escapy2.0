@@ -39,6 +39,22 @@
             </c:node.data>
         </c:location.node>
 
+        <c:location.node>
+            <o:string>BoyFriend</o:string>
+            <c:node.data>
+                <c:model.texture-static>
+                    <c:model.props>
+                        <o:string name="diffuse"> locations/demo/resources/diffuse/bf_idle.png </o:string>
+                        <o:boolean name="flipX">true</o:boolean>
+                        <o:float name="width">256</o:float>
+                        <o:float name="height">256</o:float>
+                        <o:float name="x">75</o:float>
+                        <o:float name="y">35</o:float>
+                    </c:model.props>
+                </c:model.texture-static>
+            </c:node.data>
+        </c:location.node>
+
     </c:location.node>
 
 

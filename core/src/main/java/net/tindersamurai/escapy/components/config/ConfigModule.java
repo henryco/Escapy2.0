@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 	public String provideResourcesConfigFile (
 			EscapyGameContext gameContext
 	) {
-		return gameContext.getConfigsFilePath() + "config.eacxml";
+		return gameContext.getConfigsFilePath() + "index.eacxml";
 	}
 
 	@Provide("DefaultStageFileName") @Singleton
