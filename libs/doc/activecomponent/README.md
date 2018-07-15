@@ -41,4 +41,28 @@
 Второй метод в качестве первого входного параметра принимает имя компонента, в свою очередь второй параметр это уже созданный компонент 
 который по умолчанию возвращает метод.
 
+### **UtilityCoreComponent**
+Библиотека содержит некоторе число вспомагательных компонентов, среди которых:
+
+* **`@EscapyComponent("debug") void debug(@Arg("args") Object ... args);`**
+
+* **`@EscapyComponent("main")  void main(Object ... args);`**
+
+* **`@EscapyComponent("array") Object newArrayInstance(@Arg("type") Class<?> type, @Arg("elements") Object ... args);`**
+
+* **`@EscapyComponent("array-auto") Object newAutoArray(@Arg("elements") Object ... args);`**
+
+* **`@EscapyComponent("array-list") List<?> newArrayList(@Arg("elements") Object ... args);`**
+
+* **`@EscapyComponent("class") Class<?> findClass(@Arg("object") Object o);`**
+
+* **`@EscapyComponent("class-by-name") Class<?> classByName(String name);`**
+
+* **`@EscapyComponent("entry") Entry createEntry(@Arg("key") Object key, @Arg("value") Object value);`**
+
+* **`@EscapyComponent("null") Object nullObject(Object ... args);`**
+
+* **`@EscapyComponent("type") Class<?> primitiveType(@Arg("object") Object o);`**
+
+C полным списком можно ознакомиться заглянув в класс-фабрику **```java UtilityCoreComponent```**.
 
