@@ -88,7 +88,7 @@ C полным списком можно ознакомиться загляну
 
 ### **Code example**
 
-```java 
+```JAVA 
 	
 	@EscapyComponentFactory("some")
 	public class SomeExampleFactory {
@@ -162,7 +162,7 @@ C полным списком можно ознакомиться загляну
 
 ****
  
-# **Внешний XML файл**
+# **External configuration file**
 В конечном итоге, главная цель библиотеки заключается в использовании внешнего файла конфигурации,
 по умолчанию в библиотеке присутствует поддержка **`XML`** формата.
 
@@ -171,8 +171,112 @@ C полным списком можно ознакомиться загляну
 * **`<c: ... `** - префикс применимый к компонентам
 * **`<o: ... `** - префикс применимый к объектам java
 * **`<m: ... `** - префикс применимый к методам объектов
-
 * **`<new> `** - тэг применимый к конструкторам объектов java
 
+### **Сomponents**
+Каждый файл конфигурации должен иметь хотя бы один (и только один) корневой компонент, который 
+будет создан и возвращен при вызове метода **`<T> T parseComponent(String file);`** 
+из интерфейса **`EscapyComponentParser`**.
 
+Создание компонента в файле конфигурации объявляется через префикс **`<c: ... `** и последующим за 
+ним названием компонента из фабрики компонентов разделенных (по умолчанию) точкой.
+
+Например: 
+```XML 
+	<c:some-comp-factory.nested-factory.component-name />
+```
+
+* **`some-comp-factory`**, **`nested-factory`** - это фабрики компонентов отмеченные в коде аннотацией **`@EscapyComponentFactory(%name%)`**
+* **`component-name`** - это компонент, метод из фабрики отмеченный аннотацией **`@EscapyComponent(%name%)`**
+
+
+В случае с корневым компонентом, следует так же явно объявить используемые префиксы. 
+Ниже показан полный пример демонстрационного корневого компонента:
+
+
+```XML
+
+	<c:u.main 
+		xmlns:c="https://henryco.net/escapy"
+		xmlns:o="https://henryco.net/escapy"
+        xmlns:m="https://henryco.net/escapy"
+	>
+		<!-- Some components and objects here -->
+	</с:u.main>
+	
+```
+
+### **Objects**
+С объектами дело обстоит немного интереснее, как и в случае с компонентами, декларация объектов начинается с префикса, но на этом
+сходства заканчиваются.
+
+На все теги объектов распространяется несколько важных правил: 
+
+1) По умолчанию тип объекта следует из названия к которому добавляется префикс `java.lang.`, а первая буква заменяется заглавной:
+
+* **`<o:string />`** --- **`java.lang.String`**
+* **`<o:float />`** --- **`java.lang.Float`**
+* **`<o:object />`** --- **`java.lang.Object`**
+
+2) Тип объекта можно указать самому используя атрибут **`class`**:
+
+* **`<o:object class="java.util.List" />`** --- **`java.lang.Object`** --- **`java.util.List`**
+* **`<o:number class="java.lang.Integer" />`** --- **`java.lang.Number`** --- **`java.lang.Integer`**
+
+3) По умолчанию, для входного параметра конструктора отдается прдепочтение типу **`String`** если не указанно иначе: 
+
+.
+```XML
+	<!-- new String( new String( "hello" ) ) -->
+	<!-- String into string -->
+	<o:string> hello </o:string>
+
+
+	<!-- new Short( new String( "42" ) ) -->
+	<o:short> 42 </o:short>
+
+
+	<!-- new Short( new String ( "42" ) ) -->
+	<o:short>
+		<o:string> 42 </o:string>
+	</o:short>
+
+
+	<!-- new Float( new Float( new Stirng( "50" ) ) ) -->
+	<o:float>
+		<o:float> 50 </o:float>
+	</o:float>
+	
+```
+.
+
+
+4) Конструктор автоматически определяется из типа или же в ручную из тега **`<new>`**:
+
+.
+```XML 
+	<!-- Constructor: java.lang.Float -->
+	<o:float> 10 </o:float> 
+
+
+	<!-- Constructor: java.lang.Float -->
+	<o:float> 
+		<new> 10 </new>
+	</o:float>
+
+
+	<!-- Constructor: java.lang.Integer -->
+	<o:object> 
+		<new class="java.lang.Integer"> 10 </new>
+	</o:object>
+
+
+	<!-- Constructor: java.util.ArrayList -->
+	<!-- Type: java.util.List -->
+	<o:object class="java.util.List"> 
+		<new class="java.util.ArrayList" /> 
+	</o:object>
+	
+```
+.
 
