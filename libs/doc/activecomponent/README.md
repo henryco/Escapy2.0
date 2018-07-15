@@ -66,3 +66,78 @@
 
 C полным списком можно ознакомиться заглянув в класс-фабрику **```java UtilityCoreComponent```**.
 
+### **Code example**
+
+```java 
+	
+	@EscapyComponentFactory("some")
+	public class SomeExampleFactory {
+	
+		private Object someState = new Integer(42);
+			
+		@EscapyComponent("mutate")
+		public final void justVoidCall(Object arg) {
+			if (someState instanceof Integer && arg instanceof Integer) 
+				someState += arg;
+			else someState = arg;
+		}
+		
+		@EscapyComponent("state")
+		public Object getState() {
+			return someState;
+		}
+	
+		@EscapyComponentFactory("nested-a") // Static class
+		public static final class Nested_A implements EscapyComponentFactoryListener {
+		
+			@Override
+			public boolean enterComponent(String name) {
+				System.out.println("Create: " + name);
+				return true;
+			}
+
+			@Override
+			public Object leaveComponent(String name, Object instance) {
+				System.out.println("Createed: " + name);
+				System.out.println("Instance: " + instance);
+				return instance;
+			}
+		
+			@EscapyComponent("sum")
+			public String sumToText(@Arg("a") float a, @Arg("b") float b) {
+				return new Float(a + b).toString();
+			}
+
+		}
+		
+		@EscapyComponentFactory("second")
+		public class SencondNestedFactory {
+			
+			@EscapyComponent("hello")
+			public String hello(String ... varargs) {
+				for (String s: varargs) 
+					System.out.println(s);
+				return "Hello world!";
+			}
+			
+			@EscapyComponent("calculate")
+			public int calc(@Arg("val") int val, Float ... args) {
+				int r = val;
+				for (Float f: args) 
+					r += (int) f;
+				return r;
+			}
+			
+			@EscapyComponent("also-show-state") 
+			public void showParentState() {
+				System.out.println(someState);
+			}
+			
+		}
+		
+	}
+	
+	
+```
+
+
