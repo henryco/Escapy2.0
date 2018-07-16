@@ -188,7 +188,7 @@ public class DefaultRenderer implements EscapyRenderer {
 	public <T> T getRendererAttribute(String name) {
 
 		String[] names = name.split(":");
-		if (names != null && !names[0].equals(name)) {
+		if (!names[0].equals(name)) {
 
 			Object parent = getRendererAttribute(names[0]);
 			for (int i = 1; i < names.length; i++) {

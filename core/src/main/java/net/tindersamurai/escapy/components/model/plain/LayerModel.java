@@ -6,6 +6,9 @@ import lombok.extern.java.Log;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
+import net.tindersamurai.escapy.graphic.render.fbo.EscapyFrameBuffer;
+import net.tindersamurai.escapy.graphic.render.program.gl10.mask.LightMask;
+import net.tindersamurai.escapy.graphic.screen.Resolution;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.utils.EscapyUtils;
 
@@ -21,7 +24,8 @@ public class LayerModel implements IEscapyModel {
 	private final EscapyFBO diffuseBuffer;
 	private final EscapyFBO normalsBuffer;
 
-
+	LightMask mask;
+	EscapyFBO maskFbo;
 	public LayerModel (
 			EscapyFBO diffuseBuffer,
 			EscapyFBO normalsBuffer,
@@ -35,6 +39,8 @@ public class LayerModel implements IEscapyModel {
 		log.info("***********\n\nDIFFUSE BUFFER DIM: " + diffuseBuffer.getWidth() + " : " + diffuseBuffer.getHeight());
 		log.info("BUFFER ID: " + diffuseBuffer.toString() + " : " + normalsBuffer.toString());
 		log.info("NORMALS BUFFER DIM: " + normalsBuffer.getWidth() + " : " + normalsBuffer.getHeight() + "\n\n***********");
+		mask = new LightMask(diffuseBuffer.getWidth(), diffuseBuffer.getHeight());
+		maskFbo = new EscapyFrameBuffer(new Resolution((int) diffuseBuffer.getWidth(), (int) diffuseBuffer.getHeight()));
 	}
 
 	@Override
@@ -72,12 +78,23 @@ public class LayerModel implements IEscapyModel {
 	@Override
 	public void postRender(IEscapyMemoCam camera, Batch batch, float delta) {
 
-		EscapyUtils.centerize(diffuseBuffer.getSprite(),
+//		EscapyUtils.centerize (
+//				diffuseBuffer.getSprite(),
+//				Gdx.graphics.getWidth(),
+//				Gdx.graphics.getHeight()
+//		);
+
+		batch.setProjectionMatrix(camera.update().getProjection());
+//		diffuseBuffer.renderGraphics(batch);
+		maskFbo.begin(() -> {
+			wipe();
+			mask.renderMask(diffuseBuffer.getTexture());
+		});
+		EscapyUtils.centerize (
+				maskFbo.getSprite(),
 				Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight()
 		);
-
-		batch.setProjectionMatrix(camera.update().getProjection());
-		diffuseBuffer.renderGraphics(batch);
+		maskFbo.renderGraphics(batch);
 	}
 }

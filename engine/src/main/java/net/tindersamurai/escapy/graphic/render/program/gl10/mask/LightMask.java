@@ -11,6 +11,7 @@ import net.tindersamurai.escapy.context.annotation.EscapyAPI;
 /**
  * @author Henry on 23/09/16.
  */
+@SuppressWarnings("WeakerAccess")
 @EscapyAPI @Dante
 public class LightMask {
 
@@ -25,7 +26,7 @@ public class LightMask {
 
 
 	private final OrthographicCamera camera;
-	private final int width, height, x, y;
+	private final float width, height, x, y;
 	private final int[] blendFunc;
 	private final Color color;
 	private final Batch batch;
@@ -34,7 +35,7 @@ public class LightMask {
 
 
 	@EscapyAPI
-	public LightMask(int x, int y, int width, int height) {
+	public LightMask(float x, float y, float width, float height) {
 		this.camera = new OrthographicCamera();
 		this.camera.setToOrtho(true, width, height);
 		this.batch = new SpriteBatch();
@@ -49,19 +50,19 @@ public class LightMask {
 	}
 
 	@EscapyAPI
-	public LightMask(int[] dim) {
+	public LightMask(float[] dim) {
 		this(dim[0], dim[1], dim[2], dim[3]);
 	}
 
 	@EscapyAPI
-	public LightMask(int width, int height) {
+	public LightMask(float width, float height) {
 		this(0, 0, width, height);
 	}
 
 
 	public void initMaskTexture() {
 
-		FrameBuffer tmp = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
+		FrameBuffer tmp = new FrameBuffer(Pixmap.Format.RGBA8888, (int)width, (int)height, false);
 		tmp.begin();
 		Gdx.gl.glClearColor(this.color.r, this.color.g, this.color.b, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

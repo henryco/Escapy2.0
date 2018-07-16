@@ -50,7 +50,9 @@ public class LocationFactory  {
 			@Arg("data") NodeData data,
 			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
-		return new EscapyNode<NodeData>(data, id) {{
+		return new EscapyNode<NodeData> (
+				data == null ? new NodeData() : data, id
+		) {{
 			setObserver(nodeObserver);
 			for (IEscapyNode<NodeData> node : nodes)
 				addNode(node);
