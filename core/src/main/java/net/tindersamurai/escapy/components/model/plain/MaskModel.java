@@ -39,8 +39,8 @@ public class MaskModel implements IEscapyModel {
 	@Override
 	public void postRender(IEscapyMemoCam camera, Batch batch, float delta) {
 
-		if (diffuseBuffer == null || !diffuseBuffer.isUpdated()) return;
 		if (lightMask == null) throw new RuntimeException("Light mask in NULL!");
+		if (diffuseBuffer == null || !diffuseBuffer.isUpdated()) return;
 
 		if (maskBuffer == null) {
 			lightMask.renderMask(diffuseBuffer.get().getTexture());
