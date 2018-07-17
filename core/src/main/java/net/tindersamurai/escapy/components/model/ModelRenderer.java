@@ -36,12 +36,13 @@ public class ModelRenderer implements IEscapyModelRenderer {
 		camera.safety(() -> preRender(model, delta));
 		camera.safety(() -> model.renderDiffuseModel(camera, batch, delta));
 		camera.safety(() -> model.renderNormalModel(camera, batch, delta));
-		camera.safety(() -> model.renderLightModel(camera, batch, delta));
+		camera.safety(() -> model.renderShadowModel(camera, batch, delta));
 		camera.safety(() -> postRender(model, delta));
 	}
 
 
 	private void preRender(IEscapyModel model, float delta) {
+		if (model == null) return;
 		for (val preRenderer : model.preRenderQueue())
 			preRenderer.render(camera, batch, delta);
 		for (val nested : model.getNestedModels())
@@ -49,6 +50,7 @@ public class ModelRenderer implements IEscapyModelRenderer {
 	}
 
 	private void postRender(IEscapyModel model, float delta) {
+		if (model == null) return;
 		for (val postRenderer : model.postRenderQueue())
 			postRenderer.render(finalCamera, batch, delta);
 		for (val nested : model.getNestedModels())

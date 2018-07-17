@@ -37,7 +37,7 @@ public class RootModel implements IEscapyModel {
 	}
 
 	@Override
-	public void renderLightMap(IEscapyCamera camera, Batch batch, float delta) {
+	public void renderShadowMap(IEscapyCamera camera, Batch batch, float delta) {
 		camera.update();
 		wipe();
 	}

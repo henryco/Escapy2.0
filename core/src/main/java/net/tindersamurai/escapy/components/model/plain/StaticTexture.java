@@ -56,7 +56,7 @@ public class StaticTexture implements IEscapyModel, IEscapyTexture {
 	}
 
 	@Override
-	public void renderLightMap(IEscapyCamera camera, Batch batch, float delta) {
+	public void renderShadowMap(IEscapyCamera camera, Batch batch, float delta) {
 		draw(sprites[2], camera, batch);
 	}
 

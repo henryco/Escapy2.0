@@ -10,7 +10,7 @@ public interface IEscapyRenderable extends Wipeable {
 		wipe();
 	}
 
-	default void renderLightMap(IEscapyCamera camera, Batch batch, float delta) {
+	default void renderShadowMap(IEscapyCamera camera, Batch batch, float delta) {
 		wipe();
 	}
 

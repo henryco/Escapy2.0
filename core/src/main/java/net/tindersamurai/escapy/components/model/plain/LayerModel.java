@@ -1,16 +1,12 @@
 package net.tindersamurai.escapy.components.model.plain;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import lombok.extern.java.Log;
+import net.tindersamurai.escapy.components.model.plain.util.UpWrapper;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
-import net.tindersamurai.escapy.graphic.render.fbo.EscapyFrameBuffer;
-import net.tindersamurai.escapy.graphic.render.program.gl10.mask.LightMask;
-import net.tindersamurai.escapy.graphic.screen.Resolution;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
-import net.tindersamurai.escapy.utils.EscapyUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,27 +16,24 @@ import java.util.List;
 @Log
 public class LayerModel implements IEscapyModel {
 
+	private final UpWrapper<EscapyFBO> diffuseBuffer;
+	private final UpWrapper<EscapyFBO> normalsBuffer;
+	private final UpWrapper<EscapyFBO> shadowsBuffer;
 	private final List<IEscapyModel> nested;
-	private final EscapyFBO diffuseBuffer;
-	private final EscapyFBO normalsBuffer;
 
-	LightMask mask;
-	EscapyFBO maskFbo;
-	public LayerModel (
-			EscapyFBO diffuseBuffer,
-			EscapyFBO normalsBuffer,
+	public LayerModel(
+			UpWrapper<EscapyFBO> diffuseBuffer,
+			UpWrapper<EscapyFBO> normalsBuffer,
+			UpWrapper<EscapyFBO> shadowsBuffer,
 			IEscapyModel... nested
 	) {
 		this.normalsBuffer = normalsBuffer;
 		this.diffuseBuffer = diffuseBuffer;
+		this.shadowsBuffer = shadowsBuffer;
 		this.nested = new ArrayList<>();
 		Collections.addAll(this.nested, nested);
 
-		log.info("***********\n\nDIFFUSE BUFFER DIM: " + diffuseBuffer.getWidth() + " : " + diffuseBuffer.getHeight());
-		log.info("BUFFER ID: " + diffuseBuffer.toString() + " : " + normalsBuffer.toString());
-		log.info("NORMALS BUFFER DIM: " + normalsBuffer.getWidth() + " : " + normalsBuffer.getHeight() + "\n\n***********");
-		mask = new LightMask(diffuseBuffer.getWidth(), diffuseBuffer.getHeight());
-		maskFbo = new EscapyFrameBuffer(new Resolution((int) diffuseBuffer.getWidth(), (int) diffuseBuffer.getHeight()));
+		log();
 	}
 
 	@Override
@@ -56,45 +49,67 @@ public class LayerModel implements IEscapyModel {
 	@Override
 	public void renderDiffuseModel(IEscapyMemoCam camera, Batch batch, float delta) {
 
-		diffuseBuffer.begin(batch, () -> {
+		if (diffuseBuffer == null) return;
+
+		diffuseBuffer.get().begin(batch, () -> {
 			batch.setProjectionMatrix(camera.update().getProjection());
 			renderDiffuseMap(camera, batch, delta);
 			for (IEscapyModel model : getNestedModels())
 				model.renderDiffuseModel(camera, batch, delta);
 		});
+		diffuseBuffer.setUpdated(true);
 	}
 
 	@Override
 	public void renderNormalModel(IEscapyMemoCam camera, Batch batch, float delta) {
 
-		normalsBuffer.begin(batch, () -> {
+		if (normalsBuffer == null) return;
+
+		normalsBuffer.get().begin(batch, () -> {
 			batch.setProjectionMatrix(camera.update().getProjection());
 			renderNormalMap(camera, batch, delta);
 			for (IEscapyModel model : getNestedModels())
 				model.renderNormalModel(camera, batch, delta);
 		});
+		normalsBuffer.setUpdated(true);
 	}
 
 	@Override
-	public void postRender(IEscapyMemoCam camera, Batch batch, float delta) {
+	public void renderShadowModel(IEscapyMemoCam camera, Batch batch, float delta) {
+		if (shadowsBuffer == null) return;
 
-//		EscapyUtils.centerize (
-//				diffuseBuffer.getSprite(),
-//				Gdx.graphics.getWidth(),
-//				Gdx.graphics.getHeight()
-//		);
-
-		batch.setProjectionMatrix(camera.update().getProjection());
-//		diffuseBuffer.renderGraphics(batch);
-		maskFbo.begin(() -> {
-			wipe();
-			mask.renderMask(diffuseBuffer.getTexture());
+		shadowsBuffer.get().begin(batch, () -> {
+			batch.setProjectionMatrix(camera.update().getProjection());
+			renderShadowMap(camera, batch, delta);
+			for (IEscapyModel model : getNestedModels())
+				model.renderShadowModel(camera, batch, delta);
 		});
-		EscapyUtils.centerize (
-				maskFbo.getSprite(),
-				Gdx.graphics.getWidth(),
-				Gdx.graphics.getHeight()
-		);
-		maskFbo.renderGraphics(batch);
+		shadowsBuffer.setUpdated(true);
 	}
+
+	@Override
+	public void preRender(IEscapyMemoCam camera, Batch batch, float delta) {
+		if (diffuseBuffer != null) diffuseBuffer.setUpdated(false);
+		if (normalsBuffer != null) normalsBuffer.setUpdated(false);
+		if (shadowsBuffer != null) shadowsBuffer.setUpdated(false);
+	}
+
+
+	private void log() {
+		log.info("***********\n\n");
+		if (diffuseBuffer != null) {
+			log.info("DIFFUSE BUFFER DIM: " + diffuseBuffer.get().getWidth() + " : " + diffuseBuffer.get().getHeight());
+			log.info("BUFFER ID: " + diffuseBuffer.toString());
+		}
+		if (normalsBuffer != null) {
+			log.info("NORMALS BUFFER DIM: " + normalsBuffer.get().getWidth() + " : " + normalsBuffer.get().getHeight());
+			log.info("BUFFER ID: " + normalsBuffer.toString());
+		}
+		if (shadowsBuffer != null) {
+			log.info("SHADOWS BUFFER DIM: " + shadowsBuffer.get().getWidth() + " : " + shadowsBuffer.get().getHeight());
+			log.info("BUFFER ID: " + shadowsBuffer.toString());
+		}
+		log.info("\n\n***********");
+	}
+
 }

@@ -1,6 +1,7 @@
 package net.tindersamurai.escapy.components.factory;
 
 import com.github.henryco.injector.meta.annotations.Provide;
+import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
@@ -59,4 +60,30 @@ public class LocationFactory  {
 		}};
 	}
 
+	/**
+	 *	This is just wrapper
+	 */ @SafeVarargs @EscapyComponent("main-node")
+	public final IEscapyNode<NodeData> mainNode (
+			@Arg("nodes") IEscapyNode<NodeData> ... nodes
+	) {
+		return node("MainNode", null, nodes);
+	}
+
+	/**
+	 *	This is just wrapper
+	 */ @SafeVarargs @EscapyComponent("mask-node")
+	public final IEscapyNode<NodeData> maskNode (
+			@Arg("nodes") IEscapyNode<NodeData> ... nodes
+	) {
+	 	return node("MaskNode", null, nodes);
+	}
+
+	/**
+	 *	This is just wrapper
+	 */ @SafeVarargs @EscapyComponent("light-node")
+	public final IEscapyNode<NodeData> lightNode (
+			@Arg("nodes") IEscapyNode<NodeData> ... nodes
+	) {
+		return node("LightNode", null, nodes);
+	}
 }

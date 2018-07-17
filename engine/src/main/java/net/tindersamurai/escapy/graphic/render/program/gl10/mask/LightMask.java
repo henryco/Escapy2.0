@@ -13,17 +13,7 @@ import net.tindersamurai.escapy.context.annotation.EscapyAPI;
  */
 @SuppressWarnings("WeakerAccess")
 @EscapyAPI @Dante
-public class LightMask {
-
-	@EscapyAPI
-	public static final int[] MULTIPLY = new int[]{GL30.GL_DST_COLOR, GL30.GL_ONE_MINUS_SRC_ALPHA};
-	@EscapyAPI
-	public static final int[] SEPIA = new int[]{GL30.GL_SRC_ALPHA, GL30.GL_DST_COLOR};
-	@EscapyAPI
-	public static final int[] SCREEN = new int[]{GL30.GL_ONE_MINUS_DST_COLOR, GL30.GL_ONE};
-	@EscapyAPI
-	public static final int[] LINEAR_DODGE = new int[]{GL30.GL_ONE, GL30.GL_ONE};
-
+public class LightMask implements EscapyLightMask {
 
 	private final OrthographicCamera camera;
 	private final float width, height, x, y;
@@ -70,31 +60,34 @@ public class LightMask {
 		maskTexture = tmp.getColorBufferTexture();
 	}
 
-
+	@Override
 	public void setMaskFunc(int src, int dst) {
 		blendFunc[0] = src;
 		blendFunc[1] = dst;
 	}
 
+	@Override
 	public void setMaskFunc(int[] func) {
 		setMaskFunc(func[0], func[1]);
 	}
 
+	@Override
 	public void setColor(float r, float g, float b, float a) {
 		color.set(r, g, b, a);
 		initMaskTexture();
 	}
 
+	@Override
 	public void setColor(int r, int g, int b, int a) {
 		setColor(r / 255f, g / 255f, b / 255f, a / 255f);
 	}
 
-	@EscapyAPI
+	@Override
 	public void setColor(int[] color) {
 		setColor(color[0], color[1], color[2], color[3]);
 	}
 
-	@EscapyAPI
+	@Override
 	public void renderMask(Texture target) {
 		batch.setProjectionMatrix(camera.combined);
 

@@ -1,13 +1,14 @@
 package net.tindersamurai.escapy.map.model;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.utils.Disposable;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.graphic.screen.Wipeable;
 
 import java.util.Collection;
 import java.util.Collections;
 
-public interface IEscapyModel extends IEscapyRenderable, Wipeable {
+public interface IEscapyModel extends IEscapyRenderable, Wipeable, Disposable {
 
 	@FunctionalInterface interface Render {
 		void render(IEscapyMemoCam camera, Batch batch, float delta);
@@ -37,19 +38,25 @@ public interface IEscapyModel extends IEscapyRenderable, Wipeable {
 	default void renderDiffuseModel(IEscapyMemoCam camera, Batch batch, float delta) {
 		renderDiffuseMap(camera, batch, delta);
 		for (IEscapyModel model : getNestedModels())
-			model.renderDiffuseModel(camera, batch, delta);
+			if (model != null)
+				model.renderDiffuseModel(camera, batch, delta);
 	}
 
 	default void renderNormalModel(IEscapyMemoCam camera, Batch batch, float delta) {
 		renderNormalMap(camera, batch, delta);
 		for (IEscapyModel model : getNestedModels())
-			model.renderNormalModel(camera, batch, delta);
+			if (model != null)
+				model.renderNormalModel(camera, batch, delta);
 	}
 
-	default void renderLightModel(IEscapyMemoCam camera, Batch batch, float delta) {
-		renderLightMap(camera, batch, delta);
+	default void renderShadowModel(IEscapyMemoCam camera, Batch batch, float delta) {
+		renderShadowMap(camera, batch, delta);
 		for (IEscapyModel model : getNestedModels())
-			model.renderLightModel(camera, batch, delta);
+			if (model != null)
+				model.renderShadowModel(camera, batch, delta);
 	}
-	
+
+
+	default void dispose() {
+	}
 }
