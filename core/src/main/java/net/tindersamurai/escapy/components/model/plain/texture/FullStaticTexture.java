@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.components.model.plain;
+package net.tindersamurai.escapy.components.model.plain.texture;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;

@@ -50,7 +50,7 @@ public interface EscapyShaderHelper extends EscapyObject {
 
 
 	default void begin(Batch batch, Runnable r) {
-		ShaderProgram defaultShader = batch.getShader();
+		final ShaderProgram defaultShader = batch.getShader();
 		r.run();
 		batch.setShader(defaultShader);
 	}

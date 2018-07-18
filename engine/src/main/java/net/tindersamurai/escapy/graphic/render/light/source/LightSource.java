@@ -15,7 +15,7 @@ import net.tindersamurai.escapy.utils.EscapyObject;
  */
 public class LightSource implements EscapyObject {
 
-	private final EscapyLightSource lightSource;
+	private final @Getter EscapyLightSource lightSource;
 	private final float[] position;
 
 	public final @Getter String name;

@@ -1,6 +1,7 @@
 package net.tindersamurai.escapy.components.model.plain;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import lombok.Getter;
 import lombok.extern.java.Log;
 import net.tindersamurai.escapy.components.model.plain.util.UpWrapper;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
@@ -16,9 +17,9 @@ import java.util.List;
 @Log
 public class LayerModel implements IEscapyModel {
 
-	private final UpWrapper<EscapyFBO> diffuseBuffer;
-	private final UpWrapper<EscapyFBO> normalsBuffer;
-	private final UpWrapper<EscapyFBO> shadowsBuffer;
+	private final @Getter UpWrapper<EscapyFBO> diffuseBuffer;
+	private final @Getter UpWrapper<EscapyFBO> normalsBuffer;
+	private final @Getter UpWrapper<EscapyFBO> shadowsBuffer;
 	private final List<IEscapyModel> nested;
 
 	public LayerModel(

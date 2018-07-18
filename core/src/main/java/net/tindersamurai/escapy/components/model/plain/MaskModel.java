@@ -2,6 +2,7 @@ package net.tindersamurai.escapy.components.model.plain;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import lombok.Getter;
 import lombok.extern.java.Log;
 import net.tindersamurai.escapy.components.model.plain.util.UpWrapper;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
@@ -14,9 +15,9 @@ import net.tindersamurai.escapy.utils.EscapyUtils;
 @Log
 public class MaskModel implements IEscapyModel {
 
-	private final UpWrapper<EscapyFBO> diffuseBuffer;
-	private final UpWrapper<EscapyFBO> maskBuffer;
-	private final EscapyLightMask lightMask;
+	private final @Getter UpWrapper<EscapyFBO> diffuseBuffer;
+	private final @Getter UpWrapper<EscapyFBO> maskBuffer;
+	private final @Getter EscapyLightMask lightMask;
 
 	public MaskModel (
 			UpWrapper<EscapyFBO> diffuseBuffer,
@@ -43,7 +44,7 @@ public class MaskModel implements IEscapyModel {
 		if (diffuseBuffer == null || !diffuseBuffer.isUpdated()) return;
 
 		if (maskBuffer == null) {
-			lightMask.renderMask(diffuseBuffer.get().getTexture());
+//			lightMask.renderMask(diffuseBuffer.get().getTexture());
 			return;
 		}
 
@@ -51,14 +52,14 @@ public class MaskModel implements IEscapyModel {
 			wipe();
 			lightMask.renderMask(diffuseBuffer.get().getTexture());
 		});
-
-		EscapyUtils.centerize(
-				maskBuffer.get().getSprite(),
-				Gdx.graphics.getWidth(),
-				Gdx.graphics.getHeight()
-		);
-
-		batch.setProjectionMatrix(camera.update().getProjection());
-		maskBuffer.get().renderGraphics(batch);
+//
+//		EscapyUtils.centerize(
+//				maskBuffer.get().getSprite(),
+//				Gdx.graphics.getWidth(),
+//				Gdx.graphics.getHeight()
+//		);
+//
+//		batch.setProjectionMatrix(camera.update().getProjection());
+//		maskBuffer.get().renderGraphics(batch);
 	}
 }
