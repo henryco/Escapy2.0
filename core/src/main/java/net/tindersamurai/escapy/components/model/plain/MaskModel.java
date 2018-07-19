@@ -44,7 +44,6 @@ public class MaskModel implements IEscapyModel {
 		if (diffuseBuffer == null || !diffuseBuffer.isUpdated()) return;
 
 		if (maskBuffer == null) {
-//			lightMask.renderMask(diffuseBuffer.get().getTexture());
 			return;
 		}
 
@@ -52,14 +51,14 @@ public class MaskModel implements IEscapyModel {
 			wipe();
 			lightMask.renderMask(diffuseBuffer.get().getTexture());
 		});
-//
-//		EscapyUtils.centerize(
-//				maskBuffer.get().getSprite(),
-//				Gdx.graphics.getWidth(),
-//				Gdx.graphics.getHeight()
-//		);
-//
-//		batch.setProjectionMatrix(camera.update().getProjection());
-//		maskBuffer.get().renderGraphics(batch);
+
+ 		EscapyUtils.centerize(
+				maskBuffer.get().getSprite(),
+				Gdx.graphics.getWidth(),
+				Gdx.graphics.getHeight()
+		);
+
+		batch.setProjectionMatrix(camera.update().getProjection());
+		maskBuffer.get().renderGraphics(batch);
 	}
 }

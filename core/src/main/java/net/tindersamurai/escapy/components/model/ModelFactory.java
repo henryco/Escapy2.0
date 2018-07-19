@@ -6,6 +6,8 @@ import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
 import net.tindersamurai.escapy.components.model.plain.LayerModel;
+import net.tindersamurai.escapy.components.model.plain.shift.DummyShiftLogic;
+import net.tindersamurai.escapy.components.model.plain.shift.ShiftModel;
 import net.tindersamurai.escapy.components.model.plain.texture.FullStaticTexture;
 import net.tindersamurai.escapy.components.model.plain.MaskModel;
 import net.tindersamurai.escapy.components.model.plain.texture.StaticTexture;
@@ -44,7 +46,7 @@ public class ModelFactory {
 			@Arg("diffuse-fbo") UpWrapper<EscapyFBO> diffuseFbo,
 			@Arg("normals-fbo") UpWrapper<EscapyFBO> normalsFbo,
 			@Arg("shadows-fbo") UpWrapper<EscapyFBO> shadowsFbo,
-			@Arg("args") IEscapyModel ... nested
+			@Arg("nested") IEscapyModel ... nested
 	) {
 		return new LayerModel (diffuseFbo, normalsFbo, shadowsFbo, nested);
 	}
@@ -58,6 +60,13 @@ public class ModelFactory {
 		return new MaskModel(diffuseFbo, maskFbo, mask);
 	}
 
+	@EscapyComponent("shift")
+	public IEscapyModel shift (
+			// TODO some shift args
+			@Arg("nested") IEscapyModel ... nested
+	) {
+		return new ShiftModel(new DummyShiftLogic(), nested);
+	}
 
 	@EscapyComponentFactory("helper")
 	public final class HelperFactory {
