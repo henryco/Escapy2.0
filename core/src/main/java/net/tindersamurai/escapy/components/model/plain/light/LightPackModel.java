@@ -13,11 +13,12 @@ import java.util.List;
 @Log
 public class LightPackModel implements IEscapyModel {
 
-	private final @Getter
-	List<IEscapyModel> nestedModels;
 
+	private final @Getter List<IEscapyModel> nestedModels;
 
-	public LightPackModel(IEscapyModel ... nested) {
+	public LightPackModel (
+			IEscapyModel... nested
+	) {
 		this.nestedModels = new ArrayList<>();
 		Collections.addAll(this.nestedModels, nested);
 	}
@@ -26,5 +27,4 @@ public class LightPackModel implements IEscapyModel {
 	public void renderDiffuseMap(IEscapyCamera camera, Batch batch, float delta) {
 		wipe();
 	}
-
 }
