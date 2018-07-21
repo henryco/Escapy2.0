@@ -21,8 +21,7 @@ public class LightSourceModel implements IEscapyModel {
 
 	@Override
 	public void renderDiffuseMap(IEscapyCamera camera, Batch batch, float delta) {
-		wipe();
-		// todo
+		lightSource.drawBuffer(batch);
 	}
 
 	@Override

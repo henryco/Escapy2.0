@@ -50,10 +50,10 @@
                     <o:string>Birudingu</o:string>
                     <c:node.data>
                         <c:model.texture.static>
-                            <c:model.helper.props>
+                            <c:model.helper.t-props>
                                 <o:string namd="diffuse"> locations/demo/resources/diffuse/Loc_33.png </o:string>
                                 <o:string namd="normals"> locations/demo/resources/normals/Loc_33.png </o:string>
-                            </c:model.helper.props>
+                            </c:model.helper.t-props>
                         </c:model.texture.static>
                     </c:node.data>
                 </c:location.node>
@@ -62,14 +62,14 @@
                     <o:string>BoyFriend</o:string>
                     <c:node.data>
                         <c:model.texture.static>
-                            <c:model.helper.props>
+                            <c:model.helper.t-props>
                                 <o:string name="diffuse"> locations/demo/resources/diffuse/bf_idle.png </o:string>
                                 <o:boolean name="flipX">true</o:boolean>
                                 <o:float name="width">256</o:float>
                                 <o:float name="height">256</o:float>
                                 <o:float name="x">75</o:float>
                                 <o:float name="y">35</o:float>
-                            </c:model.helper.props>
+                            </c:model.helper.t-props>
                         </c:model.texture.static>
                     </c:node.data>
                 </c:location.node>
@@ -108,7 +108,98 @@
 
 
     <c:location.light-node>
-        <!--TODO LIGHTS-->
+
+        <c:location.node>
+            <o:string> Layer0LightPack </o:string>
+            <c:node.data>
+                <c:model.light.pack>
+                    <!-- TODO LIGHT PROCESSOR -->
+
+                    <c:model.helper.w-fbo name="color-fbo">
+                        <o:string> Layer0LightPackColorFbo </o:string>
+                    </c:model.helper.w-fbo>
+
+                    <c:model.helper.w-fbo name="normals-fbo">
+                        <o:string> Layer0FboNormals </o:string>
+                    </c:model.helper.w-fbo>
+
+                    <c:model.helper.w-fbo name="mask-fbo">
+                        <o:string> Layer0MaskFbo </o:string>
+                    </c:model.helper.w-fbo>
+                </c:model.light.pack>
+            </c:node.data>
+
+            <c:location.node>
+                <o:string> Layer0LightPackShift </o:string>
+                <c:node.data>
+                    <c:model.shift/>
+                </c:node.data>
+
+                <c:location.node>
+                    <o:string> LightType0 </o:string>
+                    <c:node.data>
+                        <c:model.light.type>
+                            <c:model.light.shader name="shader">
+                                <o:string> ADD_OVERLAY_STRONG </o:string>
+                            </c:model.light.shader>
+
+                            <c:model.helper.w-fbo name="diffuse-fbo">
+                                <o:string> Layer0FboDiffuse </o:string>
+                            </c:model.helper.w-fbo>
+
+                            <c:model.helper.w-fbo name="color-fbo">
+                                <o:string> Layer0LightPackColorFbo </o:string>
+                            </c:model.helper.w-fbo>
+
+                            <c:model.helper.w-fbo name="light-fbo">
+                                <o:string> Layer0LightPackLightFbo </o:string>
+                            </c:model.helper.w-fbo>
+                        </c:model.light.type>
+                    </c:node.data>
+
+                    <c:location.node>
+                        <o:string> LightSource1 </o:string>
+                        <c:node.data>
+                            <c:model.light.source>
+                                <c:model.helper.l-props>
+
+                                    <c:model.helper.color name="color">
+                                        <c:u.array-auto name="RGB">
+                                            <o:float> 40  </o:float>
+                                            <o:float> 34  </o:float>
+                                            <o:float> 200 </o:float>
+                                        </c:u.array-auto>
+                                    </c:model.helper.color>
+
+                                    <c:u.array-auto name="resolution">
+                                        <o:integer>256</o:integer>
+                                        <o:integer>256</o:integer>
+                                    </c:u.array-auto>
+
+                                    <c:u.array-auto name="size">
+                                        <o:integer>256</o:integer>
+                                        <o:integer>256</o:integer>
+                                    </c:u.array-auto>
+
+                                    <c:u.array-auto name="position">
+                                        <o:float>600</o:float>
+                                        <o:float>456</o:float>
+                                    </c:u.array-auto>
+
+                                    <o:float name="scale"> 3 </o:float>
+
+                                </c:model.helper.l-props>
+                            </c:model.light.source>
+                        </c:node.data>
+                    </c:location.node>
+
+                </c:location.node>
+
+                <!-- MORE LIGHT TYPES -->
+
+            </c:location.node>
+        </c:location.node>
+
     </c:location.light-node>
 
 

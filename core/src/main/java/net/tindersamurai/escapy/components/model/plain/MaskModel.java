@@ -52,13 +52,13 @@ public class MaskModel implements IEscapyModel {
 			lightMask.renderMask(diffuseBuffer.get().getTexture());
 		});
 
- 		EscapyUtils.centerize(
-				maskBuffer.get().getSprite(),
-				Gdx.graphics.getWidth(),
-				Gdx.graphics.getHeight()
-		);
-
-		batch.setProjectionMatrix(camera.update().getProjection());
-		maskBuffer.get().renderGraphics(batch);
+// 		EscapyUtils.centerize(
+//				maskBuffer.get().getSprite(),
+//				Gdx.graphics.getWidth(),
+//				Gdx.graphics.getHeight()
+//		);
+//
+//		batch.setProjectionMatrix(camera.update().getProjection());
+//		maskBuffer.get().renderGraphics(batch);
 	}
 }

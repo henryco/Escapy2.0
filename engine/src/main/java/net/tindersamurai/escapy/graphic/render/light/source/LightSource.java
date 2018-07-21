@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.utils.Disposable;
 import lombok.Getter;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFrameBuffer;
@@ -13,7 +14,7 @@ import net.tindersamurai.escapy.utils.EscapyObject;
 /**
  * @author Henry on 23/07/17.
  */
-public class LightSource implements EscapyObject {
+public class LightSource implements EscapyObject, Disposable {
 
 	private final @Getter EscapyLightSource lightSource;
 	private final float[] position;
