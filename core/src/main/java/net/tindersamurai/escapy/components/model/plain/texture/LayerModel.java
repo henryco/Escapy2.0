@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.components.model.plain;
+package net.tindersamurai.escapy.components.model.plain.texture;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import lombok.Getter;
@@ -10,7 +10,6 @@ import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class LayerModel implements IEscapyModel {
 	private final @Getter UpWrapper<EscapyFBO> diffuseBuffer;
 	private final @Getter UpWrapper<EscapyFBO> normalsBuffer;
 	private final @Getter UpWrapper<EscapyFBO> shadowsBuffer;
-	private final List<IEscapyModel> nested;
+	private final @Getter List<IEscapyModel> nestedModels;
 
 	public LayerModel(
 			UpWrapper<EscapyFBO> diffuseBuffer,
@@ -31,8 +30,8 @@ public class LayerModel implements IEscapyModel {
 		this.normalsBuffer = normalsBuffer;
 		this.diffuseBuffer = diffuseBuffer;
 		this.shadowsBuffer = shadowsBuffer;
-		this.nested = new ArrayList<>();
-		Collections.addAll(this.nested, nested);
+		this.nestedModels = new ArrayList<>();
+		Collections.addAll(this.nestedModels, nested);
 
 		log();
 	}
@@ -40,11 +39,6 @@ public class LayerModel implements IEscapyModel {
 	@Override
 	public void renderDiffuseMap(IEscapyCamera camera, Batch batch, float delta) {
 		wipe();
-	}
-
-	@Override
-	public Collection<IEscapyModel> getNestedModels() {
-		return nested;
 	}
 
 	@Override

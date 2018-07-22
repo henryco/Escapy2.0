@@ -37,7 +37,7 @@ public class ModelRenderer implements IEscapyModelRenderer {
 		camera.safety(() -> model.renderDiffuseModel(camera, batch, delta));
 		camera.safety(() -> model.renderNormalModel(camera, batch, delta));
 		camera.safety(() -> model.renderShadowModel(camera, batch, delta));
-		camera.safety(() -> postRender(model, delta));
+		finalCamera.safety(() -> postRender(model, delta));
 	}
 
 

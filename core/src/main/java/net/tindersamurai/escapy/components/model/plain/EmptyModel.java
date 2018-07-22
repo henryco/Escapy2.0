@@ -23,6 +23,16 @@ public class EmptyModel implements IEscapyModel {
 	}
 
 	@Override
+	public void renderNormalMap(IEscapyCamera camera, Batch batch, float delta) {
+		// nothing
+	}
+
+	@Override
+	public void renderShadowMap(IEscapyCamera camera, Batch batch, float delta) {
+		// nothing
+	}
+
+	@Override
 	public Collection<IEscapyModel> getNestedModels() {
 		return nested;
 	}

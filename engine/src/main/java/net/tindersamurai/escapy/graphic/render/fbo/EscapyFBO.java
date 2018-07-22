@@ -12,7 +12,7 @@ import net.tindersamurai.escapy.utils.EscapyObject;
 /**
  * @author Henry on 29/06/17.
  */
-public interface EscapyFBO extends GraphicRenderer, Wipeable, EscapyObject {
+public interface EscapyFBO extends Wipeable, EscapyObject {
 
 	@EscapyAPI default EscapyFBO begin(Runnable r) {
 		begin();
@@ -46,4 +46,6 @@ public interface EscapyFBO extends GraphicRenderer, Wipeable, EscapyObject {
 	@EscapyAPI Sprite getSprite();
 
 	void setFlip(boolean x, boolean y);
+
+	void renderBuffer(Batch batch);
 }

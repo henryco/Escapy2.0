@@ -7,7 +7,7 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
-import net.tindersamurai.escapy.components.model.plain.LayerModel;
+import net.tindersamurai.escapy.components.model.plain.texture.LayerModel;
 import net.tindersamurai.escapy.components.model.plain.light.LightPackModel;
 import net.tindersamurai.escapy.components.model.plain.light.LightSourceModel;
 import net.tindersamurai.escapy.components.model.plain.light.LightTypeModel;

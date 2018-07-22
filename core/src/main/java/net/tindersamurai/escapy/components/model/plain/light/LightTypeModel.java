@@ -1,6 +1,7 @@
 package net.tindersamurai.escapy.components.model.plain.light;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import lombok.Getter;
 import lombok.extern.java.Log;
 import net.tindersamurai.escapy.components.model.plain.util.UpWrapper;
@@ -24,6 +25,9 @@ import java.util.List;
 	private final @Getter UpWrapper<EscapyFBO> lightTypeFbo;
 	private final @Getter UpWrapper<EscapyFBO> diffuseFbo;
 	private final @Getter List<IEscapyModel> nestedModels;
+
+	private final Batch batch;
+	private final Batch post;
 
 	public LightTypeModel (
 			EscapyMultiSourceShader lightBlender,
@@ -52,15 +56,18 @@ import java.util.List;
 		this.lightColorFbo = lightColorFbo;
 		this.nestedModels = new ArrayList<>();
 		Collections.addAll(this.nestedModels, nested);
+
+		this.batch = new SpriteBatch();
+		this.post = new SpriteBatch();
 	}
 
 	@Override
-	public void renderDiffuseMap(IEscapyCamera camera, Batch batch, float delta) {
+	public void renderDiffuseMap(IEscapyCamera camera, Batch _batch, float delta) {
 		wipe();
 	}
 
 	@Override
-	public void renderDiffuseModel(IEscapyMemoCam camera, Batch batch, float delta) {
+	public void renderDiffuseModel(IEscapyMemoCam camera, Batch _batch, float delta) {
 		lightTypeFbo.get().begin(() -> {
 			batch.setProjectionMatrix(camera.update().getProjection());
 			renderDiffuseMap(camera, batch, delta);
@@ -73,22 +80,22 @@ import java.util.List;
 	}
 
 	@Override
-	public void preRender(IEscapyMemoCam camera, Batch batch, float delta) {
+	public void preRender(IEscapyMemoCam camera, Batch _batch, float delta) {
 		lightTypeFbo.setUpdated(false);
 		lightColorFbo.setUpdated(false);
 	}
 
 	@Override
-	public void postRender(IEscapyMemoCam camera, Batch batch, float delta) {
+	public void postRender(IEscapyMemoCam camera, Batch _batch, float delta) {
 		if (!diffuseFbo.isUpdated()) return;
 		lightColorFbo.get().begin(() -> {
 			if (!lightColorFbo.isUpdated()) {
 				wipe();
 				lightBlender.draw (
-						batch, diffuseFbo.get().getSprite(), lightTypeFbo.get().getSprite()
+						post, diffuseFbo.get().getSprite(), lightTypeFbo.get().getSprite()
 				);
 			} else lightBlender.draw (
-					batch, lightColorFbo.get().getSprite(), lightTypeFbo.get().getSprite()
+					post, lightColorFbo.get().getSprite(), lightTypeFbo.get().getSprite()
 			);
 		});
 		lightColorFbo.setUpdated(true);

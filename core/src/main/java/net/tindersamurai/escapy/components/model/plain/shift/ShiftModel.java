@@ -39,7 +39,6 @@ public class ShiftModel implements IEscapyModel {
 		camera.safety(() -> {
 			camera.setCameraPosition(shiftLogic.calculatePosition(camera.getPosition()));
 			batch.setProjectionMatrix(camera.update().getProjection());
-			renderDiffuseMap(camera, batch, delta);
 			for (IEscapyModel model : getNestedModels())
 				model.renderDiffuseModel(camera, batch, delta);
 		});
@@ -50,7 +49,6 @@ public class ShiftModel implements IEscapyModel {
 		camera.safety(() -> {
 			camera.setCameraPosition(shiftLogic.calculatePosition(camera.getPosition()));
 			batch.setProjectionMatrix(camera.update().getProjection());
-			renderNormalMap(camera, batch, delta);
 			for (IEscapyModel model : getNestedModels())
 				model.renderNormalModel(camera, batch, delta);
 		});
@@ -61,7 +59,6 @@ public class ShiftModel implements IEscapyModel {
 		camera.safety(() -> {
 			camera.setCameraPosition(shiftLogic.calculatePosition(camera.getPosition()));
 			batch.setProjectionMatrix(camera.update().getProjection());
-			renderShadowMap(camera, batch, delta);
 			for (IEscapyModel model : getNestedModels())
 				model.renderShadowModel(camera, batch, delta);
 		});

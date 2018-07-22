@@ -2,12 +2,14 @@ package net.tindersamurai.escapy.components.model.plain.light;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import lombok.Getter;
 import lombok.extern.java.Log;
 import net.tindersamurai.escapy.components.model.plain.util.UpWrapper;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
+import net.tindersamurai.escapy.graphic.render.fbo.EscapyFrameBuffer;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.utils.EscapyUtils;
 
@@ -23,12 +25,15 @@ import java.util.List;
 
 	private final @Getter List<IEscapyModel> nestedModels;
 
+	private final Batch postRenderBatch;
+
 	public LightPackModel (
 			UpWrapper<EscapyFBO> lightColorFbo,
 			UpWrapper<EscapyFBO> normalsFbo,
 			UpWrapper<EscapyFBO> maskFbo,
 			IEscapyModel... nested
 	) {
+		this.postRenderBatch = new SpriteBatch();
 		this.lightColorFbo = lightColorFbo;
 		this.normalsFbo = normalsFbo;
 		this.maskFbo = maskFbo;
@@ -43,13 +48,13 @@ import java.util.List;
 
 	@Override
 	public void postRender(IEscapyMemoCam camera, Batch batch, float delta) {
-		EscapyUtils.centerize(
+		EscapyUtils.centerize (
 				maskFbo.get().getSprite(),
 				Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight()
 		);
 
-		batch.setProjectionMatrix(camera.update().getProjection());
-		maskFbo.get().renderGraphics(batch);
+		postRenderBatch.setProjectionMatrix(camera.update().getProjection());
+		maskFbo.get().renderBuffer(postRenderBatch);
 	}
 }
