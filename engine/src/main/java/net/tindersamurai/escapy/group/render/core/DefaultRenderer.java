@@ -143,7 +143,7 @@ public class DefaultRenderer implements EscapyRenderer {
 
 
 			for (LightSource source: lightSource)
-				source.prepareBuffer(batch_pre);
+				source.prepareBuffer();
 
 
 			lightFBO.begin(() -> {
@@ -233,7 +233,7 @@ public class DefaultRenderer implements EscapyRenderer {
 		for (EscapyLightProcessor p: lightProcessors) p.setFieldSize(width, height);
 
 		for (LightSource[] sources: lightSources) {
-			for (LightSource s : sources) s.resize(width, height);
+//			for (LightSource s : sources) s.resize(width, height);
 		}
 	}
 

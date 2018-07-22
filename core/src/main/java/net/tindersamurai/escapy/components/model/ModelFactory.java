@@ -148,30 +148,29 @@ public class ModelFactory {
 				@Arg("color") Color color
 		) {
 			return new EscapyLightSourceData () {{
-				setResolution(resolution);
-				setCoefficient(coefficient);
-				setCorrection(correction);
-				setPosition(position);
-				setRadius(radius);
-				setSize(size);
-				setUmbra(umbra);
-				setAngle(angle);
-				setAlpha(alpha);
-				setScale(scale);
-				setColor(color);
+				if (resolution != null) setResolution(resolution);
+				if (coefficient != null) setCoefficient(coefficient);
+				if (correction != null) setCorrection(correction);
+				if (position != null) setPosition(position);
+				if (radius != null) setRadius(radius);
+				if (umbra != null) setUmbra(umbra);
+				if (angle != null) setAngle(angle);
+				if (alpha != null) setAlpha(alpha);
+				if (scale != null) setScale(scale);
+				if (color != null) setColor(color);
 			}};
 		}
 
 		@EscapyComponent("color")
 		public Color color (
 				@Arg("RGBA8888") Integer rgba8888,
-				@Arg("RGB") Float[] rgb,
+				@Arg("RGB255") Float[] rgb,
 				@Arg("r") Float r,
 				@Arg("g") Float g,
 				@Arg("b") Float b,
 				@Arg("a") Float a
 		) {
-			if (rgb != null) return new Color(rgb[0], rgb[1], rgb[2], 1);
+			if (rgb != null) return new Color(rgb[0] / 255f, rgb[1] / 255f, rgb[2] / 255f, 1);
 			if (rgba8888 != null) return new Color(rgba8888);
 			return new Color(r, g, b, a);
 		}
@@ -282,7 +281,7 @@ public class ModelFactory {
 				@Arg("properties") EscapyLightSourceData props
 		) {
 			return new LightSourceModel(props.initialize(new LightSource (
-					UUID.randomUUID().toString(), resolution.width, resolution.height
+					UUID.randomUUID().toString()
 			)));
 		}
 

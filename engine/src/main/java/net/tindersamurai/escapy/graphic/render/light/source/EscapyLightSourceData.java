@@ -2,12 +2,12 @@ package net.tindersamurai.escapy.graphic.render.light.source;
 
 import com.badlogic.gdx.graphics.Color;
 import lombok.Data;
+import lombok.extern.java.Log;
 import net.tindersamurai.escapy.graphic.screen.Resolution;
 
-@Data public class EscapyLightSourceData {
+@Data @Log public class EscapyLightSourceData {
 
 	private Integer[] resolution; // w, h
-	private Integer[] size; // w, h
 
 	private Float[] position = { 0f, 0f }; // x, y
 	private Float[] radius = { 0f, 1f }; // min, max
@@ -29,7 +29,6 @@ import net.tindersamurai.escapy.graphic.screen.Resolution;
 		}
 
 		if (position != null) l.setPosition(position[0], position[1]);
-		if (size != null) l.resize(size[0], size[1]);
 		if (radius != null) l.setRadius(radius[0], radius[1]);
 		if (umbra != null) l.setUmbra(umbra[0], umbra[1]);
 		if (angle != null) l.setAngles(angle[0], angle[1]);
@@ -40,6 +39,7 @@ import net.tindersamurai.escapy.graphic.screen.Resolution;
 		if (scale != null) l.setScale(scale);
 		if (color != null) l.setColor(color);
 
+		log.info(this.toString());
 		return l;
 	}
 

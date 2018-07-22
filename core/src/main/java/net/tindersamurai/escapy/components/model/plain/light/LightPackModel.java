@@ -81,14 +81,14 @@ import java.util.List;
 				Gdx.graphics.getHeight()
 		);
 
-		postRenderBatch.setProjectionMatrix(camera.update().getProjection());
-		maskFbo.get().draw(postRenderBatch);
-
-		lightProcessor.draw (
-				postRenderBatch,
-				lightColorFbo.get().getSprite(),
-				normalsFbo.get().getSprite(),
-				maskFbo.get().getSprite()
-		);
+//		postRenderBatch.setProjectionMatrix(camera.update().getProjection());
+//		maskFbo.get().draw(postRenderBatch);
+//
+//		lightProcessor.draw (
+//				postRenderBatch,
+//				lightColorFbo.get().getSprite(),
+//				normalsFbo.get().getSprite(),
+//				maskFbo.get().getSprite()
+//		);
 	}
 }
