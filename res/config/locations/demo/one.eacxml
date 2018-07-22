@@ -123,7 +123,10 @@
             <o:string> Layer0LightPack </o:string>
             <c:node.data>
                 <c:model.light.pack>
-                    <!-- TODO LIGHT PROCESSOR -->
+                    <c:model.light.processor.flat>
+                        <o:boolean name="enable"> true </o:boolean>
+                        <o:float name="threshold"> 0 </o:float>
+                    </c:model.light.processor.flat>
 
                     <c:model.helper.w-fbo name="color-fbo">
                         <o:string> Layer0LightPackColorFbo </o:string>

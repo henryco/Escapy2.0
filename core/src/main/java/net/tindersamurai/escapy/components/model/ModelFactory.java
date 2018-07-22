@@ -19,6 +19,9 @@ import net.tindersamurai.escapy.components.model.plain.MaskModel;
 import net.tindersamurai.escapy.components.model.plain.texture.StaticTexture;
 import net.tindersamurai.escapy.components.model.plain.util.UpWrapper;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
+import net.tindersamurai.escapy.graphic.render.light.processor.EscapyFlatLight;
+import net.tindersamurai.escapy.graphic.render.light.processor.EscapyLightProcessor;
+import net.tindersamurai.escapy.graphic.render.light.processor.EscapyVolumeLight;
 import net.tindersamurai.escapy.graphic.render.light.source.EscapyLightSourceData;
 import net.tindersamurai.escapy.graphic.render.light.source.LightSource;
 import net.tindersamurai.escapy.graphic.render.program.gl10.blend.NativeSeparateBlendRenderer;
@@ -210,14 +213,54 @@ public class ModelFactory {
 	@EscapyComponentFactory("light")
 	public final class LightFactory {
 
+		@EscapyComponentFactory("processor")
+		public final class LightProcessor {
+
+			@EscapyComponent("flat")
+			public EscapyLightProcessor flat (
+					@Arg("threshold") Float threshold,
+					@Arg("enable") Boolean enable
+			) {
+				val processor = new EscapyFlatLight(UUID.randomUUID().toString());
+				processor.setFieldSize(resolution.width, resolution.height);
+				if (threshold != null) processor.setThreshold(threshold);
+				if (enable != null) processor.setEnable(enable);
+				return processor;
+			}
+
+			@EscapyComponent("volumetric")
+			public EscapyLightProcessor processor (
+					@Arg("threshold") Float threshold,
+					@Arg("enable") Boolean enable,
+					@Arg("ambient") Float ambient,
+					@Arg("direct") Float direct,
+					@Arg("shadow") Float shadow,
+					@Arg("height") Float height,
+					@Arg("sprite") Float sprite
+			) {
+				val processor = new EscapyVolumeLight(UUID.randomUUID().toString());
+				processor.setFieldSize(resolution.width, resolution.height);
+				if (threshold != null) processor.setThreshold(threshold);
+				if (enable != null) processor.setEnable(enable);
+				if (direct != null) processor.setDirectIntensity(direct);
+				if (ambient != null) processor.setAmbientIntensity(ambient);
+				if (shadow != null) processor.setShadowIntensity(shadow);
+				if (height != null) processor.setHeight(height);
+				if (sprite != null) processor.setSpriteSize(sprite);
+				return processor;
+			}
+		}
+
 		@EscapyComponent("pack")
 		public IEscapyModel lightPack (
-				// TODO PROCESSOR
+				@Arg("processor") EscapyLightProcessor processor,
 				@Arg("color-fbo") UpWrapper<EscapyFBO> colorFbo,
 				@Arg("normals-fbo") UpWrapper<EscapyFBO> normalsFbo,
 				@Arg("mask-fbo") UpWrapper<EscapyFBO> maskFbo
 		) {
-			return new LightPackModel(colorFbo, normalsFbo, maskFbo);
+			if (processor == null)
+				throw new RuntimeException("EscapyLightProcessor == NULL");
+			return new LightPackModel(processor, colorFbo, normalsFbo, maskFbo);
 		}
 
 		@EscapyComponent("type")

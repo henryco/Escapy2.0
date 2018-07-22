@@ -10,7 +10,6 @@ import net.tindersamurai.escapy.map.model.IEscapyModelRenderer;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Arrays;
 
 @Provide @Log
 public class ModelRenderer implements IEscapyModelRenderer {
@@ -52,10 +51,8 @@ public class ModelRenderer implements IEscapyModelRenderer {
 
 	private void postRender(IEscapyModel model, float delta) {
 		if (model == null) return;
-		for (val postRenderer : model.postRenderQueue())
-			postRenderer.render(finalCamera, batch, delta);
-		for (val nested : model.getNestedModels())
-			postRender(nested, delta);
+		for (val nested : model.getNestedModels()) postRender(nested, delta);
+		for (val postRenderer : model.postRenderQueue()) postRenderer.render(finalCamera, batch, delta);
 	}
 
 }

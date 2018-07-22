@@ -169,7 +169,7 @@ public class DefaultRenderer implements EscapyRenderer {
 					renderer.renderNormalsMap(batch_pre);
 				});
 
-				((EscapyVolumeLight) processor).draw(batch_post, colorFBO.getSprite(), normalFBO.getSprite(), maskFBO.getSprite());
+				processor.draw(batch_post, colorFBO.getSprite(), normalFBO.getSprite(), maskFBO.getSprite());
 			}
 
 			else if (processor instanceof EscapyFlatLight) {

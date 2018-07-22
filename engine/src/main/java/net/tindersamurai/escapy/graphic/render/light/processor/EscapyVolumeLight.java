@@ -19,7 +19,7 @@ public class EscapyVolumeLight implements EscapyLightProcessor {
 	private final String name;
 	private final EscapyUniformBlender uniformBlender;
 
-	private boolean enable;
+	private boolean enable = true;
 
 
 	public EscapyVolumeLight(String name) {
@@ -75,13 +75,17 @@ public class EscapyVolumeLight implements EscapyLightProcessor {
 
 
 
-
+	@Override
 	public void draw(Batch batch, float x, float y, Texture colorMap, Texture normalMap, Texture maskMap) {
 		if (enable) uniformBlender.draw(batch, x, y, colorMap, normalMap, maskMap);
 	}
+
+	@Override
 	public void draw(Batch batch, Sprite colorMap, Sprite normalMap, Sprite maskMap) {
 		if (enable) uniformBlender.draw(batch, colorMap, normalMap, maskMap);
 	}
+
+	@Override
 	public void draw(Batch batch, float x, float y, float width, float height,
 					 TextureRegion colorMap, TextureRegion normalMap, TextureRegion maskMap) {
 		if (enable) uniformBlender.draw(batch, x, y, width, height, colorMap, normalMap, maskMap);
