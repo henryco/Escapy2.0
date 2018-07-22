@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
+import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFrameBuffer;
 import net.tindersamurai.escapy.graphic.screen.Resolution;
@@ -22,8 +23,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class SplashScreen extends EscapyScreenCore {
 
 	private final AtomicBoolean initialized;
-	private final IEscapyCamera camera;
-	private final IEscapyCamera fCam;
+	private final IEscapyMemoCam camera;
+	private final IEscapyMemoCam fCam;
 	private final String logoUrl;
 	private final float showTime;
 
@@ -33,8 +34,8 @@ public class SplashScreen extends EscapyScreenCore {
 
 	@Inject
 	public SplashScreen(@Named("logo_splash") String logoUrl,
-						@Named("main-camera") IEscapyCamera camera,
-						@Named("final-camera") IEscapyCamera fCam,
+						@Named("main-camera") IEscapyMemoCam camera,
+						@Named("final-camera") IEscapyMemoCam fCam,
 						float showTime
 	) {
 		this.initialized = new AtomicBoolean(false);
@@ -51,6 +52,8 @@ public class SplashScreen extends EscapyScreenCore {
 	public void show() {
 		batch = new SpriteBatch();
 		sprite = new Sprite(new Texture(logoUrl));
+
+		camera.save();
 		camera.setCameraPosition(sprite.getWidth() * .5f, sprite.getHeight() * .5f, true);
 
 		// todo INITIALIZATION
@@ -66,8 +69,10 @@ public class SplashScreen extends EscapyScreenCore {
 		Gdx.gl.glClearColor(0,0,0,0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		if ((time -= delta) <= 0 && initialized.get())
+		if ((time -= delta) <= 0 && initialized.get()) {
+			camera.revert();
 			setScreen(MenuScreen.class);
+		}
 		else {
 			fbo.begin(() -> {
 				batch.setProjectionMatrix(camera.update(camera::clear).getProjection());

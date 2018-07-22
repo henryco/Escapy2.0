@@ -10,6 +10,7 @@ import net.tindersamurai.escapy.map.model.IEscapyModelRenderer;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Arrays;
 
 @Provide @Log
 public class ModelRenderer implements IEscapyModelRenderer {

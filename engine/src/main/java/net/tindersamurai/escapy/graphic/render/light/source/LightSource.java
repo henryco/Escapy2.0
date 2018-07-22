@@ -68,7 +68,7 @@ public class LightSource implements EscapyObject, Disposable {
 
 	public void draw(Batch batch) {
 		prepareBuffer(batch);
-		buffer.renderBuffer(batch);
+		buffer.draw(batch);
 	}
 
 

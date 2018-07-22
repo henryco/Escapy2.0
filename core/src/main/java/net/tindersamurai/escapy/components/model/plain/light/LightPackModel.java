@@ -9,7 +9,6 @@ import net.tindersamurai.escapy.components.model.plain.util.UpWrapper;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
-import net.tindersamurai.escapy.graphic.render.fbo.EscapyFrameBuffer;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.utils.EscapyUtils;
 
@@ -55,6 +54,6 @@ import java.util.List;
 		);
 
 		postRenderBatch.setProjectionMatrix(camera.update().getProjection());
-		maskFbo.get().renderBuffer(postRenderBatch);
+		maskFbo.get().draw(postRenderBatch);
 	}
 }

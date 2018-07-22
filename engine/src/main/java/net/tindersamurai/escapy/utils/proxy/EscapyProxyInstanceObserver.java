@@ -1,5 +1,6 @@
 package net.tindersamurai.escapy.utils.proxy;
 
+import lombok.extern.java.Log;
 import net.tindersamurai.escapy.utils.EscapyLogger;
 
 import java.lang.reflect.InvocationTargetException;
@@ -11,14 +12,16 @@ import java.util.LinkedList;
 
 /**
  * @author Henry on 19/07/17.
- */
+ */  @Log
 public class EscapyProxyInstanceObserver {
 
 
 	private final Collection<EscapyProxyListener> proxyListeners;
+
 	public EscapyProxyInstanceObserver() {
 		this.proxyListeners = new LinkedList<>();
 	}
+
 	public EscapyProxyInstanceObserver(EscapyProxyListener... listeners) {
 		this();
 		addProxyListeners(listeners);
@@ -45,8 +48,7 @@ public class EscapyProxyInstanceObserver {
 							Throwable exception = ((InvocationTargetException) e).getTargetException();
 							logger.log(exception, true);
 						} else logger.log(e, true);
-
-						System.exit(4);
+						log.throwing(this.getClass().getName(), method.getName(), e);
 					}
 
 					throw new RuntimeException("proxyObservedInstanceError");

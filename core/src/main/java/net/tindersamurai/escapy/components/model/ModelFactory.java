@@ -7,6 +7,7 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
+import net.tindersamurai.escapy.components.model.plain.texture.BufferModel;
 import net.tindersamurai.escapy.components.model.plain.texture.LayerModel;
 import net.tindersamurai.escapy.components.model.plain.light.LightPackModel;
 import net.tindersamurai.escapy.components.model.plain.light.LightSourceModel;
@@ -178,7 +179,7 @@ public class ModelFactory {
 	public final class TextureFactory {
 
 		@EscapyComponent("static-full")
-		public IEscapyModel staticTextureFull (
+		public final IEscapyModel staticTextureFull (
 				@Arg("diffuse") String diffuseFile,
 				@Arg("normals") String normalsFile,
 				@Arg("shadows") String shadowsFile
@@ -191,12 +192,18 @@ public class ModelFactory {
 		}
 
 		@EscapyComponent("static")
-		public IEscapyModel staticTexture (
+		public final IEscapyModel staticTexture (
 				@Arg("properties") EscapyTextureData props
 		) {
 			return new StaticTexture(props);
 		}
 
+		@SafeVarargs @EscapyComponent("buffer")
+		public final IEscapyModel buffer(
+				@Arg("buffers") UpWrapper<EscapyFBO> ... buffers
+		) {
+			return new BufferModel(buffers);
+		}
 	}
 
 

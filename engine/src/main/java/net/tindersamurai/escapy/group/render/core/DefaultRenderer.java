@@ -139,7 +139,7 @@ public class DefaultRenderer implements EscapyRenderer {
 			}
 
 
-			maskFBO.renderBuffer(batch_post);
+			maskFBO.draw(batch_post);
 
 
 			for (LightSource source: lightSource)

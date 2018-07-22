@@ -62,7 +62,7 @@ public class LayerModel implements IEscapyModel {
 
 		normalsBuffer.get().begin(batch, () -> {
 			batch.setProjectionMatrix(camera.update().getProjection());
-			renderNormalMap(camera, batch, delta);
+			color(0.502f, 0.502f, 1f, 1f);
 			for (IEscapyModel model : getNestedModels())
 				model.renderNormalModel(camera, batch, delta);
 		});
@@ -75,7 +75,7 @@ public class LayerModel implements IEscapyModel {
 
 		shadowsBuffer.get().begin(batch, () -> {
 			batch.setProjectionMatrix(camera.update().getProjection());
-			renderShadowMap(camera, batch, delta);
+			wipe();
 			for (IEscapyModel model : getNestedModels())
 				model.renderShadowModel(camera, batch, delta);
 		});

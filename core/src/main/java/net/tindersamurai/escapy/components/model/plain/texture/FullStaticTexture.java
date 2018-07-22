@@ -55,7 +55,6 @@ public class FullStaticTexture implements IEscapyModel {
 		batch.setProjectionMatrix(camera.update().getProjection());
 		sprite.draw(batch);
 		camera.setCameraPosition(pos);
-		camera.update();
 	}
 
 	private static void prepareSprite(float width, float height, Sprite sprite) {

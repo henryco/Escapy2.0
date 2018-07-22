@@ -1,6 +1,5 @@
 package net.tindersamurai.escapy.components.model.plain;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import lombok.Getter;
 import lombok.extern.java.Log;
@@ -10,7 +9,6 @@ import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
 import net.tindersamurai.escapy.graphic.render.program.gl10.mask.EscapyLightMask;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
-import net.tindersamurai.escapy.utils.EscapyUtils;
 
 @Log
 public class MaskModel implements IEscapyModel {
@@ -34,7 +32,12 @@ public class MaskModel implements IEscapyModel {
 
 	@Override
 	public void renderDiffuseMap(IEscapyCamera camera, Batch batch, float delta) {
-		wipe();
+		// void
+	}
+
+	@Override
+	public void preRender(IEscapyMemoCam camera, Batch batch, float delta) {
+		maskBuffer.setUpdated(false);
 	}
 
 	@Override
@@ -51,5 +54,6 @@ public class MaskModel implements IEscapyModel {
 			wipe();
 			lightMask.renderMask(diffuseBuffer.get().getTexture());
 		});
+		maskBuffer.setUpdated(true);
 	}
 }

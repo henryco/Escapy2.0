@@ -101,7 +101,7 @@ public class EscapyFrameBuffer implements EscapyFBO {
 	}
 
 	@Override
-	public void renderBuffer(Batch batch) {
+	public void draw(Batch batch) {
 		if (DEBUG) log.info("RENDER FBO: " + uuid + " | " + batch);
 	 	batch.begin();
 	 	bufferSprite.draw(batch);
