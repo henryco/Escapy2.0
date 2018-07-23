@@ -2,6 +2,7 @@ package net.tindersamurai.escapy.components.model.plain.light;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import lombok.Getter;
 import lombok.extern.java.Log;
@@ -53,15 +54,17 @@ import java.util.List;
 	@Override
 	public void postRender(IEscapyMemoCam camera, Batch batch, float delta) {
 
-		if (!maskFbo.isUpdated() || !lightColorFbo.isUpdated() || !normalsFbo.isUpdated()) {
-			log.info("*");
-			log.info("BUFFERS NOT UPDATED YET");
-			log.info("NORMALS: " + normalsFbo.isUpdated());
-			log.info("COLOR: " + lightColorFbo.isUpdated());
-			log.info("MASK: " + maskFbo.isUpdated());
-			log.info("*");
-			return;
-		}
+		if (maskFbo == null) return;
+
+		postRenderBatch.setProjectionMatrix(camera.update().getProjection());
+		EscapyUtils.centerize (
+				maskFbo.get().getSprite(),
+				Gdx.graphics.getWidth(),
+				Gdx.graphics.getHeight()
+		);
+		maskFbo.get().draw(postRenderBatch);
+
+		if (lightColorFbo == null) return;
 
 		EscapyUtils.centerize (
 				lightColorFbo.get().getSprite(),
@@ -69,26 +72,26 @@ import java.util.List;
 				Gdx.graphics.getHeight()
 		);
 
-		EscapyUtils.centerize (
-				normalsFbo.get().getSprite(),
-				Gdx.graphics.getWidth(),
-				Gdx.graphics.getHeight()
-		);
+		Sprite normalSprite = null;
+		if (normalsFbo != null) {
+			EscapyUtils.centerize(
+					normalsFbo.get().getSprite(),
+					Gdx.graphics.getWidth(),
+					Gdx.graphics.getHeight()
+			);
+			normalSprite = normalsFbo.get().getSprite();
+		}
 
-		EscapyUtils.centerize (
-				maskFbo.get().getSprite(),
-				Gdx.graphics.getWidth(),
-				Gdx.graphics.getHeight()
-		);
+		if (lightProcessor == null) {
+			lightColorFbo.get().draw(postRenderBatch);
+			return;
+		}
 
-//		postRenderBatch.setProjectionMatrix(camera.update().getProjection());
-//		maskFbo.get().draw(postRenderBatch);
-//
-//		lightProcessor.draw (
-//				postRenderBatch,
-//				lightColorFbo.get().getSprite(),
-//				normalsFbo.get().getSprite(),
-//				maskFbo.get().getSprite()
-//		);
+		lightProcessor.draw (
+				postRenderBatch,
+				lightColorFbo.get().getSprite(),
+				normalSprite,
+				maskFbo.get().getSprite()
+		);
 	}
 }

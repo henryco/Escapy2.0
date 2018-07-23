@@ -71,9 +71,12 @@ public class ModelFactory {
 	@EscapyComponent("mask")
 	public IEscapyModel mask (
 			@Arg("diffuse-fbo") UpWrapper<EscapyFBO> diffuseFbo,
-			@Arg("mask-fbo") UpWrapper<EscapyFBO> maskFbo
+			@Arg("mask-fbo") UpWrapper<EscapyFBO> maskFbo,
+			@Arg("color") Color color
 	) {
 		val mask = new LightMask(resolution.width, resolution.height);
+		if (color != null) mask.setColor(color.r, color.g, color.b, color.a);
+//		mask.setMaskFunc();
 		return new MaskModel(diffuseFbo, maskFbo, mask);
 	}
 
@@ -140,7 +143,6 @@ public class ModelFactory {
 				@Arg("correction") Float correction,
 				@Arg("position") Float[] position,
 				@Arg("radius") Float[] radius,
-				@Arg("size") Integer[] size,
 				@Arg("umbra") Float[] umbra,
 				@Arg("angle") Float[] angle,
 				@Arg("alpha") Float alpha,
@@ -257,8 +259,6 @@ public class ModelFactory {
 				@Arg("normals-fbo") UpWrapper<EscapyFBO> normalsFbo,
 				@Arg("mask-fbo") UpWrapper<EscapyFBO> maskFbo
 		) {
-			if (processor == null)
-				throw new RuntimeException("EscapyLightProcessor == NULL");
 			return new LightPackModel(processor, colorFbo, normalsFbo, maskFbo);
 		}
 

@@ -31,6 +31,9 @@ import java.util.List;
 	private final Batch batch;
 	private final Batch post;
 
+	private IEscapyMemoCam commonCamera;
+
+
 	public LightTypeModel (
 			EscapyMultiSourceShader lightBlender,
 			UpWrapper<EscapyFBO> lightColorFbo,
@@ -79,6 +82,7 @@ import java.util.List;
 			});
 		});
 		lightTypeFbo.setUpdated(true);
+		commonCamera = camera;
 	}
 
 	@Override
@@ -90,6 +94,22 @@ import java.util.List;
 	@Override
 	public void postRender(IEscapyMemoCam camera, Batch _batch, float delta) {
 		if (!diffuseFbo.isUpdated()) return;
+
+//		EscapyUtils.centerize (
+//				diffuseFbo.get().getSprite(),
+//				Gdx.graphics.getWidth(),
+//				Gdx.graphics.getHeight()
+//		);
+//
+//		EscapyUtils.centerize (
+//				lightTypeFbo.get().getSprite(),
+//				Gdx.graphics.getWidth(),
+//				Gdx.graphics.getHeight()
+//		);
+
+		commonCamera.save();
+		commonCamera.setCameraPosition(lightColorFbo.get().getWidth() * .5f, lightColorFbo.get().getHeight() * .5f, true);
+		post.setProjectionMatrix(commonCamera.update().getProjection());
 		lightColorFbo.get().begin(() -> {
 			if (!lightColorFbo.isUpdated()) {
 				wipe();
@@ -101,27 +121,12 @@ import java.util.List;
 			);
 		});
 		lightColorFbo.setUpdated(true);
+		commonCamera.revert();
 
 //		_batch.setProjectionMatrix(camera.getProjection());
-//		EscapyUtils.centerize (
-//				diffuseFbo.get().getSprite(),
-//				Gdx.graphics.getWidth(),
-//				Gdx.graphics.getHeight()
-//		);
-//		diffuseFbo.get().draw(_batch);
-//
-//		EscapyUtils.centerize (
-//				lightTypeFbo.get().getSprite(),
-//				Gdx.graphics.getWidth(),
-//				Gdx.graphics.getHeight()
-//		);
-//		lightTypeFbo.get().draw(_batch);
 
-//		EscapyUtils.centerize (
-//				lightColorFbo.get().getSprite(),
-//				Gdx.graphics.getWidth(),
-//				Gdx.graphics.getHeight()
-//		);
+//		diffuseFbo.get().draw(_batch);
+//		lightTypeFbo.get().draw(_batch);
 //		lightColorFbo.get().draw(_batch);
 	}
 

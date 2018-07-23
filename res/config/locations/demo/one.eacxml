@@ -109,15 +109,14 @@
 
     <c:location.light-node>
 
-        <!--<c:location.node>-->
-            <!--<o:string> BackgroundNoLights </o:string>-->
-            <!--<c:node.data>-->
-                <!--<c:model.texture.buffer>-->
-                    <!--<c:model.helper.w-fbo><o:string> BackgroundMaskFbo </o:string></c:model.helper.w-fbo>-->
-                    <!--&lt;!&ndash;<c:model.helper.w-fbo><o:string> Layer0MaskFbo </o:string></c:model.helper.w-fbo>&ndash;&gt;-->
-                <!--</c:model.texture.buffer>-->
-            <!--</c:node.data>-->
-        <!--</c:location.node>-->
+        <c:location.node>
+            <o:string> BackgroundNoLights </o:string>
+            <c:node.data>
+                <c:model.texture.buffer>
+                    <c:model.helper.w-fbo><o:string> BackgroundMaskFbo </o:string></c:model.helper.w-fbo>
+                </c:model.texture.buffer>
+            </c:node.data>
+        </c:location.node>
 
         <c:location.node>
             <o:string> Layer0LightPack </o:string>
@@ -125,7 +124,7 @@
                 <c:model.light.pack>
                     <c:model.light.processor.flat>
                         <o:boolean name="enable"> true </o:boolean>
-                        <o:float name="threshold"> 0 </o:float>
+                        <o:float name="threshold"> 0.075 </o:float>
                     </c:model.light.processor.flat>
 
                     <c:model.helper.w-fbo name="color-fbo">
@@ -190,11 +189,11 @@
                                     </c:u.array-auto>
 
                                     <c:u.array-auto name="position">
-                                        <o:float>640</o:float>
-                                        <o:float>360</o:float>
+                                        <o:float>450</o:float>
+                                        <o:float>250</o:float>
                                     </c:u.array-auto>
 
-                                    <o:float name="scale"> 1 </o:float>
+                                    <o:float name="scale"> 1.5 </o:float>
 
                                 </c:model.helper.l-props>
                             </c:model.light.source>
