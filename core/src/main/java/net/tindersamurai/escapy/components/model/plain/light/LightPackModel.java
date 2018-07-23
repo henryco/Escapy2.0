@@ -87,6 +87,8 @@ import java.util.List;
 			return;
 		}
 
+		// todo fixme LIGHT PROCESSOR NORMAL MAPPING ON
+		// todo dimension != standard
 		lightProcessor.draw (
 				postRenderBatch,
 				lightColorFbo.get().getSprite(),

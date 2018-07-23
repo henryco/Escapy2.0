@@ -113,7 +113,7 @@ import java.util.List;
 		lightColorFbo.get().begin(() -> {
 			if (!lightColorFbo.isUpdated()) {
 				wipe();
-				lightBlender.draw ( // FIXME WTF SHIFT
+				lightBlender.draw (
 						post, diffuseFbo.get().getSprite(), lightTypeFbo.get().getSprite()
 				);
 			} else lightBlender.draw (

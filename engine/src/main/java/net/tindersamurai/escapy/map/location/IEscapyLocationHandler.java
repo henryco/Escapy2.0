@@ -1,5 +1,7 @@
 package net.tindersamurai.escapy.map.location;
 
+import net.tindersamurai.escapy.map.node.IEscapyNode;
+
 public interface IEscapyLocationHandler {
 
 	interface HandlerListener {
@@ -13,4 +15,5 @@ public interface IEscapyLocationHandler {
 	void reset();
 
 	IEscapyLocation getLocation();
+	IEscapyNode getLocationNode();
 }

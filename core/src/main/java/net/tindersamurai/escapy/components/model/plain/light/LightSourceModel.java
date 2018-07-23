@@ -29,11 +29,4 @@ public class LightSourceModel implements IEscapyModel {
 		lightSource.prepareBuffer();
 	}
 
-//	@Override
-//	public void postRender(IEscapyMemoCam camera, Batch batch, float delta) {
-//		batch.begin();
-//		lightSource.drawBuffer(batch);
-//		batch.end();
-//	}
-
 }

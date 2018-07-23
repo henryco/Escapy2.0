@@ -2,6 +2,7 @@ package net.tindersamurai.escapy.components.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
@@ -72,11 +73,20 @@ public class ModelFactory {
 	public IEscapyModel mask (
 			@Arg("diffuse-fbo") UpWrapper<EscapyFBO> diffuseFbo,
 			@Arg("mask-fbo") UpWrapper<EscapyFBO> maskFbo,
-			@Arg("color") Color color
+			@Arg("color") Color color,
+			@Arg("scr") String src,
+			@Arg("dst") String dst
 	) {
 		val mask = new LightMask(resolution.width, resolution.height);
 		if (color != null) mask.setColor(color.r, color.g, color.b, color.a);
-//		mask.setMaskFunc();
+		if (src != null && dst != null) try {
+			mask.setMaskFunc (
+					(int) GL20.class.getDeclaredField(src).get(GL20.class),
+					(int) GL20.class.getDeclaredField(dst).get(GL20.class)
+			);
+		} catch (Exception e) {
+			throw new RuntimeException("Cannot load mask blend mode", e);
+		}
 		return new MaskModel(diffuseFbo, maskFbo, mask);
 	}
 
@@ -166,12 +176,14 @@ public class ModelFactory {
 		@EscapyComponent("color")
 		public Color color (
 				@Arg("RGBA8888") Integer rgba8888,
+				@Arg("RGBA255") Float[] rgba,
 				@Arg("RGB255") Float[] rgb,
 				@Arg("r") Float r,
 				@Arg("g") Float g,
 				@Arg("b") Float b,
 				@Arg("a") Float a
 		) {
+			if (rgba != null) return new Color(rgba[0] / 255f, rgba[1] / 255f, rgba[2] / 255f, rgba[3] / 255f);
 			if (rgb != null) return new Color(rgb[0] / 255f, rgb[1] / 255f, rgb[2] / 255f, 1);
 			if (rgba8888 != null) return new Color(rgba8888);
 			return new Color(r, g, b, a);

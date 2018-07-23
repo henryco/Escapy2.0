@@ -33,7 +33,6 @@ public class ModelRenderer implements IEscapyModelRenderer {
 
 	@Override
 	public void render(IEscapyModel model, float delta) {
-//		camera.translateCamera(1, 0);
 		camera.safety(() -> preRender(model, delta));
 		camera.safety(() -> model.renderDiffuseModel(camera, batch, delta));
 		camera.safety(() -> model.renderNormalModel(camera, batch, delta));

@@ -25,6 +25,7 @@ public class GameLocationHandler implements IEscapyLocationHandler {
 	private final EscapyComponentParser parser;
 
 	private @Getter IEscapyLocation location;
+	private @Getter IEscapyNode locationNode;
 
 	@Inject
 	public GameLocationHandler(EscapyComponentParser parser) {
@@ -47,6 +48,7 @@ public class GameLocationHandler implements IEscapyLocationHandler {
 			IEscapyNode<NodeData> root = parser.parseComponent(file);
 			if (root == null || root.get() == null)
 				return false;
+			this.locationNode = root;
 			this.location = root.get();
 			cache.put(file, this.location);
 		}
