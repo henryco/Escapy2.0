@@ -107,7 +107,9 @@ public class ModelFactory {
 		}
 
 		@EscapyComponent("w-fbo")
-		public UpWrapper<EscapyFBO> findOrCreateFbo(@Arg("id") String name) {
+		public UpWrapper<EscapyFBO> findOrCreateFbo(
+				@Arg("id") String name
+		) {
 			val fbo = fboMap.get(name);
 			if (fbo != null) return fbo;
 			val newFbo = new UpWrapper<EscapyFBO>(new EscapyFrameBuffer(resolution));
