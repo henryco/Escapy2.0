@@ -95,18 +95,6 @@ import java.util.List;
 	public void postRender(IEscapyMemoCam camera, Batch _batch, float delta) {
 		if (!diffuseFbo.isUpdated()) return;
 
-//		EscapyUtils.centerize (
-//				diffuseFbo.get().getSprite(),
-//				Gdx.graphics.getWidth(),
-//				Gdx.graphics.getHeight()
-//		);
-//
-//		EscapyUtils.centerize (
-//				lightTypeFbo.get().getSprite(),
-//				Gdx.graphics.getWidth(),
-//				Gdx.graphics.getHeight()
-//		);
-
 		commonCamera.save();
 		commonCamera.setCameraPosition(lightColorFbo.get().getWidth() * .5f, lightColorFbo.get().getHeight() * .5f, true);
 		post.setProjectionMatrix(commonCamera.update().getProjection());
@@ -122,12 +110,6 @@ import java.util.List;
 		});
 		lightColorFbo.setUpdated(true);
 		commonCamera.revert();
-
-//		_batch.setProjectionMatrix(camera.getProjection());
-
-//		diffuseFbo.get().draw(_batch);
-//		lightTypeFbo.get().draw(_batch);
-//		lightColorFbo.get().draw(_batch);
 	}
 
 }

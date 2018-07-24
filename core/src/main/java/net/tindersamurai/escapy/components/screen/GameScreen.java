@@ -52,7 +52,7 @@ public class GameScreen extends EscapyScreenCore {
 	@Override
 	public void render(float delta) {
 		renderer.render(model, delta);
-		lightSource.translate(1, 0);
+		lightSource.translate(1.5f, 0);
 	}
 
 	@Override

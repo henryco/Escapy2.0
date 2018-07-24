@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import lombok.Getter;
 import net.tindersamurai.escapy.context.annotation.EscapyAPI;
 import net.tindersamurai.escapy.graphic.render.program.gl20.core.ShaderFile;
 import net.tindersamurai.escapy.graphic.render.program.gl20.core.uniform.StandardUniforms;
@@ -12,11 +13,12 @@ import net.tindersamurai.escapy.graphic.render.program.gl20.shader.blend.EscapyU
 
 /**
  * @author Henry on 02/07/17.
- */ @EscapyAPI
+ */
+@EscapyAPI @SuppressWarnings({"unused", "WeakerAccess"})
 public class EscapyVolumeLight implements EscapyLightProcessor {
 
 	public static boolean debug = false;
-	private final String name;
+	private final @Getter String name;
 	private final EscapyUniformBlender uniformBlender;
 
 	private boolean enable = true;
@@ -25,9 +27,11 @@ public class EscapyVolumeLight implements EscapyLightProcessor {
 	public EscapyVolumeLight(String name) {
 		this(name, new ShaderFile(VERT, FRAG));
 	}
+
 	public EscapyVolumeLight(String name, ShaderFile shaderFile) {
 		this(name, new BlendRendererExtended().setDebug(debug), shaderFile);
 	}
+
 	protected EscapyVolumeLight(String name,
 								EscapyUniformBlender uniformBlender,
 								ShaderFile shaderFile) {
@@ -67,13 +71,6 @@ public class EscapyVolumeLight implements EscapyLightProcessor {
 	public void dispose() {
 		uniformBlender.dispose();
 	}
-
-	@Override
-	public String getName() {
-		return name;
-	}
-
-
 
 	@Override
 	public void draw(Batch batch, float x, float y, Texture colorMap, Texture normalMap, Texture maskMap) {
@@ -233,7 +230,7 @@ public class EscapyVolumeLight implements EscapyLightProcessor {
 			"        if (dot(c_one, col.rgb) <= threshold) gl_FragColor = vec4(0);\n" +
 			"        else {\n" +
 			"\n" +
-			"            vec2 uv = vec2(gl_FragCoord.st / fieldSize.st);\n" +
+			"            vec2 uv = vec2(v_texCoord0.st);\n" +
 			"            vec3 normal = normalize(2.0 * texture2D(normalMap, uv).rgb - 1.0);\n" +
 			"            normal.r *= -1;\n" +
 			"\n" +

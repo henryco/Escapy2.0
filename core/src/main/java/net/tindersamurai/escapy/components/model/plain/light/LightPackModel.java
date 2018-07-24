@@ -2,7 +2,6 @@ package net.tindersamurai.escapy.components.model.plain.light;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import lombok.Getter;
 import lombok.extern.java.Log;
@@ -72,28 +71,24 @@ import java.util.List;
 				Gdx.graphics.getHeight()
 		);
 
-		Sprite normalSprite = null;
-		if (normalsFbo != null) {
-			EscapyUtils.centerize(
-					normalsFbo.get().getSprite(),
-					Gdx.graphics.getWidth(),
-					Gdx.graphics.getHeight()
-			);
-			normalSprite = normalsFbo.get().getSprite();
-		}
-
 		if (lightProcessor == null) {
 			lightColorFbo.get().draw(postRenderBatch);
 			return;
 		}
 
-		// todo fixme LIGHT PROCESSOR NORMAL MAPPING ON
-		// todo dimension != standard
 		lightProcessor.draw (
 				postRenderBatch,
 				lightColorFbo.get().getSprite(),
-				normalSprite,
+				normalsFbo != null ? normalsFbo.get().getSprite() : null,
 				maskFbo.get().getSprite()
 		);
+
+//		lightProcessor.draw (
+//				postRenderBatch,
+//				0, 0,
+//				lightColorFbo.get().getSprite().getTexture(),
+//				normalsFbo != null ? normalsFbo.get().getSprite().getTexture() : null,
+//				maskFbo.get().getSprite().getTexture()
+//		);
 	}
 }
