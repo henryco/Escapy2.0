@@ -59,15 +59,14 @@ public class DefaultLightGroupSubLoader
 
 
 				final LayerShift finalLayerShifter = layerShifter;
-				LightSource source = new LightSource(light.name, new EscapyLightSource(),
-						Gdx.graphics.getWidth(), Gdx.graphics.getHeight())
+				LightSource source = new LightSource(light.name, new EscapyLightSource())
 				{
 
 					private float[] state_shift = {0, 0};
 
 					@Override
-					public void prepareBuffer(Batch batch, boolean force) {
-						super.prepareBuffer(batch, force);
+					public void prepareBuffer(boolean force) {
+						super.prepareBuffer(force);
 
 						float[] shift = finalLayerShifter.calculateShift();
 						float tx = shift[0] - state_shift[0];

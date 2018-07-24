@@ -7,14 +7,20 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import lombok.extern.java.Log;
 import net.tindersamurai.escapy.context.annotation.EscapyAPI;
 import net.tindersamurai.escapy.graphic.screen.Resolution;
+
+import java.util.UUID;
 
 /**
  * This class encapsulate default FBO logic provided by GDX.FrameBuffer
  * @author Henry on 29/06/17.
- */ @EscapyAPI
+ */ @EscapyAPI @Log
 public class EscapyFrameBuffer implements EscapyFBO {
+
+ 	public static boolean DEBUG = false;
+	private final String uuid = UUID.randomUUID().toString();
 
 	private final FrameBuffer buffer;
 	private final Sprite bufferSprite;
@@ -30,6 +36,8 @@ public class EscapyFrameBuffer implements EscapyFBO {
 		this.bufferSprite = new Sprite(bufferRegion);
 		setFlip(false, true);
 		if (initialWipe) begin(this::wipe);
+
+		log.info("EscapyFBO CREATED: " + uuid);
 	}
 
 	/**
@@ -93,8 +101,9 @@ public class EscapyFrameBuffer implements EscapyFBO {
 	}
 
 	@Override
-	public void renderGraphics(Batch batch) {
-		batch.begin();
+	public void draw(Batch batch) {
+		if (DEBUG) log.info("RENDER FBO: " + uuid + " | " + batch);
+	 	batch.begin();
 	 	bufferSprite.draw(batch);
 	 	batch.end();
 	}

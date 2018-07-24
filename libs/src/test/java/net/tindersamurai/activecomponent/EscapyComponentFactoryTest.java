@@ -159,7 +159,7 @@ public class EscapyComponentFactoryTest {
 		try {
 			factory.createComponent("u.array", args);
 		} catch (RuntimeException e) {
-			assert "Cannot create component: u.array".equals(e.getMessage());
+			assert e.getMessage().contains("Cannot create component: u.array");
 		}
 
 	}

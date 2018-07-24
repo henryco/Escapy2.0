@@ -29,9 +29,19 @@ public class MainConfiguration extends EscapyGameContextConfiguration {
 	@Override
 	public void configurePropertyKeys(PropertyKeysStorage propertyKeyStorage) {
 		propertyKeyStorage
-				.addPropertyKey("BLEND_SHADERS_ROOT_DIR_PATH")
+				.addPropertyKey("BLEND_SHADERS_DIR")
 				.addPropertyValue(getResourcesDir() + separator + "shaders" + separator + "blend" + separator)
 		.save();
+	}
+
+	@Override
+	public int getDefaultScrWidth() {
+		return 1280;
+	}
+
+	@Override
+	public int getDefaultScrHeight() {
+		return 720;
 	}
 
 }

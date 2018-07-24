@@ -65,22 +65,40 @@ public class EscapyFlatLight implements EscapyLightProcessor {
 	}
 
 
-
+	@Deprecated
 	public void draw(Batch batch, float x, float y, Texture colorMap, Texture maskMap) {
 		if (enable) uniformBlender.draw(batch, x, y, colorMap, maskMap);
 	}
+
+	@Deprecated
 	public void draw(Batch batch, Sprite colorMap, Sprite maskMap) {
 		if (enable) uniformBlender.draw(batch, colorMap, maskMap);
 	}
+
+	@Deprecated
 	public void draw(Batch batch, float x, float y, float width, float height,
 					 TextureRegion colorMap, TextureRegion maskMap) {
 		if (enable) uniformBlender.draw(batch, x, y, width, height, colorMap, maskMap);
 	}
 
 
+	@Override
+	public void draw(Batch batch, float x, float y, Texture colorMap, Texture normalMap, Texture maskMap) {
+		if (enable) uniformBlender.draw(batch, x, y, colorMap, maskMap);
+	}
+
+	@Override
+	public void draw(Batch batch, Sprite colorMap, Sprite normalMap, Sprite maskMap) {
+		if (enable) uniformBlender.draw(batch, colorMap, maskMap);
+	}
+
+	@Override
+	public void draw(Batch batch, float x, float y, float width, float height, TextureRegion colorMap, TextureRegion normalMap, TextureRegion maskMap) {
+		if (enable) uniformBlender.draw(batch, x, y, width, height, colorMap, maskMap);
+	}
 
 
-//	---------------------------------------- SET ---------------------------------------------
+	//	---------------------------------------- SET ---------------------------------------------
 	@Override
 	public void setFieldSize(float width, float height) {
 		this.fieldSize[0] = width;

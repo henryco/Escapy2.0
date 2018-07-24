@@ -139,11 +139,11 @@ public class DefaultRenderer implements EscapyRenderer {
 			}
 
 
-			maskFBO.renderGraphics(batch_post);
+			maskFBO.draw(batch_post);
 
 
 			for (LightSource source: lightSource)
-				source.prepareBuffer(batch_pre);
+				source.prepareBuffer();
 
 
 			lightFBO.begin(() -> {
@@ -169,7 +169,7 @@ public class DefaultRenderer implements EscapyRenderer {
 					renderer.renderNormalsMap(batch_pre);
 				});
 
-				((EscapyVolumeLight) processor).draw(batch_post, colorFBO.getSprite(), normalFBO.getSprite(), maskFBO.getSprite());
+				processor.draw(batch_post, colorFBO.getSprite(), normalFBO.getSprite(), maskFBO.getSprite());
 			}
 
 			else if (processor instanceof EscapyFlatLight) {
@@ -188,7 +188,7 @@ public class DefaultRenderer implements EscapyRenderer {
 	public <T> T getRendererAttribute(String name) {
 
 		String[] names = name.split(":");
-		if (names != null && !names[0].equals(name)) {
+		if (!names[0].equals(name)) {
 
 			Object parent = getRendererAttribute(names[0]);
 			for (int i = 1; i < names.length; i++) {
@@ -233,7 +233,7 @@ public class DefaultRenderer implements EscapyRenderer {
 		for (EscapyLightProcessor p: lightProcessors) p.setFieldSize(width, height);
 
 		for (LightSource[] sources: lightSources) {
-			for (LightSource s : sources) s.resize(width, height);
+//			for (LightSource s : sources) s.resize(width, height);
 		}
 	}
 

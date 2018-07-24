@@ -3,9 +3,11 @@ package net.tindersamurai.escapy.components.stage;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.Getter;
 import lombok.ToString;
-import lombok.Value;
+
 import lombok.val;
 import net.tindersamurai.activecomponent.parser.EscapyComponentParser;
+import net.tindersamurai.escapy.components.stage.plain.StageInfo;
+import net.tindersamurai.escapy.components.stage.plain.StageInfo.StageMetaData.LocationMetaData;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
 import net.tindersamurai.escapy.utils.files.EscapyFileMetaData;
 import net.tindersamurai.escapy.utils.files.EscapyFiles;
@@ -15,24 +17,9 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 import java.util.Map;
 
-import static net.tindersamurai.escapy.components.stage.StageContainer.StageMetaData.*;
 
 @Provide @Singleton @ToString
-public class StageContainer {
-
-	@SuppressWarnings("WeakerAccess")
-	@Value public static final class StageMetaData {
-
-		@Value public static final class LocationMetaData {
-			private EscapyFileMetaData file;
-			private boolean _default;
-		}
-
-		private EscapyFileMetaData file;
-		private LocationMetaData[] locations;
-		private LocationMetaData defaultLocation;
-		private boolean _default;
-	}
+public class GameStageInfo implements StageInfo {
 
 	private final EscapyComponentParser parser;
 	private final EscapyGameContext context;
@@ -43,7 +30,7 @@ public class StageContainer {
 	private @Getter StageMetaData[] stages;
 
 	@Inject
-	public StageContainer(
+	public GameStageInfo(
 			@Named("MainResConfigFile") String mainConfigFile,
 			@Named("DefaultStageFileName") String stageFileName,
 			EscapyComponentParser parser,

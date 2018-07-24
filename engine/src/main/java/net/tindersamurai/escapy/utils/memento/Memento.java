@@ -1,17 +1,19 @@
 package net.tindersamurai.escapy.utils.memento;
 
+import lombok.ToString;
+
 import java.util.Stack;
 
-public class Memento<T extends EscapyCloneable<T>> {
+@ToString public class Memento<T extends EscapyCloneable<T>> {
 
 	private final Stack<T> stack;
-	private final int deep;
+	private final int depth;
 	private T bottom;
 
-	public Memento(T content, int deep) {
+	public Memento(T content, int depth) {
 		this.stack = new Stack<>();
 		this.stack.push(content);
-		this.deep = deep;
+		this.depth = depth;
 	}
 
 	public Memento(T content) {
@@ -20,7 +22,7 @@ public class Memento<T extends EscapyCloneable<T>> {
 
 	public Memento<T> save() {
 		stack.push(get().copy());
-		if (stack.size() > deep + 1)
+		if (stack.size() > depth + 1)
 			stack.removeElementAt(0);
 		return this;
 	}

@@ -149,7 +149,10 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 					return method.invoke(factory, arr);
 
 				} catch (Exception e) {
-					throw new RuntimeException("Cannot create component: " + componentName, e);
+					String msg = "Cannot create component: " + componentName
+							+ "\nMETHOD: " + method
+							+ "\nARGS: " + Arrays.toString(arr) + "\n";
+					throw new RuntimeException(msg, e);
 				}
 			});
 

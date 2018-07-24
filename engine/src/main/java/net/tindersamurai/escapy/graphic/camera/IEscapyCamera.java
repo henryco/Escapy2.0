@@ -20,7 +20,7 @@ public interface IEscapyCamera extends Wipeable {
 
 	float getZoom();
 
-	void update();
+	IEscapyCamera update();
 
 	void translateCamera(float x, float y);
 
