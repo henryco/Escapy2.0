@@ -25,11 +25,13 @@ import java.util.Collection;
 
 	@Provide @Singleton
 	public Collection<EscapyScreen> provideScreens(
+			@Named("loading-screen") EscapyScreen loading,
 			@Named("splash-screen") EscapyScreen splash,
 			@Named("menu-screen") EscapyScreen menu,
 			@Named("game-screen") EscapyScreen game
 	) {
 		return new ArrayList<EscapyScreen>() {{
+			add(loading);
 			add(splash);
 			add(menu);
 			add(game);

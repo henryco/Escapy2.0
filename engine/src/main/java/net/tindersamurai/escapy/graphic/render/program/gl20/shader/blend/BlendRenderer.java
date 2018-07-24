@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import lombok.extern.java.Log;
 import net.tindersamurai.escapy.context.annotation.Dante;
 import net.tindersamurai.escapy.context.annotation.EscapyAPI;
 import net.tindersamurai.escapy.graphic.render.program.gl20.core.EscapyMultiSourceShader;
@@ -12,11 +13,12 @@ import net.tindersamurai.escapy.graphic.render.program.gl20.core.ShaderFile;
 import net.tindersamurai.escapy.graphic.render.program.gl20.proxy.EscapyProxyShaderProgram;
 import net.tindersamurai.escapy.graphic.render.program.gl20.proxy.ProxyShaderProgram;
 
+import java.util.Arrays;
 import java.util.function.Function;
 
 /**
  * @author Henry on 29/06/17.
- */ @EscapyAPI @Dante
+ */ @EscapyAPI @Dante @Log
 public class BlendRenderer implements EscapyMultiSourceShader {
 
 	private EscapyProxyShaderProgram shaderProgram;
@@ -37,6 +39,7 @@ public class BlendRenderer implements EscapyMultiSourceShader {
 
 	@Override
 	public void setSourcesNames(String... sourcesNames) {
+		log.info("Source Names: " + Arrays.toString(sourcesNames));
 		this.sourcesNames = new String[sourcesNames.length];
 		System.arraycopy(sourcesNames, 0, this.sourcesNames, 0, sourcesNames.length);
 	}
@@ -44,13 +47,16 @@ public class BlendRenderer implements EscapyMultiSourceShader {
 	@Override
 	public void loadProgram(ShaderFile shaderFile) {
 		dispose();
+		log.info("load program: " + shaderFile.toString());
 		shaderProgram = createProxyProgram(shaderFile, debug);
 	}
 
 	@Override
 	public void dispose() {
+		log.info("dispose");
 		if (shaderProgram != null) {
 			shaderProgram.dispose();
+			log.info("disposed!");
 		}
 	}
 

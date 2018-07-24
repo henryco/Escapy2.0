@@ -161,6 +161,7 @@ public class EscapyNode<T> implements IEscapyNode<T> {
 				" keys=" + keys +
 				", content=" + content +
 				", parent=" + (parent == null ? null : parent.getId()) +
+				", observer=" + observer +
 				", id='" + id + '\'' +
 				'}';
 	}

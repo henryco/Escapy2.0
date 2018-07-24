@@ -36,8 +36,9 @@ public class EscapyCamera implements IEscapyCamera {
 	}
 
 	@Override
-	public void update() {
+	public EscapyCamera update() {
 		camera.update();
+		return this;
 	}
 
 
@@ -91,6 +92,11 @@ public class EscapyCamera implements IEscapyCamera {
 //	----------------------------- ZOOM --------------------------------
 
 
-
-
+	@Override
+	public String toString() {
+		return "EscapyCamera{" +
+				"camera=" + camera +
+				", resolution=" + resolution +
+				'}';
+	}
 }

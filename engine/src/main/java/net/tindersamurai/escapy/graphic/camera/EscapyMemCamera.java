@@ -7,6 +7,8 @@ import net.tindersamurai.escapy.graphic.screen.Resolution;
 import net.tindersamurai.escapy.utils.memento.EscapyCloneable;
 import net.tindersamurai.escapy.utils.memento.Memento;
 
+import java.util.Arrays;
+
 public class EscapyMemCamera
 		implements IEscapyMemoCam {
 
@@ -48,8 +50,8 @@ public class EscapyMemCamera
 
 	private static IEscapyCamera initializeCamera(IEscapyCamera camera,
 												  Memento<CameraData> data) {
-		camera.setCameraPosition(data.get().getPosition());
 		camera.setResolution(data.get().getResolution());
+		camera.setCameraPosition(data.get().getPosition());
 		camera.setZoom(data.get().getZoom());
 		return camera;
 	}
