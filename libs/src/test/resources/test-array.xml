@@ -55,6 +55,17 @@
     <o:void/>
 
     <c:u.array-auto>
+        <o:float>52</o:float>
+        <o:float>12</o:float>
+    </c:u.array-auto>
+
+    <c:u.array>
+        <c:u.p.type> float </c:u.p.type>
+        <o:float>52</o:float>
+        <o:float>12</o:float>
+    </c:u.array>
+
+    <c:u.array-auto>
         <c:u.entry>
             <o:string>A</o:string>
             <o:float>52</o:float>

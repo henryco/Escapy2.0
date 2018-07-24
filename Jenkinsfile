@@ -77,9 +77,18 @@ pipeline {
     always {
       
       junit(testResults: 'tests/build/test-results/*.xml', allowEmptyResults: true)
+      junit(testResults: 'libs/build/test-results/*.xml', allowEmptyResults: true)
+      junit(testResults: 'engine/build/test-results/*.xml', allowEmptyResults: true)
+      junit(testResults: 'desktop/build/test-results/*.xml', allowEmptyResults: true)
+      junit(testResults: 'core/build/test-results/*.xml', allowEmptyResults: true)
+
       sh 'rm -f -r test-arch'
       sh 'mkdir test-arch'
-      sh '(zip -r test-arch/test-report.zip tests/build/reports) || true'
+      sh '(zip -r test-arch/test-report-tests.zip tests/build/reports) || true'
+      sh '(zip -r test-arch/test-report-libs.zip libs/build/reports) || true'
+      sh '(zip -r test-arch/test-report-engine.zip engine/build/reports) || true'
+      sh '(zip -r test-arch/test-report-desktop.zip desktop/build/reports) || true'
+      sh '(zip -r test-arch/test-report-core.zip core/build/reports) || true'
       archiveArtifacts(artifacts: 'test-arch/*.zip', allowEmptyArchive: true)
 
       sh 'gradle clean'

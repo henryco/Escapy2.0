@@ -1,21 +1,22 @@
 package net.tindersamurai.escapy.map.model;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
+import com.badlogic.gdx.utils.Disposable;
+import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.graphic.screen.Wipeable;
 
 import java.util.Collection;
 import java.util.Collections;
 
-public interface IEscapyModel extends IEscapyRenderable, Wipeable {
+public interface IEscapyModel extends IEscapyRenderable, Wipeable, Disposable {
 
 	@FunctionalInterface interface Render {
-		void renderModel(IEscapyCamera camera, Batch batch, float delta);
+		void render(IEscapyMemoCam camera, Batch batch, float delta);
 	}
 
-	default void preRender(IEscapyCamera camera, Batch batch, float delta) {}
+	default void preRender(IEscapyMemoCam camera, Batch batch, float delta) {}
 
-	default void postRender(IEscapyCamera camera, Batch batch, float delta) {}
+	default void postRender(IEscapyMemoCam camera, Batch batch, float delta) {}
 
 	default Render[] preRenderQueue() {
 		return new Render[] {
@@ -34,22 +35,28 @@ public interface IEscapyModel extends IEscapyRenderable, Wipeable {
 		return Collections.EMPTY_LIST;
 	}
 
-	default void renderDiffuseModel(IEscapyCamera camera, Batch batch, float delta) {
+	default void renderDiffuseModel(IEscapyMemoCam camera, Batch batch, float delta) {
 		renderDiffuseMap(camera, batch, delta);
 		for (IEscapyModel model : getNestedModels())
-			model.renderDiffuseMap(camera, batch, delta);
+			if (model != null)
+				model.renderDiffuseModel(camera, batch, delta);
 	}
 
-	default void renderNormalModel(IEscapyCamera camera, Batch batch, float delta) {
+	default void renderNormalModel(IEscapyMemoCam camera, Batch batch, float delta) {
 		renderNormalMap(camera, batch, delta);
 		for (IEscapyModel model : getNestedModels())
-			model.renderNormalMap(camera, batch, delta);
+			if (model != null)
+				model.renderNormalModel(camera, batch, delta);
 	}
 
-	default void renderLightModel(IEscapyCamera camera, Batch batch, float delta) {
-		renderLightMap(camera, batch, delta);
+	default void renderShadowModel(IEscapyMemoCam camera, Batch batch, float delta) {
+		renderShadowMap(camera, batch, delta);
 		for (IEscapyModel model : getNestedModels())
-			model.renderLightMap(camera, batch, delta);
+			if (model != null)
+				model.renderShadowModel(camera, batch, delta);
 	}
-	
+
+
+	default void dispose() {
+	}
 }

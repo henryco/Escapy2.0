@@ -4,7 +4,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Disposable;
 import lombok.Getter;
+import lombok.extern.java.Log;
+import net.tindersamurai.escapy.graphic.camera.EscapyCamera;
+import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFrameBuffer;
 import net.tindersamurai.escapy.graphic.screen.Resolution;
@@ -12,10 +17,10 @@ import net.tindersamurai.escapy.utils.EscapyObject;
 
 /**
  * @author Henry on 23/07/17.
- */
-public class LightSource implements EscapyObject {
+ */ @Log
+public class LightSource implements EscapyObject, Disposable {
 
-	private final EscapyLightSource lightSource;
+	private final @Getter EscapyLightSource lightSource;
 	private final float[] position;
 
 	public final @Getter String name;
@@ -23,30 +28,34 @@ public class LightSource implements EscapyObject {
 	private @Getter EscapyFBO buffer;
 	private @Getter float scale;
 	private @Getter float alpha;
+	private final Batch batch;
 
+	private IEscapyCamera camera;
 	private Texture region;
 	private boolean update;
 
 
-	public LightSource(String name, EscapyLightSource lightSource, int scrW, int scrH) {
+	public LightSource(String name, EscapyLightSource lightSource) {
 
-		this.lightSource = lightSource;
 		this.position = new float[]{0, 0};
+		this.batch = new SpriteBatch();
+		this.lightSource = lightSource;
 		this.name = name;
 		this.scale = 1f;
 
 		setResolution(new Resolution(128, 128));
-		resize(scrW, scrH);
 		update();
 	}
 
-	public LightSource(String name, int scrW, int scrH) {
-		this(name, new EscapyLightSource(), scrW, scrH);
+	public LightSource(String name) {
+		this(name, new EscapyLightSource());
 	}
 
 
-	public void prepareBuffer(Batch batch, boolean force) {
+	public void prepareBuffer(boolean force) {
 		if (update || force) {
+			log.info("UPDATE LIGHT SOURCE BUFFER: [" + name + "]");
+			batch.setProjectionMatrix(camera.update().getProjection());
 			buffer.begin(() -> {
 				buffer.wipe();
 				lightSource.draw(batch, 0, 0, region, region);
@@ -55,8 +64,8 @@ public class LightSource implements EscapyObject {
 		}
 	}
 
-	public void prepareBuffer(Batch batch) {
-		prepareBuffer(batch, false);
+	public void prepareBuffer() {
+		prepareBuffer(false);
 	}
 
 
@@ -66,8 +75,8 @@ public class LightSource implements EscapyObject {
 	}
 
 	public void draw(Batch batch) {
-		prepareBuffer(batch);
-		buffer.renderGraphics(batch);
+		prepareBuffer();
+		buffer.draw(batch);
 	}
 
 
@@ -83,14 +92,10 @@ public class LightSource implements EscapyObject {
 
 
 
-
-	public void resize(int w, int h) {
-		update(() -> this.region = new Texture(w, h, Pixmap.Format.RGBA8888));
-	}
-
-
 	public void setResolution(Resolution resolution) {
 
+		region = new Texture(resolution.width, resolution.height, Pixmap.Format.RGBA8888);
+		camera = new EscapyCamera(resolution);
 		lightSource.setResolution(resolution);
 
 		if (buffer != null) buffer.dispose();
