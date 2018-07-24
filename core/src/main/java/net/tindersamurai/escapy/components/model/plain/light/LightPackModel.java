@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import lombok.Getter;
 import lombok.extern.java.Log;
+import lombok.val;
 import net.tindersamurai.escapy.components.model.plain.util.UpWrapper;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
@@ -56,16 +57,21 @@ import java.util.List;
 		if (maskFbo == null) return;
 
 		postRenderBatch.setProjectionMatrix(camera.update().getProjection());
-		EscapyUtils.centerize (
+
+		val mskPos = EscapyUtils.center(
 				maskFbo.get().getSprite(),
 				Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight()
 		);
 		maskFbo.get().draw(postRenderBatch);
 
-		if (lightColorFbo == null) return;
+		if (lightColorFbo == null) {
+			// cleanup state
+			maskFbo.get().getSprite().setPosition(mskPos[0], mskPos[1]);
+			return;
+		}
 
-		EscapyUtils.centerize (
+		val lcoPos = EscapyUtils.center(
 				lightColorFbo.get().getSprite(),
 				Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight()
@@ -73,6 +79,10 @@ import java.util.List;
 
 		if (lightProcessor == null) {
 			lightColorFbo.get().draw(postRenderBatch);
+
+			// cleanup state
+			maskFbo.get().getSprite().setPosition(mskPos[0], mskPos[1]);
+			lightColorFbo.get().getSprite().setPosition(lcoPos[0], lcoPos[1]);
 			return;
 		}
 
@@ -83,12 +93,8 @@ import java.util.List;
 				maskFbo.get().getSprite()
 		);
 
-//		lightProcessor.draw (
-//				postRenderBatch,
-//				0, 0,
-//				lightColorFbo.get().getSprite().getTexture(),
-//				normalsFbo != null ? normalsFbo.get().getSprite().getTexture() : null,
-//				maskFbo.get().getSprite().getTexture()
-//		);
+		// cleanup state
+		maskFbo.get().getSprite().setPosition(mskPos[0], mskPos[1]);
+		lightColorFbo.get().getSprite().setPosition(lcoPos[0], lcoPos[1]);
 	}
 }

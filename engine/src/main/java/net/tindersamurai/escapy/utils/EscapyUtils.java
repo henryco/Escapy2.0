@@ -16,11 +16,11 @@ public final class EscapyUtils {
 		}
 	}
 
-	public static Sprite centerize(Sprite sprite, float w, float h) {
+	public static float[] center(Sprite sprite, float w, float h) {
+		float[] last = { sprite.getX(), sprite.getY() };
 		final float sx = (w - (sprite.getWidth() * sprite.getScaleX())) * 0.5f;
 		final float sy = (h - (sprite.getHeight() * sprite.getScaleY())) * 0.5f;
 		sprite.setPosition(sx, sy);
-//		System.out.println("CENTER: " + sx + " : " + sy);
-		return sprite;
+		return last;
 	}
 }

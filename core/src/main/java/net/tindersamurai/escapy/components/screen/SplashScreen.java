@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.github.henryco.injector.meta.annotations.Provide;
+import lombok.val;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
-import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFrameBuffer;
@@ -81,14 +81,13 @@ public class SplashScreen extends EscapyScreenCore {
 				batch.end();
 			});
 
-			EscapyUtils.centerize(fbo.getSprite(),
+			val lstPos = EscapyUtils.center(fbo.getSprite(),
 					Gdx.graphics.getWidth(),
 					Gdx.graphics.getHeight()
 			);
 			batch.setProjectionMatrix(fCam.getProjection());
-			batch.begin();
-			fbo.getSprite().draw(batch);
-			batch.end();
+			fbo.draw(batch);
+			fbo.getSprite().setPosition(lstPos[0], lstPos[1]);
 		}
 	}
 

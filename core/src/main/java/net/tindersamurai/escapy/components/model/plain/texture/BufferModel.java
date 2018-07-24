@@ -46,7 +46,7 @@ import java.util.Arrays;
 		for (val wrapper : buffers) {
 			if (wrapper.isUpdated()) {
 				val buffer = wrapper.get();
-				EscapyUtils.centerize (
+				val buffPos = EscapyUtils.center (
 						buffer.getSprite(),
 						Gdx.graphics.getWidth(),
 						Gdx.graphics.getHeight()
@@ -54,6 +54,7 @@ import java.util.Arrays;
 
 				postRenderBatch.setProjectionMatrix(camera.update().getProjection());
 				buffer.draw(postRenderBatch);
+				buffer.getSprite().setPosition(buffPos[0], buffPos[1]);
 			}
 		}
 	}

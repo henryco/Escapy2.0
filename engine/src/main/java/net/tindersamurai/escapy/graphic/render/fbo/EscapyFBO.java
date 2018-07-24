@@ -47,5 +47,9 @@ public interface EscapyFBO extends Wipeable, EscapyObject {
 
 	void setFlip(boolean x, boolean y);
 
-	void draw(Batch batch);
+	default void draw(Batch batch) {
+		batch.begin();
+		getSprite().draw(batch);
+		batch.end();
+	}
 }
