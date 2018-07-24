@@ -1,6 +1,5 @@
 package net.tindersamurai.escapy.components.model.plain.light;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import lombok.Getter;
@@ -12,7 +11,6 @@ import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
 import net.tindersamurai.escapy.graphic.render.program.gl10.blend.EscapyGLBlendRenderer;
 import net.tindersamurai.escapy.graphic.render.program.gl20.core.EscapyMultiSourceShader;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
-import net.tindersamurai.escapy.utils.EscapyUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
