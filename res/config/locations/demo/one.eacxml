@@ -207,7 +207,7 @@
                                         <o:float>150</o:float>
                                     </c:u.array-auto>
 
-                                    <o:float name="scale"> 1.5 </o:float>
+                                    <o:float name="scale"> 1.75 </o:float>
 
                                 </c:model.helper.l-props>
                             </c:model.light.source>

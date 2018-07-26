@@ -1,6 +1,7 @@
 package net.tindersamurai.escapy.components.config;
 
 import com.github.henryco.injector.meta.annotations.Provide;
+import lombok.val;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContextConfiguration;
 import net.tindersamurai.escapy.context.game.configuration.util.PropertyKeysStorage;
 
@@ -13,7 +14,8 @@ public class MainConfiguration extends EscapyGameContextConfiguration {
 
 	@Override
 	public String getWorkDir() {
-		return super.getWorkDir().replace(separator+"core"+separator+"assets", "") + separator;
+		val path = separator+"core"+separator+"assets";
+		return super.getWorkDir().replace(path, "") + separator;
 	}
 
 	@Override

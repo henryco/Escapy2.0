@@ -3,14 +3,18 @@ package net.tindersamurai.escapy.components.model.plain.texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import lombok.extern.java.Log;
+import lombok.val;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
+import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteProvider;
 import net.tindersamurai.escapy.map.model.texture.EscapyTextureData;
 import net.tindersamurai.escapy.map.model.texture.IEscapyTextureData;
 import net.tindersamurai.escapy.utils.files.EscapyFiles;
 
+import java.util.function.Consumer;
+
 @Log
-public class StaticTexture implements IEscapyModel {
+public class StaticTexture implements IEscapyModel, IEscapySpriteProvider {
 
 	private Sprite[] sprites; // diff, normal, light
 
@@ -63,4 +67,13 @@ public class StaticTexture implements IEscapyModel {
 		draw(sprites[2], camera, batch);
 	}
 
+	@Override
+	public void apply(Consumer<Sprite> s) {
+		for (val sprite : sprites) s.accept(sprite);
+	}
+
+	@Override
+	public Sprite provideEffectiveSprite() {
+		return sprites[0] != null ? sprites[0] : sprites[1] != null ? sprites[1] : sprites[2];
+	}
 }

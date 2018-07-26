@@ -12,7 +12,6 @@ import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFrameBuffer;
-import net.tindersamurai.escapy.graphic.screen.Resolution;
 import net.tindersamurai.escapy.utils.EscapyUtils;
 
 import javax.inject.Inject;
@@ -60,7 +59,7 @@ public class SplashScreen extends EscapyScreenCore {
 		this.initialized.set(true);
 
 		// fixme todo remove
-		fbo = new EscapyFrameBuffer(new Resolution(1280, 720));
+		fbo = new EscapyFrameBuffer(camera.getResolution());
 	}
 
 	@Override
