@@ -122,6 +122,7 @@ public class ModelFactory {
 				@Arg("diffuse") String diffuse,
 				@Arg("normals") String normals,
 				@Arg("shadows") String shadows,
+				@Arg("rotation") Float rotation,
 				@Arg("x") Float x,
 				@Arg("y") Float y,
 				@Arg("width") Float width,
@@ -142,6 +143,8 @@ public class ModelFactory {
 
 				if (flipX != null) setFlipX(flipX);
 				if (flipY != null) setFlipY(flipY);
+
+				if (rotation != null) setRotation(rotation);
 
 				if (x != null) setX(x);
 				if (y != null) setY(y);

@@ -11,4 +11,5 @@ public class NodeData implements IEscapyLocation {
 	{ log.info("Node created [" + this.hashCode() + super.hashCode() + "]"); }
 
 	private IEscapyModel model;
+
 }
