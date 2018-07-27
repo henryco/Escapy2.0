@@ -2,10 +2,13 @@ package net.tindersamurai.escapy.components.node;
 
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
+import lombok.val;
 import net.tindersamurai.escapy.components.model.plain.EmptyModel;
 import net.tindersamurai.escapy.components.node.plain.NodeData;
+import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteProvider;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
+import net.tindersamurai.escapy.physics.event.IEscapyPhysListener;
 
 import javax.inject.Singleton;
 
@@ -17,23 +20,70 @@ public class NodeObserver implements IEscapyNodeObserver {
 	public void nodeAdded(IEscapyNode parent, IEscapyNode node) {
 
 		log.info("NODE ADDED: " + parent.getId() + " -> " + node.getId());
-		IEscapyNode<NodeData> cParent = parent;
-		while (cParent != null) {
-			if (cParent.get().getModel() != null)
-				break;
-			cParent.get().setModel(new EmptyModel());
-			cParent = cParent.getParent();
-		}
+		fillMissingParents(parent);
 
-		((IEscapyNode<NodeData>) parent)
-				.get().getModel().getNestedModels()
-				.add(((IEscapyNode<NodeData>) node).get().getModel());
+		val nodeData = ((IEscapyNode<NodeData>) node).get();
+
+		addChildModel(parent, nodeData);
+		mergeModelWithPhys(nodeData);
+
 	}
 
 	@Override @SuppressWarnings("unchecked")
 	public void nodeRemoved(IEscapyNode parent, IEscapyNode node) {
-		((IEscapyNode<NodeData>) node).get().getModel().dispose();
-		// todo
+
+		log.info("NODE REMOVED: " + parent.get() + " -> " + node.getId());
+		val nodeData = (NodeData) node.get();
+		nodeData.dispose();
+
+		val phys = nodeData.getPhys();
+		if (phys == null) return;
+
+		phys.setPhysListener(null);
+
+		log.info("REMOVE FIXTURE FROM WORLD: " + phys.getFixture());
+		val world = phys.getFixture().getBody().getWorld();
+		world.destroyBody(phys.getFixture().getBody());
 	}
 
+
+	private static void fillMissingParents(IEscapyNode<NodeData> parent) {
+		while (parent != null) {
+			if (parent.get().getModel() != null)
+				break;
+			log.info("FILLING MISSING MODELS: " + parent);
+			parent.get().setModel(new EmptyModel());
+			parent = parent.getParent();
+			log.info("MODEL FILLED: " + parent);
+		}
+	}
+
+	private static void addChildModel(IEscapyNode<NodeData> parent, NodeData nodeData) {
+		log.info("" + nodeData.getModel());
+		parent.get().getModel().getNestedModels().add(nodeData.getModel());
+	}
+
+	private static void mergeModelWithPhys(NodeData nodeData) {
+		val model = nodeData.getModel();
+		val phys = nodeData.getPhys();
+
+		log.info(model + " : " + phys);
+
+		if (phys == null) return;
+		if (model instanceof IEscapySpriteProvider) {
+			phys.setPhysListener(new IEscapyPhysListener() {
+
+				@Override
+				public void onPhysPositionUpdate(final float x, final float y) {
+					((IEscapySpriteProvider) model).apply(s -> s.setPosition(x, y));
+				}
+
+				@Override
+				public void onPhysAngleUpdate(final float angle) {
+					((IEscapySpriteProvider) model).apply(s -> s.setRotation(angle));
+				}
+
+			});
+		}
+	}
 }

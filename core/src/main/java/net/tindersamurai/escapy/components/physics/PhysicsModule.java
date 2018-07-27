@@ -8,6 +8,4 @@ import net.tindersamurai.escapy.components.config.ConfigModule;
 		include = { ConfigModule.class }
 ) @Log public final class PhysicsModule {
 
-	// todo
-
 }

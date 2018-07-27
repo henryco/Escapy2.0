@@ -7,6 +7,7 @@ import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
 import net.tindersamurai.escapy.components.node.plain.NodeData;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
+import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 
 import javax.inject.Singleton;
 
@@ -22,8 +23,8 @@ public class NodeFactory {
 
 			if (arg instanceof IEscapyModel)
 				data.setModel((IEscapyModel) arg);
-
-			// todo
+			if (arg instanceof IEscapyPhysObject)
+				data.setPhys((IEscapyPhysObject) arg);
 		}
 
 		return data;
