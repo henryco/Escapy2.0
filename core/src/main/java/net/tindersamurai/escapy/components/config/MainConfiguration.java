@@ -1,5 +1,6 @@
 package net.tindersamurai.escapy.components.config;
 
+import com.badlogic.gdx.math.Vector2;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.val;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContextConfiguration;

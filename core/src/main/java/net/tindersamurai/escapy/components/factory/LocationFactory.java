@@ -1,5 +1,6 @@
 package net.tindersamurai.escapy.components.factory;
 
+import com.badlogic.gdx.math.Vector2;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
@@ -7,13 +8,12 @@ import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
 import net.tindersamurai.escapy.components.model.plain.RootModel;
 import net.tindersamurai.escapy.components.node.plain.NodeData;
-import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.map.node.EscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
+import net.tindersamurai.escapy.physics.EscapyPhysWorld;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 @Provide @Singleton
@@ -21,15 +21,10 @@ import javax.inject.Singleton;
 public class LocationFactory  {
 
 	private final IEscapyNodeObserver nodeObserver;
-	private final IEscapyCamera viewPortCamera;
 
 	@Inject
-	public LocationFactory(
-			@Named("final-camera") IEscapyCamera viewPortCamera,
-			IEscapyNodeObserver nodeObserver
-	) {
+	public LocationFactory(IEscapyNodeObserver nodeObserver) {
 		this.nodeObserver = nodeObserver;
-		this.viewPortCamera = viewPortCamera;
 	}
 
 	@SafeVarargs @EscapyComponent("root")
@@ -37,7 +32,7 @@ public class LocationFactory  {
 			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
 		return new EscapyNode<NodeData> (new NodeData() {{
-			setModel(new RootModel(viewPortCamera));
+			setModel(new RootModel());
 		}}, "root" ) {{
 			setObserver(nodeObserver);
 			for (IEscapyNode<NodeData> node : nodes)
@@ -62,7 +57,7 @@ public class LocationFactory  {
 
 	/**
 	 *	This is just wrapper
-	 */ @SafeVarargs @EscapyComponent("main-node")
+	 */ @SafeVarargs @EscapyComponent("main")
 	public final IEscapyNode<NodeData> mainNode (
 			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
@@ -71,7 +66,7 @@ public class LocationFactory  {
 
 	/**
 	 *	This is just wrapper
-	 */ @SafeVarargs @EscapyComponent("mask-node")
+	 */ @SafeVarargs @EscapyComponent("masks")
 	public final IEscapyNode<NodeData> maskNode (
 			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
@@ -80,10 +75,17 @@ public class LocationFactory  {
 
 	/**
 	 *	This is just wrapper
-	 */ @SafeVarargs @EscapyComponent("light-node")
+	 */ @SafeVarargs @EscapyComponent("lights")
 	public final IEscapyNode<NodeData> lightNode (
 			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
 		return node("LightNode", null, nodes);
+	}
+
+	@SafeVarargs @EscapyComponent("physics")
+	public final IEscapyNode<NodeData> physicsNode (
+			@Arg("nodes") IEscapyNode<NodeData> ... nodes
+	) {
+		return node("PhysicsNode", null, nodes);
 	}
 }

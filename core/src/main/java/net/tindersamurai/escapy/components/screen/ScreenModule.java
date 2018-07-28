@@ -19,7 +19,6 @@ import java.io.File;
 	@Provide("logo_splash") @Singleton // TODO REMOVE
 	public String provideSplashLogoUrl() {
 		return "res" + File.separator + "ESCAPY.png";
-//		return "res/config/locations/demo/resources/diffuse/test_hd.png";
 	}
 
 	@Provide("time_splash") @Singleton // TODO REMOVE

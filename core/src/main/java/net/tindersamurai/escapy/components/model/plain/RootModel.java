@@ -13,13 +13,8 @@ import java.util.List;
 public class RootModel implements IEscapyModel {
 
 	private final List<IEscapyModel> nested;
-	private final IEscapyCamera vpCamera;
 
-	public RootModel (
-			IEscapyCamera vpCamera,
-			IEscapyModel ... nested
-	) {
-		this.vpCamera = vpCamera;
+	public RootModel (IEscapyModel ... nested) {
 		this.nested = new ArrayList<>();
 		Collections.addAll(this.nested, nested);
 	}
