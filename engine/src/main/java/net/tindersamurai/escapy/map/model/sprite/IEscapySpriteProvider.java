@@ -10,6 +10,12 @@ public interface IEscapySpriteProvider extends IEscapyTextureData {
 	void apply(Consumer<Sprite> s);
 	Sprite provideEffectiveSprite();
 
+	default float[] getBindPadding() {
+		return new float[] {0, 0};
+	}
+
+	void setBindPadding(float left, float top);
+
 	@Override
 	default float getX() {
 		return provideEffectiveSprite().getX();

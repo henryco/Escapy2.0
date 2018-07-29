@@ -1,5 +1,6 @@
 package net.tindersamurai.escapy.components.node;
 
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
 import lombok.val;
@@ -71,11 +72,18 @@ public class NodeObserver implements IEscapyNodeObserver {
 
 		if (phys == null) return;
 		if (model instanceof IEscapySpriteProvider) {
+			log.info("SETTING UP PHYS LISTENER");
 			phys.setPhysListener(new IEscapyPhysListener() {
 
 				@Override
 				public void onPhysPositionUpdate(final float x, final float y) {
-					((IEscapySpriteProvider) model).apply(s -> s.setPosition(x, y));
+					val m = (IEscapySpriteProvider) model;
+					val padding = m.getBindPadding();
+					m.apply(s -> {
+						final float px = x - (s.getWidth() * 0.5f) + padding[0];
+						final float py = y - (s.getHeight() * 0.5f) + padding[1];
+						s.setPosition(px, py);
+					});
 				}
 
 				@Override

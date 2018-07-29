@@ -4,7 +4,7 @@
 	
 	"resizable": false,
 	"vSync": true,
-	"fullscreen": false,
+	"fullscreen": true,
 	"forceExit": true,
 	"useGL30": true,
 	

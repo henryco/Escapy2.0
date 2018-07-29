@@ -141,7 +141,7 @@ public class PhysicsFactory {
 				@Arg("type") String type,
 				@Arg("position") Float[] pos,
 				@Arg("angle") Float angle,
-				@Arg("fixed") Boolean fixed,
+				@Arg("rotation") Boolean rotation,
 				@Arg("linearDamping") Float lDamp,
 				@Arg("angularDamping") Float aDamp,
 				@Arg("bullet") Boolean bullet,
@@ -165,7 +165,7 @@ public class PhysicsFactory {
 					if (gScale != null) bodyDef.gravityScale = gScale;
 					if (aDamp != null) bodyDef.angularDamping = aDamp;
 					if (aVel != null) bodyDef.angularVelocity = aVel;
-					if (fixed != null) bodyDef.fixedRotation = fixed;
+					if (rotation != null) bodyDef.fixedRotation = !rotation;
 					if (lDamp != null) bodyDef.linearDamping = lDamp;
 					if (bullet != null) bodyDef.bullet = bullet;
 					if (angle != null) bodyDef.angle = angle;
@@ -196,7 +196,7 @@ public class PhysicsFactory {
 				@Arg("type") String type,
 				@Arg("position") Float[] pos,
 				@Arg("angle") Float angle,
-				@Arg("fixed") Boolean fixed,
+				@Arg("rotation") Boolean rotation,
 				@Arg("linearDamping") Float lDamp,
 				@Arg("angularDamping") Float aDamp,
 				@Arg("bullet") Boolean bullet,
@@ -210,7 +210,7 @@ public class PhysicsFactory {
 				@Arg("shape") Supplier<Shape> shape
 		) {
 			val o = objectDef (
-					id, type, pos, angle, fixed, lDamp,
+					id, type, pos, angle, rotation, lDamp,
 					aDamp, bullet, gScale, lVel, aVel,
 					dens, rest, friction, sensor, shape
 			).apply(physics);

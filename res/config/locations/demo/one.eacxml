@@ -13,10 +13,11 @@
             </c:u.array-auto>
             <o:float name="fps">60</o:float>
 
+            <!-- TODO MOVE TO EXTERNAL FILE (MAYBE) -->
             <c:physics.object.def>
                 <o:string name="id">ground</o:string>
                 <o:string name="type">StaticBody</o:string>
-                <o:boolean name="fixed">true</o:boolean>
+                <o:boolean name="rotation">false</o:boolean>
                 <c:physics.shape.box name="shape">
                     <c:u.array-auto name="size">
                         <o:float>600</o:float>
@@ -29,8 +30,23 @@
                 </c:u.array-auto>
             </c:physics.object.def>
 
-        </c:physics.manager>
+            <c:physics.object.def>
+                <o:string name="id"> boi </o:string>
+                <o:string name="type">DynamicBody</o:string>
+                <o:boolean name="rotation">false</o:boolean>
+                <c:physics.shape.box name="shape">
+                    <c:u.array-auto>
+                        <o:float>55</o:float>
+                        <o:float>205</o:float>
+                    </c:u.array-auto>
+                </c:physics.shape.box>
+                <c:u.array-auto name="position">
+                    <o:float>150</o:float>
+                    <o:float>300</o:float>
+                </c:u.array-auto>
+            </c:physics.object.def>
 
+        </c:physics.manager>
     </c:location.constructor>
 
 
@@ -114,7 +130,16 @@
                                 <o:float name="x">75</o:float>
                                 <o:float name="y">35</o:float>
                             </c:model.helper.t-props>
+                            <c:u.array-auto name="bind">
+                                <!-- left -->
+                                <o:float>5</o:float>
+                                <!-- top -->
+                                <o:float>25</o:float>
+                            </c:u.array-auto>
                         </c:model.texture.static>
+                       <c:physics.object.get>
+                           <o:string>boi</o:string>
+                       </c:physics.object.get>
                     </c:node.data>
                 </c:location.node>
 

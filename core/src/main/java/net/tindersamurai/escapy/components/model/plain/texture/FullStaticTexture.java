@@ -16,6 +16,7 @@ import java.util.function.Consumer;
 public class FullStaticTexture implements IEscapyModel, IEscapySpriteProvider {
 
 	private final Sprite[] maps;
+	private float[] bindPadding = {0, 0};
 
 	public FullStaticTexture(
 			Resolution resolution,
@@ -79,11 +80,23 @@ public class FullStaticTexture implements IEscapyModel, IEscapySpriteProvider {
 
 	@Override
 	public void apply(Consumer<Sprite> s) {
-		for (val map : maps) s.accept(map);
+		for (val map : maps)
+			if (map != null)
+				s.accept(map);
 	}
 
 	@Override
 	public Sprite provideEffectiveSprite() {
 		return maps[0] != null ? maps[0] : maps[1] != null ? maps[1] : maps[2];
+	}
+
+	@Override
+	public float[] getBindPadding() {
+		return new float[]{bindPadding[0], bindPadding[1]};
+	}
+
+	@Override
+	public void setBindPadding(float left, float top) {
+		this.bindPadding = new float[]{left, top};
 	}
 }

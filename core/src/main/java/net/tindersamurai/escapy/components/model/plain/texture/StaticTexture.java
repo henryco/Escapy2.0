@@ -17,6 +17,7 @@ import java.util.function.Consumer;
 public class StaticTexture implements IEscapyModel, IEscapySpriteProvider {
 
 	private Sprite[] sprites; // diff, normal, light
+	private float[] bindPadding = {0, 0};
 
 	public StaticTexture (EscapyTextureData data) {
 		log.info(data.toString());
@@ -69,11 +70,23 @@ public class StaticTexture implements IEscapyModel, IEscapySpriteProvider {
 
 	@Override
 	public void apply(Consumer<Sprite> s) {
-		for (val sprite : sprites) s.accept(sprite);
+		for (val sprite : sprites)
+			if (sprite != null)
+				s.accept(sprite);
 	}
 
 	@Override
 	public Sprite provideEffectiveSprite() {
 		return sprites[0] != null ? sprites[0] : sprites[1] != null ? sprites[1] : sprites[2];
+	}
+
+	@Override
+	public float[] getBindPadding() {
+		return new float[]{bindPadding[0], bindPadding[1]};
+	}
+
+	@Override
+	public void setBindPadding(float left, float top) {
+		this.bindPadding = new float[]{left, top};
 	}
 }
