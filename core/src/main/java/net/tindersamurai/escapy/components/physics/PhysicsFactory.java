@@ -15,6 +15,7 @@ import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 @Provide
 @EscapyComponentFactory("physics")
@@ -59,11 +60,11 @@ public class PhysicsFactory {
 	public final class _Shape {
 
 		@EscapyComponent("polygon")
-		public final Shape polygon (
+		public final Supplier<Shape> polygon (
 				@Arg("vertices") Float[] vertices,
 				@Arg("radius") Float radius
 		) {
-			return new PolygonShape() {{
+			return () -> new PolygonShape() {{
 				if (vertices != null) {
 					float[] vert = new float[vertices.length];
 					for (int i = 0; i < vert.length; i++)
@@ -75,35 +76,33 @@ public class PhysicsFactory {
 		}
 
 		@EscapyComponent("box")
-		public final Shape box (
-				@Arg("vertices") Float[] v,
+		public final Supplier<Shape> box (
+				@Arg("size") Float[] dim,
 				@Arg("radius") Float radius
 		) {
-			return polygon(new Float[]{
-					v[0], v[1], // x1, y1
-					v[2], v[1], // x2, y1
-					v[2], v[3], // x2, y2
-					v[0], v[3]  // x1, y2
-			}, radius);
+			return () -> new PolygonShape() {{
+				if (dim != null) setAsBox(dim[0] * 0.5f, dim[1] * 0.5f);
+				if (radius != null) setRadius(radius);
+			}};
 		}
 
 		@EscapyComponent("circle")
-		public final Shape circle (
+		public final Supplier<Shape> circle (
 				@Arg("position") Float[] pos,
 				@Arg("radius") Float radius
 		) {
-			return new CircleShape() {{
+			return () -> new CircleShape() {{
 				if (pos != null) setPosition(new Vector2(pos[0], pos[1]));
 				if (radius != null) setRadius(radius);
 			}};
 		}
 
 		@EscapyComponent("chain")
-		public final Shape chain (
+		public final Supplier<Shape> chain (
 				@Arg("vertices") Float[] vertices,
 				@Arg("radius") Float radius
 		) {
-			return new ChainShape() {{
+			return () -> new ChainShape() {{
 				if (vertices != null) {
 					float[] vert = new float[vertices.length];
 					for (int i = 0; i < vert.length; i++)
@@ -115,11 +114,11 @@ public class PhysicsFactory {
 		}
 
 		@EscapyComponent("edge")
-		public final Shape edge (
+		public final Supplier<Shape> edge (
 				@Arg("vertices") Float[] vert,
 				@Arg("radius") Float radius
 		) {
-			return new EdgeShape() {{
+			return () -> new EdgeShape() {{
 				if (vert != null) set(vert[0], vert[1], vert[2], vert[3]);
 				if (radius != null) setRadius(radius);
 			}};
@@ -138,6 +137,7 @@ public class PhysicsFactory {
 		@EscapyComponent("def")
 		public Function<IEscapyPhysics, IEscapyPhysObject> objectDef (
 				@Arg("id") String id,
+				// StaticBody(0), KinematicBody(1), DynamicBody(2);
 				@Arg("type") String type,
 				@Arg("position") Float[] pos,
 				@Arg("angle") Float angle,
@@ -152,7 +152,7 @@ public class PhysicsFactory {
 				@Arg("restitution") Float restitution,
 				@Arg("friction") Float friction,
 				@Arg("sensor") Boolean sensor,
-				@Arg("shape") Shape shape
+				@Arg("shape") Supplier<Shape> shape
 		) {
 			return physics -> {
 				val world = physics.getWorld();
@@ -172,9 +172,10 @@ public class PhysicsFactory {
 				}
 
 				val body = world.createBody(bodyDef);
+				val _shape = shape.get();
 
 				val fixtureDef = new FixtureDef(); {
-					fixtureDef.shape = shape;
+					fixtureDef.shape = _shape;
 					if (restitution != null) fixtureDef.restitution = restitution;
 					if (density != null) fixtureDef.density = density;
 					if (friction != null) fixtureDef.friction = friction;
@@ -182,7 +183,7 @@ public class PhysicsFactory {
 				}
 
 				val fixture = body.createFixture(fixtureDef); {
-					shape.dispose();
+					_shape.dispose();
 				}
 
 				return new EscapyPhysObject(id,fixture);
@@ -206,7 +207,7 @@ public class PhysicsFactory {
 				@Arg("restitution") Float rest,
 				@Arg("friction") Float friction,
 				@Arg("sensor") Boolean sensor,
-				@Arg("shape") Shape shape
+				@Arg("shape") Supplier<Shape> shape
 		) {
 			val o = objectDef (
 					id, type, pos, angle, fixed, lDamp,

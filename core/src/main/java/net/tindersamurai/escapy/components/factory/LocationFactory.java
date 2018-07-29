@@ -74,7 +74,7 @@ public class LocationFactory  {
 	public final IEscapyNode<NodeData> maskNode (
 			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
-	 	return node("MaskNode", null, nodes);
+	 	return node("MasksNode", null, nodes);
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class LocationFactory  {
 	public final IEscapyNode<NodeData> lightNode (
 			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
-		return node("LightNode", null, nodes);
+		return node("LightsNode", null, nodes);
 	}
 
 	@SafeVarargs @EscapyComponent("physics")

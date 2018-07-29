@@ -5,14 +5,34 @@
 >
 
     <c:location.constructor>
+
         <c:physics.manager>
             <c:u.array-auto name="gravity">
                 <o:float>0</o:float>
                 <o:float>-9.8</o:float>
             </c:u.array-auto>
             <o:float name="fps">60</o:float>
+
+            <c:physics.object.def>
+                <o:string name="id">ground</o:string>
+                <o:string name="type">StaticBody</o:string>
+                <o:boolean name="fixed">true</o:boolean>
+                <c:physics.shape.box name="shape">
+                    <c:u.array-auto name="size">
+                        <o:float>600</o:float>
+                        <o:float>15</o:float>
+                    </c:u.array-auto>
+                </c:physics.shape.box>
+                <c:u.array-auto name="position">
+                    <o:float>301</o:float>
+                    <o:float>10</o:float>
+                </c:u.array-auto>
+            </c:physics.object.def>
+
         </c:physics.manager>
+
     </c:location.constructor>
+
 
     <c:location.physics>
         <c:node.data>
@@ -20,9 +40,8 @@
                 <o:string>manager</o:string>
             </c:physics.object.get>
         </c:node.data>
-
-
     </c:location.physics>
+
 
     <!-- HERE WE STORE LAYERS -->
     <c:location.main>

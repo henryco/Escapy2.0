@@ -27,15 +27,6 @@ import java.io.File;
 	}
 
 
-
-
-	@Provide
-	public IEscapyLocation provideLocation (
-			IEscapyLocationHandler handler
-	) {
-		return handler.getLocation();
-	}
-
 	@Provide @SuppressWarnings("unchecked")
 	public IEscapyNode<NodeData> provideLocationNode(
 			IEscapyLocationHandler handler
