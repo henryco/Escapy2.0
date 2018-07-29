@@ -10,6 +10,11 @@ import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 public class PhysManagerWrapper implements IEscapyPhysObject {
 
 	private @Getter @Setter IEscapyPhysics physicsManager;
+	private @Getter final String id;
+
+	public PhysManagerWrapper(String id) {
+		this.id = id;
+	}
 
 	@Override
 	public void setPhysListener(IEscapyPhysListener listener) {

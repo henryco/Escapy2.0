@@ -12,11 +12,13 @@ public class EscapyPhysObject implements IEscapyPhysObject {
 
 	private @Getter @Setter IEscapyPhysics physicsManager;
 	private @Getter final Fixture fixture;
+	private @Getter final String id;
 
-	public EscapyPhysObject(Fixture fixture) {
+	public EscapyPhysObject(String id, Fixture fixture) {
 		if (fixture == null)
 			throw new RuntimeException("Fixture cannot be NULL");
 		this.fixture = fixture;
+		this.id = id;
 	}
 
 	@Override

@@ -4,19 +4,24 @@
         xmlns:m="https://tindersamurai.net/escapy/ac/method"
 >
 
+    <c:location.constructor>
+        <c:physics.manager>
+            <c:u.array-auto name="gravity">
+                <o:float>0</o:float>
+                <o:float>-9.8</o:float>
+            </c:u.array-auto>
+            <o:float name="fps">60</o:float>
+        </c:physics.manager>
+    </c:location.constructor>
+
     <c:location.physics>
-        <c:location.node>
-            <o:string>PhysicsManager</o:string>
-            <c:node.data>
-                <c:physics.manager>
-                    <c:u.array-auto name="gravity">
-                        <o:float>0</o:float>
-                        <o:float>-9.8</o:float>
-                    </c:u.array-auto>
-                    <o:float name="fps">60</o:float>
-                </c:physics.manager>
-            </c:node.data>
-        </c:location.node>
+        <c:node.data>
+            <c:physics.object.get>
+                <o:string>manager</o:string>
+            </c:physics.object.get>
+        </c:node.data>
+
+
     </c:location.physics>
 
     <!-- HERE WE STORE LAYERS -->
@@ -151,6 +156,7 @@
             <c:node.data>
                 <c:model.light.pack>
 
+                    <!-- FLAT LIGHT PROCESSOR -->
                     <!--<c:model.light.processor.flat>-->
                     <!--<o:boolean name="enable"> true </o:boolean>-->
                     <!--<o:float name="threshold"> 0.075 </o:float>-->

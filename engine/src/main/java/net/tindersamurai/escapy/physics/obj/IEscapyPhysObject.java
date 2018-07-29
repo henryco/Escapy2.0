@@ -14,4 +14,5 @@ public interface IEscapyPhysObject extends Disposable {
 	Fixture getFixture();
 
 	IEscapyPhysics getPhysicsManager();
+	String getId();
 }

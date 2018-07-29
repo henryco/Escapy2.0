@@ -1,8 +1,7 @@
 package net.tindersamurai.escapy.components.factory;
 
-import com.badlogic.gdx.math.Vector2;
 import com.github.henryco.injector.meta.annotations.Provide;
-import lombok.val;
+import lombok.extern.java.Log;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
@@ -11,12 +10,11 @@ import net.tindersamurai.escapy.components.node.plain.NodeData;
 import net.tindersamurai.escapy.map.node.EscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
-import net.tindersamurai.escapy.physics.EscapyPhysWorld;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-@Provide @Singleton
+@Provide @Singleton @Log
 @EscapyComponentFactory("location")
 public class LocationFactory  {
 
@@ -36,8 +34,14 @@ public class LocationFactory  {
 		}}, "root" ) {{
 			setObserver(nodeObserver);
 			for (IEscapyNode<NodeData> node : nodes)
-				addNode(node);
+				if (node != null)
+					addNode(node);
 		}};
+	}
+
+	@EscapyComponent("constructor")
+	public final void constructor(Object ... nothing) {
+		log.info("Constructor call");
 	}
 
 	@SafeVarargs @EscapyComponent("node")
@@ -84,8 +88,9 @@ public class LocationFactory  {
 
 	@SafeVarargs @EscapyComponent("physics")
 	public final IEscapyNode<NodeData> physicsNode (
+			@Arg("data") NodeData data,
 			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
-		return node("PhysicsNode", null, nodes);
+		return node("PhysicsNode", data, nodes);
 	}
 }
