@@ -14,7 +14,7 @@ public interface IEscapySpriteProvider extends IEscapyTextureData {
 		return new float[] {0, 0};
 	}
 
-	void setBindPadding(float left, float top);
+	default void setBindPadding(float left, float top) {}
 
 	@Override
 	default float getX() {

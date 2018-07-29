@@ -1,5 +1,7 @@
 package net.tindersamurai.escapy.components.screen;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.github.henryco.injector.GrInjector;
 import com.github.henryco.injector.meta.annotations.Provide;
@@ -8,12 +10,19 @@ import net.tindersamurai.escapy.components.model.ModelRenderer;
 import net.tindersamurai.escapy.components.model.plain.light.LightSourceModel;
 import net.tindersamurai.escapy.components.node.plain.NodeData;
 import net.tindersamurai.escapy.components.stage.plain.LocationSwitcher;
+import net.tindersamurai.escapy.context.game.Escapy;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
+import net.tindersamurai.escapy.graphic.camera.EscapyCamera;
+import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
+import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
+import net.tindersamurai.escapy.graphic.render.fbo.EscapyFrameBuffer;
 import net.tindersamurai.escapy.graphic.render.light.source.LightSource;
+import net.tindersamurai.escapy.graphic.screen.Resolution;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.map.model.IEscapyModelRenderer;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
 import net.tindersamurai.escapy.physics.IEscapyPhysics;
+import net.tindersamurai.escapy.utils.EscapyUtils;
 
 import javax.inject.Inject;
 
@@ -22,6 +31,7 @@ public class GameScreen extends EscapyScreenCore {
 
 	private final IEscapyModelRenderer renderer;
 	private final LocationSwitcher locationSetter;
+	private Thread physicsThread;
 
 	@Inject
 	public GameScreen(
@@ -59,7 +69,7 @@ public class GameScreen extends EscapyScreenCore {
 		physicsManager.updateWorld(delta);
 		renderer.render(model, delta);
 
-		debuger.render(delta);
+		debuger.render();
 	}
 
 	@Override
@@ -68,6 +78,10 @@ public class GameScreen extends EscapyScreenCore {
 	}
 
 
+	@Override
+	public void pause() {
+
+	}
 
 	/**
 	 *  TODO REMOVE DEBUG ONLY!!!
@@ -78,10 +92,23 @@ public class GameScreen extends EscapyScreenCore {
 
 		private DEBUG physDebugConf() {
 			log.info("PHYSICS DEBUG RENDERER PREPARE");
+
 			Box2DDebugRenderer box2DDebugRenderer = new Box2DDebugRenderer();
-			((ModelRenderer) renderer).addExtraRenderData((camera, batch, delta)
-					-> box2DDebugRenderer.render(physicsManager.getWorld(), camera.update().getProjection())
-			);
+			IEscapyCamera cam = GrInjector.getComponent("final-camera");
+			EscapyFBO fbo = new EscapyFrameBuffer(new Resolution(
+					getGameContext().getDefaultScrWidth(),
+					getGameContext().getDefaultScrHeight()
+			));
+
+			EscapyUtils.center(fbo.getSprite(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+			((ModelRenderer) renderer).addExtraRenderData((camera, batch, delta) -> {
+				fbo.begin(() -> {
+					fbo.wipe();
+					box2DDebugRenderer.render(physicsManager.getWorld(), camera.update().getProjection());
+				});
+				batch.setProjectionMatrix(cam.update().getProjection());
+				fbo.draw(batch);
+			});
 			return this;
 		}
 
@@ -91,7 +118,7 @@ public class GameScreen extends EscapyScreenCore {
 			return this;
 		}
 
-		private void render(float delta) {
+		private void render() {
 			lightSource.translate(1.5f, 0);
 		}
 	}

@@ -109,12 +109,11 @@ public class LightSource implements EscapyObject, Disposable {
 
 	public void setPosition(float x, float y) {
 
-		float w = buffer.getSprite().getWidth() * scale;
-		float h = buffer.getSprite().getHeight() * scale;
+		float w = buffer.getSprite().getWidth();// * scale;
+		float h = buffer.getSprite().getHeight();// * scale;
 
 		position[0] = x  - 0.5f * w;
 		position[1] = y - 0.5f * h;
-
 		buffer.getSprite().setPosition(position[0], position[1]);
 	}
 
@@ -131,8 +130,9 @@ public class LightSource implements EscapyObject, Disposable {
 	}
 
 	public void translate(float x, float y) {
-		float[] position = getPosition();
-		setPosition(position[0] + x, position[1] + y);
+		final float xx = buffer.getSprite().getX();
+		final float yy = buffer.getSprite().getY();
+		buffer.getSprite().setPosition(x + xx, y + yy);
 	}
 
 	public void setPosition(float[] position2f) {
@@ -144,8 +144,9 @@ public class LightSource implements EscapyObject, Disposable {
 		return new float[]{position[0] + 0.5f * w, position[1] + 0.5f * h};
 	}
 
-
-
+	public void rotate(float angle) {
+		setAngles(angle, getAngles()[1]);
+	}
 
 
 //	---------------------------------------- SET ---------------------------------------------

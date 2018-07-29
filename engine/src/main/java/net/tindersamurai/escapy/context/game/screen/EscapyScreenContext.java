@@ -2,6 +2,7 @@ package net.tindersamurai.escapy.context.game.screen;
 
 
 import com.badlogic.gdx.Screen;
+import net.tindersamurai.escapy.context.game.EscapyGame;
 
 /**
  * @author Henry on 28/06/17.
@@ -29,4 +30,6 @@ public interface EscapyScreenContext {
 	void setScreen(String name);
 
 	void setScreen(Class<? extends EscapyScreen> screenClass);
+
+	EscapyGame getGame();
 }

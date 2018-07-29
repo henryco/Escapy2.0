@@ -26,7 +26,7 @@
                 </c:physics.shape.box>
                 <c:u.array-auto name="position">
                     <o:float>301</o:float>
-                    <o:float>10</o:float>
+                    <o:float>25</o:float>
                 </c:u.array-auto>
             </c:physics.object.def>
 
@@ -279,7 +279,7 @@
 
                                     <c:u.array-auto name="position">
                                         <o:float>-100</o:float>
-                                        <o:float>150</o:float>
+                                        <o:float>200</o:float>
                                     </c:u.array-auto>
 
                                     <o:float name="scale">1.75</o:float>
