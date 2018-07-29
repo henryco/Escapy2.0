@@ -3,6 +3,8 @@ package net.tindersamurai.activecomponent.core;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
+import net.tindersamurai.activecomponent.parser.EscapyComponentParser;
+import net.tindersamurai.activecomponent.parser.EscapyComponentParserProvider;
 
 import java.lang.reflect.Array;
 import java.util.AbstractMap;
@@ -12,9 +14,9 @@ import java.util.List;
 import java.util.Map.Entry;
 
 @EscapyComponentFactory("u") // u for utility
-public class UtilityCoreComponent {
+public final class UtilityCoreComponent {
 
-	@EscapyComponentFactory("p") // p for primitive
+	@EscapyComponentFactory("p") // p for Primitive
 	public static final class PrimitivesUtilities {
 
 		@EscapyComponent("type") // test: OK
@@ -36,6 +38,36 @@ public class UtilityCoreComponent {
 			}
 		}
 
+	}
+
+	@EscapyComponentFactory("s") // s for System
+	public static final class SystemUtilities {
+
+		@EscapyComponent("property")
+		public String property(@Arg("key") String key) {
+			return System.getProperty(key);
+		}
+
+		@EscapyComponent("exit")
+		public void exit(@Arg("status") int status) {
+			System.exit(status);
+		}
+	}
+
+	@EscapyComponentFactory("l") // l for Loader
+	public static final class LoaderUtilities implements EscapyComponentParserProvider {
+
+		private EscapyComponentParser parser;
+
+		@Override
+		public void provideParser(EscapyComponentParser parser) {
+			this.parser = parser;
+		}
+
+		@EscapyComponent("external")
+		public <T> T external(String file) {
+			return parser.parseComponent(file);
+		}
 	}
 
 	@EscapyComponent("debug") // test: OK
