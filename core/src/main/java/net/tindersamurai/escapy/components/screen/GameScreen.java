@@ -1,7 +1,6 @@
 package net.tindersamurai.escapy.components.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.github.henryco.injector.GrInjector;
 import com.github.henryco.injector.meta.annotations.Provide;
@@ -10,9 +9,7 @@ import net.tindersamurai.escapy.components.model.ModelRenderer;
 import net.tindersamurai.escapy.components.model.plain.light.LightSourceModel;
 import net.tindersamurai.escapy.components.node.plain.NodeData;
 import net.tindersamurai.escapy.components.stage.plain.LocationSwitcher;
-import net.tindersamurai.escapy.context.game.Escapy;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
-import net.tindersamurai.escapy.graphic.camera.EscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFrameBuffer;
@@ -23,22 +20,28 @@ import net.tindersamurai.escapy.map.model.IEscapyModelRenderer;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
 import net.tindersamurai.escapy.physics.IEscapyPhysics;
 import net.tindersamurai.escapy.utils.EscapyUtils;
+import net.tindersamurai.escapy.utils.loop.EscapyThread;
+import net.tindersamurai.escapy.utils.loop.IEscapyThread;
+import net.tindersamurai.escapy.utils.loop.IEscapyUpdateble;
 
 import javax.inject.Inject;
 
 @Provide("game-screen") @Log
-public class GameScreen extends EscapyScreenCore {
+public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 
 	private final IEscapyModelRenderer renderer;
-	private final LocationSwitcher locationSetter;
-	private Thread physicsThread;
+	private final LocationSwitcher locSetter;
+	private final IEscapyThread escapyThread;
+
+	private volatile boolean paused;
 
 	@Inject
 	public GameScreen(
 			IEscapyModelRenderer renderer,
 			LocationSwitcher locationSetter
 	) {
-		this.locationSetter = locationSetter;
+		this.escapyThread = new EscapyThread(5, this);
+		this.locSetter = locationSetter;
 		this.renderer = renderer;
 	}
 
@@ -62,25 +65,40 @@ public class GameScreen extends EscapyScreenCore {
 		physicsManager = node.getNode("PhysicsNode").get().getPhys().getPhysicsManager();
 
 		debuger = new DEBUG().physDebugConf().lightTransConf(node);
+
+		resume();
 	}
 
 	@Override
 	public void render(float delta) {
-		physicsManager.updateWorld(delta);
-		renderer.render(model, delta);
-
-		debuger.render();
+		if (!paused) {
+			renderer.render(model, delta);
+			debuger.render();
+		}
 	}
 
 	@Override
-	public void resize(int width, int height) {
-		// todo
+	public void update(float delta) {
+		if (!paused) {
+			physicsManager.updateWorld(delta);
+		}
 	}
 
+	@Override
+	public void resume() {
+		escapyThread.start();
+		paused = false;
+	}
 
 	@Override
 	public void pause() {
+		escapyThread.stop();
+		paused = true;
+	}
 
+	@Override
+	public void hide() {
+		pause();
 	}
 
 	/**

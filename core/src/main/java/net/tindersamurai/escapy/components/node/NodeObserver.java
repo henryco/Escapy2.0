@@ -1,5 +1,6 @@
 package net.tindersamurai.escapy.components.node;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
@@ -79,16 +80,18 @@ public class NodeObserver implements IEscapyNodeObserver {
 				public void onPhysPositionUpdate(final float x, final float y) {
 					val m = (IEscapySpriteProvider) model;
 					val padding = m.getBindPadding();
-					m.apply(s -> {
+					Gdx.app.postRunnable(() -> m.apply(s -> {
 						final float px = x - (s.getWidth() * 0.5f) + padding[0];
 						final float py = y - (s.getHeight() * 0.5f) + padding[1];
 						s.setPosition(px, py);
-					});
+					}));
 				}
 
 				@Override
 				public void onPhysAngleUpdate(final float angle) {
-					((IEscapySpriteProvider) model).apply(s -> s.setRotation(angle));
+					Gdx.app.postRunnable(() -> (
+							(IEscapySpriteProvider) model).apply(s -> s.setRotation(angle))
+					);
 				}
 
 			});
