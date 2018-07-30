@@ -7,7 +7,7 @@ import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
 import net.tindersamurai.escapy.components.model.ModelRenderer;
 import net.tindersamurai.escapy.components.model.plain.light.LightSourceModel;
-import net.tindersamurai.escapy.components.node.plain.NodeData;
+import net.tindersamurai.escapy.components.node.plain.data.NodeData;
 import net.tindersamurai.escapy.components.stage.plain.LocationSwitcher;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;

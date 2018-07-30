@@ -6,7 +6,8 @@ import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
 import net.tindersamurai.escapy.components.model.plain.RootModel;
-import net.tindersamurai.escapy.components.node.plain.NodeData;
+import net.tindersamurai.escapy.components.node.NodeFactory;
+import net.tindersamurai.escapy.components.node.plain.data.NodeData;
 import net.tindersamurai.escapy.map.node.EscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
@@ -19,19 +20,24 @@ import javax.inject.Singleton;
 public class LocationFactory  {
 
 	private final IEscapyNodeObserver nodeObserver;
+	private final NodeFactory nodeFactory;
 
 	@Inject
-	public LocationFactory(IEscapyNodeObserver nodeObserver) {
+	public LocationFactory(
+			IEscapyNodeObserver nodeObserver,
+			NodeFactory nodeFactory
+	) {
 		this.nodeObserver = nodeObserver;
+		this.nodeFactory = nodeFactory;
 	}
 
 	@SafeVarargs @EscapyComponent("root")
 	public final IEscapyNode<NodeData> root (
 			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
-		return new EscapyNode<NodeData> (new NodeData() {{
-			setModel(new RootModel());
-		}}, "root" ) {{
+		return new EscapyNode<NodeData> (
+				nodeFactory.data(new RootModel()), "root"
+		) {{
 			setObserver(nodeObserver);
 			for (IEscapyNode<NodeData> node : nodes)
 				if (node != null)
@@ -51,7 +57,7 @@ public class LocationFactory  {
 			@Arg("nodes") IEscapyNode<NodeData> ... nodes
 	) {
 		return new EscapyNode<NodeData> (
-				data == null ? new NodeData() : data, id
+				data == null ? nodeFactory.data() : data, id
 		) {{
 			setObserver(nodeObserver);
 			for (IEscapyNode<NodeData> node : nodes)

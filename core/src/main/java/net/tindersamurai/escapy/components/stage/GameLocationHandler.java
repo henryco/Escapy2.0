@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.extern.java.Log;
 import lombok.val;
 import net.tindersamurai.activecomponent.parser.EscapyComponentParser;
-import net.tindersamurai.escapy.components.node.plain.NodeData;
+import net.tindersamurai.escapy.components.node.plain.data.NodeData;
 import net.tindersamurai.escapy.map.location.IEscapyLocation;
 import net.tindersamurai.escapy.map.location.IEscapyLocationHandler;
 import net.tindersamurai.escapy.map.node.IEscapyNode;

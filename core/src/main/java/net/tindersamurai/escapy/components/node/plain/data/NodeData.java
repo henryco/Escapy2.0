@@ -1,14 +1,16 @@
-package net.tindersamurai.escapy.components.node.plain;
+package net.tindersamurai.escapy.components.node.plain.data;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.extern.java.Log;
-import net.tindersamurai.escapy.map.location.IEscapyLocation;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 
-@Data @Log @NoArgsConstructor
-public class NodeData implements IEscapyLocation {
+@Data @Log
+public class NodeData implements INodeData {
+
+	public static NodeData newInstance() {
+		return new NodeData();
+	}
 
 	private final String id; {
 		id = this.hashCode() + ":" + super.hashCode();
@@ -17,6 +19,8 @@ public class NodeData implements IEscapyLocation {
 
 	private IEscapyModel model;
 	private IEscapyPhysObject phys;
+
+	private NodeData() { }
 
 	@Override
 	public void dispose() {
