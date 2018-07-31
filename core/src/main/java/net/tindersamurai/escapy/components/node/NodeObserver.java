@@ -4,17 +4,23 @@ import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
 import lombok.val;
 import net.tindersamurai.escapy.components.model.plain.EmptyModel;
-import net.tindersamurai.escapy.components.node.plain.NodeData;
-import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteProvider;
+import net.tindersamurai.escapy.components.node.plain.merger.INodeDataMerger;
+import net.tindersamurai.escapy.components.node.plain.data.NodeData;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
-import net.tindersamurai.escapy.physics.event.IEscapyPhysListener;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Provide @Singleton @Log
 public class NodeObserver implements IEscapyNodeObserver {
 
+	private final INodeDataMerger merger;
+
+	@Inject
+	public NodeObserver(INodeDataMerger merger) {
+		this.merger = merger;
+	}
 
 	@Override @SuppressWarnings("unchecked")
 	public void nodeAdded(IEscapyNode parent, IEscapyNode node) {
@@ -25,8 +31,7 @@ public class NodeObserver implements IEscapyNodeObserver {
 		val nodeData = ((IEscapyNode<NodeData>) node).get();
 
 		addChildModel(parent, nodeData);
-		mergeModelWithPhys(nodeData);
-
+		merger.mergeNodeData(nodeData);
 	}
 
 	@Override @SuppressWarnings("unchecked")
@@ -61,29 +66,5 @@ public class NodeObserver implements IEscapyNodeObserver {
 	private static void addChildModel(IEscapyNode<NodeData> parent, NodeData nodeData) {
 		log.info("" + nodeData.getModel());
 		parent.get().getModel().getNestedModels().add(nodeData.getModel());
-	}
-
-	private static void mergeModelWithPhys(NodeData nodeData) {
-		val model = nodeData.getModel();
-		val phys = nodeData.getPhys();
-
-		log.info(model + " : " + phys);
-
-		if (phys == null) return;
-		if (model instanceof IEscapySpriteProvider) {
-			phys.setPhysListener(new IEscapyPhysListener() {
-
-				@Override
-				public void onPhysPositionUpdate(final float x, final float y) {
-					((IEscapySpriteProvider) model).apply(s -> s.setPosition(x, y));
-				}
-
-				@Override
-				public void onPhysAngleUpdate(final float angle) {
-					((IEscapySpriteProvider) model).apply(s -> s.setRotation(angle));
-				}
-
-			});
-		}
 	}
 }
