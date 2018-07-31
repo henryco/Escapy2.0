@@ -1,6 +1,5 @@
 package net.tindersamurai.escapy.components.node.plain.merger;
 
-import com.badlogic.gdx.Gdx;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
 import lombok.val;
@@ -26,7 +25,8 @@ public class NodeDataMerger implements INodeDataMerger {
 		if (phys == null) return;
 		if (model instanceof IEscapySpriteProvider) {
 			log.info("SETTING UP PHYS LISTENER");
-			phys.setPhysListener(new IEscapyPhysListener() {
+			val pixelScale = phys.getPhysicsManager().getPixelScale();
+			val listener = new IEscapyPhysListener() {
 
 				private Float lastX = null, lastY = null;
 				private Float lastAngle = null;
@@ -40,11 +40,11 @@ public class NodeDataMerger implements INodeDataMerger {
 
 					val m = (IEscapySpriteProvider) model;
 					val padding = m.getBindPadding();
-					Gdx.app.postRunnable(() -> m.apply(s -> {
-						final float px = x - (s.getWidth() * 0.5f) + padding[0];
-						final float py = y - (s.getHeight() * 0.5f) + padding[1];
+					m.apply(s -> {
+						final float px = (x * pixelScale) - (s.getWidth() * 0.5f) + padding[0];
+						final float py = (y * pixelScale) - (s.getHeight() * 0.5f) + padding[1];
 						s.setPosition(px, py);
-					}));
+					});
 
 					lastX = x;
 					lastY = y;
@@ -55,14 +55,16 @@ public class NodeDataMerger implements INodeDataMerger {
 
 					if (lastAngle != null && angle == lastAngle)
 						return;
-
-					Gdx.app.postRunnable(() -> (
-							(IEscapySpriteProvider) model).apply(s -> s.setRotation(angle))
-					);
+					((IEscapySpriteProvider) model).apply(s -> s.setRotation(angle));
 					lastAngle = angle;
 				}
 
-			});
+			};
+			phys.setPhysListener(listener);
+			val position = phys.getFixture().getBody().getPosition();
+			val angle = phys.getFixture().getBody().getAngle();
+			listener.onPhysPositionUpdate(position.x, position.y);
+			listener.onPhysAngleUpdate(angle);
 		}
 	}
 }

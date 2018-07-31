@@ -8,4 +8,6 @@ public interface IEscapyPhysics extends Disposable {
 	void updateWorld(float delta);
 
 	World getWorld();
+
+	float getPixelScale();
 }

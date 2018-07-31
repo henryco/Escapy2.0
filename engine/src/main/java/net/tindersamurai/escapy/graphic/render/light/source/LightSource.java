@@ -94,7 +94,7 @@ public class LightSource implements EscapyObject, Disposable {
 
 	public void setResolution(Resolution resolution) {
 
-		region = new Texture(resolution.width, resolution.height, Pixmap.Format.RGBA8888);
+		region = new Texture(((int) resolution.width), (int) resolution.height, Pixmap.Format.RGBA8888);
 		camera = new EscapyCamera(resolution);
 		lightSource.setResolution(resolution);
 

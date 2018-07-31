@@ -30,6 +30,7 @@ public class PhysicsFactory {
 	public final IEscapyPhysObject physicsManager(
 			@Arg("gravity") Float[] gravity,
 			@Arg("fps") Float fps,
+			@Arg("scale") Float scale,
 			@Arg("objects") Function<IEscapyPhysics, IEscapyPhysObject>... objects
 	) {
 		objectMap.clear();
@@ -39,6 +40,7 @@ public class PhysicsFactory {
 
 		physics = new EscapyPhysWorld (
 				gravity == null ? new Vector2(0, -9.8f) : new Vector2(gravity[0], gravity[1]),
+				scale == null ? 1f : scale,
 				fps == null ? 1f / 60f : 1f / fps
 		);
 		val object = new PhysManagerWrapper(MANAGER_ID);
@@ -68,10 +70,10 @@ public class PhysicsFactory {
 				if (vertices != null) {
 					float[] vert = new float[vertices.length];
 					for (int i = 0; i < vert.length; i++)
-						vert[i] = vertices[i];
+						vert[i] = vertices[i] / physics.getPixelScale();
 					set(vert);
 				}
-				if (radius != null) setRadius(radius);
+				if (radius != null) setRadius(radius / physics.getPixelScale());
 			}};
 		}
 
@@ -81,8 +83,11 @@ public class PhysicsFactory {
 				@Arg("radius") Float radius
 		) {
 			return () -> new PolygonShape() {{
-				if (dim != null) setAsBox(dim[0] * 0.5f, dim[1] * 0.5f);
-				if (radius != null) setRadius(radius);
+				if (dim != null) setAsBox(
+						dim[0] * 0.5f / physics.getPixelScale(),
+						dim[1] * 0.5f / physics.getPixelScale()
+				);
+				if (radius != null) setRadius(radius / physics.getPixelScale());
 			}};
 		}
 
@@ -92,8 +97,11 @@ public class PhysicsFactory {
 				@Arg("radius") Float radius
 		) {
 			return () -> new CircleShape() {{
-				if (pos != null) setPosition(new Vector2(pos[0], pos[1]));
-				if (radius != null) setRadius(radius);
+				if (pos != null) setPosition(new Vector2(
+						pos[0] / physics.getPixelScale(),
+						pos[1] / physics.getPixelScale()
+				));
+				if (radius != null) setRadius(radius / physics.getPixelScale());
 			}};
 		}
 
@@ -106,10 +114,10 @@ public class PhysicsFactory {
 				if (vertices != null) {
 					float[] vert = new float[vertices.length];
 					for (int i = 0; i < vert.length; i++)
-						vert[i] = vertices[i];
+						vert[i] = vertices[i] / physics.getPixelScale();
 					createChain(vert);
 				}
-				if (radius != null) setRadius(radius);
+				if (radius != null) setRadius(radius / physics.getPixelScale());
 			}};
 		}
 
@@ -119,8 +127,13 @@ public class PhysicsFactory {
 				@Arg("radius") Float radius
 		) {
 			return () -> new EdgeShape() {{
-				if (vert != null) set(vert[0], vert[1], vert[2], vert[3]);
-				if (radius != null) setRadius(radius);
+				if (vert != null) set(
+						vert[0] / physics.getPixelScale(),
+						vert[1] / physics.getPixelScale(),
+						vert[2] / physics.getPixelScale(),
+						vert[3] / physics.getPixelScale()
+				);
+				if (radius != null) setRadius(radius / physics.getPixelScale());
 			}};
 		}
 	}
@@ -161,7 +174,10 @@ public class PhysicsFactory {
 					bodyDef.type = BodyDef.BodyType.valueOf(type);
 
 					if (lVel != null) bodyDef.linearVelocity.set(lVel[0], lVel[1]);
-					if (pos != null) bodyDef.position.set(pos[0], pos[1]);
+					if (pos != null) bodyDef.position.set(
+							pos[0] / physics.getPixelScale(),
+							pos[1] / physics.getPixelScale()
+					);
 					if (gScale != null) bodyDef.gravityScale = gScale;
 					if (aDamp != null) bodyDef.angularDamping = aDamp;
 					if (aVel != null) bodyDef.angularVelocity = aVel;

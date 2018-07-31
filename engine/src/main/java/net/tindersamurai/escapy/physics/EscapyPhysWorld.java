@@ -1,5 +1,6 @@
 package net.tindersamurai.escapy.physics;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
@@ -14,18 +15,20 @@ import java.lang.reflect.Field;
 @Log
 public class EscapyPhysWorld implements IEscapyPhysics {
 
+	private @Getter final float pixelScale;
 	private @Getter final float timeStep;
 	private @Getter final World world;
 	private final LongMap<Fixture> fixtures;
 
 	public EscapyPhysWorld (
 			Vector2 gravity,
+			float pixelScale,
 			float timeStep
 	) {
 		log.info("NEW PHYS WORLD INSTANCE");
 		this.world = new World(gravity, true);
 		this.timeStep = timeStep;
-
+		this.pixelScale = pixelScale;
 		this.fixtures = accessFixtures();
 	}
 
@@ -42,16 +45,18 @@ public class EscapyPhysWorld implements IEscapyPhysics {
 			world.step(timeStep, 6, 2);
 			accumulator -= timeStep;
 
-			for (val fixture : fixtures) {
-				val data = fixture.value.getUserData();
-				if (data instanceof IEscapyPhysListener) {
-					val l = (IEscapyPhysListener) data;
-					val body = fixture.value.getBody();
-					val position = body.getPosition();
-					l.onPhysPositionUpdate(position.x, position.y);
-					l.onPhysAngleUpdate(body.getAngle());
+			Gdx.app.postRunnable(() -> {
+				for (val fixture : fixtures) {
+					val data = fixture.value.getUserData();
+					if (data instanceof IEscapyPhysListener) {
+						val l = (IEscapyPhysListener) data;
+						val body = fixture.value.getBody();
+						val position = body.getPosition();
+						l.onPhysPositionUpdate(position.x, position.y);
+						l.onPhysAngleUpdate(body.getAngle());
+					}
 				}
-			}
+			});
 		}
 	}
 
