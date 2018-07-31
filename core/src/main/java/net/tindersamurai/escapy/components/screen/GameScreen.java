@@ -1,13 +1,10 @@
 package net.tindersamurai.escapy.components.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.github.henryco.injector.GrInjector;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
-import lombok.val;
 import net.tindersamurai.escapy.components.model.ModelRenderer;
 import net.tindersamurai.escapy.components.model.plain.light.LightSourceModel;
 import net.tindersamurai.escapy.components.node.plain.data.NodeData;
@@ -52,8 +49,6 @@ public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 	private IEscapyPhysics physicsManager;
 	private IEscapyModel model;
 
-	private DEBUG debuger;
-
 	@Override
 	public void show() {
 		// get location directly from DI Container
@@ -67,7 +62,7 @@ public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 		log.info("GET PHYSICS DATA DIRECTLY FROM LOCATION NODE");
 		physicsManager = node.getNode("PhysicsNode").get().getPhys().getPhysicsManager();
 
-		debuger = new DEBUG().physDebugConf().lightTransConf(node);
+		new DEBUG().physDebugConf().lightTransConf(node);
 
 		resume();
 	}
@@ -75,7 +70,6 @@ public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 	@Override
 	public void render(float delta) {
 		renderer.render(model, delta);
-		debuger.render();
 	}
 
 	@Override
@@ -139,18 +133,14 @@ public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 				});
 				batch.setProjectionMatrix(cam.update().getProjection());
 				fbo.draw(batch);
+				lightSource.translate(1.5f, 0);
 			});
 			return this;
 		}
 
-		private DEBUG lightTransConf(IEscapyNode<NodeData> node) {
+		private void lightTransConf(IEscapyNode<NodeData> node) {
 			IEscapyNode<NodeData> lightNode = node.getNode("LightsNode:Layer0LightPack:Layer0LightPackShift:LightType0:LightSource1");
 			lightSource = ((LightSourceModel) lightNode.get().getModel()).getLightSource();
-			return this;
-		}
-
-		private void render() {
-			lightSource.translate(1.5f, 0);
 		}
 	}
 

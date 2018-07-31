@@ -165,6 +165,8 @@ public class PhysicsFactory {
 				@Arg("restitution") Float restitution,
 				@Arg("friction") Float friction,
 				@Arg("sensor") Boolean sensor,
+				@Arg("mass") Float _mass,
+				@Arg("inertia") Float inertia,
 				@Arg("shape") Supplier<Shape> shape
 		) {
 			return physics -> {
@@ -187,7 +189,13 @@ public class PhysicsFactory {
 					if (angle != null) bodyDef.angle = angle;
 				}
 
-				val body = world.createBody(bodyDef);
+				val body = world.createBody(bodyDef); {
+					if (_mass != null || inertia != null)
+						body.setMassData(new MassData() {{
+							if (_mass != null) this.mass = _mass;
+							if (inertia != null) this.I = inertia;
+						}});
+				}
 				val _shape = shape.get();
 
 				val fixtureDef = new FixtureDef(); {
@@ -223,12 +231,14 @@ public class PhysicsFactory {
 				@Arg("restitution") Float rest,
 				@Arg("friction") Float friction,
 				@Arg("sensor") Boolean sensor,
+				@Arg("mass") Float mass,
+				@Arg("inertia") Float inertia,
 				@Arg("shape") Supplier<Shape> shape
 		) {
 			val o = objectDef (
 					id, type, pos, angle, rotation, lDamp,
 					aDamp, bullet, gScale, lVel, aVel,
-					dens, rest, friction, sensor, shape
+					dens, rest, friction, sensor, mass, inertia, shape
 			).apply(physics);
 			o.setPhysicsManager(physics);
 			if (o.getId() != null)
