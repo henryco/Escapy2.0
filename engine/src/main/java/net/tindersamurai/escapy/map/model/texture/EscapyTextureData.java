@@ -2,7 +2,7 @@ package net.tindersamurai.escapy.map.model.texture;
 
 import lombok.Data;
 
-@Data public class EscapyTextureData implements IEscapyTexture {
+@Data public class EscapyTextureData implements IEscapyTextureData {
 
 	public final String diffuse;
 	public final String normals;
@@ -10,6 +10,8 @@ import lombok.Data;
 
 	private boolean flipX;
 	private boolean flipY;
+
+	private float rotation = 0f;
 
 	private float scaleX = 1f;
 	private float scaleY = 1f;

@@ -10,10 +10,10 @@ import lombok.Value;
 @Value @AllArgsConstructor
 public final class Resolution {
 
-	public int width, height;
+	public float width, height;
 	public boolean bool;
 
-	public Resolution(int width, int height) {
+	public Resolution(float width, float height) {
 		this(width, height, false);
 	}
 

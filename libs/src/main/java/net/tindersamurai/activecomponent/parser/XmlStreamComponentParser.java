@@ -89,6 +89,9 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 			listener = (EscapyComponentFactoryListener) factory;
 		else listener = null;
 
+		if (factory instanceof EscapyComponentParserProvider)
+			((EscapyComponentParserProvider) factory).provideParser(this);
+
 		boolean enter = true;
 		if (listener != null && !listener.enterComponent(componentName))
 			enter = false;

@@ -4,8 +4,67 @@
         xmlns:m="https://tindersamurai.net/escapy/ac/method"
 >
 
+    <c:location.constructor>
+
+        <c:physics.manager>
+            <c:u.array-auto name="gravity">
+                <o:float>0</o:float>
+                <o:float>-9.8</o:float>
+            </c:u.array-auto>
+            <o:float name="fps">45</o:float>
+            <!-- Scale means that for physics 1m == 113.888888889px -->
+            <!-- which also means that default camera resolution -->
+            <!-- [1280 x 720]px == [11.23902439 x 6.32195122]m -->
+            <o:float name="scale">113.888888889</o:float>
+
+            <!-- TODO MOVE TO EXTERNAL FILE (MAYBE) -->
+            <c:physics.object.def>
+                <o:string name="id">ground</o:string>
+                <o:string name="type">StaticBody</o:string>
+                <o:boolean name="rotation">false</o:boolean>
+                <c:physics.shape.box name="shape">
+                    <c:u.array-auto name="size">
+                        <o:float>600</o:float>
+                        <o:float>15</o:float>
+                    </c:u.array-auto>
+                </c:physics.shape.box>
+                <c:u.array-auto name="position">
+                    <o:float>301</o:float>
+                    <o:float>25</o:float>
+                </c:u.array-auto>
+            </c:physics.object.def>
+
+            <c:physics.object.def>
+                <o:string name="id"> boi </o:string>
+                <o:string name="type">DynamicBody</o:string>
+                <o:boolean name="rotation">false</o:boolean>
+                <c:physics.shape.box name="shape">
+                    <c:u.array-auto>
+                        <o:float>55</o:float>
+                        <o:float>205</o:float>
+                    </c:u.array-auto>
+                </c:physics.shape.box>
+                <c:u.array-auto name="position">
+                    <o:float>150</o:float>
+                    <o:float>300</o:float>
+                </c:u.array-auto>
+            </c:physics.object.def>
+
+        </c:physics.manager>
+    </c:location.constructor>
+
+
+    <c:location.physics>
+        <c:node.data>
+            <c:physics.object.get>
+                <o:string>manager</o:string>
+            </c:physics.object.get>
+        </c:node.data>
+    </c:location.physics>
+
+
     <!-- HERE WE STORE LAYERS -->
-    <c:location.main-node>
+    <c:location.main>
 
         <c:location.node>  <!-- LAYER NODE -->
             <o:string name="id">LayerBackground</o:string> <!-- NODE ID -->
@@ -34,14 +93,18 @@
 
             <c:node.data>
                 <c:model.layer>
-                    <c:model.helper.w-fbo><o:string> Layer0FboDiffuse </o:string></c:model.helper.w-fbo>
-                    <c:model.helper.w-fbo><o:string> Layer0FboNormals </o:string></c:model.helper.w-fbo>
+                    <c:model.helper.w-fbo>
+                        <o:string>Layer0FboDiffuse</o:string>
+                    </c:model.helper.w-fbo>
+                    <c:model.helper.w-fbo>
+                        <o:string>Layer0FboNormals</o:string>
+                    </c:model.helper.w-fbo>
                 </c:model.layer>
             </c:node.data>
 
 
             <c:location.node>
-                <o:string> Layer0Shift </o:string>
+                <o:string>Layer0Shift</o:string>
                 <c:node.data>
                     <c:model.shift/>
                 </c:node.data>
@@ -51,8 +114,8 @@
                     <c:node.data>
                         <c:model.texture.static>
                             <c:model.helper.t-props>
-                                <o:string namd="diffuse"> locations/demo/resources/diffuse/Loc_33.png </o:string>
-                                <o:string namd="normals"> locations/demo/resources/normals/Loc_33.png </o:string>
+                                <o:string namd="diffuse">locations/demo/resources/diffuse/Loc_33.png</o:string>
+                                <o:string namd="normals">locations/demo/resources/normals/Loc_33.png</o:string>
                             </c:model.helper.t-props>
                         </c:model.texture.static>
                     </c:node.data>
@@ -63,137 +126,151 @@
                     <c:node.data>
                         <c:model.texture.static>
                             <c:model.helper.t-props>
-                                <o:string name="diffuse"> locations/demo/resources/diffuse/bf_idle.png </o:string>
-                                <o:string name="normals"> locations/demo/resources/normals/bf_idle.png </o:string>
+                                <o:string name="diffuse">locations/demo/resources/diffuse/bf_idle.png</o:string>
+                                <o:string name="normals">locations/demo/resources/normals/bf_idle.png</o:string>
                                 <o:boolean name="flipX">true</o:boolean>
                                 <o:float name="width">256</o:float>
-                                <o:float name="height">256</o:float>
-                                <o:float name="x">75</o:float>
-                                <o:float name="y">35</o:float>
+                                <o:float name="height">256</o:float>>
                             </c:model.helper.t-props>
+                            <c:u.array-auto name="bind">
+                                <!-- left -->
+                                <o:float>5</o:float>
+                                <!-- top -->
+                                <o:float>25</o:float>
+                            </c:u.array-auto>
                         </c:model.texture.static>
+                       <c:physics.object.get>
+                           <o:string>boi</o:string>
+                       </c:physics.object.get>
                     </c:node.data>
                 </c:location.node>
 
             </c:location.node>
         </c:location.node>
 
-    </c:location.main-node>
+    </c:location.main>
 
 
-
-    <c:location.mask-node>
+    <c:location.masks>
 
         <c:location.node>
-            <o:string> BackgroundMask </o:string>
+            <o:string>BackgroundMask</o:string>
             <c:node.data>
                 <c:model.mask>
-                    <c:model.helper.w-fbo><o:string> LayerBackgroundFboDiffuse </o:string></c:model.helper.w-fbo>
-                    <c:model.helper.w-fbo><o:string> BackgroundMaskFbo </o:string></c:model.helper.w-fbo>
+                    <c:model.helper.w-fbo>
+                        <o:string>LayerBackgroundFboDiffuse</o:string>
+                    </c:model.helper.w-fbo>
+                    <c:model.helper.w-fbo>
+                        <o:string>BackgroundMaskFbo</o:string>
+                    </c:model.helper.w-fbo>
                 </c:model.mask>
             </c:node.data>
         </c:location.node>
 
         <c:location.node>
-            <o:string> Layer0Mask </o:string>
+            <o:string>Layer0Mask</o:string>
             <c:node.data>
                 <c:model.mask>
-                    <c:model.helper.w-fbo><o:string> Layer0FboDiffuse </o:string></c:model.helper.w-fbo>
-                    <c:model.helper.w-fbo><o:string> Layer0MaskFbo </o:string></c:model.helper.w-fbo>
+                    <c:model.helper.w-fbo>
+                        <o:string>Layer0FboDiffuse</o:string>
+                    </c:model.helper.w-fbo>
+                    <c:model.helper.w-fbo>
+                        <o:string>Layer0MaskFbo</o:string>
+                    </c:model.helper.w-fbo>
                 </c:model.mask>
             </c:node.data>
         </c:location.node>
 
-    </c:location.mask-node>
+    </c:location.masks>
 
 
-
-    <c:location.light-node>
+    <c:location.lights>
 
         <c:location.node>
-            <o:string> BackgroundNoLights </o:string>
+            <o:string>BackgroundNoLights</o:string>
             <c:node.data>
                 <c:model.texture.buffer>
                     <c:model.helper.w-fbo>
-                        <o:string> BackgroundMaskFbo </o:string>
+                        <o:string>BackgroundMaskFbo</o:string>
                     </c:model.helper.w-fbo>
                 </c:model.texture.buffer>
             </c:node.data>
         </c:location.node>
 
         <c:location.node>
-            <o:string> Layer0LightPack </o:string>
+            <o:string>Layer0LightPack</o:string>
             <c:node.data>
                 <c:model.light.pack>
 
+                    <!-- FLAT LIGHT PROCESSOR -->
                     <!--<c:model.light.processor.flat>-->
-                        <!--<o:boolean name="enable"> true </o:boolean>-->
-                        <!--<o:float name="threshold"> 0.075 </o:float>-->
+                    <!--<o:boolean name="enable"> true </o:boolean>-->
+                    <!--<o:float name="threshold"> 0.075 </o:float>-->
                     <!--</c:model.light.processor.flat>-->
 
                     <c:model.light.processor.volumetric>
-                        <o:boolean name="enable"> true </o:boolean>
-                        <o:float name="sprite"> 55 </o:float>
-                        <o:float name="threshold"> 0 </o:float>
-                        <o:float name="height"> 0.8175 </o:float>
-                        <o:float name="ambient"> 0.45 </o:float>
-                        <o:float name="direct"> 9 </o:float>
-                        <o:float name="shadow"> 0.65 </o:float>
+                        <o:boolean name="enable">true</o:boolean>
+                        <o:float name="sprite">55</o:float>
+                        <o:float name="threshold">0</o:float>
+                        <o:float name="height">0.8175</o:float>
+                        <o:float name="ambient">0.45</o:float>
+                        <o:float name="direct">9</o:float>
+                        <o:float name="shadow">0.65</o:float>
                     </c:model.light.processor.volumetric>
 
                     <c:model.helper.w-fbo name="color-fbo">
-                        <o:string> Layer0LightPackColorFbo </o:string>
+                        <o:string>Layer0LightPackColorFbo</o:string>
                     </c:model.helper.w-fbo>
 
                     <c:model.helper.w-fbo name="normals-fbo">
-                        <o:string> Layer0FboNormals </o:string>
+                        <o:string>Layer0FboNormals</o:string>
                     </c:model.helper.w-fbo>
 
                     <c:model.helper.w-fbo name="mask-fbo">
-                        <o:string> Layer0MaskFbo </o:string>
+                        <o:string>Layer0MaskFbo</o:string>
                     </c:model.helper.w-fbo>
                 </c:model.light.pack>
             </c:node.data>
 
             <c:location.node>
-                <o:string> Layer0LightPackShift </o:string>
+                <o:string>Layer0LightPackShift</o:string>
                 <c:node.data>
                     <c:model.shift/>
                 </c:node.data>
 
                 <c:location.node>
-                    <o:string> LightType0 </o:string>
+                    <o:string>LightType0</o:string>
                     <c:node.data>
                         <c:model.light.type>
                             <c:model.light.shader name="shader">
-                                <o:string> ADD_OVERLAY_STRONG </o:string>
+                                <o:string>ADD_OVERLAY_STRONG</o:string>
                             </c:model.light.shader>
 
                             <c:model.helper.w-fbo name="diffuse-fbo">
-                                <o:string> Layer0FboDiffuse </o:string>
+                                <o:string>Layer0FboDiffuse</o:string>
                             </c:model.helper.w-fbo>
 
                             <c:model.helper.w-fbo name="color-fbo">
-                                <o:string> Layer0LightPackColorFbo </o:string>
+                                <o:string>Layer0LightPackColorFbo</o:string>
                             </c:model.helper.w-fbo>
 
                             <c:model.helper.w-fbo name="light-fbo">
-                                <o:string> Layer0LightPackLightFbo </o:string>
+                                <o:string>Layer0LightPackLightFbo</o:string>
                             </c:model.helper.w-fbo>
                         </c:model.light.type>
                     </c:node.data>
 
                     <c:location.node>
-                        <o:string> LightSource1 </o:string>
+                        <o:string>LightSource1</o:string>
                         <c:node.data>
                             <c:model.light.source>
                                 <c:model.helper.l-props>
 
                                     <c:model.helper.color name="color">
                                         <c:u.array-auto name="RGB255">
-                                            <o:float> 40  </o:float>
-                                            <o:float> 34  </o:float>
-                                            <o:float> 200 </o:float>
+                                            <o:float>40</o:float>
+                                            <o:float>34</o:float>
+                                            <o:float>200</o:float>
                                         </c:u.array-auto>
                                     </c:model.helper.color>
 
@@ -204,10 +281,10 @@
 
                                     <c:u.array-auto name="position">
                                         <o:float>-100</o:float>
-                                        <o:float>150</o:float>
+                                        <o:float>200</o:float>
                                     </c:u.array-auto>
 
-                                    <o:float name="scale"> 1.5 </o:float>
+                                    <o:float name="scale">1.75</o:float>
 
                                 </c:model.helper.l-props>
                             </c:model.light.source>
@@ -221,7 +298,7 @@
             </c:location.node>
         </c:location.node>
 
-    </c:location.light-node>
+    </c:location.lights>
 
 
 </c:location.root>

@@ -1,6 +1,6 @@
 package net.tindersamurai.escapy.map.model.texture;
 
-public interface IEscapyTexture {
+public interface IEscapyTextureData {
 
 	float getX();
 	float getY();
@@ -8,6 +8,7 @@ public interface IEscapyTexture {
 	float getScaleY();
 	float getWidth();
 	float getHeight();
+	float getRotation();
 	boolean isFlipX();
 	boolean isFlipY();
 }

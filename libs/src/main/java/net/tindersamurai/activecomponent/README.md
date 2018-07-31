@@ -20,8 +20,8 @@
 взаимодействием с интерфейсом **`EscapyComponentParser`** (его реализациями). Интерфейс описывает 3 метода
 чья роль ясна из названий, это:
 
-* **`void setComponentFactory(IEscapyComponentFactory factory);`**
-* **`void setObjectFactory(IEscapyObjectFactory factory);`**
+* **`void setComponentFactory(IEscapyComponentFactory nodeFactory);`**
+* **`void setObjectFactory(IEscapyObjectFactory nodeFactory);`**
 * **`<T> T parseComponent(String file);`**
 
 Первые 2 метода нужны если потребуется расширить функциональность библиотеки и/или используемой
@@ -174,7 +174,7 @@ C полным списком можно ознакомиться загляну
 * **`<new> `** - тэг применимый к конструкторам объектов java
 
 
-### **Сomponents**
+### **Components**
 Каждый файл конфигурации должен иметь хотя бы один (и только один) корневой компонент, который 
 будет создан и возвращен при вызове метода **`<T> T parseComponent(String file);`** 
 из интерфейса **`EscapyComponentParser`**.
@@ -184,10 +184,10 @@ C полным списком можно ознакомиться загляну
 
 Например: 
 ```XML 
-	<c:some-comp-factory.nested-factory.component-name />
+	<c:some-comp-nodeFactory.nested-nodeFactory.component-name />
 ```
 
-* **`some-comp-factory`**, **`nested-factory`** - это фабрики компонентов отмеченные в коде аннотацией **`@EscapyComponentFactory(%name%)`**
+* **`some-comp-nodeFactory`**, **`nested-nodeFactory`** - это фабрики компонентов отмеченные в коде аннотацией **`@EscapyComponentFactory(%name%)`**
 * **`component-name`** - это компонент, метод из фабрики отмеченный аннотацией **`@EscapyComponent(%name%)`**
 
 
@@ -211,13 +211,13 @@ C полным списком можно ознакомиться загляну
 
 
 ```XML
-	<c:factory.component>
+	<c:nodeFactory.component>
 		<o:float name="someFloat"> 42 </o:float>
 		
-		<c:factory-2.other name="other">
+		<c:nodeFactory-2.other name="other">
 			<o:string> test </o:string>
-		</c:factory-2.other>
-	</c:factory.component>
+		</c:nodeFactory-2.other>
+	</c:nodeFactory.component>
 ```
 
 ### **Objects**

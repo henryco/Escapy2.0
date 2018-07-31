@@ -1,9 +1,7 @@
 package net.tindersamurai.escapy.context.game.configuration;
 
 import net.tindersamurai.escapy.context.annotation.meta.AnnotationProcessor;
-import net.tindersamurai.escapy.context.game.Escapy;
 import net.tindersamurai.escapy.context.game.configuration.util.DefaultPropertyKeysContainer;
-import net.tindersamurai.escapy.context.game.configuration.util.PropertyKeysStorage;
 
 import java.util.HashMap;
 import java.util.Map;

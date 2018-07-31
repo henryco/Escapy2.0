@@ -3,16 +3,21 @@ package net.tindersamurai.escapy.components.model.plain.texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import lombok.extern.java.Log;
+import lombok.val;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
+import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteProvider;
 import net.tindersamurai.escapy.map.model.texture.EscapyTextureData;
-import net.tindersamurai.escapy.map.model.texture.IEscapyTexture;
+import net.tindersamurai.escapy.map.model.texture.IEscapyTextureData;
 import net.tindersamurai.escapy.utils.files.EscapyFiles;
 
+import java.util.function.Consumer;
+
 @Log
-public class StaticTexture implements IEscapyModel, IEscapyTexture {
+public class StaticTexture implements IEscapyModel, IEscapySpriteProvider {
 
 	private Sprite[] sprites; // diff, normal, light
+	private float[] bindPadding = {0, 0};
 
 	public StaticTexture (EscapyTextureData data) {
 		log.info(data.toString());
@@ -26,12 +31,15 @@ public class StaticTexture implements IEscapyModel, IEscapyTexture {
 			initialize(sprite, data);
 	}
 
-	private static void initialize (Sprite sprite, IEscapyTexture data) {
+	private static void initialize (Sprite sprite, IEscapyTextureData data) {
 		if (sprite == null) return;
+
+		log.info("Initialize sprite: " + sprite);
 
 		sprite.setScale(data.getScaleX(), data.getScaleY());
 		sprite.setFlip(data.isFlipX(), data.isFlipY());
 		sprite.setPosition(data.getX(), data.getY());
+		sprite.setRotation(data.getRotation());
 
 		sprite.setSize (
 				data.getWidth() == 0 ? sprite.getWidth() : data.getWidth(),
@@ -61,42 +69,24 @@ public class StaticTexture implements IEscapyModel, IEscapyTexture {
 	}
 
 	@Override
-	public float getX() {
-		return sprites[0].getX();
+	public void apply(Consumer<Sprite> s) {
+		for (val sprite : sprites)
+			if (sprite != null)
+				s.accept(sprite);
 	}
 
 	@Override
-	public float getY() {
-		return sprites[0].getY();
+	public Sprite provideEffectiveSprite() {
+		return sprites[0] != null ? sprites[0] : sprites[1] != null ? sprites[1] : sprites[2];
 	}
 
 	@Override
-	public float getScaleX() {
-		return sprites[0].getScaleX();
+	public float[] getBindPadding() {
+		return new float[]{bindPadding[0], bindPadding[1]};
 	}
 
 	@Override
-	public float getScaleY() {
-		return sprites[0].getScaleY();
-	}
-
-	@Override
-	public float getWidth() {
-		return sprites[0].getWidth();
-	}
-
-	@Override
-	public float getHeight() {
-		return sprites[0].getHeight();
-	}
-
-	@Override
-	public boolean isFlipX() {
-		return sprites[0].isFlipX();
-	}
-
-	@Override
-	public boolean isFlipY() {
-		return sprites[0].isFlipY();
+	public void setBindPadding(float left, float top) {
+		this.bindPadding = new float[]{left, top};
 	}
 }

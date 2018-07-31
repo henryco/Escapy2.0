@@ -122,6 +122,7 @@ public class ModelFactory {
 				@Arg("diffuse") String diffuse,
 				@Arg("normals") String normals,
 				@Arg("shadows") String shadows,
+				@Arg("rotation") Float rotation,
 				@Arg("x") Float x,
 				@Arg("y") Float y,
 				@Arg("width") Float width,
@@ -142,6 +143,8 @@ public class ModelFactory {
 
 				if (flipX != null) setFlipX(flipX);
 				if (flipY != null) setFlipY(flipY);
+
+				if (rotation != null) setRotation(rotation);
 
 				if (x != null) setX(x);
 				if (y != null) setY(y);
@@ -200,20 +203,26 @@ public class ModelFactory {
 		public final IEscapyModel staticTextureFull (
 				@Arg("diffuse") String diffuseFile,
 				@Arg("normals") String normalsFile,
-				@Arg("shadows") String shadowsFile
+				@Arg("shadows") String shadowsFile,
+				@Arg("bind") Float[] bind
 		) {
 			val root = context.getConfigsFilePath();
 			val a = diffuseFile == null ? null : root + diffuseFile;
 			val b = normalsFile == null ? null : root + normalsFile;
 			val c = shadowsFile == null ? null : root + shadowsFile;
-			return new FullStaticTexture(resolution, a, b, c);
+			return new FullStaticTexture(resolution, a, b, c) {{
+				if (bind != null) setBindPadding(bind[0], bind[1]);
+			}};
 		}
 
 		@EscapyComponent("static")
 		public final IEscapyModel staticTexture (
-				@Arg("properties") EscapyTextureData props
+				@Arg("properties") EscapyTextureData props,
+				@Arg("bind") Float[] bind
 		) {
-			return new StaticTexture(props);
+			return new StaticTexture(props) {{
+				if (bind != null) setBindPadding(bind[0], bind[1]);
+			}};
 		}
 
 		@SafeVarargs @EscapyComponent("buffer")
