@@ -4,34 +4,22 @@ import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
 import lombok.val;
 import net.tindersamurai.escapy.components.model.plain.EmptyModel;
-import net.tindersamurai.escapy.components.node.plain.merger.INodeDataMerger;
 import net.tindersamurai.escapy.components.node.plain.data.NodeData;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
 import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Provide @Singleton @Log
 public class NodeObserver implements IEscapyNodeObserver {
 
-	private final INodeDataMerger merger;
-
-	@Inject
-	public NodeObserver(INodeDataMerger merger) {
-		this.merger = merger;
-	}
 
 	@Override @SuppressWarnings("unchecked")
 	public void nodeAdded(IEscapyNode parent, IEscapyNode node) {
 
 		log.info("NODE ADDED: " + parent.getId() + " -> " + node.getId());
 		fillMissingParents(parent);
-
-		val nodeData = ((IEscapyNode<NodeData>) node).get();
-
-		addChildModel(parent, nodeData);
-		merger.mergeNodeData(nodeData);
+		addChildModel(parent, ((IEscapyNode<NodeData>) node).get());
 	}
 
 	@Override @SuppressWarnings("unchecked")
