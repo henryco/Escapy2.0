@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
+import lombok.val;
 import net.tindersamurai.escapy.physics.IEscapyPhysics;
 import net.tindersamurai.escapy.physics.event.IEscapyPhysListener;
 
@@ -24,7 +25,14 @@ public class EscapyPhysObject implements IEscapyPhysObject {
 	@Override
 	public void setPhysListener(IEscapyPhysListener listener) {
 		log.info("Listener: " + listener);
-		fixture.setUserData(listener);
+		IEscapyPhysListener[] data = (IEscapyPhysListener[]) fixture.getUserData();
+		if (data == null) data = new IEscapyPhysListener[0];
+
+		IEscapyPhysListener[] listeners = new IEscapyPhysListener[data.length + 1];
+		System.arraycopy(data, 0, listeners, 0, data.length);
+		listeners[listeners.length - 1] = listener;
+
+		fixture.setUserData(listeners);
 	}
 
 	@Override

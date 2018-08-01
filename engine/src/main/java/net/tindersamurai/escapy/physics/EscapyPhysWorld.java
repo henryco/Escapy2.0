@@ -48,12 +48,14 @@ public class EscapyPhysWorld implements IEscapyPhysics {
 			Gdx.app.postRunnable(() -> {
 				for (val fixture : fixtures) {
 					val data = fixture.value.getUserData();
-					if (data instanceof IEscapyPhysListener) {
-						val l = (IEscapyPhysListener) data;
+					if (data instanceof IEscapyPhysListener[]) {
+						val listeners = (IEscapyPhysListener[]) data;
 						val body = fixture.value.getBody();
 						val position = body.getPosition();
-						l.onPhysPositionUpdate(position.x, position.y);
-						l.onPhysAngleUpdate(body.getAngle());
+						for (val l : listeners) {
+							l.onPhysPositionUpdate(position.x, position.y);
+							l.onPhysAngleUpdate(body.getAngle());
+						}
 					}
 				}
 			});
