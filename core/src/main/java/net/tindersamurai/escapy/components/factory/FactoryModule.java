@@ -5,6 +5,8 @@ import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.activecomponent.parser.EscapyComponentParser;
 import net.tindersamurai.activecomponent.parser.XmlStreamComponentParser;
 import net.tindersamurai.escapy.components.config.ConfigModule;
+import net.tindersamurai.escapy.components.control.ControlFactory;
+import net.tindersamurai.escapy.components.control.ControlModule;
 import net.tindersamurai.escapy.components.model.ModelFactory;
 import net.tindersamurai.escapy.components.model.ModelModule;
 import net.tindersamurai.escapy.components.node.NodeFactory;
@@ -21,21 +23,27 @@ import javax.inject.Singleton;
 			NodeModule.class,
 			ResourceModule.class,
 			ModelModule.class,
-			PhysicsModule.class
+			PhysicsModule.class,
+			ControlModule.class
 		}
 ) public final class FactoryModule {
 
-	@Provide public EscapyComponentParser provideComponentParser (
+	@Provide
+	public EscapyComponentParser provideComponentParser (
+
 			ResourceFactory resourcesConfigFactory,
 			LocationFactory locationFactory,
 			PhysicsFactory physicsFactory,
+			ControlFactory controlFactory,
 			ModelFactory modelFactory,
 			NodeFactory nodeFactory
+
 	) {
 		return new XmlStreamComponentParser(
 				resourcesConfigFactory,
 				locationFactory,
 				physicsFactory,
+				controlFactory,
 				modelFactory,
 				nodeFactory
 		);
