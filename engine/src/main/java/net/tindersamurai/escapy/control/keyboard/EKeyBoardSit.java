@@ -1,8 +1,8 @@
-package net.tindersamurai.escapy.controller.keyboard;
+package net.tindersamurai.escapy.control.keyboard;
 
 import com.badlogic.gdx.Gdx;
-import net.tindersamurai.escapy.controller.IEscapyController.Sit;
-import static net.tindersamurai.escapy.controller.IEscapyController.Listeners.*;
+import net.tindersamurai.escapy.control.IEscapyController.Sit;
+import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
 
 public class EKeyBoardSit
 		extends AEKeyBoardController<SitListener>

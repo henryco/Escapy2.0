@@ -1,9 +1,9 @@
-package net.tindersamurai.escapy.controller.keyboard;
+package net.tindersamurai.escapy.control.keyboard;
 
 import com.badlogic.gdx.Gdx;
-import net.tindersamurai.escapy.controller.IEscapyController.MoveRight;
+import net.tindersamurai.escapy.control.IEscapyController.MoveRight;
 
-import static net.tindersamurai.escapy.controller.IEscapyController.Listeners.*;
+import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
 
 public class EKeyBoardMoveRight
 		extends AEKeyBoardController<MoveRightListener>

@@ -1,8 +1,8 @@
-package net.tindersamurai.escapy.controller.keyboard;
+package net.tindersamurai.escapy.control.keyboard;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.tindersamurai.escapy.controller.IEscapyController;
+import net.tindersamurai.escapy.control.IEscapyController;
 
 public abstract class AEKeyBoardController<LISTENER>
 		implements IEscapyController<Integer, LISTENER> {

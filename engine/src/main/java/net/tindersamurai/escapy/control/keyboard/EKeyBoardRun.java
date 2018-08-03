@@ -1,7 +1,7 @@
-package net.tindersamurai.escapy.controller.keyboard;
+package net.tindersamurai.escapy.control.keyboard;
 import com.badlogic.gdx.Gdx;
-import net.tindersamurai.escapy.controller.IEscapyController.Run;
-import static net.tindersamurai.escapy.controller.IEscapyController.Listeners.*;
+import net.tindersamurai.escapy.control.IEscapyController.Run;
+import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
 
 public class EKeyBoardRun
 		extends AEKeyBoardController<RunListener>

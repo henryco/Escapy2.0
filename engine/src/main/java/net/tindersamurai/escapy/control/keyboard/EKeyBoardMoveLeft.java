@@ -1,9 +1,9 @@
-package net.tindersamurai.escapy.controller.keyboard;
+package net.tindersamurai.escapy.control.keyboard;
 
 import com.badlogic.gdx.Gdx;
-import net.tindersamurai.escapy.controller.IEscapyController.MoveLeft;
+import net.tindersamurai.escapy.control.IEscapyController.MoveLeft;
 
-import static net.tindersamurai.escapy.controller.IEscapyController.Listeners.*;
+import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
 
 public class EKeyBoardMoveLeft
 		extends AEKeyBoardController<MoveLeftListener>
@@ -15,7 +15,7 @@ public class EKeyBoardMoveLeft
 
 	@Override
 	public void update() {
-		if (Gdx.input.isKeyJustPressed(key))
+		if (Gdx.input.isKeyPressed(key))
 			getListener().onMoveLeft();
 	}
 }

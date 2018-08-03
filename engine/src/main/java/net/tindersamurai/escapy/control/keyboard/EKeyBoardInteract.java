@@ -1,9 +1,9 @@
-package net.tindersamurai.escapy.controller.keyboard;
+package net.tindersamurai.escapy.control.keyboard;
 
 import com.badlogic.gdx.Gdx;
-import net.tindersamurai.escapy.controller.IEscapyController.Interact;
+import net.tindersamurai.escapy.control.IEscapyController.Interact;
 
-import static net.tindersamurai.escapy.controller.IEscapyController.Listeners.*;
+import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
 
 public class EKeyBoardInteract
 		extends AEKeyBoardController<InteractListener>
