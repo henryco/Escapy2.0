@@ -14,23 +14,23 @@ import java.util.HashSet;
 public class EscapyPhysObject implements IEscapyPhysObject {
 
 	private @Getter @Setter IEscapyPhysics physicsManager;
-	private @Getter final Fixture fixture;
+	private @Getter final Fixture mainFixture;
 	private @Getter final String id;
 
 	public EscapyPhysObject(String id, Fixture fixture) {
 		if (fixture == null)
 			throw new RuntimeException("Fixture cannot be NULL");
-		this.fixture = fixture;
+		this.mainFixture = fixture;
 		this.id = id;
 	}
 
 	@Override
 	public void setPhysListener(IEscapyPhysListener listener) {
 		log.info("Listener: " + listener);
-		IEscapyPhysListener[] data = (IEscapyPhysListener[]) fixture.getUserData();
+		IEscapyPhysListener[] data = (IEscapyPhysListener[]) mainFixture.getUserData();
 		if (data == null) data = new IEscapyPhysListener[0];
 
-		fixture.setUserData(
+		mainFixture.setUserData(
 				new HashSet<IEscapyPhysListener>(Arrays.asList(data)) {{
 					add(listener);
 				}}.toArray(new IEscapyPhysListener[0])
@@ -40,6 +40,6 @@ public class EscapyPhysObject implements IEscapyPhysObject {
 	@Override
 	public void dispose() {
 		log.info("PHYS DISPOSE");
-		fixture.setUserData(null);
+		mainFixture.setUserData(null);
 	}
 }

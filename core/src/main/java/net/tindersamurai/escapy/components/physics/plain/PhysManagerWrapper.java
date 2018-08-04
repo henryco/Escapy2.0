@@ -22,7 +22,7 @@ public class PhysManagerWrapper implements IEscapyPhysObject {
 	}
 
 	@Override
-	public Fixture getFixture() {
+	public Fixture getMainFixture() {
 		return null;
 	}
 

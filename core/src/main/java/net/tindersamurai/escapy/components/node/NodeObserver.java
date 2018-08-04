@@ -34,9 +34,9 @@ public class NodeObserver implements IEscapyNodeObserver {
 
 		phys.setPhysListener(null);
 
-		log.info("REMOVE FIXTURE FROM WORLD: " + phys.getFixture());
-		val world = phys.getFixture().getBody().getWorld();
-		world.destroyBody(phys.getFixture().getBody());
+		log.info("REMOVE FIXTURE FROM WORLD: " + phys.getMainFixture());
+		val world = phys.getMainFixture().getBody().getWorld();
+		world.destroyBody(phys.getMainFixture().getBody());
 	}
 
 

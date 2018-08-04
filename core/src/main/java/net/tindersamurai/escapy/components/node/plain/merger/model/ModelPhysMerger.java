@@ -57,8 +57,8 @@ public class ModelPhysMerger implements IModelPhysMerger {
 
 			};
 			phys.setPhysListener(listener);
-			val position = phys.getFixture().getBody().getPosition();
-			val angle = phys.getFixture().getBody().getAngle();
+			val position = phys.getMainFixture().getBody().getPosition();
+			val angle = phys.getMainFixture().getBody().getAngle();
 			listener.onPhysPositionUpdate(position.x, position.y);
 			listener.onPhysAngleUpdate(angle);
 		}

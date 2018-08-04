@@ -10,7 +10,7 @@ public interface IEscapyPhysObject extends Disposable {
 	void setPhysListener(IEscapyPhysListener listener);
 	void setPhysicsManager(IEscapyPhysics physicsManager);
 
-	Fixture getFixture();
+	Fixture getMainFixture();
 
 	IEscapyPhysics getPhysicsManager();
 	String getId();
