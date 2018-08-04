@@ -40,9 +40,7 @@ public class ControlFactory {
 		this.controlManager = controlManager;
 
 		// initial registering
-		for (val phy : new Register().keyboardPhys()) {
-			controlManager.registerController(phy);
-		}
+		new Register().keyboardPhys();
 	}
 
 
@@ -64,6 +62,8 @@ public class ControlFactory {
 				controllers[4] = new EKeyboardSit("Sit") {{ setKey(Keys.C); }};
 			}
 			registered.put("kb-phys", controllers);
+			for (val c : controllers)
+				controlManager.registerController(c);
 			return controllers;
 		}
 	}
