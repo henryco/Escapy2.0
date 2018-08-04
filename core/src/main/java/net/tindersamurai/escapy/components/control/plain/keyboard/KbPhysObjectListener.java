@@ -1,12 +1,28 @@
 package net.tindersamurai.escapy.components.control.plain.keyboard;
 
-import lombok.NoArgsConstructor;
+import lombok.val;
 import net.tindersamurai.escapy.components.control.plain.CoreCharacterListener;
 import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 
-@NoArgsConstructor
+
 public class KbPhysObjectListener extends
 		CoreCharacterListener<IEscapyPhysObject> {
+
+	private final float speed;
+	private final float run;
+	private final float sit;
+
+	private float mv_speed;
+
+	public KbPhysObjectListener (
+			float speed,
+			float run,
+			float sit
+	) {
+		this.speed = speed;
+		this.run = run;
+		this.sit = sit;
+	}
 
 	@Override
 	protected Class<IEscapyPhysObject> getDataType() {
@@ -20,21 +36,32 @@ public class KbPhysObjectListener extends
 
 	@Override
 	public void onMoveLeft() {
-		System.out.println("left");
+		applyForceLR(-1);
+		mv_speed = speed;
 	}
 
 	@Override
 	public void onMoveRight() {
-		System.out.println("right");
+		applyForceLR(1);
+		mv_speed = speed;
 	}
 
 	@Override
 	public void onRun() {
-		System.out.println("run");
+		mv_speed = run;
 	}
 
 	@Override
 	public void onSit() {
-		System.out.println("sit");
+		mv_speed = sit;
+	}
+
+	private void applyForceLR(int sign) {
+		for (val d : getUserData()) {
+			if (!d.isGrounded()) continue;
+			val body = d.getMainFixture().getBody();
+			body.setLinearVelocity(Math.signum(sign) * mv_speed, 0);
+			body.setAwake(true);
+		}
 	}
 }

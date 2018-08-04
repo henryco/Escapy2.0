@@ -1,6 +1,5 @@
 package net.tindersamurai.escapy.components.control;
 
-import com.badlogic.gdx.Input;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
 import lombok.val;
@@ -62,7 +61,7 @@ public class ControlFactory {
 				controllers[1] = new EKeyboardMoveLeft("Move left") {{ setKey(Keys.A); }};
 				controllers[2] = new EKeyboardMoveRight("Move Right") {{ setKey(Keys.D); }};
 				controllers[3] = new EKeyboardRun("Run") {{ setKey(Keys.SHIFT_LEFT); }};
-				controllers[4] = new EKeyboardSit("Sit") {{ setKey(Keys.S); }};
+				controllers[4] = new EKeyboardSit("Sit") {{ setKey(Keys.C); }};
 			}
 			registered.put("kb-phys", controllers);
 			return controllers;
@@ -75,9 +74,12 @@ public class ControlFactory {
 
 		@EscapyComponent("kb-phys-object")
 		public IEscapyControllerListener physObjectListener (
+				@Arg("move") Float move,
+				@Arg("run") Float run,
+				@Arg("sit") Float sit,
 				@Arg("controllers") IEscapyController ... controllers
 		) {
-			val l = new KbPhysObjectListener();
+			val l = new KbPhysObjectListener(move, run, sit);
 			for (val c : controllers) {
 				try {
 					//noinspection unchecked
