@@ -15,6 +15,7 @@ public class EKeyboardInteract
 
 	@Override
 	public void update() {
+
 		if (Gdx.input.isKeyJustPressed(key))
 			getListener().onInteract();
 	}

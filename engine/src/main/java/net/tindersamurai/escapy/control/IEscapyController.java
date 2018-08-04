@@ -2,7 +2,7 @@ package net.tindersamurai.escapy.control;
 
 import net.tindersamurai.escapy.control.IEscapyControllerListener.*;
 
-public interface IEscapyController<KEY_TYPE, LISTENER> {
+public interface IEscapyController<KEY_TYPE, LISTENER extends IEscapyControllerListener> {
 
 	String getName();
 	void setKey(KEY_TYPE key);

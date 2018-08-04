@@ -1,20 +1,29 @@
 package net.tindersamurai.escapy.components.control.plain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.val;
 import net.tindersamurai.escapy.control.IEscapyControllerListener;
 
 import java.lang.reflect.Array;
 import java.util.HashSet;
 
+@NoArgsConstructor
 public abstract class CoreListener<T>
 		implements IEscapyControllerListener {
 
 	private @Getter T[] userData;
 
+	public CoreListener(T ... userData) {
+		if (userData != null)
+			for (val d : userData)
+				addUserData(d);
+	}
+
 	@Override
 	public void addUserData(Object data) {
 
-		if (!data.getClass().getName().equals(getDataType().getName()))
+		if (!getDataType().isAssignableFrom(data.getClass()))
 			throw new RuntimeException("Incompatible UserData type," +
 					"requires: " + getDataType() + ", found: " + data.getClass());
 

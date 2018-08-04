@@ -141,6 +141,12 @@
                        <c:physics.object.get>
                            <o:string>boi</o:string>
                        </c:physics.object.get>
+
+                        <c:control.listener.kb-phys-object>
+                            <c:control.register.get>
+                                <o:string>kb-interact</o:string>
+                            </c:control.register.get>
+                        </c:control.listener.kb-phys-object>
                     </c:node.data>
                 </c:location.node>
 

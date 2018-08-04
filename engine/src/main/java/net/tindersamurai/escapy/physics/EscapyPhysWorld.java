@@ -2,12 +2,12 @@ package net.tindersamurai.escapy.physics;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.LongMap;
 import lombok.Getter;
 import lombok.extern.java.Log;
 import lombok.val;
+import net.dermetfan.gdx.physics.box2d.ContactMultiplexer;
 import net.tindersamurai.escapy.physics.event.IEscapyPhysListener;
 
 import java.lang.reflect.Field;
@@ -18,6 +18,8 @@ public class EscapyPhysWorld implements IEscapyPhysics {
 	private @Getter final float pixelScale;
 	private @Getter final float timeStep;
 	private @Getter final World world;
+
+	private final ContactMultiplexer contactMultiplexer;
 	private final LongMap<Fixture> fixtures;
 
 	public EscapyPhysWorld (
@@ -26,7 +28,13 @@ public class EscapyPhysWorld implements IEscapyPhysics {
 			float timeStep
 	) {
 		log.info("NEW PHYS WORLD INSTANCE");
-		this.world = new World(gravity, true);
+
+		this.contactMultiplexer = new ContactMultiplexer();
+
+		this.world = new World(gravity, true); {
+			world.setContactListener(contactMultiplexer);
+		}
+
 		this.timeStep = timeStep;
 		this.pixelScale = pixelScale;
 		this.fixtures = accessFixtures();
@@ -64,6 +72,7 @@ public class EscapyPhysWorld implements IEscapyPhysics {
 
 	@Override
 	public void dispose() {
+		if (contactMultiplexer != null) contactMultiplexer.clear();
 		if (world != null) world.dispose();
 	}
 
@@ -79,4 +88,24 @@ public class EscapyPhysWorld implements IEscapyPhysics {
 			throw new RuntimeException("Cannot access fixtures from " + World.class.getName() + " instance");
 		}
 	}
+
+	@Override
+	public void addContactListener(ContactListener listener) {
+		if (listener == null) {
+			log.warning("Cannot add ContactListener cause NULL");
+			return;
+		}
+		contactMultiplexer.add(listener);
+	}
+
+	@Override
+	public void removeContactListener(ContactListener listener) {
+		if (listener == null) {
+			log.warning("Cannot remove ContactListener, cause NULL");
+			return;
+		}
+		contactMultiplexer.remove(listener);
+	}
+
+
 }

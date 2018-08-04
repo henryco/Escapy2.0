@@ -30,4 +30,9 @@ public class PhysManagerWrapper implements IEscapyPhysObject {
 	public void dispose() {
 		physicsManager.dispose();
 	}
+
+	@Override
+	public boolean isGrounded() {
+		return false;
+	}
 }

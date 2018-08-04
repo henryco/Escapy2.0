@@ -11,6 +11,7 @@ public interface IEscapyPhysObject extends Disposable {
 	void setPhysicsManager(IEscapyPhysics physicsManager);
 
 	Fixture getMainFixture();
+	boolean isGrounded();
 
 	IEscapyPhysics getPhysicsManager();
 	String getId();

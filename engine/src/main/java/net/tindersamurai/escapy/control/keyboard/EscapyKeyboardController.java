@@ -3,8 +3,9 @@ package net.tindersamurai.escapy.control.keyboard;
 import lombok.Getter;
 import lombok.Setter;
 import net.tindersamurai.escapy.control.IEscapyController;
+import net.tindersamurai.escapy.control.IEscapyControllerListener;
 
-public abstract class EscapyKeyboardController<LISTENER>
+public abstract class EscapyKeyboardController<LISTENER extends IEscapyControllerListener>
 		implements IEscapyController<Integer, LISTENER> {
 
 	protected @Setter @Getter LISTENER listener;
