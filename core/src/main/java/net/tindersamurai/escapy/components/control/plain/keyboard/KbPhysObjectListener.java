@@ -8,10 +8,6 @@ import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 public class KbPhysObjectListener extends
 		CoreCharacterListener<IEscapyPhysObject> {
 
-	public KbPhysObjectListener(IEscapyPhysObject ... objects) {
-		super(objects);
-	}
-
 	@Override
 	protected Class<IEscapyPhysObject> getDataType() {
 		return IEscapyPhysObject.class;

@@ -1,6 +1,5 @@
 package net.tindersamurai.escapy.components.control;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
@@ -12,18 +11,20 @@ import net.tindersamurai.escapy.components.control.plain.keyboard.KbPhysObjectLi
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
 import net.tindersamurai.escapy.control.IEscapyController;
 import net.tindersamurai.escapy.control.IEscapyControllerListener;
-import net.tindersamurai.escapy.control.keyboard.EKeyboardInteract;
+import net.tindersamurai.escapy.control.keyboard.*;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.badlogic.gdx.Input.*;
+
 @Provide @Singleton @Log
 @EscapyComponentFactory("control")
 public class ControlFactory {
 
-	private final Map<String, IEscapyController> registered;
+	private final Map<String, Object> registered;
 
 	private final EscapyGameContext gameContext;
 	private final ControlManager controlManager;
@@ -39,35 +40,32 @@ public class ControlFactory {
 		this.gameContext = gameContext;
 		this.controlManager = controlManager;
 
-		// initializing keys
-		new Register().initialize();
+		// initial registering
+		for (val phy : new Register().keyboardPhys()) {
+			controlManager.registerController(phy);
+		}
 	}
 
 
 	@EscapyComponentFactory("register")
 	public final class Register {
 
-		private void initialize() {
-			log.info("INITIAL CONTROLLER REGISTRATION");
-			keyboardInteract("Interact", Input.Keys.F);
-		}
-
 		@EscapyComponent("get")
-		public IEscapyController get(String name) {
+		public Object get(String name) {
 			return registered.get(name);
 		}
 
-		@EscapyComponent("kb-interact")
-		public IEscapyController keyboardInteract (
-				@Arg("label") String label,
-				@Arg("key") Integer key
-		) {
-			val c =  new EKeyboardInteract(label) {{
-				setKey(key);
-			}};
-			registered.put("kb-interact", c);
-			controlManager.registerController(c);
-			return c;
+		@EscapyComponent("kb-phys")
+		public IEscapyController[] keyboardPhys() {
+			val controllers = new IEscapyController[5]; {
+				controllers[0] = new EKeyboardInteract("Interact") {{ setKey(Keys.F); }};
+				controllers[1] = new EKeyboardMoveLeft("Move left") {{ setKey(Keys.A); }};
+				controllers[2] = new EKeyboardMoveRight("Move Right") {{ setKey(Keys.D); }};
+				controllers[3] = new EKeyboardRun("Run") {{ setKey(Keys.SHIFT_LEFT); }};
+				controllers[4] = new EKeyboardSit("Sit") {{ setKey(Keys.S); }};
+			}
+			registered.put("kb-phys", controllers);
+			return controllers;
 		}
 	}
 
@@ -82,6 +80,7 @@ public class ControlFactory {
 			val l = new KbPhysObjectListener();
 			for (val c : controllers) {
 				try {
+					//noinspection unchecked
 					c.setListener(l);
 				} catch (Exception e) {
 					log.warning("Controller listener type mismatch!");

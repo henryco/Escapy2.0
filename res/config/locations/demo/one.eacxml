@@ -143,8 +143,8 @@
                        </c:physics.object.get>
 
                         <c:control.listener.kb-phys-object>
-                            <c:control.register.get>
-                                <o:string>kb-interact</o:string>
+                            <c:control.register.get name="controllers">
+                                <o:string>kb-phys</o:string>
                             </c:control.register.get>
                         </c:control.listener.kb-phys-object>
                     </c:node.data>
