@@ -5,11 +5,11 @@ import net.tindersamurai.escapy.control.IEscapyController.MoveLeft;
 
 import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
 
-public class EKeyBoardMoveLeft
-		extends AEKeyBoardController<MoveLeftListener>
+public class EKeyboardMoveLeft
+		extends EscapyKeyboardController<MoveLeftListener>
 		implements MoveLeft<Integer> {
 
-	public EKeyBoardMoveLeft(String name) {
+	public EKeyboardMoveLeft(String name) {
 		super(name);
 	}
 

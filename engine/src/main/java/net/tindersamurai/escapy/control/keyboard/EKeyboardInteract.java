@@ -5,11 +5,11 @@ import net.tindersamurai.escapy.control.IEscapyController.Interact;
 
 import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
 
-public class EKeyBoardInteract
-		extends AEKeyBoardController<InteractListener>
+public class EKeyboardInteract
+		extends EscapyKeyboardController<InteractListener>
 		implements Interact<Integer> {
 
-	public EKeyBoardInteract(String name) {
+	public EKeyboardInteract(String name) {
 		super(name);
 	}
 

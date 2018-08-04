@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.tindersamurai.escapy.control.IEscapyController;
 
-public abstract class AEKeyBoardController<LISTENER>
+public abstract class EscapyKeyboardController<LISTENER>
 		implements IEscapyController<Integer, LISTENER> {
 
 	protected @Setter @Getter LISTENER listener;
@@ -12,7 +12,7 @@ public abstract class AEKeyBoardController<LISTENER>
 
 	/* package */ int key;
 
-	/* package */ AEKeyBoardController(String name) {
+	/* package */ EscapyKeyboardController(String name) {
 		this.name = name;
 	}
 
