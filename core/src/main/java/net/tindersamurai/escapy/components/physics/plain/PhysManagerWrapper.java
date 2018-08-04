@@ -22,12 +22,17 @@ public class PhysManagerWrapper implements IEscapyPhysObject {
 	}
 
 	@Override
-	public Fixture getFixture() {
+	public Fixture getMainFixture() {
 		return null;
 	}
 
 	@Override
 	public void dispose() {
 		physicsManager.dispose();
+	}
+
+	@Override
+	public boolean isGrounded() {
+		return false;
 	}
 }
