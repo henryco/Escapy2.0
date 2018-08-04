@@ -6,7 +6,7 @@ import net.tindersamurai.escapy.control.IEscapyControllerListener;
 import java.lang.reflect.Array;
 import java.util.HashSet;
 
-public abstract class AbstractControllerListener <T>
+public abstract class CoreListener<T>
 		implements IEscapyControllerListener {
 
 	private @Getter T[] userData;
