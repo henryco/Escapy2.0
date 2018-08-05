@@ -6,7 +6,7 @@ import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
 
 public class EKeyboardSit
 		extends EscapyKeyboardController<SitListener>
-		implements Sit<Integer> {
+		implements Sit {
 
 	public EKeyboardSit(String name) {
 		super(name);
@@ -14,6 +14,7 @@ public class EKeyboardSit
 
 	@Override
 	public void update() {
+		getListener().onUpdate();
 		if (Gdx.input.isKeyPressed(key))
 			getListener().onSit();
 	}

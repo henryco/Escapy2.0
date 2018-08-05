@@ -7,7 +7,7 @@ import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
 
 public class EKeyboardMoveRight
 		extends EscapyKeyboardController<MoveRightListener>
-		implements MoveRight<Integer> {
+		implements MoveRight {
 
 	public EKeyboardMoveRight(String name) {
 		super(name);
@@ -15,6 +15,7 @@ public class EKeyboardMoveRight
 
 	@Override
 	public void update() {
+		getListener().onUpdate();
 		if (Gdx.input.isKeyPressed(key))
 			getListener().onMoveRight();
 	}

@@ -4,9 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import net.tindersamurai.escapy.control.IEscapyController;
 import net.tindersamurai.escapy.control.IEscapyControllerListener;
+import net.tindersamurai.escapy.control.IEscapyKeyController;
 
 public abstract class EscapyKeyboardController<LISTENER extends IEscapyControllerListener>
-		implements IEscapyController<Integer, LISTENER> {
+		implements IEscapyKeyController<Integer, LISTENER> {
 
 	protected @Setter @Getter LISTENER listener;
 	private @Getter final String name;

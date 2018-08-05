@@ -2,21 +2,19 @@ package net.tindersamurai.escapy.control;
 
 import net.tindersamurai.escapy.control.IEscapyControllerListener.*;
 
-public interface IEscapyController<KEY_TYPE, LISTENER extends IEscapyControllerListener> {
+public interface IEscapyController<LISTENER extends IEscapyControllerListener> {
 
 	String getName();
-	void setKey(KEY_TYPE key);
-	KEY_TYPE getKey();
-
+	
 	void setListener(LISTENER listener);
 	void update();
 
 
-	interface Interact<T> extends IEscapyController<T, InteractListener> { }
-	interface MoveLeft<T> extends IEscapyController<T, MoveLeftListener> { }
-	interface MoveRight<T> extends IEscapyController<T, MoveRightListener> { }
-	interface Run<T> extends IEscapyController<T, RunListener> { }
-	interface Sit<T> extends IEscapyController<T, SitListener> { }
+	interface Interact extends IEscapyController<InteractListener> { }
+	interface MoveLeft extends IEscapyController<MoveLeftListener> { }
+	interface MoveRight extends IEscapyController<MoveRightListener> { }
+	interface Run extends IEscapyController<RunListener> { }
+	interface Sit extends IEscapyController<SitListener> { }
 
 	// TODO MORE
 

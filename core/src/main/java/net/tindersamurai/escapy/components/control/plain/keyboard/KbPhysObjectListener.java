@@ -12,6 +12,7 @@ public class KbPhysObjectListener extends
 	private final float run;
 	private final float sit;
 
+	private boolean active;
 	private float mv_speed;
 
 	public KbPhysObjectListener (
@@ -30,30 +31,43 @@ public class KbPhysObjectListener extends
 	}
 
 	@Override
+	public void onUpdate() {
+//		if (!active) {
+//			System.out.println("LAST FALSE");
+//		}
+		active = false;
+	}
+
+	@Override
 	public void onInteract() {
 		System.out.println("interact");
+		active = true;
 	}
 
 	@Override
 	public void onMoveLeft() {
 		applyForceLR(-1);
 		mv_speed = speed;
+		active = true;
 	}
 
 	@Override
 	public void onMoveRight() {
 		applyForceLR(1);
 		mv_speed = speed;
+		active = true;
 	}
 
 	@Override
 	public void onRun() {
 		mv_speed = run;
+		active = true;
 	}
 
 	@Override
 	public void onSit() {
 		mv_speed = sit;
+		active = true;
 	}
 
 	private void applyForceLR(int sign) {

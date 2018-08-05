@@ -5,7 +5,7 @@ import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
 
 public class EKeyboardRun
 		extends EscapyKeyboardController<RunListener>
-		implements Run<Integer> {
+		implements Run {
 
 	public EKeyboardRun(String name) {
 		super(name);
@@ -13,6 +13,7 @@ public class EKeyboardRun
 
 	@Override
 	public void update() {
+		getListener().onUpdate();
 		if (Gdx.input.isKeyPressed(key))
 			getListener().onRun();
 	}

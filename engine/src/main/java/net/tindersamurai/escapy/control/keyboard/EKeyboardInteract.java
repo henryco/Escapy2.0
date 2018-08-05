@@ -7,7 +7,7 @@ import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
 
 public class EKeyboardInteract
 		extends EscapyKeyboardController<InteractListener>
-		implements Interact<Integer> {
+		implements Interact {
 
 	public EKeyboardInteract(String name) {
 		super(name);
@@ -15,7 +15,7 @@ public class EKeyboardInteract
 
 	@Override
 	public void update() {
-
+		getListener().onUpdate();
 		if (Gdx.input.isKeyJustPressed(key))
 			getListener().onInteract();
 	}
