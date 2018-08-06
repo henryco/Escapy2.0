@@ -32,9 +32,6 @@ public class KbPhysObjectListener extends
 
 	@Override
 	public void onUpdate() {
-//		if (!active) {
-//			System.out.println("LAST FALSE");
-//		}
 		active = false;
 	}
 

@@ -6,15 +6,21 @@ import net.tindersamurai.escapy.control.IEscapyController;
 import net.tindersamurai.escapy.control.IEscapyControllerListener;
 import net.tindersamurai.escapy.control.IEscapyKeyController;
 
+import java.lang.reflect.Array;
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class EscapyKeyboardController<LISTENER extends IEscapyControllerListener>
 		implements IEscapyKeyController<Integer, LISTENER> {
 
-	protected @Setter @Getter LISTENER listener;
+	protected @Getter LISTENER[] listeners;
 	private @Getter final String name;
+	private Set<LISTENER> tmpSet;
 
 	/* package */ int key;
 
 	/* package */ EscapyKeyboardController(String name) {
+		this.tmpSet = new HashSet<>();
 		this.name = name;
 	}
 
@@ -28,4 +34,9 @@ public abstract class EscapyKeyboardController<LISTENER extends IEscapyControlle
 		return key;
 	}
 
+	@Override
+	public void addListener(LISTENER listener) {
+		tmpSet.add(listener);
+		listeners = tmpSet.toArray(((LISTENER[]) Array.newInstance(listener.getClass(), 0)));
+	}
 }

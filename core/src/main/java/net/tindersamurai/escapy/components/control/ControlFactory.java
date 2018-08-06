@@ -83,7 +83,7 @@ public class ControlFactory {
 			for (val c : controllers) {
 				try {
 					//noinspection unchecked
-					c.setListener(l);
+					c.addListener(l);
 				} catch (Exception e) {
 					log.warning("Controller listener type mismatch!");
 					log.throwing(this.getClass().getName(), "physObjectListener", e);

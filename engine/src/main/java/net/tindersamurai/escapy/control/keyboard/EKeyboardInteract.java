@@ -1,6 +1,7 @@
 package net.tindersamurai.escapy.control.keyboard;
 
 import com.badlogic.gdx.Gdx;
+import lombok.val;
 import net.tindersamurai.escapy.control.IEscapyController.Interact;
 
 import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
@@ -15,8 +16,10 @@ public class EKeyboardInteract
 
 	@Override
 	public void update() {
-		getListener().onUpdate();
-		if (Gdx.input.isKeyJustPressed(key))
-			getListener().onInteract();
+		for (val l : getListeners()) {
+			l.onUpdate();
+			if (Gdx.input.isKeyJustPressed(key))
+				l.onInteract();
+		}
 	}
 }

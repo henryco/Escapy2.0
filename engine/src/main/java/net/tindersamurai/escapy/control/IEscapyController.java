@@ -5,8 +5,8 @@ import net.tindersamurai.escapy.control.IEscapyControllerListener.*;
 public interface IEscapyController<LISTENER extends IEscapyControllerListener> {
 
 	String getName();
-	
-	void setListener(LISTENER listener);
+
+	void addListener(LISTENER listener);
 	void update();
 
 
