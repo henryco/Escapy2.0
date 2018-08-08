@@ -2,7 +2,7 @@ package net.tindersamurai.activecomponent.parser;
 
 import lombok.Setter;
 import lombok.Value;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.java.Log;
 import lombok.val;
 import net.tindersamurai.activecomponent.comp.factory.EscapyComponentAnnotationFactory;
 import net.tindersamurai.activecomponent.comp.factory.EscapyComponentFactoryListener;
@@ -14,14 +14,16 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Consumer;
 
-@Slf4j
+@Log
 public class XmlStreamComponentParser implements EscapyComponentParser {
 
 	@Value private static final class UniComponent {
@@ -36,10 +38,13 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 	@Setter private
 	IEscapyObjectFactory objectFactory;
 
+	private String contextRootPath;
+
 	/**
 	 * @param componentModules instances annotated by {@link net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory}
 	 */
 	public XmlStreamComponentParser(Object ... componentModules) {
+		log.info("::EAC:: NEW INSTANCE: XmlStreamComponentParser " + this.hashCode());
 		setObjectFactory(IEscapyObjectFactory.Default());
 		setComponentFactory(new EscapyComponentAnnotationFactory(componentModules));
 	}
@@ -47,7 +52,17 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 	@Override
 	public <T> T parseComponent(String file) {
 
-		try (InputStream stream = Files.newInputStream(Paths.get(file))) {
+		Path path = Paths.get(file);
+		if (contextRootPath == null) {
+			contextRootPath = path.getParent().toString();
+			log.info("::EAC:: Context root path: " + contextRootPath + " | " + this.hashCode());
+		}
+		else if (!Files.exists(path))
+			path = Paths.get(contextRootPath + File.separator + file);
+
+
+		try (InputStream stream = Files.newInputStream(path)) {
+			log.info("PARSE FILE: " + path);
 
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 			XMLStreamReader reader = inputFactory.createXMLStreamReader(stream);
@@ -65,13 +80,19 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 			return (T) (component != null ? component.instance : null);
 
 		} catch (Exception e) {
-			log.error("Escapy Active Component parsing error", e);
+			log.throwing(this.getClass().getName(), "parseComponent",
+					new RuntimeException("Escapy Active Component parsing error", e)
+			);
 			e.printStackTrace();
 		}
 
 		return null;
 	}
 
+	@Override
+	public String getRootPath() {
+		return contextRootPath;
+	}
 
 	private UniComponent onComponent (XMLStreamReader reader) throws XMLStreamException {
 		Map<String, Object> args = new HashMap<>();
@@ -246,8 +267,9 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 					return new UniComponent(returnClass, param, returnClass.cast(returnInstance));
 				} catch (Exception e) {
 					val MSG = "CANNOT INSTANCE OBJECT: " + name;
-					log.error(MSG, e);
-					throw new RuntimeException(MSG, e);
+					val t = new RuntimeException(MSG, e);
+					log.throwing(getClass().getName(), "onObject", t);
+					throw t;
 				}
 			}
 		}

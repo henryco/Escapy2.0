@@ -20,4 +20,6 @@ public interface EscapyComponentParser {
 	void setObjectFactory(IEscapyObjectFactory factory);
 
 	<T> T parseComponent(String file);
+
+	String getRootPath();
 }

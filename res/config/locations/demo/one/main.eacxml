@@ -1,0 +1,97 @@
+<c:location.main
+        xmlns:c="https://tindersamurai.net/escapy/ac/component"
+        xmlns:o="https://tindersamurai.net/escapy/ac/object"
+        xmlns:m="https://tindersamurai.net/escapy/ac/method"
+>
+
+    <c:location.node>  <!-- LAYER NODE -->
+        <o:string name="id">LayerBackground</o:string> <!-- NODE ID -->
+
+        <c:node.data name="data"> <!-- NODE DATA, just wrapper -->
+            <c:model.layer>
+                <c:model.helper.w-fbo>
+                    <o:string>LayerBackgroundFboDiffuse</o:string>
+                </c:model.helper.w-fbo>
+            </c:model.layer>
+        </c:node.data>
+
+        <c:location.node> <!-- nested nodes -->
+            <o:string>staticBackground</o:string> <!-- node id-->
+            <c:node.data> <!--and again, wrapper-->
+                <c:model.texture.static-full>
+                    <o:string>locations/demo/resources/diffuse/background.png</o:string>
+                </c:model.texture.static-full>
+            </c:node.data>
+            <!--there are no nested nodes, coz textures doesn't need them-->
+        </c:location.node>
+    </c:location.node>
+
+    <c:location.node>
+        <o:string>Layer0</o:string>
+
+        <c:node.data>
+            <c:model.layer>
+                <c:model.helper.w-fbo>
+                    <o:string>Layer0FboDiffuse</o:string>
+                </c:model.helper.w-fbo>
+                <c:model.helper.w-fbo>
+                    <o:string>Layer0FboNormals</o:string>
+                </c:model.helper.w-fbo>
+            </c:model.layer>
+        </c:node.data>
+
+
+        <c:location.node>
+            <o:string>Layer0Shift</o:string>
+            <c:node.data>
+                <c:model.shift/>
+            </c:node.data>
+
+            <c:location.node>
+                <o:string>Birudingu</o:string>
+                <c:node.data>
+                    <c:model.texture.static>
+                        <c:model.helper.t-props>
+                            <o:string namd="diffuse">locations/demo/resources/diffuse/Loc_33.png</o:string>
+                            <o:string namd="normals">locations/demo/resources/normals/Loc_33.png</o:string>
+                        </c:model.helper.t-props>
+                    </c:model.texture.static>
+                </c:node.data>
+            </c:location.node>
+
+            <c:location.node>
+                <o:string>BoyFriend</o:string>
+                <c:node.data>
+                    <c:model.texture.static>
+                        <c:model.helper.t-props>
+                            <o:string name="diffuse">locations/demo/resources/diffuse/bf_idle.png</o:string>
+                            <o:string name="normals">locations/demo/resources/normals/bf_idle.png</o:string>
+                            <o:boolean name="flipX">true</o:boolean>
+                            <o:float name="width">256</o:float>
+                            <o:float name="height">256</o:float>
+                        </c:model.helper.t-props>
+                        <c:u.array-auto name="bind">
+                            <o:float><!-- left --> 5 </o:float>
+                            <o:float><!-- top --> 25 </o:float>
+                        </c:u.array-auto>
+                    </c:model.texture.static>
+
+                    <c:physics.object.get>
+                        <o:string>boi</o:string>
+                    </c:physics.object.get>
+
+                    <c:control.listener.kb-phys-object>
+                        <o:float name="move">2.25</o:float>
+                        <o:float name="run">3</o:float>
+                        <o:float name="sit">1.75</o:float>
+                        <c:control.register.get name="controllers">
+                            <o:string>kb-phys</o:string>
+                        </c:control.register.get>
+                    </c:control.listener.kb-phys-object>
+                </c:node.data>
+            </c:location.node>
+
+        </c:location.node>
+    </c:location.node>
+
+</c:location.main>

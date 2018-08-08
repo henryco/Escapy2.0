@@ -1,5 +1,7 @@
 package net.tindersamurai.activecomponent.core;
 
+import lombok.extern.java.Log;
+import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
@@ -13,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
-@EscapyComponentFactory("u") // u for utility
+@Log @EscapyComponentFactory("u") // u for utility
 public final class UtilityCoreComponent {
 
 	@EscapyComponentFactory("p") // p for Primitive
@@ -21,7 +23,7 @@ public final class UtilityCoreComponent {
 
 		@EscapyComponent("type") // test: OK
 		public Class<?> primitiveType(@Arg("object") Object o) {
-			System.out.println(o);
+			log.info(""+o);
 			if (o instanceof String) {
 				String oo = (String) o;
 				String cl = "java.lang." + oo.substring(0, 1).toUpperCase() + oo.substring(1);
@@ -54,26 +56,10 @@ public final class UtilityCoreComponent {
 		}
 	}
 
-	@EscapyComponentFactory("l") // l for Loader
-	public static final class LoaderUtilities implements EscapyComponentParserProvider {
-
-		private EscapyComponentParser parser;
-
-		@Override
-		public void provideParser(EscapyComponentParser parser) {
-			this.parser = parser;
-		}
-
-		@EscapyComponent("external")
-		public <T> T external(String file) {
-			return parser.parseComponent(file);
-		}
-	}
-
 	@EscapyComponent("debug") // test: OK
 	public void debug(@Arg("args") Object ... args) {
 
-		System.out.println("\n<c:u.debug>");
+		log.info("\n<c:u.debug>");
 		for (Object arg : args) try {
 			if (arg.getClass().isArray()) {
 
@@ -82,15 +68,15 @@ public final class UtilityCoreComponent {
 				for (int i = 0; i < l; i++)
 					ars.append(Array.get(arg, i)).append(", ");
 				String res = ars.substring(0, Math.max(0, ars.length() - 2));
-				System.out.println("\t" + arg.getClass() + ": [" + res + "]");
+				log.info("\t" + arg.getClass() + ": [" + res + "]");
 
 			} else {
-				System.out.println("\t" + arg.getClass() + ": " + arg);
+				log.info("\t" + arg.getClass() + ": " + arg);
 			}
 		} catch (NullPointerException e) {
-			System.out.println("null");
+			log.info("null");
 		}
-		System.out.println("</c:u.debug>\n");
+		log.info("</c:u.debug>\n");
 	}
 
 	@EscapyComponent("main") // test OK

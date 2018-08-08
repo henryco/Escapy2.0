@@ -5,6 +5,7 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
+import net.tindersamurai.activecomponent.core.FilesCoreComponent;
 import net.tindersamurai.activecomponent.core.UtilityCoreComponent;
 
 import java.lang.reflect.Array;
@@ -28,9 +29,10 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 		this.constructors = new HashMap<>();
 		this.factories = new HashMap<>();
 
-		Object[] factories = new Object[componentFactories.length + 1];
-		System.arraycopy(componentFactories, 0, factories, 1, componentFactories.length);
+		Object[] factories = new Object[componentFactories.length + 2];
+		System.arraycopy(componentFactories, 0, factories, 2, componentFactories.length);
 		factories[0] = new UtilityCoreComponent();
+		factories[1] = new FilesCoreComponent();
 
 		initialize(factories, "");
 	}

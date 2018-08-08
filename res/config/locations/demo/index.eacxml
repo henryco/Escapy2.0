@@ -11,15 +11,15 @@
 
         <c:resource.metadata>
             <o:string name="id"> one </o:string>
-            <o:string name="url"> one.eacxml </o:string>
+            <o:string name="url"> one/one.eacxml </o:string>
             <o:string name="title"> Location 1 </o:string>
         </c:resource.metadata>
 
-        <c:resource.metadata>
-            <o:string name="id"> two </o:string>
-            <o:string name="url"> two.eacxml </o:string>
-            <o:string name="title"> Location 2 </o:string>
-        </c:resource.metadata>
+        <!--<c:resource.metadata>-->
+            <!--<o:string name="id"> two </o:string>-->
+            <!--<o:string name="url"> two.eacxml </o:string>-->
+            <!--<o:string name="title"> Location 2 </o:string>-->
+        <!--</c:resource.metadata>-->
 
     </c:u.array-auto>
 

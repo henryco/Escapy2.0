@@ -15,8 +15,6 @@ import net.tindersamurai.escapy.components.physics.PhysicsFactory;
 import net.tindersamurai.escapy.components.physics.PhysicsModule;
 import net.tindersamurai.escapy.components.resource.ResourceModule;
 
-import javax.inject.Singleton;
-
 @Module(componentsRootClass = FactoryModule.class,
 		include = {
 			ConfigModule.class,

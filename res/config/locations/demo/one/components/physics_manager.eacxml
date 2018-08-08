@@ -1,0 +1,49 @@
+<c:physics.manager
+        xmlns:c="https://tindersamurai.net/escapy/ac/component"
+        xmlns:o="https://tindersamurai.net/escapy/ac/object"
+        xmlns:m="https://tindersamurai.net/escapy/ac/method"
+>
+    <c:u.array-auto name="gravity">
+        <o:float>0</o:float>
+        <o:float>-9.8</o:float>
+    </c:u.array-auto>
+    <o:float name="fps">45</o:float>
+    <!-- Scale means that for physics 1m == 113.888888889px -->
+    <!-- which also means that default camera resolution -->
+    <!-- [1280 x 720]px == [11.23902439 x 6.32195122]m -->
+    <o:float name="scale">113.888888889</o:float>
+
+    <c:physics.object.def>
+        <o:string name="id">ground</o:string>
+        <o:string name="type">StaticBody</o:string>
+        <o:boolean name="rotation">false</o:boolean>
+        <c:physics.shape.box name="shape">
+            <c:u.array-auto name="size">
+                <o:float>600</o:float>
+                <o:float>15</o:float>
+            </c:u.array-auto>
+        </c:physics.shape.box>
+        <c:u.array-auto name="position">
+            <o:float>301</o:float>
+            <o:float>25</o:float>
+        </c:u.array-auto>
+    </c:physics.object.def>
+
+    <c:physics.object.def>
+        <o:string name="id">boi</o:string>
+        <o:string name="type">DynamicBody</o:string>
+        <o:boolean name="rotation">false</o:boolean>
+        <o:float name="friction">100</o:float>
+        <c:physics.shape.box name="shape">
+            <c:u.array-auto>
+                <o:float>55</o:float>
+                <o:float>205</o:float>
+            </c:u.array-auto>
+        </c:physics.shape.box>
+        <c:u.array-auto name="position">
+            <o:float>150</o:float>
+            <o:float>300</o:float>
+        </c:u.array-auto>
+    </c:physics.object.def>
+
+</c:physics.manager>
