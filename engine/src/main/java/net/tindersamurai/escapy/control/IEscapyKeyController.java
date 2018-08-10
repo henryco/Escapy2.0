@@ -1,5 +1,7 @@
 package net.tindersamurai.escapy.control;
 
+import net.tindersamurai.escapy.control.listener.IEscapyControllerListener;
+
 public interface IEscapyKeyController<KEY_TYPE, LISTENER extends IEscapyControllerListener>
 		extends IEscapyController<LISTENER> {
 

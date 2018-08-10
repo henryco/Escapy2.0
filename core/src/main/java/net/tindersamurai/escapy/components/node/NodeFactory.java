@@ -8,7 +8,7 @@ import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
 import net.tindersamurai.escapy.components.node.plain.data.NodeData;
 import net.tindersamurai.escapy.components.node.plain.merger.INodeDataMerger;
-import net.tindersamurai.escapy.control.IEscapyControllerListener;
+import net.tindersamurai.escapy.control.listener.IEscapyControllerListener;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 

@@ -3,7 +3,7 @@ package net.tindersamurai.escapy.components.node.plain.data;
 import lombok.Data;
 import lombok.extern.java.Log;
 import net.tindersamurai.escapy.components.node.plain.merger.INodeDataMerger;
-import net.tindersamurai.escapy.control.IEscapyControllerListener;
+import net.tindersamurai.escapy.control.listener.IEscapyControllerListener;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 

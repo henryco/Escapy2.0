@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import lombok.val;
 import net.tindersamurai.escapy.control.IEscapyController.MoveLeft;
 
-import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
+import static net.tindersamurai.escapy.control.listener.IEscapyControllerListener.*;
 
 public class EKeyboardMoveLeft
 		extends EscapyKeyboardController<MoveLeftListener>

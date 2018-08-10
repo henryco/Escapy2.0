@@ -10,7 +10,7 @@ import net.tindersamurai.escapy.components.model.plain.light.LightSourceModel;
 import net.tindersamurai.escapy.components.node.plain.data.NodeData;
 import net.tindersamurai.escapy.components.stage.plain.LocationSwitcher;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
-import net.tindersamurai.escapy.control.EscapyControlManager;
+import net.tindersamurai.escapy.control.manager.EscapyControlManager;
 import net.tindersamurai.escapy.graphic.camera.EscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;

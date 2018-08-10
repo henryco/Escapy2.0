@@ -1,6 +1,7 @@
 package net.tindersamurai.escapy.control;
 
-import net.tindersamurai.escapy.control.IEscapyControllerListener.*;
+import net.tindersamurai.escapy.control.listener.IEscapyControllerListener;
+import net.tindersamurai.escapy.control.listener.IEscapyControllerListener.*;
 
 public interface IEscapyController<LISTENER extends IEscapyControllerListener> {
 

@@ -8,9 +8,9 @@ import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
 import net.tindersamurai.escapy.components.control.plain.phys.PhysCharacterListener;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
-import net.tindersamurai.escapy.control.EscapyControlManager;
+import net.tindersamurai.escapy.control.manager.EscapyControlManager;
 import net.tindersamurai.escapy.control.IEscapyController;
-import net.tindersamurai.escapy.control.IEscapyControllerListener;
+import net.tindersamurai.escapy.control.listener.IEscapyControllerListener;
 import net.tindersamurai.escapy.control.keyboard.*;
 
 import javax.inject.Inject;

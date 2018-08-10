@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.control;
+package net.tindersamurai.escapy.control.listener;
 
 import com.badlogic.gdx.utils.Disposable;
 

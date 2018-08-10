@@ -1,9 +1,8 @@
-package net.tindersamurai.escapy.control;
+package net.tindersamurai.escapy.control.listener;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.val;
-import net.tindersamurai.escapy.control.IEscapyControllerListener;
 
 import java.lang.reflect.Array;
 import java.util.HashSet;

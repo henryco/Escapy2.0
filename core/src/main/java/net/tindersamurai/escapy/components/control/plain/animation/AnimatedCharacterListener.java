@@ -1,7 +1,7 @@
 package net.tindersamurai.escapy.components.control.plain.animation;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import net.tindersamurai.escapy.control.IEscapyControllerListener.*;
+import net.tindersamurai.escapy.control.listener.IEscapyControllerListener.*;
 
 public class AnimatedCharacterListener implements IAnimationListener,
 		MoveLeftListener, MoveRightListener, RunListener,

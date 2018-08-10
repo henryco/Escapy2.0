@@ -1,9 +1,7 @@
 package net.tindersamurai.escapy.control.keyboard;
 
 import lombok.Getter;
-import lombok.Setter;
-import net.tindersamurai.escapy.control.IEscapyController;
-import net.tindersamurai.escapy.control.IEscapyControllerListener;
+import net.tindersamurai.escapy.control.listener.IEscapyControllerListener;
 import net.tindersamurai.escapy.control.IEscapyKeyController;
 
 import java.lang.reflect.Array;
@@ -36,14 +34,14 @@ public abstract class EscapyKeyboardController<LISTENER extends IEscapyControlle
 
 	@Override
 	public void addListener(LISTENER listener) {
-		tmpSet.add(listener);
-		listeners = updArray(listener.getClass());
+		if (tmpSet.add(listener))
+			listeners = updArray(listener.getClass());
 	}
 
 	@Override
 	public void removeListener(LISTENER listener) {
-		tmpSet.remove(listener);
-		listeners = updArray(listener.getClass());
+		if (tmpSet.remove(listener))
+			listeners = updArray(listener.getClass());
 	}
 
 	private LISTENER[] updArray(Class<? extends IEscapyControllerListener> listenerClass) {
