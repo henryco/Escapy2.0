@@ -6,15 +6,18 @@ import lombok.extern.java.Log;
 import lombok.val;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
-import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteProvider;
+import net.tindersamurai.escapy.map.model.IEscapyRenderable;
+import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteBinder;
 import net.tindersamurai.escapy.map.model.texture.EscapyTextureData;
 import net.tindersamurai.escapy.map.model.texture.IEscapyTextureData;
 import net.tindersamurai.escapy.utils.files.EscapyFiles;
 
 import java.util.function.Consumer;
 
+import static net.tindersamurai.escapy.map.model.IEscapyRenderable.*;
+
 @Log
-public class StaticTexture implements IEscapyModel, IEscapySpriteProvider {
+public class StaticTexture implements IEscapyModel, IEscapySpriteBinder {
 
 	private Sprite[] sprites; // diff, normal, light
 	private float[] bindPadding = {0, 0};
@@ -45,12 +48,6 @@ public class StaticTexture implements IEscapyModel, IEscapySpriteProvider {
 				data.getWidth() == 0 ? sprite.getWidth() : data.getWidth(),
 				data.getHeight() == 0 ? sprite.getHeight() : data.getHeight()
 		);
-	}
-
-	private static void draw (Sprite sprite, IEscapyCamera camera, Batch batch) {
-		if (sprite == null) return;
-		batch.setProjectionMatrix(camera.getProjection());
-		sprite.draw(batch);
 	}
 
 	@Override

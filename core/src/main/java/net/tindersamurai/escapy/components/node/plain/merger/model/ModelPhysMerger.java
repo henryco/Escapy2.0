@@ -4,7 +4,7 @@ import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
 import lombok.val;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
-import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteProvider;
+import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteBinder;
 import net.tindersamurai.escapy.physics.event.IEscapyPhysListener;
 import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 
@@ -19,7 +19,7 @@ public class ModelPhysMerger implements IModelPhysMerger {
 		log.info(model + " : " + phys);
 
 		if (phys == null) return;
-		if (model instanceof IEscapySpriteProvider) {
+		if (model instanceof IEscapySpriteBinder) {
 			log.info("SETTING UP PHYS LISTENER");
 			val pixelScale = phys.getPhysicsManager().getPixelScale();
 			val listener = new IEscapyPhysListener() {
@@ -34,7 +34,7 @@ public class ModelPhysMerger implements IModelPhysMerger {
 						if (x == lastX && y == lastY)
 							return;
 
-					val m = (IEscapySpriteProvider) model;
+					val m = (IEscapySpriteBinder) model;
 					val padding = m.getBindPadding();
 					m.apply(s -> {
 						final float px = (x * pixelScale) - (s.getWidth() * 0.5f) + padding[0];
@@ -51,7 +51,7 @@ public class ModelPhysMerger implements IModelPhysMerger {
 
 					if (lastAngle != null && angle == lastAngle)
 						return;
-					((IEscapySpriteProvider) model).apply(s -> s.setRotation(angle));
+					((IEscapySpriteBinder) model).apply(s -> s.setRotation(angle));
 					lastAngle = angle;
 				}
 

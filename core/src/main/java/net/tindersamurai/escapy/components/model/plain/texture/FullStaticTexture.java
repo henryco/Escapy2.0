@@ -7,13 +7,13 @@ import lombok.val;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.screen.Resolution;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
-import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteProvider;
+import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteBinder;
 import net.tindersamurai.escapy.utils.files.EscapyFiles;
 
 import java.util.function.Consumer;
 
 @Log
-public class FullStaticTexture implements IEscapyModel, IEscapySpriteProvider {
+public class FullStaticTexture implements IEscapyModel, IEscapySpriteBinder {
 
 	private final Sprite[] maps;
 	private float[] bindPadding = {0, 0};

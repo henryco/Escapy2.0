@@ -6,7 +6,7 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
-import net.tindersamurai.escapy.components.control.plain.keyboard.KbPhysObjectListener;
+import net.tindersamurai.escapy.components.control.plain.phys.PhysCharacterListener;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
 import net.tindersamurai.escapy.control.IEscapyController;
 import net.tindersamurai.escapy.control.IEscapyControllerListener;
@@ -52,7 +52,7 @@ public class ControlFactory {
 			return registered.get(name);
 		}
 
-		@EscapyComponent("kb-phys")
+		@EscapyComponent("char-phys")
 		public IEscapyController[] keyboardPhys() {
 			val controllers = new IEscapyController[5]; {
 				controllers[0] = new EKeyboardInteract("Interact") {{ setKey(Keys.F); }};
@@ -61,7 +61,7 @@ public class ControlFactory {
 				controllers[3] = new EKeyboardRun("Run") {{ setKey(Keys.SHIFT_LEFT); }};
 				controllers[4] = new EKeyboardSit("Sit") {{ setKey(Keys.C); }};
 			}
-			registered.put("kb-phys", controllers);
+			registered.put("char-phys", controllers);
 			for (val c : controllers)
 				controlManager.registerController(c);
 			return controllers;
@@ -72,14 +72,14 @@ public class ControlFactory {
 	@EscapyComponentFactory("listener")
 	public final static class Listener {
 
-		@EscapyComponent("kb-phys-object")
+		@EscapyComponent("phys-character")
 		public IEscapyControllerListener physObjectListener (
 				@Arg("move") Float move,
 				@Arg("run") Float run,
 				@Arg("sit") Float sit,
 				@Arg("controllers") IEscapyController ... controllers
 		) {
-			val l = new KbPhysObjectListener(move, run, sit);
+			val l = new PhysCharacterListener(move, run, sit);
 			for (val c : controllers) {
 				try {
 					//noinspection unchecked

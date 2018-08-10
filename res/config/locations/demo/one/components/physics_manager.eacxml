@@ -7,7 +7,7 @@
         <o:float>0</o:float>
         <o:float>-9.8</o:float>
     </c:u.array-auto>
-    <o:float name="fps">45</o:float>
+    <o:float name="fps">25</o:float>
     <!-- Scale means that for physics 1m == 113.888888889px -->
     <!-- which also means that default camera resolution -->
     <!-- [1280 x 720]px == [11.23902439 x 6.32195122]m -->

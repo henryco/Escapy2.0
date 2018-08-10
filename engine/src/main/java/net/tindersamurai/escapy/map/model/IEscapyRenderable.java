@@ -1,6 +1,7 @@
 package net.tindersamurai.escapy.map.model;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.screen.Wipeable;
 
@@ -12,4 +13,10 @@ public interface IEscapyRenderable extends Wipeable {
 
 	void renderDiffuseMap(IEscapyCamera camera, Batch batch, float delta);
 
+
+	static void draw (Sprite sprite, IEscapyCamera camera, Batch batch) {
+		if (sprite == null) return;
+		batch.setProjectionMatrix(camera.getProjection());
+		sprite.draw(batch);
+	}
 }

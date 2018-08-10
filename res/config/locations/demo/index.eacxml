@@ -11,7 +11,7 @@
 
         <c:resource.metadata>
             <o:string name="id"> one </o:string>
-            <o:string name="url"> one/one.eacxml </o:string>
+            <o:string name="url"> one/index.eacxml </o:string>
             <o:string name="title"> Location 1 </o:string>
         </c:resource.metadata>
 

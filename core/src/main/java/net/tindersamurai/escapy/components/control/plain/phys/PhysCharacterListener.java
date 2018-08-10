@@ -1,11 +1,11 @@
-package net.tindersamurai.escapy.components.control.plain.keyboard;
+package net.tindersamurai.escapy.components.control.plain.phys;
 
 import lombok.val;
 import net.tindersamurai.escapy.components.control.plain.CoreCharacterListener;
 import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 
 
-public class KbPhysObjectListener extends
+public class PhysCharacterListener extends
 		CoreCharacterListener<IEscapyPhysObject> {
 
 	private final float speed;
@@ -15,7 +15,7 @@ public class KbPhysObjectListener extends
 	private boolean active;
 	private float mv_speed;
 
-	public KbPhysObjectListener (
+	public PhysCharacterListener(
 			float speed,
 			float run,
 			float sit

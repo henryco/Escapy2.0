@@ -8,12 +8,12 @@ import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.graphic.render.light.source.LightSource;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
-import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteProvider;
+import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteBinder;
 
 import java.util.function.Consumer;
 
 @Log
-public class LightSourceModel implements IEscapyModel, IEscapySpriteProvider {
+public class LightSourceModel implements IEscapyModel, IEscapySpriteBinder {
 
 	private final @Getter LightSource lightSource;
 
