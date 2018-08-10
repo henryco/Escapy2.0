@@ -21,7 +21,7 @@ public final class ControlManager {
 		this.arr = controllers.values().toArray(new IEscapyController[0]);
 	}
 
-	public void update() {
-		for (val c : arr) c.update();
+	public void update(float delta) {
+		for (val c : arr) c.update(delta);
 	}
 }

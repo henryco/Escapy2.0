@@ -37,6 +37,16 @@ public abstract class EscapyKeyboardController<LISTENER extends IEscapyControlle
 	@Override
 	public void addListener(LISTENER listener) {
 		tmpSet.add(listener);
-		listeners = tmpSet.toArray(((LISTENER[]) Array.newInstance(listener.getClass(), 0)));
+		listeners = updArray(listener.getClass());
+	}
+
+	@Override
+	public void removeListener(LISTENER listener) {
+		tmpSet.remove(listener);
+		listeners = updArray(listener.getClass());
+	}
+
+	private LISTENER[] updArray(Class<? extends IEscapyControllerListener> listenerClass) {
+		return tmpSet.toArray(((LISTENER[]) Array.newInstance(listenerClass, 0)));
 	}
 }

@@ -7,7 +7,8 @@ public interface IEscapyController<LISTENER extends IEscapyControllerListener> {
 	String getName();
 
 	void addListener(LISTENER listener);
-	void update();
+	void removeListener(LISTENER listener);
+	void update(float delta);
 
 
 	interface Interact extends IEscapyController<InteractListener> { }

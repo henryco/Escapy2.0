@@ -33,7 +33,7 @@ public class AnimatedCharacterListener implements IAnimationListener,
 	}
 
 	@Override
-	public void onUpdate() {
+	public void onUpdate(float delta) {
 
 	}
 

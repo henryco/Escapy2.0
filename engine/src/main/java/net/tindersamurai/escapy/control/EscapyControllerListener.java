@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.components.control.plain;
+package net.tindersamurai.escapy.control;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,12 +9,12 @@ import java.lang.reflect.Array;
 import java.util.HashSet;
 
 @NoArgsConstructor
-public abstract class CoreListener<T>
+public abstract class EscapyControllerListener<T>
 		implements IEscapyControllerListener {
 
 	private @Getter T[] userData;
 
-	public CoreListener(T ... userData) {
+	public EscapyControllerListener(T ... userData) {
 		if (userData != null)
 			for (val d : userData)
 				addUserData(d);

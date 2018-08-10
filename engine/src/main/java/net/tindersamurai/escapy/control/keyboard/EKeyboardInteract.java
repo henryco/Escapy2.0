@@ -15,9 +15,9 @@ public class EKeyboardInteract
 	}
 
 	@Override
-	public void update() {
+	public void update(float delta) {
 		for (val l : getListeners()) {
-			l.onUpdate();
+			l.onUpdate(delta);
 			if (Gdx.input.isKeyJustPressed(key))
 				l.onInteract();
 		}

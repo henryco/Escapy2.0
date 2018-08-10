@@ -73,7 +73,7 @@ public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 
 	@Override
 	public void render(float delta) {
-		if (!paused) controlManager.update();
+		if (!paused) controlManager.update(delta);
 		renderer.render(model, delta);
 	}
 

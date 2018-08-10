@@ -86,7 +86,6 @@ public class ControlFactory {
 					c.addListener(l);
 				} catch (Exception e) {
 					log.warning("Controller listener type mismatch!");
-					log.throwing(this.getClass().getName(), "physObjectListener", e);
 				}
 			}
 			return l;

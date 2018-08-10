@@ -31,7 +31,7 @@ public class PhysCharacterListener extends
 	}
 
 	@Override
-	public void onUpdate() {
+	public void onUpdate(float delta) {
 		active = false;
 	}
 

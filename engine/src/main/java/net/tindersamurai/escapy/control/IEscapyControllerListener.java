@@ -7,7 +7,7 @@ public interface IEscapyControllerListener extends Disposable {
 	default void addUserData(Object data) { }
 	default  void removeUserData(Object data) { }
 
-	default void onUpdate() { /* OPTIONAL */ }
+	default void onUpdate(float delta) { /* OPTIONAL */ }
 
 	interface InteractListener extends IEscapyControllerListener { void onInteract(); }
 	interface MoveLeftListener extends IEscapyControllerListener { void onMoveLeft(); }
