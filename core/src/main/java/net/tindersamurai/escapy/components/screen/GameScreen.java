@@ -10,7 +10,7 @@ import net.tindersamurai.escapy.components.model.plain.light.LightSourceModel;
 import net.tindersamurai.escapy.components.node.plain.data.NodeData;
 import net.tindersamurai.escapy.components.stage.plain.LocationSwitcher;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
-import net.tindersamurai.escapy.components.control.ControlManager;
+import net.tindersamurai.escapy.control.EscapyControlManager;
 import net.tindersamurai.escapy.graphic.camera.EscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
@@ -40,16 +40,13 @@ public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 	@Inject
 	public GameScreen(
 			IEscapyModelRenderer renderer,
-			LocationSwitcher locationSetter,
-			ControlManager controlManager
+			LocationSwitcher locationSetter
 	) {
 		this.escapyThread = new EscapyThread(5, this);
-		this.controlManager = controlManager;
 		this.locSetter = locationSetter;
 		this.renderer = renderer;
 	}
 
-	private final ControlManager controlManager;
 	private IEscapyPhysics physicsManager;
 	private IEscapyModel model;
 
@@ -73,7 +70,7 @@ public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 
 	@Override
 	public void render(float delta) {
-		if (!paused) controlManager.update(delta);
+		if (!paused) EscapyControlManager.getInstance().update(delta);
 		renderer.render(model, delta);
 	}
 

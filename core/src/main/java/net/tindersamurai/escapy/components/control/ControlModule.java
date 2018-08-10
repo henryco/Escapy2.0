@@ -2,6 +2,7 @@ package net.tindersamurai.escapy.components.control;
 import com.github.henryco.injector.meta.annotations.Module;
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.escapy.components.config.ConfigModule;
+import net.tindersamurai.escapy.control.EscapyControlManager;
 
 import javax.inject.Singleton;
 
@@ -11,8 +12,8 @@ import javax.inject.Singleton;
 ) public final class ControlModule {
 
 	@Provide @Singleton
-	public final ControlManager provideControlManager() {
-		return new ControlManager();
+	public final EscapyControlManager provideControlManager() {
+		return EscapyControlManager.getInstance();
 	}
 
 }
