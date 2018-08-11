@@ -6,7 +6,8 @@ import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 
 
 public class PhysCharacterListener extends
-		CoreCharacterListener<IEscapyPhysObject> {
+		CoreCharacterListener<IEscapyPhysObject>
+		implements IPhysListener {
 
 	private final float speed;
 	private final float run;

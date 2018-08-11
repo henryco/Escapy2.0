@@ -73,7 +73,7 @@ public class StaticTexture implements IEscapyModel, IEscapySpriteBinder {
 	}
 
 	@Override
-	public Sprite provideEffectiveSprite() {
+	public Sprite getEffectiveSprite() {
 		return sprites[0] != null ? sprites[0] : sprites[1] != null ? sprites[1] : sprites[2];
 	}
 

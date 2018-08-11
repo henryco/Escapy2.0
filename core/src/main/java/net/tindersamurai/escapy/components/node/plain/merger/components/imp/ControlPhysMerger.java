@@ -1,7 +1,8 @@
-package net.tindersamurai.escapy.components.node.plain.merger.control;
+package net.tindersamurai.escapy.components.node.plain.merger.components.imp;
 
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
+import net.tindersamurai.escapy.components.node.plain.merger.components.IControlPhysMerger;
 import net.tindersamurai.escapy.control.listener.IEscapyControllerListener;
 import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import lombok.Getter;
 import lombok.extern.java.Log;
+import lombok.val;
 import net.dermetfan.gdx.physics.box2d.ContactAdapter;
 import net.tindersamurai.escapy.physics.IEscapyPhysics;
 import net.tindersamurai.escapy.physics.event.IEscapyPhysListener;
@@ -57,6 +58,11 @@ public class EscapyPhysObject implements IEscapyPhysObject {
 		log.info("PHYS DISPOSE");
 		mainFixture.setUserData(null);
 		resetListener();
+
+		log.info("REMOVE FIXTURE FROM WORLD: " + mainFixture);
+		val body = mainFixture.getBody();
+		val world = body.getWorld();
+		world.destroyBody(body);
 	}
 
 	@Override

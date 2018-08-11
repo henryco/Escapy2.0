@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 public interface IEscapySpriteBinder extends IEscapyTextureData {
 
 	void apply(Consumer<Sprite> s);
-	Sprite provideEffectiveSprite();
+	Sprite getEffectiveSprite();
 
 	default float[] getBindPadding() {
 		return new float[] {0, 0};
@@ -18,46 +18,46 @@ public interface IEscapySpriteBinder extends IEscapyTextureData {
 
 	@Override
 	default float getX() {
-		return provideEffectiveSprite().getX();
+		return getEffectiveSprite().getX();
 	}
 
 	@Override
 	default float getY() {
-		return provideEffectiveSprite().getY();
+		return getEffectiveSprite().getY();
 	}
 
 	@Override
 	default float getScaleX() {
-		return provideEffectiveSprite().getScaleX();
+		return getEffectiveSprite().getScaleX();
 	}
 
 	@Override
 	default float getScaleY() {
-		return provideEffectiveSprite().getScaleY();
+		return getEffectiveSprite().getScaleY();
 	}
 
 	@Override
 	default float getWidth() {
-		return provideEffectiveSprite().getWidth();
+		return getEffectiveSprite().getWidth();
 	}
 
 	@Override
 	default float getHeight() {
-		return provideEffectiveSprite().getHeight();
+		return getEffectiveSprite().getHeight();
 	}
 
 	@Override
 	default boolean isFlipX() {
-		return provideEffectiveSprite().isFlipX();
+		return getEffectiveSprite().isFlipX();
 	}
 
 	@Override
 	default boolean isFlipY() {
-		return provideEffectiveSprite().isFlipY();
+		return getEffectiveSprite().isFlipY();
 	}
 
 	@Override
 	default float getRotation() {
-		return provideEffectiveSprite().getRotation();
+		return getEffectiveSprite().getRotation();
 	}
 }

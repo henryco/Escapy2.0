@@ -86,7 +86,7 @@ public class FullStaticTexture implements IEscapyModel, IEscapySpriteBinder {
 	}
 
 	@Override
-	public Sprite provideEffectiveSprite() {
+	public Sprite getEffectiveSprite() {
 		return maps[0] != null ? maps[0] : maps[1] != null ? maps[1] : maps[2];
 	}
 

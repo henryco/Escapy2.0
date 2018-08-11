@@ -39,7 +39,7 @@ public class LightSourceModel implements IEscapyModel, IEscapySpriteBinder {
 	}
 
 	@Override
-	public Sprite provideEffectiveSprite() {
+	public Sprite getEffectiveSprite() {
 		return mockProvidableSprite;
 	}
 
