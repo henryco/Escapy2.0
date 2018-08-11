@@ -13,9 +13,8 @@ public class EKeyboardRun
 	}
 
 	@Override
-	public void update(float delta, long timestamp) {
+	public void update(float delta) {
 		for (val l : getListeners()) {
-			l.onUpdate(delta, timestamp);
 			if (Gdx.input.isKeyPressed(key))
 				l.onRun();
 		}

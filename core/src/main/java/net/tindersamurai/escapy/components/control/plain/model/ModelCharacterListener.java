@@ -33,7 +33,7 @@ public class ModelCharacterListener implements IModelListener,
 	}
 
 	@Override
-	public void onUpdate(float delta, long timestamp) {
+	public void onUpdate(float delta) {
 
 	}
 

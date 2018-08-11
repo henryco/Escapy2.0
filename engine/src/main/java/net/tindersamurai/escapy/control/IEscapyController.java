@@ -9,7 +9,7 @@ public interface IEscapyController<LISTENER extends IEscapyControllerListener> {
 
 	void addListener(LISTENER listener);
 	void removeListener(LISTENER listener);
-	void update(float delta, long timestamp);
+	void update(float delta);
 
 
 	interface Interact extends IEscapyController<InteractListener> { }

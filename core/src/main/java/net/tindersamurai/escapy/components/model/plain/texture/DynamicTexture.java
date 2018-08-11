@@ -23,6 +23,8 @@ public class DynamicTexture implements IEscapyModelDynamic, IEscapySpriteBinder 
 	private float[] bindPadding = {0, 0};
 
 	public DynamicTexture (IEscapyTextureData data) {
+		if (data == null)
+			log.warning("No TextureData found for DynamicTexture");
 		this.textureData = data;
 	}
 
@@ -37,6 +39,7 @@ public class DynamicTexture implements IEscapyModelDynamic, IEscapySpriteBinder 
 	@Override
 	public void setSpriteProvider(IEscapySpriteProvider spriteProvider) {
 		this.animatedSpriteProvider = spriteProvider;
+		if (textureData == null) return;
 		apply(textureData::initializeSprite);
 	}
 

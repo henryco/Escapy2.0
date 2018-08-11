@@ -13,7 +13,7 @@ public class PhysCharacterListener extends
 	private final float run;
 	private final float sit;
 
-	private boolean active;
+	private long timestamp;
 	private float mv_speed;
 
 	public PhysCharacterListener(
@@ -32,40 +32,40 @@ public class PhysCharacterListener extends
 	}
 
 	@Override
-	public void onUpdate(float delta, long timestamp) {
-		active = false;
+	public void onUpdate(float delta) {
+		this.timestamp = System.nanoTime();
 	}
 
 	@Override
 	public void onInteract() {
 		System.out.println("interact");
-		active = true;
-	}
+
+ 	}
 
 	@Override
 	public void onMoveLeft() {
 		applyForceLR(-1);
 		mv_speed = speed;
-		active = true;
+		System.out.println("left");
 	}
 
 	@Override
 	public void onMoveRight() {
 		applyForceLR(1);
 		mv_speed = speed;
-		active = true;
+
 	}
 
 	@Override
 	public void onRun() {
 		mv_speed = run;
-		active = true;
+
 	}
 
 	@Override
 	public void onSit() {
 		mv_speed = sit;
-		active = true;
+
 	}
 
 	private void applyForceLR(int sign) {

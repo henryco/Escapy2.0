@@ -20,24 +20,34 @@ public final class EscapyControlManager implements IEscapyControlManager {
 
 	private EscapyControlManager() {
 		this.controllers = new HashMap<>();
-		this.arr = new IEscapyController[0];
+		this.listeners = new HashSet<>();
+		this.controllersArray = new IEscapyController[0];
+		this.listenersArray = new IEscapyControllerListener[0];
 	}
 
 	private final Map<String, IEscapyController> controllers;
-	private IEscapyController[] arr;
+	private final Set<IEscapyControllerListener> listeners;
+
+	private IEscapyControllerListener[] listenersArray;
+	private IEscapyController[] controllersArray;
 
 
 	@Override
 	public void registerController(IEscapyController controller) {
 		log.info("REGISTER CONTROLLER: " + controller);
 		controllers.put(controller.getName(), controller);
-		this.arr = controllers.values().toArray(new IEscapyController[0]);
+		controllersArray = controllers.values().toArray(new IEscapyController[0]);
 	}
 
 	@Override
 	public void attachControllerListener(IEscapyControllerListener listener) {
 		log.info("ATTACH CONTROLLER LISTENER: " + listener);
-		for (val c: arr) {
+		if (listener == null) return;
+
+		listeners.add(listener);
+		listenersArray = listeners.toArray(new IEscapyControllerListener[0]);
+
+		for (val c: controllersArray) {
 			try {
 				//noinspection unchecked
 				c.addListener(listener);
@@ -50,7 +60,12 @@ public final class EscapyControlManager implements IEscapyControlManager {
 	@Override
 	public void detachControllerListener(IEscapyControllerListener listener) {
 		log.info("DETACH CONTROLLER LISTENER: " + listener);
-		for (val c: arr) {
+		if (listener == null) return;
+
+		listeners.remove(listener);
+		listenersArray = listeners.toArray(new IEscapyControllerListener[0]);
+
+		for (val c: controllersArray) {
 			try {
 				//noinspection unchecked
 				c.removeListener(listener);
@@ -62,7 +77,7 @@ public final class EscapyControlManager implements IEscapyControlManager {
 
 	@Override
 	public void update(float delta) {
-		val timestamp = System.nanoTime();
-		for (val c : arr) c.update(delta, timestamp);
+		for (val l : listenersArray) l.onUpdate(delta);
+		for (val c: controllersArray) c.update(delta);
 	}
 }
