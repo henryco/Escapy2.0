@@ -5,6 +5,7 @@ import lombok.extern.java.Log;
 import net.tindersamurai.escapy.components.control.plain.animation.IAnimationListener;
 import net.tindersamurai.escapy.components.control.plain.phys.IPhysListener;
 import net.tindersamurai.escapy.components.node.plain.merger.INodeDataMerger;
+import net.tindersamurai.escapy.control.manager.IEscapyControlManager;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 
@@ -63,17 +64,25 @@ public class NodeData implements INodeData {
 	}
 
 	public void setPhysListener(IPhysListener physListener) {
-		if (physListener == null && this.physListener != null)
+		if (this.physListener != null)
+			this.physListener.detach();
+	 	if (physListener == null && this.physListener != null)
 			this.physListener.dispose();
-		this.physListener = physListener;
+	 	this.physListener = physListener;
 		merge();
+		if (this.physListener != null)
+			this.physListener.attach();
 	}
 
 	public void setAnimationListener(IAnimationListener animationListener) {
+	 	if (this.animationListener != null)
+	 		this.animationListener.detach();
 		if (animationListener == null && this.animationListener != null)
 			this.animationListener.dispose();
 		this.animationListener = animationListener;
 		merge();
+		if (this.animationListener != null)
+			this.animationListener.attach();
 	}
 
 }

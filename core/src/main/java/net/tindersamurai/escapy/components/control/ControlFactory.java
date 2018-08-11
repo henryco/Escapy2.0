@@ -8,10 +8,10 @@ import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
 import net.tindersamurai.escapy.components.control.plain.phys.PhysCharacterListener;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
-import net.tindersamurai.escapy.control.manager.EscapyControlManager;
 import net.tindersamurai.escapy.control.IEscapyController;
 import net.tindersamurai.escapy.control.listener.IEscapyControllerListener;
 import net.tindersamurai.escapy.control.keyboard.*;
+import net.tindersamurai.escapy.control.manager.IEscapyControlManager;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -27,12 +27,12 @@ public class ControlFactory {
 	private final Map<String, Object> registered;
 
 	private final EscapyGameContext gameContext;
-	private final EscapyControlManager controlManager;
+	private final IEscapyControlManager controlManager;
 
 	@Inject
 	public ControlFactory (
 			EscapyGameContext gameContext,
-			EscapyControlManager controlManager
+			IEscapyControlManager controlManager
 	) {
 
 		this.registered = new HashMap<>();
@@ -77,19 +77,9 @@ public class ControlFactory {
 		public IEscapyControllerListener physObjectListener (
 				@Arg("move") Float move,
 				@Arg("run") Float run,
-				@Arg("sit") Float sit,
-				@Arg("controllers") IEscapyController ... controllers
+				@Arg("sit") Float sit
 		) {
-			val l = new PhysCharacterListener(move, run, sit);
-			for (val c : controllers) {
-				try {
-					//noinspection unchecked
-					c.addListener(l);
-				} catch (Exception e) {
-					log.warning("Controller listener type mismatch!");
-				}
-			}
-			return l;
+			return new PhysCharacterListener(move, run, sit);
 		}
 	}
 

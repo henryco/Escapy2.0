@@ -14,12 +14,13 @@ public final class EscapyControlManager implements IEscapyControlManager {
 		private static final EscapyControlManager INSTANCE = new EscapyControlManager();
 	}
 
-	private EscapyControlManager() {
-		this.controllers = new HashMap<>();
-	}
-
 	public static IEscapyControlManager getInstance() {
 		return LazyHolder.INSTANCE;
+	}
+
+	private EscapyControlManager() {
+		this.controllers = new HashMap<>();
+		this.arr = new IEscapyController[0];
 	}
 
 	private final Map<String, IEscapyController> controllers;
@@ -28,12 +29,14 @@ public final class EscapyControlManager implements IEscapyControlManager {
 
 	@Override
 	public void registerController(IEscapyController controller) {
+		log.info("REGISTER CONTROLLER: " + controller);
 		controllers.put(controller.getName(), controller);
 		this.arr = controllers.values().toArray(new IEscapyController[0]);
 	}
 
 	@Override
-	public void addControllerListener(IEscapyControllerListener listener) {
+	public void attachControllerListener(IEscapyControllerListener listener) {
+		log.info("ATTACH CONTROLLER LISTENER: " + listener);
 		for (val c: arr) {
 			try {
 				//noinspection unchecked
@@ -46,6 +49,7 @@ public final class EscapyControlManager implements IEscapyControlManager {
 
 	@Override
 	public void detachControllerListener(IEscapyControllerListener listener) {
+		log.info("DETACH CONTROLLER LISTENER: " + listener);
 		for (val c: arr) {
 			try {
 				//noinspection unchecked
