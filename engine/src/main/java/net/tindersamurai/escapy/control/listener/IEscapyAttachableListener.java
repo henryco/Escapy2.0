@@ -1,9 +1,8 @@
-package net.tindersamurai.escapy.components.control.plain;
+package net.tindersamurai.escapy.control.listener;
 
-import net.tindersamurai.escapy.control.listener.IEscapyControllerListener;
 import net.tindersamurai.escapy.control.manager.IEscapyControlManager;
 
-public interface AttachableListener extends IEscapyControllerListener {
+public interface IEscapyAttachableListener extends IEscapyControllerListener {
 
 	default void attach(IEscapyControlManager manager) {
 		manager.attachControllerListener(this);

@@ -1,14 +1,33 @@
 package net.tindersamurai.escapy.components.control.plain.model;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import net.tindersamurai.escapy.control.listener.IEscapyControllerListener.*;
+import lombok.Setter;
+import lombok.extern.java.Log;
+import net.tindersamurai.escapy.components.control.plain.CoreCharacterListener;
 
-public class ModelCharacterListener implements IModelListener,
-		MoveLeftListener, MoveRightListener, RunListener,
-		SitListener, InteractListener {
+@Log
+public class ModelCharacterListener
+		extends CoreCharacterListener<Object>
+		implements IModelListener {
+
+	/**
+	 * time in ms
+	 */
+	private @Setter float frameStep;
+
 
 	@Override
 	public void dispose() {
+
+	}
+
+	@Override
+	protected Class<Object> getDataType() {
+		return Object.class;
+	}
+
+	@Override
+	public void onUpdate(float delta) {
 
 	}
 
@@ -29,11 +48,6 @@ public class ModelCharacterListener implements IModelListener,
 
 	@Override
 	public void onInteract() {
-
-	}
-
-	@Override
-	public void onUpdate(float delta) {
 
 	}
 
