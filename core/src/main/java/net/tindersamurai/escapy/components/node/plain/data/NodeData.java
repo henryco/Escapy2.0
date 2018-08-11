@@ -11,10 +11,6 @@ import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 @Data @Log
 public class NodeData implements INodeData {
 
-	public static NodeData newInstance(INodeDataMerger<NodeData> merger) {
-		return new NodeData(merger);
-	}
-
 	private IEscapyModel model;
 	private IEscapyPhysObject phys;
 
@@ -23,6 +19,11 @@ public class NodeData implements INodeData {
 
 	private final INodeDataMerger<NodeData> merger;
 	private final String id;
+
+
+	public static NodeData newInstance(INodeDataMerger<NodeData> merger) {
+		return new NodeData(merger);
+	}
 
 	private NodeData(INodeDataMerger<NodeData> merger) {
 		id = this.hashCode() + ":" + super.hashCode();

@@ -6,10 +6,8 @@ import lombok.extern.java.Log;
 import lombok.val;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
-import net.tindersamurai.escapy.map.model.IEscapyRenderable;
 import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteBinder;
 import net.tindersamurai.escapy.map.model.texture.EscapyTextureData;
-import net.tindersamurai.escapy.map.model.texture.IEscapyTextureData;
 import net.tindersamurai.escapy.utils.files.EscapyFiles;
 
 import java.util.function.Consumer;
@@ -31,24 +29,10 @@ public class StaticTexture implements IEscapyModel, IEscapySpriteBinder {
 		};
 
 		for (Sprite sprite : sprites)
-			initialize(sprite, data);
+			data.initializeSprite(sprite);
 	}
 
-	private static void initialize (Sprite sprite, IEscapyTextureData data) {
-		if (sprite == null) return;
 
-		log.info("Initialize sprite: " + sprite);
-
-		sprite.setScale(data.getScaleX(), data.getScaleY());
-		sprite.setFlip(data.isFlipX(), data.isFlipY());
-		sprite.setPosition(data.getX(), data.getY());
-		sprite.setRotation(data.getRotation());
-
-		sprite.setSize (
-				data.getWidth() == 0 ? sprite.getWidth() : data.getWidth(),
-				data.getHeight() == 0 ? sprite.getHeight() : data.getHeight()
-		);
-	}
 
 	@Override
 	public void renderDiffuseMap(IEscapyCamera camera, Batch batch, float delta) {

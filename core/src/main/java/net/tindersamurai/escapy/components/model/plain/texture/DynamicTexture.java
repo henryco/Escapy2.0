@@ -2,27 +2,42 @@ package net.tindersamurai.escapy.components.model.plain.texture;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import lombok.NoArgsConstructor;
 import lombok.extern.java.Log;
 import lombok.val;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.map.model.IEscapyModelDynamic;
 import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteBinder;
 import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteProvider;
+import net.tindersamurai.escapy.map.model.texture.IEscapyTextureData;
 
 import java.util.function.Consumer;
 
-import static net.tindersamurai.escapy.map.model.IEscapyRenderable.*;
+import static net.tindersamurai.escapy.map.model.IEscapyRenderable.draw;
 
-@Log @NoArgsConstructor
+@Log
 public class DynamicTexture implements IEscapyModelDynamic, IEscapySpriteBinder {
+
+	private final IEscapyTextureData textureData;
 
 	private IEscapySpriteProvider animatedSpriteProvider;
 	private float[] bindPadding = {0, 0};
 
+	public DynamicTexture (IEscapyTextureData data) {
+		this.textureData = data;
+	}
+
+	public DynamicTexture(
+			IEscapySpriteProvider provider,
+			IEscapyTextureData data
+	) {
+		this(data);
+		setSpriteProvider(provider);
+	}
+
 	@Override
 	public void setSpriteProvider(IEscapySpriteProvider spriteProvider) {
 		this.animatedSpriteProvider = spriteProvider;
+		apply(textureData::initializeSprite);
 	}
 
 	@Override
