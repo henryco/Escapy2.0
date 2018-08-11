@@ -81,9 +81,9 @@
                     </c:physics.object.get>
 
                     <c:control.listener.phys-character>
-                        <o:float name="move">2.25</o:float>
+                        <o:float name="move">1</o:float>
                         <o:float name="run">3</o:float>
-                        <o:float name="sit">1.75</o:float>
+                        <o:float name="sit">0.5</o:float>
                     </c:control.listener.phys-character>
                 </c:node.data>
             </c:location.node>

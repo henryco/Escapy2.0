@@ -44,7 +44,7 @@ public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 			LocationSwitcher locationSetter
 	) {
 		this.controlManager = IEscapyControlManager.instance();
-		this.escapyThread = new EscapyThread(5, this);
+		this.escapyThread = new EscapyThread(1, this);
 		this.locSetter = locationSetter;
 		this.renderer = renderer;
 	}

@@ -1,5 +1,6 @@
 package net.tindersamurai.escapy.components.control.plain.phys;
 
+import com.badlogic.gdx.math.Vector2;
 import lombok.val;
 import net.tindersamurai.escapy.components.control.plain.CoreCharacterListener;
 import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
@@ -8,6 +9,8 @@ import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 public class PhysCharacterListener extends
 		CoreCharacterListener<IEscapyPhysObject>
 		implements IPhysListener {
+
+	private Vector2[] lastPosition;
 
 	private final float speed;
 	private final float run;
@@ -34,10 +37,16 @@ public class PhysCharacterListener extends
 	@Override
 	public void onUpdate(float delta) {
 		if (moved) {
-//			for (val d : getUserData()) {
-//				if (!d.isGrounded()) continue;
-//
-//			}
+			val objects = getUserData();
+			for (int i = 0; i < objects.length; i++) {
+				val object = objects[i];
+				if (!object.isGrounded()) continue;
+
+				val body = object.getMainFixture().getBody();
+				body.setLinearVelocity(0, 0);
+				body.getPosition().set(lastPosition[i]);
+				body.setAwake(true);
+			}
 		}
 		moved = false;
 	}
@@ -75,11 +84,17 @@ public class PhysCharacterListener extends
 	}
 
 	private void applyForceLR(int sign) {
-		for (val d : getUserData()) {
+		val objects = getUserData();
+		lastPosition = new Vector2[objects.length];
+		for (int i = 0; i < objects.length; i++) {
+			val d = objects[i];
 			if (!d.isGrounded()) continue;
+
 			val body = d.getMainFixture().getBody();
 			body.setLinearVelocity(Math.signum(sign) * mv_speed, 0);
 			body.setAwake(true);
+
+			lastPosition[i] = body.getPosition();
 		}
 		moved = true;
 	}
