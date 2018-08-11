@@ -13,8 +13,8 @@ public class PhysCharacterListener extends
 	private final float run;
 	private final float sit;
 
-	private long timestamp;
 	private float mv_speed;
+	private boolean moved;
 
 	public PhysCharacterListener(
 			float speed,
@@ -33,7 +33,13 @@ public class PhysCharacterListener extends
 
 	@Override
 	public void onUpdate(float delta) {
-		this.timestamp = System.nanoTime();
+		if (moved) {
+//			for (val d : getUserData()) {
+//				if (!d.isGrounded()) continue;
+//
+//			}
+		}
+		moved = false;
 	}
 
 	@Override
@@ -46,7 +52,7 @@ public class PhysCharacterListener extends
 	public void onMoveLeft() {
 		applyForceLR(-1);
 		mv_speed = speed;
-		System.out.println("left");
+
 	}
 
 	@Override
@@ -75,5 +81,6 @@ public class PhysCharacterListener extends
 			body.setLinearVelocity(Math.signum(sign) * mv_speed, 0);
 			body.setAwake(true);
 		}
+		moved = true;
 	}
 }

@@ -3,13 +3,17 @@ package net.tindersamurai.escapy.utils.loop;
 import lombok.Setter;
 import lombok.extern.java.Log;
 
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 
 @Log
 public class EscapyThread implements IEscapyThread {
 
 	private final ExecutorService executorService;
+	private final Queue<IEscapyUpdateble> bus;
 	private final long sleep;
 
 	private @Setter IEscapyUpdateble updateble;
@@ -20,12 +24,18 @@ public class EscapyThread implements IEscapyThread {
 	 */
 	public EscapyThread(long sleep, IEscapyUpdateble updateble) {
 		this.executorService = Executors.newSingleThreadExecutor();
+		this.bus = new ConcurrentLinkedQueue<>();
 		setUpdateble(updateble);
 		this.sleep = sleep;
 	}
 
 	public EscapyThread() {
 		this(5, null);
+	}
+
+	@Override
+	public void nextTick(IEscapyUpdateble nextTick) {
+		bus.offer(nextTick);
 	}
 
 	@Override
@@ -57,7 +67,14 @@ public class EscapyThread implements IEscapyThread {
 				final long t0 = System.nanoTime();
 				Thread.sleep(sleep);
 				final long t1 = System.nanoTime() - t0;
-				updateble.update(((float) t1) / 1000000000f);
+
+				final float delta = ((float) t1) / 1000000000f;
+
+				IEscapyUpdateble queued;
+				while ((queued = bus.poll()) != null)
+					queued.update(delta);
+
+				updateble.update(delta);
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
 			}
