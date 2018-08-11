@@ -1,9 +1,9 @@
-package net.tindersamurai.escapy.components.control.plain.animation;
+package net.tindersamurai.escapy.components.control.plain.model;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import net.tindersamurai.escapy.control.listener.IEscapyControllerListener.*;
 
-public class AnimatedCharacterListener implements IAnimationListener,
+public class ModelCharacterListener implements IModelListener,
 		MoveLeftListener, MoveRightListener, RunListener,
 		SitListener, InteractListener {
 
@@ -33,7 +33,7 @@ public class AnimatedCharacterListener implements IAnimationListener,
 	}
 
 	@Override
-	public void onUpdate(float delta) {
+	public void onUpdate(float delta, long timestamp) {
 
 	}
 

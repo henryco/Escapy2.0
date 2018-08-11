@@ -14,6 +14,7 @@ public class ControlPhysMerger implements IControlPhysMerger {
 			IEscapyControllerListener listener,
 			IEscapyPhysObject phys
 	) {
+		log.info(listener + " : " + phys);
 		if (phys == null || listener == null) return;
 		listener.addUserData(phys);
 	}

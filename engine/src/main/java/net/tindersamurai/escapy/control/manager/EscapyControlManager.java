@@ -62,6 +62,7 @@ public final class EscapyControlManager implements IEscapyControlManager {
 
 	@Override
 	public void update(float delta) {
-		for (val c : arr) c.update(delta);
+		val timestamp = System.nanoTime();
+		for (val c : arr) c.update(delta, timestamp);
 	}
 }

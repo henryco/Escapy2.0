@@ -14,9 +14,9 @@ public class EKeyboardSit
 	}
 
 	@Override
-	public void update(float delta) {
+	public void update(float delta, long timestamp) {
 		for (val l : getListeners()) {
-			l.onUpdate(delta);
+			l.onUpdate(delta, timestamp);
 			if (Gdx.input.isKeyPressed(key))
 				l.onSit();
 		}

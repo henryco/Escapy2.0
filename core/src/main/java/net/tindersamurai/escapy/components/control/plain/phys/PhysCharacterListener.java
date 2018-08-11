@@ -32,7 +32,7 @@ public class PhysCharacterListener extends
 	}
 
 	@Override
-	public void onUpdate(float delta) {
+	public void onUpdate(float delta, long timestamp) {
 		active = false;
 	}
 

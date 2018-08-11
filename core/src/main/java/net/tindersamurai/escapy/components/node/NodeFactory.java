@@ -6,7 +6,7 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
-import net.tindersamurai.escapy.components.control.plain.animation.IAnimationListener;
+import net.tindersamurai.escapy.components.control.plain.model.IModelListener;
 import net.tindersamurai.escapy.components.control.plain.phys.IPhysListener;
 import net.tindersamurai.escapy.components.node.plain.data.NodeData;
 import net.tindersamurai.escapy.components.node.plain.merger.INodeDataMerger;
@@ -44,8 +44,8 @@ public class NodeFactory {
 			if (arg instanceof IPhysListener)
 				data.setPhysListener((IPhysListener) arg);
 
-			if (arg instanceof IAnimationListener)
-				data.setAnimationListener((IAnimationListener) arg);
+			if (arg instanceof IModelListener)
+				data.setModelListener((IModelListener) arg);
 
 		}
 

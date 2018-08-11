@@ -7,7 +7,6 @@ import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
 import net.tindersamurai.escapy.components.control.plain.phys.PhysCharacterListener;
-import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
 import net.tindersamurai.escapy.control.IEscapyController;
 import net.tindersamurai.escapy.control.listener.IEscapyControllerListener;
 import net.tindersamurai.escapy.control.keyboard.*;
@@ -24,21 +23,15 @@ import static com.badlogic.gdx.Input.*;
 @EscapyComponentFactory("control")
 public class ControlFactory {
 
-	private final Map<String, Object> registered;
-
-	private final EscapyGameContext gameContext;
 	private final IEscapyControlManager controlManager;
+	private final Map<String, Object> registered;
 
 	@Inject
 	public ControlFactory (
-			EscapyGameContext gameContext,
 			IEscapyControlManager controlManager
 	) {
-
-		this.registered = new HashMap<>();
-
-		this.gameContext = gameContext;
 		this.controlManager = controlManager;
+		this.registered = new HashMap<>();
 
 		// initial registering
 		new Register().keyboardPhys();

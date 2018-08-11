@@ -2,10 +2,9 @@ package net.tindersamurai.escapy.components.node.plain.data;
 
 import lombok.Data;
 import lombok.extern.java.Log;
-import net.tindersamurai.escapy.components.control.plain.animation.IAnimationListener;
+import net.tindersamurai.escapy.components.control.plain.model.IModelListener;
 import net.tindersamurai.escapy.components.control.plain.phys.IPhysListener;
 import net.tindersamurai.escapy.components.node.plain.merger.INodeDataMerger;
-import net.tindersamurai.escapy.control.manager.IEscapyControlManager;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 
@@ -15,7 +14,7 @@ public class NodeData implements INodeData {
 	private IEscapyModel model;
 	private IEscapyPhysObject phys;
 
-	private IAnimationListener animationListener;
+	private IModelListener modelListener;
 	private IPhysListener physListener;
 
 	private final INodeDataMerger<NodeData> merger;
@@ -36,7 +35,7 @@ public class NodeData implements INodeData {
 	@Override
 	public void dispose() {
 		log.info("DISPOSE NODE DATA: [" + id + "]");
-		if (animationListener != null) animationListener.dispose();
+		if (modelListener != null) modelListener.dispose();
 		if (physListener != null) physListener.dispose();
 		if (model != null) model.dispose();
 		if (phys != null) phys.dispose();
@@ -46,7 +45,7 @@ public class NodeData implements INodeData {
 	 * We can set merger only via constructor
 	 */ @Override
 	public void setMerger(INodeDataMerger merger) {
-		// constructor only
+		// set via constructor only
 	}
 
 	public void setModel(IEscapyModel model) {
@@ -74,15 +73,15 @@ public class NodeData implements INodeData {
 			this.physListener.attach();
 	}
 
-	public void setAnimationListener(IAnimationListener animationListener) {
-	 	if (this.animationListener != null)
-	 		this.animationListener.detach();
-		if (animationListener == null && this.animationListener != null)
-			this.animationListener.dispose();
-		this.animationListener = animationListener;
+	public void setModelListener(IModelListener modelListener) {
+	 	if (this.modelListener != null)
+	 		this.modelListener.detach();
+		if (modelListener == null && this.modelListener != null)
+			this.modelListener.dispose();
+		this.modelListener = modelListener;
 		merge();
-		if (this.animationListener != null)
-			this.animationListener.attach();
+		if (this.modelListener != null)
+			this.modelListener.attach();
 	}
 
 }
