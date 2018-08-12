@@ -1,16 +1,15 @@
 package net.tindersamurai.escapy.animation;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import lombok.Getter;
 import lombok.extern.java.Log;
 import lombok.val;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 /**
  * State machine, very useful
@@ -161,4 +160,31 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 		val renderable = currentSubState.getRenderable();
 		if (renderable != null) renderable.renderDiffuseMap(camera, batch, delta);
 	}
-}
+
+	@Override
+	public void applyToAllStateSprites(Consumer<Sprite> consumer) {
+		states.values().forEach(state -> consumeState(state, consumer));
+	}
+
+
+	private static void consumeState (
+			final State state, final Consumer<Sprite> consumer
+	) {
+		final Map<String, State> trans = state.getTrans();
+		if (trans != null) {
+			final Collection<State> values = trans.values();
+			values.forEach(ss -> consumeState(ss, consumer));
+		}
+
+		final Alternative[] alt = state.getAlt();
+		if (alt == null) return;
+
+		for (Alternative a : alt) {
+			final Sprites s = a.getSub().getSprites();
+			consumer.accept(s.getDiffuse());
+			consumer.accept(s.getNormal());
+			consumer.accept(s.getShadow());
+		}
+	}
+
+ }

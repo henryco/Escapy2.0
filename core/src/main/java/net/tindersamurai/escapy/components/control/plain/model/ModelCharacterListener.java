@@ -7,6 +7,8 @@ import net.tindersamurai.escapy.animation.IEscapyAnimationSM;
 import net.tindersamurai.escapy.components.control.plain.CoreCharacterListener;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 
+import java.util.function.Consumer;
+
 @Log
 public class ModelCharacterListener
 		extends CoreCharacterListener<Object>
@@ -27,6 +29,11 @@ public class ModelCharacterListener
 	@Override
 	protected Class<Object> getDataType() {
 		return Object.class;
+	}
+
+	@Override
+	public void applyToAll(Consumer<Sprite> spriteConsumer) {
+		animationSM.applyToAllStateSprites(spriteConsumer);
 	}
 
 	@Override

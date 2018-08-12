@@ -5,12 +5,14 @@ import lombok.Value;
 import net.tindersamurai.escapy.graphic.IEscapyRenderable;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public interface IEscapyAnimationSM extends IEscapyRenderable{
 
 	interface AnimationRender extends IEscapyRenderable {
 		void start();
 		void stop();
+		boolean isFinished();
 		default void restart() {
 			stop();
 			start();
@@ -52,4 +54,6 @@ public interface IEscapyAnimationSM extends IEscapyRenderable{
 	State getCurrentState();
 
 	SubState getCurrentSubState();
+
+	void applyToAllStateSprites(Consumer<Sprite> consumer);
 }
