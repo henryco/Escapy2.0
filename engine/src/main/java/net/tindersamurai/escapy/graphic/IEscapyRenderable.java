@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.map.model;
+package net.tindersamurai.escapy.graphic;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;

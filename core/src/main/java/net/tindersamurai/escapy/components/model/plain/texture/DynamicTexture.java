@@ -12,7 +12,7 @@ import net.tindersamurai.escapy.map.model.texture.IEscapyTextureData;
 
 import java.util.function.Consumer;
 
-import static net.tindersamurai.escapy.map.model.IEscapyRenderable.draw;
+import static net.tindersamurai.escapy.graphic.IEscapyRenderable.draw;
 
 @Log
 public class DynamicTexture implements IEscapyModelDynamic, IEscapySpriteBinder {

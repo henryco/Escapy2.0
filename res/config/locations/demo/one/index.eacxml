@@ -9,7 +9,7 @@
     </c:location.constructor>
 
 
-    <c:location.physics>d
+    <c:location.physics>
         <c:node.data>
             <c:physics.object.get>
                 <o:string>manager</o:string>

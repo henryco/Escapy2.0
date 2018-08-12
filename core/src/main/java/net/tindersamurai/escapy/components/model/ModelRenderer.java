@@ -7,7 +7,7 @@ import lombok.val;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.map.model.IEscapyModelRenderer;
-import net.tindersamurai.escapy.map.model.IEscapyRenderable;
+import net.tindersamurai.escapy.graphic.IEscapyRenderable;
 
 import javax.inject.Inject;
 import javax.inject.Named;

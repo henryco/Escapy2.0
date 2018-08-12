@@ -12,7 +12,7 @@ import net.tindersamurai.escapy.utils.files.EscapyFiles;
 
 import java.util.function.Consumer;
 
-import static net.tindersamurai.escapy.map.model.IEscapyRenderable.*;
+import static net.tindersamurai.escapy.graphic.IEscapyRenderable.*;
 
 @Log
 public class StaticTexture implements IEscapyModel, IEscapySpriteBinder {
