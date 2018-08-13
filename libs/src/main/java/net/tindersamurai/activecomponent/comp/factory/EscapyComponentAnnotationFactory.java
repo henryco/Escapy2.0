@@ -5,6 +5,7 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
+import net.tindersamurai.activecomponent.core.CoreComponentsContract;
 import net.tindersamurai.activecomponent.core.FilesCoreComponent;
 import net.tindersamurai.activecomponent.core.UtilityCoreComponent;
 
@@ -33,6 +34,14 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 		System.arraycopy(componentFactories, 0, factories, 2, componentFactories.length);
 		factories[0] = new UtilityCoreComponent();
 		factories[1] = new FilesCoreComponent();
+
+//		Object[] coreFactories = CoreComponentsContract.getCoreComponents();
+//		final int crl = coreFactories.length;
+//
+//		Object[] factories = new Object[componentFactories.length + crl];
+//
+//		System.arraycopy(coreFactories, 0, factories, 0, crl);
+//		System.arraycopy(componentFactories, 0, factories, crl, factories.length);
 
 		initialize(factories, "");
 	}
