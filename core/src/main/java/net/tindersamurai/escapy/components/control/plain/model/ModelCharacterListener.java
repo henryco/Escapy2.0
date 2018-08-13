@@ -3,7 +3,7 @@ package net.tindersamurai.escapy.components.control.plain.model;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import lombok.extern.java.Log;
-import net.tindersamurai.escapy.animation.IEscapyAnimationSM;
+import net.tindersamurai.escapy.graphic.animation.IEscapyAnimationSM;
 import net.tindersamurai.escapy.components.control.plain.CoreCharacterListener;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 

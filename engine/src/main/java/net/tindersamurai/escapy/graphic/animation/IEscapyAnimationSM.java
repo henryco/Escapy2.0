@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.animation;
+package net.tindersamurai.escapy.graphic.animation;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import lombok.Value;
