@@ -29,7 +29,6 @@ public interface IEscapyAnimationSM extends IEscapyRenderable{
 		private AnimationRender renderable;
 		private Sprites sprites;
 		private SubState next;
-		private String name;
 	}
 
 	@Value final class State {

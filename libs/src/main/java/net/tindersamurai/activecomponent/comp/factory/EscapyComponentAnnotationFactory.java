@@ -5,7 +5,7 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
-import net.tindersamurai.activecomponent.core.CoreComponentsContract;
+import net.tindersamurai.activecomponent.comp.annotation.NotNull;
 import net.tindersamurai.activecomponent.core.FilesCoreComponent;
 import net.tindersamurai.activecomponent.core.UtilityCoreComponent;
 
@@ -153,6 +153,17 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 
 					if (arr[i] != null && arr[i].toString().equalsIgnoreCase("null"))
 						arr[i] = null;
+
+					if (arr[i] == null &&
+							parameter.getDeclaredAnnotation(NotNull.class) != null) {
+						throw new RuntimeException("\nComponent factory argument " +
+								"is NULL which it annotated @NotNULL:" +
+								"\n\tCOMPONENT: " + componentName +
+								"\n\tMETHOD: " + method +
+								"\n\tARG NAME: " + argName +
+								"\n\tPARAMETER: " + parameter
+						);
+					}
 				}
 
 				try {
@@ -161,8 +172,8 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 
 				} catch (Exception e) {
 					String msg = "Cannot create component: " + componentName
-							+ "\nMETHOD: " + method
-							+ "\nARGS: " + Arrays.toString(arr) + "\n";
+							+ "\n\tMETHOD: " + method
+							+ "\n\tARGS: " + Arrays.toString(arr) + "\n";
 					throw new RuntimeException(msg, e);
 				}
 			});
