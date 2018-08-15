@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 
 import static net.tindersamurai.escapy.graphic.IEscapyRenderable.draw;
 
-@Log
+@SuppressWarnings({"WeakerAccess", "unused"}) @Log
 public class DynamicTexture implements IEscapyModelDynamic, IEscapySpriteBinder {
 
 	private final IEscapyTextureData textureData;
@@ -40,6 +40,8 @@ public class DynamicTexture implements IEscapyModelDynamic, IEscapySpriteBinder 
 	public void setSpriteProvider(IEscapySpriteProvider spriteProvider) {
 		this.animatedSpriteProvider = spriteProvider;
 		if (textureData == null) return;
+
+		log.info("GOING TO INITIALIZE SPRITES");
 		apply(textureData::initializeSprite);
 	}
 

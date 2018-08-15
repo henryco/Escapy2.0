@@ -168,7 +168,9 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 
 	@Override
 	public void applyToAllStateSprites(Consumer<Sprite> consumer) {
-		states.values().forEach(state -> consumeState(state, consumer));
+		for (State state : states.values()) {
+			consumeState(state, consumer);
+		}
 	}
 
 
@@ -185,16 +187,23 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 		if (alt == null) return;
 
 		for (Animation a : alt) {
-			final Sprites s = a.getSub().getSprites();
 
-			final Sprite diffuse = s.getDiffuse();
-			if (diffuse != null) consumer.accept(diffuse);
+			SubState sub = a.getSub();
+			while (sub != null) {
 
-			final Sprite normal = s.getDiffuse();
-			if (normal != null) consumer.accept(normal);
+				final Sprites s = sub.getSprites();
 
-			final Sprite shadow = s.getDiffuse();
-			if (shadow != null) consumer.accept(shadow);
+				final Sprite diffuse = s.getDiffuse();
+				if (diffuse != null) consumer.accept(diffuse);
+
+				final Sprite normal = s.getDiffuse();
+				if (normal != null) consumer.accept(normal);
+
+				final Sprite shadow = s.getDiffuse();
+				if (shadow != null) consumer.accept(shadow);
+
+				sub = sub.getNext();
+			}
 		}
 	}
 

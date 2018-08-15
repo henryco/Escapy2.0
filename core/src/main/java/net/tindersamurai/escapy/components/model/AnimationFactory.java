@@ -97,7 +97,7 @@ public class AnimationFactory {
 			@Arg("states") State... states
 	) {
 
-		IEscapyAnimationSM sm = new EscapyAnimationSM(1000f / speed);
+		IEscapyAnimationSM sm = new EscapyAnimationSM(speed / 1000f);
 		for (State state : states)
 			sm.addState(state);
 
