@@ -22,4 +22,5 @@ public interface EscapyComponentParser {
 	<T> T parseComponent(String file);
 
 	String getRootPath();
+	void setRootPath(String path);
 }

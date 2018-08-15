@@ -1,6 +1,9 @@
 package net.tindersamurai.escapy.graphic.animation;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 import net.tindersamurai.escapy.graphic.IEscapyRenderable;
 
@@ -25,7 +28,8 @@ public interface IEscapyAnimationSM extends IEscapyRenderable{
 		private Sprite shadow;
 	}
 
-	@Value final class SubState {
+	@Data @AllArgsConstructor @NoArgsConstructor
+	final class SubState {
 		private AnimationRender renderable;
 		private Sprites sprites;
 		private SubState next;
@@ -33,11 +37,11 @@ public interface IEscapyAnimationSM extends IEscapyRenderable{
 
 	@Value final class State {
 		private Map<String, State> trans;
-		private Alternative[] alt;
+		private Animation[] animations;
 		private String name;
 	}
 
-	@Value final class Alternative {
+	@Value final class Animation {
 		private float probability;
 		private SubState sub;
 	}

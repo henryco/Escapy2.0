@@ -61,7 +61,7 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 			}
 
 			// get sub state of current state
-			currentSubState = rollSubState(currentState.getAlt());
+			currentSubState = rollSubState(currentState.getAnimations());
 		}
 	}
 
@@ -75,7 +75,7 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 		available.set(false);
 		{
 			currentState = states.get(name);
-			currentSubState = rollSubState(currentState.getAlt());
+			currentSubState = rollSubState(currentState.getAnimations());
 			accumulator = 0;
 			nextState = null;
 		}
@@ -84,6 +84,11 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 
 	@Override
 	public void setState(String name) {
+		if (currentState != null
+				&& name.equals(currentState.getName())) {
+			return;
+		}
+
 		available.set(false);
 		{
 			accumulator = 0;
@@ -96,7 +101,7 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 
 				// if there are transitions present
 				if (transition != null) {
-					currentSubState = rollSubState(transition.getAlt());
+					currentSubState = rollSubState(transition.getAnimations());
 					currentState = transition;
 					nextState = next;
 					return;
@@ -104,7 +109,7 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 			}
 
 			// if there are no transitions
-			currentSubState = rollSubState(next.getAlt());
+			currentSubState = rollSubState(next.getAnimations());
 			currentState = next;
 			nextState = null;
 		}
@@ -112,7 +117,7 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 	}
 
 	private static SubState rollSubState (
-			Alternative[] alternatives
+			Animation[] alternatives
 	) {
 		if (alternatives == null || alternatives.length == 0)
 			return null;
@@ -176,10 +181,10 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 			values.forEach(ss -> consumeState(ss, consumer));
 		}
 
-		final Alternative[] alt = state.getAlt();
+		final Animation[] alt = state.getAnimations();
 		if (alt == null) return;
 
-		for (Alternative a : alt) {
+		for (Animation a : alt) {
 			final Sprites s = a.getSub().getSprites();
 			consumer.accept(s.getDiffuse());
 			consumer.accept(s.getNormal());

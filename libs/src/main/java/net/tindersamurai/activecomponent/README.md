@@ -80,11 +80,18 @@
 
 * **`@EscapyComponent("entry") Entry createEntry(@Arg("key") Object key, @Arg("value") Object value);`**
 
+* **`@EscapyComponent("map") <K, V> Map<K, V> createMap(@Arg("entries") Entry<K, V> ... entries);`**
+
 * **`@EscapyComponent("null") Object nullObject(Object ... args);`**
 
 * **`@EscapyComponent("type") Class<?> primitiveType(@Arg("object") Object o);`**
 
 C полным списком можно ознакомиться заглянув в класс-фабрику **```java UtilityCoreComponent```**.
+
+### **INCLUDES**
+Библиотека позволяет подключать компоненты и объекты из внешних файлов
+с помощью директивы **`<c:f.include / >`** принимающей в качестве аргумента
+**`String`** путь к файлу.
 
 ### **Code example**
 

@@ -64,12 +64,7 @@ public class DynamicTexture implements IEscapyModelDynamic, IEscapySpriteBinder 
 	@Override
 	public void apply(Consumer<Sprite> s) {
 		if (animatedSpriteProvider == null) return;
-		val d = animatedSpriteProvider.getDiffuseSprite();
-		if (d != null) s.accept(d);
-		val n = animatedSpriteProvider.getNormalsSprite();
-		if(n != null) s.accept(n);
-		val h = animatedSpriteProvider.getShadowsSprite();
-		if (h != null) s.accept(h);
+		animatedSpriteProvider.applyToAll(s);
 	}
 
 	@Override

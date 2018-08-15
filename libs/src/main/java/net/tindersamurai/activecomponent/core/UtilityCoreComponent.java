@@ -5,15 +5,14 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
+import net.tindersamurai.activecomponent.comp.annotation.NotNull;
 import net.tindersamurai.activecomponent.parser.EscapyComponentParser;
 import net.tindersamurai.activecomponent.parser.EscapyComponentParserProvider;
 
 import java.lang.reflect.Array;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 @Log @EscapyComponentFactory("u") // u for utility
 public final class UtilityCoreComponent {
@@ -22,7 +21,7 @@ public final class UtilityCoreComponent {
 	public static final class PrimitivesUtilities {
 
 		@EscapyComponent("type") // test: OK
-		public Class<?> primitiveType(@Arg("object") Object o) {
+		public Class<?> primitiveType(@NotNull @Arg("object") Object o) {
 			log.info(""+o);
 			if (o instanceof String) {
 				String oo = (String) o;
@@ -46,12 +45,12 @@ public final class UtilityCoreComponent {
 	public static final class SystemUtilities {
 
 		@EscapyComponent("property")
-		public String property(@Arg("key") String key) {
+		public String property(@NotNull @Arg("key") String key) {
 			return System.getProperty(key);
 		}
 
 		@EscapyComponent("exit")
-		public void exit(@Arg("status") int status) {
+		public void exit(@NotNull @Arg("status") int status) {
 			System.exit(status);
 		}
 	}
@@ -85,7 +84,7 @@ public final class UtilityCoreComponent {
 	}
 
 	@EscapyComponent("array") // test: OK
-	public Object newArrayInstance(@Arg("type") Class<?> type,
+	public Object newArrayInstance(@NotNull @Arg("type") Class<?> type,
 								   @Arg("elements") Object ... args) {
 		final int l = Array.getLength(args);
 		Object array = Array.newInstance(type, l);
@@ -105,12 +104,12 @@ public final class UtilityCoreComponent {
 	}
 
 	@EscapyComponent("class") // test: OK
-	public Class<?> findClass(@Arg("object") Object o) {
+	public Class<?> findClass(@NotNull @Arg("object") Object o) {
 		return o.getClass();
 	}
 
 	@EscapyComponent("class-by-name")
-	public Class<?> classByName(String name) {
+	public Class<?> classByName(@NotNull @Arg("name") String name) {
 		try {
 			return Class.forName(name);
 		} catch (ClassNotFoundException e) {
@@ -123,6 +122,11 @@ public final class UtilityCoreComponent {
 							 @Arg("value") Object value
 	) {
 		return new AbstractMap.SimpleImmutableEntry<>(key, value);
+	}
+
+	@EscapyComponent("map")
+	public <K, V> Map<K, V> createMap(@Arg("entries") Entry<K, V> ... entries) {
+		return Arrays.stream(entries).collect(Collectors.toMap(Entry::getKey, Entry::getValue, (a, b) -> b));
 	}
 
 	@EscapyComponent("null")

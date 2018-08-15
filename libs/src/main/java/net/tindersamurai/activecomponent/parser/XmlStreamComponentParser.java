@@ -53,13 +53,20 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 	public <T> T parseComponent(String file) {
 
 		Path path = Paths.get(file);
+		val exists = Files.exists(path);
+
+		String lastRoot = null;
+
 		if (contextRootPath == null) {
 			contextRootPath = path.getParent().toString();
 			log.info("::EAC:: Context root path: " + contextRootPath + " | " + this.hashCode());
-		}
-		else if (!Files.exists(path))
+		} else if (!exists)
 			path = Paths.get(contextRootPath + File.separator + file);
 
+		if (contextRootPath != null && Files.exists(path)) {
+			lastRoot = contextRootPath;
+			contextRootPath = path.getParent().toString();
+		}
 
 		try (InputStream stream = Files.newInputStream(path)) {
 			log.info("PARSE FILE: " + path);
@@ -67,15 +74,20 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 			XMLStreamReader reader = inputFactory.createXMLStreamReader(stream);
 
-			if (!reader.hasNext())
+			if (!reader.hasNext()) {
+				if (lastRoot != null) contextRootPath = lastRoot;
 				return null;
+			}
 
 			reader.next();
 
-			if (reader.getPrefix() == null || !reader.getPrefix().equals(PREFIX_COMPONENT))
+			if (reader.getPrefix() == null || !reader.getPrefix().equals(PREFIX_COMPONENT)) {
+				if (lastRoot != null) contextRootPath = lastRoot;
 				return null;
+			}
 
 			final UniComponent component = onComponent(reader);
+			if (lastRoot != null) contextRootPath = lastRoot;
 			//noinspection unchecked
 			return (T) (component != null ? component.instance : null);
 
@@ -86,12 +98,18 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 			e.printStackTrace();
 		}
 
+		if (lastRoot != null) contextRootPath = lastRoot;
 		return null;
 	}
 
 	@Override
 	public String getRootPath() {
 		return contextRootPath;
+	}
+
+	@Override
+	public void setRootPath(String path) {
+		this.contextRootPath = path;
 	}
 
 	private UniComponent onComponent (XMLStreamReader reader) throws XMLStreamException {

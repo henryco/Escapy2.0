@@ -8,16 +8,13 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
-import net.tindersamurai.escapy.components.model.plain.texture.BufferModel;
-import net.tindersamurai.escapy.components.model.plain.texture.LayerModel;
+import net.tindersamurai.escapy.components.model.plain.texture.*;
 import net.tindersamurai.escapy.components.model.plain.light.LightPackModel;
 import net.tindersamurai.escapy.components.model.plain.light.LightSourceModel;
 import net.tindersamurai.escapy.components.model.plain.light.LightTypeModel;
 import net.tindersamurai.escapy.components.model.plain.shift.DummyShiftLogic;
 import net.tindersamurai.escapy.components.model.plain.shift.ShiftModel;
-import net.tindersamurai.escapy.components.model.plain.texture.FullStaticTexture;
 import net.tindersamurai.escapy.components.model.plain.MaskModel;
-import net.tindersamurai.escapy.components.model.plain.texture.StaticTexture;
 import net.tindersamurai.escapy.components.model.plain.util.UpWrapper;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
 import net.tindersamurai.escapy.graphic.render.light.processor.EscapyFlatLight;
@@ -30,11 +27,13 @@ import net.tindersamurai.escapy.graphic.render.program.gl10.mask.LightMask;
 import net.tindersamurai.escapy.graphic.render.program.gl20.core.EscapyMultiSourceShader;
 import net.tindersamurai.escapy.graphic.render.program.gl20.core.ShaderFile;
 import net.tindersamurai.escapy.graphic.render.program.gl20.shader.blend.BlendRenderer;
+import net.tindersamurai.escapy.map.model.sprite.IEscapySpriteProvider;
 import net.tindersamurai.escapy.map.model.texture.EscapyTextureData;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFrameBuffer;
 import net.tindersamurai.escapy.graphic.screen.Resolution;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
+import net.tindersamurai.escapy.map.model.texture.IEscapyTextureData;
 import net.tindersamurai.escapy.utils.files.EscapyFiles;
 
 import javax.inject.Inject;
@@ -198,6 +197,19 @@ public class ModelFactory {
 
 	@EscapyComponentFactory("texture")
 	public final class TextureFactory {
+
+		@EscapyComponent("dynamic")
+		public final IEscapyModel dynamicTexture (
+				@Arg("properties") IEscapyTextureData textureData,
+				@Arg("provider") IEscapySpriteProvider provider,
+				@Arg("bind") Float[] bind
+		) {
+			return new DynamicTexture(textureData) {{
+				if (bind != null) setBindPadding(bind[0], bind[1]);
+				if (provider != null) setSpriteProvider(provider);
+			}};
+		}
+
 
 		@EscapyComponent("static-full")
 		public final IEscapyModel staticTextureFull (
