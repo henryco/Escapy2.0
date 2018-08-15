@@ -6,7 +6,9 @@ import lombok.extern.java.Log;
 import lombok.val;
 import net.tindersamurai.activecomponent.comp.factory.EscapyComponentAnnotationFactory;
 import net.tindersamurai.activecomponent.comp.factory.EscapyComponentFactoryListener;
+import net.tindersamurai.activecomponent.comp.factory.EscapyComponentFactoryProvider;
 import net.tindersamurai.activecomponent.comp.factory.IEscapyComponentFactory;
+import net.tindersamurai.activecomponent.obj.EscapyObjectFactoryProvider;
 import net.tindersamurai.activecomponent.obj.IEscapyObject;
 import net.tindersamurai.activecomponent.obj.IEscapyObjectFactory;
 
@@ -17,6 +19,7 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -50,7 +53,7 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 	}
 
 	@Override
-	public <T> T parseComponent(String file) {
+	public <T> T parseComponent(String file) throws NoSuchFileException {
 
 		Path path = Paths.get(file);
 		val exists = Files.exists(path);
@@ -67,6 +70,9 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 			lastRoot = contextRootPath;
 			contextRootPath = path.getParent().toString();
 		}
+
+		if (!Files.exists(path))
+			throw new NoSuchFileException(path.toString());
 
 		try (InputStream stream = Files.newInputStream(path)) {
 			log.info("PARSE FILE: " + path);
@@ -130,6 +136,10 @@ public class XmlStreamComponentParser implements EscapyComponentParser {
 
 		if (factory instanceof EscapyComponentParserProvider)
 			((EscapyComponentParserProvider) factory).provideParser(this);
+		if (factory instanceof EscapyComponentFactoryProvider)
+			((EscapyComponentFactoryProvider) factory).provideComponentFactory(componentFactory);
+		if (factory instanceof EscapyObjectFactoryProvider)
+			((EscapyObjectFactoryProvider) factory).provideObjectFactory(objectFactory);
 
 		boolean enter = true;
 		if (listener != null && !listener.enterComponent(componentName))

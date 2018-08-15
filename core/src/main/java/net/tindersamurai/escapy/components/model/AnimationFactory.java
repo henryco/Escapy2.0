@@ -1,22 +1,31 @@
 package net.tindersamurai.escapy.components.model;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
 import net.tindersamurai.activecomponent.comp.annotation.NotNull;
+import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
 import net.tindersamurai.escapy.graphic.animation.EscapyAnimationSM;
 import net.tindersamurai.escapy.graphic.animation.IEscapyAnimationSM;
 import net.tindersamurai.escapy.graphic.animation.IEscapyAnimationSM.*;
 import net.tindersamurai.escapy.utils.files.EscapyFiles;
 
+import javax.inject.Inject;
 import java.util.Map;
 
 @Provide
 @EscapyComponentFactory("animation")
 public class AnimationFactory {
 
+	private final EscapyGameContext context;
+
+	@Inject
+	public AnimationFactory(EscapyGameContext context) {
+		this.context = context;
+	}
 
 	@EscapyComponent("sprites")
 	public final Sprites sprites (
@@ -24,11 +33,17 @@ public class AnimationFactory {
 			@Arg("normal") String normal,
 			@Arg("shadow") String shadow
 	) {
-		return new Sprites(
-				EscapyFiles.loadSprite(diffuse),
-				EscapyFiles.loadSprite(normal),
-				EscapyFiles.loadSprite(shadow)
-		);
+		val root = context.getConfigsFilePath();
+
+		Sprite diff = EscapyFiles.loadSprite(diffuse);
+		Sprite norm = EscapyFiles.loadSprite(normal);
+		Sprite shad = EscapyFiles.loadSprite(shadow);
+
+		if (diff == null) diff = EscapyFiles.loadSprite(root + diffuse);
+		if (norm == null) norm = EscapyFiles.loadSprite(root + normal);
+		if (shad == null) shad = EscapyFiles.loadSprite(root + shadow);
+
+		return new Sprites(diff, norm, shad);
 	}
 
 

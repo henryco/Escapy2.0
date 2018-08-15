@@ -6,11 +6,15 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
+import net.tindersamurai.escapy.components.control.plain.model.IModelListener;
+import net.tindersamurai.escapy.components.control.plain.model.ModelCharacterListener;
+import net.tindersamurai.escapy.components.control.plain.phys.IPhysListener;
 import net.tindersamurai.escapy.components.control.plain.phys.PhysCharacterListener;
 import net.tindersamurai.escapy.control.IEscapyController;
 import net.tindersamurai.escapy.control.listener.IEscapyControllerListener;
 import net.tindersamurai.escapy.control.keyboard.*;
 import net.tindersamurai.escapy.control.manager.IEscapyControlManager;
+import net.tindersamurai.escapy.graphic.animation.IEscapyAnimationSM;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -67,12 +71,19 @@ public class ControlFactory {
 	public final static class Listener {
 
 		@EscapyComponent("phys-character")
-		public IEscapyControllerListener physObjectListener (
+		public IPhysListener physObjectListener (
 				@Arg("move") Float move,
 				@Arg("run") Float run,
 				@Arg("sit") Float sit
 		) {
 			return new PhysCharacterListener(move, run, sit);
+		}
+
+		@EscapyComponent("model-character")
+		public IModelListener modelListener (
+				@Arg("animationSM") IEscapyAnimationSM animationSM
+		) {
+			return new ModelCharacterListener(animationSM);
 		}
 	}
 

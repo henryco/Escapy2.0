@@ -12,6 +12,7 @@ import net.tindersamurai.escapy.map.node.IEscapyNode;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.nio.file.NoSuchFileException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -45,9 +46,17 @@ public class GameLocationHandler implements IEscapyLocationHandler {
 		val locationNode = cache.get(file);
 
 		if (locationNode == null) {
-			IEscapyNode<NodeData> root = parser.parseComponent(file);
+			IEscapyNode<NodeData> root = null;
+			try {
+				root = parser.parseComponent(file);
+			} catch (NoSuchFileException e) {
+				log.throwing(this.getClass().getName(),
+						"switchLocation()", e);
+			}
+
 			if (root == null || root.get() == null)
 				return false;
+
 			this.locationNode = root;
 			this.location = root.get();
 			cache.put(file, root);
