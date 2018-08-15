@@ -1,6 +1,6 @@
 package net.tindersamurai.activecomponent.core;
 
-public final class CoreComponentsContract {
+public final class CoreComponentsProvider {
 
 	public static Object[] getCoreComponents () {
 		return new Object[] {
