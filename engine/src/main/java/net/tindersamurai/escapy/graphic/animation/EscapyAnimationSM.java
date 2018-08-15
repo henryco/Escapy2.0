@@ -186,9 +186,15 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 
 		for (Animation a : alt) {
 			final Sprites s = a.getSub().getSprites();
-			consumer.accept(s.getDiffuse());
-			consumer.accept(s.getNormal());
-			consumer.accept(s.getShadow());
+
+			final Sprite diffuse = s.getDiffuse();
+			if (diffuse != null) consumer.accept(diffuse);
+
+			final Sprite normal = s.getDiffuse();
+			if (normal != null) consumer.accept(normal);
+
+			final Sprite shadow = s.getDiffuse();
+			if (shadow != null) consumer.accept(shadow);
 		}
 	}
 

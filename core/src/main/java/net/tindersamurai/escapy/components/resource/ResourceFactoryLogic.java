@@ -1,14 +1,23 @@
 package net.tindersamurai.escapy.components.resource;
 
 import com.github.henryco.injector.meta.annotations.Provide;
+import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
 import net.tindersamurai.escapy.utils.files.EscapyFileMetaData;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.HashMap;
 import java.util.Map;
 
 @Provide @Singleton
 public class ResourceFactoryLogic {
+
+	private final EscapyGameContext gameContext;
+
+	@Inject
+	public ResourceFactoryLogic(EscapyGameContext gameContext) {
+		this.gameContext = gameContext;
+	}
 
 	public EscapyFileMetaData fileMetaData(String id, String url, String name) {
 		return new EscapyFileMetaData(id, url, name);
@@ -34,6 +43,10 @@ public class ResourceFactoryLogic {
 			put("locations", locations);
 			put("default", def);
 		}};
+	}
+
+	public String configPath() {
+		return gameContext.getConfigsFilePath();
 	}
 
 }

@@ -113,7 +113,11 @@
                     </c:control.listener.phys-character>
 
                     <c:control.listener.model-character>
-                        <c:v.string> ${resources.config-path}/animations/mco.eacxml </c:v.string>
+                        <c:f.include>
+                            <c:v.string>
+                                ${resource.config-path}animations/mco.eacxml
+                            </c:v.string>
+                        </c:f.include>
                     </c:control.listener.model-character>
 
                 </c:node.data>

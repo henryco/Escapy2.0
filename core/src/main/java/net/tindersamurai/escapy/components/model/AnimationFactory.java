@@ -14,10 +14,12 @@ import net.tindersamurai.escapy.graphic.animation.IEscapyAnimationSM.*;
 import net.tindersamurai.escapy.utils.files.EscapyFiles;
 
 import javax.inject.Inject;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Map;
 
 @Provide
-@EscapyComponentFactory("animation")
+@EscapyComponentFactory("animations")
 public class AnimationFactory {
 
 	private final EscapyGameContext context;
@@ -35,13 +37,16 @@ public class AnimationFactory {
 	) {
 		val root = context.getConfigsFilePath();
 
-		Sprite diff = EscapyFiles.loadSprite(diffuse);
-		Sprite norm = EscapyFiles.loadSprite(normal);
-		Sprite shad = EscapyFiles.loadSprite(shadow);
+		Sprite diff = null;
+		Sprite norm = null;
+		Sprite shad = null;
 
-		if (diff == null) diff = EscapyFiles.loadSprite(root + diffuse);
-		if (norm == null) norm = EscapyFiles.loadSprite(root + normal);
-		if (shad == null) shad = EscapyFiles.loadSprite(root + shadow);
+		if (diffuse != null)
+			diff = EscapyFiles.loadSprite(Files.exists(Paths.get(diffuse)) ? diffuse : root + diffuse);
+		if (normal != null)
+			norm = EscapyFiles.loadSprite(Files.exists(Paths.get(normal)) ? normal : root + normal);
+		if (shadow != null)
+			shad = EscapyFiles.loadSprite(Files.exists(Paths.get(shadow)) ? shadow : root + shadow);
 
 		return new Sprites(diff, norm, shad);
 	}

@@ -47,4 +47,9 @@ public class ResourceFactory {
 		return logic.stage(locations, def);
 	}
 
+	@EscapyComponent("config-path")
+	public String configPath() {
+		return logic.configPath();
+	}
+
 }

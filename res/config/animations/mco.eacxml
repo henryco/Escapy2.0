@@ -7,14 +7,15 @@
     <o:string name="initial"> idle </o:string>
 
     <!-- STATES -->
-    <c:animation.state>
+    <c:animations.state>
         <o:string name="name">idle</o:string>
 
         <!-- todo transitions here -->
+        <c:u.null name="transitions" />
 
         <c:f.include>
             mco/animation_smoke1.eacxml
         </c:f.include>
-    </c:animation.state>
+    </c:animations.state>
 
 </c:animations.config>
