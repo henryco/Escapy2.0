@@ -42,7 +42,9 @@ public class DynamicTexture implements IEscapyModelDynamic, IEscapySpriteBinder 
 		if (textureData == null) return;
 
 		log.info("GOING TO INITIALIZE SPRITES");
-		apply(textureData::initializeSprite);
+
+		if (animatedSpriteProvider == null) return;
+		animatedSpriteProvider.applyToAll(textureData::initializeSprite);
 	}
 
 	@Override
@@ -66,7 +68,7 @@ public class DynamicTexture implements IEscapyModelDynamic, IEscapySpriteBinder 
 	@Override
 	public void apply(Consumer<Sprite> s) {
 		if (animatedSpriteProvider == null) return;
-		animatedSpriteProvider.applyToAll(s);
+		animatedSpriteProvider.apply(s);
 	}
 
 	@Override

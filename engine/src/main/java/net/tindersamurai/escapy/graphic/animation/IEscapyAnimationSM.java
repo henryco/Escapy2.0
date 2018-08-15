@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Value;
 import net.tindersamurai.escapy.graphic.IEscapyRenderable;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -33,6 +34,24 @@ public interface IEscapyAnimationSM extends IEscapyRenderable{
 		private AnimationRender renderable;
 		private Sprites sprites;
 		private SubState next;
+		private SubState root;
+
+		public void setRoot(SubState root) {
+			SubState curr = this;
+			while (curr != null) {
+				curr.root = root;
+				curr = curr.next;
+			}
+		}
+
+		@Override
+		public String toString() {
+			return "SubState{" +
+					"renderable=" + renderable +
+					", sprites=" + sprites +
+					", next=" + next +
+					'}';
+		}
 	}
 
 	@Value final class State {
@@ -59,4 +78,43 @@ public interface IEscapyAnimationSM extends IEscapyRenderable{
 	SubState getCurrentSubState();
 
 	void applyToAllStateSprites(Consumer<Sprite> consumer);
+
+	default void consumeState (
+			final State state, final Consumer<Sprite> consumer
+	) {
+		final Map<String, State> trans = state.getTrans();
+		if (trans != null) {
+			final Collection<State> values = trans.values();
+			values.forEach(ss -> consumeState(ss, consumer));
+		}
+
+		final Animation[] alt = state.getAnimations();
+		if (alt == null) return;
+
+		for (Animation a : alt)
+			consumeSubState(a.getSub(), consumer);
+	}
+
+	default void consumeSubState (
+			final SubState subState,
+			final Consumer<Sprite> consumer
+	) {
+		SubState sub = subState.getRoot();
+
+		while (sub != null) {
+			final Sprites s = sub.getSprites();
+
+			final Sprite diffuse = s.getDiffuse();
+			if (diffuse != null) consumer.accept(diffuse);
+
+			final Sprite normal = s.getDiffuse();
+			if (normal != null) consumer.accept(normal);
+
+			final Sprite shadow = s.getDiffuse();
+			if (shadow != null) consumer.accept(shadow);
+
+			sub = sub.getNext();
+		}
+	}
+
 }

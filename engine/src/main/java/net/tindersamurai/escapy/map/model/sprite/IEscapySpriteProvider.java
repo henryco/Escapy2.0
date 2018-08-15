@@ -11,5 +11,9 @@ public interface IEscapySpriteProvider extends IEscapyRenderable {
 	Sprite getNormalsSprite();
 	Sprite getShadowsSprite();
 
-	void applyToAll(Consumer<Sprite> spriteConsumer);
+	void apply(Consumer<Sprite> spriteConsumer);
+
+	default void applyToAll(Consumer<Sprite> spriteConsumer) {
+		apply(spriteConsumer);
+	}
 }

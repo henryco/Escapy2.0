@@ -32,6 +32,13 @@ public class ModelCharacterListener
 	}
 
 	@Override
+	public void apply(Consumer<Sprite> spriteConsumer) {
+		animationSM.consumeSubState(
+				animationSM.getCurrentSubState(), spriteConsumer
+		);
+	}
+
+	@Override
 	public void applyToAll(Consumer<Sprite> spriteConsumer) {
 		animationSM.applyToAllStateSprites(spriteConsumer);
 	}

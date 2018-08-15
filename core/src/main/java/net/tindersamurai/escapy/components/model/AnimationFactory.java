@@ -72,9 +72,18 @@ public class AnimationFactory {
 			@Arg("render") AnimationRender render,
 			@Arg("next") SubState ... subStates
 	) {
-		return new SubState (
-				render, sprites, nestSubStates(subStates)
-		);
+		SubState subState = new SubState();
+		subState.setRenderable(render);
+		subState.setSprites(sprites);
+		subState.setRoot(subState);
+
+		final SubState nested = nestSubStates(subStates);
+		if (nested != null) {
+			nested.setRoot(subState);
+			subState.setNext(nested);
+		}
+
+		return subState;
 	}
 
 
@@ -125,6 +134,10 @@ public class AnimationFactory {
 			head.setNext(sub);
 			head = sub;
 		}
+
+		if (root != null)
+			root.setRoot(root);
+
 		return root;
 	}
 

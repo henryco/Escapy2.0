@@ -173,38 +173,4 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 		}
 	}
 
-
-	private static void consumeState (
-			final State state, final Consumer<Sprite> consumer
-	) {
-		final Map<String, State> trans = state.getTrans();
-		if (trans != null) {
-			final Collection<State> values = trans.values();
-			values.forEach(ss -> consumeState(ss, consumer));
-		}
-
-		final Animation[] alt = state.getAnimations();
-		if (alt == null) return;
-
-		for (Animation a : alt) {
-
-			SubState sub = a.getSub();
-			while (sub != null) {
-
-				final Sprites s = sub.getSprites();
-
-				final Sprite diffuse = s.getDiffuse();
-				if (diffuse != null) consumer.accept(diffuse);
-
-				final Sprite normal = s.getDiffuse();
-				if (normal != null) consumer.accept(normal);
-
-				final Sprite shadow = s.getDiffuse();
-				if (shadow != null) consumer.accept(shadow);
-
-				sub = sub.getNext();
-			}
-		}
-	}
-
  }
