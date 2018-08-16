@@ -89,12 +89,14 @@ public class AnimationFactory {
 
 	@EscapyComponent("animation")
 	public final Animation animation (
+			@NotNull @Arg("name") String name,
 			@Arg("probability") Float probability,
 			@Arg("substates") SubState ... subStates
 	) {
 		return new Animation(
 				probability == null ? 1f : probability,
-				nestSubStates(subStates)
+				nestSubStates(subStates),
+				name
 		);
 	}
 

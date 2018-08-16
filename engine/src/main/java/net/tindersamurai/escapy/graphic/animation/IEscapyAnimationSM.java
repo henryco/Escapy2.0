@@ -63,6 +63,7 @@ public interface IEscapyAnimationSM extends IEscapyRenderable{
 	@Value final class Animation {
 		private float probability;
 		private SubState sub;
+		private String name;
 	}
 
 	void update(float delta);

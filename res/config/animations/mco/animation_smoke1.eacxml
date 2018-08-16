@@ -4,6 +4,7 @@
         xmlns:m="https://tindersamurai.net/escapy/ac/method"
 >
     <o:float name="probability">1</o:float>
+    <o:string name="name">smoke</o:string>
 
     <!-- SUBSTATES nesting automatically-->
     <c:animations.substate>
