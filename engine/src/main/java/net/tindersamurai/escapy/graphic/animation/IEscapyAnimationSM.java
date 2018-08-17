@@ -82,7 +82,7 @@ public interface IEscapyAnimationSM extends IEscapyRenderable{
 
 	Animation getCurrentAnimation();
 
-	void applyToAllStateSprites(Consumer<Sprite> consumer);
+	void applyToAllStates(Consumer<Sprite> consumer);
 
 	default void consumeState (
 			final State state, final Consumer<Sprite> consumer

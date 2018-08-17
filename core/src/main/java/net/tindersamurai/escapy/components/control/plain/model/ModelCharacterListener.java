@@ -7,7 +7,6 @@ import net.tindersamurai.escapy.graphic.animation.IEscapyAnimationSM;
 import net.tindersamurai.escapy.components.control.plain.CoreCharacterListener;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 
-import java.util.Arrays;
 import java.util.function.Consumer;
 
 @Log
@@ -55,14 +54,16 @@ public class ModelCharacterListener
 
 	@Override
 	public void apply(Consumer<Sprite> spriteConsumer) {
-		animationSM.consumeSubState(
-				animationSM.getCurrentSubState(), spriteConsumer
-		);
+//		animationSM.consumeSubState(
+//				animationSM.getCurrentSubState(), spriteConsumer
+//		);
+//		animationSM.applyToActualState(spriteConsumer);
+		animationSM.applyToAllStates(spriteConsumer);
 	}
 
 	@Override
 	public void applyToAll(Consumer<Sprite> spriteConsumer) {
-		animationSM.applyToAllStateSprites(spriteConsumer);
+		animationSM.applyToAllStates(spriteConsumer);
 	}
 
 	@Override
@@ -101,13 +102,8 @@ public class ModelCharacterListener
 		else animationSM.setState(prefix + POSTFIX_DEFAULT);
 	}
 
-	private int counter;
-
 	@Override // FIXME
 	public void onUpdate(float delta) {
-
-		System.out.println("UPDATE: " + counter);
-
 
 		// MOVE ANIMATION
 		if (state[MOV]) {
@@ -117,6 +113,8 @@ public class ModelCharacterListener
 				updState(state[LFT], state[RGT], "sit-move");
 			else if (state[RUN])
 				updState(state[LFT], state[RGT], "run");
+			else
+				updState(state[LFT], state[RGT], "move");
 		}
 
 		// STATIC ANIMATION
@@ -138,8 +136,6 @@ public class ModelCharacterListener
 	@Override
 	public void onInteract() {
 		state[ACT] = true;
-		System.out.println("interact");
-		counter++;
 	}
 
 	@Override
@@ -148,8 +144,6 @@ public class ModelCharacterListener
 		state[MOV] = true;
 		last[LFT] = true;
 		last[RGT] = false;
-		System.out.println("mv left");
-		counter++;
 	}
 
 	@Override
@@ -158,22 +152,16 @@ public class ModelCharacterListener
 		state[MOV] = true;
 		last[LFT] = false;
 		last[RGT] = true;
-		System.out.println("mv right");
-		counter++;
 	}
 
 	@Override
 	public void onRun() {
 		state[RUN] = true;
-		System.out.println("run");
-		counter++;
 	}
 
 	@Override
 	public void onSit() {
 		state[SIT] = true;
-		System.out.println("sit");
-		counter++;
 	}
 
 }

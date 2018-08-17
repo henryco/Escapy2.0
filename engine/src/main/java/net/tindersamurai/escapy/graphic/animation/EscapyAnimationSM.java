@@ -15,17 +15,22 @@ import java.util.function.Consumer;
 /**
  * State machine, very useful
  * in animations
+ *
  * @author henryco
- */ @Log
+ */
+@Log
 public class EscapyAnimationSM implements IEscapyAnimationSM {
 
 	private final Map<String, State> states;
 	private final AtomicBoolean available;
 	private final float frameStepMs;
 
-	private @Getter State currentState;
-	private @Getter SubState currentSubState;
-	private @Getter Animation currentAnimation;
+	private @Getter
+	State currentState;
+	private @Getter
+	SubState currentSubState;
+	private @Getter
+	Animation currentAnimation;
 
 	private State nextState;
 	private SubState nextSubState;
@@ -67,9 +72,7 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 				nextState = null;
 				nextSubState = null;
 				nextAnimation = null;
-			}
-
-			else {
+			} else {
 				val animation = rollAnimation(currentState.getAnimations());
 				currentSubState = animation.getSub();
 				currentAnimation = animation;
@@ -113,10 +116,11 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 			val next = states.get(name);
 
 			if (next == null) {
-				val e = new RuntimeException("Unknown animation state: " + name);
-				log.throwing(this.getClass().getName(), "setState", e);
-				throw e;
+				log.warning("Unknown animation state: " + name);
+				available.set(true);
+				return;
 			}
+
 			val __nextAnimation = rollAnimation(next.getAnimations());
 
 			if (trans != null) {
@@ -137,6 +141,8 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 					nextAnimation = __nextAnimation;
 					nextSubState = __nextAnimation.getSub();
 					nextState = next;
+
+					available.set(true);
 					return;
 				}
 			}
@@ -204,10 +210,10 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 	}
 
 	@Override
-	public void applyToAllStateSprites(Consumer<Sprite> consumer) {
+	public void applyToAllStates(Consumer<Sprite> consumer) {
 		for (State state : states.values()) {
 			consumeState(state, consumer);
 		}
 	}
 
- }
+}
