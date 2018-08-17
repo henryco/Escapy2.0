@@ -103,6 +103,8 @@ public class ModelCharacterListener
 	@Override
 	public void onUpdate(float delta) {
 
+		// fixme no update
+
 		// MOVE ANIMATION
 		if (state[MOV]) {
 			if (state[SIT] && state[RUN])

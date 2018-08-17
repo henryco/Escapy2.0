@@ -29,6 +29,8 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 
 	private State nextState;
 	private SubState nextSubState;
+	private Animation nextAnimation;
+
 	private float accumulator;
 
 	public EscapyAnimationSM(float frameStepMs) {
@@ -61,8 +63,16 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 			if (nextState != null) {
 				currentState = nextState;
 				currentSubState = nextSubState;
+				currentAnimation = nextAnimation;
 				nextState = null;
 				nextSubState = null;
+				nextAnimation = null;
+			}
+
+			else {
+				val animation = rollAnimation(currentState.getAnimations());
+				currentSubState = animation.getSub();
+				currentAnimation = animation;
 			}
 		}
 	}
@@ -83,6 +93,7 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 			accumulator = 0;
 			nextState = null;
 			nextSubState = null;
+			nextAnimation = null;
 		}
 		available.set(true);
 	}
@@ -106,12 +117,12 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 				log.throwing(this.getClass().getName(), "setState", e);
 				throw e;
 			}
-			val nextAnimation = rollAnimation(next.getAnimations());
+			val __nextAnimation = rollAnimation(next.getAnimations());
 
 			if (trans != null) {
 
 				String key1 = currentAnimation.getName();
-				String key2 = nextAnimation.getName();
+				String key2 = __nextAnimation.getName();
 
 				val transition = trans.get(new EscapyMultiKey<>(key1, key2));
 
@@ -120,11 +131,11 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 					val animation = rollAnimation(transition.getAnimations());
 
 					currentAnimation = animation;
-
 					currentSubState = animation.getSub();
 					currentState = transition;
 
-					nextSubState = nextAnimation.getSub();
+					nextAnimation = __nextAnimation;
+					nextSubState = __nextAnimation.getSub();
 					nextState = next;
 					return;
 				}
@@ -132,11 +143,12 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 
 			// if there are no transitions
 
-			currentSubState = nextAnimation.getSub();
-			currentAnimation = nextAnimation;
+			currentSubState = __nextAnimation.getSub();
+			currentAnimation = __nextAnimation;
 			currentState = next;
 			nextState = null;
 			nextSubState = null;
+			nextAnimation = null;
 		}
 		available.set(true);
 	}
@@ -157,10 +169,10 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 				return a;
 		}
 
-		log.warning("---------------------------------------");
-		log.warning("GET RANDOM SUB STATE CALCULATION ERROR!");
+		log.warning("----------------------------------------");
+		log.warning("ROLL RANDOM ANIMATION CALCULATION ERROR!");
 		log.warning(Arrays.toString(alternatives));
-		log.warning("---------------------------------------");
+		log.warning("----------------------------------------");
 
 		return alternatives[0];
 	}
