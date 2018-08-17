@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 import net.tindersamurai.escapy.graphic.IEscapyRenderable;
+import net.tindersamurai.escapy.utils.map.EscapyMultiKey;
 
 import java.util.Collection;
 import java.util.Map;
@@ -55,7 +56,8 @@ public interface IEscapyAnimationSM extends IEscapyRenderable{
 	}
 
 	@Value final class State {
-		private Map<String, State> trans;
+		// STATE:ANIMATION -> NEXT:ANIMATION
+		private Map<EscapyMultiKey<String, String>, State> trans;
 		private Animation[] animations;
 		private String name;
 	}
@@ -78,12 +80,14 @@ public interface IEscapyAnimationSM extends IEscapyRenderable{
 
 	SubState getCurrentSubState();
 
+	Animation getCurrentAnimation();
+
 	void applyToAllStateSprites(Consumer<Sprite> consumer);
 
 	default void consumeState (
 			final State state, final Consumer<Sprite> consumer
 	) {
-		final Map<String, State> trans = state.getTrans();
+		final Map<EscapyMultiKey<String, String>, State> trans = state.getTrans();
 		if (trans != null) {
 			final Collection<State> values = trans.values();
 			values.forEach(ss -> consumeState(ss, consumer));

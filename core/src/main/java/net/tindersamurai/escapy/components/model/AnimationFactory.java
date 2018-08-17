@@ -12,6 +12,7 @@ import net.tindersamurai.escapy.graphic.animation.EscapyAnimationSM;
 import net.tindersamurai.escapy.graphic.animation.IEscapyAnimationSM;
 import net.tindersamurai.escapy.graphic.animation.IEscapyAnimationSM.*;
 import net.tindersamurai.escapy.utils.files.EscapyFiles;
+import net.tindersamurai.escapy.utils.map.EscapyMultiKey;
 
 import javax.inject.Inject;
 import java.nio.file.Files;
@@ -55,7 +56,7 @@ public class AnimationFactory {
 	@EscapyComponent("state")
 	public final State state(
 			@Arg("name") @NotNull String name,
-			@Arg("transitions") Map<String, State> transitions,
+			@Arg("transitions") Map<EscapyMultiKey<String, String>, State> transitions,
 			@Arg("animations") Animation ... animations
 	) {
 		return new State(

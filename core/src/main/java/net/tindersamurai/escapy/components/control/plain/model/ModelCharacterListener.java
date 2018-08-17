@@ -18,12 +18,12 @@ public class ModelCharacterListener
 	private static final String POSTFIX_RIGHT = "-right";
 	private static final String POSTFIX_DEFAULT = POSTFIX_RIGHT;
 
-	private static final int SIT = 0;
-	private static final int RUN = 1;
-	private static final int MOV = 2;
-	private static final int ACT = 3;
-	private static final int LFT = 4;
-	private static final int RGT = 5;
+	private static final int LFT = 0;
+	private static final int RGT = 1;
+	private static final int SIT = 2;
+	private static final int RUN = 3;
+	private static final int MOV = 4;
+	private static final int ACT = 5;
 
 	private boolean[] state;
 	private boolean[] last;

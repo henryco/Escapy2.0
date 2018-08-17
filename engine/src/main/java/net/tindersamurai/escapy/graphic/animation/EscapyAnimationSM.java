@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.extern.java.Log;
 import lombok.val;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
+import net.tindersamurai.escapy.utils.map.EscapyMultiKey;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -24,8 +25,10 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 
 	private @Getter State currentState;
 	private @Getter SubState currentSubState;
+	private @Getter Animation currentAnimation;
 
 	private State nextState;
+	private SubState nextSubState;
 	private float accumulator;
 
 	public EscapyAnimationSM(float frameStepMs) {
@@ -57,11 +60,10 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 			// next == null and we have next state
 			if (nextState != null) {
 				currentState = nextState;
+				currentSubState = nextSubState;
 				nextState = null;
+				nextSubState = null;
 			}
-
-			// get sub state of current state
-			currentSubState = rollSubState(currentState.getAnimations());
 		}
 	}
 
@@ -75,9 +77,12 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 		available.set(false);
 		{
 			currentState = states.get(name);
-			currentSubState = rollSubState(currentState.getAnimations());
+			val animation = rollAnimation(currentState.getAnimations());
+			currentSubState = animation.getSub();
+			currentAnimation = animation;
 			accumulator = 0;
 			nextState = null;
+			nextSubState = null;
 		}
 		available.set(true);
 	}
@@ -96,40 +101,60 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 			val trans = currentState.getTrans();
 			val next = states.get(name);
 
+			if (next == null) {
+				val e = new RuntimeException("Unknown animation state: " + name);
+				log.throwing(this.getClass().getName(), "setState", e);
+				throw e;
+			}
+			val nextAnimation = rollAnimation(next.getAnimations());
+
 			if (trans != null) {
-				val transition = trans.get(name);
+
+				String key1 = currentAnimation.getName();
+				String key2 = nextAnimation.getName();
+
+				val transition = trans.get(new EscapyMultiKey<>(key1, key2));
 
 				// if there are transitions present
 				if (transition != null) {
-					currentSubState = rollSubState(transition.getAnimations());
+					val animation = rollAnimation(transition.getAnimations());
+
+					currentAnimation = animation;
+
+					currentSubState = animation.getSub();
 					currentState = transition;
+
+					nextSubState = nextAnimation.getSub();
 					nextState = next;
 					return;
 				}
 			}
 
 			// if there are no transitions
-			currentSubState = rollSubState(next.getAnimations());
+
+			currentSubState = nextAnimation.getSub();
+			currentAnimation = nextAnimation;
 			currentState = next;
 			nextState = null;
+			nextSubState = null;
 		}
 		available.set(true);
 	}
 
-	private static SubState rollSubState (
+	private static Animation rollAnimation(
 			Animation[] alternatives
 	) {
 		if (alternatives == null || alternatives.length == 0)
 			return null;
 		if (alternatives.length == 1)
-			return alternatives[0].getSub();
+			return alternatives[0];
 
 		val r = new Random().nextFloat();
 		float d = 0f;
 
 		for (val a : alternatives) {
 			if (r >= d && r <= (d = Math.min(1, d + a.getProbability())))
-				return a.getSub();
+				return a;
 		}
 
 		log.warning("---------------------------------------");
@@ -137,7 +162,7 @@ public class EscapyAnimationSM implements IEscapyAnimationSM {
 		log.warning(Arrays.toString(alternatives));
 		log.warning("---------------------------------------");
 
-		return alternatives[0].getSub();
+		return alternatives[0];
 	}
 
 	@Override
