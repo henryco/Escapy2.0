@@ -8,9 +8,7 @@ import net.tindersamurai.activecomponent.comp.annotation.NotNull;
 import net.tindersamurai.activecomponent.comp.factory.EscapyComponentFactoryProvider;
 import net.tindersamurai.activecomponent.comp.factory.IEscapyComponentFactory;
 import net.tindersamurai.activecomponent.util.ExpressionProcessor;
-import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 

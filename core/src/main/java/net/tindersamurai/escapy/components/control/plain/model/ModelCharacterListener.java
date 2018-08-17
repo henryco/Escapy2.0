@@ -14,12 +14,33 @@ public class ModelCharacterListener
 		extends CoreCharacterListener<Object>
 		implements IModelListener {
 
+	private static final String POSTFIX_LEFT = "-left";
+	private static final String POSTFIX_RIGHT = "-right";
+	private static final String POSTFIX_DEFAULT = POSTFIX_RIGHT;
+
+	private static final int SIT = 0;
+	private static final int RUN = 1;
+	private static final int MOV = 2;
+	private static final int ACT = 3;
+	private static final int LFT = 4;
+	private static final int RGT = 5;
+
+	private boolean[] state;
+	private boolean[] last;
+
 	private final IEscapyAnimationSM animationSM;
 
 	public ModelCharacterListener(IEscapyAnimationSM animationSM) {
 		this.animationSM = animationSM;
+		this.state = new boolean[6];
+		this.last = new boolean[2];
+		resetState();
 	}
 
+	private void resetState() {
+		for (int i = 0; i < this.state.length; i++)
+			state[i] = false;
+	}
 
 	@Override
 	public void dispose() {
@@ -59,11 +80,6 @@ public class ModelCharacterListener
 	}
 
 	@Override
-	public void onUpdate(float delta) {
-		animationSM.update(delta);
-	}
-
-	@Override
 	public Sprite getDiffuseSprite() {
 		return animationSM.getCurrentSubState().getSprites().getDiffuse();
 	}
@@ -78,28 +94,70 @@ public class ModelCharacterListener
 		return animationSM.getCurrentSubState().getSprites().getShadow();
 	}
 
+	private void updState(boolean left, boolean right, String prefix) {
+		if (left) animationSM.setState(prefix + POSTFIX_LEFT);
+		else if (right) animationSM.setState(prefix + POSTFIX_RIGHT);
+		else animationSM.setState(prefix + POSTFIX_DEFAULT);
+	}
+
+	@Override
+	public void onUpdate(float delta) {
+
+		// MOVE ANIMATION
+		if (state[MOV]) {
+			if (state[SIT] && state[RUN])
+				updState(state[LFT], state[RGT], "sit-run");
+			else if (state[SIT])
+				updState(state[LFT], state[RGT], "sit-move");
+			else if (state[RUN])
+				updState(state[LFT], state[RGT], "run");
+		}
+
+		// STATIC ANIMATION
+		else {
+			if (state[SIT] && state[ACT])
+				updState(last[LFT], last[RGT], "sit-interact");
+			else if (state[SIT])
+				updState(last[LFT], last[RGT], "sit");
+			else if (state[ACT])
+				updState(last[LFT], last[RGT], "interact");
+			else
+				updState(last[LFT], last[RGT], "idle");
+		}
+
+		animationSM.update(delta);
+		resetState();
+	}
+
 	@Override
 	public void onInteract() {
-		animationSM.setState("interact");
+		state[ACT] = true;
 	}
 
 	@Override
 	public void onMoveLeft() {
-		animationSM.setState("left");
+		state[LFT] = true;
+		state[MOV] = true;
+		last[LFT] = true;
+		last[RGT] = false;
 	}
 
 	@Override
 	public void onMoveRight() {
-		animationSM.setState("right");
+		state[RGT] = true;
+		state[MOV] = true;
+		last[LFT] = false;
+		last[RGT] = true;
 	}
 
 	@Override
 	public void onRun() {
-		animationSM.setState("run");
+		state[RUN] = true;
 	}
 
 	@Override
 	public void onSit() {
-		animationSM.setState("sit");
+		state[SIT] = true;
 	}
+
 }
