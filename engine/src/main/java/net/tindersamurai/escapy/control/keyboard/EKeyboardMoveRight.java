@@ -11,7 +11,7 @@ public class EKeyboardMoveRight
 		implements MoveRight {
 
 	public EKeyboardMoveRight(String name) {
-		super(name);
+		super(name, MoveRightListener.class);
 	}
 
 	@Override

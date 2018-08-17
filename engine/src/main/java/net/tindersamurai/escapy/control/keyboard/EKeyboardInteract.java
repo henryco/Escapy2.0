@@ -11,7 +11,7 @@ public class EKeyboardInteract
 		implements Interact {
 
 	public EKeyboardInteract(String name) {
-		super(name);
+		super(name, InteractListener.class);
 	}
 
 	@Override

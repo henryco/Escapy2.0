@@ -10,7 +10,7 @@ public class EKeyboardSit
 		implements Sit {
 
 	public EKeyboardSit(String name) {
-		super(name);
+		super(name, SitListener.class);
 	}
 
 	@Override

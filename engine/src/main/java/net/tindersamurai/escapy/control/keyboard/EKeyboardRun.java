@@ -9,7 +9,7 @@ public class EKeyboardRun
 		implements Run {
 
 	public EKeyboardRun(String name) {
-		super(name);
+		super(name, RunListener.class);
 	}
 
 	@Override

@@ -11,13 +11,18 @@ import java.util.Set;
 public abstract class EscapyKeyboardController<LISTENER extends IEscapyControllerListener>
 		implements IEscapyKeyController<Integer, LISTENER> {
 
+	private final Class<LISTENER> listenerClass;
+	private final @Getter String name;
+
 	protected @Getter LISTENER[] listeners;
-	private @Getter final String name;
 	private Set<LISTENER> tmpSet;
 
 	/* package */ int key;
 
-	/* package */ EscapyKeyboardController(String name) {
+	/* package */ EscapyKeyboardController(
+			String name, Class<LISTENER> listenerClass
+	) {
+		this.listenerClass = listenerClass;
 		this.tmpSet = new HashSet<>();
 		this.name = name;
 	}
@@ -35,16 +40,16 @@ public abstract class EscapyKeyboardController<LISTENER extends IEscapyControlle
 	@Override
 	public void addListener(LISTENER listener) {
 		if (tmpSet.add(listener))
-			listeners = updArray(listener.getClass());
+			listeners = updArray();
 	}
 
 	@Override
 	public void removeListener(LISTENER listener) {
 		if (tmpSet.remove(listener))
-			listeners = updArray(listener.getClass());
+			listeners = updArray();
 	}
 
-	private LISTENER[] updArray(Class<? extends IEscapyControllerListener> listenerClass) {
+	private LISTENER[] updArray() {
 		return tmpSet.toArray(((LISTENER[]) Array.newInstance(listenerClass, 0)));
 	}
 }

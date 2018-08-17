@@ -7,6 +7,7 @@ import net.tindersamurai.escapy.graphic.animation.IEscapyAnimationSM;
 import net.tindersamurai.escapy.components.control.plain.CoreCharacterListener;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 
+import java.util.Arrays;
 import java.util.function.Consumer;
 
 @Log
@@ -100,10 +101,13 @@ public class ModelCharacterListener
 		else animationSM.setState(prefix + POSTFIX_DEFAULT);
 	}
 
-	@Override
+	private int counter;
+
+	@Override // FIXME
 	public void onUpdate(float delta) {
 
-		// fixme no update
+		System.out.println("UPDATE: " + counter);
+
 
 		// MOVE ANIMATION
 		if (state[MOV]) {
@@ -134,6 +138,8 @@ public class ModelCharacterListener
 	@Override
 	public void onInteract() {
 		state[ACT] = true;
+		System.out.println("interact");
+		counter++;
 	}
 
 	@Override
@@ -142,6 +148,8 @@ public class ModelCharacterListener
 		state[MOV] = true;
 		last[LFT] = true;
 		last[RGT] = false;
+		System.out.println("mv left");
+		counter++;
 	}
 
 	@Override
@@ -150,16 +158,22 @@ public class ModelCharacterListener
 		state[MOV] = true;
 		last[LFT] = false;
 		last[RGT] = true;
+		System.out.println("mv right");
+		counter++;
 	}
 
 	@Override
 	public void onRun() {
 		state[RUN] = true;
+		System.out.println("run");
+		counter++;
 	}
 
 	@Override
 	public void onSit() {
 		state[SIT] = true;
+		System.out.println("sit");
+		counter++;
 	}
 
 }

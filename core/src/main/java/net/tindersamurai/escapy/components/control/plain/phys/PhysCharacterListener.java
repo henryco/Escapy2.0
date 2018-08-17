@@ -1,13 +1,14 @@
 package net.tindersamurai.escapy.components.control.plain.phys;
 
 import com.badlogic.gdx.math.Vector2;
+import lombok.extern.java.Log;
 import lombok.val;
 import net.tindersamurai.escapy.components.control.plain.CoreCharacterListener;
 import net.tindersamurai.escapy.physics.obj.IEscapyPhysObject;
 
-
-public class PhysCharacterListener extends
-		CoreCharacterListener<IEscapyPhysObject>
+@Log
+public class PhysCharacterListener
+		extends CoreCharacterListener<IEscapyPhysObject>
 		implements IPhysListener {
 
 	private Vector2[] lastPosition;

@@ -52,7 +52,11 @@ public final class EscapyControlManager implements IEscapyControlManager {
 				//noinspection unchecked
 				c.addListener(listener);
 			} catch (Exception e) {
-				log.warning("Controller listener type mismatch!");
+				log.warning("Controller listener attach error:" +
+						"\n\tListener: " + listener + "" +
+						"\n\tController: " + c);
+				log.throwing(this.getClass().getName(), "attachControllerListener", e);
+				e.printStackTrace();
 			}
 		}
 	}
@@ -70,7 +74,11 @@ public final class EscapyControlManager implements IEscapyControlManager {
 				//noinspection unchecked
 				c.removeListener(listener);
 			} catch (Exception e) {
-				log.warning("Controller listener type mismatch!");
+				log.warning("Controller listener detach error:" +
+						"\n\tListener: " + listener + "" +
+						"\n\tController: " + c);
+				log.throwing(this.getClass().getName(), "detachControllerListener", e);
+				e.printStackTrace();
 			}
 		}
 	}
