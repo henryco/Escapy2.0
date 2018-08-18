@@ -99,7 +99,7 @@ public final class UtilityCoreComponent {
 	}
 
 	@EscapyComponent("array-list")
-	public List<?> newArrayList(@Arg("elements") Object ... args) {
+	public <T> List<T> newArrayList(@Arg("elements") T ... args) {
 		return new ArrayList<>(Arrays.asList(args));
 	}
 
@@ -118,8 +118,8 @@ public final class UtilityCoreComponent {
 	}
 
 	@EscapyComponent("entry")
-	public Entry createEntry(@Arg("key") Object key,
-							 @Arg("value") Object value
+	public <K, V> Entry<K, V> createEntry(
+			@Arg("key") K key, @Arg("value") V value
 	) {
 		return new AbstractMap.SimpleImmutableEntry<>(key, value);
 	}

@@ -17,7 +17,9 @@ import net.tindersamurai.escapy.utils.collections.EscapyMultiKey;
 import javax.inject.Inject;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.AbstractMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 @Provide
 @EscapyComponentFactory("animations")
@@ -63,6 +65,18 @@ public class AnimationFactory {
 				transitions,
 				animations,
 				name
+		);
+	}
+
+
+	@EscapyComponent("transition")
+	public final Entry<EscapyMultiKey<String, String>, State> transition (
+			@Arg("from") @NotNull String from,
+			@Arg("to") @NotNull String to,
+			@Arg("state") State state
+	) {
+		return new AbstractMap.SimpleImmutableEntry<> (
+				new EscapyMultiKey<>(from, to), state
 		);
 	}
 
