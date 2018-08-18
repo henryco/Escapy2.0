@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.utils.array;
+package net.tindersamurai.escapy.utils.collections.array;
 
 import java.util.Collection;
 import java.util.Comparator;

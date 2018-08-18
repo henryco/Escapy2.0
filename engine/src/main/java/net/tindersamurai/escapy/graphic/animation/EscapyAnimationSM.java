@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.extern.java.Log;
 import lombok.val;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
-import net.tindersamurai.escapy.utils.map.EscapyMultiKey;
+import net.tindersamurai.escapy.utils.collections.EscapyMultiKey;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;

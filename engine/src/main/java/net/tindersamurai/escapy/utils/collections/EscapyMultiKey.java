@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.utils.map;
+package net.tindersamurai.escapy.utils.collections;
 
 public final class EscapyMultiKey<KEY_1, KEY_2> {
 

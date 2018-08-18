@@ -3,10 +3,13 @@ package net.tindersamurai.escapy.components.control.plain.model;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import lombok.extern.java.Log;
+import lombok.val;
 import net.tindersamurai.escapy.graphic.animation.IEscapyAnimationSM;
 import net.tindersamurai.escapy.components.control.plain.CoreCharacterListener;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
+import net.tindersamurai.escapy.utils.collections.EscapyFixedSizeConcurrentLinkedQueue;
 
+import java.util.Queue;
 import java.util.function.Consumer;
 
 @Log
@@ -29,6 +32,8 @@ public class ModelCharacterListener
 	private boolean[] last;
 
 	private final IEscapyAnimationSM animationSM;
+
+	private Consumer<Sprite> spriteConsumer;
 
 	public ModelCharacterListener(IEscapyAnimationSM animationSM) {
 		this.animationSM = animationSM;
@@ -54,11 +59,7 @@ public class ModelCharacterListener
 
 	@Override
 	public void apply(Consumer<Sprite> spriteConsumer) {
-//		animationSM.consumeSubState(
-//				animationSM.getCurrentSubState(), spriteConsumer
-//		);
-//		animationSM.applyToActualState(spriteConsumer);
-		animationSM.applyToAllStates(spriteConsumer);
+		this.spriteConsumer = spriteConsumer;
 	}
 
 	@Override
@@ -83,17 +84,26 @@ public class ModelCharacterListener
 
 	@Override
 	public Sprite getDiffuseSprite() {
-		return animationSM.getCurrentSubState().getSprites().getDiffuse();
+		val diffuse = animationSM.getCurrentSubState().getSprites().getDiffuse();
+		if (spriteConsumer != null && diffuse != null)
+			spriteConsumer.accept(diffuse);
+		return diffuse;
 	}
 
 	@Override
 	public Sprite getNormalsSprite() {
-		return animationSM.getCurrentSubState().getSprites().getNormal();
+		val normal = animationSM.getCurrentSubState().getSprites().getNormal();
+		if (spriteConsumer != null && normal != null)
+			spriteConsumer.accept(normal);
+		return normal;
 	}
 
 	@Override
 	public Sprite getShadowsSprite() {
-		return animationSM.getCurrentSubState().getSprites().getShadow();
+		val shadow = animationSM.getCurrentSubState().getSprites().getShadow();
+		if (spriteConsumer != null && shadow != null)
+			spriteConsumer.accept(shadow);
+		return shadow;
 	}
 
 	private void updState(boolean left, boolean right, String prefix) {

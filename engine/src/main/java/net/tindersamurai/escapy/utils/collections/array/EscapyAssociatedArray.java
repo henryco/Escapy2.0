@@ -1,4 +1,4 @@
-package net.tindersamurai.escapy.utils.array;
+package net.tindersamurai.escapy.utils.collections.array;
 
 
 import net.tindersamurai.escapy.utils.EscapyNamed;

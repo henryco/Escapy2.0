@@ -12,7 +12,7 @@ import net.tindersamurai.escapy.graphic.animation.EscapyAnimationSM;
 import net.tindersamurai.escapy.graphic.animation.IEscapyAnimationSM;
 import net.tindersamurai.escapy.graphic.animation.IEscapyAnimationSM.*;
 import net.tindersamurai.escapy.utils.files.EscapyFiles;
-import net.tindersamurai.escapy.utils.map.EscapyMultiKey;
+import net.tindersamurai.escapy.utils.collections.EscapyMultiKey;
 
 import javax.inject.Inject;
 import java.nio.file.Files;

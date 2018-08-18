@@ -74,9 +74,8 @@ public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 	public void render(float delta) {
 		if (!paused) {
 			escapyThread.nextTick(d -> {
-//				if (!paused) controlManager.update(d);
-				// todo delta next tick fix
-				if (!paused) controlManager.update(delta);
+				if (!paused)
+					controlManager.update(delta + d);
 			});
 		}
 		renderer.render(model, delta);

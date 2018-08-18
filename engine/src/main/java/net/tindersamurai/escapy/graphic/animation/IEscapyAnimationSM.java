@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 import net.tindersamurai.escapy.graphic.IEscapyRenderable;
-import net.tindersamurai.escapy.utils.map.EscapyMultiKey;
+import net.tindersamurai.escapy.utils.collections.EscapyMultiKey;
 
 import java.util.Collection;
 import java.util.Map;
