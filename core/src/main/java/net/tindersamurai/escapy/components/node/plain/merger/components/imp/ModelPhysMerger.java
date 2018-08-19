@@ -39,11 +39,13 @@ public class ModelPhysMerger implements IModelPhysMerger {
 					val m = (IEscapySpriteBinder) model;
 					val padding = m.getBindPadding();
 
-					Gdx.app.postRunnable(() -> m.apply(s -> {
+//					Gdx.app.postRunnable(() ->
+							m.apply(s -> {
 						final float px = (x * pixelScale) - (s.getWidth() * 0.5f) + padding[0];
 						final float py = (y * pixelScale) - (s.getHeight() * 0.5f) + padding[1];
 						s.setPosition(px, py);
-					}));
+					});
+//					);
 
 
 					lastX = x;
@@ -55,9 +57,9 @@ public class ModelPhysMerger implements IModelPhysMerger {
 
 					if (lastAngle != null && angle == lastAngle)
 						return;
-					Gdx.app.postRunnable(() ->
-							((IEscapySpriteBinder) model).apply(s -> s.setRotation(angle))
-					);
+//					Gdx.app.postRunnable(() ->
+							((IEscapySpriteBinder) model).apply(s -> s.setRotation(angle));
+//					);
 					lastAngle = angle;
 				}
 

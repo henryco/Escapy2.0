@@ -18,6 +18,7 @@ import javax.inject.Inject;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -99,6 +100,35 @@ public class AnimationFactory {
 		}
 
 		return subState;
+	}
+
+	@SafeVarargs
+	@EscapyComponent("substates")
+	public final SubState[] subStates (
+			@Arg("amount") int number,
+			@Arg("from") int from,
+			@NotNull @Arg("extension") String extension,
+			@Arg("diffuse") String diffuse,
+			@Arg("normal") String normal,
+			@Arg("shadow") String shadow,
+			@Arg("renders") Entry<Integer, AnimationRender> ... renderers
+	) {
+		Map<Integer, AnimationRender> renderMap = new HashMap<>();
+		if (renderers != null) {
+			for (val entry : renderers)
+				renderMap.put(entry.getKey(), entry.getValue());
+		}
+
+		val subStates = new SubState[number];
+		for (int i = 0; i < number; i++) {
+			subStates[i] = subState(sprites(
+					diffuse == null ? null : diffuse + Integer.toString(i + from) + "." + extension,
+					normal == null ? null : normal + Integer.toString(i + from)+ "." + extension,
+					shadow == null ? null : shadow + Integer.toString(i + from)+ "." + extension),
+					renderMap.get(i)
+			);
+		}
+		return subStates;
 	}
 
 

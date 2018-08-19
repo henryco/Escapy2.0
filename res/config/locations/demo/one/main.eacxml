@@ -78,7 +78,7 @@
                     </c:physics.object.get>
 
                     <c:control.listener.phys-character>
-                        <o:float name="move">0.75</o:float>
+                        <o:float name="move">0.9</o:float>
                         <o:float name="run">3</o:float>
                         <o:float name="sit">0.25</o:float>
                     </c:control.listener.phys-character>

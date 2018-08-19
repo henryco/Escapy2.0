@@ -30,4 +30,22 @@
         </c:f.include>
     </c:animations.state>
 
+    <c:animations.state>
+        <o:string>move-right</o:string>
+        <!-- todo transitions here -->
+        <c:u.null name="transitions" />
+        <c:f.include>
+            mco/animation_mover.eacxml
+        </c:f.include>
+    </c:animations.state>
+
+    <c:animations.state>
+        <o:string>move-left</o:string>
+        <!-- todo transitions here -->
+        <c:u.null name="transitions" />
+        <c:f.include>
+            mco/animation_movel.eacxml
+        </c:f.include>
+    </c:animations.state>
+
 </c:animations.config>
