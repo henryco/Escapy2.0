@@ -107,8 +107,8 @@ public class ModelCharacterListener
 	}
 
 	private void updState(boolean left, boolean right, String prefix) {
-		if (left) animationSM.setState(prefix + POSTFIX_LEFT);
-		else if (right) animationSM.setState(prefix + POSTFIX_RIGHT);
+		if (right) animationSM.setState(prefix + POSTFIX_RIGHT);
+		else if (left) animationSM.setState(prefix + POSTFIX_LEFT);
 		else animationSM.setState(prefix + POSTFIX_DEFAULT);
 	}
 
