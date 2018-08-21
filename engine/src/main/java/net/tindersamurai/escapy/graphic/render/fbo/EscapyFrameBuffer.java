@@ -45,7 +45,7 @@ public class EscapyFrameBuffer implements EscapyFBO {
 	 * @author Henry on 29/06/17.
 	 */ @EscapyAPI
 	public EscapyFrameBuffer(final Resolution resolution, boolean initialWipe) {
-		this(new FrameBuffer(Pixmap.Format.RGBA8888, resolution.width, resolution.height, resolution.bool), initialWipe);
+		this(new FrameBuffer(Pixmap.Format.RGBA8888, ((int) resolution.width), ((int) resolution.height), resolution.bool), initialWipe);
 	}
 
 	/**

@@ -6,13 +6,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.github.henryco.injector.meta.annotations.Module;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
-import lombok.val;
 import net.tindersamurai.escapy.components.config.ConfigModule;
 import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
 import net.tindersamurai.escapy.graphic.camera.EscapyMemCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.graphic.screen.Resolution;
-import net.tindersamurai.escapy.utils.proxy.EscapyProxyInstanceObserver;
 
 import javax.inject.Singleton;
 

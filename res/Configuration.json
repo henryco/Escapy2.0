@@ -4,12 +4,12 @@
 	
 	"resizable": false,
 	"vSync": true,
-	"fullscreen": false,
+	"fullscreen": true,
 	"forceExit": true,
 	"useGL30": true,
 	
-	"scrWidth": 1480,
-	"scrHeight": 800,
+	"scrWidth": 1920,
+	"scrHeight": 1080,
 	
 	"fps": 25
 }

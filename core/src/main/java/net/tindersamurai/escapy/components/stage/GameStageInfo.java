@@ -4,6 +4,7 @@ import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.Getter;
 import lombok.ToString;
 
+import lombok.extern.java.Log;
 import lombok.val;
 import net.tindersamurai.activecomponent.parser.EscapyComponentParser;
 import net.tindersamurai.escapy.components.stage.plain.StageInfo;
@@ -15,10 +16,11 @@ import net.tindersamurai.escapy.utils.files.EscapyFiles;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
+import java.nio.file.NoSuchFileException;
 import java.util.Map;
 
 
-@Provide @Singleton @ToString
+@Provide @Singleton @ToString @Log
 public class GameStageInfo implements StageInfo {
 
 	private final EscapyComponentParser parser;
@@ -41,12 +43,18 @@ public class GameStageInfo implements StageInfo {
 		this.context = context;
 		this.parser = parser;
 
-		initialize();
+		try {
+			initialize();
+		} catch (NoSuchFileException e) {
+			log.throwing(this.getClass().getName(),
+					"constructor GameStageInfo()", e
+			);
+		}
 	}
 
 
 	@SuppressWarnings("unchecked")
-	private void initialize() {
+	private void initialize() throws NoSuchFileException {
 
 		Map<String, Object> main = parser.parseComponent(mainConfigFile);
 		val metas = (EscapyFileMetaData[]) main.get("stages");

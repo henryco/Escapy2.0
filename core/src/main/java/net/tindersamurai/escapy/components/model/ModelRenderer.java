@@ -7,15 +7,19 @@ import lombok.val;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.map.model.IEscapyModel;
 import net.tindersamurai.escapy.map.model.IEscapyModelRenderer;
+import net.tindersamurai.escapy.graphic.IEscapyRenderable;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ArrayList;
+import java.util.List;
 
 @Provide @Log
 public class ModelRenderer implements IEscapyModelRenderer {
 
 	{ log.info("ModelRenderer instance [" + this.hashCode() + "]"); }
 
+	private final List<IEscapyRenderable> extra;
 	private final IEscapyMemoCam finalCamera;
 	private final IEscapyMemoCam camera;
 	private final Batch batch;
@@ -26,6 +30,7 @@ public class ModelRenderer implements IEscapyModelRenderer {
 			@Named("main-camera") IEscapyMemoCam camera,
 			Batch batch
 	) {
+		this.extra = new ArrayList<>();
 		this.finalCamera = finalCamera;
 		this.camera = camera;
 		this.batch = batch;
@@ -38,6 +43,9 @@ public class ModelRenderer implements IEscapyModelRenderer {
 		camera.safety(() -> model.renderNormalModel(camera, batch, delta));
 		camera.safety(() -> model.renderShadowModel(camera, batch, delta));
 		finalCamera.safety(() -> postRender(model, delta));
+
+		// debug only
+		renderExtra(delta);
 	}
 
 
@@ -53,6 +61,21 @@ public class ModelRenderer implements IEscapyModelRenderer {
 		if (model == null) return;
 		for (val nested : model.getNestedModels()) postRender(nested, delta);
 		for (val postRenderer : model.postRenderQueue()) postRenderer.render(finalCamera, batch, delta);
+	}
+
+	private void renderExtra(float delta) {
+		for (val e : extra) {
+			camera.safety(() -> e.renderDiffuseMap(camera, batch, delta));
+			camera.safety(() -> e.renderNormalMap(camera, batch, delta));
+			camera.safety(() -> e.renderShadowMap(camera, batch, delta));
+		}
+	}
+
+	/**
+	 * Use it for DEBUG ONLY!
+	 * @param extra extra data
+	 */ public final void addExtraRenderData(IEscapyRenderable extra) {
+		this.extra.add(extra);
 	}
 
 }

@@ -1,5 +1,6 @@
 package net.tindersamurai.escapy.components.screen;
 
+import com.badlogic.gdx.utils.GdxNativesLoader;
 import com.github.henryco.injector.meta.annotations.Provide;
 import net.tindersamurai.escapy.components.stage.plain.LocationLoader;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
