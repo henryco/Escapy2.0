@@ -1,5 +1,6 @@
 package net.tindersamurai.escapy.desktop;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import net.tindersamurai.escapy.EscapyApplication;
@@ -21,9 +22,6 @@ public final class DesktopLauncher {
 				.setName("MainConfiguration")
 				.build()
 		.loadDesktopConfig();
-
-//		new LwjglApplication(new EscapyApplicationAdapter(MainEnvironment.class, new MainModule()), config);
-
 		new LwjglApplication(new EscapyApplication(), config);
 	}
 }

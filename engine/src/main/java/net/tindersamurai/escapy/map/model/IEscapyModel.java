@@ -2,6 +2,7 @@ package net.tindersamurai.escapy.map.model;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.Disposable;
+import net.tindersamurai.escapy.graphic.IEscapyRenderable;
 import net.tindersamurai.escapy.graphic.camera.IEscapyMemoCam;
 import net.tindersamurai.escapy.graphic.screen.Wipeable;
 

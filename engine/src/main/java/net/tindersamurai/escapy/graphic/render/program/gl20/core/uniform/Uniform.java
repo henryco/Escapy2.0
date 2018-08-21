@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import net.tindersamurai.escapy.context.annotation.Dante;
 import net.tindersamurai.escapy.context.annotation.EscapyAPI;
 import net.tindersamurai.escapy.graphic.render.program.gl20.proxy.EscapyProxyShaderProgram;
-import net.tindersamurai.escapy.utils.array.EscapyIndexedArray;
+import net.tindersamurai.escapy.utils.collections.array.EscapyIndexedArray;
 
 import java.util.function.Consumer;
 

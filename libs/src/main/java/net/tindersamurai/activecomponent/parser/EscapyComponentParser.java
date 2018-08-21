@@ -4,6 +4,8 @@ package net.tindersamurai.activecomponent.parser;
 import net.tindersamurai.activecomponent.comp.factory.IEscapyComponentFactory;
 import net.tindersamurai.activecomponent.obj.IEscapyObjectFactory;
 
+import java.nio.file.NoSuchFileException;
+
 public interface EscapyComponentParser {
 
 	String PREFIX_COMPONENT = "c";
@@ -19,5 +21,8 @@ public interface EscapyComponentParser {
 
 	void setObjectFactory(IEscapyObjectFactory factory);
 
-	<T> T parseComponent(String file);
+	<T> T parseComponent(String file) throws NoSuchFileException;
+
+	String getRootPath();
+	void setRootPath(String path);
 }

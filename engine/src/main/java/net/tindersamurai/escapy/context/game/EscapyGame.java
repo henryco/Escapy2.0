@@ -57,7 +57,10 @@ public abstract class EscapyGame extends Game implements EscapyScreenContext, Es
 
 	protected abstract EscapyScreen getInitialScreen();
 
-
+	@Override
+	public EscapyGame getGame() {
+		return this;
+	}
 
 	@Override
 	public final void create() {

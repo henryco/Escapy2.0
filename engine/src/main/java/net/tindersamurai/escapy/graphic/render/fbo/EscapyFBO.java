@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.tindersamurai.escapy.context.annotation.EscapyAPI;
-import net.tindersamurai.escapy.graphic.render.mapping.GraphicRenderer;
 import net.tindersamurai.escapy.graphic.screen.Wipeable;
 import net.tindersamurai.escapy.utils.EscapyObject;
 
