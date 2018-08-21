@@ -53,7 +53,7 @@ public class EscapyPhysWorld implements IEscapyPhysics {
 			world.step(timeStep, 6, 2);
 			accumulator -= timeStep;
 
-			Gdx.app.postRunnable(() -> {
+//			Gdx.app.postRunnable(() -> {
 				for (val fixture : fixtures) {
 					val data = fixture.value.getUserData();
 					if (data instanceof IEscapyPhysListener[]) {
@@ -66,7 +66,7 @@ public class EscapyPhysWorld implements IEscapyPhysics {
 						}
 					}
 				}
-			});
+//			});
 		}
 	}
 

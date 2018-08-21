@@ -2,7 +2,6 @@ package net.tindersamurai.escapy.components.node;
 
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
-import lombok.val;
 import net.tindersamurai.escapy.components.model.plain.EmptyModel;
 import net.tindersamurai.escapy.components.node.plain.data.NodeData;
 import net.tindersamurai.escapy.map.node.IEscapyNode;
@@ -10,11 +9,11 @@ import net.tindersamurai.escapy.map.node.IEscapyNodeObserver;
 
 import javax.inject.Singleton;
 
-@Provide @Singleton @Log
+@SuppressWarnings("unchecked") @Provide @Singleton @Log
 public class NodeObserver implements IEscapyNodeObserver {
 
 
-	@Override @SuppressWarnings("unchecked")
+	@Override
 	public void nodeAdded(IEscapyNode parent, IEscapyNode node) {
 
 		log.info("NODE ADDED: " + parent.getId() + " -> " + node.getId());
@@ -22,21 +21,13 @@ public class NodeObserver implements IEscapyNodeObserver {
 		addChildModel(parent, ((IEscapyNode<NodeData>) node).get());
 	}
 
-	@Override @SuppressWarnings("unchecked")
+	@Override
 	public void nodeRemoved(IEscapyNode parent, IEscapyNode node) {
 
 		log.info("NODE REMOVED: " + parent.get() + " -> " + node.getId());
-		val nodeData = (NodeData) node.get();
-		nodeData.dispose();
+		//((NodeData) node.get()).dispose();
 
-		val phys = nodeData.getPhys();
-		if (phys == null) return;
-
-		phys.setPhysListener(null);
-
-		log.info("REMOVE FIXTURE FROM WORLD: " + phys.getMainFixture());
-		val world = phys.getMainFixture().getBody().getWorld();
-		world.destroyBody(phys.getMainFixture().getBody());
+		// We should dispose data manually !!!
 	}
 
 

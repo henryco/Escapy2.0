@@ -1,19 +1,22 @@
 package net.tindersamurai.escapy.control.keyboard;
 import com.badlogic.gdx.Gdx;
+import lombok.val;
 import net.tindersamurai.escapy.control.IEscapyController.Run;
-import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
+import static net.tindersamurai.escapy.control.listener.IEscapyControllerListener.*;
 
 public class EKeyboardRun
 		extends EscapyKeyboardController<RunListener>
-		implements Run<Integer> {
+		implements Run {
 
 	public EKeyboardRun(String name) {
-		super(name);
+		super(name, RunListener.class);
 	}
 
 	@Override
-	public void update() {
-		if (Gdx.input.isKeyPressed(key))
-			getListener().onRun();
+	public void update(float delta) {
+		for (val l : getListeners()) {
+			if (Gdx.input.isKeyPressed(key))
+				l.onRun();
+		}
 	}
 }

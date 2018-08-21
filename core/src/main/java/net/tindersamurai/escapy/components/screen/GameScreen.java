@@ -1,16 +1,18 @@
 package net.tindersamurai.escapy.components.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.github.henryco.injector.GrInjector;
 import com.github.henryco.injector.meta.annotations.Provide;
 import lombok.extern.java.Log;
+import lombok.val;
 import net.tindersamurai.escapy.components.model.ModelRenderer;
 import net.tindersamurai.escapy.components.model.plain.light.LightSourceModel;
 import net.tindersamurai.escapy.components.node.plain.data.NodeData;
 import net.tindersamurai.escapy.components.stage.plain.LocationSwitcher;
 import net.tindersamurai.escapy.context.game.screen.EscapyScreenCore;
-import net.tindersamurai.escapy.components.control.ControlManager;
+import net.tindersamurai.escapy.control.manager.IEscapyControlManager;
 import net.tindersamurai.escapy.graphic.camera.EscapyCamera;
 import net.tindersamurai.escapy.graphic.camera.IEscapyCamera;
 import net.tindersamurai.escapy.graphic.render.fbo.EscapyFBO;
@@ -27,10 +29,12 @@ import net.tindersamurai.escapy.utils.loop.IEscapyThread;
 import net.tindersamurai.escapy.utils.loop.IEscapyUpdateble;
 
 import javax.inject.Inject;
+import java.util.Random;
 
 @Provide("game-screen") @Log
 public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 
+	private final IEscapyControlManager controlManager;
 	private final IEscapyModelRenderer renderer;
 	private final LocationSwitcher locSetter;
 	private final IEscapyThread escapyThread;
@@ -40,16 +44,14 @@ public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 	@Inject
 	public GameScreen(
 			IEscapyModelRenderer renderer,
-			LocationSwitcher locationSetter,
-			ControlManager controlManager
+			LocationSwitcher locationSetter
 	) {
-		this.escapyThread = new EscapyThread(5, this);
-		this.controlManager = controlManager;
+		this.controlManager = IEscapyControlManager.instance();
+		this.escapyThread = new EscapyThread(1, this);
 		this.locSetter = locationSetter;
 		this.renderer = renderer;
 	}
 
-	private final ControlManager controlManager;
 	private IEscapyPhysics physicsManager;
 	private IEscapyModel model;
 
@@ -73,7 +75,12 @@ public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 
 	@Override
 	public void render(float delta) {
-		if (!paused) controlManager.update();
+		if (!paused) {
+			escapyThread.nextTick(d -> {
+				if (!paused)
+					controlManager.update(delta + d);
+			});
+		}
 		renderer.render(model, delta);
 	}
 
@@ -101,12 +108,16 @@ public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 		pause();
 	}
 
+
+
+
 	/**
 	 *  TODO REMOVE DEBUG ONLY!!!
 	 */
 	private final class DEBUG {
 
 		private LightSource lightSource;
+		private float r, g, b;
 
 		private DEBUG physDebugConf() {
 			log.info("PHYSICS DEBUG RENDERER PREPARE");
@@ -138,7 +149,20 @@ public class GameScreen extends EscapyScreenCore implements IEscapyUpdateble {
 				});
 				batch.setProjectionMatrix(cam.update().getProjection());
 				fbo.draw(batch);
-				lightSource.translate(1.5f, 0);
+
+				val random = new Random().nextFloat();
+				if (random < 0.3f)
+					r += 0.0025f;
+				else if (random < 0.1f)
+					g += 0.0025f;
+				else if (random > 0.7)
+					b += 0.0025f;
+
+				if (r > 0.7f || r < 0.4f) r = 0.4f;
+				if (g > 0.7f || r < 0.4f) g = 0.4f;
+				if (b > 0.7f || r < 0.4f) b = 0.4f;
+
+//				lightSource.setColor(new Color(r, g, b, 1f));
 			});
 			return this;
 		}

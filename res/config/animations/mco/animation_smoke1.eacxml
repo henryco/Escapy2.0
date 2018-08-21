@@ -1,0 +1,434 @@
+<c:animations.animation
+        xmlns:c="https://tindersamurai.net/escapy/ac/component"
+        xmlns:o="https://tindersamurai.net/escapy/ac/object"
+        xmlns:m="https://tindersamurai.net/escapy/ac/method"
+>
+    <o:float name="probability">1</o:float>
+    <o:string name="name">smoke</o:string>
+
+    <!-- SUBSTATES nesting automatically-->
+    <c:animations.substate>
+        <c:animations.sprites name="sprites">
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking1.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking2.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking3.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking4.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking5.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking6.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking7.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking8.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking9.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking10.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking11.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking12.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking13.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking14.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking15.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking16.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking17.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking18.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking19.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking20.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking21.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking22.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking23.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking24.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking25.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking26.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking27.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking28.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking29.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking30.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking31.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking32.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking33.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking34.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking35.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking36.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking37.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking38.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking39.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking40.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking41.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking42.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking43.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking44.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking45.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking46.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking47.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking48.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking49.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking50.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking51.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking52.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+
+    <c:animations.substate>
+        <c:animations.sprites>
+            <o:string name="diffuse">
+                animations/resources/mhsmoking/mhsmoking53.png
+            </o:string>
+        </c:animations.sprites>
+    </c:animations.substate>
+    
+</c:animations.animation>

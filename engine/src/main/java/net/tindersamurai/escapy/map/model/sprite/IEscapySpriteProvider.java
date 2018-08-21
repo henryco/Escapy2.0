@@ -1,63 +1,19 @@
 package net.tindersamurai.escapy.map.model.sprite;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import net.tindersamurai.escapy.map.model.texture.IEscapyTextureData;
+import net.tindersamurai.escapy.graphic.IEscapyRenderable;
 
 import java.util.function.Consumer;
 
-public interface IEscapySpriteProvider extends IEscapyTextureData {
+public interface IEscapySpriteProvider extends IEscapyRenderable {
 
-	void apply(Consumer<Sprite> s);
-	Sprite provideEffectiveSprite();
+	Sprite getDiffuseSprite();
+	Sprite getNormalsSprite();
+	Sprite getShadowsSprite();
 
-	default float[] getBindPadding() {
-		return new float[] {0, 0};
-	}
+	void apply(Consumer<Sprite> spriteConsumer);
 
-	default void setBindPadding(float left, float top) {}
-
-	@Override
-	default float getX() {
-		return provideEffectiveSprite().getX();
-	}
-
-	@Override
-	default float getY() {
-		return provideEffectiveSprite().getY();
-	}
-
-	@Override
-	default float getScaleX() {
-		return provideEffectiveSprite().getScaleX();
-	}
-
-	@Override
-	default float getScaleY() {
-		return provideEffectiveSprite().getScaleY();
-	}
-
-	@Override
-	default float getWidth() {
-		return provideEffectiveSprite().getWidth();
-	}
-
-	@Override
-	default float getHeight() {
-		return provideEffectiveSprite().getHeight();
-	}
-
-	@Override
-	default boolean isFlipX() {
-		return provideEffectiveSprite().isFlipX();
-	}
-
-	@Override
-	default boolean isFlipY() {
-		return provideEffectiveSprite().isFlipY();
-	}
-
-	@Override
-	default float getRotation() {
-		return provideEffectiveSprite().getRotation();
+	default void applyToAll(Consumer<Sprite> spriteConsumer) {
+		apply(spriteConsumer);
 	}
 }

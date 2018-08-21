@@ -7,6 +7,7 @@ import net.tindersamurai.activecomponent.parser.XmlStreamComponentParser;
 import net.tindersamurai.escapy.components.config.ConfigModule;
 import net.tindersamurai.escapy.components.control.ControlFactory;
 import net.tindersamurai.escapy.components.control.ControlModule;
+import net.tindersamurai.escapy.components.model.AnimationFactory;
 import net.tindersamurai.escapy.components.model.ModelFactory;
 import net.tindersamurai.escapy.components.model.ModelModule;
 import net.tindersamurai.escapy.components.node.NodeFactory;
@@ -14,8 +15,6 @@ import net.tindersamurai.escapy.components.node.NodeModule;
 import net.tindersamurai.escapy.components.physics.PhysicsFactory;
 import net.tindersamurai.escapy.components.physics.PhysicsModule;
 import net.tindersamurai.escapy.components.resource.ResourceModule;
-
-import javax.inject.Singleton;
 
 @Module(componentsRootClass = FactoryModule.class,
 		include = {
@@ -32,6 +31,7 @@ import javax.inject.Singleton;
 	public EscapyComponentParser provideComponentParser (
 
 			ResourceFactory resourcesConfigFactory,
+			AnimationFactory animationFactory,
 			LocationFactory locationFactory,
 			PhysicsFactory physicsFactory,
 			ControlFactory controlFactory,
@@ -41,6 +41,7 @@ import javax.inject.Singleton;
 	) {
 		return new XmlStreamComponentParser(
 				resourcesConfigFactory,
+				animationFactory,
 				locationFactory,
 				physicsFactory,
 				controlFactory,

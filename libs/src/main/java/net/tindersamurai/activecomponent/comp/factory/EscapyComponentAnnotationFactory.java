@@ -5,7 +5,8 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
-import net.tindersamurai.activecomponent.core.UtilityCoreComponent;
+import net.tindersamurai.activecomponent.comp.annotation.NotNull;
+import net.tindersamurai.activecomponent.core.CoreComponentsProvider;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Parameter;
@@ -28,9 +29,11 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 		this.constructors = new HashMap<>();
 		this.factories = new HashMap<>();
 
-		Object[] factories = new Object[componentFactories.length + 1];
-		System.arraycopy(componentFactories, 0, factories, 1, componentFactories.length);
-		factories[0] = new UtilityCoreComponent();
+		Object[] coreFactories = CoreComponentsProvider.getCoreComponents();
+		final int crl = coreFactories.length;
+		Object[] factories = new Object[componentFactories.length + crl];
+		System.arraycopy(coreFactories, 0, factories, 0, crl);
+		System.arraycopy(componentFactories, 0, factories, crl, componentFactories.length);
 
 		initialize(factories, "");
 	}
@@ -142,6 +145,17 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 
 					if (arr[i] != null && arr[i].toString().equalsIgnoreCase("null"))
 						arr[i] = null;
+
+					if (arr[i] == null &&
+							parameter.getDeclaredAnnotation(NotNull.class) != null) {
+						throw new RuntimeException("\nComponent factory argument " +
+								"is NULL which it annotated @NotNULL:" +
+								"\n\tCOMPONENT: " + componentName +
+								"\n\tMETHOD: " + method +
+								"\n\tARG NAME: " + argName +
+								"\n\tPARAMETER: " + parameter
+						);
+					}
 				}
 
 				try {
@@ -150,8 +164,8 @@ public class EscapyComponentAnnotationFactory implements IEscapyComponentFactory
 
 				} catch (Exception e) {
 					String msg = "Cannot create component: " + componentName
-							+ "\nMETHOD: " + method
-							+ "\nARGS: " + Arrays.toString(arr) + "\n";
+							+ "\n\tMETHOD: " + method
+							+ "\n\tARGS: " + Arrays.toString(arr) + "\n";
 					throw new RuntimeException(msg, e);
 				}
 			});

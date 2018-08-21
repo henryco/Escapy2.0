@@ -1,0 +1,18 @@
+<c:animations.animation
+        xmlns:c="https://tindersamurai.net/escapy/ac/component"
+        xmlns:o="https://tindersamurai.net/escapy/ac/object"
+        xmlns:m="https://tindersamurai.net/escapy/ac/method"
+>
+
+    <o:float name="probability">1</o:float>
+    <o:string name="name">move-right</o:string>
+
+    <!-- SUBSTATES nesting automatically-->
+    <c:animations.substates name="substates">
+        <o:integer name="amount">8</o:integer>
+        <o:integer name="from">1</o:integer>
+        <o:string name="diffuse">animations/resources/mhwalkr/</o:string>
+        <o:string name="extension">png</o:string>
+    </c:animations.substates>
+
+</c:animations.animation>

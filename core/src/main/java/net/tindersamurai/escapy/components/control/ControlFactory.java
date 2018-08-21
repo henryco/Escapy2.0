@@ -6,11 +6,15 @@ import lombok.val;
 import net.tindersamurai.activecomponent.comp.annotation.Arg;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponent;
 import net.tindersamurai.activecomponent.comp.annotation.EscapyComponentFactory;
-import net.tindersamurai.escapy.components.control.plain.keyboard.KbPhysObjectListener;
-import net.tindersamurai.escapy.context.game.configuration.EscapyGameContext;
+import net.tindersamurai.escapy.components.control.plain.model.IModelListener;
+import net.tindersamurai.escapy.components.control.plain.model.ModelCharacterListener;
+import net.tindersamurai.escapy.components.control.plain.phys.IPhysListener;
+import net.tindersamurai.escapy.components.control.plain.phys.PhysCharacterListener;
 import net.tindersamurai.escapy.control.IEscapyController;
-import net.tindersamurai.escapy.control.IEscapyControllerListener;
+import net.tindersamurai.escapy.control.listener.IEscapyControllerListener;
 import net.tindersamurai.escapy.control.keyboard.*;
+import net.tindersamurai.escapy.control.manager.IEscapyControlManager;
+import net.tindersamurai.escapy.graphic.animation.IEscapyAnimationSM;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -23,21 +27,15 @@ import static com.badlogic.gdx.Input.*;
 @EscapyComponentFactory("control")
 public class ControlFactory {
 
+	private final IEscapyControlManager controlManager;
 	private final Map<String, Object> registered;
-
-	private final EscapyGameContext gameContext;
-	private final ControlManager controlManager;
 
 	@Inject
 	public ControlFactory (
-			EscapyGameContext gameContext,
-			ControlManager controlManager
+			IEscapyControlManager controlManager
 	) {
-
-		this.registered = new HashMap<>();
-
-		this.gameContext = gameContext;
 		this.controlManager = controlManager;
+		this.registered = new HashMap<>();
 
 		// initial registering
 		new Register().keyboardPhys();
@@ -52,7 +50,7 @@ public class ControlFactory {
 			return registered.get(name);
 		}
 
-		@EscapyComponent("kb-phys")
+		@EscapyComponent("char-phys")
 		public IEscapyController[] keyboardPhys() {
 			val controllers = new IEscapyController[5]; {
 				controllers[0] = new EKeyboardInteract("Interact") {{ setKey(Keys.F); }};
@@ -61,7 +59,7 @@ public class ControlFactory {
 				controllers[3] = new EKeyboardRun("Run") {{ setKey(Keys.SHIFT_LEFT); }};
 				controllers[4] = new EKeyboardSit("Sit") {{ setKey(Keys.C); }};
 			}
-			registered.put("kb-phys", controllers);
+			registered.put("char-phys", controllers);
 			for (val c : controllers)
 				controlManager.registerController(c);
 			return controllers;
@@ -72,24 +70,20 @@ public class ControlFactory {
 	@EscapyComponentFactory("listener")
 	public final static class Listener {
 
-		@EscapyComponent("kb-phys-object")
-		public IEscapyControllerListener physObjectListener (
+		@EscapyComponent("phys-character")
+		public IPhysListener physObjectListener (
 				@Arg("move") Float move,
 				@Arg("run") Float run,
-				@Arg("sit") Float sit,
-				@Arg("controllers") IEscapyController ... controllers
+				@Arg("sit") Float sit
 		) {
-			val l = new KbPhysObjectListener(move, run, sit);
-			for (val c : controllers) {
-				try {
-					//noinspection unchecked
-					c.setListener(l);
-				} catch (Exception e) {
-					log.warning("Controller listener type mismatch!");
-					log.throwing(this.getClass().getName(), "physObjectListener", e);
-				}
-			}
-			return l;
+			return new PhysCharacterListener(move, run, sit);
+		}
+
+		@EscapyComponent("model-character")
+		public IModelListener modelListener (
+				@Arg("animationSM") IEscapyAnimationSM animationSM
+		) {
+			return new ModelCharacterListener(animationSM);
 		}
 	}
 

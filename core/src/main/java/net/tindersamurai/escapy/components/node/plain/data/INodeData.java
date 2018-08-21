@@ -6,7 +6,7 @@ import net.tindersamurai.escapy.map.location.IEscapyLocation;
 
 import java.util.logging.Logger;
 
-public interface INodeData  extends IEscapyLocation {
+public interface INodeData extends IEscapyLocation {
 
 	void setMerger(INodeDataMerger dataMerger);
 	INodeDataMerger getMerger();

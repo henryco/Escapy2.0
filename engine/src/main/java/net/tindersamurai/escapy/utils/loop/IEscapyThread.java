@@ -7,4 +7,6 @@ public interface IEscapyThread {
 	void start();
 
 	void stop();
+
+	void nextTick(IEscapyUpdateble nextTick);
 }

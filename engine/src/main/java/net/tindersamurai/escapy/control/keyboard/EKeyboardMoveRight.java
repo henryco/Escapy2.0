@@ -1,21 +1,24 @@
 package net.tindersamurai.escapy.control.keyboard;
 
 import com.badlogic.gdx.Gdx;
+import lombok.val;
 import net.tindersamurai.escapy.control.IEscapyController.MoveRight;
 
-import static net.tindersamurai.escapy.control.IEscapyControllerListener.*;
+import static net.tindersamurai.escapy.control.listener.IEscapyControllerListener.*;
 
 public class EKeyboardMoveRight
 		extends EscapyKeyboardController<MoveRightListener>
-		implements MoveRight<Integer> {
+		implements MoveRight {
 
 	public EKeyboardMoveRight(String name) {
-		super(name);
+		super(name, MoveRightListener.class);
 	}
 
 	@Override
-	public void update() {
-		if (Gdx.input.isKeyPressed(key))
-			getListener().onMoveRight();
+	public void update(float delta) {
+		for (val l : getListeners()) {
+			if (Gdx.input.isKeyPressed(key))
+				l.onMoveRight();
+		}
 	}
 }
