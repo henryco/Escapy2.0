@@ -108,7 +108,7 @@
                         </c:model.light.source>
 
                         <c:physics.object.get>
-                            <o:string>boi</o:string>
+                            <o:string>player</o:string>
                         </c:physics.object.get>
 
                     </c:node.data>

@@ -30,7 +30,7 @@
     </c:physics.object.def>
 
     <c:physics.object.def>
-        <o:string name="id">boi</o:string>
+        <o:string name="id">player</o:string>
         <o:string name="type">DynamicBody</o:string>
         <o:boolean name="rotation">false</o:boolean>
         <o:float name="friction">0</o:float>
