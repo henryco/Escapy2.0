@@ -77,7 +77,7 @@ public class ParserTest {
 	}
 
 	@Test
-	public void parseArrayTest() {
+	public void parseArrayTest() throws Exception {
 		final EscapyComponentParser parser = new XmlStreamComponentParser(new TestComponent());
 		parser.parseComponent(System.getProperty("user.dir") + "/src/test/resources/test-array.xml");
 	}
