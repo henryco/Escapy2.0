@@ -1,0 +1,26 @@
+<c:resource.stage
+        xmlns:c="https://tindersamurai.net/escapy/ac/component"
+        xmlns:o="https://tindersamurai.net/escapy/ac/object"
+        xmlns:m="https://tindersamurai.net/escapy/ac/method"
+>
+    <o:string name="name"> Demo Stage </o:string>
+
+    <o:string name="default"> one </o:string>
+
+    <c:u.array-auto name="locations">
+
+        <c:resource.metadata>
+            <o:string name="id"> one </o:string>
+            <o:string name="url"> one/index.eacxml </o:string>
+            <o:string name="title"> Location 1 </o:string>
+        </c:resource.metadata>
+
+        <!--<c:resource.metadata>-->
+            <!--<o:string name="id"> two </o:string>-->
+            <!--<o:string name="url"> two.eacxml </o:string>-->
+            <!--<o:string name="title"> Location 2 </o:string>-->
+        <!--</c:resource.metadata>-->
+
+    </c:u.array-auto>
+
+</c:resource.stage>

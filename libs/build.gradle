@@ -1,0 +1,44 @@
+plugins {
+    id 'net.ltgt.apt' version '0.10'
+}
+
+apply plugin: "java"
+
+sourceCompatibility = 1.8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceSets.main.java.srcDirs = [ "src/main/java/" ]
+sourceSets.test.java.srcDirs = [ "src/test/java/" ]
+
+ext {
+    lombok_Version = '1.16.20'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+}
+
+dependencies {
+
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
+
+    compile "junit:junit:4.+"
+    compile "org.mockito:mockito-all:1.9.+"
+
+    compile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+
+    testCompile 'junit:junit:4.+'
+    testCompile "org.mockito:mockito-all:1.9.+"
+
+    testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+    testCompile "com.badlogicgames.gdx:gdx:$gdxVersion"
+    testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+
+    compileOnly "org.projectlombok:lombok:$lombok_Version"
+    apt "org.projectlombok:lombok:$lombok_Version"
+}
