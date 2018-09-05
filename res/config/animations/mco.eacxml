@@ -1,0 +1,51 @@
+<c:animations.config
+        xmlns:c="https://tindersamurai.net/escapy/ac/component"
+        xmlns:o="https://tindersamurai.net/escapy/ac/object"
+        xmlns:m="https://tindersamurai.net/escapy/ac/method"
+>
+    <o:float name="speed">120</o:float>
+    <o:string name="initial"> idle-right </o:string>
+
+    <!-- STATES -->
+    <c:animations.state>
+        <o:string name="name">idle-right</o:string>
+
+        <!-- todo transitions here -->
+        <c:u.null name="transitions" />
+
+        <c:f.include>
+            mco/animation_smoke1.eacxml
+        </c:f.include>
+    </c:animations.state>
+
+    <c:animations.state>
+        <o:string name="name">idle-left</o:string>
+
+        <!-- todo transitions here -->
+        <c:u.null name="transitions" />
+
+        <!--same here because smoking animation is undirected-->
+        <c:f.include>
+            mco/animation_smoke1.eacxml
+        </c:f.include>
+    </c:animations.state>
+
+    <c:animations.state>
+        <o:string>move-right</o:string>
+        <!-- todo transitions here -->
+        <c:u.null name="transitions" />
+        <c:f.include>
+            mco/animation_mover.eacxml
+        </c:f.include>
+    </c:animations.state>
+
+    <c:animations.state>
+        <o:string>move-left</o:string>
+        <!-- todo transitions here -->
+        <c:u.null name="transitions" />
+        <c:f.include>
+            mco/animation_movel.eacxml
+        </c:f.include>
+    </c:animations.state>
+
+</c:animations.config>
