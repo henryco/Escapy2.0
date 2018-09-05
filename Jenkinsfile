@@ -4,18 +4,14 @@ pipeline {
     
     stage('Check') {
       steps {
-        sh 'gradle check -x desktop:dist -x tests:test --stacktrace'
+        sh 'gradle clean'
+        sh 'gradle check -x desktop:dist -x test --stacktrace'
       }
     }
     
     stage('Test') {
       steps {
-        sh '(gradle tests:test --stacktrace) || true'
-        junit(testResults: 'tests/build/test-results/*.xml', allowEmptyResults: true)
-        sh 'rm -f -r test-arch'
-        sh 'mkdir test-arch'
-        sh '(zip -r test-arch/test-report.zip tests/build/reports) || true'
-        archiveArtifacts(artifacts: 'test-arch/*.zip', allowEmptyArchive: true)
+        sh 'gradle test --stacktrace'
       }
     }
     
@@ -79,27 +75,46 @@ pipeline {
   post {
 
     always {
+      
+      junit(testResults: 'tests/build/test-results/*.xml', allowEmptyResults: true)
+      junit(testResults: 'libs/build/test-results/*.xml', allowEmptyResults: true)
+      junit(testResults: 'engine/build/test-results/*.xml', allowEmptyResults: true)
+      junit(testResults: 'desktop/build/test-results/*.xml', allowEmptyResults: true)
+      junit(testResults: 'core/build/test-results/*.xml', allowEmptyResults: true)
+
+      sh 'rm -f -r test-arch'
+      sh 'mkdir test-arch'
+      sh '(zip -r test-arch/test-report-tests.zip tests/build/reports) || true'
+      sh '(zip -r test-arch/test-report-libs.zip libs/build/reports) || true'
+      sh '(zip -r test-arch/test-report-engine.zip engine/build/reports) || true'
+      sh '(zip -r test-arch/test-report-desktop.zip desktop/build/reports) || true'
+      sh '(zip -r test-arch/test-report-core.zip core/build/reports) || true'
+      archiveArtifacts(artifacts: 'test-arch/*.zip', allowEmptyArchive: true)
+
+      sh 'gradle clean'
       sh '(pkill -f gradle) || true'
+      sh '(rm -r artifacts) || true'
+      sh '(rm -r release) || true'
     }
 
     success {
       script {
         if (env.GIT_BRANCH == "develope" || env.GIT_BRANCH == "release")
-            mail bcc: '', body: "<body><h2 style=\"color:green\">Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] deployed successful</h2> <h3>Commit: <a style=\"color:black\" href=\"https://github.com/henryco/Escapy2.0/commit/${env.GIT_COMMIT}\">${env.GIT_COMMIT}</a></h3> <br> <ul> <li><b><a href=\"${env.BUILD_URL}\">Build page reference</a></b></li> <li><b><a href=\"${env.GIT_URL}\">Gitub project reference</a></b></li></ul></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] SUCCESS", to: "henrycodev@gmail.com"
+            mail bcc: '', body: "<body><h2 style=\"color:green\">Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] deployed successful</h2> <h3>Commit: <a style=\"color:black\" href=\"https://bitbucket.org/tinder-samurai/escapy2.0/commits/${env.GIT_COMMIT}\">${env.GIT_COMMIT}</a></h3> <br> <ul> <li><b><a href=\"${env.BUILD_URL}\">Build page reference</a></b></li> <li><b><a href=\"${env.GIT_URL}\">Bitbucket project reference</a></b></li></ul></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] SUCCESS", to: "henrycodev@gmail.com"
       }
     }
 
     failure {
       script {
         if (env.GIT_BRANCH == "develope" || env.GIT_BRANCH == "release")
-            mail bcc: '', body: "<body><h2 style=\"color:red\">Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] failure</h2> <h3>Commit: <a style=\"color:black\" href=\"https://github.com/henryco/Escapy2.0/commit/${env.GIT_COMMIT}\">${env.GIT_COMMIT}</a></h3> <br> <ul> <li><b><a href=\"${env.BUILD_URL}\">Build page reference</a></b></li> <li><b><a href=\"${env.GIT_URL}\">Gitub project reference</a></b></li></ul></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] FAILURE", to: "henrycodev@gmail.com"
+            mail bcc: '', body: "<body><h2 style=\"color:red\">Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] failure</h2> <h3>Commit: <a style=\"color:black\" href=\"https://bitbucket.org/tinder-samurai/escapy2.0/commits/${env.GIT_COMMIT}\">${env.GIT_COMMIT}</a></h3> <br> <ul> <li><b><a href=\"${env.BUILD_URL}\">Build page reference</a></b></li> <li><b><a href=\"${env.GIT_URL}\">Bitbucket project reference</a></b></li></ul></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] FAILURE", to: "henrycodev@gmail.com"
       }
     }
 
     unstable {
       script {
         if (env.GIT_BRANCH == "develope" || env.GIT_BRANCH == "release")
-            mail bcc: '', body: "<body><h2 style=\"color:orange\">Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] unstable</h2> <h3>Commit: <a style=\"color:black\" href=\"https://github.com/henryco/Escapy2.0/commit/${env.GIT_COMMIT}\">${env.GIT_COMMIT}</a></h3> <br> <ul> <li><b><a href=\"${env.BUILD_URL}\">Build page reference</a></b></li> <li><b><a href=\"${env.GIT_URL}\">Gitub project reference</a></b></li></ul></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] UNSTABLE", to: "henrycodev@gmail.com"
+            mail bcc: '', body: "<body><h2 style=\"color:orange\">Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] unstable</h2> <h3>Commit: <a style=\"color:black\" href=\"https://bitbucket.org/tinder-samurai/escapy2.0/commits/${env.GIT_COMMIT}\">${env.GIT_COMMIT}</a></h3> <br> <ul> <li><b><a href=\"${env.BUILD_URL}\">Build page reference</a></b></li> <li><b><a href=\"${env.GIT_URL}\">Bitbucket project reference</a></b></li></ul></body>", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "Escapy2.0 build [${env.BUILD_NUMBER}] [${env.GIT_BRANCH}] UNSTABLE", to: "henrycodev@gmail.com"
       }
     }
 

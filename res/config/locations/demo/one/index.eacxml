@@ -1,0 +1,30 @@
+<c:location.root
+        xmlns:c="https://tindersamurai.net/escapy/ac/component"
+        xmlns:o="https://tindersamurai.net/escapy/ac/object"
+        xmlns:m="https://tindersamurai.net/escapy/ac/method"
+>
+
+    <c:location.constructor>
+        <c:f.include> components/physics_manager.eacxml </c:f.include>
+    </c:location.constructor>
+
+
+    <c:location.physics>
+        <c:node.data>
+            <c:physics.object.get>
+                <o:string>manager</o:string>
+            </c:physics.object.get>
+        </c:node.data>
+    </c:location.physics>
+
+
+    <!-- MODEL & LAYERS -->
+    <c:f.include> main.eacxml </c:f.include>
+
+    <!-- MASKS -->
+    <c:f.include> mask.eacxml </c:f.include>
+
+    <!-- LIGHTS -->
+    <c:f.include> light.eacxml </c:f.include>
+
+</c:location.root>
