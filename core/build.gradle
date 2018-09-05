@@ -1,11 +1,34 @@
+plugins {
+    id 'net.ltgt.apt' version '0.10'
+}
+
 apply plugin: "java"
 
 
 sourceCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-sourceSets.main.java.srcDirs = [ "src/" ]
+sourceSets.main.java.srcDirs = [ "src/main/java/" ]
+sourceSets.test.java.srcDirs = [ "src/test/java/" ]
 
+ext {
+    appName = "Escapy2.0"
+    gdxVersion = '1.9.8'
+    lombok_Version = '1.16.20'
+}
+
+dependencies {
+    compile project(":engine")
+
+    compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+    compile 'com.github.henryco:grinjector:1.2.1'
+    compile "com.kotcrab.vis:vis-ui:1.3.0"
+
+    compileOnly "org.projectlombok:lombok:$lombok_Version"
+    apt "org.projectlombok:lombok:$lombok_Version"
+}
 
 eclipse.project {
     name = appName + "-core"
